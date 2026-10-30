@@ -56,6 +56,9 @@ td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-
 td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
  letter-spacing:.2px;word-break:break-word}
 td.m{color:var(--ink)}
+.ipa{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:12px;font-weight:400;
+ color:var(--ink2);letter-spacing:0;margin-top:3px;word-break:break-word}
+.card .w .ipa{font-size:13px;margin-left:8px}
 tr.hit td.w,tr.hit td.m{background:var(--mark)}
 
 .cards{display:grid;gap:12px}
@@ -86,6 +89,7 @@ section.grp .card:last-child{border-bottom:0}
 
 .hide-m .m,.hide-m td.m{display:none}
 .hide-z .zh{display:none}
+.hide-i .ipa{display:none}
 body.hide-m td.m{display:none!important}
 .empty{padding:40px;text-align:center;color:var(--ink2);font-size:14px}
 
@@ -126,180 +130,181 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
   <input id="q" type="search" placeholder="搜索单词或释义…（按 / 聚焦）">
   <label class="sw"><input type="checkbox" id="all"> 默写模式</label>
   <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
+  <label class="sw"><input type="checkbox" id="i"> 隐藏音标</label>
   
   <button class="btn" id="reset">重置</button>
   <span class="count" id="cnt">114 条</span>
  </div>
 </div></div><div class="wrap"><table><thead><tr><th>#</th><th>单词</th><th>释义</th></tr></thead>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 01</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="law n. 法律；定律"><td class="n">1</td><td class="w">law</td><td class="m">n. 法律；定律</td></tr>
-<tr data-s="legal adj. 合法的；法律的"><td class="n">2</td><td class="w">legal</td><td class="m">adj. 合法的；法律的</td></tr>
-<tr data-s="rule n. 规则；统治；v. 统治； 支配；裁决"><td class="n">3</td><td class="w">rule</td><td class="m">n. 规则；统治；v. 统治； 支配；裁决</td></tr>
-<tr data-s="regulation n. 规则；条例；管理"><td class="n">4</td><td class="w">regulation</td><td class="m">n. 规则；条例；管理</td></tr>
+<tr data-s="law n. 法律；定律"><td class="n">1</td><td class="w">law<div class="ipa">[lɔː]</div></td><td class="m">n. 法律；定律</td></tr>
+<tr data-s="legal adj. 合法的；法律的"><td class="n">2</td><td class="w">legal<div class="ipa">[ˈliːɡl]</div></td><td class="m">adj. 合法的；法律的</td></tr>
+<tr data-s="rule n. 规则；统治；v. 统治； 支配；裁决"><td class="n">3</td><td class="w">rule<div class="ipa">[ruːl]</div></td><td class="m">n. 规则；统治；v. 统治； 支配；裁决</td></tr>
+<tr data-s="regulation n. 规则；条例；管理"><td class="n">4</td><td class="w">regulation<div class="ipa">[ˌreɡjuˈleɪʃ(ə)n]</div></td><td class="m">n. 规则；条例；管理</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 02</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="treaty n. 条约；协议"><td class="n">5</td><td class="w">treaty</td><td class="m">n. 条约；协议</td></tr>
-<tr data-s="agreement n. 一致；同意；协议"><td class="n">6</td><td class="w">agreement</td><td class="m">n. 一致；同意；协议</td></tr>
-<tr data-s="charter n. 宪章；许可证；包租；v. 包 租(汽⻋、⻜机等)；特许"><td class="n">7</td><td class="w">charter</td><td class="m">n. 宪章；许可证；包租；v. 包 租(汽⻋、⻜机等)；特许</td></tr>
-<tr data-s="protocol n. 外交礼节；礼仪；(外 交)议定书；协议"><td class="n">8</td><td class="w">protocol</td><td class="m">n. 外交礼节；礼仪；(外 交)议定书；协议</td></tr>
+<tr data-s="treaty n. 条约；协议"><td class="n">5</td><td class="w">treaty<div class="ipa">[ˈtriːti]</div></td><td class="m">n. 条约；协议</td></tr>
+<tr data-s="agreement n. 一致；同意；协议"><td class="n">6</td><td class="w">agreement<div class="ipa">[əˈɡriːmənt]</div></td><td class="m">n. 一致；同意；协议</td></tr>
+<tr data-s="charter n. 宪章；许可证；包租；v. 包 租(汽⻋、⻜机等)；特许"><td class="n">7</td><td class="w">charter<div class="ipa">[ˈtʃɑːtə(r)]</div></td><td class="m">n. 宪章；许可证；包租；v. 包 租(汽⻋、⻜机等)；特许</td></tr>
+<tr data-s="protocol n. 外交礼节；礼仪；(外 交)议定书；协议"><td class="n">8</td><td class="w">protocol<div class="ipa">[ˈprəʊtəkɒl]</div></td><td class="m">n. 外交礼节；礼仪；(外 交)议定书；协议</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 03</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="norm n. 准则；标准"><td class="n">9</td><td class="w">norm</td><td class="m">n. 准则；标准</td></tr>
-<tr data-s="benchmark n. 基准点"><td class="n">10</td><td class="w">benchmark</td><td class="m">n. 基准点</td></tr>
-<tr data-s="criteria n. 标准；尺度；准则； “criterion”的复数"><td class="n">11</td><td class="w">criteria</td><td class="m">n. 标准；尺度；准则； “criterion”的复数</td></tr>
-<tr data-s="standard n. 标准；adj. 标准的；规 范的；权威的"><td class="n">12</td><td class="w">standard</td><td class="m">n. 标准；adj. 标准的；规 范的；权威的</td></tr>
-<tr data-s="allow v. 允许；准许；给予；留 出；同意；承认"><td class="n">13</td><td class="w">allow</td><td class="m">v. 允许；准许；给予；留 出；同意；承认</td></tr>
-<tr data-s="admission n. 允许进入；承认"><td class="n">14</td><td class="w">admission</td><td class="m">n. 允许进入；承认</td></tr>
+<tr data-s="norm n. 准则；标准"><td class="n">9</td><td class="w">norm<div class="ipa">[nɔːm]</div></td><td class="m">n. 准则；标准</td></tr>
+<tr data-s="benchmark n. 基准点"><td class="n">10</td><td class="w">benchmark<div class="ipa">[ˈbentʃmɑːk]</div></td><td class="m">n. 基准点</td></tr>
+<tr data-s="criteria n. 标准；尺度；准则； “criterion”的复数"><td class="n">11</td><td class="w">criteria<div class="ipa">[kraɪˈtɪəriə]</div></td><td class="m">n. 标准；尺度；准则； “criterion”的复数</td></tr>
+<tr data-s="standard n. 标准；adj. 标准的；规 范的；权威的"><td class="n">12</td><td class="w">standard<div class="ipa">[ˈstændəd]</div></td><td class="m">n. 标准；adj. 标准的；规 范的；权威的</td></tr>
+<tr data-s="allow v. 允许；准许；给予；留 出；同意；承认"><td class="n">13</td><td class="w">allow<div class="ipa">[əˈlaʊ]</div></td><td class="m">v. 允许；准许；给予；留 出；同意；承认</td></tr>
+<tr data-s="admission n. 允许进入；承认"><td class="n">14</td><td class="w">admission<div class="ipa">[ədˈmɪʃ(ə)n]</div></td><td class="m">n. 允许进入；承认</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 04</span><span class="gcnt">13 词</span></td></tr>
-<tr data-s="enforce v. 强制执行；强加"><td class="n">15</td><td class="w">enforce</td><td class="m">v. 强制执行；强加</td></tr>
-<tr data-s="default v. 拖欠；违约；n. 拖欠； 违约；默认"><td class="n">16</td><td class="w">default</td><td class="m">v. 拖欠；违约；n. 拖欠； 违约；默认</td></tr>
-<tr data-s="reject v. 拒绝；驳回；n. 被拒之 人；被弃之物；残次品"><td class="n">17</td><td class="w">reject</td><td class="m">v. 拒绝；驳回；n. 被拒之 人；被弃之物；残次品</td></tr>
-<tr data-s="constraint n. 约束；限制；拘束"><td class="n">18</td><td class="w">constraint</td><td class="m">n. 约束；限制；拘束</td></tr>
-<tr data-s="official n. 官员；高级职员；adj. 官方的；正式的"><td class="n">19</td><td class="w">official</td><td class="m">n. 官员；高级职员；adj. 官方的；正式的</td></tr>
-<tr data-s="mandatory adj. 强制的；法定的；义 务的"><td class="n">20</td><td class="w">mandatory</td><td class="m">adj. 强制的；法定的；义 务的</td></tr>
-<tr data-s="potent adj. 强有力的；有效的"><td class="n">21</td><td class="w">potent</td><td class="m">adj. 强有力的；有效的</td></tr>
-<tr data-s="bound adj. 一定会；有义务的；密切相关 的；准备前往；v. 受...限制；v. 捆 绑；“bind”的过去式和过去分词"><td class="n">22</td><td class="w">bound</td><td class="m">adj. 一定会；有义务的；密切相关 的；准备前往；v. 受...限制；v. 捆 绑；“bind”的过去式和过去分词</td></tr>
-<tr data-s="obligation n. 义务；责任"><td class="n">23</td><td class="w">obligation</td><td class="m">n. 义务；责任</td></tr>
-<tr data-s="court n. 法院；球场；宫廷；v. 求爱；献殷勤；招致"><td class="n">24</td><td class="w">court</td><td class="m">n. 法院；球场；宫廷；v. 求爱；献殷勤；招致</td></tr>
-<tr data-s="supreme adj. 至上的；最高的"><td class="n">25</td><td class="w">supreme</td><td class="m">adj. 至上的；最高的</td></tr>
-<tr data-s="enact v. 制定(法律)；通过 (法律)；扮演(⻆色)"><td class="n">26</td><td class="w">enact</td><td class="m">v. 制定(法律)；通过 (法律)；扮演(⻆色)</td></tr>
-<tr data-s="legislate v. 制定法律；用立法规定"><td class="n">27</td><td class="w">legislate</td><td class="m">v. 制定法律；用立法规定</td></tr>
+<tr data-s="enforce v. 强制执行；强加"><td class="n">15</td><td class="w">enforce<div class="ipa">[ɪnˈfɔːs]</div></td><td class="m">v. 强制执行；强加</td></tr>
+<tr data-s="default v. 拖欠；违约；n. 拖欠； 违约；默认"><td class="n">16</td><td class="w">default<div class="ipa">[dɪˈfɔːlt]</div></td><td class="m">v. 拖欠；违约；n. 拖欠； 违约；默认</td></tr>
+<tr data-s="reject v. 拒绝；驳回；n. 被拒之 人；被弃之物；残次品"><td class="n">17</td><td class="w">reject<div class="ipa">[rɪˈdʒekt]</div></td><td class="m">v. 拒绝；驳回；n. 被拒之 人；被弃之物；残次品</td></tr>
+<tr data-s="constraint n. 约束；限制；拘束"><td class="n">18</td><td class="w">constraint<div class="ipa">[kənˈstreɪnt]</div></td><td class="m">n. 约束；限制；拘束</td></tr>
+<tr data-s="official n. 官员；高级职员；adj. 官方的；正式的"><td class="n">19</td><td class="w">official<div class="ipa">[əˈfɪʃ(ə)l]</div></td><td class="m">n. 官员；高级职员；adj. 官方的；正式的</td></tr>
+<tr data-s="mandatory adj. 强制的；法定的；义 务的"><td class="n">20</td><td class="w">mandatory<div class="ipa">[ˈmændətəri]</div></td><td class="m">adj. 强制的；法定的；义 务的</td></tr>
+<tr data-s="potent adj. 强有力的；有效的"><td class="n">21</td><td class="w">potent<div class="ipa">[ˈpəʊt(ə)nt]</div></td><td class="m">adj. 强有力的；有效的</td></tr>
+<tr data-s="bound adj. 一定会；有义务的；密切相关 的；准备前往；v. 受...限制；v. 捆 绑；“bind”的过去式和过去分词"><td class="n">22</td><td class="w">bound<div class="ipa">[baʊnd]</div></td><td class="m">adj. 一定会；有义务的；密切相关 的；准备前往；v. 受...限制；v. 捆 绑；“bind”的过去式和过去分词</td></tr>
+<tr data-s="obligation n. 义务；责任"><td class="n">23</td><td class="w">obligation<div class="ipa">[ˌɒblɪˈɡeɪʃ(ə)n]</div></td><td class="m">n. 义务；责任</td></tr>
+<tr data-s="court n. 法院；球场；宫廷；v. 求爱；献殷勤；招致"><td class="n">24</td><td class="w">court<div class="ipa">[kɔːt]</div></td><td class="m">n. 法院；球场；宫廷；v. 求爱；献殷勤；招致</td></tr>
+<tr data-s="supreme adj. 至上的；最高的"><td class="n">25</td><td class="w">supreme<div class="ipa">[suˈpriːm]</div></td><td class="m">adj. 至上的；最高的</td></tr>
+<tr data-s="enact v. 制定(法律)；通过 (法律)；扮演(⻆色)"><td class="n">26</td><td class="w">enact<div class="ipa">[ɪˈnækt]</div></td><td class="m">v. 制定(法律)；通过 (法律)；扮演(⻆色)</td></tr>
+<tr data-s="legislate v. 制定法律；用立法规定"><td class="n">27</td><td class="w">legislate<div class="ipa">[ˈledʒɪsleɪt]</div></td><td class="m">v. 制定法律；用立法规定</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 05</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="equity n. 公正；股票"><td class="n">28</td><td class="w">equity</td><td class="m">n. 公正；股票</td></tr>
-<tr data-s="fair adj. 公平的；合理的；相当大 的；n. 交易会；展销会；集市"><td class="n">29</td><td class="w">fair</td><td class="m">adj. 公平的；合理的；相当大 的；n. 交易会；展销会；集市</td></tr>
-<tr data-s="just adv. 只是；就；仅仅；刚刚；恰 好；adj. 公正的；正当的；合理的"><td class="n">30</td><td class="w">just</td><td class="m">adv. 只是；就；仅仅；刚刚；恰 好；adj. 公正的；正当的；合理的</td></tr>
-<tr data-s="prejudice n. 偏⻅；成⻅；v. 使有偏 ⻅；损害"><td class="n">31</td><td class="w">prejudice</td><td class="m">n. 偏⻅；成⻅；v. 使有偏 ⻅；损害</td></tr>
-<tr data-s="discrimination n. 区别；辨别；歧视"><td class="n">32</td><td class="w">discrimination</td><td class="m">n. 区别；辨别；歧视</td></tr>
+<tr data-s="equity n. 公正；股票"><td class="n">28</td><td class="w">equity<div class="ipa">[ˈekwəti]</div></td><td class="m">n. 公正；股票</td></tr>
+<tr data-s="fair adj. 公平的；合理的；相当大 的；n. 交易会；展销会；集市"><td class="n">29</td><td class="w">fair<div class="ipa">[feə(r)]</div></td><td class="m">adj. 公平的；合理的；相当大 的；n. 交易会；展销会；集市</td></tr>
+<tr data-s="just adv. 只是；就；仅仅；刚刚；恰 好；adj. 公正的；正当的；合理的"><td class="n">30</td><td class="w">just<div class="ipa">[dʒʌst]</div></td><td class="m">adv. 只是；就；仅仅；刚刚；恰 好；adj. 公正的；正当的；合理的</td></tr>
+<tr data-s="prejudice n. 偏⻅；成⻅；v. 使有偏 ⻅；损害"><td class="n">31</td><td class="w">prejudice<div class="ipa">[ˈpredʒədɪs]</div></td><td class="m">n. 偏⻅；成⻅；v. 使有偏 ⻅；损害</td></tr>
+<tr data-s="discrimination n. 区别；辨别；歧视"><td class="n">32</td><td class="w">discrimination<div class="ipa">[dɪˌskrɪmɪˈneɪʃ(ə)n]</div></td><td class="m">n. 区别；辨别；歧视</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 06</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="accuse v. 指控；指责"><td class="n">33</td><td class="w">accuse</td><td class="m">v. 指控；指责</td></tr>
-<tr data-s="sue v. 起诉；控告；请求"><td class="n">34</td><td class="w">sue</td><td class="m">v. 起诉；控告；请求</td></tr>
-<tr data-s="prosecute v. 起诉；控告；检举；指 控；继续从事"><td class="n">35</td><td class="w">prosecute</td><td class="m">v. 起诉；控告；检举；指 控；继续从事</td></tr>
+<tr data-s="accuse v. 指控；指责"><td class="n">33</td><td class="w">accuse<div class="ipa">[əˈkjuːz]</div></td><td class="m">v. 指控；指责</td></tr>
+<tr data-s="sue v. 起诉；控告；请求"><td class="n">34</td><td class="w">sue<div class="ipa">[suː]</div></td><td class="m">v. 起诉；控告；请求</td></tr>
+<tr data-s="prosecute v. 起诉；控告；检举；指 控；继续从事"><td class="n">35</td><td class="w">prosecute<div class="ipa">[ˈprɒsɪkjuːt]</div></td><td class="m">v. 起诉；控告；检举；指 控；继续从事</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 07</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="condemn v. 谴责；判刑"><td class="n">36</td><td class="w">condemn</td><td class="m">v. 谴责；判刑</td></tr>
-<tr data-s="complain v. 抱怨；投诉"><td class="n">37</td><td class="w">complain</td><td class="m">v. 抱怨；投诉</td></tr>
-<tr data-s="boycott v. 抵制；拒绝参加；n. 抵 制；拒绝参加"><td class="n">38</td><td class="w">boycott</td><td class="m">v. 抵制；拒绝参加；n. 抵 制；拒绝参加</td></tr>
+<tr data-s="condemn v. 谴责；判刑"><td class="n">36</td><td class="w">condemn<div class="ipa">[kənˈdem]</div></td><td class="m">v. 谴责；判刑</td></tr>
+<tr data-s="complain v. 抱怨；投诉"><td class="n">37</td><td class="w">complain<div class="ipa">[kəmˈpleɪn]</div></td><td class="m">v. 抱怨；投诉</td></tr>
+<tr data-s="boycott v. 抵制；拒绝参加；n. 抵 制；拒绝参加"><td class="n">38</td><td class="w">boycott<div class="ipa">[ˈbɔɪkɒt]</div></td><td class="m">v. 抵制；拒绝参加；n. 抵 制；拒绝参加</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 08</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="session n. 会议；会期；开庭；学 期；一段时间"><td class="n">39</td><td class="w">session</td><td class="m">n. 会议；会期；开庭；学 期；一段时间</td></tr>
-<tr data-s="mediate v. 调停；斡旋"><td class="n">40</td><td class="w">mediate</td><td class="m">v. 调停；斡旋</td></tr>
-<tr data-s="plea n. 恳求；申诉；抗辩；借 口"><td class="n">41</td><td class="w">plea</td><td class="m">n. 恳求；申诉；抗辩；借 口</td></tr>
+<tr data-s="session n. 会议；会期；开庭；学 期；一段时间"><td class="n">39</td><td class="w">session<div class="ipa">[ˈseʃ(ə)n]</div></td><td class="m">n. 会议；会期；开庭；学 期；一段时间</td></tr>
+<tr data-s="mediate v. 调停；斡旋"><td class="n">40</td><td class="w">mediate<div class="ipa">[ˈmiːdieɪt]</div></td><td class="m">v. 调停；斡旋</td></tr>
+<tr data-s="plea n. 恳求；申诉；抗辩；借 口"><td class="n">41</td><td class="w">plea<div class="ipa">[pliː]</div></td><td class="m">n. 恳求；申诉；抗辩；借 口</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 09</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="appeal n. 恳求；呼吁；上诉；吸 引力；v. 呼吁；吸引；诉请"><td class="n">42</td><td class="w">appeal</td><td class="m">n. 恳求；呼吁；上诉；吸 引力；v. 呼吁；吸引；诉请</td></tr>
-<tr data-s="contradict v. 反驳；相矛盾"><td class="n">43</td><td class="w">contradict</td><td class="m">v. 反驳；相矛盾</td></tr>
-<tr data-s="persuade v. 说服；劝说"><td class="n">44</td><td class="w">persuade</td><td class="m">v. 说服；劝说</td></tr>
-<tr data-s="controversy n. 争论；论战"><td class="n">45</td><td class="w">controversy</td><td class="m">n. 争论；论战</td></tr>
-<tr data-s="whisper v. 耳语；低语；n. 耳语； 低语；飒飒的声音"><td class="n">46</td><td class="w">whisper</td><td class="m">v. 耳语；低语；n. 耳语； 低语；飒飒的声音</td></tr>
+<tr data-s="appeal n. 恳求；呼吁；上诉；吸 引力；v. 呼吁；吸引；诉请"><td class="n">42</td><td class="w">appeal<div class="ipa">[əˈpiːl]</div></td><td class="m">n. 恳求；呼吁；上诉；吸 引力；v. 呼吁；吸引；诉请</td></tr>
+<tr data-s="contradict v. 反驳；相矛盾"><td class="n">43</td><td class="w">contradict<div class="ipa">[ˌkɒntrəˈdɪkt]</div></td><td class="m">v. 反驳；相矛盾</td></tr>
+<tr data-s="persuade v. 说服；劝说"><td class="n">44</td><td class="w">persuade<div class="ipa">[pəˈsweɪd]</div></td><td class="m">v. 说服；劝说</td></tr>
+<tr data-s="controversy n. 争论；论战"><td class="n">45</td><td class="w">controversy<div class="ipa">[ˈkɒntrəvɜːsi]</div></td><td class="m">n. 争论；论战</td></tr>
+<tr data-s="whisper v. 耳语；低语；n. 耳语； 低语；飒飒的声音"><td class="n">46</td><td class="w">whisper<div class="ipa">[ˈwɪspə(r)]</div></td><td class="m">v. 耳语；低语；n. 耳语； 低语；飒飒的声音</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 10</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="mutter v. 咕哝地抱怨；嘀咕；n. 咕哝地抱怨；嘀咕"><td class="n">47</td><td class="w">mutter</td><td class="m">v. 咕哝地抱怨；嘀咕；n. 咕哝地抱怨；嘀咕</td></tr>
-<tr data-s="murmur n. 低语声；嘟哝；v. 低 语；咕哝；私下抱怨"><td class="n">48</td><td class="w">murmur</td><td class="m">n. 低语声；嘟哝；v. 低 语；咕哝；私下抱怨</td></tr>
-<tr data-s="silent adj. 沉默的；无声的"><td class="n">49</td><td class="w">silent</td><td class="m">adj. 沉默的；无声的</td></tr>
-<tr data-s="mute adj. 哑的；无声的；n. 哑巴；沉默 的人；v. 减弱...的声音；adv. 缄默 地"><td class="n">50</td><td class="w">mute</td><td class="m">adj. 哑的；无声的；n. 哑巴；沉默 的人；v. 减弱...的声音；adv. 缄默 地</td></tr>
+<tr data-s="mutter v. 咕哝地抱怨；嘀咕；n. 咕哝地抱怨；嘀咕"><td class="n">47</td><td class="w">mutter<div class="ipa">[ˈmʌtə(r)]</div></td><td class="m">v. 咕哝地抱怨；嘀咕；n. 咕哝地抱怨；嘀咕</td></tr>
+<tr data-s="murmur n. 低语声；嘟哝；v. 低 语；咕哝；私下抱怨"><td class="n">48</td><td class="w">murmur<div class="ipa">[ˈmɜːmə(r)]</div></td><td class="m">n. 低语声；嘟哝；v. 低 语；咕哝；私下抱怨</td></tr>
+<tr data-s="silent adj. 沉默的；无声的"><td class="n">49</td><td class="w">silent<div class="ipa">[ˈsaɪlənt]</div></td><td class="m">adj. 沉默的；无声的</td></tr>
+<tr data-s="mute adj. 哑的；无声的；n. 哑巴；沉默 的人；v. 减弱...的声音；adv. 缄默 地"><td class="n">50</td><td class="w">mute<div class="ipa">[mjuːt]</div></td><td class="m">adj. 哑的；无声的；n. 哑巴；沉默 的人；v. 减弱...的声音；adv. 缄默 地</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 11</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="investigate v. 调查；研究"><td class="n">51</td><td class="w">investigate</td><td class="m">v. 调查；研究</td></tr>
-<tr data-s="witness n. 证人；目击者；v. ⻅证"><td class="n">52</td><td class="w">witness</td><td class="m">n. 证人；目击者；v. ⻅证</td></tr>
-<tr data-s="justify v. 替...辩护；证明...正当"><td class="n">53</td><td class="w">justify</td><td class="m">v. 替...辩护；证明...正当</td></tr>
-<tr data-s="reasonable adj. 合理的"><td class="n">54</td><td class="w">reasonable</td><td class="m">adj. 合理的</td></tr>
-<tr data-s="suitable adj. 合适的；适宜的"><td class="n">55</td><td class="w">suitable</td><td class="m">adj. 合适的；适宜的</td></tr>
+<tr data-s="investigate v. 调查；研究"><td class="n">51</td><td class="w">investigate<div class="ipa">[ɪnˈvestɪɡeɪt]</div></td><td class="m">v. 调查；研究</td></tr>
+<tr data-s="witness n. 证人；目击者；v. ⻅证"><td class="n">52</td><td class="w">witness<div class="ipa">[ˈwɪtnəs]</div></td><td class="m">n. 证人；目击者；v. ⻅证</td></tr>
+<tr data-s="justify v. 替...辩护；证明...正当"><td class="n">53</td><td class="w">justify<div class="ipa">[ˈdʒʌstɪfaɪ]</div></td><td class="m">v. 替...辩护；证明...正当</td></tr>
+<tr data-s="reasonable adj. 合理的"><td class="n">54</td><td class="w">reasonable<div class="ipa">[ˈriːznəb(ə)l]</div></td><td class="m">adj. 合理的</td></tr>
+<tr data-s="suitable adj. 合适的；适宜的"><td class="n">55</td><td class="w">suitable<div class="ipa">[ˈsuːtəb(ə)l]</div></td><td class="m">adj. 合适的；适宜的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 12</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="judge n. 法官；裁判；v. 判断； 评判；审判"><td class="n">56</td><td class="w">judge</td><td class="m">n. 法官；裁判；v. 判断； 评判；审判</td></tr>
-<tr data-s="jury n. 陪审团；评委会"><td class="n">57</td><td class="w">jury</td><td class="m">n. 陪审团；评委会</td></tr>
-<tr data-s="trial n. 审判；试验；考验；v. 测试"><td class="n">58</td><td class="w">trial</td><td class="m">n. 审判；试验；考验；v. 测试</td></tr>
-<tr data-s="suspect v. 猜想；怀疑；n. 嫌疑犯； adj. 令人怀疑的；不可信的"><td class="n">59</td><td class="w">suspect</td><td class="m">v. 猜想；怀疑；n. 嫌疑犯； adj. 令人怀疑的；不可信的</td></tr>
+<tr data-s="judge n. 法官；裁判；v. 判断； 评判；审判"><td class="n">56</td><td class="w">judge<div class="ipa">[dʒʌdʒ]</div></td><td class="m">n. 法官；裁判；v. 判断； 评判；审判</td></tr>
+<tr data-s="jury n. 陪审团；评委会"><td class="n">57</td><td class="w">jury<div class="ipa">[ˈdʒʊəri]</div></td><td class="m">n. 陪审团；评委会</td></tr>
+<tr data-s="trial n. 审判；试验；考验；v. 测试"><td class="n">58</td><td class="w">trial<div class="ipa">[ˈtraɪəl]</div></td><td class="m">n. 审判；试验；考验；v. 测试</td></tr>
+<tr data-s="suspect v. 猜想；怀疑；n. 嫌疑犯； adj. 令人怀疑的；不可信的"><td class="n">59</td><td class="w">suspect<div class="ipa">[səˈspekt]</div></td><td class="m">v. 猜想；怀疑；n. 嫌疑犯； adj. 令人怀疑的；不可信的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 13</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="sentence n. 句子；判决；宣判；v. 判决；判刑"><td class="n">60</td><td class="w">sentence</td><td class="m">n. 句子；判决；宣判；v. 判决；判刑</td></tr>
-<tr data-s="arrest v. 逮捕；拘留；阻止；吸 引；n. 逮捕；拘捕"><td class="n">61</td><td class="w">arrest</td><td class="m">v. 逮捕；拘留；阻止；吸 引；n. 逮捕；拘捕</td></tr>
-<tr data-s="jail n. 监狱"><td class="n">62</td><td class="w">jail</td><td class="m">n. 监狱</td></tr>
-<tr data-s="prison n. 监狱；监禁"><td class="n">63</td><td class="w">prison</td><td class="m">n. 监狱；监禁</td></tr>
-<tr data-s="confine v. 限制；监禁"><td class="n">64</td><td class="w">confine</td><td class="m">v. 限制；监禁</td></tr>
+<tr data-s="sentence n. 句子；判决；宣判；v. 判决；判刑"><td class="n">60</td><td class="w">sentence<div class="ipa">[ˈsentəns]</div></td><td class="m">n. 句子；判决；宣判；v. 判决；判刑</td></tr>
+<tr data-s="arrest v. 逮捕；拘留；阻止；吸 引；n. 逮捕；拘捕"><td class="n">61</td><td class="w">arrest<div class="ipa">[əˈrest]</div></td><td class="m">v. 逮捕；拘留；阻止；吸 引；n. 逮捕；拘捕</td></tr>
+<tr data-s="jail n. 监狱"><td class="n">62</td><td class="w">jail<div class="ipa">[dʒeɪl]</div></td><td class="m">n. 监狱</td></tr>
+<tr data-s="prison n. 监狱；监禁"><td class="n">63</td><td class="w">prison<div class="ipa">[ˈprɪz(ə)n]</div></td><td class="m">n. 监狱；监禁</td></tr>
+<tr data-s="confine v. 限制；监禁"><td class="n">64</td><td class="w">confine<div class="ipa">[kənˈfaɪn]</div></td><td class="m">v. 限制；监禁</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 14</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="oversee v. 监督；监视"><td class="n">65</td><td class="w">oversee</td><td class="m">v. 监督；监视</td></tr>
-<tr data-s="supervise v. 监督；管理；指导"><td class="n">66</td><td class="w">supervise</td><td class="m">v. 监督；管理；指导</td></tr>
-<tr data-s="restrict v. 限制；约束"><td class="n">67</td><td class="w">restrict</td><td class="m">v. 限制；约束</td></tr>
-<tr data-s="restrain v. 抑制；抑止"><td class="n">68</td><td class="w">restrain</td><td class="m">v. 抑制；抑止</td></tr>
+<tr data-s="oversee v. 监督；监视"><td class="n">65</td><td class="w">oversee<div class="ipa">[ˌəʊvəˈsiː]</div></td><td class="m">v. 监督；监视</td></tr>
+<tr data-s="supervise v. 监督；管理；指导"><td class="n">66</td><td class="w">supervise<div class="ipa">[ˈsuːpəvaɪz]</div></td><td class="m">v. 监督；管理；指导</td></tr>
+<tr data-s="restrict v. 限制；约束"><td class="n">67</td><td class="w">restrict<div class="ipa">[rɪˈstrɪkt]</div></td><td class="m">v. 限制；约束</td></tr>
+<tr data-s="restrain v. 抑制；抑止"><td class="n">68</td><td class="w">restrain<div class="ipa">[rɪˈstreɪn]</div></td><td class="m">v. 抑制；抑止</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 15</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="commit v. 犯(罪、错)；承诺； 投入"><td class="n">69</td><td class="w">commit</td><td class="m">v. 犯(罪、错)；承诺； 投入</td></tr>
-<tr data-s="sin n. 罪；罪行"><td class="n">70</td><td class="w">sin</td><td class="m">n. 罪；罪行</td></tr>
-<tr data-s="crime n. 罪行；罪恶"><td class="n">71</td><td class="w">crime</td><td class="m">n. 罪行；罪恶</td></tr>
+<tr data-s="commit v. 犯(罪、错)；承诺； 投入"><td class="n">69</td><td class="w">commit<div class="ipa">[kəˈmɪt]</div></td><td class="m">v. 犯(罪、错)；承诺； 投入</td></tr>
+<tr data-s="sin n. 罪；罪行"><td class="n">70</td><td class="w">sin<div class="ipa">[sɪn]</div></td><td class="m">n. 罪；罪行</td></tr>
+<tr data-s="crime n. 罪行；罪恶"><td class="n">71</td><td class="w">crime<div class="ipa">[kraɪm]</div></td><td class="m">n. 罪行；罪恶</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 16</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="vice n. 恶习；罪恶；缺点；代理； 副职；adj. 代理的；副职的"><td class="n">72</td><td class="w">vice</td><td class="m">n. 恶习；罪恶；缺点；代理； 副职；adj. 代理的；副职的</td></tr>
-<tr data-s="bribe v. 贿赂；n. 贿赂"><td class="n">73</td><td class="w">bribe</td><td class="m">v. 贿赂；n. 贿赂</td></tr>
-<tr data-s="rob v. 抢劫；掠夺"><td class="n">74</td><td class="w">rob</td><td class="m">v. 抢劫；掠夺</td></tr>
-<tr data-s="pirate n. 海盗；盗版者；v. 抢 劫；剽窃；盗印"><td class="n">75</td><td class="w">pirate</td><td class="m">n. 海盗；盗版者；v. 抢 劫；剽窃；盗印</td></tr>
+<tr data-s="vice n. 恶习；罪恶；缺点；代理； 副职；adj. 代理的；副职的"><td class="n">72</td><td class="w">vice<div class="ipa">[vaɪs]</div></td><td class="m">n. 恶习；罪恶；缺点；代理； 副职；adj. 代理的；副职的</td></tr>
+<tr data-s="bribe v. 贿赂；n. 贿赂"><td class="n">73</td><td class="w">bribe<div class="ipa">[braɪb]</div></td><td class="m">v. 贿赂；n. 贿赂</td></tr>
+<tr data-s="rob v. 抢劫；掠夺"><td class="n">74</td><td class="w">rob<div class="ipa">[rɒb]</div></td><td class="m">v. 抢劫；掠夺</td></tr>
+<tr data-s="pirate n. 海盗；盗版者；v. 抢 劫；剽窃；盗印"><td class="n">75</td><td class="w">pirate<div class="ipa">[ˈpaɪrət]</div></td><td class="m">n. 海盗；盗版者；v. 抢 劫；剽窃；盗印</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 17</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="steal v. 偷；窃取"><td class="n">76</td><td class="w">steal</td><td class="m">v. 偷；窃取</td></tr>
-<tr data-s="thief n. 小偷；贼；窃贼"><td class="n">77</td><td class="w">thief</td><td class="m">n. 小偷；贼；窃贼</td></tr>
-<tr data-s="murder n. 谋杀；v. 谋杀；杀害"><td class="n">78</td><td class="w">murder</td><td class="m">n. 谋杀；v. 谋杀；杀害</td></tr>
-<tr data-s="suicide n. 自杀"><td class="n">79</td><td class="w">suicide</td><td class="m">n. 自杀</td></tr>
+<tr data-s="steal v. 偷；窃取"><td class="n">76</td><td class="w">steal<div class="ipa">[stiːl]</div></td><td class="m">v. 偷；窃取</td></tr>
+<tr data-s="thief n. 小偷；贼；窃贼"><td class="n">77</td><td class="w">thief<div class="ipa">[θiːf]</div></td><td class="m">n. 小偷；贼；窃贼</td></tr>
+<tr data-s="murder n. 谋杀；v. 谋杀；杀害"><td class="n">78</td><td class="w">murder<div class="ipa">[ˈmɜːdə(r)]</div></td><td class="m">n. 谋杀；v. 谋杀；杀害</td></tr>
+<tr data-s="suicide n. 自杀"><td class="n">79</td><td class="w">suicide<div class="ipa">[ˈsuːɪsaɪd]</div></td><td class="m">n. 自杀</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 18</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="deceive v. 欺骗；蒙骗"><td class="n">80</td><td class="w">deceive</td><td class="m">v. 欺骗；蒙骗</td></tr>
-<tr data-s="cheat n. 骗子；作弊者；v. 欺 骗；作弊"><td class="n">81</td><td class="w">cheat</td><td class="m">n. 骗子；作弊者；v. 欺 骗；作弊</td></tr>
+<tr data-s="deceive v. 欺骗；蒙骗"><td class="n">80</td><td class="w">deceive<div class="ipa">[dɪˈsiːv]</div></td><td class="m">v. 欺骗；蒙骗</td></tr>
+<tr data-s="cheat n. 骗子；作弊者；v. 欺 骗；作弊"><td class="n">81</td><td class="w">cheat<div class="ipa">[tʃiːt]</div></td><td class="m">n. 骗子；作弊者；v. 欺 骗；作弊</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 19</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="fraud n. 欺骗；欺诈；骗子；伪 品"><td class="n">82</td><td class="w">fraud</td><td class="m">n. 欺骗；欺诈；骗子；伪 品</td></tr>
-<tr data-s="liar n. 说谎者；骗子"><td class="n">83</td><td class="w">liar</td><td class="m">n. 说谎者；骗子</td></tr>
+<tr data-s="fraud n. 欺骗；欺诈；骗子；伪 品"><td class="n">82</td><td class="w">fraud<div class="ipa">[frɔːd]</div></td><td class="m">n. 欺骗；欺诈；骗子；伪 品</td></tr>
+<tr data-s="liar n. 说谎者；骗子"><td class="n">83</td><td class="w">liar<div class="ipa">[ˈlaɪə(r)]</div></td><td class="m">n. 说谎者；骗子</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 20</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="trap n. 圈套；陷阱；困境；v. 设圈套；陷入(困境)"><td class="n">84</td><td class="w">trap</td><td class="m">n. 圈套；陷阱；困境；v. 设圈套；陷入(困境)</td></tr>
-<tr data-s="trick n. 戏法；诡计；恶作剧； 诀窍；v. 哄骗；欺骗"><td class="n">85</td><td class="w">trick</td><td class="m">n. 戏法；诡计；恶作剧； 诀窍；v. 哄骗；欺骗</td></tr>
-<tr data-s="pretend v. 假装；佯装；自称"><td class="n">86</td><td class="w">pretend</td><td class="m">v. 假装；佯装；自称</td></tr>
-<tr data-s="fool n. 傻瓜；蠢人；v. 愚弄"><td class="n">87</td><td class="w">fool</td><td class="m">n. 傻瓜；蠢人；v. 愚弄</td></tr>
-<tr data-s="stigma n. 耻辱；污名；(花朵 的)柱头"><td class="n">88</td><td class="w">stigma</td><td class="m">n. 耻辱；污名；(花朵 的)柱头</td></tr>
+<tr data-s="trap n. 圈套；陷阱；困境；v. 设圈套；陷入(困境)"><td class="n">84</td><td class="w">trap<div class="ipa">[træp]</div></td><td class="m">n. 圈套；陷阱；困境；v. 设圈套；陷入(困境)</td></tr>
+<tr data-s="trick n. 戏法；诡计；恶作剧； 诀窍；v. 哄骗；欺骗"><td class="n">85</td><td class="w">trick<div class="ipa">[trɪk]</div></td><td class="m">n. 戏法；诡计；恶作剧； 诀窍；v. 哄骗；欺骗</td></tr>
+<tr data-s="pretend v. 假装；佯装；自称"><td class="n">86</td><td class="w">pretend<div class="ipa">[prɪˈtend]</div></td><td class="m">v. 假装；佯装；自称</td></tr>
+<tr data-s="fool n. 傻瓜；蠢人；v. 愚弄"><td class="n">87</td><td class="w">fool<div class="ipa">[fuːl]</div></td><td class="m">n. 傻瓜；蠢人；v. 愚弄</td></tr>
+<tr data-s="stigma n. 耻辱；污名；(花朵 的)柱头"><td class="n">88</td><td class="w">stigma<div class="ipa">[ˈstɪɡmə]</div></td><td class="m">n. 耻辱；污名；(花朵 的)柱头</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 21</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="confess v. 承认；忏悔"><td class="n">89</td><td class="w">confess</td><td class="m">v. 承认；忏悔</td></tr>
-<tr data-s="conform v. 符合；顺应；遵从； (使)一致"><td class="n">90</td><td class="w">conform</td><td class="m">v. 符合；顺应；遵从； (使)一致</td></tr>
-<tr data-s="reconcile v. 使和解；使和好；调和"><td class="n">91</td><td class="w">reconcile</td><td class="m">v. 使和解；使和好；调和</td></tr>
-<tr data-s="obey v. 遵守；服从"><td class="n">92</td><td class="w">obey</td><td class="m">v. 遵守；服从</td></tr>
-<tr data-s="succumb v. 屈服；屈从"><td class="n">93</td><td class="w">succumb</td><td class="m">v. 屈服；屈从</td></tr>
+<tr data-s="confess v. 承认；忏悔"><td class="n">89</td><td class="w">confess<div class="ipa">[kənˈfes]</div></td><td class="m">v. 承认；忏悔</td></tr>
+<tr data-s="conform v. 符合；顺应；遵从； (使)一致"><td class="n">90</td><td class="w">conform<div class="ipa">[kənˈfɔːm]</div></td><td class="m">v. 符合；顺应；遵从； (使)一致</td></tr>
+<tr data-s="reconcile v. 使和解；使和好；调和"><td class="n">91</td><td class="w">reconcile<div class="ipa">[ˈrekənsaɪl]</div></td><td class="m">v. 使和解；使和好；调和</td></tr>
+<tr data-s="obey v. 遵守；服从"><td class="n">92</td><td class="w">obey<div class="ipa">[əˈbeɪ]</div></td><td class="m">v. 遵守；服从</td></tr>
+<tr data-s="succumb v. 屈服；屈从"><td class="n">93</td><td class="w">succumb<div class="ipa">[səˈkʌm]</div></td><td class="m">v. 屈服；屈从</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 22</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="penalty n. 惩罚；刑罚"><td class="n">94</td><td class="w">penalty</td><td class="m">n. 惩罚；刑罚</td></tr>
-<tr data-s="fine adj. 很好的；晴朗的；健康的； adv. 很好；n. 罚款；v. 罚款"><td class="n">95</td><td class="w">fine</td><td class="m">adj. 很好的；晴朗的；健康的； adv. 很好；n. 罚款；v. 罚款</td></tr>
-<tr data-s="mortgage n. 抵押；按揭；v. 抵押； 按揭"><td class="n">96</td><td class="w">mortgage</td><td class="m">n. 抵押；按揭；v. 抵押； 按揭</td></tr>
-<tr data-s="ownership n. 所有权；物主身份"><td class="n">97</td><td class="w">ownership</td><td class="m">n. 所有权；物主身份</td></tr>
+<tr data-s="penalty n. 惩罚；刑罚"><td class="n">94</td><td class="w">penalty<div class="ipa">[ˈpenəlti]</div></td><td class="m">n. 惩罚；刑罚</td></tr>
+<tr data-s="fine adj. 很好的；晴朗的；健康的； adv. 很好；n. 罚款；v. 罚款"><td class="n">95</td><td class="w">fine<div class="ipa">[faɪn]</div></td><td class="m">adj. 很好的；晴朗的；健康的； adv. 很好；n. 罚款；v. 罚款</td></tr>
+<tr data-s="mortgage n. 抵押；按揭；v. 抵押； 按揭"><td class="n">96</td><td class="w">mortgage<div class="ipa">[ˈmɔːɡɪdʒ]</div></td><td class="m">n. 抵押；按揭；v. 抵押； 按揭</td></tr>
+<tr data-s="ownership n. 所有权；物主身份"><td class="n">97</td><td class="w">ownership<div class="ipa">[ˈəʊnəʃɪp]</div></td><td class="m">n. 所有权；物主身份</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 23</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="copyright n. 版权；著作权"><td class="n">98</td><td class="w">copyright</td><td class="m">n. 版权；著作权</td></tr>
-<tr data-s="privilege n. 特权；荣幸；v. 给予特 权；特殊对待"><td class="n">99</td><td class="w">privilege</td><td class="m">n. 特权；荣幸；v. 给予特 权；特殊对待</td></tr>
-<tr data-s="accredit v. 归于；委托；授权；信 任"><td class="n">100</td><td class="w">accredit</td><td class="m">v. 归于；委托；授权；信 任</td></tr>
-<tr data-s="clue n. 线索；提示"><td class="n">101</td><td class="w">clue</td><td class="m">n. 线索；提示</td></tr>
+<tr data-s="copyright n. 版权；著作权"><td class="n">98</td><td class="w">copyright<div class="ipa">[ˈkɒpiraɪt]</div></td><td class="m">n. 版权；著作权</td></tr>
+<tr data-s="privilege n. 特权；荣幸；v. 给予特 权；特殊对待"><td class="n">99</td><td class="w">privilege<div class="ipa">[ˈprɪvəlɪdʒ]</div></td><td class="m">n. 特权；荣幸；v. 给予特 权；特殊对待</td></tr>
+<tr data-s="accredit v. 归于；委托；授权；信 任"><td class="n">100</td><td class="w">accredit<div class="ipa">[əˈkredɪt]</div></td><td class="m">v. 归于；委托；授权；信 任</td></tr>
+<tr data-s="clue n. 线索；提示"><td class="n">101</td><td class="w">clue<div class="ipa">[kluː]</div></td><td class="m">n. 线索；提示</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 24</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="access n. 进入；通道；接触(的机会或 权利)；v. 接近；使用；获取"><td class="n">102</td><td class="w">access</td><td class="m">n. 进入；通道；接触(的机会或 权利)；v. 接近；使用；获取</td></tr>
-<tr data-s="anonymous adj. 匿名的；无名的；不 知名的"><td class="n">103</td><td class="w">anonymous</td><td class="m">adj. 匿名的；无名的；不 知名的</td></tr>
+<tr data-s="access n. 进入；通道；接触(的机会或 权利)；v. 接近；使用；获取"><td class="n">102</td><td class="w">access<div class="ipa">[ˈækses]</div></td><td class="m">n. 进入；通道；接触(的机会或 权利)；v. 接近；使用；获取</td></tr>
+<tr data-s="anonymous adj. 匿名的；无名的；不 知名的"><td class="n">103</td><td class="w">anonymous<div class="ipa">[əˈnɒnɪməs]</div></td><td class="m">adj. 匿名的；无名的；不 知名的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 25</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="false adj. 虚假的；错误的"><td class="n">104</td><td class="w">false</td><td class="m">adj. 虚假的；错误的</td></tr>
-<tr data-s="genuine adj. 真正的；真诚的"><td class="n">105</td><td class="w">genuine</td><td class="m">adj. 真正的；真诚的</td></tr>
+<tr data-s="false adj. 虚假的；错误的"><td class="n">104</td><td class="w">false<div class="ipa">[fɔːls]</div></td><td class="m">adj. 虚假的；错误的</td></tr>
+<tr data-s="genuine adj. 真正的；真诚的"><td class="n">105</td><td class="w">genuine<div class="ipa">[ˈdʒenjuɪn]</div></td><td class="m">adj. 真正的；真诚的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 26</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="procedure n. 程序；手续；步骤"><td class="n">106</td><td class="w">procedure</td><td class="m">n. 程序；手续；步骤</td></tr>
-<tr data-s="routine n. 常规；例行公事；adj. 常规的；例行公事的"><td class="n">107</td><td class="w">routine</td><td class="m">n. 常规；例行公事；adj. 常规的；例行公事的</td></tr>
-<tr data-s="consequence n. 后果；结果"><td class="n">108</td><td class="w">consequence</td><td class="m">n. 后果；结果</td></tr>
+<tr data-s="procedure n. 程序；手续；步骤"><td class="n">106</td><td class="w">procedure<div class="ipa">[prəˈsiːdʒə(r)]</div></td><td class="m">n. 程序；手续；步骤</td></tr>
+<tr data-s="routine n. 常规；例行公事；adj. 常规的；例行公事的"><td class="n">107</td><td class="w">routine<div class="ipa">[ruːˈtiːn]</div></td><td class="m">n. 常规；例行公事；adj. 常规的；例行公事的</td></tr>
+<tr data-s="consequence n. 后果；结果"><td class="n">108</td><td class="w">consequence<div class="ipa">[ˈkɒnsɪkwəns]</div></td><td class="m">n. 后果；结果</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 27</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="demand n. 要求；请求；需求；v. 要求；请求；需求"><td class="n">109</td><td class="w">demand</td><td class="m">n. 要求；请求；需求；v. 要求；请求；需求</td></tr>
-<tr data-s="request n. 请求；要求的事；v. 要 求；请求"><td class="n">110</td><td class="w">request</td><td class="m">n. 请求；要求的事；v. 要 求；请求</td></tr>
-<tr data-s="require v. 需要；要求"><td class="n">111</td><td class="w">require</td><td class="m">v. 需要；要求</td></tr>
+<tr data-s="demand n. 要求；请求；需求；v. 要求；请求；需求"><td class="n">109</td><td class="w">demand<div class="ipa">[dɪˈmɑːnd]</div></td><td class="m">n. 要求；请求；需求；v. 要求；请求；需求</td></tr>
+<tr data-s="request n. 请求；要求的事；v. 要 求；请求"><td class="n">110</td><td class="w">request<div class="ipa">[rɪˈkwest]</div></td><td class="m">n. 请求；要求的事；v. 要 求；请求</td></tr>
+<tr data-s="require v. 需要；要求"><td class="n">111</td><td class="w">require<div class="ipa">[rɪˈkwaɪə(r)]</div></td><td class="m">v. 需要；要求</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 28</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="petition v. 请求；请愿；祈求；n. 请愿书；祈求；诉状"><td class="n">112</td><td class="w">petition</td><td class="m">v. 请求；请愿；祈求；n. 请愿书；祈求；诉状</td></tr>
-<tr data-s="command n. 命令；指挥；掌握；v. 命令；指挥；掌握"><td class="n">113</td><td class="w">command</td><td class="m">n. 命令；指挥；掌握；v. 命令；指挥；掌握</td></tr>
-<tr data-s="instruct v. 教授；教导；指示；命 令；通知"><td class="n">114</td><td class="w">instruct</td><td class="m">v. 教授；教导；指示；命 令；通知</td></tr>
+<tr data-s="petition v. 请求；请愿；祈求；n. 请愿书；祈求；诉状"><td class="n">112</td><td class="w">petition<div class="ipa">[pəˈtɪʃ(ə)n]</div></td><td class="m">v. 请求；请愿；祈求；n. 请愿书；祈求；诉状</td></tr>
+<tr data-s="command n. 命令；指挥；掌握；v. 命令；指挥；掌握"><td class="n">113</td><td class="w">command<div class="ipa">[kəˈmɑːnd]</div></td><td class="m">n. 命令；指挥；掌握；v. 命令；指挥；掌握</td></tr>
+<tr data-s="instruct v. 教授；教导；指示；命 令；通知"><td class="n">114</td><td class="w">instruct<div class="ipa">[ɪnˈstrʌkt]</div></td><td class="m">v. 教授；教导；指示；命 令；通知</td></tr>
 </tbody>
 </table><div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit16.html">← Unit 16</a><a href="unit17-card.html">切到例句卡片版</a><a href="unit18.html">Unit 18 →</a></div><footer><div class="wrap" style="padding:0">
  摘自《雅思词汇真经》（刘洪波 编著）第 17 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
@@ -309,27 +314,31 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  var KEY='vj-hide';
  var body=document.body;
  var kind=body.dataset.kind;
- var s={m:false,z:false};
- try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;}}catch(e){}
+ var s={m:false,z:false,i:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z; if(typeof o.i==='boolean')s.i=o.i;}}catch(e){}
  function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
  function paint(){
   body.classList.toggle('hide-m',s.m);
   body.classList.toggle('hide-z',s.z);
-  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all');
+  body.classList.toggle('hide-i',s.i);
+  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all'), ci=document.getElementById('i');
   if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
   if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
+  if(ci){ci.checked=s.i; ci.closest('.sw').classList.toggle('on',s.i);}
   if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
  }
  var cm=document.getElementById('m');
  if(cm) cm.addEventListener('change',function(){s.m=cm.checked; save(); paint();});
  var cz=document.getElementById('z');
  if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
+ var ci=document.getElementById('i');
+ if(ci) ci.addEventListener('change',function(){s.i=ci.checked; save(); paint();});
  var ca=document.getElementById('all');
  if(ca) ca.addEventListener('change',function(){
    s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
  });
  var rs=document.getElementById('reset');
- if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; save(); paint();});
+ if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; s.i=false; save(); paint();});
  var q=document.getElementById('q');
  var items=[].slice.call(document.querySelectorAll('[data-s]'));
  var cnt=document.getElementById('cnt');

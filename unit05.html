@@ -56,6 +56,9 @@ td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-
 td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
  letter-spacing:.2px;word-break:break-word}
 td.m{color:var(--ink)}
+.ipa{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:12px;font-weight:400;
+ color:var(--ink2);letter-spacing:0;margin-top:3px;word-break:break-word}
+.card .w .ipa{font-size:13px;margin-left:8px}
 tr.hit td.w,tr.hit td.m{background:var(--mark)}
 
 .cards{display:grid;gap:12px}
@@ -86,6 +89,7 @@ section.grp .card:last-child{border-bottom:0}
 
 .hide-m .m,.hide-m td.m{display:none}
 .hide-z .zh{display:none}
+.hide-i .ipa{display:none}
 body.hide-m td.m{display:none!important}
 .empty{padding:40px;text-align:center;color:var(--ink2);font-size:14px}
 
@@ -126,600 +130,601 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
   <input id="q" type="search" placeholder="搜索单词或释义…（按 / 聚焦）">
   <label class="sw"><input type="checkbox" id="all"> 默写模式</label>
   <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
+  <label class="sw"><input type="checkbox" id="i"> 隐藏音标</label>
   
   <button class="btn" id="reset">重置</button>
   <span class="count" id="cnt">400 条</span>
  </div>
 </div></div><div class="wrap"><table><thead><tr><th>#</th><th>单词</th><th>释义</th></tr></thead>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 01</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="education n. 教育"><td class="n">1</td><td class="w">education</td><td class="m">n. 教育</td></tr>
-<tr data-s="primary adj. 最初的；首要的；初 等的；小学的；原来的"><td class="n">2</td><td class="w">primary</td><td class="m">adj. 最初的；首要的；初 等的；小学的；原来的</td></tr>
-<tr data-s="secondary adj. 第二的,次要的；中 等的"><td class="n">3</td><td class="w">secondary</td><td class="m">adj. 第二的,次要的；中 等的</td></tr>
+<tr data-s="education n. 教育"><td class="n">1</td><td class="w">education<div class="ipa">[ˌedʒuˈkeɪʃ(ə)n]</div></td><td class="m">n. 教育</td></tr>
+<tr data-s="primary adj. 最初的；首要的；初 等的；小学的；原来的"><td class="n">2</td><td class="w">primary<div class="ipa">[ˈpraɪməri]</div></td><td class="m">adj. 最初的；首要的；初 等的；小学的；原来的</td></tr>
+<tr data-s="secondary adj. 第二的,次要的；中 等的"><td class="n">3</td><td class="w">secondary<div class="ipa">[ˈsekəndri]</div></td><td class="m">adj. 第二的,次要的；中 等的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 02</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="university n. 大学"><td class="n">4</td><td class="w">university</td><td class="m">n. 大学</td></tr>
-<tr data-s="college n. 学院；大学"><td class="n">5</td><td class="w">college</td><td class="m">n. 学院；大学</td></tr>
-<tr data-s="institute n. 协会；学院；研究所；机构； v. 建立；制定；开创；开始"><td class="n">6</td><td class="w">institute</td><td class="m">n. 协会；学院；研究所；机构； v. 建立；制定；开创；开始</td></tr>
-<tr data-s="academy n. 学院"><td class="n">7</td><td class="w">academy</td><td class="m">n. 学院</td></tr>
+<tr data-s="university n. 大学"><td class="n">4</td><td class="w">university<div class="ipa">[ˌjuːnɪˈvɜːsəti]</div></td><td class="m">n. 大学</td></tr>
+<tr data-s="college n. 学院；大学"><td class="n">5</td><td class="w">college<div class="ipa">[ˈkɒlɪdʒ]</div></td><td class="m">n. 学院；大学</td></tr>
+<tr data-s="institute n. 协会；学院；研究所；机构； v. 建立；制定；开创；开始"><td class="n">6</td><td class="w">institute<div class="ipa">[ˈɪnstɪtjuːt]</div></td><td class="m">n. 协会；学院；研究所；机构； v. 建立；制定；开创；开始</td></tr>
+<tr data-s="academy n. 学院"><td class="n">7</td><td class="w">academy<div class="ipa">[əˈkædəmi]</div></td><td class="m">n. 学院</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 03</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="learn v. 学习"><td class="n">8</td><td class="w">learn</td><td class="m">v. 学习</td></tr>
-<tr data-s="study v. 学习；研究；n. 学习； 研究；书房"><td class="n">9</td><td class="w">study</td><td class="m">v. 学习；研究；n. 学习； 研究；书房</td></tr>
-<tr data-s="acquire v. 获得；得到；学会"><td class="n">10</td><td class="w">acquire</td><td class="m">v. 获得；得到；学会</td></tr>
-<tr data-s="knowledge n. 知识；了解；学问；学 识"><td class="n">11</td><td class="w">knowledge</td><td class="m">n. 知识；了解；学问；学 识</td></tr>
+<tr data-s="learn v. 学习"><td class="n">8</td><td class="w">learn<div class="ipa">[lɜːn]</div></td><td class="m">v. 学习</td></tr>
+<tr data-s="study v. 学习；研究；n. 学习； 研究；书房"><td class="n">9</td><td class="w">study<div class="ipa">[ˈstʌdi]</div></td><td class="m">v. 学习；研究；n. 学习； 研究；书房</td></tr>
+<tr data-s="acquire v. 获得；得到；学会"><td class="n">10</td><td class="w">acquire<div class="ipa">[əˈkwaɪə(r)]</div></td><td class="m">v. 获得；得到；学会</td></tr>
+<tr data-s="knowledge n. 知识；了解；学问；学 识"><td class="n">11</td><td class="w">knowledge<div class="ipa">[ˈnɒlɪdʒ]</div></td><td class="m">n. 知识；了解；学问；学 识</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 04</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="expertise n. 专⻔技能；专⻔知识"><td class="n">12</td><td class="w">expertise</td><td class="m">n. 专⻔技能；专⻔知识</td></tr>
-<tr data-s="novice n. 新手；初学者；新信徒"><td class="n">13</td><td class="w">novice</td><td class="m">n. 新手；初学者；新信徒</td></tr>
-<tr data-s="recruit v. 征募；招收；招聘；n. 新兵；新成员"><td class="n">14</td><td class="w">recruit</td><td class="m">v. 征募；招收；招聘；n. 新兵；新成员</td></tr>
+<tr data-s="expertise n. 专⻔技能；专⻔知识"><td class="n">12</td><td class="w">expertise<div class="ipa">[ˌekspɜːˈtiːz]</div></td><td class="m">n. 专⻔技能；专⻔知识</td></tr>
+<tr data-s="novice n. 新手；初学者；新信徒"><td class="n">13</td><td class="w">novice<div class="ipa">[ˈnɒvɪs]</div></td><td class="m">n. 新手；初学者；新信徒</td></tr>
+<tr data-s="recruit v. 征募；招收；招聘；n. 新兵；新成员"><td class="n">14</td><td class="w">recruit<div class="ipa">[rɪˈkruːt]</div></td><td class="m">v. 征募；招收；招聘；n. 新兵；新成员</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 05</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="literate adj. 识字的；有读写能力的；有文 化的；n. 识字的人；有学问的人"><td class="n">15</td><td class="w">literate</td><td class="m">adj. 识字的；有读写能力的；有文 化的；n. 识字的人；有学问的人</td></tr>
-<tr data-s="illiteracy n. 文盲；无知；缺乏教育"><td class="n">16</td><td class="w">illiteracy</td><td class="m">n. 文盲；无知；缺乏教育</td></tr>
-<tr data-s="numerate v. 数；计算；读(数)； adj. 识数的；有计算能力的"><td class="n">17</td><td class="w">numerate</td><td class="m">v. 数；计算；读(数)； adj. 识数的；有计算能力的</td></tr>
+<tr data-s="literate adj. 识字的；有读写能力的；有文 化的；n. 识字的人；有学问的人"><td class="n">15</td><td class="w">literate<div class="ipa">[ˈlɪtərət]</div></td><td class="m">adj. 识字的；有读写能力的；有文 化的；n. 识字的人；有学问的人</td></tr>
+<tr data-s="illiteracy n. 文盲；无知；缺乏教育"><td class="n">16</td><td class="w">illiteracy<div class="ipa">[ɪˈlɪtərəsi]</div></td><td class="m">n. 文盲；无知；缺乏教育</td></tr>
+<tr data-s="numerate v. 数；计算；读(数)； adj. 识数的；有计算能力的"><td class="n">17</td><td class="w">numerate<div class="ipa">[ˈnjuːmərət]</div></td><td class="m">v. 数；计算；读(数)； adj. 识数的；有计算能力的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 06</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="problem n. 难题；问题"><td class="n">18</td><td class="w">problem</td><td class="m">n. 难题；问题</td></tr>
-<tr data-s="issue n. 问题；发行(物)；重要议题； 流出；v. 发行；发表；流出；在... 上挑起争论"><td class="n">19</td><td class="w">issue</td><td class="m">n. 问题；发行(物)；重要议题； 流出；v. 发行；发表；流出；在... 上挑起争论</td></tr>
-<tr data-s="affair n. 事务；事件；暧昧关系"><td class="n">20</td><td class="w">affair</td><td class="m">n. 事务；事件；暧昧关系</td></tr>
-<tr data-s="controversial adj. 有争议的"><td class="n">21</td><td class="w">controversial</td><td class="m">adj. 有争议的</td></tr>
+<tr data-s="problem n. 难题；问题"><td class="n">18</td><td class="w">problem<div class="ipa">[ˈprɒbləm]</div></td><td class="m">n. 难题；问题</td></tr>
+<tr data-s="issue n. 问题；发行(物)；重要议题； 流出；v. 发行；发表；流出；在... 上挑起争论"><td class="n">19</td><td class="w">issue<div class="ipa">[ˈɪʃuː]</div></td><td class="m">n. 问题；发行(物)；重要议题； 流出；v. 发行；发表；流出；在... 上挑起争论</td></tr>
+<tr data-s="affair n. 事务；事件；暧昧关系"><td class="n">20</td><td class="w">affair<div class="ipa">[əˈfeə(r)]</div></td><td class="m">n. 事务；事件；暧昧关系</td></tr>
+<tr data-s="controversial adj. 有争议的"><td class="n">21</td><td class="w">controversial<div class="ipa">[ˌkɒntrəˈvɜːʃ(ə)l]</div></td><td class="m">adj. 有争议的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 07</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="puzzle n. 谜；难题；拼图；v. (使)迷惑；(使)伤脑筋"><td class="n">22</td><td class="w">puzzle</td><td class="m">n. 谜；难题；拼图；v. (使)迷惑；(使)伤脑筋</td></tr>
-<tr data-s="riddle n. 谜语；费解的事；v. 解谜； 出谜；使布满窟窿；打洞"><td class="n">23</td><td class="w">riddle</td><td class="m">n. 谜语；费解的事；v. 解谜； 出谜；使布满窟窿；打洞</td></tr>
-<tr data-s="obscure adj. 昏暗的；不清楚的；无名 的；v. 使模糊；使隐晦；使费解"><td class="n">24</td><td class="w">obscure</td><td class="m">adj. 昏暗的；不清楚的；无名 的；v. 使模糊；使隐晦；使费解</td></tr>
+<tr data-s="puzzle n. 谜；难题；拼图；v. (使)迷惑；(使)伤脑筋"><td class="n">22</td><td class="w">puzzle<div class="ipa">[ˈpʌz(ə)l]</div></td><td class="m">n. 谜；难题；拼图；v. (使)迷惑；(使)伤脑筋</td></tr>
+<tr data-s="riddle n. 谜语；费解的事；v. 解谜； 出谜；使布满窟窿；打洞"><td class="n">23</td><td class="w">riddle<div class="ipa">[ˈrɪd(ə)l]</div></td><td class="m">n. 谜语；费解的事；v. 解谜； 出谜；使布满窟窿；打洞</td></tr>
+<tr data-s="obscure adj. 昏暗的；不清楚的；无名 的；v. 使模糊；使隐晦；使费解"><td class="n">24</td><td class="w">obscure<div class="ipa">[əbˈskjʊə(r)]</div></td><td class="m">adj. 昏暗的；不清楚的；无名 的；v. 使模糊；使隐晦；使费解</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 08</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="instil v. 逐步渗透；逐渐灌输"><td class="n">25</td><td class="w">instil</td><td class="m">v. 逐步渗透；逐渐灌输</td></tr>
-<tr data-s="cram v. 塞满；填鸭式学习；n. 仓促备考；死记硬背"><td class="n">26</td><td class="w">cram</td><td class="m">v. 塞满；填鸭式学习；n. 仓促备考；死记硬背</td></tr>
-<tr data-s="emphasise v. 强调；着重"><td class="n">27</td><td class="w">emphasise</td><td class="m">v. 强调；着重</td></tr>
-<tr data-s="enhance v. 提高；增强"><td class="n">28</td><td class="w">enhance</td><td class="m">v. 提高；增强</td></tr>
+<tr data-s="instil v. 逐步渗透；逐渐灌输"><td class="n">25</td><td class="w">instil<div class="ipa">[ɪnˈstɪl]</div></td><td class="m">v. 逐步渗透；逐渐灌输</td></tr>
+<tr data-s="cram v. 塞满；填鸭式学习；n. 仓促备考；死记硬背"><td class="n">26</td><td class="w">cram<div class="ipa">[kræm]</div></td><td class="m">v. 塞满；填鸭式学习；n. 仓促备考；死记硬背</td></tr>
+<tr data-s="emphasise v. 强调；着重"><td class="n">27</td><td class="w">emphasise<div class="ipa">[ˈemfəsaɪz]</div></td><td class="m">v. 强调；着重</td></tr>
+<tr data-s="enhance v. 提高；增强"><td class="n">28</td><td class="w">enhance<div class="ipa">[ɪnˈhɑːns]</div></td><td class="m">v. 提高；增强</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 09</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="enable v. 使能够；使可能"><td class="n">29</td><td class="w">enable</td><td class="m">v. 使能够；使可能</td></tr>
-<tr data-s="inspire v. 鼓舞；激励；启迪；激 起；促成"><td class="n">30</td><td class="w">inspire</td><td class="m">v. 鼓舞；激励；启迪；激 起；促成</td></tr>
-<tr data-s="motive n. 动机；目的"><td class="n">31</td><td class="w">motive</td><td class="m">n. 动机；目的</td></tr>
-<tr data-s="motivate v. 引起动机；激发；激励"><td class="n">32</td><td class="w">motivate</td><td class="m">v. 引起动机；激发；激励</td></tr>
+<tr data-s="enable v. 使能够；使可能"><td class="n">29</td><td class="w">enable<div class="ipa">[ɪˈneɪb(ə)l]</div></td><td class="m">v. 使能够；使可能</td></tr>
+<tr data-s="inspire v. 鼓舞；激励；启迪；激 起；促成"><td class="n">30</td><td class="w">inspire<div class="ipa">[ɪnˈspaɪə(r)]</div></td><td class="m">v. 鼓舞；激励；启迪；激 起；促成</td></tr>
+<tr data-s="motive n. 动机；目的"><td class="n">31</td><td class="w">motive<div class="ipa">[ˈməʊtɪv]</div></td><td class="m">n. 动机；目的</td></tr>
+<tr data-s="motivate v. 引起动机；激发；激励"><td class="n">32</td><td class="w">motivate<div class="ipa">[ˈməʊtɪveɪt]</div></td><td class="m">v. 引起动机；激发；激励</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 10</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="stimulate v. 刺激；激励"><td class="n">33</td><td class="w">stimulate</td><td class="m">v. 刺激；激励</td></tr>
-<tr data-s="spur n. ⻢刺；鞭策；v. 刺激； 鞭策"><td class="n">34</td><td class="w">spur</td><td class="m">n. ⻢刺；鞭策；v. 刺激； 鞭策</td></tr>
-<tr data-s="impetus n. 冲力；推动力；刺激"><td class="n">35</td><td class="w">impetus</td><td class="m">n. 冲力；推动力；刺激</td></tr>
+<tr data-s="stimulate v. 刺激；激励"><td class="n">33</td><td class="w">stimulate<div class="ipa">[ˈstɪmjuleɪt]</div></td><td class="m">v. 刺激；激励</td></tr>
+<tr data-s="spur n. ⻢刺；鞭策；v. 刺激； 鞭策"><td class="n">34</td><td class="w">spur<div class="ipa">[spɜː(r)]</div></td><td class="m">n. ⻢刺；鞭策；v. 刺激； 鞭策</td></tr>
+<tr data-s="impetus n. 冲力；推动力；刺激"><td class="n">35</td><td class="w">impetus<div class="ipa">[ˈɪmpɪtəs]</div></td><td class="m">n. 冲力；推动力；刺激</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 11</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="indulge v. 放任；沉溺；使满足； 听任"><td class="n">36</td><td class="w">indulge</td><td class="m">v. 放任；沉溺；使满足； 听任</td></tr>
-<tr data-s="spoil v. 宠坏；搞糟；变质；n. 赃物；战利品"><td class="n">37</td><td class="w">spoil</td><td class="m">v. 宠坏；搞糟；变质；n. 赃物；战利品</td></tr>
-<tr data-s="abuse v. 滥用；虐待；辱骂；n. 滥用；虐待；辱骂"><td class="n">38</td><td class="w">abuse</td><td class="m">v. 滥用；虐待；辱骂；n. 滥用；虐待；辱骂</td></tr>
-<tr data-s="intelligent adj. 有才智的；聪明的； 明智的"><td class="n">39</td><td class="w">intelligent</td><td class="m">adj. 有才智的；聪明的； 明智的</td></tr>
+<tr data-s="indulge v. 放任；沉溺；使满足； 听任"><td class="n">36</td><td class="w">indulge<div class="ipa">[ɪnˈdʌldʒ]</div></td><td class="m">v. 放任；沉溺；使满足； 听任</td></tr>
+<tr data-s="spoil v. 宠坏；搞糟；变质；n. 赃物；战利品"><td class="n">37</td><td class="w">spoil<div class="ipa">[spɔɪl]</div></td><td class="m">v. 宠坏；搞糟；变质；n. 赃物；战利品</td></tr>
+<tr data-s="abuse v. 滥用；虐待；辱骂；n. 滥用；虐待；辱骂"><td class="n">38</td><td class="w">abuse<div class="ipa">[əˈbjuːz]</div></td><td class="m">v. 滥用；虐待；辱骂；n. 滥用；虐待；辱骂</td></tr>
+<tr data-s="intelligent adj. 有才智的；聪明的； 明智的"><td class="n">39</td><td class="w">intelligent<div class="ipa">[ɪnˈtelɪdʒənt]</div></td><td class="m">adj. 有才智的；聪明的； 明智的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 12</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="clever adj. 聪明的；灵巧的"><td class="n">40</td><td class="w">clever</td><td class="m">adj. 聪明的；灵巧的</td></tr>
-<tr data-s="smart adj. 聪明的；敏捷的；时髦的；衣 冠楚楚的；v. 剧痛；刺痛；感到难 过"><td class="n">41</td><td class="w">smart</td><td class="m">adj. 聪明的；敏捷的；时髦的；衣 冠楚楚的；v. 剧痛；刺痛；感到难 过</td></tr>
-<tr data-s="all-round adj. 全能的；多方面的； 多才多艺的"><td class="n">42</td><td class="w">all-round</td><td class="m">adj. 全能的；多方面的； 多才多艺的</td></tr>
+<tr data-s="clever adj. 聪明的；灵巧的"><td class="n">40</td><td class="w">clever<div class="ipa">[ˈklevə(r)]</div></td><td class="m">adj. 聪明的；灵巧的</td></tr>
+<tr data-s="smart adj. 聪明的；敏捷的；时髦的；衣 冠楚楚的；v. 剧痛；刺痛；感到难 过"><td class="n">41</td><td class="w">smart<div class="ipa">[smɑːt]</div></td><td class="m">adj. 聪明的；敏捷的；时髦的；衣 冠楚楚的；v. 剧痛；刺痛；感到难 过</td></tr>
+<tr data-s="all-round adj. 全能的；多方面的； 多才多艺的"><td class="n">42</td><td class="w">all-round<div class="ipa">[ˌɔːl ˈraʊnd]</div></td><td class="m">adj. 全能的；多方面的； 多才多艺的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 13</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="genius n. 天才；天赋"><td class="n">43</td><td class="w">genius</td><td class="m">n. 天才；天赋</td></tr>
-<tr data-s="elite n. (社会)精英；上层人士； adj. 精英的；出类拔萃的"><td class="n">44</td><td class="w">elite</td><td class="m">n. (社会)精英；上层人士； adj. 精英的；出类拔萃的</td></tr>
-<tr data-s="idiot n. 白痴；笨蛋"><td class="n">45</td><td class="w">idiot</td><td class="m">n. 白痴；笨蛋</td></tr>
+<tr data-s="genius n. 天才；天赋"><td class="n">43</td><td class="w">genius<div class="ipa">[ˈdʒiːniəs]</div></td><td class="m">n. 天才；天赋</td></tr>
+<tr data-s="elite n. (社会)精英；上层人士； adj. 精英的；出类拔萃的"><td class="n">44</td><td class="w">elite<div class="ipa">[eɪˈliːt]</div></td><td class="m">n. (社会)精英；上层人士； adj. 精英的；出类拔萃的</td></tr>
+<tr data-s="idiot n. 白痴；笨蛋"><td class="n">45</td><td class="w">idiot<div class="ipa">[ˈɪdiət]</div></td><td class="m">n. 白痴；笨蛋</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 14</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="wisdom n. 智慧；明智；学问"><td class="n">46</td><td class="w">wisdom</td><td class="m">n. 智慧；明智；学问</td></tr>
-<tr data-s="wit n. 机智(的人)；⻛趣(的 人)；才智；头脑；智慧"><td class="n">47</td><td class="w">wit</td><td class="m">n. 机智(的人)；⻛趣(的 人)；才智；头脑；智慧</td></tr>
-<tr data-s="aptitude n. 天资；天赋；才能"><td class="n">48</td><td class="w">aptitude</td><td class="m">n. 天资；天赋；才能</td></tr>
-<tr data-s="capable adj. 有能力的"><td class="n">49</td><td class="w">capable</td><td class="m">adj. 有能力的</td></tr>
+<tr data-s="wisdom n. 智慧；明智；学问"><td class="n">46</td><td class="w">wisdom<div class="ipa">[ˈwɪzdəm]</div></td><td class="m">n. 智慧；明智；学问</td></tr>
+<tr data-s="wit n. 机智(的人)；⻛趣(的 人)；才智；头脑；智慧"><td class="n">47</td><td class="w">wit<div class="ipa">[wɪt]</div></td><td class="m">n. 机智(的人)；⻛趣(的 人)；才智；头脑；智慧</td></tr>
+<tr data-s="aptitude n. 天资；天赋；才能"><td class="n">48</td><td class="w">aptitude<div class="ipa">[ˈæptɪtjuːd]</div></td><td class="m">n. 天资；天赋；才能</td></tr>
+<tr data-s="capable adj. 有能力的"><td class="n">49</td><td class="w">capable<div class="ipa">[ˈkeɪpəb(ə)l]</div></td><td class="m">adj. 有能力的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 15</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="excellent adj. 优秀的；杰出的；卓 越的"><td class="n">50</td><td class="w">excellent</td><td class="m">adj. 优秀的；杰出的；卓 越的</td></tr>
-<tr data-s="outstanding adj. 杰出的；尚未处理的"><td class="n">51</td><td class="w">outstanding</td><td class="m">adj. 杰出的；尚未处理的</td></tr>
-<tr data-s="brilliant adj. 光辉的；明亮的；灿 烂的；卓越的；极好的"><td class="n">52</td><td class="w">brilliant</td><td class="m">adj. 光辉的；明亮的；灿 烂的；卓越的；极好的</td></tr>
+<tr data-s="excellent adj. 优秀的；杰出的；卓 越的"><td class="n">50</td><td class="w">excellent<div class="ipa">[ˈeksələnt]</div></td><td class="m">adj. 优秀的；杰出的；卓 越的</td></tr>
+<tr data-s="outstanding adj. 杰出的；尚未处理的"><td class="n">51</td><td class="w">outstanding<div class="ipa">[aʊtˈstændɪŋ]</div></td><td class="m">adj. 杰出的；尚未处理的</td></tr>
+<tr data-s="brilliant adj. 光辉的；明亮的；灿 烂的；卓越的；极好的"><td class="n">52</td><td class="w">brilliant<div class="ipa">[ˈbrɪliənt]</div></td><td class="m">adj. 光辉的；明亮的；灿 烂的；卓越的；极好的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 16</span><span class="gcnt">8 词</span></td></tr>
-<tr data-s="prestige n. 声望；威望；威信"><td class="n">53</td><td class="w">prestige</td><td class="m">n. 声望；威望；威信</td></tr>
-<tr data-s="reputation n. 名声；名誉"><td class="n">54</td><td class="w">reputation</td><td class="m">n. 名声；名誉</td></tr>
-<tr data-s="eminent adj. 著名的；非凡的；杰 出的"><td class="n">55</td><td class="w">eminent</td><td class="m">adj. 著名的；非凡的；杰 出的</td></tr>
-<tr data-s="notorious adj. 声名狼藉的；臭名昭 著的"><td class="n">56</td><td class="w">notorious</td><td class="m">adj. 声名狼藉的；臭名昭 著的</td></tr>
-<tr data-s="esteem v. 尊重；尊敬；n. 尊重； 尊敬"><td class="n">57</td><td class="w">esteem</td><td class="m">v. 尊重；尊敬；n. 尊重； 尊敬</td></tr>
-<tr data-s="respect v. 尊重；尊敬；遵从；n. 尊重；尊敬；方面"><td class="n">58</td><td class="w">respect</td><td class="m">v. 尊重；尊敬；遵从；n. 尊重；尊敬；方面</td></tr>
-<tr data-s="diligent adj. 勤勉的；勤奋的"><td class="n">59</td><td class="w">diligent</td><td class="m">adj. 勤勉的；勤奋的</td></tr>
-<tr data-s="painstaking adj. 辛苦的；苦干的"><td class="n">60</td><td class="w">painstaking</td><td class="m">adj. 辛苦的；苦干的</td></tr>
+<tr data-s="prestige n. 声望；威望；威信"><td class="n">53</td><td class="w">prestige<div class="ipa">[preˈstiːʒ]</div></td><td class="m">n. 声望；威望；威信</td></tr>
+<tr data-s="reputation n. 名声；名誉"><td class="n">54</td><td class="w">reputation<div class="ipa">[ˌrepjuˈteɪʃ(ə)n]</div></td><td class="m">n. 名声；名誉</td></tr>
+<tr data-s="eminent adj. 著名的；非凡的；杰 出的"><td class="n">55</td><td class="w">eminent<div class="ipa">[ˈemɪnənt]</div></td><td class="m">adj. 著名的；非凡的；杰 出的</td></tr>
+<tr data-s="notorious adj. 声名狼藉的；臭名昭 著的"><td class="n">56</td><td class="w">notorious<div class="ipa">[nəʊˈtɔːriəs]</div></td><td class="m">adj. 声名狼藉的；臭名昭 著的</td></tr>
+<tr data-s="esteem v. 尊重；尊敬；n. 尊重； 尊敬"><td class="n">57</td><td class="w">esteem<div class="ipa">[ɪˈstiːm]</div></td><td class="m">v. 尊重；尊敬；n. 尊重； 尊敬</td></tr>
+<tr data-s="respect v. 尊重；尊敬；遵从；n. 尊重；尊敬；方面"><td class="n">58</td><td class="w">respect<div class="ipa">[rɪˈspekt]</div></td><td class="m">v. 尊重；尊敬；遵从；n. 尊重；尊敬；方面</td></tr>
+<tr data-s="diligent adj. 勤勉的；勤奋的"><td class="n">59</td><td class="w">diligent<div class="ipa">[ˈdɪlɪdʒənt]</div></td><td class="m">adj. 勤勉的；勤奋的</td></tr>
+<tr data-s="painstaking adj. 辛苦的；苦干的"><td class="n">60</td><td class="w">painstaking<div class="ipa">[ˈpeɪnzteɪkɪŋ]</div></td><td class="m">adj. 辛苦的；苦干的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 17</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="skill n. 技能；技巧；技术"><td class="n">61</td><td class="w">skill</td><td class="m">n. 技能；技巧；技术</td></tr>
-<tr data-s="approach v. 接近；靠近；临近；处理； n. 方法；接近；靠近；路径"><td class="n">62</td><td class="w">approach</td><td class="m">v. 接近；靠近；临近；处理； n. 方法；接近；靠近；路径</td></tr>
-<tr data-s="scheme n. 阴谋；计划；v. 密谋； 策划"><td class="n">63</td><td class="w">scheme</td><td class="m">n. 阴谋；计划；v. 密谋； 策划</td></tr>
+<tr data-s="skill n. 技能；技巧；技术"><td class="n">61</td><td class="w">skill<div class="ipa">[skɪl]</div></td><td class="m">n. 技能；技巧；技术</td></tr>
+<tr data-s="approach v. 接近；靠近；临近；处理； n. 方法；接近；靠近；路径"><td class="n">62</td><td class="w">approach<div class="ipa">[əˈprəʊtʃ]</div></td><td class="m">v. 接近；靠近；临近；处理； n. 方法；接近；靠近；路径</td></tr>
+<tr data-s="scheme n. 阴谋；计划；v. 密谋； 策划"><td class="n">63</td><td class="w">scheme<div class="ipa">[skiːm]</div></td><td class="m">n. 阴谋；计划；v. 密谋； 策划</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 18</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="headmaster n. 校⻓"><td class="n">64</td><td class="w">headmaster</td><td class="m">n. 校⻓</td></tr>
-<tr data-s="principal adj. 最重要的；主要的；本金的； n. 负责人；首⻓；校⻓；本金"><td class="n">65</td><td class="w">principal</td><td class="m">adj. 最重要的；主要的；本金的； n. 负责人；首⻓；校⻓；本金</td></tr>
-<tr data-s="dean n. 学院院⻓；系主任"><td class="n">66</td><td class="w">dean</td><td class="m">n. 学院院⻓；系主任</td></tr>
-<tr data-s="faculty n. 才能；能力；全体教 员；院系"><td class="n">67</td><td class="w">faculty</td><td class="m">n. 才能；能力；全体教 员；院系</td></tr>
+<tr data-s="headmaster n. 校⻓"><td class="n">64</td><td class="w">headmaster<div class="ipa">[ˌhedˈmɑːstə(r)]</div></td><td class="m">n. 校⻓</td></tr>
+<tr data-s="principal adj. 最重要的；主要的；本金的； n. 负责人；首⻓；校⻓；本金"><td class="n">65</td><td class="w">principal<div class="ipa">[ˈprɪnsəp(ə)l]</div></td><td class="m">adj. 最重要的；主要的；本金的； n. 负责人；首⻓；校⻓；本金</td></tr>
+<tr data-s="dean n. 学院院⻓；系主任"><td class="n">66</td><td class="w">dean<div class="ipa">[diːn]</div></td><td class="m">n. 学院院⻓；系主任</td></tr>
+<tr data-s="faculty n. 才能；能力；全体教 员；院系"><td class="n">67</td><td class="w">faculty<div class="ipa">[ˈfæk(ə)lti]</div></td><td class="m">n. 才能；能力；全体教 员；院系</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 19</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="professor n. 教授；导师"><td class="n">68</td><td class="w">professor</td><td class="m">n. 教授；导师</td></tr>
-<tr data-s="scholar n. 学者；奖学金获得者"><td class="n">69</td><td class="w">scholar</td><td class="m">n. 学者；奖学金获得者</td></tr>
-<tr data-s="scientist n. 科学家"><td class="n">70</td><td class="w">scientist</td><td class="m">n. 科学家</td></tr>
-<tr data-s="mentor n. 导师；顾问；v. 指导； 辅导"><td class="n">71</td><td class="w">mentor</td><td class="m">n. 导师；顾问；v. 指导； 辅导</td></tr>
-<tr data-s="tutor n. 导师；家庭教师；v. 当 家教；指导；辅导"><td class="n">72</td><td class="w">tutor</td><td class="m">n. 导师；家庭教师；v. 当 家教；指导；辅导</td></tr>
+<tr data-s="professor n. 教授；导师"><td class="n">68</td><td class="w">professor<div class="ipa">[prəˈfesə(r)]</div></td><td class="m">n. 教授；导师</td></tr>
+<tr data-s="scholar n. 学者；奖学金获得者"><td class="n">69</td><td class="w">scholar<div class="ipa">[ˈskɒlə(r)]</div></td><td class="m">n. 学者；奖学金获得者</td></tr>
+<tr data-s="scientist n. 科学家"><td class="n">70</td><td class="w">scientist<div class="ipa">[ˈsaɪəntɪst]</div></td><td class="m">n. 科学家</td></tr>
+<tr data-s="mentor n. 导师；顾问；v. 指导； 辅导"><td class="n">71</td><td class="w">mentor<div class="ipa">[ˈmentɔː(r)]</div></td><td class="m">n. 导师；顾问；v. 指导； 辅导</td></tr>
+<tr data-s="tutor n. 导师；家庭教师；v. 当 家教；指导；辅导"><td class="n">72</td><td class="w">tutor<div class="ipa">[ˈtjuːtə(r)]</div></td><td class="m">n. 导师；家庭教师；v. 当 家教；指导；辅导</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 20</span><span class="gcnt">8 词</span></td></tr>
-<tr data-s="lecturer n. 演讲者；讲师；授课老 师"><td class="n">73</td><td class="w">lecturer</td><td class="m">n. 演讲者；讲师；授课老 师</td></tr>
-<tr data-s="assistant n. 助理；助手；adj. 助理 的；辅助的"><td class="n">74</td><td class="w">assistant</td><td class="m">n. 助理；助手；adj. 助理 的；辅助的</td></tr>
-<tr data-s="candidate n. 候选人；应试者"><td class="n">75</td><td class="w">candidate</td><td class="m">n. 候选人；应试者</td></tr>
-<tr data-s="degree n. 度；程度；学位"><td class="n">76</td><td class="w">degree</td><td class="m">n. 度；程度；学位</td></tr>
-<tr data-s="qualify v. 使合格；使具有资格"><td class="n">77</td><td class="w">qualify</td><td class="m">v. 使合格；使具有资格</td></tr>
-<tr data-s="certify v. 证明；保证；证实"><td class="n">78</td><td class="w">certify</td><td class="m">v. 证明；保证；证实</td></tr>
-<tr data-s="license n. 许可证；执照；v. 发许 可证"><td class="n">79</td><td class="w">license</td><td class="m">n. 许可证；执照；v. 发许 可证</td></tr>
-<tr data-s="permit v. 允许；准许；n. 通行 证；许可证；执照"><td class="n">80</td><td class="w">permit</td><td class="m">v. 允许；准许；n. 通行 证；许可证；执照</td></tr>
+<tr data-s="lecturer n. 演讲者；讲师；授课老 师"><td class="n">73</td><td class="w">lecturer<div class="ipa">[ˈlektʃərə(r)]</div></td><td class="m">n. 演讲者；讲师；授课老 师</td></tr>
+<tr data-s="assistant n. 助理；助手；adj. 助理 的；辅助的"><td class="n">74</td><td class="w">assistant<div class="ipa">[əˈsɪstənt]</div></td><td class="m">n. 助理；助手；adj. 助理 的；辅助的</td></tr>
+<tr data-s="candidate n. 候选人；应试者"><td class="n">75</td><td class="w">candidate<div class="ipa">[ˈkændɪdeɪt]</div></td><td class="m">n. 候选人；应试者</td></tr>
+<tr data-s="degree n. 度；程度；学位"><td class="n">76</td><td class="w">degree<div class="ipa">[dɪˈɡriː]</div></td><td class="m">n. 度；程度；学位</td></tr>
+<tr data-s="qualify v. 使合格；使具有资格"><td class="n">77</td><td class="w">qualify<div class="ipa">[ˈkwɒlɪfaɪ]</div></td><td class="m">v. 使合格；使具有资格</td></tr>
+<tr data-s="certify v. 证明；保证；证实"><td class="n">78</td><td class="w">certify<div class="ipa">[ˈsɜːtɪfaɪ]</div></td><td class="m">v. 证明；保证；证实</td></tr>
+<tr data-s="license n. 许可证；执照；v. 发许 可证"><td class="n">79</td><td class="w">license<div class="ipa">[ˈlaɪs(ə)ns]</div></td><td class="m">n. 许可证；执照；v. 发许 可证</td></tr>
+<tr data-s="permit v. 允许；准许；n. 通行 证；许可证；执照"><td class="n">80</td><td class="w">permit<div class="ipa">[pəˈmɪt]</div></td><td class="m">v. 允许；准许；n. 通行 证；许可证；执照</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 21</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="diploma n. 毕业文凭；学位证书"><td class="n">81</td><td class="w">diploma</td><td class="m">n. 毕业文凭；学位证书</td></tr>
-<tr data-s="diplomat n. 外交官；会耍手腕儿的 人"><td class="n">82</td><td class="w">diplomat</td><td class="m">n. 外交官；会耍手腕儿的 人</td></tr>
-<tr data-s="ambassador n. 大使"><td class="n">83</td><td class="w">ambassador</td><td class="m">n. 大使</td></tr>
-<tr data-s="pupil n. 小学生；瞳孔"><td class="n">84</td><td class="w">pupil</td><td class="m">n. 小学生；瞳孔</td></tr>
-<tr data-s="graduate n. 大学毕业生；学士学位 获得者；v. 毕业"><td class="n">85</td><td class="w">graduate</td><td class="m">n. 大学毕业生；学士学位 获得者；v. 毕业</td></tr>
-<tr data-s="ceremony n. 仪式；典礼"><td class="n">86</td><td class="w">ceremony</td><td class="m">n. 仪式；典礼</td></tr>
+<tr data-s="diploma n. 毕业文凭；学位证书"><td class="n">81</td><td class="w">diploma<div class="ipa">[dɪˈpləʊmə]</div></td><td class="m">n. 毕业文凭；学位证书</td></tr>
+<tr data-s="diplomat n. 外交官；会耍手腕儿的 人"><td class="n">82</td><td class="w">diplomat<div class="ipa">[ˈdɪpləmæt]</div></td><td class="m">n. 外交官；会耍手腕儿的 人</td></tr>
+<tr data-s="ambassador n. 大使"><td class="n">83</td><td class="w">ambassador<div class="ipa">[æmˈbæsədə(r)]</div></td><td class="m">n. 大使</td></tr>
+<tr data-s="pupil n. 小学生；瞳孔"><td class="n">84</td><td class="w">pupil<div class="ipa">[ˈpjuːp(ə)l]</div></td><td class="m">n. 小学生；瞳孔</td></tr>
+<tr data-s="graduate n. 大学毕业生；学士学位 获得者；v. 毕业"><td class="n">85</td><td class="w">graduate<div class="ipa">[ˈɡrædʒuət]</div></td><td class="m">n. 大学毕业生；学士学位 获得者；v. 毕业</td></tr>
+<tr data-s="ceremony n. 仪式；典礼"><td class="n">86</td><td class="w">ceremony<div class="ipa">[ˈserəməni]</div></td><td class="m">n. 仪式；典礼</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 22</span><span class="gcnt">8 词</span></td></tr>
-<tr data-s="bachelor n. 未婚男子；单身汉；学 士(本科)"><td class="n">87</td><td class="w">bachelor</td><td class="m">n. 未婚男子；单身汉；学 士(本科)</td></tr>
-<tr data-s="master n. 主人；硕士；v. 掌握； 精通"><td class="n">88</td><td class="w">master</td><td class="m">n. 主人；硕士；v. 掌握； 精通</td></tr>
-<tr data-s="doctor n. 医生；博士；v. 篡改"><td class="n">89</td><td class="w">doctor</td><td class="m">n. 医生；博士；v. 篡改</td></tr>
-<tr data-s="fresher n. 大学一年级新生；新鲜人； adj. 新鲜的；“fresh”的比较级"><td class="n">90</td><td class="w">fresher</td><td class="m">n. 大学一年级新生；新鲜人； adj. 新鲜的；“fresh”的比较级</td></tr>
-<tr data-s="sophomore n. (大学)二年级学生"><td class="n">91</td><td class="w">sophomore</td><td class="m">n. (大学)二年级学生</td></tr>
-<tr data-s="junior adj. 年幼的；(职位或等 级)较低的；n. 年幼者"><td class="n">92</td><td class="w">junior</td><td class="m">adj. 年幼的；(职位或等 级)较低的；n. 年幼者</td></tr>
-<tr data-s="senior adj. 高级的；年⻓的；资深的； n. 上司；年⻓者；大四学生"><td class="n">93</td><td class="w">senior</td><td class="m">adj. 高级的；年⻓的；资深的； n. 上司；年⻓者；大四学生</td></tr>
-<tr data-s="alumni n. 校友；“alumnus”的复 数"><td class="n">94</td><td class="w">alumni</td><td class="m">n. 校友；“alumnus”的复 数</td></tr>
+<tr data-s="bachelor n. 未婚男子；单身汉；学 士(本科)"><td class="n">87</td><td class="w">bachelor<div class="ipa">[ˈbætʃələ(r)]</div></td><td class="m">n. 未婚男子；单身汉；学 士(本科)</td></tr>
+<tr data-s="master n. 主人；硕士；v. 掌握； 精通"><td class="n">88</td><td class="w">master<div class="ipa">[ˈmɑːstə(r)]</div></td><td class="m">n. 主人；硕士；v. 掌握； 精通</td></tr>
+<tr data-s="doctor n. 医生；博士；v. 篡改"><td class="n">89</td><td class="w">doctor<div class="ipa">[ˈdɒktə(r)]</div></td><td class="m">n. 医生；博士；v. 篡改</td></tr>
+<tr data-s="fresher n. 大学一年级新生；新鲜人； adj. 新鲜的；“fresh”的比较级"><td class="n">90</td><td class="w">fresher<div class="ipa">[ˈfreʃə(r)]</div></td><td class="m">n. 大学一年级新生；新鲜人； adj. 新鲜的；“fresh”的比较级</td></tr>
+<tr data-s="sophomore n. (大学)二年级学生"><td class="n">91</td><td class="w">sophomore<div class="ipa">[ˈsɒfəmɔː(r)]</div></td><td class="m">n. (大学)二年级学生</td></tr>
+<tr data-s="junior adj. 年幼的；(职位或等 级)较低的；n. 年幼者"><td class="n">92</td><td class="w">junior<div class="ipa">[ˈdʒuːniə(r)]</div></td><td class="m">adj. 年幼的；(职位或等 级)较低的；n. 年幼者</td></tr>
+<tr data-s="senior adj. 高级的；年⻓的；资深的； n. 上司；年⻓者；大四学生"><td class="n">93</td><td class="w">senior<div class="ipa">[ˈsiːniə(r)]</div></td><td class="m">adj. 高级的；年⻓的；资深的； n. 上司；年⻓者；大四学生</td></tr>
+<tr data-s="alumni n. 校友；“alumnus”的复 数"><td class="n">94</td><td class="w">alumni<div class="ipa">[əˈlʌmnaɪ]</div></td><td class="m">n. 校友；“alumnus”的复 数</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 23</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="campus n. (大学、学院的)校园"><td class="n">95</td><td class="w">campus</td><td class="m">n. (大学、学院的)校园</td></tr>
-<tr data-s="orientation n. 方向；定位；取向；岗 前训练；入学介绍"><td class="n">96</td><td class="w">orientation</td><td class="m">n. 方向；定位；取向；岗 前训练；入学介绍</td></tr>
+<tr data-s="campus n. (大学、学院的)校园"><td class="n">95</td><td class="w">campus<div class="ipa">[ˈkæmpəs]</div></td><td class="m">n. (大学、学院的)校园</td></tr>
+<tr data-s="orientation n. 方向；定位；取向；岗 前训练；入学介绍"><td class="n">96</td><td class="w">orientation<div class="ipa">[ˌɔːriənˈteɪʃ(ə)n]</div></td><td class="m">n. 方向；定位；取向；岗 前训练；入学介绍</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 24</span><span class="gcnt">10 词</span></td></tr>
-<tr data-s="platform n. 平台；站台；月台"><td class="n">97</td><td class="w">platform</td><td class="m">n. 平台；站台；月台</td></tr>
-<tr data-s="coed n. (男女同校学校的)女 学生；adj. 男女同校的"><td class="n">98</td><td class="w">coed</td><td class="m">n. (男女同校学校的)女 学生；adj. 男女同校的</td></tr>
-<tr data-s="register v. 注册；登记；n. 登记 簿；现金出纳机"><td class="n">99</td><td class="w">register</td><td class="m">v. 注册；登记；n. 登记 簿；现金出纳机</td></tr>
-<tr data-s="roster n. 花名册；勤务簿"><td class="n">100</td><td class="w">roster</td><td class="m">n. 花名册；勤务簿</td></tr>
-<tr data-s="enrol v. 登记；注册；招收； (使)加入"><td class="n">101</td><td class="w">enrol</td><td class="m">v. 登记；注册；招收； (使)加入</td></tr>
-<tr data-s="matriculation n. 入学考试；大学入学许 可；录取入学"><td class="n">102</td><td class="w">matriculation</td><td class="m">n. 入学考试；大学入学许 可；录取入学</td></tr>
-<tr data-s="accommodation n. 住处；工作场所；停留处； 膳宿；(交通工具内的)空间"><td class="n">103</td><td class="w">accommodation</td><td class="m">n. 住处；工作场所；停留处； 膳宿；(交通工具内的)空间</td></tr>
-<tr data-s="dorm n. (集体)宿舍"><td class="n">104</td><td class="w">dorm</td><td class="m">n. (集体)宿舍</td></tr>
-<tr data-s="dining hall phrase. 餐厅；⻝堂"><td class="n">105</td><td class="w">dining hall</td><td class="m">phrase. 餐厅；⻝堂</td></tr>
-<tr data-s="canteen n. ⻝堂"><td class="n">106</td><td class="w">canteen</td><td class="m">n. ⻝堂</td></tr>
+<tr data-s="platform n. 平台；站台；月台"><td class="n">97</td><td class="w">platform<div class="ipa">[ˈplætfɔːm]</div></td><td class="m">n. 平台；站台；月台</td></tr>
+<tr data-s="coed n. (男女同校学校的)女 学生；adj. 男女同校的"><td class="n">98</td><td class="w">coed<div class="ipa">[ˌkəʊˈed]</div></td><td class="m">n. (男女同校学校的)女 学生；adj. 男女同校的</td></tr>
+<tr data-s="register v. 注册；登记；n. 登记 簿；现金出纳机"><td class="n">99</td><td class="w">register<div class="ipa">[ˈredʒɪstə(r)]</div></td><td class="m">v. 注册；登记；n. 登记 簿；现金出纳机</td></tr>
+<tr data-s="roster n. 花名册；勤务簿"><td class="n">100</td><td class="w">roster<div class="ipa">[ˈrɒstə(r)]</div></td><td class="m">n. 花名册；勤务簿</td></tr>
+<tr data-s="enrol v. 登记；注册；招收； (使)加入"><td class="n">101</td><td class="w">enrol<div class="ipa">[ɪnˈrəʊl]</div></td><td class="m">v. 登记；注册；招收； (使)加入</td></tr>
+<tr data-s="matriculation n. 入学考试；大学入学许 可；录取入学"><td class="n">102</td><td class="w">matriculation<div class="ipa">[məˌtrɪkjuˈleɪʃ(ə)n]</div></td><td class="m">n. 入学考试；大学入学许 可；录取入学</td></tr>
+<tr data-s="accommodation n. 住处；工作场所；停留处； 膳宿；(交通工具内的)空间"><td class="n">103</td><td class="w">accommodation<div class="ipa">[əˌkɒməˈdeɪʃ(ə)n]</div></td><td class="m">n. 住处；工作场所；停留处； 膳宿；(交通工具内的)空间</td></tr>
+<tr data-s="dorm n. (集体)宿舍"><td class="n">104</td><td class="w">dorm<div class="ipa">[dɔːm]</div></td><td class="m">n. (集体)宿舍</td></tr>
+<tr data-s="dining hall phrase. 餐厅；⻝堂"><td class="n">105</td><td class="w">dining hall<div class="ipa">[ˈdaɪnɪŋ hɔːl]</div></td><td class="m">phrase. 餐厅；⻝堂</td></tr>
+<tr data-s="canteen n. ⻝堂"><td class="n">106</td><td class="w">canteen<div class="ipa">[kænˈtiːn]</div></td><td class="m">n. ⻝堂</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 25</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="laboratory n. 实验室"><td class="n">107</td><td class="w">laboratory</td><td class="m">n. 实验室</td></tr>
-<tr data-s="experiment n. 实验；试验；v. 做试 验；进行实验"><td class="n">108</td><td class="w">experiment</td><td class="m">n. 实验；试验；v. 做试 验；进行实验</td></tr>
-<tr data-s="data n. 数据；资料"><td class="n">109</td><td class="w">data</td><td class="m">n. 数据；资料</td></tr>
-<tr data-s="quantity n. 量；数量；大量"><td class="n">110</td><td class="w">quantity</td><td class="m">n. 量；数量；大量</td></tr>
-<tr data-s="quality n. 质量；素质；品质"><td class="n">111</td><td class="w">quality</td><td class="m">n. 质量；素质；品质</td></tr>
-<tr data-s="library n. 图书馆"><td class="n">112</td><td class="w">library</td><td class="m">n. 图书馆</td></tr>
+<tr data-s="laboratory n. 实验室"><td class="n">107</td><td class="w">laboratory<div class="ipa">[ləˈbɒrətri]</div></td><td class="m">n. 实验室</td></tr>
+<tr data-s="experiment n. 实验；试验；v. 做试 验；进行实验"><td class="n">108</td><td class="w">experiment<div class="ipa">[ɪkˈsperɪmənt]</div></td><td class="m">n. 实验；试验；v. 做试 验；进行实验</td></tr>
+<tr data-s="data n. 数据；资料"><td class="n">109</td><td class="w">data<div class="ipa">[ˈdeɪtə]</div></td><td class="m">n. 数据；资料</td></tr>
+<tr data-s="quantity n. 量；数量；大量"><td class="n">110</td><td class="w">quantity<div class="ipa">[ˈkwɒntəti]</div></td><td class="m">n. 量；数量；大量</td></tr>
+<tr data-s="quality n. 质量；素质；品质"><td class="n">111</td><td class="w">quality<div class="ipa">[ˈkwɒləti]</div></td><td class="m">n. 质量；素质；品质</td></tr>
+<tr data-s="library n. 图书馆"><td class="n">112</td><td class="w">library<div class="ipa">[ˈlaɪbrəri]</div></td><td class="m">n. 图书馆</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 26</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="literature n. 文学；文学作品"><td class="n">113</td><td class="w">literature</td><td class="m">n. 文学；文学作品</td></tr>
-<tr data-s="article n. 文章；物品；项目；条 款；冠词"><td class="n">114</td><td class="w">article</td><td class="m">n. 文章；物品；项目；条 款；冠词</td></tr>
-<tr data-s="author n. 作者"><td class="n">115</td><td class="w">author</td><td class="m">n. 作者</td></tr>
+<tr data-s="literature n. 文学；文学作品"><td class="n">113</td><td class="w">literature<div class="ipa">[ˈlɪtrətʃə(r)]</div></td><td class="m">n. 文学；文学作品</td></tr>
+<tr data-s="article n. 文章；物品；项目；条 款；冠词"><td class="n">114</td><td class="w">article<div class="ipa">[ˈɑːtɪk(ə)l]</div></td><td class="m">n. 文章；物品；项目；条 款；冠词</td></tr>
+<tr data-s="author n. 作者"><td class="n">115</td><td class="w">author<div class="ipa">[ˈɔːθə(r)]</div></td><td class="m">n. 作者</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 27</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="tale n. 故事；叙述；传说"><td class="n">116</td><td class="w">tale</td><td class="m">n. 故事；叙述；传说</td></tr>
-<tr data-s="fiction n. 小说；虚构"><td class="n">117</td><td class="w">fiction</td><td class="m">n. 小说；虚构</td></tr>
-<tr data-s="story n. 故事；小说； 轶事；假 话"><td class="n">118</td><td class="w">story</td><td class="m">n. 故事；小说； 轶事；假 话</td></tr>
-<tr data-s="diary n. 日记"><td class="n">119</td><td class="w">diary</td><td class="m">n. 日记</td></tr>
+<tr data-s="tale n. 故事；叙述；传说"><td class="n">116</td><td class="w">tale<div class="ipa">[teɪl]</div></td><td class="m">n. 故事；叙述；传说</td></tr>
+<tr data-s="fiction n. 小说；虚构"><td class="n">117</td><td class="w">fiction<div class="ipa">[ˈfɪkʃ(ə)n]</div></td><td class="m">n. 小说；虚构</td></tr>
+<tr data-s="story n. 故事；小说； 轶事；假 话"><td class="n">118</td><td class="w">story<div class="ipa">[ˈstɔːri]</div></td><td class="m">n. 故事；小说； 轶事；假 话</td></tr>
+<tr data-s="diary n. 日记"><td class="n">119</td><td class="w">diary<div class="ipa">[ˈdaɪəri]</div></td><td class="m">n. 日记</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 28</span><span class="gcnt">9 词</span></td></tr>
-<tr data-s="poetry n. 诗歌；诗作"><td class="n">120</td><td class="w">poetry</td><td class="m">n. 诗歌；诗作</td></tr>
-<tr data-s="magazine n. 杂志"><td class="n">121</td><td class="w">magazine</td><td class="m">n. 杂志</td></tr>
-<tr data-s="journal n. 日志；日记；期刊；杂 志"><td class="n">122</td><td class="w">journal</td><td class="m">n. 日志；日记；期刊；杂 志</td></tr>
-<tr data-s="coverage n. 覆盖范围；新闻报道"><td class="n">123</td><td class="w">coverage</td><td class="m">n. 覆盖范围；新闻报道</td></tr>
-<tr data-s="bibliography n. 参考书目；书籍学；文 献学"><td class="n">124</td><td class="w">bibliography</td><td class="m">n. 参考书目；书籍学；文 献学</td></tr>
-<tr data-s="encyclopedia n. 百科全书"><td class="n">125</td><td class="w">encyclopedia</td><td class="m">n. 百科全书</td></tr>
-<tr data-s="biography n. 传记"><td class="n">126</td><td class="w">biography</td><td class="m">n. 传记</td></tr>
-<tr data-s="documentary adj. 记录的；文书的；纪 实的；n. 纪录片"><td class="n">127</td><td class="w">documentary</td><td class="m">adj. 记录的；文书的；纪 实的；n. 纪录片</td></tr>
-<tr data-s="series n. 连续；系列"><td class="n">128</td><td class="w">series</td><td class="m">n. 连续；系列</td></tr>
+<tr data-s="poetry n. 诗歌；诗作"><td class="n">120</td><td class="w">poetry<div class="ipa">[ˈpəʊətri]</div></td><td class="m">n. 诗歌；诗作</td></tr>
+<tr data-s="magazine n. 杂志"><td class="n">121</td><td class="w">magazine<div class="ipa">[ˌmæɡəˈziːn]</div></td><td class="m">n. 杂志</td></tr>
+<tr data-s="journal n. 日志；日记；期刊；杂 志"><td class="n">122</td><td class="w">journal<div class="ipa">[ˈdʒɜːn(ə)l]</div></td><td class="m">n. 日志；日记；期刊；杂 志</td></tr>
+<tr data-s="coverage n. 覆盖范围；新闻报道"><td class="n">123</td><td class="w">coverage<div class="ipa">[ˈkʌvərɪdʒ]</div></td><td class="m">n. 覆盖范围；新闻报道</td></tr>
+<tr data-s="bibliography n. 参考书目；书籍学；文 献学"><td class="n">124</td><td class="w">bibliography<div class="ipa">[ˌbɪbliˈɒɡrəfi]</div></td><td class="m">n. 参考书目；书籍学；文 献学</td></tr>
+<tr data-s="encyclopedia n. 百科全书"><td class="n">125</td><td class="w">encyclopedia<div class="ipa">[ɪnˌsaɪkləˈpiːdiə]</div></td><td class="m">n. 百科全书</td></tr>
+<tr data-s="biography n. 传记"><td class="n">126</td><td class="w">biography<div class="ipa">[baɪˈɒɡrəfi]</div></td><td class="m">n. 传记</td></tr>
+<tr data-s="documentary adj. 记录的；文书的；纪 实的；n. 纪录片"><td class="n">127</td><td class="w">documentary<div class="ipa">[ˌdɒkjuˈmentri]</div></td><td class="m">adj. 记录的；文书的；纪 实的；n. 纪录片</td></tr>
+<tr data-s="series n. 连续；系列"><td class="n">128</td><td class="w">series<div class="ipa">[ˈsɪəriːz]</div></td><td class="m">n. 连续；系列</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 29</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="record n. 记录；唱片；v. 记录； 录制"><td class="n">129</td><td class="w">record</td><td class="m">n. 记录；唱片；v. 记录； 录制</td></tr>
-<tr data-s="file n. 文件；档案；锉；v. 把...归档； 用 锉刀锉；提出(离婚诉讼或其他讼 案)"><td class="n">130</td><td class="w">file</td><td class="m">n. 文件；档案；锉；v. 把...归档； 用 锉刀锉；提出(离婚诉讼或其他讼 案)</td></tr>
-<tr data-s="profile n. 侧面像；轮廓；简介； 受公众注意的程度"><td class="n">131</td><td class="w">profile</td><td class="m">n. 侧面像；轮廓；简介； 受公众注意的程度</td></tr>
+<tr data-s="record n. 记录；唱片；v. 记录； 录制"><td class="n">129</td><td class="w">record<div class="ipa">[ˈrekɔːd]</div></td><td class="m">n. 记录；唱片；v. 记录； 录制</td></tr>
+<tr data-s="file n. 文件；档案；锉；v. 把...归档； 用 锉刀锉；提出(离婚诉讼或其他讼 案)"><td class="n">130</td><td class="w">file<div class="ipa">[faɪl]</div></td><td class="m">n. 文件；档案；锉；v. 把...归档； 用 锉刀锉；提出(离婚诉讼或其他讼 案)</td></tr>
+<tr data-s="profile n. 侧面像；轮廓；简介； 受公众注意的程度"><td class="n">131</td><td class="w">profile<div class="ipa">[ˈprəʊfaɪl]</div></td><td class="m">n. 侧面像；轮廓；简介； 受公众注意的程度</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 30</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="draft n. 草稿；v. 起草；草拟"><td class="n">132</td><td class="w">draft</td><td class="m">n. 草稿；v. 起草；草拟</td></tr>
-<tr data-s="sketch n. 草图；素描；概述；v. 草拟；速写；简述"><td class="n">133</td><td class="w">sketch</td><td class="m">n. 草图；素描；概述；v. 草拟；速写；简述</td></tr>
-<tr data-s="brochure n. 小册子；手册；指南"><td class="n">134</td><td class="w">brochure</td><td class="m">n. 小册子；手册；指南</td></tr>
-<tr data-s="manual n. 说明书；指南；adj. 手 工的；体力的"><td class="n">135</td><td class="w">manual</td><td class="m">n. 说明书；指南；adj. 手 工的；体力的</td></tr>
+<tr data-s="draft n. 草稿；v. 起草；草拟"><td class="n">132</td><td class="w">draft<div class="ipa">[drɑːft]</div></td><td class="m">n. 草稿；v. 起草；草拟</td></tr>
+<tr data-s="sketch n. 草图；素描；概述；v. 草拟；速写；简述"><td class="n">133</td><td class="w">sketch<div class="ipa">[sketʃ]</div></td><td class="m">n. 草图；素描；概述；v. 草拟；速写；简述</td></tr>
+<tr data-s="brochure n. 小册子；手册；指南"><td class="n">134</td><td class="w">brochure<div class="ipa">[ˈbrəʊʃə(r)]</div></td><td class="m">n. 小册子；手册；指南</td></tr>
+<tr data-s="manual n. 说明书；指南；adj. 手 工的；体力的"><td class="n">135</td><td class="w">manual<div class="ipa">[ˈmænjuəl]</div></td><td class="m">n. 说明书；指南；adj. 手 工的；体力的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 31</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="frame n. 框架；结构；⻣架；模式； v. 制定；框住；陷害；表达"><td class="n">136</td><td class="w">frame</td><td class="m">n. 框架；结构；⻣架；模式； v. 制定；框住；陷害；表达</td></tr>
-<tr data-s="index n. 指标；索引；指数"><td class="n">137</td><td class="w">index</td><td class="m">n. 指标；索引；指数</td></tr>
-<tr data-s="catalogue n. 目录"><td class="n">138</td><td class="w">catalogue</td><td class="m">n. 目录</td></tr>
-<tr data-s="category n. 类别"><td class="n">139</td><td class="w">category</td><td class="m">n. 类别</td></tr>
+<tr data-s="frame n. 框架；结构；⻣架；模式； v. 制定；框住；陷害；表达"><td class="n">136</td><td class="w">frame<div class="ipa">[freɪm]</div></td><td class="m">n. 框架；结构；⻣架；模式； v. 制定；框住；陷害；表达</td></tr>
+<tr data-s="index n. 指标；索引；指数"><td class="n">137</td><td class="w">index<div class="ipa">[ˈɪndeks]</div></td><td class="m">n. 指标；索引；指数</td></tr>
+<tr data-s="catalogue n. 目录"><td class="n">138</td><td class="w">catalogue<div class="ipa">[ˈkætəlɒɡ]</div></td><td class="m">n. 目录</td></tr>
+<tr data-s="category n. 类别"><td class="n">139</td><td class="w">category<div class="ipa">[ˈkætəɡəri]</div></td><td class="m">n. 类别</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 32</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="inventory n. 详细目录；清单；储 备；存货"><td class="n">140</td><td class="w">inventory</td><td class="m">n. 详细目录；清单；储 备；存货</td></tr>
-<tr data-s="content n. 内容；含量；目录； adj. 满足的；v. 使满意"><td class="n">141</td><td class="w">content</td><td class="m">n. 内容；含量；目录； adj. 满足的；v. 使满意</td></tr>
-<tr data-s="context n. 上下文；语境；环境"><td class="n">142</td><td class="w">context</td><td class="m">n. 上下文；语境；环境</td></tr>
-<tr data-s="list n. 表；名单；v. 列出； (船)倾斜"><td class="n">143</td><td class="w">list</td><td class="m">n. 表；名单；v. 列出； (船)倾斜</td></tr>
+<tr data-s="inventory n. 详细目录；清单；储 备；存货"><td class="n">140</td><td class="w">inventory<div class="ipa">[ˈɪnvəntri]</div></td><td class="m">n. 详细目录；清单；储 备；存货</td></tr>
+<tr data-s="content n. 内容；含量；目录； adj. 满足的；v. 使满意"><td class="n">141</td><td class="w">content<div class="ipa">[ˈkɒntent]</div></td><td class="m">n. 内容；含量；目录； adj. 满足的；v. 使满意</td></tr>
+<tr data-s="context n. 上下文；语境；环境"><td class="n">142</td><td class="w">context<div class="ipa">[ˈkɒntekst]</div></td><td class="m">n. 上下文；语境；环境</td></tr>
+<tr data-s="list n. 表；名单；v. 列出； (船)倾斜"><td class="n">143</td><td class="w">list<div class="ipa">[lɪst]</div></td><td class="m">n. 表；名单；v. 列出； (船)倾斜</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 33</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="chapter n. 篇章"><td class="n">144</td><td class="w">chapter</td><td class="m">n. 篇章</td></tr>
-<tr data-s="volume n. 卷；册；体积；音量"><td class="n">145</td><td class="w">volume</td><td class="m">n. 卷；册；体积；音量</td></tr>
-<tr data-s="reel n. 卷筒；卷轴；卷盘；线轴；v. 卷；绕；踉跄；摇摇晃晃地挪动； 蹒跚"><td class="n">146</td><td class="w">reel</td><td class="m">n. 卷筒；卷轴；卷盘；线轴；v. 卷；绕；踉跄；摇摇晃晃地挪动； 蹒跚</td></tr>
+<tr data-s="chapter n. 篇章"><td class="n">144</td><td class="w">chapter<div class="ipa">[ˈtʃæptə(r)]</div></td><td class="m">n. 篇章</td></tr>
+<tr data-s="volume n. 卷；册；体积；音量"><td class="n">145</td><td class="w">volume<div class="ipa">[ˈvɒljuːm]</div></td><td class="m">n. 卷；册；体积；音量</td></tr>
+<tr data-s="reel n. 卷筒；卷轴；卷盘；线轴；v. 卷；绕；踉跄；摇摇晃晃地挪动； 蹒跚"><td class="n">146</td><td class="w">reel<div class="ipa">[riːl]</div></td><td class="m">n. 卷筒；卷轴；卷盘；线轴；v. 卷；绕；踉跄；摇摇晃晃地挪动； 蹒跚</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 34</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="subject n. 主题；话题；学科；对 象"><td class="n">147</td><td class="w">subject</td><td class="m">n. 主题；话题；学科；对 象</td></tr>
-<tr data-s="object n. 物体；目的；对象；宾 语；v. 反对；有意⻅；讨厌"><td class="n">148</td><td class="w">object</td><td class="m">n. 物体；目的；对象；宾 语；v. 反对；有意⻅；讨厌</td></tr>
+<tr data-s="subject n. 主题；话题；学科；对 象"><td class="n">147</td><td class="w">subject<div class="ipa">[ˈsʌbdʒɪkt]</div></td><td class="m">n. 主题；话题；学科；对 象</td></tr>
+<tr data-s="object n. 物体；目的；对象；宾 语；v. 反对；有意⻅；讨厌"><td class="n">148</td><td class="w">object<div class="ipa">[ˈɒbdʒɪkt]</div></td><td class="m">n. 物体；目的；对象；宾 语；v. 反对；有意⻅；讨厌</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 35</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="major adj. 主要的；较多的；成年的；大 调的；n. 主修课；成年人；少校； 大调；v. 主修"><td class="n">149</td><td class="w">major</td><td class="m">adj. 主要的；较多的；成年的；大 调的；n. 主修课；成年人；少校； 大调；v. 主修</td></tr>
-<tr data-s="minor adj. 小的；次要的；轻微 的；小调的；n. 未成年人"><td class="n">150</td><td class="w">minor</td><td class="m">adj. 小的；次要的；轻微 的；小调的；n. 未成年人</td></tr>
+<tr data-s="major adj. 主要的；较多的；成年的；大 调的；n. 主修课；成年人；少校； 大调；v. 主修"><td class="n">149</td><td class="w">major<div class="ipa">[ˈmeɪdʒə(r)]</div></td><td class="m">adj. 主要的；较多的；成年的；大 调的；n. 主修课；成年人；少校； 大调；v. 主修</td></tr>
+<tr data-s="minor adj. 小的；次要的；轻微 的；小调的；n. 未成年人"><td class="n">150</td><td class="w">minor<div class="ipa">[ˈmaɪnə(r)]</div></td><td class="m">adj. 小的；次要的；轻微 的；小调的；n. 未成年人</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 36</span><span class="gcnt">8 词</span></td></tr>
-<tr data-s="sociology n. 社会学"><td class="n">151</td><td class="w">sociology</td><td class="m">n. 社会学</td></tr>
-<tr data-s="politics n. 政治；政治学"><td class="n">152</td><td class="w">politics</td><td class="m">n. 政治；政治学</td></tr>
-<tr data-s="economics n. 经济学；经济"><td class="n">153</td><td class="w">economics</td><td class="m">n. 经济学；经济</td></tr>
-<tr data-s="marketing n. 营销；促销；销售活动"><td class="n">154</td><td class="w">marketing</td><td class="m">n. 营销；促销；销售活动</td></tr>
-<tr data-s="accounting n. 会计；会计学；v. 解释说 明；“account”的现在分词"><td class="n">155</td><td class="w">accounting</td><td class="m">n. 会计；会计学；v. 解释说 明；“account”的现在分词</td></tr>
-<tr data-s="audit v. 审计；查账；n. 审计； 查账"><td class="n">156</td><td class="w">audit</td><td class="m">v. 审计；查账；n. 审计； 查账</td></tr>
-<tr data-s="statistics n. 统计学；统计数字"><td class="n">157</td><td class="w">statistics</td><td class="m">n. 统计学；统计数字</td></tr>
-<tr data-s="psychology n. 心理学；心理"><td class="n">158</td><td class="w">psychology</td><td class="m">n. 心理学；心理</td></tr>
+<tr data-s="sociology n. 社会学"><td class="n">151</td><td class="w">sociology<div class="ipa">[ˌsəʊsiˈɒlədʒi]</div></td><td class="m">n. 社会学</td></tr>
+<tr data-s="politics n. 政治；政治学"><td class="n">152</td><td class="w">politics<div class="ipa">[ˈpɒlətɪks]</div></td><td class="m">n. 政治；政治学</td></tr>
+<tr data-s="economics n. 经济学；经济"><td class="n">153</td><td class="w">economics<div class="ipa">[iːkəˈnɒmɪks]</div></td><td class="m">n. 经济学；经济</td></tr>
+<tr data-s="marketing n. 营销；促销；销售活动"><td class="n">154</td><td class="w">marketing<div class="ipa">[ˈmɑːkɪtɪŋ]</div></td><td class="m">n. 营销；促销；销售活动</td></tr>
+<tr data-s="accounting n. 会计；会计学；v. 解释说 明；“account”的现在分词"><td class="n">155</td><td class="w">accounting<div class="ipa">[əˈkaʊntɪŋ]</div></td><td class="m">n. 会计；会计学；v. 解释说 明；“account”的现在分词</td></tr>
+<tr data-s="audit v. 审计；查账；n. 审计； 查账"><td class="n">156</td><td class="w">audit<div class="ipa">[ˈɔːdɪt]</div></td><td class="m">v. 审计；查账；n. 审计； 查账</td></tr>
+<tr data-s="statistics n. 统计学；统计数字"><td class="n">157</td><td class="w">statistics<div class="ipa">[stəˈtɪstɪks]</div></td><td class="m">n. 统计学；统计数字</td></tr>
+<tr data-s="psychology n. 心理学；心理"><td class="n">158</td><td class="w">psychology<div class="ipa">[saɪˈkɒlədʒi]</div></td><td class="m">n. 心理学；心理</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 37</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="philosophy n. 哲学"><td class="n">159</td><td class="w">philosophy</td><td class="m">n. 哲学</td></tr>
-<tr data-s="logic n. 逻辑"><td class="n">160</td><td class="w">logic</td><td class="m">n. 逻辑</td></tr>
-<tr data-s="biology n. 生物学"><td class="n">161</td><td class="w">biology</td><td class="m">n. 生物学</td></tr>
-<tr data-s="physics n. 物理学"><td class="n">162</td><td class="w">physics</td><td class="m">n. 物理学</td></tr>
-<tr data-s="chemistry n. 化学"><td class="n">163</td><td class="w">chemistry</td><td class="m">n. 化学</td></tr>
+<tr data-s="philosophy n. 哲学"><td class="n">159</td><td class="w">philosophy<div class="ipa">[fəˈlɒsəfi]</div></td><td class="m">n. 哲学</td></tr>
+<tr data-s="logic n. 逻辑"><td class="n">160</td><td class="w">logic<div class="ipa">[ˈlɒdʒɪk]</div></td><td class="m">n. 逻辑</td></tr>
+<tr data-s="biology n. 生物学"><td class="n">161</td><td class="w">biology<div class="ipa">[baɪˈɒlədʒi]</div></td><td class="m">n. 生物学</td></tr>
+<tr data-s="physics n. 物理学"><td class="n">162</td><td class="w">physics<div class="ipa">[ˈfɪzɪks]</div></td><td class="m">n. 物理学</td></tr>
+<tr data-s="chemistry n. 化学"><td class="n">163</td><td class="w">chemistry<div class="ipa">[ˈkemɪstri]</div></td><td class="m">n. 化学</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 38</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="agriculture n. 农业"><td class="n">164</td><td class="w">agriculture</td><td class="m">n. 农业</td></tr>
-<tr data-s="logistics n. 物流；(军事)后勤学"><td class="n">165</td><td class="w">logistics</td><td class="m">n. 物流；(军事)后勤学</td></tr>
-<tr data-s="geography n. 地理；地理学"><td class="n">166</td><td class="w">geography</td><td class="m">n. 地理；地理学</td></tr>
-<tr data-s="history n. 历史；历史学"><td class="n">167</td><td class="w">history</td><td class="m">n. 历史；历史学</td></tr>
+<tr data-s="agriculture n. 农业"><td class="n">164</td><td class="w">agriculture<div class="ipa">[ˈæɡrɪkʌltʃə(r)]</div></td><td class="m">n. 农业</td></tr>
+<tr data-s="logistics n. 物流；(军事)后勤学"><td class="n">165</td><td class="w">logistics<div class="ipa">[ləˈdʒɪstɪks]</div></td><td class="m">n. 物流；(军事)后勤学</td></tr>
+<tr data-s="geography n. 地理；地理学"><td class="n">166</td><td class="w">geography<div class="ipa">[dʒiˈɒɡrəfi]</div></td><td class="m">n. 地理；地理学</td></tr>
+<tr data-s="history n. 历史；历史学"><td class="n">167</td><td class="w">history<div class="ipa">[ˈhɪstri]</div></td><td class="m">n. 历史；历史学</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 39</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="engineering n. 工程；工程学"><td class="n">168</td><td class="w">engineering</td><td class="m">n. 工程；工程学</td></tr>
-<tr data-s="mechanics n. 力学；机械学；构成法；运作方 式；n. 技工；机械师；机修工； “mechanic”的复数"><td class="n">169</td><td class="w">mechanics</td><td class="m">n. 力学；机械学；构成法；运作方 式；n. 技工；机械师；机修工； “mechanic”的复数</td></tr>
-<tr data-s="electronics n. 电子学；电子器件"><td class="n">170</td><td class="w">electronics</td><td class="m">n. 电子学；电子器件</td></tr>
+<tr data-s="engineering n. 工程；工程学"><td class="n">168</td><td class="w">engineering<div class="ipa">[ˌendʒɪˈnɪərɪŋ]</div></td><td class="m">n. 工程；工程学</td></tr>
+<tr data-s="mechanics n. 力学；机械学；构成法；运作方 式；n. 技工；机械师；机修工； “mechanic”的复数"><td class="n">169</td><td class="w">mechanics<div class="ipa">[mɪˈkænɪks]</div></td><td class="m">n. 力学；机械学；构成法；运作方 式；n. 技工；机械师；机修工； “mechanic”的复数</td></tr>
+<tr data-s="electronics n. 电子学；电子器件"><td class="n">170</td><td class="w">electronics<div class="ipa">[ɪˌlekˈtrɒnɪks]</div></td><td class="m">n. 电子学；电子器件</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 40</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="maths n. 数学"><td class="n">171</td><td class="w">maths</td><td class="m">n. 数学</td></tr>
-<tr data-s="arithmetic n. 算术"><td class="n">172</td><td class="w">arithmetic</td><td class="m">n. 算术</td></tr>
-<tr data-s="geometry n. 几何学"><td class="n">173</td><td class="w">geometry</td><td class="m">n. 几何学</td></tr>
-<tr data-s="algebra n. 代数"><td class="n">174</td><td class="w">algebra</td><td class="m">n. 代数</td></tr>
-<tr data-s="calculus n. (人体内的)结石；微 积分学"><td class="n">175</td><td class="w">calculus</td><td class="m">n. (人体内的)结石；微 积分学</td></tr>
+<tr data-s="maths n. 数学"><td class="n">171</td><td class="w">maths<div class="ipa">[mæθs]</div></td><td class="m">n. 数学</td></tr>
+<tr data-s="arithmetic n. 算术"><td class="n">172</td><td class="w">arithmetic<div class="ipa">[əˈrɪθmətɪk]</div></td><td class="m">n. 算术</td></tr>
+<tr data-s="geometry n. 几何学"><td class="n">173</td><td class="w">geometry<div class="ipa">[dʒiˈɒmətri]</div></td><td class="m">n. 几何学</td></tr>
+<tr data-s="algebra n. 代数"><td class="n">174</td><td class="w">algebra<div class="ipa">[ˈældʒɪbrə]</div></td><td class="m">n. 代数</td></tr>
+<tr data-s="calculus n. (人体内的)结石；微 积分学"><td class="n">175</td><td class="w">calculus<div class="ipa">[ˈkælkjələs]</div></td><td class="m">n. (人体内的)结石；微 积分学</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 41</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="plus prep. 加；加上；conj. 加；和； 并且；adj. 正的；加的；超过的； n. 加号；正数；优势"><td class="n">176</td><td class="w">plus</td><td class="m">prep. 加；加上；conj. 加；和； 并且；adj. 正的；加的；超过的； n. 加号；正数；优势</td></tr>
-<tr data-s="sum n. 总数；算术；金额；v. 概括"><td class="n">177</td><td class="w">sum</td><td class="m">n. 总数；算术；金额；v. 概括</td></tr>
-<tr data-s="total n. 总额；总计；v. 共计； 总数达；adj. 总的；全部的"><td class="n">178</td><td class="w">total</td><td class="m">n. 总额；总计；v. 共计； 总数达；adj. 总的；全部的</td></tr>
+<tr data-s="plus prep. 加；加上；conj. 加；和； 并且；adj. 正的；加的；超过的； n. 加号；正数；优势"><td class="n">176</td><td class="w">plus<div class="ipa">[plʌs]</div></td><td class="m">prep. 加；加上；conj. 加；和； 并且；adj. 正的；加的；超过的； n. 加号；正数；优势</td></tr>
+<tr data-s="sum n. 总数；算术；金额；v. 概括"><td class="n">177</td><td class="w">sum<div class="ipa">[sʌm]</div></td><td class="m">n. 总数；算术；金额；v. 概括</td></tr>
+<tr data-s="total n. 总额；总计；v. 共计； 总数达；adj. 总的；全部的"><td class="n">178</td><td class="w">total<div class="ipa">[ˈtəʊt(ə)l]</div></td><td class="m">n. 总额；总计；v. 共计； 总数达；adj. 总的；全部的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 42</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="merger n. 合并；兼并"><td class="n">179</td><td class="w">merger</td><td class="m">n. 合并；兼并</td></tr>
-<tr data-s="equation n. 方程式；等式"><td class="n">180</td><td class="w">equation</td><td class="m">n. 方程式；等式</td></tr>
-<tr data-s="identical adj. 相同的；同样的"><td class="n">181</td><td class="w">identical</td><td class="m">adj. 相同的；同样的</td></tr>
+<tr data-s="merger n. 合并；兼并"><td class="n">179</td><td class="w">merger<div class="ipa">[ˈmɜːdʒə(r)]</div></td><td class="m">n. 合并；兼并</td></tr>
+<tr data-s="equation n. 方程式；等式"><td class="n">180</td><td class="w">equation<div class="ipa">[ɪˈkweɪʒ(ə)n]</div></td><td class="m">n. 方程式；等式</td></tr>
+<tr data-s="identical adj. 相同的；同样的"><td class="n">181</td><td class="w">identical<div class="ipa">[aɪˈdentɪk(ə)l]</div></td><td class="m">adj. 相同的；同样的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 43</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="minus adj. 零下的；负的；n. 减 号；负号；缺点；prep. 减去"><td class="n">182</td><td class="w">minus</td><td class="m">adj. 零下的；负的；n. 减 号；负号；缺点；prep. 减去</td></tr>
-<tr data-s="subtract v. 减去；扣除"><td class="n">183</td><td class="w">subtract</td><td class="m">v. 减去；扣除</td></tr>
-<tr data-s="multiply v. 乘；增加；繁殖"><td class="n">184</td><td class="w">multiply</td><td class="m">v. 乘；增加；繁殖</td></tr>
-<tr data-s="divide v. 分开；分隔；除以"><td class="n">185</td><td class="w">divide</td><td class="m">v. 分开；分隔；除以</td></tr>
+<tr data-s="minus adj. 零下的；负的；n. 减 号；负号；缺点；prep. 减去"><td class="n">182</td><td class="w">minus<div class="ipa">[ˈmaɪnəs]</div></td><td class="m">adj. 零下的；负的；n. 减 号；负号；缺点；prep. 减去</td></tr>
+<tr data-s="subtract v. 减去；扣除"><td class="n">183</td><td class="w">subtract<div class="ipa">[səbˈtrækt]</div></td><td class="m">v. 减去；扣除</td></tr>
+<tr data-s="multiply v. 乘；增加；繁殖"><td class="n">184</td><td class="w">multiply<div class="ipa">[ˈmʌltɪplaɪ]</div></td><td class="m">v. 乘；增加；繁殖</td></tr>
+<tr data-s="divide v. 分开；分隔；除以"><td class="n">185</td><td class="w">divide<div class="ipa">[dɪˈvaɪd]</div></td><td class="m">v. 分开；分隔；除以</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 44</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="dividend n. 被除数；股份红利；股 息"><td class="n">186</td><td class="w">dividend</td><td class="m">n. 被除数；股份红利；股 息</td></tr>
-<tr data-s="remainder n. 剩余物；其余的人；余 数；v. 廉价出售"><td class="n">187</td><td class="w">remainder</td><td class="m">n. 剩余物；其余的人；余 数；v. 廉价出售</td></tr>
-<tr data-s="rational adj. 理性的；理智的；合 理的"><td class="n">188</td><td class="w">rational</td><td class="m">adj. 理性的；理智的；合 理的</td></tr>
+<tr data-s="dividend n. 被除数；股份红利；股 息"><td class="n">186</td><td class="w">dividend<div class="ipa">[ˈdɪvɪdend]</div></td><td class="m">n. 被除数；股份红利；股 息</td></tr>
+<tr data-s="remainder n. 剩余物；其余的人；余 数；v. 廉价出售"><td class="n">187</td><td class="w">remainder<div class="ipa">[rɪˈmeɪndə(r)]</div></td><td class="m">n. 剩余物；其余的人；余 数；v. 廉价出售</td></tr>
+<tr data-s="rational adj. 理性的；理智的；合 理的"><td class="n">188</td><td class="w">rational<div class="ipa">[ˈræʃnəl]</div></td><td class="m">adj. 理性的；理智的；合 理的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 45</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="parameter n. 参数；参量；决定因 素；界限"><td class="n">189</td><td class="w">parameter</td><td class="m">n. 参数；参量；决定因 素；界限</td></tr>
-<tr data-s="variable adj. 可变的；易变的；不稳 定的；n. 变量；易变的东⻄"><td class="n">190</td><td class="w">variable</td><td class="m">adj. 可变的；易变的；不稳 定的；n. 变量；易变的东⻄</td></tr>
-<tr data-s="even adv. 甚至；甚至于；adj. 偶数 的；平坦的；v. 使平均；使相等； 使平坦"><td class="n">191</td><td class="w">even</td><td class="m">adv. 甚至；甚至于；adj. 偶数 的；平坦的；v. 使平均；使相等； 使平坦</td></tr>
-<tr data-s="odd adj. 奇怪的；奇数的；不成对的； 不经常的；adv. (用于数字后)大 约"><td class="n">192</td><td class="w">odd</td><td class="m">adj. 奇怪的；奇数的；不成对的； 不经常的；adv. (用于数字后)大 约</td></tr>
-<tr data-s="mean v. 意思是；打算；导致；有意；对... 严肃认真；adj. 低劣的；吝啬的；平 均的；n. 平均数；中庸；居中"><td class="n">193</td><td class="w">mean</td><td class="m">v. 意思是；打算；导致；有意；对... 严肃认真；adj. 低劣的；吝啬的；平 均的；n. 平均数；中庸；居中</td></tr>
+<tr data-s="parameter n. 参数；参量；决定因 素；界限"><td class="n">189</td><td class="w">parameter<div class="ipa">[pəˈræmɪtə(r)]</div></td><td class="m">n. 参数；参量；决定因 素；界限</td></tr>
+<tr data-s="variable adj. 可变的；易变的；不稳 定的；n. 变量；易变的东⻄"><td class="n">190</td><td class="w">variable<div class="ipa">[ˈveəriəb(ə)l]</div></td><td class="m">adj. 可变的；易变的；不稳 定的；n. 变量；易变的东⻄</td></tr>
+<tr data-s="even adv. 甚至；甚至于；adj. 偶数 的；平坦的；v. 使平均；使相等； 使平坦"><td class="n">191</td><td class="w">even<div class="ipa">[ˈiːv(ə)n]</div></td><td class="m">adv. 甚至；甚至于；adj. 偶数 的；平坦的；v. 使平均；使相等； 使平坦</td></tr>
+<tr data-s="odd adj. 奇怪的；奇数的；不成对的； 不经常的；adv. (用于数字后)大 约"><td class="n">192</td><td class="w">odd<div class="ipa">[ɒd]</div></td><td class="m">adj. 奇怪的；奇数的；不成对的； 不经常的；adv. (用于数字后)大 约</td></tr>
+<tr data-s="mean v. 意思是；打算；导致；有意；对... 严肃认真；adj. 低劣的；吝啬的；平 均的；n. 平均数；中庸；居中"><td class="n">193</td><td class="w">mean<div class="ipa">[miːn]</div></td><td class="m">v. 意思是；打算；导致；有意；对... 严肃认真；adj. 低劣的；吝啬的；平 均的；n. 平均数；中庸；居中</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 46</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="double n. 两倍；v. (使)加倍； 是...的两倍；把...对折"><td class="n">194</td><td class="w">double</td><td class="m">n. 两倍；v. (使)加倍； 是...的两倍；把...对折</td></tr>
-<tr data-s="triple adj. 三部分的；三方的；三倍的； n. 三倍的数；三个一组；v. 成为三 倍；使增至三倍"><td class="n">195</td><td class="w">triple</td><td class="m">adj. 三部分的；三方的；三倍的； n. 三倍的数；三个一组；v. 成为三 倍；使增至三倍</td></tr>
-<tr data-s="quadruple adj. 四倍的；四重的；n. 四部分；v. 成四倍；翻两番"><td class="n">196</td><td class="w">quadruple</td><td class="m">adj. 四倍的；四重的；n. 四部分；v. 成四倍；翻两番</td></tr>
-<tr data-s="multiple adj. 多样的；多种的；n. 倍数"><td class="n">197</td><td class="w">multiple</td><td class="m">adj. 多样的；多种的；n. 倍数</td></tr>
+<tr data-s="double n. 两倍；v. (使)加倍； 是...的两倍；把...对折"><td class="n">194</td><td class="w">double<div class="ipa">[ˈdʌb(ə)l]</div></td><td class="m">n. 两倍；v. (使)加倍； 是...的两倍；把...对折</td></tr>
+<tr data-s="triple adj. 三部分的；三方的；三倍的； n. 三倍的数；三个一组；v. 成为三 倍；使增至三倍"><td class="n">195</td><td class="w">triple<div class="ipa">[ˈtrɪp(ə)l]</div></td><td class="m">adj. 三部分的；三方的；三倍的； n. 三倍的数；三个一组；v. 成为三 倍；使增至三倍</td></tr>
+<tr data-s="quadruple adj. 四倍的；四重的；n. 四部分；v. 成四倍；翻两番"><td class="n">196</td><td class="w">quadruple<div class="ipa">[ˈkwɒdrʊp(ə)l]</div></td><td class="m">adj. 四倍的；四重的；n. 四部分；v. 成四倍；翻两番</td></tr>
+<tr data-s="multiple adj. 多样的；多种的；n. 倍数"><td class="n">197</td><td class="w">multiple<div class="ipa">[ˈmʌltɪp(ə)l]</div></td><td class="m">adj. 多样的；多种的；n. 倍数</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 47</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="maximum n. 最大限度；最大量； adj. 最多的；最大极限的"><td class="n">198</td><td class="w">maximum</td><td class="m">n. 最大限度；最大量； adj. 最多的；最大极限的</td></tr>
-<tr data-s="minimum n. 最小值；adj. 最小量的"><td class="n">199</td><td class="w">minimum</td><td class="m">n. 最小值；adj. 最小量的</td></tr>
-<tr data-s="approximately adv. 大约；大概"><td class="n">200</td><td class="w">approximately</td><td class="m">adv. 大约；大概</td></tr>
+<tr data-s="maximum n. 最大限度；最大量； adj. 最多的；最大极限的"><td class="n">198</td><td class="w">maximum<div class="ipa">[ˈmæksɪməm]</div></td><td class="m">n. 最大限度；最大量； adj. 最多的；最大极限的</td></tr>
+<tr data-s="minimum n. 最小值；adj. 最小量的"><td class="n">199</td><td class="w">minimum<div class="ipa">[ˈmɪnɪməm]</div></td><td class="m">n. 最小值；adj. 最小量的</td></tr>
+<tr data-s="approximately adv. 大约；大概"><td class="n">200</td><td class="w">approximately<div class="ipa">[əˈprɒksɪmətli]</div></td><td class="m">adv. 大约；大概</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 48</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="chart n. 图表；v. 作图；记录； 制定"><td class="n">201</td><td class="w">chart</td><td class="m">n. 图表；v. 作图；记录； 制定</td></tr>
-<tr data-s="graph n. 图表；曲线图"><td class="n">202</td><td class="w">graph</td><td class="m">n. 图表；曲线图</td></tr>
-<tr data-s="diagram n. 图表；图解"><td class="n">203</td><td class="w">diagram</td><td class="m">n. 图表；图解</td></tr>
+<tr data-s="chart n. 图表；v. 作图；记录； 制定"><td class="n">201</td><td class="w">chart<div class="ipa">[tʃɑːt]</div></td><td class="m">n. 图表；v. 作图；记录； 制定</td></tr>
+<tr data-s="graph n. 图表；曲线图"><td class="n">202</td><td class="w">graph<div class="ipa">[ɡrɑːf]</div></td><td class="m">n. 图表；曲线图</td></tr>
+<tr data-s="diagram n. 图表；图解"><td class="n">203</td><td class="w">diagram<div class="ipa">[ˈdaɪəɡræm]</div></td><td class="m">n. 图表；图解</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 49</span><span class="gcnt">8 词</span></td></tr>
-<tr data-s="table n. 桌子；台子；表格；v. 把...列入议事日程；搁置"><td class="n">204</td><td class="w">table</td><td class="m">n. 桌子；台子；表格；v. 把...列入议事日程；搁置</td></tr>
-<tr data-s="matrix n. 母体；发源地；矩阵"><td class="n">205</td><td class="w">matrix</td><td class="m">n. 母体；发源地；矩阵</td></tr>
-<tr data-s="rectangle n. 矩形；⻓方形"><td class="n">206</td><td class="w">rectangle</td><td class="m">n. 矩形；⻓方形</td></tr>
-<tr data-s="cube n. 立方体；立方"><td class="n">207</td><td class="w">cube</td><td class="m">n. 立方体；立方</td></tr>
-<tr data-s="angle n. ⻆；⻆度；视⻆；v. 斜 放；运用手段获得"><td class="n">208</td><td class="w">angle</td><td class="m">n. ⻆；⻆度；视⻆；v. 斜 放；运用手段获得</td></tr>
-<tr data-s="triangle n. 三⻆形；三⻆形物"><td class="n">209</td><td class="w">triangle</td><td class="m">n. 三⻆形；三⻆形物</td></tr>
-<tr data-s="diagonal adj. 对⻆线的；斜的；n. 对⻆线；斜线"><td class="n">210</td><td class="w">diagonal</td><td class="m">adj. 对⻆线的；斜的；n. 对⻆线；斜线</td></tr>
-<tr data-s="straight adj. 直的；笔直的；正直的； 率直的；adv. 直；径直；直接"><td class="n">211</td><td class="w">straight</td><td class="m">adj. 直的；笔直的；正直的； 率直的；adv. 直；径直；直接</td></tr>
+<tr data-s="table n. 桌子；台子；表格；v. 把...列入议事日程；搁置"><td class="n">204</td><td class="w">table<div class="ipa">[ˈteɪb(ə)l]</div></td><td class="m">n. 桌子；台子；表格；v. 把...列入议事日程；搁置</td></tr>
+<tr data-s="matrix n. 母体；发源地；矩阵"><td class="n">205</td><td class="w">matrix<div class="ipa">[ˈmeɪtrɪks]</div></td><td class="m">n. 母体；发源地；矩阵</td></tr>
+<tr data-s="rectangle n. 矩形；⻓方形"><td class="n">206</td><td class="w">rectangle<div class="ipa">[ˈrektæŋɡl]</div></td><td class="m">n. 矩形；⻓方形</td></tr>
+<tr data-s="cube n. 立方体；立方"><td class="n">207</td><td class="w">cube<div class="ipa">[kjuːb]</div></td><td class="m">n. 立方体；立方</td></tr>
+<tr data-s="angle n. ⻆；⻆度；视⻆；v. 斜 放；运用手段获得"><td class="n">208</td><td class="w">angle<div class="ipa">[ˈæŋɡl]</div></td><td class="m">n. ⻆；⻆度；视⻆；v. 斜 放；运用手段获得</td></tr>
+<tr data-s="triangle n. 三⻆形；三⻆形物"><td class="n">209</td><td class="w">triangle<div class="ipa">[ˈtraɪæŋɡl]</div></td><td class="m">n. 三⻆形；三⻆形物</td></tr>
+<tr data-s="diagonal adj. 对⻆线的；斜的；n. 对⻆线；斜线"><td class="n">210</td><td class="w">diagonal<div class="ipa">[daɪˈæɡən(ə)l]</div></td><td class="m">adj. 对⻆线的；斜的；n. 对⻆线；斜线</td></tr>
+<tr data-s="straight adj. 直的；笔直的；正直的； 率直的；adv. 直；径直；直接"><td class="n">211</td><td class="w">straight<div class="ipa">[streɪt]</div></td><td class="m">adj. 直的；笔直的；正直的； 率直的；adv. 直；径直；直接</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 50</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="circle n. 圆；圈；v. 圈出；环绕"><td class="n">212</td><td class="w">circle</td><td class="m">n. 圆；圈；v. 圈出；环绕</td></tr>
-<tr data-s="round adj. 圆的；球形的；十足的；adv. 环绕； 附近；prep. 环绕；在...周围；n. 圆；圆形 物；巡回；回合；v. 绕过；拐过；使成圆形"><td class="n">213</td><td class="w">round</td><td class="m">adj. 圆的；球形的；十足的；adv. 环绕； 附近；prep. 环绕；在...周围；n. 圆；圆形 物；巡回；回合；v. 绕过；拐过；使成圆形</td></tr>
-<tr data-s="dot n. 小圆点；点；v. 在...上 加点"><td class="n">214</td><td class="w">dot</td><td class="m">n. 小圆点；点；v. 在...上 加点</td></tr>
-<tr data-s="sphere n. 球体；范围"><td class="n">215</td><td class="w">sphere</td><td class="m">n. 球体；范围</td></tr>
-<tr data-s="cone n. 圆锥体；圆锥形物；球 果；松球"><td class="n">216</td><td class="w">cone</td><td class="m">n. 圆锥体；圆锥形物；球 果；松球</td></tr>
+<tr data-s="circle n. 圆；圈；v. 圈出；环绕"><td class="n">212</td><td class="w">circle<div class="ipa">[ˈsɜːk(ə)l]</div></td><td class="m">n. 圆；圈；v. 圈出；环绕</td></tr>
+<tr data-s="round adj. 圆的；球形的；十足的；adv. 环绕； 附近；prep. 环绕；在...周围；n. 圆；圆形 物；巡回；回合；v. 绕过；拐过；使成圆形"><td class="n">213</td><td class="w">round<div class="ipa">[raʊnd]</div></td><td class="m">adj. 圆的；球形的；十足的；adv. 环绕； 附近；prep. 环绕；在...周围；n. 圆；圆形 物；巡回；回合；v. 绕过；拐过；使成圆形</td></tr>
+<tr data-s="dot n. 小圆点；点；v. 在...上 加点"><td class="n">214</td><td class="w">dot<div class="ipa">[dɒt]</div></td><td class="m">n. 小圆点；点；v. 在...上 加点</td></tr>
+<tr data-s="sphere n. 球体；范围"><td class="n">215</td><td class="w">sphere<div class="ipa">[sfɪə(r)]</div></td><td class="m">n. 球体；范围</td></tr>
+<tr data-s="cone n. 圆锥体；圆锥形物；球 果；松球"><td class="n">216</td><td class="w">cone<div class="ipa">[kəʊn]</div></td><td class="m">n. 圆锥体；圆锥形物；球 果；松球</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 51</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="extent n. ⻓度；广度；程度"><td class="n">217</td><td class="w">extent</td><td class="m">n. ⻓度；广度；程度</td></tr>
-<tr data-s="width n. 宽度"><td class="n">218</td><td class="w">width</td><td class="m">n. 宽度</td></tr>
-<tr data-s="length n. ⻓度"><td class="n">219</td><td class="w">length</td><td class="m">n. ⻓度</td></tr>
+<tr data-s="extent n. ⻓度；广度；程度"><td class="n">217</td><td class="w">extent<div class="ipa">[ɪkˈstent]</div></td><td class="m">n. ⻓度；广度；程度</td></tr>
+<tr data-s="width n. 宽度"><td class="n">218</td><td class="w">width<div class="ipa">[wɪdθ]</div></td><td class="m">n. 宽度</td></tr>
+<tr data-s="length n. ⻓度"><td class="n">219</td><td class="w">length<div class="ipa">[leŋkθ]</div></td><td class="m">n. ⻓度</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 52</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="decimal adj. 小数的；十进位的； n. 小数"><td class="n">220</td><td class="w">decimal</td><td class="m">adj. 小数的；十进位的； n. 小数</td></tr>
-<tr data-s="per cent n. 百分之..."><td class="n">221</td><td class="w">per cent</td><td class="m">n. 百分之...</td></tr>
-<tr data-s="proportion n. 比例；份额"><td class="n">222</td><td class="w">proportion</td><td class="m">n. 比例；份额</td></tr>
+<tr data-s="decimal adj. 小数的；十进位的； n. 小数"><td class="n">220</td><td class="w">decimal<div class="ipa">[ˈdesɪm(ə)l]</div></td><td class="m">adj. 小数的；十进位的； n. 小数</td></tr>
+<tr data-s="per cent n. 百分之..."><td class="n">221</td><td class="w">per cent<div class="ipa">[pə ˈsent]</div></td><td class="m">n. 百分之...</td></tr>
+<tr data-s="proportion n. 比例；份额"><td class="n">222</td><td class="w">proportion<div class="ipa">[prəˈpɔːʃ(ə)n]</div></td><td class="m">n. 比例；份额</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 53</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="rate n. 比率； 率；速度；进度；价格； 费用；地方税；等级；v. 估价；值 得；定级；(被)认为；被评价"><td class="n">223</td><td class="w">rate</td><td class="m">n. 比率； 率；速度；进度；价格； 费用；地方税；等级；v. 估价；值 得；定级；(被)认为；被评价</td></tr>
-<tr data-s="ratio n. 比率；比值"><td class="n">224</td><td class="w">ratio</td><td class="m">n. 比率；比值</td></tr>
-<tr data-s="fraction n. 小部分；分数"><td class="n">225</td><td class="w">fraction</td><td class="m">n. 小部分；分数</td></tr>
+<tr data-s="rate n. 比率； 率；速度；进度；价格； 费用；地方税；等级；v. 估价；值 得；定级；(被)认为；被评价"><td class="n">223</td><td class="w">rate<div class="ipa">[reɪt]</div></td><td class="m">n. 比率； 率；速度；进度；价格； 费用；地方税；等级；v. 估价；值 得；定级；(被)认为；被评价</td></tr>
+<tr data-s="ratio n. 比率；比值"><td class="n">224</td><td class="w">ratio<div class="ipa">[ˈreɪʃiəʊ]</div></td><td class="m">n. 比率；比值</td></tr>
+<tr data-s="fraction n. 小部分；分数"><td class="n">225</td><td class="w">fraction<div class="ipa">[ˈfrækʃ(ə)n]</div></td><td class="m">n. 小部分；分数</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 54</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="scale n. 规模；等级；秤；刻度；比例 (尺)；v. 改变...大小；攀登"><td class="n">226</td><td class="w">scale</td><td class="m">n. 规模；等级；秤；刻度；比例 (尺)；v. 改变...大小；攀登</td></tr>
-<tr data-s="ounce n. 少量；盎司"><td class="n">227</td><td class="w">ounce</td><td class="m">n. 少量；盎司</td></tr>
-<tr data-s="density n. 浓密；密度"><td class="n">228</td><td class="w">density</td><td class="m">n. 浓密；密度</td></tr>
-<tr data-s="fahrenheit adj. 华氏温度计的；n. 华 氏温度计"><td class="n">229</td><td class="w">Fahrenheit</td><td class="m">adj. 华氏温度计的；n. 华 氏温度计</td></tr>
-<tr data-s="mercury n. 水银；汞"><td class="n">230</td><td class="w">mercury</td><td class="m">n. 水银；汞</td></tr>
+<tr data-s="scale n. 规模；等级；秤；刻度；比例 (尺)；v. 改变...大小；攀登"><td class="n">226</td><td class="w">scale<div class="ipa">[skeɪl]</div></td><td class="m">n. 规模；等级；秤；刻度；比例 (尺)；v. 改变...大小；攀登</td></tr>
+<tr data-s="ounce n. 少量；盎司"><td class="n">227</td><td class="w">ounce<div class="ipa">[aʊns]</div></td><td class="m">n. 少量；盎司</td></tr>
+<tr data-s="density n. 浓密；密度"><td class="n">228</td><td class="w">density<div class="ipa">[ˈdensəti]</div></td><td class="m">n. 浓密；密度</td></tr>
+<tr data-s="fahrenheit adj. 华氏温度计的；n. 华 氏温度计"><td class="n">229</td><td class="w">Fahrenheit<div class="ipa">[ˈfærənhaɪt]</div></td><td class="m">adj. 华氏温度计的；n. 华 氏温度计</td></tr>
+<tr data-s="mercury n. 水银；汞"><td class="n">230</td><td class="w">mercury<div class="ipa">[ˈmɜːkjəri]</div></td><td class="m">n. 水银；汞</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 55</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="battery n. 电池；一组；一连串"><td class="n">231</td><td class="w">battery</td><td class="m">n. 电池；一组；一连串</td></tr>
-<tr data-s="volt n. 伏特"><td class="n">232</td><td class="w">volt</td><td class="m">n. 伏特</td></tr>
-<tr data-s="radiate v. 散发；发射(光或 热)；辐射"><td class="n">233</td><td class="w">radiate</td><td class="m">v. 散发；发射(光或 热)；辐射</td></tr>
-<tr data-s="emit v. 发出；发射"><td class="n">234</td><td class="w">emit</td><td class="m">v. 发出；发射</td></tr>
-<tr data-s="transparent adj. 透明的；显然的"><td class="n">235</td><td class="w">transparent</td><td class="m">adj. 透明的；显然的</td></tr>
-<tr data-s="hollow adj. 中空的；空洞的"><td class="n">236</td><td class="w">hollow</td><td class="m">adj. 中空的；空洞的</td></tr>
+<tr data-s="battery n. 电池；一组；一连串"><td class="n">231</td><td class="w">battery<div class="ipa">[ˈbætəri]</div></td><td class="m">n. 电池；一组；一连串</td></tr>
+<tr data-s="volt n. 伏特"><td class="n">232</td><td class="w">volt<div class="ipa">[vəʊlt]</div></td><td class="m">n. 伏特</td></tr>
+<tr data-s="radiate v. 散发；发射(光或 热)；辐射"><td class="n">233</td><td class="w">radiate<div class="ipa">[ˈreɪdieɪt]</div></td><td class="m">v. 散发；发射(光或 热)；辐射</td></tr>
+<tr data-s="emit v. 发出；发射"><td class="n">234</td><td class="w">emit<div class="ipa">[iˈmɪt]</div></td><td class="m">v. 发出；发射</td></tr>
+<tr data-s="transparent adj. 透明的；显然的"><td class="n">235</td><td class="w">transparent<div class="ipa">[trænsˈpærənt]</div></td><td class="m">adj. 透明的；显然的</td></tr>
+<tr data-s="hollow adj. 中空的；空洞的"><td class="n">236</td><td class="w">hollow<div class="ipa">[ˈhɒləʊ]</div></td><td class="m">adj. 中空的；空洞的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 56</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="ozone n. 臭氧"><td class="n">237</td><td class="w">ozone</td><td class="m">n. 臭氧</td></tr>
-<tr data-s="gravity n. 重力；地心引力；严重 性"><td class="n">238</td><td class="w">gravity</td><td class="m">n. 重力；地心引力；严重 性</td></tr>
-<tr data-s="friction n. 摩擦；不和；争执"><td class="n">239</td><td class="w">friction</td><td class="m">n. 摩擦；不和；争执</td></tr>
-<tr data-s="eccentric adj. 古怪的；偏离轨道的； n. 怪人；偏离轨道运行"><td class="n">240</td><td class="w">eccentric</td><td class="m">adj. 古怪的；偏离轨道的； n. 怪人；偏离轨道运行</td></tr>
-<tr data-s="displace v. 取代；移置；免职；迫 使...离开家园"><td class="n">241</td><td class="w">displace</td><td class="m">v. 取代；移置；免职；迫 使...离开家园</td></tr>
+<tr data-s="ozone n. 臭氧"><td class="n">237</td><td class="w">ozone<div class="ipa">[ˈəʊzəʊn]</div></td><td class="m">n. 臭氧</td></tr>
+<tr data-s="gravity n. 重力；地心引力；严重 性"><td class="n">238</td><td class="w">gravity<div class="ipa">[ˈɡrævəti]</div></td><td class="m">n. 重力；地心引力；严重 性</td></tr>
+<tr data-s="friction n. 摩擦；不和；争执"><td class="n">239</td><td class="w">friction<div class="ipa">[ˈfrɪkʃ(ə)n]</div></td><td class="m">n. 摩擦；不和；争执</td></tr>
+<tr data-s="eccentric adj. 古怪的；偏离轨道的； n. 怪人；偏离轨道运行"><td class="n">240</td><td class="w">eccentric<div class="ipa">[ɪkˈsentrɪk]</div></td><td class="m">adj. 古怪的；偏离轨道的； n. 怪人；偏离轨道运行</td></tr>
+<tr data-s="displace v. 取代；移置；免职；迫 使...离开家园"><td class="n">241</td><td class="w">displace<div class="ipa">[dɪsˈpleɪs]</div></td><td class="m">v. 取代；移置；免职；迫 使...离开家园</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 57</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="boil v. 沸腾；煮；煮沸；n. 煮 沸；沸点"><td class="n">242</td><td class="w">boil</td><td class="m">v. 沸腾；煮；煮沸；n. 煮 沸；沸点</td></tr>
-<tr data-s="melt v. (使)融化；(使)熔 化"><td class="n">243</td><td class="w">melt</td><td class="m">v. (使)融化；(使)熔 化</td></tr>
-<tr data-s="dissolve v. 溶解；解散；散去；失 控"><td class="n">244</td><td class="w">dissolve</td><td class="m">v. 溶解；解散；散去；失 控</td></tr>
+<tr data-s="boil v. 沸腾；煮；煮沸；n. 煮 沸；沸点"><td class="n">242</td><td class="w">boil<div class="ipa">[bɔɪl]</div></td><td class="m">v. 沸腾；煮；煮沸；n. 煮 沸；沸点</td></tr>
+<tr data-s="melt v. (使)融化；(使)熔 化"><td class="n">243</td><td class="w">melt<div class="ipa">[melt]</div></td><td class="m">v. (使)融化；(使)熔 化</td></tr>
+<tr data-s="dissolve v. 溶解；解散；散去；失 控"><td class="n">244</td><td class="w">dissolve<div class="ipa">[dɪˈzɒlv]</div></td><td class="m">v. 溶解；解散；散去；失 控</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 58</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="rust n. 铁锈；v. 生锈"><td class="n">245</td><td class="w">rust</td><td class="m">n. 铁锈；v. 生锈</td></tr>
-<tr data-s="ferment n. 发酵；酵素；动乱；v. (使)发酵；动乱"><td class="n">246</td><td class="w">ferment</td><td class="m">n. 发酵；酵素；动乱；v. (使)发酵；动乱</td></tr>
-<tr data-s="dilute v. 稀释；adj. 经稀释的"><td class="n">247</td><td class="w">dilute</td><td class="m">v. 稀释；adj. 经稀释的</td></tr>
-<tr data-s="acid adj. 酸的；酸性的；刻薄 的；n. 酸"><td class="n">248</td><td class="w">acid</td><td class="m">adj. 酸的；酸性的；刻薄 的；n. 酸</td></tr>
-<tr data-s="noxious adj. 有害的；有毒的；可 憎的"><td class="n">249</td><td class="w">noxious</td><td class="m">adj. 有害的；有毒的；可 憎的</td></tr>
+<tr data-s="rust n. 铁锈；v. 生锈"><td class="n">245</td><td class="w">rust<div class="ipa">[rʌst]</div></td><td class="m">n. 铁锈；v. 生锈</td></tr>
+<tr data-s="ferment n. 发酵；酵素；动乱；v. (使)发酵；动乱"><td class="n">246</td><td class="w">ferment<div class="ipa">[ˈfɜːment]</div></td><td class="m">n. 发酵；酵素；动乱；v. (使)发酵；动乱</td></tr>
+<tr data-s="dilute v. 稀释；adj. 经稀释的"><td class="n">247</td><td class="w">dilute<div class="ipa">[daɪˈluːt]</div></td><td class="m">v. 稀释；adj. 经稀释的</td></tr>
+<tr data-s="acid adj. 酸的；酸性的；刻薄 的；n. 酸"><td class="n">248</td><td class="w">acid<div class="ipa">[ˈæsɪd]</div></td><td class="m">adj. 酸的；酸性的；刻薄 的；n. 酸</td></tr>
+<tr data-s="noxious adj. 有害的；有毒的；可 憎的"><td class="n">249</td><td class="w">noxious<div class="ipa">[ˈnɒkʃəs]</div></td><td class="m">adj. 有害的；有毒的；可 憎的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 59</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="static adj. 静止的；不变的；n. 静电"><td class="n">250</td><td class="w">static</td><td class="m">adj. 静止的；不变的；n. 静电</td></tr>
-<tr data-s="inert adj. 无行动的；无生气 的；惰性的"><td class="n">251</td><td class="w">inert</td><td class="m">adj. 无行动的；无生气 的；惰性的</td></tr>
-<tr data-s="inherent adj. 固有的；内在的；天 生的"><td class="n">252</td><td class="w">inherent</td><td class="m">adj. 固有的；内在的；天 生的</td></tr>
+<tr data-s="static adj. 静止的；不变的；n. 静电"><td class="n">250</td><td class="w">static<div class="ipa">[ˈstætɪk]</div></td><td class="m">adj. 静止的；不变的；n. 静电</td></tr>
+<tr data-s="inert adj. 无行动的；无生气 的；惰性的"><td class="n">251</td><td class="w">inert<div class="ipa">[ɪˈnɜːt]</div></td><td class="m">adj. 无行动的；无生气 的；惰性的</td></tr>
+<tr data-s="inherent adj. 固有的；内在的；天 生的"><td class="n">252</td><td class="w">inherent<div class="ipa">[ɪnˈherənt]</div></td><td class="m">adj. 固有的；内在的；天 生的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 60</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="formula n. 公式；配方；方案；分 子式"><td class="n">253</td><td class="w">formula</td><td class="m">n. 公式；配方；方案；分 子式</td></tr>
-<tr data-s="component n. 成分；部分；零件； adj. 组成的；构成的"><td class="n">254</td><td class="w">component</td><td class="m">n. 成分；部分；零件； adj. 组成的；构成的</td></tr>
-<tr data-s="compose v. 创作；组成；使镇定"><td class="n">255</td><td class="w">compose</td><td class="m">v. 创作；组成；使镇定</td></tr>
-<tr data-s="mixture n. 混合物；混合"><td class="n">256</td><td class="w">mixture</td><td class="m">n. 混合物；混合</td></tr>
-<tr data-s="blend v. 混合；配合；融合"><td class="n">257</td><td class="w">blend</td><td class="m">v. 混合；配合；融合</td></tr>
+<tr data-s="formula n. 公式；配方；方案；分 子式"><td class="n">253</td><td class="w">formula<div class="ipa">[ˈfɔːmjələ]</div></td><td class="m">n. 公式；配方；方案；分 子式</td></tr>
+<tr data-s="component n. 成分；部分；零件； adj. 组成的；构成的"><td class="n">254</td><td class="w">component<div class="ipa">[kəmˈpəʊnənt]</div></td><td class="m">n. 成分；部分；零件； adj. 组成的；构成的</td></tr>
+<tr data-s="compose v. 创作；组成；使镇定"><td class="n">255</td><td class="w">compose<div class="ipa">[kəmˈpəʊz]</div></td><td class="m">v. 创作；组成；使镇定</td></tr>
+<tr data-s="mixture n. 混合物；混合"><td class="n">256</td><td class="w">mixture<div class="ipa">[ˈmɪkstʃə(r)]</div></td><td class="m">n. 混合物；混合</td></tr>
+<tr data-s="blend v. 混合；配合；融合"><td class="n">257</td><td class="w">blend<div class="ipa">[blend]</div></td><td class="m">v. 混合；配合；融合</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 61</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="theory n. 理论；学说"><td class="n">258</td><td class="w">theory</td><td class="m">n. 理论；学说</td></tr>
-<tr data-s="empirical adj. 经验主义的；以经验 为根据的"><td class="n">259</td><td class="w">empirical</td><td class="m">adj. 经验主义的；以经验 为根据的</td></tr>
-<tr data-s="practical adj. 实际的；实践的；实 用的"><td class="n">260</td><td class="w">practical</td><td class="m">adj. 实际的；实践的；实 用的</td></tr>
+<tr data-s="theory n. 理论；学说"><td class="n">258</td><td class="w">theory<div class="ipa">[ˈθɪəri]</div></td><td class="m">n. 理论；学说</td></tr>
+<tr data-s="empirical adj. 经验主义的；以经验 为根据的"><td class="n">259</td><td class="w">empirical<div class="ipa">[ɪmˈpɪrɪk(ə)l]</div></td><td class="m">adj. 经验主义的；以经验 为根据的</td></tr>
+<tr data-s="practical adj. 实际的；实践的；实 用的"><td class="n">260</td><td class="w">practical<div class="ipa">[ˈpræktɪk(ə)l]</div></td><td class="m">adj. 实际的；实践的；实 用的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 62</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="doctrine n. 学说；教义；教条"><td class="n">261</td><td class="w">doctrine</td><td class="m">n. 学说；教义；教条</td></tr>
-<tr data-s="principle n. 原则；原理"><td class="n">262</td><td class="w">principle</td><td class="m">n. 原则；原理</td></tr>
-<tr data-s="discipline n. 纪律；训练；惩戒；学科；科 目；v. 训练；约束自己；惩罚"><td class="n">263</td><td class="w">discipline</td><td class="m">n. 纪律；训练；惩戒；学科；科 目；v. 训练；约束自己；惩罚</td></tr>
+<tr data-s="doctrine n. 学说；教义；教条"><td class="n">261</td><td class="w">doctrine<div class="ipa">[ˈdɒktrɪn]</div></td><td class="m">n. 学说；教义；教条</td></tr>
+<tr data-s="principle n. 原则；原理"><td class="n">262</td><td class="w">principle<div class="ipa">[ˈprɪnsəp(ə)l]</div></td><td class="m">n. 原则；原理</td></tr>
+<tr data-s="discipline n. 纪律；训练；惩戒；学科；科 目；v. 训练；约束自己；惩罚"><td class="n">263</td><td class="w">discipline<div class="ipa">[ˈdɪsəplɪn]</div></td><td class="m">n. 纪律；训练；惩戒；学科；科 目；v. 训练；约束自己；惩罚</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 63</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="term n. 学期；术语；措辞；期限； 条款；v. 把...称作；把...叫做"><td class="n">264</td><td class="w">term</td><td class="m">n. 学期；术语；措辞；期限； 条款；v. 把...称作；把...叫做</td></tr>
-<tr data-s="semester n. 一学期；半学年"><td class="n">265</td><td class="w">semester</td><td class="m">n. 一学期；半学年</td></tr>
-<tr data-s="timetable n. 时间表；时刻表；课程 表"><td class="n">266</td><td class="w">timetable</td><td class="m">n. 时间表；时刻表；课程 表</td></tr>
-<tr data-s="schedule n. 日程表；时间表；v. 安 排"><td class="n">267</td><td class="w">schedule</td><td class="m">n. 日程表；时间表；v. 安 排</td></tr>
-<tr data-s="deadline n. 最终期限"><td class="n">268</td><td class="w">deadline</td><td class="m">n. 最终期限</td></tr>
+<tr data-s="term n. 学期；术语；措辞；期限； 条款；v. 把...称作；把...叫做"><td class="n">264</td><td class="w">term<div class="ipa">[tɜːm]</div></td><td class="m">n. 学期；术语；措辞；期限； 条款；v. 把...称作；把...叫做</td></tr>
+<tr data-s="semester n. 一学期；半学年"><td class="n">265</td><td class="w">semester<div class="ipa">[sɪˈmestə(r)]</div></td><td class="m">n. 一学期；半学年</td></tr>
+<tr data-s="timetable n. 时间表；时刻表；课程 表"><td class="n">266</td><td class="w">timetable<div class="ipa">[ˈtaɪmteɪb(ə)l]</div></td><td class="m">n. 时间表；时刻表；课程 表</td></tr>
+<tr data-s="schedule n. 日程表；时间表；v. 安 排"><td class="n">267</td><td class="w">schedule<div class="ipa">[ˈʃedjuːl]</div></td><td class="m">n. 日程表；时间表；v. 安 排</td></tr>
+<tr data-s="deadline n. 最终期限"><td class="n">268</td><td class="w">deadline<div class="ipa">[ˈdedlaɪn]</div></td><td class="m">n. 最终期限</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 64</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="course n. 课程；过程；一道菜；v. 快 速流动；(思想或感情)涌动"><td class="n">269</td><td class="w">course</td><td class="m">n. 课程；过程；一道菜；v. 快 速流动；(思想或感情)涌动</td></tr>
-<tr data-s="lesson n. 课；功课；课程；教训"><td class="n">270</td><td class="w">lesson</td><td class="m">n. 课；功课；课程；教训</td></tr>
-<tr data-s="curriculum n. 课程"><td class="n">271</td><td class="w">curriculum</td><td class="m">n. 课程</td></tr>
+<tr data-s="course n. 课程；过程；一道菜；v. 快 速流动；(思想或感情)涌动"><td class="n">269</td><td class="w">course<div class="ipa">[kɔːs]</div></td><td class="m">n. 课程；过程；一道菜；v. 快 速流动；(思想或感情)涌动</td></tr>
+<tr data-s="lesson n. 课；功课；课程；教训"><td class="n">270</td><td class="w">lesson<div class="ipa">[ˈles(ə)n]</div></td><td class="m">n. 课；功课；课程；教训</td></tr>
+<tr data-s="curriculum n. 课程"><td class="n">271</td><td class="w">curriculum<div class="ipa">[kəˈrɪkjələm]</div></td><td class="m">n. 课程</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 65</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="seminar n. 研讨会；专题讨论"><td class="n">272</td><td class="w">seminar</td><td class="m">n. 研讨会；专题讨论</td></tr>
-<tr data-s="forum n. 古罗⻢城镇的广场；论 坛；讨论会"><td class="n">273</td><td class="w">forum</td><td class="m">n. 古罗⻢城镇的广场；论 坛；讨论会</td></tr>
-<tr data-s="syllabus n. 教学大纲；摘要"><td class="n">274</td><td class="w">syllabus</td><td class="m">n. 教学大纲；摘要</td></tr>
-<tr data-s="system n. 系统；体系"><td class="n">275</td><td class="w">system</td><td class="m">n. 系统；体系</td></tr>
+<tr data-s="seminar n. 研讨会；专题讨论"><td class="n">272</td><td class="w">seminar<div class="ipa">[ˈsemɪnɑː(r)]</div></td><td class="m">n. 研讨会；专题讨论</td></tr>
+<tr data-s="forum n. 古罗⻢城镇的广场；论 坛；讨论会"><td class="n">273</td><td class="w">forum<div class="ipa">[ˈfɔːrəm]</div></td><td class="m">n. 古罗⻢城镇的广场；论 坛；讨论会</td></tr>
+<tr data-s="syllabus n. 教学大纲；摘要"><td class="n">274</td><td class="w">syllabus<div class="ipa">[ˈsɪləbəs]</div></td><td class="m">n. 教学大纲；摘要</td></tr>
+<tr data-s="system n. 系统；体系"><td class="n">275</td><td class="w">system<div class="ipa">[ˈsɪstəm]</div></td><td class="m">n. 系统；体系</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 66</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="rudimentary adj. 基本的；初步的；未 充分发展的"><td class="n">276</td><td class="w">rudimentary</td><td class="m">adj. 基本的；初步的；未 充分发展的</td></tr>
-<tr data-s="basic adj. 基本的；基础的"><td class="n">277</td><td class="w">basic</td><td class="m">adj. 基本的；基础的</td></tr>
-<tr data-s="fundamental adj. 基本的；基础的；根本 的；n. 基本原则；基本原理"><td class="n">278</td><td class="w">fundamental</td><td class="m">adj. 基本的；基础的；根本 的；n. 基本原则；基本原理</td></tr>
+<tr data-s="rudimentary adj. 基本的；初步的；未 充分发展的"><td class="n">276</td><td class="w">rudimentary<div class="ipa">[ˌruːdɪˈmentri]</div></td><td class="m">adj. 基本的；初步的；未 充分发展的</td></tr>
+<tr data-s="basic adj. 基本的；基础的"><td class="n">277</td><td class="w">basic<div class="ipa">[ˈbeɪsɪk]</div></td><td class="m">adj. 基本的；基础的</td></tr>
+<tr data-s="fundamental adj. 基本的；基础的；根本 的；n. 基本原则；基本原理"><td class="n">278</td><td class="w">fundamental<div class="ipa">[ˌfʌndəˈment(ə)l]</div></td><td class="m">adj. 基本的；基础的；根本 的；n. 基本原则；基本原理</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 67</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="elementary adj. 基本的；初级的"><td class="n">279</td><td class="w">elementary</td><td class="m">adj. 基本的；初级的</td></tr>
-<tr data-s="profound adj. 深刻的；渊博的；深 奥的；深远的"><td class="n">280</td><td class="w">profound</td><td class="m">adj. 深刻的；渊博的；深 奥的；深远的</td></tr>
-<tr data-s="surface n. 表面；v. 显露；给...铺 路面"><td class="n">281</td><td class="w">surface</td><td class="m">n. 表面；v. 显露；给...铺 路面</td></tr>
+<tr data-s="elementary adj. 基本的；初级的"><td class="n">279</td><td class="w">elementary<div class="ipa">[ˌelɪˈmentri]</div></td><td class="m">adj. 基本的；初级的</td></tr>
+<tr data-s="profound adj. 深刻的；渊博的；深 奥的；深远的"><td class="n">280</td><td class="w">profound<div class="ipa">[prəˈfaʊnd]</div></td><td class="m">adj. 深刻的；渊博的；深 奥的；深远的</td></tr>
+<tr data-s="surface n. 表面；v. 显露；给...铺 路面"><td class="n">281</td><td class="w">surface<div class="ipa">[ˈsɜːfɪs]</div></td><td class="m">n. 表面；v. 显露；给...铺 路面</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 68</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="compulsory adj. 强制的；必须做的"><td class="n">282</td><td class="w">compulsory</td><td class="m">adj. 强制的；必须做的</td></tr>
-<tr data-s="prerequisite n. 前提；先决条件；adj. 首要必备的"><td class="n">283</td><td class="w">prerequisite</td><td class="m">n. 前提；先决条件；adj. 首要必备的</td></tr>
-<tr data-s="selective adj. 选择的；选择性的； 精挑细选的"><td class="n">284</td><td class="w">selective</td><td class="m">adj. 选择的；选择性的； 精挑细选的</td></tr>
-<tr data-s="elective adj. 选举的；选修的；可 选择的；n. 选修课程"><td class="n">285</td><td class="w">elective</td><td class="m">adj. 选举的；选修的；可 选择的；n. 选修课程</td></tr>
+<tr data-s="compulsory adj. 强制的；必须做的"><td class="n">282</td><td class="w">compulsory<div class="ipa">[kəmˈpʌlsəri]</div></td><td class="m">adj. 强制的；必须做的</td></tr>
+<tr data-s="prerequisite n. 前提；先决条件；adj. 首要必备的"><td class="n">283</td><td class="w">prerequisite<div class="ipa">[ˌpriːˈrekwəzɪt]</div></td><td class="m">n. 前提；先决条件；adj. 首要必备的</td></tr>
+<tr data-s="selective adj. 选择的；选择性的； 精挑细选的"><td class="n">284</td><td class="w">selective<div class="ipa">[sɪˈlektɪv]</div></td><td class="m">adj. 选择的；选择性的； 精挑细选的</td></tr>
+<tr data-s="elective adj. 选举的；选修的；可 选择的；n. 选修课程"><td class="n">285</td><td class="w">elective<div class="ipa">[ɪˈlektɪv]</div></td><td class="m">adj. 选举的；选修的；可 选择的；n. 选修课程</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 69</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="assignment n. 分配；指派；任务；作 业"><td class="n">286</td><td class="w">assignment</td><td class="m">n. 分配；指派；任务；作 业</td></tr>
-<tr data-s="submit v. 提交；屈服"><td class="n">287</td><td class="w">submit</td><td class="m">v. 提交；屈服</td></tr>
-<tr data-s="preview n. 预审；预看；试映；预习； v. 预映；预看；预习；写预评"><td class="n">288</td><td class="w">preview</td><td class="m">n. 预审；预看；试映；预习； v. 预映；预看；预习；写预评</td></tr>
-<tr data-s="review n. 回顾；复习；审查；评论； v. 回顾；复习；审核；评论"><td class="n">289</td><td class="w">review</td><td class="m">n. 回顾；复习；审查；评论； v. 回顾；复习；审核；评论</td></tr>
+<tr data-s="assignment n. 分配；指派；任务；作 业"><td class="n">286</td><td class="w">assignment<div class="ipa">[əˈsaɪnmənt]</div></td><td class="m">n. 分配；指派；任务；作 业</td></tr>
+<tr data-s="submit v. 提交；屈服"><td class="n">287</td><td class="w">submit<div class="ipa">[səbˈmɪt]</div></td><td class="m">v. 提交；屈服</td></tr>
+<tr data-s="preview n. 预审；预看；试映；预习； v. 预映；预看；预习；写预评"><td class="n">288</td><td class="w">preview<div class="ipa">[ˈpriːvjuː]</div></td><td class="m">n. 预审；预看；试映；预习； v. 预映；预看；预习；写预评</td></tr>
+<tr data-s="review n. 回顾；复习；审查；评论； v. 回顾；复习；审核；评论"><td class="n">289</td><td class="w">review<div class="ipa">[rɪˈvjuː]</div></td><td class="m">n. 回顾；复习；审查；评论； v. 回顾；复习；审核；评论</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 70</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="revise v. 修正；温习；校订"><td class="n">290</td><td class="w">revise</td><td class="m">v. 修正；温习；校订</td></tr>
-<tr data-s="inspect v. 检查；视察"><td class="n">291</td><td class="w">inspect</td><td class="m">v. 检查；视察</td></tr>
-<tr data-s="consult v. 咨询；查询；请教"><td class="n">292</td><td class="w">consult</td><td class="m">v. 咨询；查询；请教</td></tr>
+<tr data-s="revise v. 修正；温习；校订"><td class="n">290</td><td class="w">revise<div class="ipa">[rɪˈvaɪz]</div></td><td class="m">v. 修正；温习；校订</td></tr>
+<tr data-s="inspect v. 检查；视察"><td class="n">291</td><td class="w">inspect<div class="ipa">[ɪnˈspekt]</div></td><td class="m">v. 检查；视察</td></tr>
+<tr data-s="consult v. 咨询；查询；请教"><td class="n">292</td><td class="w">consult<div class="ipa">[kənˈsʌlt]</div></td><td class="m">v. 咨询；查询；请教</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 71</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="skim v. 撇去；略读；掠过"><td class="n">293</td><td class="w">skim</td><td class="m">v. 撇去；略读；掠过</td></tr>
-<tr data-s="scan v. 扫描；浏览；审视；细 看；n. 扫描；浏览；扫描图"><td class="n">294</td><td class="w">scan</td><td class="m">v. 扫描；浏览；审视；细 看；n. 扫描；浏览；扫描图</td></tr>
-<tr data-s="scrutinise v. 详细检查；仔细察看"><td class="n">295</td><td class="w">scrutinise</td><td class="m">v. 详细检查；仔细察看</td></tr>
-<tr data-s="recite v. 背诵；吟诵；细述"><td class="n">296</td><td class="w">recite</td><td class="m">v. 背诵；吟诵；细述</td></tr>
-<tr data-s="dictate v. 听写；口授；命令；支 配；影响；n. 指令"><td class="n">297</td><td class="w">dictate</td><td class="m">v. 听写；口授；命令；支 配；影响；n. 指令</td></tr>
+<tr data-s="skim v. 撇去；略读；掠过"><td class="n">293</td><td class="w">skim<div class="ipa">[skɪm]</div></td><td class="m">v. 撇去；略读；掠过</td></tr>
+<tr data-s="scan v. 扫描；浏览；审视；细 看；n. 扫描；浏览；扫描图"><td class="n">294</td><td class="w">scan<div class="ipa">[skæn]</div></td><td class="m">v. 扫描；浏览；审视；细 看；n. 扫描；浏览；扫描图</td></tr>
+<tr data-s="scrutinise v. 详细检查；仔细察看"><td class="n">295</td><td class="w">scrutinise<div class="ipa">[ˈskruːtənaɪz]</div></td><td class="m">v. 详细检查；仔细察看</td></tr>
+<tr data-s="recite v. 背诵；吟诵；细述"><td class="n">296</td><td class="w">recite<div class="ipa">[rɪˈsaɪt]</div></td><td class="m">v. 背诵；吟诵；细述</td></tr>
+<tr data-s="dictate v. 听写；口授；命令；支 配；影响；n. 指令"><td class="n">297</td><td class="w">dictate<div class="ipa">[dɪkˈteɪt]</div></td><td class="m">v. 听写；口授；命令；支 配；影响；n. 指令</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 72</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="examination n. 考试；检查；审查"><td class="n">298</td><td class="w">examination</td><td class="m">n. 考试；检查；审查</td></tr>
-<tr data-s="test v. 试验；测试；n. 试验； 测验"><td class="n">299</td><td class="w">test</td><td class="m">v. 试验；测试；n. 试验； 测验</td></tr>
-<tr data-s="quiz n. 小测验；知识竞赛"><td class="n">300</td><td class="w">quiz</td><td class="m">n. 小测验；知识竞赛</td></tr>
-<tr data-s="presentation n. 演出；展示；陈述；报 告"><td class="n">301</td><td class="w">presentation</td><td class="m">n. 演出；展示；陈述；报 告</td></tr>
+<tr data-s="examination n. 考试；检查；审查"><td class="n">298</td><td class="w">examination<div class="ipa">[ɪɡˌzæmɪˈneɪʃ(ə)n]</div></td><td class="m">n. 考试；检查；审查</td></tr>
+<tr data-s="test v. 试验；测试；n. 试验； 测验"><td class="n">299</td><td class="w">test<div class="ipa">[test]</div></td><td class="m">v. 试验；测试；n. 试验； 测验</td></tr>
+<tr data-s="quiz n. 小测验；知识竞赛"><td class="n">300</td><td class="w">quiz<div class="ipa">[kwɪz]</div></td><td class="m">n. 小测验；知识竞赛</td></tr>
+<tr data-s="presentation n. 演出；展示；陈述；报 告"><td class="n">301</td><td class="w">presentation<div class="ipa">[ˌprez(ə)nˈteɪʃ(ə)n]</div></td><td class="m">n. 演出；展示；陈述；报 告</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 73</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="plagiarise v. 抄袭；剽窃"><td class="n">302</td><td class="w">plagiarise</td><td class="m">v. 抄袭；剽窃</td></tr>
-<tr data-s="copy n. 复制品；副本；v. 复 制；拷⻉"><td class="n">303</td><td class="w">copy</td><td class="m">n. 复制品；副本；v. 复 制；拷⻉</td></tr>
-<tr data-s="print v. 打印；印刷；n. 打印； 印刷"><td class="n">304</td><td class="w">print</td><td class="m">v. 打印；印刷；n. 打印； 印刷</td></tr>
+<tr data-s="plagiarise v. 抄袭；剽窃"><td class="n">302</td><td class="w">plagiarise<div class="ipa">[ˈpleɪdʒəraɪz]</div></td><td class="m">v. 抄袭；剽窃</td></tr>
+<tr data-s="copy n. 复制品；副本；v. 复 制；拷⻉"><td class="n">303</td><td class="w">copy<div class="ipa">[ˈkɒpi]</div></td><td class="m">n. 复制品；副本；v. 复 制；拷⻉</td></tr>
+<tr data-s="print v. 打印；印刷；n. 打印； 印刷"><td class="n">304</td><td class="w">print<div class="ipa">[prɪnt]</div></td><td class="m">v. 打印；印刷；n. 打印； 印刷</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 74</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="thesis n. 论点；论文"><td class="n">305</td><td class="w">thesis</td><td class="m">n. 论点；论文</td></tr>
-<tr data-s="essay n. 散文；文章；尝试；企 图；v. 企图；尝试"><td class="n">306</td><td class="w">essay</td><td class="m">n. 散文；文章；尝试；企 图；v. 企图；尝试</td></tr>
-<tr data-s="paper n. 纸；报纸；论文；试 卷；v. 用墙纸贴"><td class="n">307</td><td class="w">paper</td><td class="m">n. 纸；报纸；论文；试 卷；v. 用墙纸贴</td></tr>
-<tr data-s="dissertation n. 专题论文；学位论文"><td class="n">308</td><td class="w">dissertation</td><td class="m">n. 专题论文；学位论文</td></tr>
-<tr data-s="project n. 计划；方案；项目；课题； v. 预计；计划；投射；突出"><td class="n">309</td><td class="w">project</td><td class="m">n. 计划；方案；项目；课题； v. 预计；计划；投射；突出</td></tr>
+<tr data-s="thesis n. 论点；论文"><td class="n">305</td><td class="w">thesis<div class="ipa">[ˈθiːsɪs]</div></td><td class="m">n. 论点；论文</td></tr>
+<tr data-s="essay n. 散文；文章；尝试；企 图；v. 企图；尝试"><td class="n">306</td><td class="w">essay<div class="ipa">[ˈeseɪ]</div></td><td class="m">n. 散文；文章；尝试；企 图；v. 企图；尝试</td></tr>
+<tr data-s="paper n. 纸；报纸；论文；试 卷；v. 用墙纸贴"><td class="n">307</td><td class="w">paper<div class="ipa">[ˈpeɪpə(r)]</div></td><td class="m">n. 纸；报纸；论文；试 卷；v. 用墙纸贴</td></tr>
+<tr data-s="dissertation n. 专题论文；学位论文"><td class="n">308</td><td class="w">dissertation<div class="ipa">[ˌdɪsəˈteɪʃ(ə)n]</div></td><td class="m">n. 专题论文；学位论文</td></tr>
+<tr data-s="project n. 计划；方案；项目；课题； v. 预计；计划；投射；突出"><td class="n">309</td><td class="w">project<div class="ipa">[ˈprɒdʒekt]</div></td><td class="m">n. 计划；方案；项目；课题； v. 预计；计划；投射；突出</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 75</span><span class="gcnt">7 词</span></td></tr>
-<tr data-s="heading n. 标题；v. 前进；朝向； “head”的现在分词"><td class="n">310</td><td class="w">heading</td><td class="m">n. 标题；v. 前进；朝向； “head”的现在分词</td></tr>
-<tr data-s="outset n. 开端；起始"><td class="n">311</td><td class="w">outset</td><td class="m">n. 开端；起始</td></tr>
-<tr data-s="outline n. 轮廓；纲要；v. 描画轮 廓；概述"><td class="n">312</td><td class="w">outline</td><td class="m">n. 轮廓；纲要；v. 描画轮 廓；概述</td></tr>
-<tr data-s="point n. 点；观点；要点；分数； v. 指向；指出；弄尖；瞄准"><td class="n">313</td><td class="w">point</td><td class="m">n. 点；观点；要点；分数； v. 指向；指出；弄尖；瞄准</td></tr>
-<tr data-s="gist n. 要点；大意；主旨"><td class="n">314</td><td class="w">gist</td><td class="m">n. 要点；大意；主旨</td></tr>
-<tr data-s="opinion n. 意⻅；看法；观点"><td class="n">315</td><td class="w">opinion</td><td class="m">n. 意⻅；看法；观点</td></tr>
-<tr data-s="introduce v. 介绍；引进"><td class="n">316</td><td class="w">introduce</td><td class="m">v. 介绍；引进</td></tr>
+<tr data-s="heading n. 标题；v. 前进；朝向； “head”的现在分词"><td class="n">310</td><td class="w">heading<div class="ipa">[ˈhedɪŋ]</div></td><td class="m">n. 标题；v. 前进；朝向； “head”的现在分词</td></tr>
+<tr data-s="outset n. 开端；起始"><td class="n">311</td><td class="w">outset<div class="ipa">[ˈaʊtset]</div></td><td class="m">n. 开端；起始</td></tr>
+<tr data-s="outline n. 轮廓；纲要；v. 描画轮 廓；概述"><td class="n">312</td><td class="w">outline<div class="ipa">[ˈaʊtlaɪn]</div></td><td class="m">n. 轮廓；纲要；v. 描画轮 廓；概述</td></tr>
+<tr data-s="point n. 点；观点；要点；分数； v. 指向；指出；弄尖；瞄准"><td class="n">313</td><td class="w">point<div class="ipa">[pɔɪnt]</div></td><td class="m">n. 点；观点；要点；分数； v. 指向；指出；弄尖；瞄准</td></tr>
+<tr data-s="gist n. 要点；大意；主旨"><td class="n">314</td><td class="w">gist<div class="ipa">[dʒɪst]</div></td><td class="m">n. 要点；大意；主旨</td></tr>
+<tr data-s="opinion n. 意⻅；看法；观点"><td class="n">315</td><td class="w">opinion<div class="ipa">[əˈpɪnjən]</div></td><td class="m">n. 意⻅；看法；观点</td></tr>
+<tr data-s="introduce v. 介绍；引进"><td class="n">316</td><td class="w">introduce<div class="ipa">[ˌɪntrəˈdjuːs]</div></td><td class="m">v. 介绍；引进</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 76</span><span class="gcnt">7 词</span></td></tr>
-<tr data-s="reference n. 提及；涉及；参考；引 用；介绍信"><td class="n">317</td><td class="w">reference</td><td class="m">n. 提及；涉及；参考；引 用；介绍信</td></tr>
-<tr data-s="cite v. 引用；提及,举例,引 证；传讯"><td class="n">318</td><td class="w">cite</td><td class="m">v. 引用；提及,举例,引 证；传讯</td></tr>
-<tr data-s="elicit v. 引出；诱出；探出"><td class="n">319</td><td class="w">elicit</td><td class="m">v. 引出；诱出；探出</td></tr>
-<tr data-s="quote v. 引用；报价；n. 引用； 引文；报价"><td class="n">320</td><td class="w">quote</td><td class="m">v. 引用；报价；n. 引用； 引文；报价</td></tr>
-<tr data-s="extract n. 提取物；摘录；精华； 节录；v. 拔出；提取；摘录"><td class="n">321</td><td class="w">extract</td><td class="m">n. 提取物；摘录；精华； 节录；v. 拔出；提取；摘录</td></tr>
-<tr data-s="abstract adj. 抽象的；非具体的；深奥的； v. 提取；抽取；作...的摘要；n. 摘 要；概要；抽象派艺术作品"><td class="n">322</td><td class="w">abstract</td><td class="m">adj. 抽象的；非具体的；深奥的； v. 提取；抽取；作...的摘要；n. 摘 要；概要；抽象派艺术作品</td></tr>
-<tr data-s="summary n. 总结；摘要"><td class="n">323</td><td class="w">summary</td><td class="m">n. 总结；摘要</td></tr>
+<tr data-s="reference n. 提及；涉及；参考；引 用；介绍信"><td class="n">317</td><td class="w">reference<div class="ipa">[ˈrefrəns]</div></td><td class="m">n. 提及；涉及；参考；引 用；介绍信</td></tr>
+<tr data-s="cite v. 引用；提及,举例,引 证；传讯"><td class="n">318</td><td class="w">cite<div class="ipa">[saɪt]</div></td><td class="m">v. 引用；提及,举例,引 证；传讯</td></tr>
+<tr data-s="elicit v. 引出；诱出；探出"><td class="n">319</td><td class="w">elicit<div class="ipa">[ɪˈlɪsɪt]</div></td><td class="m">v. 引出；诱出；探出</td></tr>
+<tr data-s="quote v. 引用；报价；n. 引用； 引文；报价"><td class="n">320</td><td class="w">quote<div class="ipa">[kwəʊt]</div></td><td class="m">v. 引用；报价；n. 引用； 引文；报价</td></tr>
+<tr data-s="extract n. 提取物；摘录；精华； 节录；v. 拔出；提取；摘录"><td class="n">321</td><td class="w">extract<div class="ipa">[ˈekstrækt]</div></td><td class="m">n. 提取物；摘录；精华； 节录；v. 拔出；提取；摘录</td></tr>
+<tr data-s="abstract adj. 抽象的；非具体的；深奥的； v. 提取；抽取；作...的摘要；n. 摘 要；概要；抽象派艺术作品"><td class="n">322</td><td class="w">abstract<div class="ipa">[ˈæbstrækt]</div></td><td class="m">adj. 抽象的；非具体的；深奥的； v. 提取；抽取；作...的摘要；n. 摘 要；概要；抽象派艺术作品</td></tr>
+<tr data-s="summary n. 总结；摘要"><td class="n">323</td><td class="w">summary<div class="ipa">[ˈsʌməri]</div></td><td class="m">n. 总结；摘要</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 77</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="assume v. 假定；设想；呈现；承 担"><td class="n">324</td><td class="w">assume</td><td class="m">v. 假定；设想；呈现；承 担</td></tr>
-<tr data-s="presume v. 假设；假定；设想；冒 昧"><td class="n">325</td><td class="w">presume</td><td class="m">v. 假设；假定；设想；冒 昧</td></tr>
-<tr data-s="suppose v. 认为；假设；猜想"><td class="n">326</td><td class="w">suppose</td><td class="m">v. 认为；假设；猜想</td></tr>
+<tr data-s="assume v. 假定；设想；呈现；承 担"><td class="n">324</td><td class="w">assume<div class="ipa">[əˈsjuːm]</div></td><td class="m">v. 假定；设想；呈现；承 担</td></tr>
+<tr data-s="presume v. 假设；假定；设想；冒 昧"><td class="n">325</td><td class="w">presume<div class="ipa">[prɪˈzjuːm]</div></td><td class="m">v. 假设；假定；设想；冒 昧</td></tr>
+<tr data-s="suppose v. 认为；假设；猜想"><td class="n">326</td><td class="w">suppose<div class="ipa">[səˈpəʊz]</div></td><td class="m">v. 认为；假设；猜想</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 78</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="hypothesis n. 假设；假说"><td class="n">327</td><td class="w">hypothesis</td><td class="m">n. 假设；假说</td></tr>
-<tr data-s="postulate v. 假定；要求；n. 假定； 假设"><td class="n">328</td><td class="w">postulate</td><td class="m">v. 假定；要求；n. 假定； 假设</td></tr>
-<tr data-s="speculate v. 推测；思索；投机"><td class="n">329</td><td class="w">speculate</td><td class="m">v. 推测；思索；投机</td></tr>
-<tr data-s="predict v. 预言；预测"><td class="n">330</td><td class="w">predict</td><td class="m">v. 预言；预测</td></tr>
+<tr data-s="hypothesis n. 假设；假说"><td class="n">327</td><td class="w">hypothesis<div class="ipa">[haɪˈpɒθəsɪs]</div></td><td class="m">n. 假设；假说</td></tr>
+<tr data-s="postulate v. 假定；要求；n. 假定； 假设"><td class="n">328</td><td class="w">postulate<div class="ipa">[ˈpɒstʃəleɪt]</div></td><td class="m">v. 假定；要求；n. 假定； 假设</td></tr>
+<tr data-s="speculate v. 推测；思索；投机"><td class="n">329</td><td class="w">speculate<div class="ipa">[ˈspekjuleɪt]</div></td><td class="m">v. 推测；思索；投机</td></tr>
+<tr data-s="predict v. 预言；预测"><td class="n">330</td><td class="w">predict<div class="ipa">[prɪˈdɪkt]</div></td><td class="m">v. 预言；预测</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 79</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="perceive v. 察觉；理解；发觉"><td class="n">331</td><td class="w">perceive</td><td class="m">v. 察觉；理解；发觉</td></tr>
-<tr data-s="detect v. 察觉；查出；测出"><td class="n">332</td><td class="w">detect</td><td class="m">v. 察觉；查出；测出</td></tr>
-<tr data-s="discern v. 辨明；识别；洞悉"><td class="n">333</td><td class="w">discern</td><td class="m">v. 辨明；识别；洞悉</td></tr>
-<tr data-s="recognise v. 认出；意识到；承认"><td class="n">334</td><td class="w">recognise</td><td class="m">v. 认出；意识到；承认</td></tr>
-<tr data-s="conscious adj. 有意识的；有知觉 的；刻意的"><td class="n">335</td><td class="w">conscious</td><td class="m">adj. 有意识的；有知觉 的；刻意的</td></tr>
+<tr data-s="perceive v. 察觉；理解；发觉"><td class="n">331</td><td class="w">perceive<div class="ipa">[pəˈsiːv]</div></td><td class="m">v. 察觉；理解；发觉</td></tr>
+<tr data-s="detect v. 察觉；查出；测出"><td class="n">332</td><td class="w">detect<div class="ipa">[dɪˈtekt]</div></td><td class="m">v. 察觉；查出；测出</td></tr>
+<tr data-s="discern v. 辨明；识别；洞悉"><td class="n">333</td><td class="w">discern<div class="ipa">[dɪˈsɜːn]</div></td><td class="m">v. 辨明；识别；洞悉</td></tr>
+<tr data-s="recognise v. 认出；意识到；承认"><td class="n">334</td><td class="w">recognise<div class="ipa">[ˈrekəɡnaɪz]</div></td><td class="m">v. 认出；意识到；承认</td></tr>
+<tr data-s="conscious adj. 有意识的；有知觉 的；刻意的"><td class="n">335</td><td class="w">conscious<div class="ipa">[ˈkɒnʃəs]</div></td><td class="m">adj. 有意识的；有知觉 的；刻意的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 80</span><span class="gcnt">7 词</span></td></tr>
-<tr data-s="reckon v. 计算；估计；认为；考 虑到"><td class="n">336</td><td class="w">reckon</td><td class="m">v. 计算；估计；认为；考 虑到</td></tr>
-<tr data-s="deem v. 认为；觉得"><td class="n">337</td><td class="w">deem</td><td class="m">v. 认为；觉得</td></tr>
-<tr data-s="imply v. 暗示；意味"><td class="n">338</td><td class="w">imply</td><td class="m">v. 暗示；意味</td></tr>
-<tr data-s="deliberate adj. 深思熟虑的；故意的； v. 深思熟虑；仔细考虑"><td class="n">339</td><td class="w">deliberate</td><td class="m">adj. 深思熟虑的；故意的； v. 深思熟虑；仔细考虑</td></tr>
-<tr data-s="represent v. 代表；表现；体现；相 当于"><td class="n">340</td><td class="w">represent</td><td class="m">v. 代表；表现；体现；相 当于</td></tr>
-<tr data-s="insist v. 坚持；坚决要求"><td class="n">341</td><td class="w">insist</td><td class="m">v. 坚持；坚决要求</td></tr>
-<tr data-s="persist v. 坚持；持续"><td class="n">342</td><td class="w">persist</td><td class="m">v. 坚持；持续</td></tr>
+<tr data-s="reckon v. 计算；估计；认为；考 虑到"><td class="n">336</td><td class="w">reckon<div class="ipa">[ˈrekən]</div></td><td class="m">v. 计算；估计；认为；考 虑到</td></tr>
+<tr data-s="deem v. 认为；觉得"><td class="n">337</td><td class="w">deem<div class="ipa">[diːm]</div></td><td class="m">v. 认为；觉得</td></tr>
+<tr data-s="imply v. 暗示；意味"><td class="n">338</td><td class="w">imply<div class="ipa">[ɪmˈplaɪ]</div></td><td class="m">v. 暗示；意味</td></tr>
+<tr data-s="deliberate adj. 深思熟虑的；故意的； v. 深思熟虑；仔细考虑"><td class="n">339</td><td class="w">deliberate<div class="ipa">[dɪˈlɪbərət]</div></td><td class="m">adj. 深思熟虑的；故意的； v. 深思熟虑；仔细考虑</td></tr>
+<tr data-s="represent v. 代表；表现；体现；相 当于"><td class="n">340</td><td class="w">represent<div class="ipa">[ˌreprɪˈzent]</div></td><td class="m">v. 代表；表现；体现；相 当于</td></tr>
+<tr data-s="insist v. 坚持；坚决要求"><td class="n">341</td><td class="w">insist<div class="ipa">[ɪnˈsɪst]</div></td><td class="m">v. 坚持；坚决要求</td></tr>
+<tr data-s="persist v. 坚持；持续"><td class="n">342</td><td class="w">persist<div class="ipa">[pəˈsɪst]</div></td><td class="m">v. 坚持；持续</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 81</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="understand v. 理解"><td class="n">343</td><td class="w">understand</td><td class="m">v. 理解</td></tr>
-<tr data-s="comprehend v. 理解；领会；包含"><td class="n">344</td><td class="w">comprehend</td><td class="m">v. 理解；领会；包含</td></tr>
-<tr data-s="analyse v. 分析"><td class="n">345</td><td class="w">analyse</td><td class="m">v. 分析</td></tr>
+<tr data-s="understand v. 理解"><td class="n">343</td><td class="w">understand<div class="ipa">[ˌʌndəˈstænd]</div></td><td class="m">v. 理解</td></tr>
+<tr data-s="comprehend v. 理解；领会；包含"><td class="n">344</td><td class="w">comprehend<div class="ipa">[ˌkɒmprɪˈhend]</div></td><td class="m">v. 理解；领会；包含</td></tr>
+<tr data-s="analyse v. 分析"><td class="n">345</td><td class="w">analyse<div class="ipa">[ˈænəlaɪz]</div></td><td class="m">v. 分析</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 82</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="diagnose v. 诊断"><td class="n">346</td><td class="w">diagnose</td><td class="m">v. 诊断</td></tr>
-<tr data-s="infer v. 推断；推知"><td class="n">347</td><td class="w">infer</td><td class="m">v. 推断；推知</td></tr>
-<tr data-s="deduce v. 推断；演绎；推论"><td class="n">348</td><td class="w">deduce</td><td class="m">v. 推断；演绎；推论</td></tr>
-<tr data-s="conclude v. 推断出；得出结论；结 束"><td class="n">349</td><td class="w">conclude</td><td class="m">v. 推断出；得出结论；结 束</td></tr>
+<tr data-s="diagnose v. 诊断"><td class="n">346</td><td class="w">diagnose<div class="ipa">[ˈdaɪəɡnəʊz]</div></td><td class="m">v. 诊断</td></tr>
+<tr data-s="infer v. 推断；推知"><td class="n">347</td><td class="w">infer<div class="ipa">[ɪnˈfɜː(r)]</div></td><td class="m">v. 推断；推知</td></tr>
+<tr data-s="deduce v. 推断；演绎；推论"><td class="n">348</td><td class="w">deduce<div class="ipa">[dɪˈdjuːs]</div></td><td class="m">v. 推断；演绎；推论</td></tr>
+<tr data-s="conclude v. 推断出；得出结论；结 束"><td class="n">349</td><td class="w">conclude<div class="ipa">[kənˈkluːd]</div></td><td class="m">v. 推断出；得出结论；结 束</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 83</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="analogy n. 类比；类推；相似"><td class="n">350</td><td class="w">analogy</td><td class="m">n. 类比；类推；相似</td></tr>
-<tr data-s="compare v. 比较；对比；比喻"><td class="n">351</td><td class="w">compare</td><td class="m">v. 比较；对比；比喻</td></tr>
-<tr data-s="contrast n. 对照；反差；对立；v. 对比；和...形成对照"><td class="n">352</td><td class="w">contrast</td><td class="m">n. 对照；反差；对立；v. 对比；和...形成对照</td></tr>
+<tr data-s="analogy n. 类比；类推；相似"><td class="n">350</td><td class="w">analogy<div class="ipa">[əˈnælədʒi]</div></td><td class="m">n. 类比；类推；相似</td></tr>
+<tr data-s="compare v. 比较；对比；比喻"><td class="n">351</td><td class="w">compare<div class="ipa">[kəmˈpeə(r)]</div></td><td class="m">v. 比较；对比；比喻</td></tr>
+<tr data-s="contrast n. 对照；反差；对立；v. 对比；和...形成对照"><td class="n">352</td><td class="w">contrast<div class="ipa">[ˈkɒntrɑːst]</div></td><td class="m">n. 对照；反差；对立；v. 对比；和...形成对照</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 84</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="overlap v. 交叠；使部分重叠；n. 重叠部分"><td class="n">353</td><td class="w">overlap</td><td class="m">v. 交叠；使部分重叠；n. 重叠部分</td></tr>
-<tr data-s="contradiction n. 矛盾；不一致；反驳"><td class="n">354</td><td class="w">contradiction</td><td class="m">n. 矛盾；不一致；反驳</td></tr>
-<tr data-s="disagree v. 不同意；不一致；不适 合；不符"><td class="n">355</td><td class="w">disagree</td><td class="m">v. 不同意；不一致；不适 合；不符</td></tr>
-<tr data-s="differ v. 与...不同；与...相异"><td class="n">356</td><td class="w">differ</td><td class="m">v. 与...不同；与...相异</td></tr>
+<tr data-s="overlap v. 交叠；使部分重叠；n. 重叠部分"><td class="n">353</td><td class="w">overlap<div class="ipa">[ˌəʊvəˈlæp]</div></td><td class="m">v. 交叠；使部分重叠；n. 重叠部分</td></tr>
+<tr data-s="contradiction n. 矛盾；不一致；反驳"><td class="n">354</td><td class="w">contradiction<div class="ipa">[ˌkɒntrəˈdɪkʃ(ə)n]</div></td><td class="m">n. 矛盾；不一致；反驳</td></tr>
+<tr data-s="disagree v. 不同意；不一致；不适 合；不符"><td class="n">355</td><td class="w">disagree<div class="ipa">[ˌdɪsəˈɡriː]</div></td><td class="m">v. 不同意；不一致；不适 合；不符</td></tr>
+<tr data-s="differ v. 与...不同；与...相异"><td class="n">356</td><td class="w">differ<div class="ipa">[ˈdɪfə(r)]</div></td><td class="m">v. 与...不同；与...相异</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 85</span><span class="gcnt">12 词</span></td></tr>
-<tr data-s="diverse adj. 多种多样的；不同的"><td class="n">357</td><td class="w">diverse</td><td class="m">adj. 多种多样的；不同的</td></tr>
-<tr data-s="nuance n. 细微差别"><td class="n">358</td><td class="w">nuance</td><td class="m">n. 细微差别</td></tr>
-<tr data-s="inductive adj. 诱导的；归纳的；感 应的"><td class="n">359</td><td class="w">inductive</td><td class="m">adj. 诱导的；归纳的；感 应的</td></tr>
-<tr data-s="detail n. 细节；详情；详细；v. 详述；细说；派遣"><td class="n">360</td><td class="w">detail</td><td class="m">n. 细节；详情；详细；v. 详述；细说；派遣</td></tr>
-<tr data-s="thorough adj. 彻底的；完全的；详 尽的"><td class="n">361</td><td class="w">thorough</td><td class="m">adj. 彻底的；完全的；详 尽的</td></tr>
-<tr data-s="example n. 例子；实例；榜样"><td class="n">362</td><td class="w">example</td><td class="m">n. 例子；实例；榜样</td></tr>
-<tr data-s="instance n. 例子；场合；情况"><td class="n">363</td><td class="w">instance</td><td class="m">n. 例子；场合；情况</td></tr>
-<tr data-s="confirm v. 证实；确认；批准"><td class="n">364</td><td class="w">confirm</td><td class="m">v. 证实；确认；批准</td></tr>
-<tr data-s="demonstrate v. 演示；展示；证明；示 威"><td class="n">365</td><td class="w">demonstrate</td><td class="m">v. 演示；展示；证明；示 威</td></tr>
-<tr data-s="illustrate v. (举例)说明；给(书 籍、杂志等)加插图"><td class="n">366</td><td class="w">illustrate</td><td class="m">v. (举例)说明；给(书 籍、杂志等)加插图</td></tr>
-<tr data-s="manifest v. 表明；显现；使人注意到；adj. 明显的；n. 载货单；旅客名单"><td class="n">367</td><td class="w">manifest</td><td class="m">v. 表明；显现；使人注意到；adj. 明显的；n. 载货单；旅客名单</td></tr>
-<tr data-s="prove v. 证明；证实"><td class="n">368</td><td class="w">prove</td><td class="m">v. 证明；证实</td></tr>
+<tr data-s="diverse adj. 多种多样的；不同的"><td class="n">357</td><td class="w">diverse<div class="ipa">[daɪˈvɜːs]</div></td><td class="m">adj. 多种多样的；不同的</td></tr>
+<tr data-s="nuance n. 细微差别"><td class="n">358</td><td class="w">nuance<div class="ipa">[ˈnjuːɑːns]</div></td><td class="m">n. 细微差别</td></tr>
+<tr data-s="inductive adj. 诱导的；归纳的；感 应的"><td class="n">359</td><td class="w">inductive<div class="ipa">[ɪnˈdʌktɪv]</div></td><td class="m">adj. 诱导的；归纳的；感 应的</td></tr>
+<tr data-s="detail n. 细节；详情；详细；v. 详述；细说；派遣"><td class="n">360</td><td class="w">detail<div class="ipa">[ˈdiːteɪl]</div></td><td class="m">n. 细节；详情；详细；v. 详述；细说；派遣</td></tr>
+<tr data-s="thorough adj. 彻底的；完全的；详 尽的"><td class="n">361</td><td class="w">thorough<div class="ipa">[ˈθʌrə]</div></td><td class="m">adj. 彻底的；完全的；详 尽的</td></tr>
+<tr data-s="example n. 例子；实例；榜样"><td class="n">362</td><td class="w">example<div class="ipa">[ɪɡˈzɑːmp(ə)l]</div></td><td class="m">n. 例子；实例；榜样</td></tr>
+<tr data-s="instance n. 例子；场合；情况"><td class="n">363</td><td class="w">instance<div class="ipa">[ˈɪnstəns]</div></td><td class="m">n. 例子；场合；情况</td></tr>
+<tr data-s="confirm v. 证实；确认；批准"><td class="n">364</td><td class="w">confirm<div class="ipa">[kənˈfɜːm]</div></td><td class="m">v. 证实；确认；批准</td></tr>
+<tr data-s="demonstrate v. 演示；展示；证明；示 威"><td class="n">365</td><td class="w">demonstrate<div class="ipa">[ˈdemənstreɪt]</div></td><td class="m">v. 演示；展示；证明；示 威</td></tr>
+<tr data-s="illustrate v. (举例)说明；给(书 籍、杂志等)加插图"><td class="n">366</td><td class="w">illustrate<div class="ipa">[ˈɪləstreɪt]</div></td><td class="m">v. (举例)说明；给(书 籍、杂志等)加插图</td></tr>
+<tr data-s="manifest v. 表明；显现；使人注意到；adj. 明显的；n. 载货单；旅客名单"><td class="n">367</td><td class="w">manifest<div class="ipa">[ˈmænɪfest]</div></td><td class="m">v. 表明；显现；使人注意到；adj. 明显的；n. 载货单；旅客名单</td></tr>
+<tr data-s="prove v. 证明；证实"><td class="n">368</td><td class="w">prove<div class="ipa">[pruːv]</div></td><td class="m">v. 证明；证实</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 86</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="determine v. 决心；决定；测定；确 定"><td class="n">369</td><td class="w">determine</td><td class="m">v. 决心；决定；测定；确 定</td></tr>
-<tr data-s="decide v. 决定"><td class="n">370</td><td class="w">decide</td><td class="m">v. 决定</td></tr>
-<tr data-s="resolve v. 决心要；解决；(使) 分解；n. 决心"><td class="n">371</td><td class="w">resolve</td><td class="m">v. 决心要；解决；(使) 分解；n. 决心</td></tr>
+<tr data-s="determine v. 决心；决定；测定；确 定"><td class="n">369</td><td class="w">determine<div class="ipa">[dɪˈtɜːmɪn]</div></td><td class="m">v. 决心；决定；测定；确 定</td></tr>
+<tr data-s="decide v. 决定"><td class="n">370</td><td class="w">decide<div class="ipa">[dɪˈsaɪd]</div></td><td class="m">v. 决定</td></tr>
+<tr data-s="resolve v. 决心要；解决；(使) 分解；n. 决心"><td class="n">371</td><td class="w">resolve<div class="ipa">[rɪˈzɒlv]</div></td><td class="m">v. 决心要；解决；(使) 分解；n. 决心</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 87</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="survey v. 调查；勘测；n. 调查； 勘测"><td class="n">372</td><td class="w">survey</td><td class="m">v. 调查；勘测；n. 调查； 勘测</td></tr>
-<tr data-s="research n. 研究；探索；调查；v. 研究；调查；探讨"><td class="n">373</td><td class="w">research</td><td class="m">n. 研究；探索；调查；v. 研究；调查；探讨</td></tr>
-<tr data-s="observe v. 观察；注意到；遵守； 评论；庆祝"><td class="n">374</td><td class="w">observe</td><td class="m">v. 观察；注意到；遵守； 评论；庆祝</td></tr>
+<tr data-s="survey v. 调查；勘测；n. 调查； 勘测"><td class="n">372</td><td class="w">survey<div class="ipa">[ˈsɜːveɪ]</div></td><td class="m">v. 调查；勘测；n. 调查； 勘测</td></tr>
+<tr data-s="research n. 研究；探索；调查；v. 研究；调查；探讨"><td class="n">373</td><td class="w">research<div class="ipa">[rɪˈsɜːtʃ]</div></td><td class="m">n. 研究；探索；调查；v. 研究；调查；探讨</td></tr>
+<tr data-s="observe v. 观察；注意到；遵守； 评论；庆祝"><td class="n">374</td><td class="w">observe<div class="ipa">[əbˈzɜːv]</div></td><td class="m">v. 观察；注意到；遵守； 评论；庆祝</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 88</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="inquire v. 询问；调查"><td class="n">375</td><td class="w">inquire</td><td class="m">v. 询问；调查</td></tr>
-<tr data-s="query n. 询问；疑问；问号；v. 询问；怀疑"><td class="n">376</td><td class="w">query</td><td class="m">n. 询问；疑问；问号；v. 询问；怀疑</td></tr>
-<tr data-s="questionnaire n. 调查问卷；调查表"><td class="n">377</td><td class="w">questionnaire</td><td class="m">n. 调查问卷；调查表</td></tr>
+<tr data-s="inquire v. 询问；调查"><td class="n">375</td><td class="w">inquire<div class="ipa">[ɪnˈkwaɪə(r)]</div></td><td class="m">v. 询问；调查</td></tr>
+<tr data-s="query n. 询问；疑问；问号；v. 询问；怀疑"><td class="n">376</td><td class="w">query<div class="ipa">[ˈkwɪəri]</div></td><td class="m">n. 询问；疑问；问号；v. 询问；怀疑</td></tr>
+<tr data-s="questionnaire n. 调查问卷；调查表"><td class="n">377</td><td class="w">questionnaire<div class="ipa">[ˌkwestʃəˈneə(r)]</div></td><td class="m">n. 调查问卷；调查表</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 89</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="achieve v. 完成；实现；达到；获 得"><td class="n">378</td><td class="w">achieve</td><td class="m">v. 完成；实现；达到；获 得</td></tr>
-<tr data-s="accomplish v. 完成；实现"><td class="n">379</td><td class="w">accomplish</td><td class="m">v. 完成；实现</td></tr>
-<tr data-s="attain v. 达到；获得"><td class="n">380</td><td class="w">attain</td><td class="m">v. 达到；获得</td></tr>
-<tr data-s="credit n. 赞扬；荣誉；赊账；信用；贷 款；学分；v. 相信；给银行账户上 存钱"><td class="n">381</td><td class="w">credit</td><td class="m">n. 赞扬；荣誉；赊账；信用；贷 款；学分；v. 相信；给银行账户上 存钱</td></tr>
+<tr data-s="achieve v. 完成；实现；达到；获 得"><td class="n">378</td><td class="w">achieve<div class="ipa">[əˈtʃiːv]</div></td><td class="m">v. 完成；实现；达到；获 得</td></tr>
+<tr data-s="accomplish v. 完成；实现"><td class="n">379</td><td class="w">accomplish<div class="ipa">[əˈkʌmplɪʃ]</div></td><td class="m">v. 完成；实现</td></tr>
+<tr data-s="attain v. 达到；获得"><td class="n">380</td><td class="w">attain<div class="ipa">[əˈteɪn]</div></td><td class="m">v. 达到；获得</td></tr>
+<tr data-s="credit n. 赞扬；荣誉；赊账；信用；贷 款；学分；v. 相信；给银行账户上 存钱"><td class="n">381</td><td class="w">credit<div class="ipa">[ˈkredɪt]</div></td><td class="m">n. 赞扬；荣誉；赊账；信用；贷 款；学分；v. 相信；给银行账户上 存钱</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 90</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="score n. 得分；分数；二十；总 谱；乐谱；v. 得分；记分"><td class="n">382</td><td class="w">score</td><td class="m">n. 得分；分数；二十；总 谱；乐谱；v. 得分；记分</td></tr>
-<tr data-s="mark n. 记号；痕迹；分数；v. 做 标记；(使)留痕迹；评分"><td class="n">383</td><td class="w">mark</td><td class="m">n. 记号；痕迹；分数；v. 做 标记；(使)留痕迹；评分</td></tr>
-<tr data-s="grade n. 等级；年级；级别；v. 分等级；给...评分"><td class="n">384</td><td class="w">grade</td><td class="m">n. 等级；年级；级别；v. 分等级；给...评分</td></tr>
+<tr data-s="score n. 得分；分数；二十；总 谱；乐谱；v. 得分；记分"><td class="n">382</td><td class="w">score<div class="ipa">[skɔː(r)]</div></td><td class="m">n. 得分；分数；二十；总 谱；乐谱；v. 得分；记分</td></tr>
+<tr data-s="mark n. 记号；痕迹；分数；v. 做 标记；(使)留痕迹；评分"><td class="n">383</td><td class="w">mark<div class="ipa">[mɑːk]</div></td><td class="m">n. 记号；痕迹；分数；v. 做 标记；(使)留痕迹；评分</td></tr>
+<tr data-s="grade n. 等级；年级；级别；v. 分等级；给...评分"><td class="n">384</td><td class="w">grade<div class="ipa">[ɡreɪd]</div></td><td class="m">n. 等级；年级；级别；v. 分等级；给...评分</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 91</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="rank n. 列；排；行列；阶层；等级；军 衔；v. 排列；分类；分等级；adj. 繁茂的；恶臭的；讨厌的；极端的"><td class="n">385</td><td class="w">rank</td><td class="m">n. 列；排；行列；阶层；等级；军 衔；v. 排列；分类；分等级；adj. 繁茂的；恶臭的；讨厌的；极端的</td></tr>
-<tr data-s="row n. 排；划船；吵闹；v. 划 船；吵架"><td class="n">386</td><td class="w">row</td><td class="m">n. 排；划船；吵闹；v. 划 船；吵架</td></tr>
-<tr data-s="queue n. 行列；⻓队；v. 排队"><td class="n">387</td><td class="w">queue</td><td class="m">n. 行列；⻓队；v. 排队</td></tr>
+<tr data-s="rank n. 列；排；行列；阶层；等级；军 衔；v. 排列；分类；分等级；adj. 繁茂的；恶臭的；讨厌的；极端的"><td class="n">385</td><td class="w">rank<div class="ipa">[ræŋk]</div></td><td class="m">n. 列；排；行列；阶层；等级；军 衔；v. 排列；分类；分等级；adj. 繁茂的；恶臭的；讨厌的；极端的</td></tr>
+<tr data-s="row n. 排；划船；吵闹；v. 划 船；吵架"><td class="n">386</td><td class="w">row<div class="ipa">[rəʊ]</div></td><td class="m">n. 排；划船；吵闹；v. 划 船；吵架</td></tr>
+<tr data-s="queue n. 行列；⻓队；v. 排队"><td class="n">387</td><td class="w">queue<div class="ipa">[kjuː]</div></td><td class="m">n. 行列；⻓队；v. 排队</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 92</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="grant v. 允许；承认；授予；n. 授予物；补助金"><td class="n">388</td><td class="w">grant</td><td class="m">v. 允许；承认；授予；n. 授予物；补助金</td></tr>
-<tr data-s="praise v. 赞美；赞扬；n. 赞美； 赞扬"><td class="n">389</td><td class="w">praise</td><td class="m">v. 赞美；赞扬；n. 赞美； 赞扬</td></tr>
-<tr data-s="appreciate v. 欣赏；理解；感激；增 值"><td class="n">390</td><td class="w">appreciate</td><td class="m">v. 欣赏；理解；感激；增 值</td></tr>
+<tr data-s="grant v. 允许；承认；授予；n. 授予物；补助金"><td class="n">388</td><td class="w">grant<div class="ipa">[ɡrɑːnt]</div></td><td class="m">v. 允许；承认；授予；n. 授予物；补助金</td></tr>
+<tr data-s="praise v. 赞美；赞扬；n. 赞美； 赞扬"><td class="n">389</td><td class="w">praise<div class="ipa">[preɪz]</div></td><td class="m">v. 赞美；赞扬；n. 赞美； 赞扬</td></tr>
+<tr data-s="appreciate v. 欣赏；理解；感激；增 值"><td class="n">390</td><td class="w">appreciate<div class="ipa">[əˈpriːʃieɪt]</div></td><td class="m">v. 欣赏；理解；感激；增 值</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 93</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="feedback n. 反馈"><td class="n">391</td><td class="w">feedback</td><td class="m">n. 反馈</td></tr>
-<tr data-s="underestimate v. 低估；对...估计不足； n. 低估；轻视"><td class="n">392</td><td class="w">underestimate</td><td class="m">v. 低估；对...估计不足； n. 低估；轻视</td></tr>
-<tr data-s="overestimate v. 过高估计；n. 过高的估 计"><td class="n">393</td><td class="w">overestimate</td><td class="m">v. 过高估计；n. 过高的估 计</td></tr>
+<tr data-s="feedback n. 反馈"><td class="n">391</td><td class="w">feedback<div class="ipa">[ˈfiːdbæk]</div></td><td class="m">n. 反馈</td></tr>
+<tr data-s="underestimate v. 低估；对...估计不足； n. 低估；轻视"><td class="n">392</td><td class="w">underestimate<div class="ipa">[ˌʌndərˈestɪmeɪt]</div></td><td class="m">v. 低估；对...估计不足； n. 低估；轻视</td></tr>
+<tr data-s="overestimate v. 过高估计；n. 过高的估 计"><td class="n">393</td><td class="w">overestimate<div class="ipa">[ˌəʊvərˈestɪmeɪt]</div></td><td class="m">v. 过高估计；n. 过高的估 计</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 94</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="apply v. 申请；应用；涂,敷"><td class="n">394</td><td class="w">apply</td><td class="m">v. 申请；应用；涂,敷</td></tr>
-<tr data-s="fellowship n. 伙伴关系；情谊；团 体；联谊会；奖学金"><td class="n">395</td><td class="w">fellowship</td><td class="m">n. 伙伴关系；情谊；团 体；联谊会；奖学金</td></tr>
-<tr data-s="scholarship n. 奖学金；学问；学识"><td class="n">396</td><td class="w">scholarship</td><td class="m">n. 奖学金；学问；学识</td></tr>
-<tr data-s="reward n. 奖励；报酬；v. 奖励； 回报"><td class="n">397</td><td class="w">reward</td><td class="m">n. 奖励；报酬；v. 奖励； 回报</td></tr>
+<tr data-s="apply v. 申请；应用；涂,敷"><td class="n">394</td><td class="w">apply<div class="ipa">[əˈplaɪ]</div></td><td class="m">v. 申请；应用；涂,敷</td></tr>
+<tr data-s="fellowship n. 伙伴关系；情谊；团 体；联谊会；奖学金"><td class="n">395</td><td class="w">fellowship<div class="ipa">[ˈfeləʊʃɪp]</div></td><td class="m">n. 伙伴关系；情谊；团 体；联谊会；奖学金</td></tr>
+<tr data-s="scholarship n. 奖学金；学问；学识"><td class="n">396</td><td class="w">scholarship<div class="ipa">[ˈskɒləʃɪp]</div></td><td class="m">n. 奖学金；学问；学识</td></tr>
+<tr data-s="reward n. 奖励；报酬；v. 奖励； 回报"><td class="n">397</td><td class="w">reward<div class="ipa">[rɪˈwɔːd]</div></td><td class="m">n. 奖励；报酬；v. 奖励； 回报</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 95</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="award v. 颁奖；授予；裁定；n. 奖品；裁定"><td class="n">398</td><td class="w">award</td><td class="m">v. 颁奖；授予；裁定；n. 奖品；裁定</td></tr>
-<tr data-s="prize n. 奖赏；奖品；奖金；战 利品；v. 珍视；珍藏；估价"><td class="n">399</td><td class="w">prize</td><td class="m">n. 奖赏；奖品；奖金；战 利品；v. 珍视；珍藏；估价</td></tr>
-<tr data-s="fee n. 费用"><td class="n">400</td><td class="w">fee</td><td class="m">n. 费用</td></tr>
+<tr data-s="award v. 颁奖；授予；裁定；n. 奖品；裁定"><td class="n">398</td><td class="w">award<div class="ipa">[əˈwɔːd]</div></td><td class="m">v. 颁奖；授予；裁定；n. 奖品；裁定</td></tr>
+<tr data-s="prize n. 奖赏；奖品；奖金；战 利品；v. 珍视；珍藏；估价"><td class="n">399</td><td class="w">prize<div class="ipa">[praɪz]</div></td><td class="m">n. 奖赏；奖品；奖金；战 利品；v. 珍视；珍藏；估价</td></tr>
+<tr data-s="fee n. 费用"><td class="n">400</td><td class="w">fee<div class="ipa">[fiː]</div></td><td class="m">n. 费用</td></tr>
 </tbody>
 </table><div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit04.html">← Unit 04</a><a href="unit05-card.html">切到例句卡片版</a><a href="unit06.html">Unit 06 →</a></div><footer><div class="wrap" style="padding:0">
  摘自《雅思词汇真经》（刘洪波 编著）第 5 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
@@ -729,27 +734,31 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  var KEY='vj-hide';
  var body=document.body;
  var kind=body.dataset.kind;
- var s={m:false,z:false};
- try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;}}catch(e){}
+ var s={m:false,z:false,i:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z; if(typeof o.i==='boolean')s.i=o.i;}}catch(e){}
  function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
  function paint(){
   body.classList.toggle('hide-m',s.m);
   body.classList.toggle('hide-z',s.z);
-  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all');
+  body.classList.toggle('hide-i',s.i);
+  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all'), ci=document.getElementById('i');
   if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
   if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
+  if(ci){ci.checked=s.i; ci.closest('.sw').classList.toggle('on',s.i);}
   if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
  }
  var cm=document.getElementById('m');
  if(cm) cm.addEventListener('change',function(){s.m=cm.checked; save(); paint();});
  var cz=document.getElementById('z');
  if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
+ var ci=document.getElementById('i');
+ if(ci) ci.addEventListener('change',function(){s.i=ci.checked; save(); paint();});
  var ca=document.getElementById('all');
  if(ca) ca.addEventListener('change',function(){
    s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
  });
  var rs=document.getElementById('reset');
- if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; save(); paint();});
+ if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; s.i=false; save(); paint();});
  var q=document.getElementById('q');
  var items=[].slice.call(document.querySelectorAll('[data-s]'));
  var cnt=document.getElementById('cnt');

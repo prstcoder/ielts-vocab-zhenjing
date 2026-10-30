@@ -56,6 +56,9 @@ td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-
 td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
  letter-spacing:.2px;word-break:break-word}
 td.m{color:var(--ink)}
+.ipa{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:12px;font-weight:400;
+ color:var(--ink2);letter-spacing:0;margin-top:3px;word-break:break-word}
+.card .w .ipa{font-size:13px;margin-left:8px}
 tr.hit td.w,tr.hit td.m{background:var(--mark)}
 
 .cards{display:grid;gap:12px}
@@ -86,6 +89,7 @@ section.grp .card:last-child{border-bottom:0}
 
 .hide-m .m,.hide-m td.m{display:none}
 .hide-z .zh{display:none}
+.hide-i .ipa{display:none}
 body.hide-m td.m{display:none!important}
 .empty{padding:40px;text-align:center;color:var(--ink2);font-size:14px}
 
@@ -126,190 +130,191 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
   <input id="q" type="search" placeholder="搜索单词或释义…（按 / 聚焦）">
   <label class="sw"><input type="checkbox" id="all"> 默写模式</label>
   <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
+  <label class="sw"><input type="checkbox" id="i"> 隐藏音标</label>
   
   <button class="btn" id="reset">重置</button>
   <span class="count" id="cnt">118 条</span>
  </div>
 </div></div><div class="wrap"><table><thead><tr><th>#</th><th>单词</th><th>释义</th></tr></thead>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 01</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="technology n. 科技；技术"><td class="n">1</td><td class="w">technology</td><td class="m">n. 科技；技术</td></tr>
-<tr data-s="technique n. 技术；工艺；技巧；技 艺"><td class="n">2</td><td class="w">technique</td><td class="m">n. 技术；工艺；技巧；技 艺</td></tr>
-<tr data-s="polytechnic n. 工艺专科学院；理工专 科学院；adj. 工艺的"><td class="n">3</td><td class="w">polytechnic</td><td class="m">n. 工艺专科学院；理工专 科学院；adj. 工艺的</td></tr>
-<tr data-s="engineer n. 工程师；机械师；v. 设 计(工程)；策划"><td class="n">4</td><td class="w">engineer</td><td class="m">n. 工程师；机械师；v. 设 计(工程)；策划</td></tr>
-<tr data-s="mechanic n. 技工；机械师；机修工"><td class="n">5</td><td class="w">mechanic</td><td class="m">n. 技工；机械师；机修工</td></tr>
+<tr data-s="technology n. 科技；技术"><td class="n">1</td><td class="w">technology<div class="ipa">[tekˈnɒlədʒi]</div></td><td class="m">n. 科技；技术</td></tr>
+<tr data-s="technique n. 技术；工艺；技巧；技 艺"><td class="n">2</td><td class="w">technique<div class="ipa">[tekˈniːk]</div></td><td class="m">n. 技术；工艺；技巧；技 艺</td></tr>
+<tr data-s="polytechnic n. 工艺专科学院；理工专 科学院；adj. 工艺的"><td class="n">3</td><td class="w">polytechnic<div class="ipa">[ˌpɒliˈteknɪk]</div></td><td class="m">n. 工艺专科学院；理工专 科学院；adj. 工艺的</td></tr>
+<tr data-s="engineer n. 工程师；机械师；v. 设 计(工程)；策划"><td class="n">4</td><td class="w">engineer<div class="ipa">[ˌendʒɪˈnɪə(r)]</div></td><td class="m">n. 工程师；机械师；v. 设 计(工程)；策划</td></tr>
+<tr data-s="mechanic n. 技工；机械师；机修工"><td class="n">5</td><td class="w">mechanic<div class="ipa">[məˈkænɪk]</div></td><td class="m">n. 技工；机械师；机修工</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 02</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="advance n. 发展；进步；提前；v. 前进；发 展；提前；adj. 预先的；在前的"><td class="n">6</td><td class="w">advance</td><td class="m">n. 发展；进步；提前；v. 前进；发 展；提前；adj. 预先的；在前的</td></tr>
-<tr data-s="innovate v. 改革；创新"><td class="n">7</td><td class="w">innovate</td><td class="m">v. 改革；创新</td></tr>
-<tr data-s="breakthrough n. 突破；突破性进展"><td class="n">8</td><td class="w">breakthrough</td><td class="m">n. 突破；突破性进展</td></tr>
+<tr data-s="advance n. 发展；进步；提前；v. 前进；发 展；提前；adj. 预先的；在前的"><td class="n">6</td><td class="w">advance<div class="ipa">[ədˈvɑːns]</div></td><td class="m">n. 发展；进步；提前；v. 前进；发 展；提前；adj. 预先的；在前的</td></tr>
+<tr data-s="innovate v. 改革；创新"><td class="n">7</td><td class="w">innovate<div class="ipa">[ˈɪnəveɪt]</div></td><td class="m">v. 改革；创新</td></tr>
+<tr data-s="breakthrough n. 突破；突破性进展"><td class="n">8</td><td class="w">breakthrough<div class="ipa">[ˈbreɪkθruː]</div></td><td class="m">n. 突破；突破性进展</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 03</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="gizmo n. 小发明"><td class="n">9</td><td class="w">gizmo</td><td class="m">n. 小发明</td></tr>
-<tr data-s="patent n. 专利；专利权；专利证书； adj. 有专利的；受专利保护的"><td class="n">10</td><td class="w">patent</td><td class="m">n. 专利；专利权；专利证书； adj. 有专利的；受专利保护的</td></tr>
+<tr data-s="gizmo n. 小发明"><td class="n">9</td><td class="w">gizmo<div class="ipa">[ˈgɪzməʊ]</div></td><td class="m">n. 小发明</td></tr>
+<tr data-s="patent n. 专利；专利权；专利证书； adj. 有专利的；受专利保护的"><td class="n">10</td><td class="w">patent<div class="ipa">[ˈpæt(ə)nt]</div></td><td class="m">n. 专利；专利权；专利证书； adj. 有专利的；受专利保护的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 04</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="devise v. 想出；设计；发明"><td class="n">11</td><td class="w">devise</td><td class="m">v. 想出；设计；发明</td></tr>
-<tr data-s="invent v. 发明；创造"><td class="n">12</td><td class="w">invent</td><td class="m">v. 发明；创造</td></tr>
-<tr data-s="discover v. 发现；查明；发觉"><td class="n">13</td><td class="w">discover</td><td class="m">v. 发现；查明；发觉</td></tr>
+<tr data-s="devise v. 想出；设计；发明"><td class="n">11</td><td class="w">devise<div class="ipa">[dɪˈvaɪz]</div></td><td class="m">v. 想出；设计；发明</td></tr>
+<tr data-s="invent v. 发明；创造"><td class="n">12</td><td class="w">invent<div class="ipa">[ɪnˈvent]</div></td><td class="m">v. 发明；创造</td></tr>
+<tr data-s="discover v. 发现；查明；发觉"><td class="n">13</td><td class="w">discover<div class="ipa">[dɪˈskʌvə(r)]</div></td><td class="m">v. 发现；查明；发觉</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 05</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="disclose v. 揭露；透露；泄露"><td class="n">14</td><td class="w">disclose</td><td class="m">v. 揭露；透露；泄露</td></tr>
-<tr data-s="reveal v. 揭露；泄露；(使)显露； n. (电视节目最后的)揭示"><td class="n">15</td><td class="w">reveal</td><td class="m">v. 揭露；泄露；(使)显露； n. (电视节目最后的)揭示</td></tr>
-<tr data-s="uncover v. 揭开；揭露"><td class="n">16</td><td class="w">uncover</td><td class="m">v. 揭开；揭露</td></tr>
-<tr data-s="expose v. 暴露；揭露；使遭受"><td class="n">17</td><td class="w">expose</td><td class="m">v. 暴露；揭露；使遭受</td></tr>
+<tr data-s="disclose v. 揭露；透露；泄露"><td class="n">14</td><td class="w">disclose<div class="ipa">[dɪsˈkləʊz]</div></td><td class="m">v. 揭露；透露；泄露</td></tr>
+<tr data-s="reveal v. 揭露；泄露；(使)显露； n. (电视节目最后的)揭示"><td class="n">15</td><td class="w">reveal<div class="ipa">[rɪˈviːl]</div></td><td class="m">v. 揭露；泄露；(使)显露； n. (电视节目最后的)揭示</td></tr>
+<tr data-s="uncover v. 揭开；揭露"><td class="n">16</td><td class="w">uncover<div class="ipa">[ʌnˈkʌvə(r)]</div></td><td class="m">v. 揭开；揭露</td></tr>
+<tr data-s="expose v. 暴露；揭露；使遭受"><td class="n">17</td><td class="w">expose<div class="ipa">[ɪkˈspəʊz]</div></td><td class="m">v. 暴露；揭露；使遭受</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 06</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="domain n. 领地；范围；领域"><td class="n">18</td><td class="w">domain</td><td class="m">n. 领地；范围；领域</td></tr>
-<tr data-s="realm n. 领域；王国"><td class="n">19</td><td class="w">realm</td><td class="m">n. 领域；王国</td></tr>
-<tr data-s="foundation n. 创建；基础；根据；基 金(会)"><td class="n">20</td><td class="w">foundation</td><td class="m">n. 创建；基础；根据；基 金(会)</td></tr>
+<tr data-s="domain n. 领地；范围；领域"><td class="n">18</td><td class="w">domain<div class="ipa">[dəˈmeɪn]</div></td><td class="m">n. 领地；范围；领域</td></tr>
+<tr data-s="realm n. 领域；王国"><td class="n">19</td><td class="w">realm<div class="ipa">[relm]</div></td><td class="m">n. 领域；王国</td></tr>
+<tr data-s="foundation n. 创建；基础；根据；基 金(会)"><td class="n">20</td><td class="w">foundation<div class="ipa">[faʊnˈdeɪʃ(ə)n]</div></td><td class="m">n. 创建；基础；根据；基 金(会)</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 07</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="specialise v. 专用于；专⻔研究"><td class="n">21</td><td class="w">specialise</td><td class="m">v. 专用于；专⻔研究</td></tr>
-<tr data-s="concentrate v. 集中；浓缩；n. 浓缩液"><td class="n">22</td><td class="w">concentrate</td><td class="m">v. 集中；浓缩；n. 浓缩液</td></tr>
-<tr data-s="focus n. 中心点；焦点；v. 集 中；聚焦"><td class="n">23</td><td class="w">focus</td><td class="m">n. 中心点；焦点；v. 集 中；聚焦</td></tr>
+<tr data-s="specialise v. 专用于；专⻔研究"><td class="n">21</td><td class="w">specialise<div class="ipa">[ˈspeʃəlaɪz]</div></td><td class="m">v. 专用于；专⻔研究</td></tr>
+<tr data-s="concentrate v. 集中；浓缩；n. 浓缩液"><td class="n">22</td><td class="w">concentrate<div class="ipa">[ˈkɒns(ə)ntreɪt]</div></td><td class="m">v. 集中；浓缩；n. 浓缩液</td></tr>
+<tr data-s="focus n. 中心点；焦点；v. 集 中；聚焦"><td class="n">23</td><td class="w">focus<div class="ipa">[ˈfəʊkəs]</div></td><td class="m">n. 中心点；焦点；v. 集 中；聚焦</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 08</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="utilise v. 利用"><td class="n">24</td><td class="w">utilise</td><td class="m">v. 利用</td></tr>
-<tr data-s="usage n. 使用；用法"><td class="n">25</td><td class="w">usage</td><td class="m">n. 使用；用法</td></tr>
-<tr data-s="tester n. 测试仪；测试器；测试 员；试验员"><td class="n">26</td><td class="w">tester</td><td class="m">n. 测试仪；测试器；测试 员；试验员</td></tr>
+<tr data-s="utilise v. 利用"><td class="n">24</td><td class="w">utilise<div class="ipa">[ˈjuːtəlaɪz]</div></td><td class="m">v. 利用</td></tr>
+<tr data-s="usage n. 使用；用法"><td class="n">25</td><td class="w">usage<div class="ipa">[ˈjuːsɪdʒ]</div></td><td class="m">n. 使用；用法</td></tr>
+<tr data-s="tester n. 测试仪；测试器；测试 员；试验员"><td class="n">26</td><td class="w">tester<div class="ipa">[ˈtestə(r)]</div></td><td class="m">n. 测试仪；测试器；测试 员；试验员</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 09</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="device n. 设备；装置；手段；策 略；方法"><td class="n">27</td><td class="w">device</td><td class="m">n. 设备；装置；手段；策 略；方法</td></tr>
-<tr data-s="appliance n. 家用电器；器具"><td class="n">28</td><td class="w">appliance</td><td class="m">n. 家用电器；器具</td></tr>
-<tr data-s="facility n. 设施；特定场所；特色 功能；资质"><td class="n">29</td><td class="w">facility</td><td class="m">n. 设施；特定场所；特色 功能；资质</td></tr>
-<tr data-s="equipment n. 设备；装备"><td class="n">30</td><td class="w">equipment</td><td class="m">n. 设备；装备</td></tr>
+<tr data-s="device n. 设备；装置；手段；策 略；方法"><td class="n">27</td><td class="w">device<div class="ipa">[dɪˈvaɪs]</div></td><td class="m">n. 设备；装置；手段；策 略；方法</td></tr>
+<tr data-s="appliance n. 家用电器；器具"><td class="n">28</td><td class="w">appliance<div class="ipa">[əˈplaɪəns]</div></td><td class="m">n. 家用电器；器具</td></tr>
+<tr data-s="facility n. 设施；特定场所；特色 功能；资质"><td class="n">29</td><td class="w">facility<div class="ipa">[fəˈsɪləti]</div></td><td class="m">n. 设施；特定场所；特色 功能；资质</td></tr>
+<tr data-s="equipment n. 设备；装备"><td class="n">30</td><td class="w">equipment<div class="ipa">[ɪˈkwɪpmənt]</div></td><td class="m">n. 设备；装备</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 10</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="instrument n. 仪器；乐器；工具；手 段；法律文件"><td class="n">31</td><td class="w">instrument</td><td class="m">n. 仪器；乐器；工具；手 段；法律文件</td></tr>
-<tr data-s="tool n. 工具；刀具；器具；v. 用工具加工"><td class="n">32</td><td class="w">tool</td><td class="m">n. 工具；刀具；器具；v. 用工具加工</td></tr>
-<tr data-s="gauge n. 测量仪器；规格；计量 器；评估；v. 测量；评估"><td class="n">33</td><td class="w">gauge</td><td class="m">n. 测量仪器；规格；计量 器；评估；v. 测量；评估</td></tr>
-<tr data-s="measure n. 衡量；量度；措施；方 法；v. 测量；衡量；度量"><td class="n">34</td><td class="w">measure</td><td class="m">n. 衡量；量度；措施；方 法；v. 测量；衡量；度量</td></tr>
-<tr data-s="calculate v. 计算；推测"><td class="n">35</td><td class="w">calculate</td><td class="m">v. 计算；推测</td></tr>
+<tr data-s="instrument n. 仪器；乐器；工具；手 段；法律文件"><td class="n">31</td><td class="w">instrument<div class="ipa">[ˈɪnstrəmənt]</div></td><td class="m">n. 仪器；乐器；工具；手 段；法律文件</td></tr>
+<tr data-s="tool n. 工具；刀具；器具；v. 用工具加工"><td class="n">32</td><td class="w">tool<div class="ipa">[tuːl]</div></td><td class="m">n. 工具；刀具；器具；v. 用工具加工</td></tr>
+<tr data-s="gauge n. 测量仪器；规格；计量 器；评估；v. 测量；评估"><td class="n">33</td><td class="w">gauge<div class="ipa">[ɡeɪdʒ]</div></td><td class="m">n. 测量仪器；规格；计量 器；评估；v. 测量；评估</td></tr>
+<tr data-s="measure n. 衡量；量度；措施；方 法；v. 测量；衡量；度量"><td class="n">34</td><td class="w">measure<div class="ipa">[ˈmeʒə(r)]</div></td><td class="m">n. 衡量；量度；措施；方 法；v. 测量；衡量；度量</td></tr>
+<tr data-s="calculate v. 计算；推测"><td class="n">35</td><td class="w">calculate<div class="ipa">[ˈkælkjuleɪt]</div></td><td class="m">v. 计算；推测</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 11</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="compute v. 计算；估计；运算"><td class="n">36</td><td class="w">compute</td><td class="m">v. 计算；估计；运算</td></tr>
-<tr data-s="count v. 计算；清点；看作；有 价值；n. 计数；计算"><td class="n">37</td><td class="w">count</td><td class="m">v. 计算；清点；看作；有 价值；n. 计数；计算</td></tr>
-<tr data-s="estimate v. 估算；估价；n. 估价； 估算"><td class="n">38</td><td class="w">estimate</td><td class="m">v. 估算；估价；n. 估价； 估算</td></tr>
-<tr data-s="assess v. 评定；评估；估算"><td class="n">39</td><td class="w">assess</td><td class="m">v. 评定；评估；估算</td></tr>
-<tr data-s="evaluate v. 估价；评价"><td class="n">40</td><td class="w">evaluate</td><td class="m">v. 估价；评价</td></tr>
+<tr data-s="compute v. 计算；估计；运算"><td class="n">36</td><td class="w">compute<div class="ipa">[kəmˈpjuːt]</div></td><td class="m">v. 计算；估计；运算</td></tr>
+<tr data-s="count v. 计算；清点；看作；有 价值；n. 计数；计算"><td class="n">37</td><td class="w">count<div class="ipa">[kaʊnt]</div></td><td class="m">v. 计算；清点；看作；有 价值；n. 计数；计算</td></tr>
+<tr data-s="estimate v. 估算；估价；n. 估价； 估算"><td class="n">38</td><td class="w">estimate<div class="ipa">[ˈestɪmeɪt]</div></td><td class="m">v. 估算；估价；n. 估价； 估算</td></tr>
+<tr data-s="assess v. 评定；评估；估算"><td class="n">39</td><td class="w">assess<div class="ipa">[əˈses]</div></td><td class="m">v. 评定；评估；估算</td></tr>
+<tr data-s="evaluate v. 估价；评价"><td class="n">40</td><td class="w">evaluate<div class="ipa">[ɪˈvæljueɪt]</div></td><td class="m">v. 估价；评价</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 12</span><span class="gcnt">10 词</span></td></tr>
-<tr data-s="accessory n. 配件；附件；从犯； adj. 附属的"><td class="n">41</td><td class="w">accessory</td><td class="m">n. 配件；附件；从犯； adj. 附属的</td></tr>
-<tr data-s="byproduct n. 副产品；副产物"><td class="n">42</td><td class="w">byproduct</td><td class="m">n. 副产品；副产物</td></tr>
-<tr data-s="auxiliary adj. 辅助的；附属的；n. 辅助物；附属物；助动词"><td class="n">43</td><td class="w">auxiliary</td><td class="m">adj. 辅助的；附属的；n. 辅助物；附属物；助动词</td></tr>
-<tr data-s="versatile adj. 多才多艺的；有多种 技能的；多方面的"><td class="n">44</td><td class="w">versatile</td><td class="m">adj. 多才多艺的；有多种 技能的；多方面的</td></tr>
-<tr data-s="add v. 加；增加"><td class="n">45</td><td class="w">add</td><td class="m">v. 加；增加</td></tr>
-<tr data-s="accumulate v. 积累"><td class="n">46</td><td class="w">accumulate</td><td class="m">v. 积累</td></tr>
-<tr data-s="assemble v. 装配；集合"><td class="n">47</td><td class="w">assemble</td><td class="m">v. 装配；集合</td></tr>
-<tr data-s="gather v. 聚集；集合"><td class="n">48</td><td class="w">gather</td><td class="m">v. 聚集；集合</td></tr>
-<tr data-s="attach v. 系上；贴上；附加；使 依附；使相关；隶属于"><td class="n">49</td><td class="w">attach</td><td class="m">v. 系上；贴上；附加；使 依附；使相关；隶属于</td></tr>
-<tr data-s="belong v. 应在(某处)；属于"><td class="n">50</td><td class="w">belong</td><td class="m">v. 应在(某处)；属于</td></tr>
+<tr data-s="accessory n. 配件；附件；从犯； adj. 附属的"><td class="n">41</td><td class="w">accessory<div class="ipa">[əkˈsesəri]</div></td><td class="m">n. 配件；附件；从犯； adj. 附属的</td></tr>
+<tr data-s="byproduct n. 副产品；副产物"><td class="n">42</td><td class="w">byproduct<div class="ipa">[ˈbaɪˌprɒdʌkt]</div></td><td class="m">n. 副产品；副产物</td></tr>
+<tr data-s="auxiliary adj. 辅助的；附属的；n. 辅助物；附属物；助动词"><td class="n">43</td><td class="w">auxiliary<div class="ipa">[ɔːɡˈzɪliəri]</div></td><td class="m">adj. 辅助的；附属的；n. 辅助物；附属物；助动词</td></tr>
+<tr data-s="versatile adj. 多才多艺的；有多种 技能的；多方面的"><td class="n">44</td><td class="w">versatile<div class="ipa">[ˈvɜːsətaɪl]</div></td><td class="m">adj. 多才多艺的；有多种 技能的；多方面的</td></tr>
+<tr data-s="add v. 加；增加"><td class="n">45</td><td class="w">add<div class="ipa">[æd]</div></td><td class="m">v. 加；增加</td></tr>
+<tr data-s="accumulate v. 积累"><td class="n">46</td><td class="w">accumulate<div class="ipa">[əˈkjuːmjəleɪt]</div></td><td class="m">v. 积累</td></tr>
+<tr data-s="assemble v. 装配；集合"><td class="n">47</td><td class="w">assemble<div class="ipa">[əˈsemb(ə)l]</div></td><td class="m">v. 装配；集合</td></tr>
+<tr data-s="gather v. 聚集；集合"><td class="n">48</td><td class="w">gather<div class="ipa">[ˈɡæðə(r)]</div></td><td class="m">v. 聚集；集合</td></tr>
+<tr data-s="attach v. 系上；贴上；附加；使 依附；使相关；隶属于"><td class="n">49</td><td class="w">attach<div class="ipa">[əˈtætʃ]</div></td><td class="m">v. 系上；贴上；附加；使 依附；使相关；隶属于</td></tr>
+<tr data-s="belong v. 应在(某处)；属于"><td class="n">50</td><td class="w">belong<div class="ipa">[bɪˈlɒŋ]</div></td><td class="m">v. 应在(某处)；属于</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 13</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="optics n. 光学"><td class="n">51</td><td class="w">optics</td><td class="m">n. 光学</td></tr>
-<tr data-s="microscope n. 显微镜"><td class="n">52</td><td class="w">microscope</td><td class="m">n. 显微镜</td></tr>
-<tr data-s="lens n. 透镜；镜片"><td class="n">53</td><td class="w">lens</td><td class="m">n. 透镜；镜片</td></tr>
+<tr data-s="optics n. 光学"><td class="n">51</td><td class="w">optics<div class="ipa">[ˈɒptɪks]</div></td><td class="m">n. 光学</td></tr>
+<tr data-s="microscope n. 显微镜"><td class="n">52</td><td class="w">microscope<div class="ipa">[ˈmaɪkrəskəʊp]</div></td><td class="m">n. 显微镜</td></tr>
+<tr data-s="lens n. 透镜；镜片"><td class="n">53</td><td class="w">lens<div class="ipa">[lenz]</div></td><td class="m">n. 透镜；镜片</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 14</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="radar n. 雷达"><td class="n">54</td><td class="w">radar</td><td class="m">n. 雷达</td></tr>
-<tr data-s="echo n. 回声；v. 回响"><td class="n">55</td><td class="w">echo</td><td class="m">n. 回声；v. 回响</td></tr>
-<tr data-s="sensor n. 传感器；敏感元件"><td class="n">56</td><td class="w">sensor</td><td class="m">n. 传感器；敏感元件</td></tr>
+<tr data-s="radar n. 雷达"><td class="n">54</td><td class="w">radar<div class="ipa">[ˈreɪdɑː(r)]</div></td><td class="m">n. 雷达</td></tr>
+<tr data-s="echo n. 回声；v. 回响"><td class="n">55</td><td class="w">echo<div class="ipa">[ˈekəʊ]</div></td><td class="m">n. 回声；v. 回响</td></tr>
+<tr data-s="sensor n. 传感器；敏感元件"><td class="n">56</td><td class="w">sensor<div class="ipa">[ˈsensə(r)]</div></td><td class="m">n. 传感器；敏感元件</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 15</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="multimedia adj. 多媒体的；n. 多媒体"><td class="n">57</td><td class="w">multimedia</td><td class="m">adj. 多媒体的；n. 多媒体</td></tr>
-<tr data-s="network n. 网络；网路；网状物"><td class="n">58</td><td class="w">network</td><td class="m">n. 网络；网路；网状物</td></tr>
-<tr data-s="browser n. 浏览器；浏览(书本 等)的人"><td class="n">59</td><td class="w">browser</td><td class="m">n. 浏览器；浏览(书本 等)的人</td></tr>
-<tr data-s="dial n. 拨号；刻度盘；v. 拨"><td class="n">60</td><td class="w">dial</td><td class="m">n. 拨号；刻度盘；v. 拨</td></tr>
+<tr data-s="multimedia adj. 多媒体的；n. 多媒体"><td class="n">57</td><td class="w">multimedia<div class="ipa">[ˌmʌltiˈmiːdiə]</div></td><td class="m">adj. 多媒体的；n. 多媒体</td></tr>
+<tr data-s="network n. 网络；网路；网状物"><td class="n">58</td><td class="w">network<div class="ipa">[ˈnetwɜːk]</div></td><td class="m">n. 网络；网路；网状物</td></tr>
+<tr data-s="browser n. 浏览器；浏览(书本 等)的人"><td class="n">59</td><td class="w">browser<div class="ipa">[ˈbraʊzə(r)]</div></td><td class="m">n. 浏览器；浏览(书本 等)的人</td></tr>
+<tr data-s="dial n. 拨号；刻度盘；v. 拨"><td class="n">60</td><td class="w">dial<div class="ipa">[ˈdaɪəl]</div></td><td class="m">n. 拨号；刻度盘；v. 拨</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 16</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="microcomputer n. 微型计算机"><td class="n">61</td><td class="w">microcomputer</td><td class="m">n. 微型计算机</td></tr>
-<tr data-s="laptop n. 便携式电脑；笔记本电 脑"><td class="n">62</td><td class="w">laptop</td><td class="m">n. 便携式电脑；笔记本电 脑</td></tr>
+<tr data-s="microcomputer n. 微型计算机"><td class="n">61</td><td class="w">microcomputer<div class="ipa">[ˈmaɪkrəʊkəmpjuːtə(r)]</div></td><td class="m">n. 微型计算机</td></tr>
+<tr data-s="laptop n. 便携式电脑；笔记本电 脑"><td class="n">62</td><td class="w">laptop<div class="ipa">[ˈlæptɒp]</div></td><td class="m">n. 便携式电脑；笔记本电 脑</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 17</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="software n. 软件"><td class="n">63</td><td class="w">software</td><td class="m">n. 软件</td></tr>
-<tr data-s="keyboard n. 键盘"><td class="n">64</td><td class="w">keyboard</td><td class="m">n. 键盘</td></tr>
-<tr data-s="screen n. 屏幕；屏⻛；掩蔽物； v. 筛查；掩蔽；放映"><td class="n">65</td><td class="w">screen</td><td class="m">n. 屏幕；屏⻛；掩蔽物； v. 筛查；掩蔽；放映</td></tr>
-<tr data-s="loudspeaker n. 扬声器；喇叭"><td class="n">66</td><td class="w">loudspeaker</td><td class="m">n. 扬声器；喇叭</td></tr>
+<tr data-s="software n. 软件"><td class="n">63</td><td class="w">software<div class="ipa">[ˈsɒftweə(r)]</div></td><td class="m">n. 软件</td></tr>
+<tr data-s="keyboard n. 键盘"><td class="n">64</td><td class="w">keyboard<div class="ipa">[ˈkiːbɔːd]</div></td><td class="m">n. 键盘</td></tr>
+<tr data-s="screen n. 屏幕；屏⻛；掩蔽物； v. 筛查；掩蔽；放映"><td class="n">65</td><td class="w">screen<div class="ipa">[skriːn]</div></td><td class="m">n. 屏幕；屏⻛；掩蔽物； v. 筛查；掩蔽；放映</td></tr>
+<tr data-s="loudspeaker n. 扬声器；喇叭"><td class="n">66</td><td class="w">loudspeaker<div class="ipa">[ˌlaʊdˈspiːkə(r)]</div></td><td class="m">n. 扬声器；喇叭</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 18</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="microphone n. ⻨克⻛；扩音器"><td class="n">67</td><td class="w">microphone</td><td class="m">n. ⻨克⻛；扩音器</td></tr>
-<tr data-s="cassette n. 盒子；盒式磁带"><td class="n">68</td><td class="w">cassette</td><td class="m">n. 盒子；盒式磁带</td></tr>
-<tr data-s="tape n. 磁带；胶带；录音带；带子； v. 录音；用带子捆；用胶带粘"><td class="n">69</td><td class="w">tape</td><td class="m">n. 磁带；胶带；录音带；带子； v. 录音；用带子捆；用胶带粘</td></tr>
+<tr data-s="microphone n. ⻨克⻛；扩音器"><td class="n">67</td><td class="w">microphone<div class="ipa">[ˈmaɪkrəfəʊn]</div></td><td class="m">n. ⻨克⻛；扩音器</td></tr>
+<tr data-s="cassette n. 盒子；盒式磁带"><td class="n">68</td><td class="w">cassette<div class="ipa">[kəˈset]</div></td><td class="m">n. 盒子；盒式磁带</td></tr>
+<tr data-s="tape n. 磁带；胶带；录音带；带子； v. 录音；用带子捆；用胶带粘"><td class="n">69</td><td class="w">tape<div class="ipa">[teɪp]</div></td><td class="m">n. 磁带；胶带；录音带；带子； v. 录音；用带子捆；用胶带粘</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 19</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="binary n. 二进制；二元；adj. 二 进位的；二元的"><td class="n">70</td><td class="w">binary</td><td class="m">n. 二进制；二元；adj. 二 进位的；二元的</td></tr>
-<tr data-s="digital adj. 数字的；数码的"><td class="n">71</td><td class="w">digital</td><td class="m">adj. 数字的；数码的</td></tr>
-<tr data-s="wireless adj. 无线的；n. 无线电； (无线电)收音机"><td class="n">72</td><td class="w">wireless</td><td class="m">adj. 无线的；n. 无线电； (无线电)收音机</td></tr>
-<tr data-s="high-definition adj. 非常鲜明的"><td class="n">73</td><td class="w">high-definition</td><td class="m">adj. 非常鲜明的</td></tr>
+<tr data-s="binary n. 二进制；二元；adj. 二 进位的；二元的"><td class="n">70</td><td class="w">binary<div class="ipa">[ˈbaɪnəri]</div></td><td class="m">n. 二进制；二元；adj. 二 进位的；二元的</td></tr>
+<tr data-s="digital adj. 数字的；数码的"><td class="n">71</td><td class="w">digital<div class="ipa">[ˈdɪdʒɪt(ə)l]</div></td><td class="m">adj. 数字的；数码的</td></tr>
+<tr data-s="wireless adj. 无线的；n. 无线电； (无线电)收音机"><td class="n">72</td><td class="w">wireless<div class="ipa">[ˈwaɪələs]</div></td><td class="m">adj. 无线的；n. 无线电； (无线电)收音机</td></tr>
+<tr data-s="high-definition adj. 非常鲜明的"><td class="n">73</td><td class="w">high-definition<div class="ipa">[haɪ ˌdefɪˈnɪʃən]</div></td><td class="m">adj. 非常鲜明的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 20</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="audio adj. 音频的；声音的"><td class="n">74</td><td class="w">audio</td><td class="m">adj. 音频的；声音的</td></tr>
-<tr data-s="vision n. 视野；视力；想象；幻 象"><td class="n">75</td><td class="w">vision</td><td class="m">n. 视野；视力；想象；幻 象</td></tr>
-<tr data-s="fantasy n. 幻想；奇幻"><td class="n">76</td><td class="w">fantasy</td><td class="m">n. 幻想；奇幻</td></tr>
-<tr data-s="science fiction phrase. 科幻作品"><td class="n">77</td><td class="w">science fiction</td><td class="m">phrase. 科幻作品</td></tr>
+<tr data-s="audio adj. 音频的；声音的"><td class="n">74</td><td class="w">audio<div class="ipa">[ˈɔːdiəʊ]</div></td><td class="m">adj. 音频的；声音的</td></tr>
+<tr data-s="vision n. 视野；视力；想象；幻 象"><td class="n">75</td><td class="w">vision<div class="ipa">[ˈvɪʒ(ə)n]</div></td><td class="m">n. 视野；视力；想象；幻 象</td></tr>
+<tr data-s="fantasy n. 幻想；奇幻"><td class="n">76</td><td class="w">fantasy<div class="ipa">[ˈfæntəsi]</div></td><td class="m">n. 幻想；奇幻</td></tr>
+<tr data-s="science fiction phrase. 科幻作品"><td class="n">77</td><td class="w">science fiction<div class="ipa">[ˌsaɪəns ˈfɪkʃ(ə)n]</div></td><td class="m">phrase. 科幻作品</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 21</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="pump n. 泵；抽水机；打气机； v. 抽水；打气"><td class="n">78</td><td class="w">pump</td><td class="m">n. 泵；抽水机；打气机； v. 抽水；打气</td></tr>
-<tr data-s="generator n. 发电机；发生器"><td class="n">79</td><td class="w">generator</td><td class="m">n. 发电机；发生器</td></tr>
-<tr data-s="gear n. 用具；⻮轮；排挡；v. 换挡；调整；(使)适合"><td class="n">80</td><td class="w">gear</td><td class="m">n. 用具；⻮轮；排挡；v. 换挡；调整；(使)适合</td></tr>
-<tr data-s="pivot n. 枢；中心；旋转；v. 在 枢轴上转动；以...为中心"><td class="n">81</td><td class="w">pivot</td><td class="m">n. 枢；中心；旋转；v. 在 枢轴上转动；以...为中心</td></tr>
+<tr data-s="pump n. 泵；抽水机；打气机； v. 抽水；打气"><td class="n">78</td><td class="w">pump<div class="ipa">[pʌmp]</div></td><td class="m">n. 泵；抽水机；打气机； v. 抽水；打气</td></tr>
+<tr data-s="generator n. 发电机；发生器"><td class="n">79</td><td class="w">generator<div class="ipa">[ˈdʒenəreɪtə(r)]</div></td><td class="m">n. 发电机；发生器</td></tr>
+<tr data-s="gear n. 用具；⻮轮；排挡；v. 换挡；调整；(使)适合"><td class="n">80</td><td class="w">gear<div class="ipa">[ɡɪə(r)]</div></td><td class="m">n. 用具；⻮轮；排挡；v. 换挡；调整；(使)适合</td></tr>
+<tr data-s="pivot n. 枢；中心；旋转；v. 在 枢轴上转动；以...为中心"><td class="n">81</td><td class="w">pivot<div class="ipa">[ˈpɪvət]</div></td><td class="m">n. 枢；中心；旋转；v. 在 枢轴上转动；以...为中心</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 22</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="hydraulic adj. 水力的；水压的；液 压的"><td class="n">82</td><td class="w">hydraulic</td><td class="m">adj. 水力的；水压的；液 压的</td></tr>
-<tr data-s="drainage n. 排水；排水系统；放水"><td class="n">83</td><td class="w">drainage</td><td class="m">n. 排水；排水系统；放水</td></tr>
-<tr data-s="sewage n. 污水；污物；下水道"><td class="n">84</td><td class="w">sewage</td><td class="m">n. 污水；污物；下水道</td></tr>
-<tr data-s="ventilation n. 通⻛；通⻛装置"><td class="n">85</td><td class="w">ventilation</td><td class="m">n. 通⻛；通⻛装置</td></tr>
+<tr data-s="hydraulic adj. 水力的；水压的；液 压的"><td class="n">82</td><td class="w">hydraulic<div class="ipa">[haɪˈdrɒlɪk]</div></td><td class="m">adj. 水力的；水压的；液 压的</td></tr>
+<tr data-s="drainage n. 排水；排水系统；放水"><td class="n">83</td><td class="w">drainage<div class="ipa">[ˈdreɪnɪdʒ]</div></td><td class="m">n. 排水；排水系统；放水</td></tr>
+<tr data-s="sewage n. 污水；污物；下水道"><td class="n">84</td><td class="w">sewage<div class="ipa">[ˈsuːɪdʒ]</div></td><td class="m">n. 污水；污物；下水道</td></tr>
+<tr data-s="ventilation n. 通⻛；通⻛装置"><td class="n">85</td><td class="w">ventilation<div class="ipa">[ˌventɪˈleɪʃ(ə)n]</div></td><td class="m">n. 通⻛；通⻛装置</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 23</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="compress v. 压缩；压榨；n. (外 科)敷布"><td class="n">86</td><td class="w">compress</td><td class="m">v. 压缩；压榨；n. (外 科)敷布</td></tr>
-<tr data-s="condense v. (使)冷凝；浓缩；删 节以求精简"><td class="n">87</td><td class="w">condense</td><td class="m">v. (使)冷凝；浓缩；删 节以求精简</td></tr>
-<tr data-s="refine v. 精炼；改进"><td class="n">88</td><td class="w">refine</td><td class="m">v. 精炼；改进</td></tr>
-<tr data-s="simplify v. 简化"><td class="n">89</td><td class="w">simplify</td><td class="m">v. 简化</td></tr>
+<tr data-s="compress v. 压缩；压榨；n. (外 科)敷布"><td class="n">86</td><td class="w">compress<div class="ipa">[kəmˈpres]</div></td><td class="m">v. 压缩；压榨；n. (外 科)敷布</td></tr>
+<tr data-s="condense v. (使)冷凝；浓缩；删 节以求精简"><td class="n">87</td><td class="w">condense<div class="ipa">[kənˈdens]</div></td><td class="m">v. (使)冷凝；浓缩；删 节以求精简</td></tr>
+<tr data-s="refine v. 精炼；改进"><td class="n">88</td><td class="w">refine<div class="ipa">[rɪˈfaɪn]</div></td><td class="m">v. 精炼；改进</td></tr>
+<tr data-s="simplify v. 简化"><td class="n">89</td><td class="w">simplify<div class="ipa">[ˈsɪmplɪfaɪ]</div></td><td class="m">v. 简化</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 24</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="purify v. 净化；使纯净；提纯"><td class="n">90</td><td class="w">purify</td><td class="m">v. 净化；使纯净；提纯</td></tr>
-<tr data-s="filter n. 过滤器；v. 过滤"><td class="n">91</td><td class="w">filter</td><td class="m">n. 过滤器；v. 过滤</td></tr>
+<tr data-s="purify v. 净化；使纯净；提纯"><td class="n">90</td><td class="w">purify<div class="ipa">[ˈpjʊərɪfaɪ]</div></td><td class="m">v. 净化；使纯净；提纯</td></tr>
+<tr data-s="filter n. 过滤器；v. 过滤"><td class="n">91</td><td class="w">filter<div class="ipa">[ˈfɪltə(r)]</div></td><td class="m">n. 过滤器；v. 过滤</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 25</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="distil v. 蒸馏；用蒸馏法提取； 提炼"><td class="n">92</td><td class="w">distil</td><td class="m">v. 蒸馏；用蒸馏法提取； 提炼</td></tr>
-<tr data-s="mode n. 方式；样式；模式"><td class="n">93</td><td class="w">mode</td><td class="m">n. 方式；样式；模式</td></tr>
-<tr data-s="prototype n. 原型；模型；典型"><td class="n">94</td><td class="w">prototype</td><td class="m">n. 原型；模型；典型</td></tr>
+<tr data-s="distil v. 蒸馏；用蒸馏法提取； 提炼"><td class="n">92</td><td class="w">distil<div class="ipa">[dɪˈstɪl]</div></td><td class="m">v. 蒸馏；用蒸馏法提取； 提炼</td></tr>
+<tr data-s="mode n. 方式；样式；模式"><td class="n">93</td><td class="w">mode<div class="ipa">[məʊd]</div></td><td class="m">n. 方式；样式；模式</td></tr>
+<tr data-s="prototype n. 原型；模型；典型"><td class="n">94</td><td class="w">prototype<div class="ipa">[ˈprəʊtətaɪp]</div></td><td class="m">n. 原型；模型；典型</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 26</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="framework n. ⻣架；支架；框架"><td class="n">95</td><td class="w">framework</td><td class="m">n. ⻣架；支架；框架</td></tr>
-<tr data-s="aspect n. 方面；模样；朝向"><td class="n">96</td><td class="w">aspect</td><td class="m">n. 方面；模样；朝向</td></tr>
-<tr data-s="phase n. 阶段；时期；相位；v. 分阶段进行"><td class="n">97</td><td class="w">phase</td><td class="m">n. 阶段；时期；相位；v. 分阶段进行</td></tr>
+<tr data-s="framework n. ⻣架；支架；框架"><td class="n">95</td><td class="w">framework<div class="ipa">[ˈfreɪmwɜːk]</div></td><td class="m">n. ⻣架；支架；框架</td></tr>
+<tr data-s="aspect n. 方面；模样；朝向"><td class="n">96</td><td class="w">aspect<div class="ipa">[ˈæspekt]</div></td><td class="m">n. 方面；模样；朝向</td></tr>
+<tr data-s="phase n. 阶段；时期；相位；v. 分阶段进行"><td class="n">97</td><td class="w">phase<div class="ipa">[feɪz]</div></td><td class="m">n. 阶段；时期；相位；v. 分阶段进行</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 27</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="operate v. 操作；运转；施行手术"><td class="n">98</td><td class="w">operate</td><td class="m">v. 操作；运转；施行手术</td></tr>
-<tr data-s="facilitate v. 使容易；使便利；促 进；帮助"><td class="n">99</td><td class="w">facilitate</td><td class="m">v. 使容易；使便利；促 进；帮助</td></tr>
-<tr data-s="transform v. 转变；改造"><td class="n">100</td><td class="w">transform</td><td class="m">v. 转变；改造</td></tr>
-<tr data-s="convert v. 转换；转变；变换； 使...改变信仰；n. 皈依者"><td class="n">101</td><td class="w">convert</td><td class="m">v. 转换；转变；变换； 使...改变信仰；n. 皈依者</td></tr>
-<tr data-s="alter v. 变更；改动"><td class="n">102</td><td class="w">alter</td><td class="m">v. 变更；改动</td></tr>
-<tr data-s="shift v. 变换位置；转移；换(挡)；轮 班；n. 转移；移位；转变；轮班"><td class="n">103</td><td class="w">shift</td><td class="m">v. 变换位置；转移；换(挡)；轮 班；n. 转移；移位；转变；轮班</td></tr>
+<tr data-s="operate v. 操作；运转；施行手术"><td class="n">98</td><td class="w">operate<div class="ipa">[ˈɒpəreɪt]</div></td><td class="m">v. 操作；运转；施行手术</td></tr>
+<tr data-s="facilitate v. 使容易；使便利；促 进；帮助"><td class="n">99</td><td class="w">facilitate<div class="ipa">[fəˈsɪlɪteɪt]</div></td><td class="m">v. 使容易；使便利；促 进；帮助</td></tr>
+<tr data-s="transform v. 转变；改造"><td class="n">100</td><td class="w">transform<div class="ipa">[trænsˈfɔːm]</div></td><td class="m">v. 转变；改造</td></tr>
+<tr data-s="convert v. 转换；转变；变换； 使...改变信仰；n. 皈依者"><td class="n">101</td><td class="w">convert<div class="ipa">[kənˈvɜːt]</div></td><td class="m">v. 转换；转变；变换； 使...改变信仰；n. 皈依者</td></tr>
+<tr data-s="alter v. 变更；改动"><td class="n">102</td><td class="w">alter<div class="ipa">[ˈɔːltə(r)]</div></td><td class="m">v. 变更；改动</td></tr>
+<tr data-s="shift v. 变换位置；转移；换(挡)；轮 班；n. 转移；移位；转变；轮班"><td class="n">103</td><td class="w">shift<div class="ipa">[ʃɪft]</div></td><td class="m">v. 变换位置；转移；换(挡)；轮 班；n. 转移；移位；转变；轮班</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 28</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="turn v. 转身；转弯；转动；转变； n. 轮到的机会；拐弯；转变"><td class="n">104</td><td class="w">turn</td><td class="m">v. 转身；转弯；转动；转变； n. 轮到的机会；拐弯；转变</td></tr>
-<tr data-s="adapt v. 适应；改编"><td class="n">105</td><td class="w">adapt</td><td class="m">v. 适应；改编</td></tr>
-<tr data-s="adjust v. 调整；使适合；使适应"><td class="n">106</td><td class="w">adjust</td><td class="m">v. 调整；使适合；使适应</td></tr>
+<tr data-s="turn v. 转身；转弯；转动；转变； n. 轮到的机会；拐弯；转变"><td class="n">104</td><td class="w">turn<div class="ipa">[tɜːn]</div></td><td class="m">v. 转身；转弯；转动；转变； n. 轮到的机会；拐弯；转变</td></tr>
+<tr data-s="adapt v. 适应；改编"><td class="n">105</td><td class="w">adapt<div class="ipa">[əˈdæpt]</div></td><td class="m">v. 适应；改编</td></tr>
+<tr data-s="adjust v. 调整；使适合；使适应"><td class="n">106</td><td class="w">adjust<div class="ipa">[əˈdʒʌst]</div></td><td class="m">v. 调整；使适合；使适应</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 29</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="pinpoint v. 指出(原因)；精准定位；n. 极 小之物；精确位置；adj. 精准的"><td class="n">107</td><td class="w">pinpoint</td><td class="m">v. 指出(原因)；精准定位；n. 极 小之物；精确位置；adj. 精准的</td></tr>
-<tr data-s="accurate adj. 精确的；无误的"><td class="n">108</td><td class="w">accurate</td><td class="m">adj. 精确的；无误的</td></tr>
-<tr data-s="precise adj. 准确的；确切的"><td class="n">109</td><td class="w">precise</td><td class="m">adj. 准确的；确切的</td></tr>
-<tr data-s="correct adj. 正确的；v. 改正；修 正"><td class="n">110</td><td class="w">correct</td><td class="m">adj. 正确的；v. 改正；修 正</td></tr>
+<tr data-s="pinpoint v. 指出(原因)；精准定位；n. 极 小之物；精确位置；adj. 精准的"><td class="n">107</td><td class="w">pinpoint<div class="ipa">[ˈpɪnpɔɪnt]</div></td><td class="m">v. 指出(原因)；精准定位；n. 极 小之物；精确位置；adj. 精准的</td></tr>
+<tr data-s="accurate adj. 精确的；无误的"><td class="n">108</td><td class="w">accurate<div class="ipa">[ˈækjərət]</div></td><td class="m">adj. 精确的；无误的</td></tr>
+<tr data-s="precise adj. 准确的；确切的"><td class="n">109</td><td class="w">precise<div class="ipa">[prɪˈsaɪs]</div></td><td class="m">adj. 准确的；确切的</td></tr>
+<tr data-s="correct adj. 正确的；v. 改正；修 正"><td class="n">110</td><td class="w">correct<div class="ipa">[kəˈrekt]</div></td><td class="m">adj. 正确的；v. 改正；修 正</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 30</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="error n. 错误；差错"><td class="n">111</td><td class="w">error</td><td class="m">n. 错误；差错</td></tr>
-<tr data-s="mistake n. 错误；失误；v. 弄错； 误解"><td class="n">112</td><td class="w">mistake</td><td class="m">n. 错误；失误；v. 弄错； 误解</td></tr>
-<tr data-s="flaw n. 瑕疵；缺陷；裂痕；v. 使有裂纹；使有缺陷"><td class="n">113</td><td class="w">flaw</td><td class="m">n. 瑕疵；缺陷；裂痕；v. 使有裂纹；使有缺陷</td></tr>
-<tr data-s="wrong adj. 错误的；n. 错误； adv. 错误地"><td class="n">114</td><td class="w">wrong</td><td class="m">adj. 错误的；n. 错误； adv. 错误地</td></tr>
-<tr data-s="fault n. 故障；过错；缺陷；断 层；v. 发现错误；找出缺点"><td class="n">115</td><td class="w">fault</td><td class="m">n. 故障；过错；缺陷；断 层；v. 发现错误；找出缺点</td></tr>
-<tr data-s="stumble v. 绊倒；蹒跚；失误 ；n. 绊倒"><td class="n">116</td><td class="w">stumble</td><td class="m">v. 绊倒；蹒跚；失误 ；n. 绊倒</td></tr>
+<tr data-s="error n. 错误；差错"><td class="n">111</td><td class="w">error<div class="ipa">[ˈerə(r)]</div></td><td class="m">n. 错误；差错</td></tr>
+<tr data-s="mistake n. 错误；失误；v. 弄错； 误解"><td class="n">112</td><td class="w">mistake<div class="ipa">[mɪˈsteɪk]</div></td><td class="m">n. 错误；失误；v. 弄错； 误解</td></tr>
+<tr data-s="flaw n. 瑕疵；缺陷；裂痕；v. 使有裂纹；使有缺陷"><td class="n">113</td><td class="w">flaw<div class="ipa">[flɔː]</div></td><td class="m">n. 瑕疵；缺陷；裂痕；v. 使有裂纹；使有缺陷</td></tr>
+<tr data-s="wrong adj. 错误的；n. 错误； adv. 错误地"><td class="n">114</td><td class="w">wrong<div class="ipa">[rɒŋ]</div></td><td class="m">adj. 错误的；n. 错误； adv. 错误地</td></tr>
+<tr data-s="fault n. 故障；过错；缺陷；断 层；v. 发现错误；找出缺点"><td class="n">115</td><td class="w">fault<div class="ipa">[fɔːlt]</div></td><td class="m">n. 故障；过错；缺陷；断 层；v. 发现错误；找出缺点</td></tr>
+<tr data-s="stumble v. 绊倒；蹒跚；失误 ；n. 绊倒"><td class="n">116</td><td class="w">stumble<div class="ipa">[ˈstʌmb(ə)l]</div></td><td class="m">v. 绊倒；蹒跚；失误 ；n. 绊倒</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 31</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="contingency n. 偶然事故；意外事件"><td class="n">117</td><td class="w">contingency</td><td class="m">n. 偶然事故；意外事件</td></tr>
-<tr data-s="circumstance n. 环境；情况"><td class="n">118</td><td class="w">circumstance</td><td class="m">n. 环境；情况</td></tr>
+<tr data-s="contingency n. 偶然事故；意外事件"><td class="n">117</td><td class="w">contingency<div class="ipa">[kənˈtɪndʒənsi]</div></td><td class="m">n. 偶然事故；意外事件</td></tr>
+<tr data-s="circumstance n. 环境；情况"><td class="n">118</td><td class="w">circumstance<div class="ipa">[ˈsɜːkəmstəns]</div></td><td class="m">n. 环境；情况</td></tr>
 </tbody>
 </table><div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit05.html">← Unit 05</a><a href="unit06-card.html">切到例句卡片版</a><a href="unit07.html">Unit 07 →</a></div><footer><div class="wrap" style="padding:0">
  摘自《雅思词汇真经》（刘洪波 编著）第 6 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
@@ -319,27 +324,31 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  var KEY='vj-hide';
  var body=document.body;
  var kind=body.dataset.kind;
- var s={m:false,z:false};
- try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;}}catch(e){}
+ var s={m:false,z:false,i:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z; if(typeof o.i==='boolean')s.i=o.i;}}catch(e){}
  function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
  function paint(){
   body.classList.toggle('hide-m',s.m);
   body.classList.toggle('hide-z',s.z);
-  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all');
+  body.classList.toggle('hide-i',s.i);
+  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all'), ci=document.getElementById('i');
   if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
   if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
+  if(ci){ci.checked=s.i; ci.closest('.sw').classList.toggle('on',s.i);}
   if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
  }
  var cm=document.getElementById('m');
  if(cm) cm.addEventListener('change',function(){s.m=cm.checked; save(); paint();});
  var cz=document.getElementById('z');
  if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
+ var ci=document.getElementById('i');
+ if(ci) ci.addEventListener('change',function(){s.i=ci.checked; save(); paint();});
  var ca=document.getElementById('all');
  if(ca) ca.addEventListener('change',function(){
    s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
  });
  var rs=document.getElementById('reset');
- if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; save(); paint();});
+ if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; s.i=false; save(); paint();});
  var q=document.getElementById('q');
  var items=[].slice.call(document.querySelectorAll('[data-s]'));
  var cnt=document.getElementById('cnt');

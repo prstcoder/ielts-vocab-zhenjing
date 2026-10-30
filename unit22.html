@@ -56,6 +56,9 @@ td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-
 td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
  letter-spacing:.2px;word-break:break-word}
 td.m{color:var(--ink)}
+.ipa{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:12px;font-weight:400;
+ color:var(--ink2);letter-spacing:0;margin-top:3px;word-break:break-word}
+.card .w .ipa{font-size:13px;margin-left:8px}
 tr.hit td.w,tr.hit td.m{background:var(--mark)}
 
 .cards{display:grid;gap:12px}
@@ -86,6 +89,7 @@ section.grp .card:last-child{border-bottom:0}
 
 .hide-m .m,.hide-m td.m{display:none}
 .hide-z .zh{display:none}
+.hide-i .ipa{display:none}
 body.hide-m td.m{display:none!important}
 .empty{padding:40px;text-align:center;color:var(--ink2);font-size:14px}
 
@@ -126,92 +130,93 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
   <input id="q" type="search" placeholder="搜索单词或释义…（按 / 聚焦）">
   <label class="sw"><input type="checkbox" id="all"> 默写模式</label>
   <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
+  <label class="sw"><input type="checkbox" id="i"> 隐藏音标</label>
   
   <button class="btn" id="reset">重置</button>
   <span class="count" id="cnt">52 条</span>
  </div>
 </div></div><div class="wrap"><table><thead><tr><th>#</th><th>单词</th><th>释义</th></tr></thead>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 01</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="daily adv. 每天；每日；adj. 每 天的；每日的；n. 日报"><td class="n">1</td><td class="w">daily</td><td class="m">adv. 每天；每日；adj. 每 天的；每日的；n. 日报</td></tr>
-<tr data-s="monthly adj. 每月的；每月一次的；adv. 每月一次；每个月；n. 月刊"><td class="n">2</td><td class="w">monthly</td><td class="m">adj. 每月的；每月一次的；adv. 每月一次；每个月；n. 月刊</td></tr>
-<tr data-s="quarterly adj. 季度的；adv. 每季一 次；n. 季刊"><td class="n">3</td><td class="w">quarterly</td><td class="m">adj. 季度的；adv. 每季一 次；n. 季刊</td></tr>
+<tr data-s="daily adv. 每天；每日；adj. 每 天的；每日的；n. 日报"><td class="n">1</td><td class="w">daily<div class="ipa">[ˈdeɪli]</div></td><td class="m">adv. 每天；每日；adj. 每 天的；每日的；n. 日报</td></tr>
+<tr data-s="monthly adj. 每月的；每月一次的；adv. 每月一次；每个月；n. 月刊"><td class="n">2</td><td class="w">monthly<div class="ipa">[ˈmʌnθli]</div></td><td class="m">adj. 每月的；每月一次的；adv. 每月一次；每个月；n. 月刊</td></tr>
+<tr data-s="quarterly adj. 季度的；adv. 每季一 次；n. 季刊"><td class="n">3</td><td class="w">quarterly<div class="ipa">[ˈkwɔːtəli]</div></td><td class="m">adj. 季度的；adv. 每季一 次；n. 季刊</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 02</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="annual adj. 每年的；一年一次 的；n. 年刊；年鉴"><td class="n">4</td><td class="w">annual</td><td class="m">adj. 每年的；一年一次 的；n. 年刊；年鉴</td></tr>
-<tr data-s="yearly adj. 每年的；adv. 每年地"><td class="n">5</td><td class="w">yearly</td><td class="m">adj. 每年的；adv. 每年地</td></tr>
-<tr data-s="anniversary n. 周年纪念日"><td class="n">6</td><td class="w">anniversary</td><td class="m">n. 周年纪念日</td></tr>
+<tr data-s="annual adj. 每年的；一年一次 的；n. 年刊；年鉴"><td class="n">4</td><td class="w">annual<div class="ipa">[ˈænjuəl]</div></td><td class="m">adj. 每年的；一年一次 的；n. 年刊；年鉴</td></tr>
+<tr data-s="yearly adj. 每年的；adv. 每年地"><td class="n">5</td><td class="w">yearly<div class="ipa">[ˈjɜːli]</div></td><td class="m">adj. 每年的；adv. 每年地</td></tr>
+<tr data-s="anniversary n. 周年纪念日"><td class="n">6</td><td class="w">anniversary<div class="ipa">[ˌænɪˈvɜːsəri]</div></td><td class="m">n. 周年纪念日</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 03</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="era n. 时代；纪元"><td class="n">7</td><td class="w">era</td><td class="m">n. 时代；纪元</td></tr>
-<tr data-s="present n. 目前；礼物；adj. 在场 的；目前的；v. 呈现；提出"><td class="n">8</td><td class="w">present</td><td class="m">n. 目前；礼物；adj. 在场 的；目前的；v. 呈现；提出</td></tr>
-<tr data-s="contemporary adj. 现代的；当代的；同时代 的；n. 同代人；同辈人；同龄人"><td class="n">9</td><td class="w">contemporary</td><td class="m">adj. 现代的；当代的；同时代 的；n. 同代人；同辈人；同龄人</td></tr>
+<tr data-s="era n. 时代；纪元"><td class="n">7</td><td class="w">era<div class="ipa">[ˈɪərə]</div></td><td class="m">n. 时代；纪元</td></tr>
+<tr data-s="present n. 目前；礼物；adj. 在场 的；目前的；v. 呈现；提出"><td class="n">8</td><td class="w">present<div class="ipa">[ˈprez(ə)nt]</div></td><td class="m">n. 目前；礼物；adj. 在场 的；目前的；v. 呈现；提出</td></tr>
+<tr data-s="contemporary adj. 现代的；当代的；同时代 的；n. 同代人；同辈人；同龄人"><td class="n">9</td><td class="w">contemporary<div class="ipa">[kənˈtemprəri]</div></td><td class="m">adj. 现代的；当代的；同时代 的；n. 同代人；同辈人；同龄人</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 04</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="medieval adj. 中世纪的；中古的"><td class="n">10</td><td class="w">medieval</td><td class="m">adj. 中世纪的；中古的</td></tr>
-<tr data-s="century n. 世纪；百年"><td class="n">11</td><td class="w">century</td><td class="m">n. 世纪；百年</td></tr>
-<tr data-s="millennium n. 一千年；千禧年；(未 来的)太平盛世"><td class="n">12</td><td class="w">millennium</td><td class="m">n. 一千年；千禧年；(未 来的)太平盛世</td></tr>
+<tr data-s="medieval adj. 中世纪的；中古的"><td class="n">10</td><td class="w">medieval<div class="ipa">[ˌmediˈiːv(ə)l]</div></td><td class="m">adj. 中世纪的；中古的</td></tr>
+<tr data-s="century n. 世纪；百年"><td class="n">11</td><td class="w">century<div class="ipa">[ˈsentʃəri]</div></td><td class="m">n. 世纪；百年</td></tr>
+<tr data-s="millennium n. 一千年；千禧年；(未 来的)太平盛世"><td class="n">12</td><td class="w">millennium<div class="ipa">[mɪˈleniəm]</div></td><td class="m">n. 一千年；千禧年；(未 来的)太平盛世</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 05</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="million num. 一百万；n. 百万； 百万个"><td class="n">13</td><td class="w">million</td><td class="m">num. 一百万；n. 百万； 百万个</td></tr>
-<tr data-s="billion num. 十亿"><td class="n">14</td><td class="w">billion</td><td class="m">num. 十亿</td></tr>
-<tr data-s="dozen n. 很多； 一打；十二个"><td class="n">15</td><td class="w">dozen</td><td class="m">n. 很多； 一打；十二个</td></tr>
-<tr data-s="dawn n. 黎明；破晓；v. 破晓； 开始明朗"><td class="n">16</td><td class="w">dawn</td><td class="m">n. 黎明；破晓；v. 破晓； 开始明朗</td></tr>
+<tr data-s="million num. 一百万；n. 百万； 百万个"><td class="n">13</td><td class="w">million<div class="ipa">[ˈmɪljən]</div></td><td class="m">num. 一百万；n. 百万； 百万个</td></tr>
+<tr data-s="billion num. 十亿"><td class="n">14</td><td class="w">billion<div class="ipa">[ˈbɪljən]</div></td><td class="m">num. 十亿</td></tr>
+<tr data-s="dozen n. 很多； 一打；十二个"><td class="n">15</td><td class="w">dozen<div class="ipa">[ˈdʌz(ə)n]</div></td><td class="m">n. 很多； 一打；十二个</td></tr>
+<tr data-s="dawn n. 黎明；破晓；v. 破晓； 开始明朗"><td class="n">16</td><td class="w">dawn<div class="ipa">[dɔːn]</div></td><td class="m">n. 黎明；破晓；v. 破晓； 开始明朗</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 06</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="midday n. 中午；正午"><td class="n">17</td><td class="w">midday</td><td class="m">n. 中午；正午</td></tr>
-<tr data-s="midnight n. 午夜；子夜"><td class="n">18</td><td class="w">midnight</td><td class="m">n. 午夜；子夜</td></tr>
-<tr data-s="overnight adv. 在夜里；突然；adj. 整晚的；突然的"><td class="n">19</td><td class="w">overnight</td><td class="m">adv. 在夜里；突然；adj. 整晚的；突然的</td></tr>
-<tr data-s="night n. 夜晚；晚上"><td class="n">20</td><td class="w">night</td><td class="m">n. 夜晚；晚上</td></tr>
+<tr data-s="midday n. 中午；正午"><td class="n">17</td><td class="w">midday<div class="ipa">[ˌmɪdˈdeɪ]</div></td><td class="m">n. 中午；正午</td></tr>
+<tr data-s="midnight n. 午夜；子夜"><td class="n">18</td><td class="w">midnight<div class="ipa">[ˈmɪdnaɪt]</div></td><td class="m">n. 午夜；子夜</td></tr>
+<tr data-s="overnight adv. 在夜里；突然；adj. 整晚的；突然的"><td class="n">19</td><td class="w">overnight<div class="ipa">[ˌəʊvəˈnaɪt]</div></td><td class="m">adv. 在夜里；突然；adj. 整晚的；突然的</td></tr>
+<tr data-s="night n. 夜晚；晚上"><td class="n">20</td><td class="w">night<div class="ipa">[naɪt]</div></td><td class="m">n. 夜晚；晚上</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 07</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="modern adj. 现代的；时髦的"><td class="n">21</td><td class="w">modern</td><td class="m">adj. 现代的；时髦的</td></tr>
-<tr data-s="recent adj. 近来的；新近的"><td class="n">22</td><td class="w">recent</td><td class="m">adj. 近来的；新近的</td></tr>
-<tr data-s="up-to-date adj. 最新的；最近的；新 式的"><td class="n">23</td><td class="w">up-to-date</td><td class="m">adj. 最新的；最近的；新 式的</td></tr>
+<tr data-s="modern adj. 现代的；时髦的"><td class="n">21</td><td class="w">modern<div class="ipa">[ˈmɒd(ə)n]</div></td><td class="m">adj. 现代的；时髦的</td></tr>
+<tr data-s="recent adj. 近来的；新近的"><td class="n">22</td><td class="w">recent<div class="ipa">[ˈriːs(ə)nt]</div></td><td class="m">adj. 近来的；新近的</td></tr>
+<tr data-s="up-to-date adj. 最新的；最近的；新 式的"><td class="n">23</td><td class="w">up-to-date<div class="ipa">[ˈʌptəˈdeɪt]</div></td><td class="m">adj. 最新的；最近的；新 式的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 08</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="first n. 第一；adj. 第一的； adv. 第一；首先"><td class="n">24</td><td class="w">first</td><td class="m">n. 第一；adj. 第一的； adv. 第一；首先</td></tr>
-<tr data-s="secondly adv. 第二；其次"><td class="n">25</td><td class="w">secondly</td><td class="m">adv. 第二；其次</td></tr>
-<tr data-s="finally adv. 最后；终于"><td class="n">26</td><td class="w">finally</td><td class="m">adv. 最后；终于</td></tr>
-<tr data-s="finish v. 完成；结束"><td class="n">27</td><td class="w">finish</td><td class="m">v. 完成；结束</td></tr>
+<tr data-s="first n. 第一；adj. 第一的； adv. 第一；首先"><td class="n">24</td><td class="w">first<div class="ipa">[fɜːst]</div></td><td class="m">n. 第一；adj. 第一的； adv. 第一；首先</td></tr>
+<tr data-s="secondly adv. 第二；其次"><td class="n">25</td><td class="w">secondly<div class="ipa">[ˈsekəndli]</div></td><td class="m">adv. 第二；其次</td></tr>
+<tr data-s="finally adv. 最后；终于"><td class="n">26</td><td class="w">finally<div class="ipa">[ˈfaɪnəli]</div></td><td class="m">adv. 最后；终于</td></tr>
+<tr data-s="finish v. 完成；结束"><td class="n">27</td><td class="w">finish<div class="ipa">[ˈfɪnɪʃ]</div></td><td class="m">v. 完成；结束</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 09</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="immediately adv. 立即；⻢上；conj. 即刻"><td class="n">28</td><td class="w">immediately</td><td class="m">adv. 立即；⻢上；conj. 即刻</td></tr>
-<tr data-s="instant n. 瞬间；立即；adj. 立即 的；即时的"><td class="n">29</td><td class="w">instant</td><td class="m">n. 瞬间；立即；adj. 立即 的；即时的</td></tr>
-<tr data-s="moment n. 瞬间；片刻"><td class="n">30</td><td class="w">moment</td><td class="m">n. 瞬间；片刻</td></tr>
-<tr data-s="minute n. 分钟；一会儿；adj. 微 小的"><td class="n">31</td><td class="w">minute</td><td class="m">n. 分钟；一会儿；adj. 微 小的</td></tr>
+<tr data-s="immediately adv. 立即；⻢上；conj. 即刻"><td class="n">28</td><td class="w">immediately<div class="ipa">[ɪˈmiːdiətli]</div></td><td class="m">adv. 立即；⻢上；conj. 即刻</td></tr>
+<tr data-s="instant n. 瞬间；立即；adj. 立即 的；即时的"><td class="n">29</td><td class="w">instant<div class="ipa">[ˈɪnstənt]</div></td><td class="m">n. 瞬间；立即；adj. 立即 的；即时的</td></tr>
+<tr data-s="moment n. 瞬间；片刻"><td class="n">30</td><td class="w">moment<div class="ipa">[ˈməʊmənt]</div></td><td class="m">n. 瞬间；片刻</td></tr>
+<tr data-s="minute n. 分钟；一会儿；adj. 微 小的"><td class="n">31</td><td class="w">minute<div class="ipa">[ˈmɪnɪt]</div></td><td class="m">n. 分钟；一会儿；adj. 微 小的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 10</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="prior adj. 优先的；在前的"><td class="n">32</td><td class="w">prior</td><td class="m">adj. 优先的；在前的</td></tr>
-<tr data-s="former adj. 以前的；前者的；n. 模子"><td class="n">33</td><td class="w">former</td><td class="m">adj. 以前的；前者的；n. 模子</td></tr>
-<tr data-s="preceding adj. 在先的；在前的"><td class="n">34</td><td class="w">preceding</td><td class="m">adj. 在先的；在前的</td></tr>
+<tr data-s="prior adj. 优先的；在前的"><td class="n">32</td><td class="w">prior<div class="ipa">[ˈpraɪə(r)]</div></td><td class="m">adj. 优先的；在前的</td></tr>
+<tr data-s="former adj. 以前的；前者的；n. 模子"><td class="n">33</td><td class="w">former<div class="ipa">[ˈfɔːmə(r)]</div></td><td class="m">adj. 以前的；前者的；n. 模子</td></tr>
+<tr data-s="preceding adj. 在先的；在前的"><td class="n">34</td><td class="w">preceding<div class="ipa">[prɪˈsiːdɪŋ]</div></td><td class="m">adj. 在先的；在前的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 11</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="precedent n. 先例；前例"><td class="n">35</td><td class="w">precedent</td><td class="m">n. 先例；前例</td></tr>
-<tr data-s="foremost adj. 最重要的；最好的； adv. 首要地"><td class="n">36</td><td class="w">foremost</td><td class="m">adj. 最重要的；最好的； adv. 首要地</td></tr>
-<tr data-s="opening n. 开始；开口；空缺职位；adj. 开 始的；v. 打开；“open”的现在分 词"><td class="n">37</td><td class="w">opening</td><td class="m">n. 开始；开口；空缺职位；adj. 开 始的；v. 打开；“open”的现在分 词</td></tr>
-<tr data-s="initially adv. 最初；开始；起初"><td class="n">38</td><td class="w">initially</td><td class="m">adv. 最初；开始；起初</td></tr>
+<tr data-s="precedent n. 先例；前例"><td class="n">35</td><td class="w">precedent<div class="ipa">[ˈpresɪdənt]</div></td><td class="m">n. 先例；前例</td></tr>
+<tr data-s="foremost adj. 最重要的；最好的； adv. 首要地"><td class="n">36</td><td class="w">foremost<div class="ipa">[ˈfɔːməʊst]</div></td><td class="m">adj. 最重要的；最好的； adv. 首要地</td></tr>
+<tr data-s="opening n. 开始；开口；空缺职位；adj. 开 始的；v. 打开；“open”的现在分 词"><td class="n">37</td><td class="w">opening<div class="ipa">[ˈəʊpənɪŋ]</div></td><td class="m">n. 开始；开口；空缺职位；adj. 开 始的；v. 打开；“open”的现在分 词</td></tr>
+<tr data-s="initially adv. 最初；开始；起初"><td class="n">38</td><td class="w">initially<div class="ipa">[ɪˈnɪʃəli]</div></td><td class="m">adv. 最初；开始；起初</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 12</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="intermediate adj. 中间的；居中的"><td class="n">39</td><td class="w">intermediate</td><td class="m">adj. 中间的；居中的</td></tr>
-<tr data-s="midst n. 中间；中部"><td class="n">40</td><td class="w">midst</td><td class="m">n. 中间；中部</td></tr>
-<tr data-s="meantime n. 期间；与此同时"><td class="n">41</td><td class="w">meantime</td><td class="m">n. 期间；与此同时</td></tr>
+<tr data-s="intermediate adj. 中间的；居中的"><td class="n">39</td><td class="w">intermediate<div class="ipa">[ˌɪntəˈmiːdiət]</div></td><td class="m">adj. 中间的；居中的</td></tr>
+<tr data-s="midst n. 中间；中部"><td class="n">40</td><td class="w">midst<div class="ipa">[mɪdst]</div></td><td class="m">n. 中间；中部</td></tr>
+<tr data-s="meantime n. 期间；与此同时"><td class="n">41</td><td class="w">meantime<div class="ipa">[ˈmiːntaɪm]</div></td><td class="m">n. 期间；与此同时</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 13</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="meanwhile adv. 与此同时；在此期间"><td class="n">42</td><td class="w">meanwhile</td><td class="m">adv. 与此同时；在此期间</td></tr>
-<tr data-s="simultaneous adj. 同时的；同步的"><td class="n">43</td><td class="w">simultaneous</td><td class="m">adj. 同时的；同步的</td></tr>
-<tr data-s="ongoing adj. 正在进行的"><td class="n">44</td><td class="w">ongoing</td><td class="m">adj. 正在进行的</td></tr>
+<tr data-s="meanwhile adv. 与此同时；在此期间"><td class="n">42</td><td class="w">meanwhile<div class="ipa">[ˈmiːnwaɪl]</div></td><td class="m">adv. 与此同时；在此期间</td></tr>
+<tr data-s="simultaneous adj. 同时的；同步的"><td class="n">43</td><td class="w">simultaneous<div class="ipa">[ˌsɪm(ə)lˈteɪniəs]</div></td><td class="m">adj. 同时的；同步的</td></tr>
+<tr data-s="ongoing adj. 正在进行的"><td class="n">44</td><td class="w">ongoing<div class="ipa">[ˈɒnɡəʊɪŋ]</div></td><td class="m">adj. 正在进行的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 14</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="everlasting adj. 永久的；永恒的；经 久不变的"><td class="n">45</td><td class="w">everlasting</td><td class="m">adj. 永久的；永恒的；经 久不变的</td></tr>
-<tr data-s="permanent adj. 永久的；持久的"><td class="n">46</td><td class="w">permanent</td><td class="m">adj. 永久的；持久的</td></tr>
-<tr data-s="punctual adj. 准时的"><td class="n">47</td><td class="w">punctual</td><td class="m">adj. 准时的</td></tr>
+<tr data-s="everlasting adj. 永久的；永恒的；经 久不变的"><td class="n">45</td><td class="w">everlasting<div class="ipa">[ˌevəˈlɑːstɪŋ]</div></td><td class="m">adj. 永久的；永恒的；经 久不变的</td></tr>
+<tr data-s="permanent adj. 永久的；持久的"><td class="n">46</td><td class="w">permanent<div class="ipa">[ˈpɜːmənənt]</div></td><td class="m">adj. 永久的；持久的</td></tr>
+<tr data-s="punctual adj. 准时的"><td class="n">47</td><td class="w">punctual<div class="ipa">[ˈpʌŋktʃuəl]</div></td><td class="m">adj. 准时的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 15</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="duration n. 持续时间；期间"><td class="n">48</td><td class="w">duration</td><td class="m">n. 持续时间；期间</td></tr>
-<tr data-s="consecutive adj. 连续的；连贯的"><td class="n">49</td><td class="w">consecutive</td><td class="m">adj. 连续的；连贯的</td></tr>
-<tr data-s="periodically adv. 周期性地；定期地"><td class="n">50</td><td class="w">periodically</td><td class="m">adv. 周期性地；定期地</td></tr>
-<tr data-s="imminent adj. 即将发生的；临近的"><td class="n">51</td><td class="w">imminent</td><td class="m">adj. 即将发生的；临近的</td></tr>
-<tr data-s="incidentally adv. 附带地；偶然地；顺 便地"><td class="n">52</td><td class="w">incidentally</td><td class="m">adv. 附带地；偶然地；顺 便地</td></tr>
+<tr data-s="duration n. 持续时间；期间"><td class="n">48</td><td class="w">duration<div class="ipa">[djuˈreɪʃ(ə)n]</div></td><td class="m">n. 持续时间；期间</td></tr>
+<tr data-s="consecutive adj. 连续的；连贯的"><td class="n">49</td><td class="w">consecutive<div class="ipa">[kənˈsekjətɪv]</div></td><td class="m">adj. 连续的；连贯的</td></tr>
+<tr data-s="periodically adv. 周期性地；定期地"><td class="n">50</td><td class="w">periodically<div class="ipa">[ˌpɪəriˈɒdɪkli]</div></td><td class="m">adv. 周期性地；定期地</td></tr>
+<tr data-s="imminent adj. 即将发生的；临近的"><td class="n">51</td><td class="w">imminent<div class="ipa">[ˈɪmɪnənt]</div></td><td class="m">adj. 即将发生的；临近的</td></tr>
+<tr data-s="incidentally adv. 附带地；偶然地；顺 便地"><td class="n">52</td><td class="w">incidentally<div class="ipa">[ˌɪnsɪˈdentli]</div></td><td class="m">adv. 附带地；偶然地；顺 便地</td></tr>
 </tbody>
 </table><div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit21.html">← Unit 21</a><a href="unit22-card.html">切到例句卡片版</a><a class="dis">下一单元 →</a></div><footer><div class="wrap" style="padding:0">
  摘自《雅思词汇真经》（刘洪波 编著）第 22 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
@@ -221,27 +226,31 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  var KEY='vj-hide';
  var body=document.body;
  var kind=body.dataset.kind;
- var s={m:false,z:false};
- try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;}}catch(e){}
+ var s={m:false,z:false,i:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z; if(typeof o.i==='boolean')s.i=o.i;}}catch(e){}
  function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
  function paint(){
   body.classList.toggle('hide-m',s.m);
   body.classList.toggle('hide-z',s.z);
-  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all');
+  body.classList.toggle('hide-i',s.i);
+  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all'), ci=document.getElementById('i');
   if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
   if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
+  if(ci){ci.checked=s.i; ci.closest('.sw').classList.toggle('on',s.i);}
   if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
  }
  var cm=document.getElementById('m');
  if(cm) cm.addEventListener('change',function(){s.m=cm.checked; save(); paint();});
  var cz=document.getElementById('z');
  if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
+ var ci=document.getElementById('i');
+ if(ci) ci.addEventListener('change',function(){s.i=ci.checked; save(); paint();});
  var ca=document.getElementById('all');
  if(ca) ca.addEventListener('change',function(){
    s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
  });
  var rs=document.getElementById('reset');
- if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; save(); paint();});
+ if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; s.i=false; save(); paint();});
  var q=document.getElementById('q');
  var items=[].slice.call(document.querySelectorAll('[data-s]'));
  var cnt=document.getElementById('cnt');

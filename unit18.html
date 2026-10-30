@@ -56,6 +56,9 @@ td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-
 td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
  letter-spacing:.2px;word-break:break-word}
 td.m{color:var(--ink)}
+.ipa{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:12px;font-weight:400;
+ color:var(--ink2);letter-spacing:0;margin-top:3px;word-break:break-word}
+.card .w .ipa{font-size:13px;margin-left:8px}
 tr.hit td.w,tr.hit td.m{background:var(--mark)}
 
 .cards{display:grid;gap:12px}
@@ -86,6 +89,7 @@ section.grp .card:last-child{border-bottom:0}
 
 .hide-m .m,.hide-m td.m{display:none}
 .hide-z .zh{display:none}
+.hide-i .ipa{display:none}
 body.hide-m td.m{display:none!important}
 .empty{padding:40px;text-align:center;color:var(--ink2);font-size:14px}
 
@@ -126,323 +130,324 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
   <input id="q" type="search" placeholder="搜索单词或释义…（按 / 聚焦）">
   <label class="sw"><input type="checkbox" id="all"> 默写模式</label>
   <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
+  <label class="sw"><input type="checkbox" id="i"> 隐藏音标</label>
   
   <button class="btn" id="reset">重置</button>
   <span class="count" id="cnt">211 条</span>
  </div>
 </div></div><div class="wrap"><table><thead><tr><th>#</th><th>单词</th><th>释义</th></tr></thead>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 01</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="violence n. 暴力；暴行"><td class="n">1</td><td class="w">violence</td><td class="m">n. 暴力；暴行</td></tr>
-<tr data-s="conflict n. 冲突；矛盾；v. 抵触； 冲突"><td class="n">2</td><td class="w">conflict</td><td class="m">n. 冲突；矛盾；v. 抵触； 冲突</td></tr>
-<tr data-s="raid n. 袭击；突击；劫掠；v. 突袭；搜捕；劫掠"><td class="n">3</td><td class="w">raid</td><td class="m">n. 袭击；突击；劫掠；v. 突袭；搜捕；劫掠</td></tr>
-<tr data-s="enormity n. 极恶；庞大；巨大"><td class="n">4</td><td class="w">enormity</td><td class="m">n. 极恶；庞大；巨大</td></tr>
+<tr data-s="violence n. 暴力；暴行"><td class="n">1</td><td class="w">violence<div class="ipa">[ˈvaɪələns]</div></td><td class="m">n. 暴力；暴行</td></tr>
+<tr data-s="conflict n. 冲突；矛盾；v. 抵触； 冲突"><td class="n">2</td><td class="w">conflict<div class="ipa">[ˈkɒnflɪkt]</div></td><td class="m">n. 冲突；矛盾；v. 抵触； 冲突</td></tr>
+<tr data-s="raid n. 袭击；突击；劫掠；v. 突袭；搜捕；劫掠"><td class="n">3</td><td class="w">raid<div class="ipa">[reɪd]</div></td><td class="m">n. 袭击；突击；劫掠；v. 突袭；搜捕；劫掠</td></tr>
+<tr data-s="enormity n. 极恶；庞大；巨大"><td class="n">4</td><td class="w">enormity<div class="ipa">[ɪˈnɔːməti]</div></td><td class="m">n. 极恶；庞大；巨大</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 02</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="campaign n. 战役；运动；(政治、商业或社 会性)活动；v. 参加战役；从事活 动"><td class="n">5</td><td class="w">campaign</td><td class="m">n. 战役；运动；(政治、商业或社 会性)活动；v. 参加战役；从事活 动</td></tr>
-<tr data-s="battle n. 战斗；v. 战斗"><td class="n">6</td><td class="w">battle</td><td class="m">n. 战斗；v. 战斗</td></tr>
-<tr data-s="struggle v. 斗争；挣扎；抗争；n. 斗争；奋斗；抗争"><td class="n">7</td><td class="w">struggle</td><td class="m">v. 斗争；挣扎；抗争；n. 斗争；奋斗；抗争</td></tr>
+<tr data-s="campaign n. 战役；运动；(政治、商业或社 会性)活动；v. 参加战役；从事活 动"><td class="n">5</td><td class="w">campaign<div class="ipa">[kæmˈpeɪn]</div></td><td class="m">n. 战役；运动；(政治、商业或社 会性)活动；v. 参加战役；从事活 动</td></tr>
+<tr data-s="battle n. 战斗；v. 战斗"><td class="n">6</td><td class="w">battle<div class="ipa">[ˈbæt(ə)l]</div></td><td class="m">n. 战斗；v. 战斗</td></tr>
+<tr data-s="struggle v. 斗争；挣扎；抗争；n. 斗争；奋斗；抗争"><td class="n">7</td><td class="w">struggle<div class="ipa">[ˈstrʌɡl]</div></td><td class="m">v. 斗争；挣扎；抗争；n. 斗争；奋斗；抗争</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 03</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="explosion n. 爆炸；(感情)爆发； 激增"><td class="n">8</td><td class="w">explosion</td><td class="m">n. 爆炸；(感情)爆发； 激增</td></tr>
-<tr data-s="bombard v. 炮轰；轰击"><td class="n">9</td><td class="w">bombard</td><td class="m">v. 炮轰；轰击</td></tr>
-<tr data-s="bomb n. 炸弹；v. 投弹于；轰炸"><td class="n">10</td><td class="w">bomb</td><td class="m">n. 炸弹；v. 投弹于；轰炸</td></tr>
+<tr data-s="explosion n. 爆炸；(感情)爆发； 激增"><td class="n">8</td><td class="w">explosion<div class="ipa">[ɪkˈspləʊʒ(ə)n]</div></td><td class="m">n. 爆炸；(感情)爆发； 激增</td></tr>
+<tr data-s="bombard v. 炮轰；轰击"><td class="n">9</td><td class="w">bombard<div class="ipa">[bɒmˈbɑːd]</div></td><td class="m">v. 炮轰；轰击</td></tr>
+<tr data-s="bomb n. 炸弹；v. 投弹于；轰炸"><td class="n">10</td><td class="w">bomb<div class="ipa">[bɒm]</div></td><td class="m">n. 炸弹；v. 投弹于；轰炸</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 04</span><span class="gcnt">8 词</span></td></tr>
-<tr data-s="blast n. 爆炸；一阵强劲的气流；突然 的响声；v. 爆破；产生巨大噪声"><td class="n">11</td><td class="w">blast</td><td class="m">n. 爆炸；一阵强劲的气流；突然 的响声；v. 爆破；产生巨大噪声</td></tr>
-<tr data-s="burst v. 爆裂；突然而起；n. 爆 裂；突然而起"><td class="n">12</td><td class="w">burst</td><td class="m">v. 爆裂；突然而起；n. 爆 裂；突然而起</td></tr>
-<tr data-s="spark n. 火花；火星；v. 触发； 冒火花；闪光；激发"><td class="n">13</td><td class="w">spark</td><td class="m">n. 火花；火星；v. 触发； 冒火花；闪光；激发</td></tr>
-<tr data-s="twinkle v. 闪耀；闪烁；n. 闪烁"><td class="n">14</td><td class="w">twinkle</td><td class="m">v. 闪耀；闪烁；n. 闪烁</td></tr>
-<tr data-s="gunpowder n. 火药；有烟火药"><td class="n">15</td><td class="w">gunpowder</td><td class="m">n. 火药；有烟火药</td></tr>
-<tr data-s="tank n. 罐；箱；坦克；v. 把 ... 储于槽中"><td class="n">16</td><td class="w">tank</td><td class="m">n. 罐；箱；坦克；v. 把 ... 储于槽中</td></tr>
-<tr data-s="cannon n. 大炮；火炮；v. 猛撞； 碰撞"><td class="n">17</td><td class="w">cannon</td><td class="m">n. 大炮；火炮；v. 猛撞； 碰撞</td></tr>
-<tr data-s="missile n. 导弹"><td class="n">18</td><td class="w">missile</td><td class="m">n. 导弹</td></tr>
+<tr data-s="blast n. 爆炸；一阵强劲的气流；突然 的响声；v. 爆破；产生巨大噪声"><td class="n">11</td><td class="w">blast<div class="ipa">[blɑːst]</div></td><td class="m">n. 爆炸；一阵强劲的气流；突然 的响声；v. 爆破；产生巨大噪声</td></tr>
+<tr data-s="burst v. 爆裂；突然而起；n. 爆 裂；突然而起"><td class="n">12</td><td class="w">burst<div class="ipa">[bɜːst]</div></td><td class="m">v. 爆裂；突然而起；n. 爆 裂；突然而起</td></tr>
+<tr data-s="spark n. 火花；火星；v. 触发； 冒火花；闪光；激发"><td class="n">13</td><td class="w">spark<div class="ipa">[spɑːk]</div></td><td class="m">n. 火花；火星；v. 触发； 冒火花；闪光；激发</td></tr>
+<tr data-s="twinkle v. 闪耀；闪烁；n. 闪烁"><td class="n">14</td><td class="w">twinkle<div class="ipa">[ˈtwɪŋk(ə)l]</div></td><td class="m">v. 闪耀；闪烁；n. 闪烁</td></tr>
+<tr data-s="gunpowder n. 火药；有烟火药"><td class="n">15</td><td class="w">gunpowder<div class="ipa">[ˈɡʌnpaʊdə(r)]</div></td><td class="m">n. 火药；有烟火药</td></tr>
+<tr data-s="tank n. 罐；箱；坦克；v. 把 ... 储于槽中"><td class="n">16</td><td class="w">tank<div class="ipa">[tæŋk]</div></td><td class="m">n. 罐；箱；坦克；v. 把 ... 储于槽中</td></tr>
+<tr data-s="cannon n. 大炮；火炮；v. 猛撞； 碰撞"><td class="n">17</td><td class="w">cannon<div class="ipa">[ˈkænən]</div></td><td class="m">n. 大炮；火炮；v. 猛撞； 碰撞</td></tr>
+<tr data-s="missile n. 导弹"><td class="n">18</td><td class="w">missile<div class="ipa">[ˈmɪsaɪl]</div></td><td class="m">n. 导弹</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 05</span><span class="gcnt">7 词</span></td></tr>
-<tr data-s="weapon n. 武器"><td class="n">19</td><td class="w">weapon</td><td class="m">n. 武器</td></tr>
-<tr data-s="pistol n. 手枪"><td class="n">20</td><td class="w">pistol</td><td class="m">n. 手枪</td></tr>
-<tr data-s="rifle n. 步枪；来复枪；v. 快速 搜寻"><td class="n">21</td><td class="w">rifle</td><td class="m">n. 步枪；来复枪；v. 快速 搜寻</td></tr>
-<tr data-s="bullet n. 子弹；枪弹"><td class="n">22</td><td class="w">bullet</td><td class="m">n. 子弹；枪弹</td></tr>
-<tr data-s="target n. 目标；对象；靶；v. 以...为目标；瞄准"><td class="n">23</td><td class="w">target</td><td class="m">n. 目标；对象；靶；v. 以...为目标；瞄准</td></tr>
-<tr data-s="deflect v. 偏斜；偏离；使转向； 使中止"><td class="n">24</td><td class="w">deflect</td><td class="m">v. 偏斜；偏离；使转向； 使中止</td></tr>
-<tr data-s="mission n. 使命；任务；使团"><td class="n">25</td><td class="w">mission</td><td class="m">n. 使命；任务；使团</td></tr>
+<tr data-s="weapon n. 武器"><td class="n">19</td><td class="w">weapon<div class="ipa">[ˈwepən]</div></td><td class="m">n. 武器</td></tr>
+<tr data-s="pistol n. 手枪"><td class="n">20</td><td class="w">pistol<div class="ipa">[ˈpɪst(ə)l]</div></td><td class="m">n. 手枪</td></tr>
+<tr data-s="rifle n. 步枪；来复枪；v. 快速 搜寻"><td class="n">21</td><td class="w">rifle<div class="ipa">[ˈraɪf(ə)l]</div></td><td class="m">n. 步枪；来复枪；v. 快速 搜寻</td></tr>
+<tr data-s="bullet n. 子弹；枪弹"><td class="n">22</td><td class="w">bullet<div class="ipa">[ˈbʊlɪt]</div></td><td class="m">n. 子弹；枪弹</td></tr>
+<tr data-s="target n. 目标；对象；靶；v. 以...为目标；瞄准"><td class="n">23</td><td class="w">target<div class="ipa">[ˈtɑːɡɪt]</div></td><td class="m">n. 目标；对象；靶；v. 以...为目标；瞄准</td></tr>
+<tr data-s="deflect v. 偏斜；偏离；使转向； 使中止"><td class="n">24</td><td class="w">deflect<div class="ipa">[dɪˈflekt]</div></td><td class="m">v. 偏斜；偏离；使转向； 使中止</td></tr>
+<tr data-s="mission n. 使命；任务；使团"><td class="n">25</td><td class="w">mission<div class="ipa">[ˈmɪʃ(ə)n]</div></td><td class="m">n. 使命；任务；使团</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 06</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="flame n. 火焰；v. 燃烧；爆发； 面红"><td class="n">26</td><td class="w">flame</td><td class="m">n. 火焰；v. 燃烧；爆发； 面红</td></tr>
-<tr data-s="flare v. (突然)烧旺；闪耀；突然爆 发；张开；加剧；n. 旺火；亮光"><td class="n">27</td><td class="w">flare</td><td class="m">v. (突然)烧旺；闪耀；突然爆 发；张开；加剧；n. 旺火；亮光</td></tr>
-<tr data-s="glitter n. 闪耀；闪烁；小发光物；v. 闪耀；闪亮；流露(感情)"><td class="n">28</td><td class="w">glitter</td><td class="m">n. 闪耀；闪烁；小发光物；v. 闪耀；闪亮；流露(感情)</td></tr>
-<tr data-s="glow v. 发光；发热；脸红；n. 红光；炽热；脸红；喜悦"><td class="n">29</td><td class="w">glow</td><td class="m">v. 发光；发热；脸红；n. 红光；炽热；脸红；喜悦</td></tr>
+<tr data-s="flame n. 火焰；v. 燃烧；爆发； 面红"><td class="n">26</td><td class="w">flame<div class="ipa">[fleɪm]</div></td><td class="m">n. 火焰；v. 燃烧；爆发； 面红</td></tr>
+<tr data-s="flare v. (突然)烧旺；闪耀；突然爆 发；张开；加剧；n. 旺火；亮光"><td class="n">27</td><td class="w">flare<div class="ipa">[fleə(r)]</div></td><td class="m">v. (突然)烧旺；闪耀；突然爆 发；张开；加剧；n. 旺火；亮光</td></tr>
+<tr data-s="glitter n. 闪耀；闪烁；小发光物；v. 闪耀；闪亮；流露(感情)"><td class="n">28</td><td class="w">glitter<div class="ipa">[ˈɡlɪtə(r)]</div></td><td class="m">n. 闪耀；闪烁；小发光物；v. 闪耀；闪亮；流露(感情)</td></tr>
+<tr data-s="glow v. 发光；发热；脸红；n. 红光；炽热；脸红；喜悦"><td class="n">29</td><td class="w">glow<div class="ipa">[ɡləʊ]</div></td><td class="m">v. 发光；发热；脸红；n. 红光；炽热；脸红；喜悦</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 07</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="blade n. 刀刃；桨叶"><td class="n">30</td><td class="w">blade</td><td class="m">n. 刀刃；桨叶</td></tr>
-<tr data-s="sword n. 剑；刀"><td class="n">31</td><td class="w">sword</td><td class="m">n. 剑；刀</td></tr>
-<tr data-s="ax n. 斧子；v. 用斧砍；裁 减；大量削减"><td class="n">32</td><td class="w">ax</td><td class="m">n. 斧子；v. 用斧砍；裁 减；大量削减</td></tr>
-<tr data-s="hammer n. 锤子；v. 锤打"><td class="n">33</td><td class="w">hammer</td><td class="m">n. 锤子；v. 锤打</td></tr>
+<tr data-s="blade n. 刀刃；桨叶"><td class="n">30</td><td class="w">blade<div class="ipa">[bleɪd]</div></td><td class="m">n. 刀刃；桨叶</td></tr>
+<tr data-s="sword n. 剑；刀"><td class="n">31</td><td class="w">sword<div class="ipa">[sɔːd]</div></td><td class="m">n. 剑；刀</td></tr>
+<tr data-s="ax n. 斧子；v. 用斧砍；裁 减；大量削减"><td class="n">32</td><td class="w">ax<div class="ipa">[æks]</div></td><td class="m">n. 斧子；v. 用斧砍；裁 减；大量削减</td></tr>
+<tr data-s="hammer n. 锤子；v. 锤打"><td class="n">33</td><td class="w">hammer<div class="ipa">[ˈhæmə(r)]</div></td><td class="m">n. 锤子；v. 锤打</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 08</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="arrow n. 箭；箭头"><td class="n">34</td><td class="w">arrow</td><td class="m">n. 箭；箭头</td></tr>
-<tr data-s="spear n. 矛；枪；v. 用矛刺"><td class="n">35</td><td class="w">spear</td><td class="m">n. 矛；枪；v. 用矛刺</td></tr>
-<tr data-s="helmet n. 头盔；防护帽"><td class="n">36</td><td class="w">helmet</td><td class="m">n. 头盔；防护帽</td></tr>
-<tr data-s="shield n. 盾牌；防护物；v. 遮 挡；防护"><td class="n">37</td><td class="w">shield</td><td class="m">n. 盾牌；防护物；v. 遮 挡；防护</td></tr>
+<tr data-s="arrow n. 箭；箭头"><td class="n">34</td><td class="w">arrow<div class="ipa">[ˈærəʊ]</div></td><td class="m">n. 箭；箭头</td></tr>
+<tr data-s="spear n. 矛；枪；v. 用矛刺"><td class="n">35</td><td class="w">spear<div class="ipa">[spɪə(r)]</div></td><td class="m">n. 矛；枪；v. 用矛刺</td></tr>
+<tr data-s="helmet n. 头盔；防护帽"><td class="n">36</td><td class="w">helmet<div class="ipa">[ˈhelmɪt]</div></td><td class="m">n. 头盔；防护帽</td></tr>
+<tr data-s="shield n. 盾牌；防护物；v. 遮 挡；防护"><td class="n">37</td><td class="w">shield<div class="ipa">[ʃiːld]</div></td><td class="m">n. 盾牌；防护物；v. 遮 挡；防护</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 09</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="equip v. 装备；配备"><td class="n">38</td><td class="w">equip</td><td class="m">v. 装备；配备</td></tr>
-<tr data-s="prepare v. 准备；预备"><td class="n">39</td><td class="w">prepare</td><td class="m">v. 准备；预备</td></tr>
-<tr data-s="provide v. 提供；供应"><td class="n">40</td><td class="w">provide</td><td class="m">v. 提供；供应</td></tr>
-<tr data-s="deploy v. 部署；有效地利用"><td class="n">41</td><td class="w">deploy</td><td class="m">v. 部署；有效地利用</td></tr>
+<tr data-s="equip v. 装备；配备"><td class="n">38</td><td class="w">equip<div class="ipa">[ɪˈkwɪp]</div></td><td class="m">v. 装备；配备</td></tr>
+<tr data-s="prepare v. 准备；预备"><td class="n">39</td><td class="w">prepare<div class="ipa">[prɪˈpeə(r)]</div></td><td class="m">v. 准备；预备</td></tr>
+<tr data-s="provide v. 提供；供应"><td class="n">40</td><td class="w">provide<div class="ipa">[prəˈvaɪd]</div></td><td class="m">v. 提供；供应</td></tr>
+<tr data-s="deploy v. 部署；有效地利用"><td class="n">41</td><td class="w">deploy<div class="ipa">[dɪˈplɔɪ]</div></td><td class="m">v. 部署；有效地利用</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 10</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="hit v. 打；击；碰撞；袭击；抨击；达 到；n. 打；击；碰撞；袭击；(演 出等)成功"><td class="n">42</td><td class="w">hit</td><td class="m">v. 打；击；碰撞；袭击；抨击；达 到；n. 打；击；碰撞；袭击；(演 出等)成功</td></tr>
-<tr data-s="beat v. 打；敲打；击败；n. 一 击；跳动"><td class="n">43</td><td class="w">beat</td><td class="m">v. 打；敲打；击败；n. 一 击；跳动</td></tr>
-<tr data-s="strike v. 击打；罢工；侵袭；突然想 到；划(火柴)；n. 罢工；袭击"><td class="n">44</td><td class="w">strike</td><td class="m">v. 击打；罢工；侵袭；突然想 到；划(火柴)；n. 罢工；袭击</td></tr>
+<tr data-s="hit v. 打；击；碰撞；袭击；抨击；达 到；n. 打；击；碰撞；袭击；(演 出等)成功"><td class="n">42</td><td class="w">hit<div class="ipa">[hɪt]</div></td><td class="m">v. 打；击；碰撞；袭击；抨击；达 到；n. 打；击；碰撞；袭击；(演 出等)成功</td></tr>
+<tr data-s="beat v. 打；敲打；击败；n. 一 击；跳动"><td class="n">43</td><td class="w">beat<div class="ipa">[biːt]</div></td><td class="m">v. 打；敲打；击败；n. 一 击；跳动</td></tr>
+<tr data-s="strike v. 击打；罢工；侵袭；突然想 到；划(火柴)；n. 罢工；袭击"><td class="n">44</td><td class="w">strike<div class="ipa">[straɪk]</div></td><td class="m">v. 击打；罢工；侵袭；突然想 到；划(火柴)；n. 罢工；袭击</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 11</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="punch n. 重拳击打；v. 拳打；打 孔"><td class="n">45</td><td class="w">punch</td><td class="m">n. 重拳击打；v. 拳打；打 孔</td></tr>
-<tr data-s="chop v. 砍；劈；剁；n. 砍； 剁；排⻣"><td class="n">46</td><td class="w">chop</td><td class="m">v. 砍；劈；剁；n. 砍； 剁；排⻣</td></tr>
-<tr data-s="stab n. 刺；戳；v. 刺；戳"><td class="n">47</td><td class="w">stab</td><td class="m">n. 刺；戳；v. 刺；戳</td></tr>
+<tr data-s="punch n. 重拳击打；v. 拳打；打 孔"><td class="n">45</td><td class="w">punch<div class="ipa">[pʌntʃ]</div></td><td class="m">n. 重拳击打；v. 拳打；打 孔</td></tr>
+<tr data-s="chop v. 砍；劈；剁；n. 砍； 剁；排⻣"><td class="n">46</td><td class="w">chop<div class="ipa">[tʃɒp]</div></td><td class="m">v. 砍；劈；剁；n. 砍； 剁；排⻣</td></tr>
+<tr data-s="stab n. 刺；戳；v. 刺；戳"><td class="n">47</td><td class="w">stab<div class="ipa">[stæb]</div></td><td class="m">n. 刺；戳；v. 刺；戳</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 12</span><span class="gcnt">7 词</span></td></tr>
-<tr data-s="dilemma n. (进退两难的)窘境"><td class="n">48</td><td class="w">dilemma</td><td class="m">n. (进退两难的)窘境</td></tr>
-<tr data-s="plight n. 境况；困境；v. 保证； 发誓"><td class="n">49</td><td class="w">plight</td><td class="m">n. 境况；困境；v. 保证； 发誓</td></tr>
-<tr data-s="pitfall n. 陷阱；隐患；想不到的 困难"><td class="n">50</td><td class="w">pitfall</td><td class="m">n. 陷阱；隐患；想不到的 困难</td></tr>
-<tr data-s="conspiracy n. 阴谋"><td class="n">51</td><td class="w">conspiracy</td><td class="m">n. 阴谋</td></tr>
-<tr data-s="destitute adj. 赤贫的；贫困的；一 无所有的"><td class="n">52</td><td class="w">destitute</td><td class="m">adj. 赤贫的；贫困的；一 无所有的</td></tr>
-<tr data-s="famine n. 饥荒"><td class="n">53</td><td class="w">famine</td><td class="m">n. 饥荒</td></tr>
-<tr data-s="starve v. 挨饿；饿死"><td class="n">54</td><td class="w">starve</td><td class="m">v. 挨饿；饿死</td></tr>
+<tr data-s="dilemma n. (进退两难的)窘境"><td class="n">48</td><td class="w">dilemma<div class="ipa">[dɪˈlemə]</div></td><td class="m">n. (进退两难的)窘境</td></tr>
+<tr data-s="plight n. 境况；困境；v. 保证； 发誓"><td class="n">49</td><td class="w">plight<div class="ipa">[plaɪt]</div></td><td class="m">n. 境况；困境；v. 保证； 发誓</td></tr>
+<tr data-s="pitfall n. 陷阱；隐患；想不到的 困难"><td class="n">50</td><td class="w">pitfall<div class="ipa">[ˈpɪtfɔːl]</div></td><td class="m">n. 陷阱；隐患；想不到的 困难</td></tr>
+<tr data-s="conspiracy n. 阴谋"><td class="n">51</td><td class="w">conspiracy<div class="ipa">[kənˈspɪrəsi]</div></td><td class="m">n. 阴谋</td></tr>
+<tr data-s="destitute adj. 赤贫的；贫困的；一 无所有的"><td class="n">52</td><td class="w">destitute<div class="ipa">[ˈdestɪtjuːt]</div></td><td class="m">adj. 赤贫的；贫困的；一 无所有的</td></tr>
+<tr data-s="famine n. 饥荒"><td class="n">53</td><td class="w">famine<div class="ipa">[ˈfæmɪn]</div></td><td class="m">n. 饥荒</td></tr>
+<tr data-s="starve v. 挨饿；饿死"><td class="n">54</td><td class="w">starve<div class="ipa">[stɑːv]</div></td><td class="m">v. 挨饿；饿死</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 13</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="deprive v. 剥夺；使丧失"><td class="n">55</td><td class="w">deprive</td><td class="m">v. 剥夺；使丧失</td></tr>
-<tr data-s="seize v. 抓住；捉拿；夺取"><td class="n">56</td><td class="w">seize</td><td class="m">v. 抓住；捉拿；夺取</td></tr>
-<tr data-s="pursue v. 追求；追赶；追逐"><td class="n">57</td><td class="w">pursue</td><td class="m">v. 追求；追赶；追逐</td></tr>
-<tr data-s="threat n. 威胁；恐吓；凶兆"><td class="n">58</td><td class="w">threat</td><td class="m">n. 威胁；恐吓；凶兆</td></tr>
+<tr data-s="deprive v. 剥夺；使丧失"><td class="n">55</td><td class="w">deprive<div class="ipa">[dɪˈpraɪv]</div></td><td class="m">v. 剥夺；使丧失</td></tr>
+<tr data-s="seize v. 抓住；捉拿；夺取"><td class="n">56</td><td class="w">seize<div class="ipa">[siːz]</div></td><td class="m">v. 抓住；捉拿；夺取</td></tr>
+<tr data-s="pursue v. 追求；追赶；追逐"><td class="n">57</td><td class="w">pursue<div class="ipa">[pəˈsjuː]</div></td><td class="m">v. 追求；追赶；追逐</td></tr>
+<tr data-s="threat n. 威胁；恐吓；凶兆"><td class="n">58</td><td class="w">threat<div class="ipa">[θret]</div></td><td class="m">n. 威胁；恐吓；凶兆</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 14</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="offend v. 冒犯；得罪；违反；犯 罪"><td class="n">59</td><td class="w">offend</td><td class="m">v. 冒犯；得罪；违反；犯 罪</td></tr>
-<tr data-s="aggressive adj. 侵略性的； 攻击性 的；有进取心的"><td class="n">60</td><td class="w">aggressive</td><td class="m">adj. 侵略性的； 攻击性 的；有进取心的</td></tr>
+<tr data-s="offend v. 冒犯；得罪；违反；犯 罪"><td class="n">59</td><td class="w">offend<div class="ipa">[əˈfend]</div></td><td class="m">v. 冒犯；得罪；违反；犯 罪</td></tr>
+<tr data-s="aggressive adj. 侵略性的； 攻击性 的；有进取心的"><td class="n">60</td><td class="w">aggressive<div class="ipa">[əˈɡresɪv]</div></td><td class="m">adj. 侵略性的； 攻击性 的；有进取心的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 15</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="invade v. 侵犯；侵略"><td class="n">61</td><td class="w">invade</td><td class="m">v. 侵犯；侵略</td></tr>
-<tr data-s="trespass v. 非法侵入；侵扰；冒 犯；n. 非法进入；冒犯"><td class="n">62</td><td class="w">trespass</td><td class="m">v. 非法侵入；侵扰；冒 犯；n. 非法进入；冒犯</td></tr>
-<tr data-s="intrude v. 闯入；打扰；强使"><td class="n">63</td><td class="w">intrude</td><td class="m">v. 闯入；打扰；强使</td></tr>
-<tr data-s="violate v. 违反；侵犯"><td class="n">64</td><td class="w">violate</td><td class="m">v. 违反；侵犯</td></tr>
+<tr data-s="invade v. 侵犯；侵略"><td class="n">61</td><td class="w">invade<div class="ipa">[ɪnˈveɪd]</div></td><td class="m">v. 侵犯；侵略</td></tr>
+<tr data-s="trespass v. 非法侵入；侵扰；冒 犯；n. 非法进入；冒犯"><td class="n">62</td><td class="w">trespass<div class="ipa">[ˈtrespəs]</div></td><td class="m">v. 非法侵入；侵扰；冒 犯；n. 非法进入；冒犯</td></tr>
+<tr data-s="intrude v. 闯入；打扰；强使"><td class="n">63</td><td class="w">intrude<div class="ipa">[ɪnˈtruːd]</div></td><td class="m">v. 闯入；打扰；强使</td></tr>
+<tr data-s="violate v. 违反；侵犯"><td class="n">64</td><td class="w">violate<div class="ipa">[ˈvaɪəleɪt]</div></td><td class="m">v. 违反；侵犯</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 16</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="attack v. 攻击；袭击；n. 攻击； 袭击"><td class="n">65</td><td class="w">attack</td><td class="m">v. 攻击；袭击；n. 攻击； 袭击</td></tr>
-<tr data-s="assault n. 攻击；袭击；侵犯他人 身体(罪)；v. 袭击；突袭"><td class="n">66</td><td class="w">assault</td><td class="m">n. 攻击；袭击；侵犯他人 身体(罪)；v. 袭击；突袭</td></tr>
-<tr data-s="challenge n. 挑战；盘问；质疑；怀疑； v. 提出挑战；质疑；驳斥"><td class="n">67</td><td class="w">challenge</td><td class="m">n. 挑战；盘问；质疑；怀疑； v. 提出挑战；质疑；驳斥</td></tr>
+<tr data-s="attack v. 攻击；袭击；n. 攻击； 袭击"><td class="n">65</td><td class="w">attack<div class="ipa">[əˈtæk]</div></td><td class="m">v. 攻击；袭击；n. 攻击； 袭击</td></tr>
+<tr data-s="assault n. 攻击；袭击；侵犯他人 身体(罪)；v. 袭击；突袭"><td class="n">66</td><td class="w">assault<div class="ipa">[əˈsɔːlt]</div></td><td class="m">n. 攻击；袭击；侵犯他人 身体(罪)；v. 袭击；突袭</td></tr>
+<tr data-s="challenge n. 挑战；盘问；质疑；怀疑； v. 提出挑战；质疑；驳斥"><td class="n">67</td><td class="w">challenge<div class="ipa">[ˈtʃælɪndʒ]</div></td><td class="m">n. 挑战；盘问；质疑；怀疑； v. 提出挑战；质疑；驳斥</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 17</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="siege n. 围攻；封锁"><td class="n">68</td><td class="w">siege</td><td class="m">n. 围攻；封锁</td></tr>
-<tr data-s="surround v. 环绕；围绕"><td class="n">69</td><td class="w">surround</td><td class="m">v. 环绕；围绕</td></tr>
-<tr data-s="enclose v. 围起；附上；封入"><td class="n">70</td><td class="w">enclose</td><td class="m">v. 围起；附上；封入</td></tr>
+<tr data-s="siege n. 围攻；封锁"><td class="n">68</td><td class="w">siege<div class="ipa">[siːdʒ]</div></td><td class="m">n. 围攻；封锁</td></tr>
+<tr data-s="surround v. 环绕；围绕"><td class="n">69</td><td class="w">surround<div class="ipa">[səˈraʊnd]</div></td><td class="m">v. 环绕；围绕</td></tr>
+<tr data-s="enclose v. 围起；附上；封入"><td class="n">70</td><td class="w">enclose<div class="ipa">[ɪnˈkləʊz]</div></td><td class="m">v. 围起；附上；封入</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 18</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="pause v. 暂停；停顿；n. 暂停； 停顿"><td class="n">71</td><td class="w">pause</td><td class="m">v. 暂停；停顿；n. 暂停； 停顿</td></tr>
-<tr data-s="halt n. 停顿下来；v. 暂停；中 断"><td class="n">72</td><td class="w">halt</td><td class="m">n. 停顿下来；v. 暂停；中 断</td></tr>
-<tr data-s="cease v. 停；息；停止"><td class="n">73</td><td class="w">cease</td><td class="m">v. 停；息；停止</td></tr>
+<tr data-s="pause v. 暂停；停顿；n. 暂停； 停顿"><td class="n">71</td><td class="w">pause<div class="ipa">[pɔːz]</div></td><td class="m">v. 暂停；停顿；n. 暂停； 停顿</td></tr>
+<tr data-s="halt n. 停顿下来；v. 暂停；中 断"><td class="n">72</td><td class="w">halt<div class="ipa">[hɔːlt]</div></td><td class="m">n. 停顿下来；v. 暂停；中 断</td></tr>
+<tr data-s="cease v. 停；息；停止"><td class="n">73</td><td class="w">cease<div class="ipa">[siːs]</div></td><td class="m">v. 停；息；停止</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 19</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="oppose v. 反对；反抗"><td class="n">74</td><td class="w">oppose</td><td class="m">v. 反对；反抗</td></tr>
-<tr data-s="oppress v. 压迫；使烦恼"><td class="n">75</td><td class="w">oppress</td><td class="m">v. 压迫；使烦恼</td></tr>
-<tr data-s="counter n. 柜台；对立面；v. 反 驳；抵消；adv. 相反地"><td class="n">76</td><td class="w">counter</td><td class="m">n. 柜台；对立面；v. 反 驳；抵消；adv. 相反地</td></tr>
+<tr data-s="oppose v. 反对；反抗"><td class="n">74</td><td class="w">oppose<div class="ipa">[əˈpəʊz]</div></td><td class="m">v. 反对；反抗</td></tr>
+<tr data-s="oppress v. 压迫；使烦恼"><td class="n">75</td><td class="w">oppress<div class="ipa">[əˈpres]</div></td><td class="m">v. 压迫；使烦恼</td></tr>
+<tr data-s="counter n. 柜台；对立面；v. 反 驳；抵消；adv. 相反地"><td class="n">76</td><td class="w">counter<div class="ipa">[ˈkaʊntə(r)]</div></td><td class="m">n. 柜台；对立面；v. 反 驳；抵消；adv. 相反地</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 20</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="deter v. 制止；威慑；使不敢"><td class="n">77</td><td class="w">deter</td><td class="m">v. 制止；威慑；使不敢</td></tr>
-<tr data-s="forbid v. 禁止；不准"><td class="n">78</td><td class="w">forbid</td><td class="m">v. 禁止；不准</td></tr>
-<tr data-s="prohibit v. 禁止；妨碍"><td class="n">79</td><td class="w">prohibit</td><td class="m">v. 禁止；妨碍</td></tr>
-<tr data-s="prevent v. 防止；预防；妨碍"><td class="n">80</td><td class="w">prevent</td><td class="m">v. 防止；预防；妨碍</td></tr>
+<tr data-s="deter v. 制止；威慑；使不敢"><td class="n">77</td><td class="w">deter<div class="ipa">[dɪˈtɜː(r)]</div></td><td class="m">v. 制止；威慑；使不敢</td></tr>
+<tr data-s="forbid v. 禁止；不准"><td class="n">78</td><td class="w">forbid<div class="ipa">[fəˈbɪd]</div></td><td class="m">v. 禁止；不准</td></tr>
+<tr data-s="prohibit v. 禁止；妨碍"><td class="n">79</td><td class="w">prohibit<div class="ipa">[prəˈhɪbɪt]</div></td><td class="m">v. 禁止；妨碍</td></tr>
+<tr data-s="prevent v. 防止；预防；妨碍"><td class="n">80</td><td class="w">prevent<div class="ipa">[prɪˈvent]</div></td><td class="m">v. 防止；预防；妨碍</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 21</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="revolt v. 叛乱；反叛；(使)厌 恶；n. 叛乱；厌恶；反感"><td class="n">81</td><td class="w">revolt</td><td class="m">v. 叛乱；反叛；(使)厌 恶；n. 叛乱；厌恶；反感</td></tr>
-<tr data-s="betray v. 背叛；出卖；泄露；暴 露"><td class="n">82</td><td class="w">betray</td><td class="m">v. 背叛；出卖；泄露；暴 露</td></tr>
-<tr data-s="treason n. 叛国(罪)；卖国 (罪)"><td class="n">83</td><td class="w">treason</td><td class="m">n. 叛国(罪)；卖国 (罪)</td></tr>
+<tr data-s="revolt v. 叛乱；反叛；(使)厌 恶；n. 叛乱；厌恶；反感"><td class="n">81</td><td class="w">revolt<div class="ipa">[rɪˈvəʊlt]</div></td><td class="m">v. 叛乱；反叛；(使)厌 恶；n. 叛乱；厌恶；反感</td></tr>
+<tr data-s="betray v. 背叛；出卖；泄露；暴 露"><td class="n">82</td><td class="w">betray<div class="ipa">[bɪˈtreɪ]</div></td><td class="m">v. 背叛；出卖；泄露；暴 露</td></tr>
+<tr data-s="treason n. 叛国(罪)；卖国 (罪)"><td class="n">83</td><td class="w">treason<div class="ipa">[ˈtriːz(ə)n]</div></td><td class="m">n. 叛国(罪)；卖国 (罪)</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 22</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="rebel v. 反抗；造反；n. 叛逆 者；造反者"><td class="n">84</td><td class="w">rebel</td><td class="m">v. 反抗；造反；n. 叛逆 者；造反者</td></tr>
-<tr data-s="traitor n. 叛徒；背叛者；卖国贼"><td class="n">85</td><td class="w">traitor</td><td class="m">n. 叛徒；背叛者；卖国贼</td></tr>
-<tr data-s="patriot n. 爱国者"><td class="n">86</td><td class="w">patriot</td><td class="m">n. 爱国者</td></tr>
+<tr data-s="rebel v. 反抗；造反；n. 叛逆 者；造反者"><td class="n">84</td><td class="w">rebel<div class="ipa">[rɪˈbel]</div></td><td class="m">v. 反抗；造反；n. 叛逆 者；造反者</td></tr>
+<tr data-s="traitor n. 叛徒；背叛者；卖国贼"><td class="n">85</td><td class="w">traitor<div class="ipa">[ˈtreɪtə(r)]</div></td><td class="m">n. 叛徒；背叛者；卖国贼</td></tr>
+<tr data-s="patriot n. 爱国者"><td class="n">86</td><td class="w">patriot<div class="ipa">[ˈpætriət]</div></td><td class="m">n. 爱国者</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 23</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="blame v. 责怪；归咎于；指责； n. 责备；责任；指责"><td class="n">87</td><td class="w">blame</td><td class="m">v. 责怪；归咎于；指责； n. 责备；责任；指责</td></tr>
-<tr data-s="reproach v. 责备；指责；n. 责备； 指责"><td class="n">88</td><td class="w">reproach</td><td class="m">v. 责备；指责；n. 责备； 指责</td></tr>
-<tr data-s="evidence n. 证据；证明"><td class="n">89</td><td class="w">evidence</td><td class="m">n. 证据；证明</td></tr>
-<tr data-s="proof n. 证明；证据；检验； adj. 防...的"><td class="n">90</td><td class="w">proof</td><td class="m">n. 证明；证据；检验； adj. 防...的</td></tr>
+<tr data-s="blame v. 责怪；归咎于；指责； n. 责备；责任；指责"><td class="n">87</td><td class="w">blame<div class="ipa">[bleɪm]</div></td><td class="m">v. 责怪；归咎于；指责； n. 责备；责任；指责</td></tr>
+<tr data-s="reproach v. 责备；指责；n. 责备； 指责"><td class="n">88</td><td class="w">reproach<div class="ipa">[rɪˈprəʊtʃ]</div></td><td class="m">v. 责备；指责；n. 责备； 指责</td></tr>
+<tr data-s="evidence n. 证据；证明"><td class="n">89</td><td class="w">evidence<div class="ipa">[ˈevɪdəns]</div></td><td class="m">n. 证据；证明</td></tr>
+<tr data-s="proof n. 证明；证据；检验； adj. 防...的"><td class="n">90</td><td class="w">proof<div class="ipa">[pruːf]</div></td><td class="m">n. 证明；证据；检验； adj. 防...的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 24</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="terror n. 恐怖；恐惧"><td class="n">91</td><td class="w">terror</td><td class="m">n. 恐怖；恐惧</td></tr>
-<tr data-s="terrible adj. 可怕的；极坏的；糟 糕的"><td class="n">92</td><td class="w">terrible</td><td class="m">adj. 可怕的；极坏的；糟 糕的</td></tr>
-<tr data-s="terrific adj. 极好的；大得惊人的"><td class="n">93</td><td class="w">terrific</td><td class="m">adj. 极好的；大得惊人的</td></tr>
-<tr data-s="horrible adj. 恐怖的；可怕的"><td class="n">94</td><td class="w">horrible</td><td class="m">adj. 恐怖的；可怕的</td></tr>
-<tr data-s="alarm n. 警报；警铃；闹钟；惊 慌；v. 使惊恐"><td class="n">95</td><td class="w">alarm</td><td class="m">n. 警报；警铃；闹钟；惊 慌；v. 使惊恐</td></tr>
+<tr data-s="terror n. 恐怖；恐惧"><td class="n">91</td><td class="w">terror<div class="ipa">[ˈterə(r)]</div></td><td class="m">n. 恐怖；恐惧</td></tr>
+<tr data-s="terrible adj. 可怕的；极坏的；糟 糕的"><td class="n">92</td><td class="w">terrible<div class="ipa">[ˈterəb(ə)l]</div></td><td class="m">adj. 可怕的；极坏的；糟 糕的</td></tr>
+<tr data-s="terrific adj. 极好的；大得惊人的"><td class="n">93</td><td class="w">terrific<div class="ipa">[təˈrɪfɪk]</div></td><td class="m">adj. 极好的；大得惊人的</td></tr>
+<tr data-s="horrible adj. 恐怖的；可怕的"><td class="n">94</td><td class="w">horrible<div class="ipa">[ˈhɒrəb(ə)l]</div></td><td class="m">adj. 恐怖的；可怕的</td></tr>
+<tr data-s="alarm n. 警报；警铃；闹钟；惊 慌；v. 使惊恐"><td class="n">95</td><td class="w">alarm<div class="ipa">[əˈlɑːm]</div></td><td class="m">n. 警报；警铃；闹钟；惊 慌；v. 使惊恐</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 25</span><span class="gcnt">10 词</span></td></tr>
-<tr data-s="dread v. 害怕；畏惧；n. 恐惧； 畏惧"><td class="n">96</td><td class="w">dread</td><td class="m">v. 害怕；畏惧；n. 恐惧； 畏惧</td></tr>
-<tr data-s="frighten v. 使惊吓；使惊恐"><td class="n">97</td><td class="w">frighten</td><td class="m">v. 使惊吓；使惊恐</td></tr>
-<tr data-s="tension n. 紧张；紧张局势；紧张 关系"><td class="n">98</td><td class="w">tension</td><td class="m">n. 紧张；紧张局势；紧张 关系</td></tr>
-<tr data-s="turbulent adj. 狂暴的；骚动的；动 荡的；汹涌的"><td class="n">99</td><td class="w">turbulent</td><td class="m">adj. 狂暴的；骚动的；动 荡的；汹涌的</td></tr>
-<tr data-s="turmoil n. 混乱；动荡；骚乱；恐 慌"><td class="n">100</td><td class="w">turmoil</td><td class="m">n. 混乱；动荡；骚乱；恐 慌</td></tr>
-<tr data-s="scenario n. 设想；可能发生的情 况；情节梗概"><td class="n">101</td><td class="w">scenario</td><td class="m">n. 设想；可能发生的情 况；情节梗概</td></tr>
-<tr data-s="occasion n. 特殊场合；时机；机会；理 由；需要；v. 导致；使发生"><td class="n">102</td><td class="w">occasion</td><td class="m">n. 特殊场合；时机；机会；理 由；需要；v. 导致；使发生</td></tr>
-<tr data-s="limit n. 限制；v. 限制"><td class="n">103</td><td class="w">limit</td><td class="m">n. 限制；v. 限制</td></tr>
-<tr data-s="boundary n. 分界线；边界"><td class="n">104</td><td class="w">boundary</td><td class="m">n. 分界线；边界</td></tr>
-<tr data-s="rein n. 缰绳；驾驭；控制；v. 控制；驾驭"><td class="n">105</td><td class="w">rein</td><td class="m">n. 缰绳；驾驭；控制；v. 控制；驾驭</td></tr>
+<tr data-s="dread v. 害怕；畏惧；n. 恐惧； 畏惧"><td class="n">96</td><td class="w">dread<div class="ipa">[dred]</div></td><td class="m">v. 害怕；畏惧；n. 恐惧； 畏惧</td></tr>
+<tr data-s="frighten v. 使惊吓；使惊恐"><td class="n">97</td><td class="w">frighten<div class="ipa">[ˈfraɪt(ə)n]</div></td><td class="m">v. 使惊吓；使惊恐</td></tr>
+<tr data-s="tension n. 紧张；紧张局势；紧张 关系"><td class="n">98</td><td class="w">tension<div class="ipa">[ˈtenʃ(ə)n]</div></td><td class="m">n. 紧张；紧张局势；紧张 关系</td></tr>
+<tr data-s="turbulent adj. 狂暴的；骚动的；动 荡的；汹涌的"><td class="n">99</td><td class="w">turbulent<div class="ipa">[ˈtɜːbjələnt]</div></td><td class="m">adj. 狂暴的；骚动的；动 荡的；汹涌的</td></tr>
+<tr data-s="turmoil n. 混乱；动荡；骚乱；恐 慌"><td class="n">100</td><td class="w">turmoil<div class="ipa">[ˈtɜːmɔɪl]</div></td><td class="m">n. 混乱；动荡；骚乱；恐 慌</td></tr>
+<tr data-s="scenario n. 设想；可能发生的情 况；情节梗概"><td class="n">101</td><td class="w">scenario<div class="ipa">[səˈnɑːriəʊ]</div></td><td class="m">n. 设想；可能发生的情 况；情节梗概</td></tr>
+<tr data-s="occasion n. 特殊场合；时机；机会；理 由；需要；v. 导致；使发生"><td class="n">102</td><td class="w">occasion<div class="ipa">[əˈkeɪʒ(ə)n]</div></td><td class="m">n. 特殊场合；时机；机会；理 由；需要；v. 导致；使发生</td></tr>
+<tr data-s="limit n. 限制；v. 限制"><td class="n">103</td><td class="w">limit<div class="ipa">[ˈlɪmɪt]</div></td><td class="m">n. 限制；v. 限制</td></tr>
+<tr data-s="boundary n. 分界线；边界"><td class="n">104</td><td class="w">boundary<div class="ipa">[ˈbaʊndri]</div></td><td class="m">n. 分界线；边界</td></tr>
+<tr data-s="rein n. 缰绳；驾驭；控制；v. 控制；驾驭"><td class="n">105</td><td class="w">rein<div class="ipa">[reɪn]</div></td><td class="m">n. 缰绳；驾驭；控制；v. 控制；驾驭</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 26</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="compete v. 竞争；比赛"><td class="n">106</td><td class="w">compete</td><td class="m">v. 竞争；比赛</td></tr>
-<tr data-s="contest n. 比赛；竞赛；v. 竞争； 争夺；争辩；辩驳"><td class="n">107</td><td class="w">contest</td><td class="m">n. 比赛；竞赛；v. 竞争； 争夺；争辩；辩驳</td></tr>
-<tr data-s="contend v. 声称；主张；竞争；争 辩"><td class="n">108</td><td class="w">contend</td><td class="m">v. 声称；主张；竞争；争 辩</td></tr>
+<tr data-s="compete v. 竞争；比赛"><td class="n">106</td><td class="w">compete<div class="ipa">[kəmˈpiːt]</div></td><td class="m">v. 竞争；比赛</td></tr>
+<tr data-s="contest n. 比赛；竞赛；v. 竞争； 争夺；争辩；辩驳"><td class="n">107</td><td class="w">contest<div class="ipa">[ˈkɒntest]</div></td><td class="m">n. 比赛；竞赛；v. 竞争； 争夺；争辩；辩驳</td></tr>
+<tr data-s="contend v. 声称；主张；竞争；争 辩"><td class="n">108</td><td class="w">contend<div class="ipa">[kənˈtend]</div></td><td class="m">v. 声称；主张；竞争；争 辩</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 27</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="rival n. 竞争者；敌手；v. 竞 争；相匹敌"><td class="n">109</td><td class="w">rival</td><td class="m">n. 竞争者；敌手；v. 竞 争；相匹敌</td></tr>
-<tr data-s="competitor n. 竞争者"><td class="n">110</td><td class="w">competitor</td><td class="m">n. 竞争者</td></tr>
-<tr data-s="enemy n. 敌人；敌军"><td class="n">111</td><td class="w">enemy</td><td class="m">n. 敌人；敌军</td></tr>
+<tr data-s="rival n. 竞争者；敌手；v. 竞 争；相匹敌"><td class="n">109</td><td class="w">rival<div class="ipa">[ˈraɪv(ə)l]</div></td><td class="m">n. 竞争者；敌手；v. 竞 争；相匹敌</td></tr>
+<tr data-s="competitor n. 竞争者"><td class="n">110</td><td class="w">competitor<div class="ipa">[kəmˈpetɪtə(r)]</div></td><td class="m">n. 竞争者</td></tr>
+<tr data-s="enemy n. 敌人；敌军"><td class="n">111</td><td class="w">enemy<div class="ipa">[ˈenəmi]</div></td><td class="m">n. 敌人；敌军</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 28</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="strategy n. 策略；战略"><td class="n">112</td><td class="w">strategy</td><td class="m">n. 策略；战略</td></tr>
-<tr data-s="tactic n. 战术；策略"><td class="n">113</td><td class="w">tactic</td><td class="m">n. 战术；策略</td></tr>
-<tr data-s="manoeuvre n. (熟练地)移动；巧 计；v. 控制；移动；操控"><td class="n">114</td><td class="w">manoeuvre</td><td class="m">n. (熟练地)移动；巧 计；v. 控制；移动；操控</td></tr>
-<tr data-s="blueprint n. 蓝图；计划；设想；v. 为...制蓝图；为...制订计划"><td class="n">115</td><td class="w">blueprint</td><td class="m">n. 蓝图；计划；设想；v. 为...制蓝图；为...制订计划</td></tr>
-<tr data-s="warn v. 警告；告诫；提醒注意"><td class="n">116</td><td class="w">warn</td><td class="m">v. 警告；告诫；提醒注意</td></tr>
+<tr data-s="strategy n. 策略；战略"><td class="n">112</td><td class="w">strategy<div class="ipa">[ˈstrætədʒi]</div></td><td class="m">n. 策略；战略</td></tr>
+<tr data-s="tactic n. 战术；策略"><td class="n">113</td><td class="w">tactic<div class="ipa">[ˈtæktɪk]</div></td><td class="m">n. 战术；策略</td></tr>
+<tr data-s="manoeuvre n. (熟练地)移动；巧 计；v. 控制；移动；操控"><td class="n">114</td><td class="w">manoeuvre<div class="ipa">[məˈnuːvə(r)]</div></td><td class="m">n. (熟练地)移动；巧 计；v. 控制；移动；操控</td></tr>
+<tr data-s="blueprint n. 蓝图；计划；设想；v. 为...制蓝图；为...制订计划"><td class="n">115</td><td class="w">blueprint<div class="ipa">[ˈbluːprɪnt]</div></td><td class="m">n. 蓝图；计划；设想；v. 为...制蓝图；为...制订计划</td></tr>
+<tr data-s="warn v. 警告；告诫；提醒注意"><td class="n">116</td><td class="w">warn<div class="ipa">[wɔːn]</div></td><td class="m">v. 警告；告诫；提醒注意</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 29</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="compel v. 强迫；胁迫"><td class="n">117</td><td class="w">compel</td><td class="m">v. 强迫；胁迫</td></tr>
-<tr data-s="oblige v. 迫使；效劳"><td class="n">118</td><td class="w">oblige</td><td class="m">v. 迫使；效劳</td></tr>
+<tr data-s="compel v. 强迫；胁迫"><td class="n">117</td><td class="w">compel<div class="ipa">[kəmˈpel]</div></td><td class="m">v. 强迫；胁迫</td></tr>
+<tr data-s="oblige v. 迫使；效劳"><td class="n">118</td><td class="w">oblige<div class="ipa">[əˈblaɪdʒ]</div></td><td class="m">v. 迫使；效劳</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 30</span><span class="gcnt">8 词</span></td></tr>
-<tr data-s="protest n. 抗议；抗议活动；v. 抗 议"><td class="n">119</td><td class="w">protest</td><td class="m">n. 抗议；抗议活动；v. 抗 议</td></tr>
-<tr data-s="refute v. 驳斥；反驳；批驳"><td class="n">120</td><td class="w">refute</td><td class="m">v. 驳斥；反驳；批驳</td></tr>
-<tr data-s="might v. 可能；也许；应该；“may” 的过去式；n. 威力；强大力量"><td class="n">121</td><td class="w">might</td><td class="m">v. 可能；也许；应该；“may” 的过去式；n. 威力；强大力量</td></tr>
-<tr data-s="force n. 力；力量；武力；兵 力；v. 强迫；促使；推动"><td class="n">122</td><td class="w">force</td><td class="m">n. 力；力量；武力；兵 力；v. 强迫；促使；推动</td></tr>
-<tr data-s="reinforce v. 增强；增援；加强；加 固"><td class="n">123</td><td class="w">reinforce</td><td class="m">v. 增强；增援；加强；加 固</td></tr>
-<tr data-s="impair v. 损害；削弱"><td class="n">124</td><td class="w">impair</td><td class="m">v. 损害；削弱</td></tr>
-<tr data-s="mitigate v. 减轻；缓和"><td class="n">125</td><td class="w">mitigate</td><td class="m">v. 减轻；缓和</td></tr>
-<tr data-s="comfort n. 舒服；安逸；安慰；v. 安慰"><td class="n">126</td><td class="w">comfort</td><td class="m">n. 舒服；安逸；安慰；v. 安慰</td></tr>
+<tr data-s="protest n. 抗议；抗议活动；v. 抗 议"><td class="n">119</td><td class="w">protest<div class="ipa">[ˈprəʊtest]</div></td><td class="m">n. 抗议；抗议活动；v. 抗 议</td></tr>
+<tr data-s="refute v. 驳斥；反驳；批驳"><td class="n">120</td><td class="w">refute<div class="ipa">[rɪˈfjuːt]</div></td><td class="m">v. 驳斥；反驳；批驳</td></tr>
+<tr data-s="might v. 可能；也许；应该；“may” 的过去式；n. 威力；强大力量"><td class="n">121</td><td class="w">might<div class="ipa">[maɪt]</div></td><td class="m">v. 可能；也许；应该；“may” 的过去式；n. 威力；强大力量</td></tr>
+<tr data-s="force n. 力；力量；武力；兵 力；v. 强迫；促使；推动"><td class="n">122</td><td class="w">force<div class="ipa">[fɔːs]</div></td><td class="m">n. 力；力量；武力；兵 力；v. 强迫；促使；推动</td></tr>
+<tr data-s="reinforce v. 增强；增援；加强；加 固"><td class="n">123</td><td class="w">reinforce<div class="ipa">[ˌriːɪnˈfɔːs]</div></td><td class="m">v. 增强；增援；加强；加 固</td></tr>
+<tr data-s="impair v. 损害；削弱"><td class="n">124</td><td class="w">impair<div class="ipa">[ɪmˈpeə(r)]</div></td><td class="m">v. 损害；削弱</td></tr>
+<tr data-s="mitigate v. 减轻；缓和"><td class="n">125</td><td class="w">mitigate<div class="ipa">[ˈmɪtɪɡeɪt]</div></td><td class="m">v. 减轻；缓和</td></tr>
+<tr data-s="comfort n. 舒服；安逸；安慰；v. 安慰"><td class="n">126</td><td class="w">comfort<div class="ipa">[ˈkʌmfət]</div></td><td class="m">n. 舒服；安逸；安慰；v. 安慰</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 31</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="event n. 事件；大事；比赛项目"><td class="n">127</td><td class="w">event</td><td class="m">n. 事件；大事；比赛项目</td></tr>
-<tr data-s="matter n. 事情；物质；问题；麻 烦；v. 要紧"><td class="n">128</td><td class="w">matter</td><td class="m">n. 事情；物质；问题；麻 烦；v. 要紧</td></tr>
-<tr data-s="happen v. 发生"><td class="n">129</td><td class="w">happen</td><td class="m">v. 发生</td></tr>
-<tr data-s="occur v. 发生；出现"><td class="n">130</td><td class="w">occur</td><td class="m">v. 发生；出现</td></tr>
+<tr data-s="event n. 事件；大事；比赛项目"><td class="n">127</td><td class="w">event<div class="ipa">[ɪˈvent]</div></td><td class="m">n. 事件；大事；比赛项目</td></tr>
+<tr data-s="matter n. 事情；物质；问题；麻 烦；v. 要紧"><td class="n">128</td><td class="w">matter<div class="ipa">[ˈmætə(r)]</div></td><td class="m">n. 事情；物质；问题；麻 烦；v. 要紧</td></tr>
+<tr data-s="happen v. 发生"><td class="n">129</td><td class="w">happen<div class="ipa">[ˈhæpən]</div></td><td class="m">v. 发生</td></tr>
+<tr data-s="occur v. 发生；出现"><td class="n">130</td><td class="w">occur<div class="ipa">[əˈkɜː(r)]</div></td><td class="m">v. 发生；出现</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 32</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="savage adj. 野性的；凶猛的；荒野的；n. 野蛮人；粗人；凶恶的人；v. 凶狠 地攻击；激烈抨击"><td class="n">131</td><td class="w">savage</td><td class="m">adj. 野性的；凶猛的；荒野的；n. 野蛮人；粗人；凶恶的人；v. 凶狠 地攻击；激烈抨击</td></tr>
-<tr data-s="reckless adj. 鲁莽的；不计后果的"><td class="n">132</td><td class="w">reckless</td><td class="m">adj. 鲁莽的；不计后果的</td></tr>
-<tr data-s="fierce adj. 凶猛的；凶狠的"><td class="n">133</td><td class="w">fierce</td><td class="m">adj. 凶猛的；凶狠的</td></tr>
+<tr data-s="savage adj. 野性的；凶猛的；荒野的；n. 野蛮人；粗人；凶恶的人；v. 凶狠 地攻击；激烈抨击"><td class="n">131</td><td class="w">savage<div class="ipa">[ˈsævɪdʒ]</div></td><td class="m">adj. 野性的；凶猛的；荒野的；n. 野蛮人；粗人；凶恶的人；v. 凶狠 地攻击；激烈抨击</td></tr>
+<tr data-s="reckless adj. 鲁莽的；不计后果的"><td class="n">132</td><td class="w">reckless<div class="ipa">[ˈrekləs]</div></td><td class="m">adj. 鲁莽的；不计后果的</td></tr>
+<tr data-s="fierce adj. 凶猛的；凶狠的"><td class="n">133</td><td class="w">fierce<div class="ipa">[fɪəs]</div></td><td class="m">adj. 凶猛的；凶狠的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 33</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="foul adj. 肮脏恶臭的；很令人不快的； 很坏的；v. 使污秽；对...犯规；缠 结难解；n. 犯规"><td class="n">134</td><td class="w">foul</td><td class="m">adj. 肮脏恶臭的；很令人不快的； 很坏的；v. 使污秽；对...犯规；缠 结难解；n. 犯规</td></tr>
-<tr data-s="evil n. 邪恶；罪恶；adj. 恶毒 的"><td class="n">135</td><td class="w">evil</td><td class="m">n. 邪恶；罪恶；adj. 恶毒 的</td></tr>
-<tr data-s="devil n. 魔⻤；恶魔"><td class="n">136</td><td class="w">devil</td><td class="m">n. 魔⻤；恶魔</td></tr>
+<tr data-s="foul adj. 肮脏恶臭的；很令人不快的； 很坏的；v. 使污秽；对...犯规；缠 结难解；n. 犯规"><td class="n">134</td><td class="w">foul<div class="ipa">[faʊl]</div></td><td class="m">adj. 肮脏恶臭的；很令人不快的； 很坏的；v. 使污秽；对...犯规；缠 结难解；n. 犯规</td></tr>
+<tr data-s="evil n. 邪恶；罪恶；adj. 恶毒 的"><td class="n">135</td><td class="w">evil<div class="ipa">[ˈiːv(ə)l]</div></td><td class="m">n. 邪恶；罪恶；adj. 恶毒 的</td></tr>
+<tr data-s="devil n. 魔⻤；恶魔"><td class="n">136</td><td class="w">devil<div class="ipa">[ˈdev(ə)l]</div></td><td class="m">n. 魔⻤；恶魔</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 34</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="punishment n. 处罚；惩罚"><td class="n">137</td><td class="w">punishment</td><td class="m">n. 处罚；惩罚</td></tr>
-<tr data-s="execute v. 执行；实施；处死"><td class="n">138</td><td class="w">execute</td><td class="m">v. 执行；实施；处死</td></tr>
-<tr data-s="hang v. 悬挂；吊；绞死；n. 悬 挂；绞刑"><td class="n">139</td><td class="w">hang</td><td class="m">v. 悬挂；吊；绞死；n. 悬 挂；绞刑</td></tr>
+<tr data-s="punishment n. 处罚；惩罚"><td class="n">137</td><td class="w">punishment<div class="ipa">[ˈpʌnɪʃmənt]</div></td><td class="m">n. 处罚；惩罚</td></tr>
+<tr data-s="execute v. 执行；实施；处死"><td class="n">138</td><td class="w">execute<div class="ipa">[ˈeksɪkjuːt]</div></td><td class="m">v. 执行；实施；处死</td></tr>
+<tr data-s="hang v. 悬挂；吊；绞死；n. 悬 挂；绞刑"><td class="n">139</td><td class="w">hang<div class="ipa">[hæŋ]</div></td><td class="m">v. 悬挂；吊；绞死；n. 悬 挂；绞刑</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 35</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="sacrifice v. 牺牲；献出；供奉；n. 供奉；祭品；牺牲(品)"><td class="n">140</td><td class="w">sacrifice</td><td class="m">v. 牺牲；献出；供奉；n. 供奉；祭品；牺牲(品)</td></tr>
-<tr data-s="casualty n. 伤亡(人数)；受伤的人； 事故；临时救治所；急诊室"><td class="n">141</td><td class="w">casualty</td><td class="m">n. 伤亡(人数)；受伤的人； 事故；临时救治所；急诊室</td></tr>
-<tr data-s="bury v. 埋葬；埋藏"><td class="n">142</td><td class="w">bury</td><td class="m">v. 埋葬；埋藏</td></tr>
-<tr data-s="funeral n. 葬礼"><td class="n">143</td><td class="w">funeral</td><td class="m">n. 葬礼</td></tr>
+<tr data-s="sacrifice v. 牺牲；献出；供奉；n. 供奉；祭品；牺牲(品)"><td class="n">140</td><td class="w">sacrifice<div class="ipa">[ˈsækrɪfaɪs]</div></td><td class="m">v. 牺牲；献出；供奉；n. 供奉；祭品；牺牲(品)</td></tr>
+<tr data-s="casualty n. 伤亡(人数)；受伤的人； 事故；临时救治所；急诊室"><td class="n">141</td><td class="w">casualty<div class="ipa">[ˈkæʒuəlti]</div></td><td class="m">n. 伤亡(人数)；受伤的人； 事故；临时救治所；急诊室</td></tr>
+<tr data-s="bury v. 埋葬；埋藏"><td class="n">142</td><td class="w">bury<div class="ipa">[ˈberi]</div></td><td class="m">v. 埋葬；埋藏</td></tr>
+<tr data-s="funeral n. 葬礼"><td class="n">143</td><td class="w">funeral<div class="ipa">[ˈfjuːnərəl]</div></td><td class="m">n. 葬礼</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 36</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="grave n. 坟墓；adj. 严重的；重 大的；严肃的；沉重的"><td class="n">144</td><td class="w">grave</td><td class="m">n. 坟墓；adj. 严重的；重 大的；严肃的；沉重的</td></tr>
-<tr data-s="tomb n. 坟墓；冢；v. 埋葬"><td class="n">145</td><td class="w">tomb</td><td class="m">n. 坟墓；冢；v. 埋葬</td></tr>
-<tr data-s="hell n. 地狱；苦境"><td class="n">146</td><td class="w">hell</td><td class="m">n. 地狱；苦境</td></tr>
+<tr data-s="grave n. 坟墓；adj. 严重的；重 大的；严肃的；沉重的"><td class="n">144</td><td class="w">grave<div class="ipa">[ɡreɪv]</div></td><td class="m">n. 坟墓；adj. 严重的；重 大的；严肃的；沉重的</td></tr>
+<tr data-s="tomb n. 坟墓；冢；v. 埋葬"><td class="n">145</td><td class="w">tomb<div class="ipa">[tuːm]</div></td><td class="m">n. 坟墓；冢；v. 埋葬</td></tr>
+<tr data-s="hell n. 地狱；苦境"><td class="n">146</td><td class="w">hell<div class="ipa">[hel]</div></td><td class="m">n. 地狱；苦境</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 37</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="maritime adj. 海的；海事的；海运 的"><td class="n">147</td><td class="w">maritime</td><td class="m">adj. 海的；海事的；海运 的</td></tr>
-<tr data-s="naval adj. 海军的"><td class="n">148</td><td class="w">naval</td><td class="m">adj. 海军的</td></tr>
+<tr data-s="maritime adj. 海的；海事的；海运 的"><td class="n">147</td><td class="w">maritime<div class="ipa">[ˈmærɪtaɪm]</div></td><td class="m">adj. 海的；海事的；海运 的</td></tr>
+<tr data-s="naval adj. 海军的"><td class="n">148</td><td class="w">naval<div class="ipa">[ˈneɪv(ə)l]</div></td><td class="m">adj. 海军的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 38</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="fleet n. 舰队；船队；机群；adj. 快速的；v. 掠过；疾⻜"><td class="n">149</td><td class="w">fleet</td><td class="m">n. 舰队；船队；机群；adj. 快速的；v. 掠过；疾⻜</td></tr>
-<tr data-s="troop n. 军队(复)；部队(复)；连； 队；群；v. 群集；结队；成群前行"><td class="n">150</td><td class="w">troop</td><td class="m">n. 军队(复)；部队(复)；连； 队；群；v. 群集；结队；成群前行</td></tr>
-<tr data-s="landing n. 着陆；降落；楼梯平台；v. 降 落；着陆；“land”的现在分词"><td class="n">151</td><td class="w">landing</td><td class="m">n. 着陆；降落；楼梯平台；v. 降 落；着陆；“land”的现在分词</td></tr>
-<tr data-s="hover v. 盘旋；翱翔；徘徊"><td class="n">152</td><td class="w">hover</td><td class="m">v. 盘旋；翱翔；徘徊</td></tr>
-<tr data-s="proceed v. 进行；继续；继续进行"><td class="n">153</td><td class="w">proceed</td><td class="m">v. 进行；继续；继续进行</td></tr>
-<tr data-s="progress n. 进展；进步；缓慢前进；稳步前 进；v. 进展；进步；(时间)逐渐 过去；前进"><td class="n">154</td><td class="w">progress</td><td class="m">n. 进展；进步；缓慢前进；稳步前 进；v. 进展；进步；(时间)逐渐 过去；前进</td></tr>
+<tr data-s="fleet n. 舰队；船队；机群；adj. 快速的；v. 掠过；疾⻜"><td class="n">149</td><td class="w">fleet<div class="ipa">[fliːt]</div></td><td class="m">n. 舰队；船队；机群；adj. 快速的；v. 掠过；疾⻜</td></tr>
+<tr data-s="troop n. 军队(复)；部队(复)；连； 队；群；v. 群集；结队；成群前行"><td class="n">150</td><td class="w">troop<div class="ipa">[truːp]</div></td><td class="m">n. 军队(复)；部队(复)；连； 队；群；v. 群集；结队；成群前行</td></tr>
+<tr data-s="landing n. 着陆；降落；楼梯平台；v. 降 落；着陆；“land”的现在分词"><td class="n">151</td><td class="w">landing<div class="ipa">[ˈlændɪŋ]</div></td><td class="m">n. 着陆；降落；楼梯平台；v. 降 落；着陆；“land”的现在分词</td></tr>
+<tr data-s="hover v. 盘旋；翱翔；徘徊"><td class="n">152</td><td class="w">hover<div class="ipa">[ˈhɒvə(r)]</div></td><td class="m">v. 盘旋；翱翔；徘徊</td></tr>
+<tr data-s="proceed v. 进行；继续；继续进行"><td class="n">153</td><td class="w">proceed<div class="ipa">[prəˈsiːd]</div></td><td class="m">v. 进行；继续；继续进行</td></tr>
+<tr data-s="progress n. 进展；进步；缓慢前进；稳步前 进；v. 进展；进步；(时间)逐渐 过去；前进"><td class="n">154</td><td class="w">progress<div class="ipa">[ˈprəʊɡres]</div></td><td class="m">n. 进展；进步；缓慢前进；稳步前 进；v. 进展；进步；(时间)逐渐 过去；前进</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 39</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="military adj. 军事的；军用的；n. 军队；武装力量"><td class="n">155</td><td class="w">military</td><td class="m">adj. 军事的；军用的；n. 军队；武装力量</td></tr>
-<tr data-s="nuclear adj. 原子能的；核能的"><td class="n">156</td><td class="w">nuclear</td><td class="m">adj. 原子能的；核能的</td></tr>
-<tr data-s="poison n. 毒药；毒物；v. 毒害； 下毒"><td class="n">157</td><td class="w">poison</td><td class="m">n. 毒药；毒物；v. 毒害； 下毒</td></tr>
-<tr data-s="devastate v. 毁灭；摧毁；变成废墟"><td class="n">158</td><td class="w">devastate</td><td class="m">v. 毁灭；摧毁；变成废墟</td></tr>
+<tr data-s="military adj. 军事的；军用的；n. 军队；武装力量"><td class="n">155</td><td class="w">military<div class="ipa">[ˈmɪlətri]</div></td><td class="m">adj. 军事的；军用的；n. 军队；武装力量</td></tr>
+<tr data-s="nuclear adj. 原子能的；核能的"><td class="n">156</td><td class="w">nuclear<div class="ipa">[ˈnjuːkliə(r)]</div></td><td class="m">adj. 原子能的；核能的</td></tr>
+<tr data-s="poison n. 毒药；毒物；v. 毒害； 下毒"><td class="n">157</td><td class="w">poison<div class="ipa">[ˈpɔɪz(ə)n]</div></td><td class="m">n. 毒药；毒物；v. 毒害； 下毒</td></tr>
+<tr data-s="devastate v. 毁灭；摧毁；变成废墟"><td class="n">158</td><td class="w">devastate<div class="ipa">[ˈdevəsteɪt]</div></td><td class="m">v. 毁灭；摧毁；变成废墟</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 40</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="risk n. ⻛险；v. 冒...的危险"><td class="n">159</td><td class="w">risk</td><td class="m">n. ⻛险；v. 冒...的危险</td></tr>
-<tr data-s="adventure n. 冒险；奇遇；v. 冒险"><td class="n">160</td><td class="w">adventure</td><td class="m">n. 冒险；奇遇；v. 冒险</td></tr>
-<tr data-s="peril n. 危险；冒险；v. 置...于 危险中；危及"><td class="n">161</td><td class="w">peril</td><td class="m">n. 危险；冒险；v. 置...于 危险中；危及</td></tr>
-<tr data-s="catastrophe n. 灾难"><td class="n">162</td><td class="w">catastrophe</td><td class="m">n. 灾难</td></tr>
-<tr data-s="collapse v. 倒塌；昏倒；暴跌；折叠； n. 倒塌；崩溃；病倒；暴跌"><td class="n">163</td><td class="w">collapse</td><td class="m">v. 倒塌；昏倒；暴跌；折叠； n. 倒塌；崩溃；病倒；暴跌</td></tr>
+<tr data-s="risk n. ⻛险；v. 冒...的危险"><td class="n">159</td><td class="w">risk<div class="ipa">[rɪsk]</div></td><td class="m">n. ⻛险；v. 冒...的危险</td></tr>
+<tr data-s="adventure n. 冒险；奇遇；v. 冒险"><td class="n">160</td><td class="w">adventure<div class="ipa">[ədˈventʃə(r)]</div></td><td class="m">n. 冒险；奇遇；v. 冒险</td></tr>
+<tr data-s="peril n. 危险；冒险；v. 置...于 危险中；危及"><td class="n">161</td><td class="w">peril<div class="ipa">[ˈperəl]</div></td><td class="m">n. 危险；冒险；v. 置...于 危险中；危及</td></tr>
+<tr data-s="catastrophe n. 灾难"><td class="n">162</td><td class="w">catastrophe<div class="ipa">[kəˈtæstrəfi]</div></td><td class="m">n. 灾难</td></tr>
+<tr data-s="collapse v. 倒塌；昏倒；暴跌；折叠； n. 倒塌；崩溃；病倒；暴跌"><td class="n">163</td><td class="w">collapse<div class="ipa">[kəˈlæps]</div></td><td class="m">v. 倒塌；昏倒；暴跌；折叠； n. 倒塌；崩溃；病倒；暴跌</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 41</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="torture n. 酷刑；拷打；v. 拷打； 折磨"><td class="n">164</td><td class="w">torture</td><td class="m">n. 酷刑；拷打；v. 拷打； 折磨</td></tr>
-<tr data-s="humiliate v. 使屈辱；使丢脸；使蒙 羞"><td class="n">165</td><td class="w">humiliate</td><td class="m">v. 使屈辱；使丢脸；使蒙 羞</td></tr>
-<tr data-s="damage v. 损害；破坏；n. 损害； 破损"><td class="n">166</td><td class="w">damage</td><td class="m">v. 损害；破坏；n. 损害； 破损</td></tr>
-<tr data-s="harmful adj. 有害的"><td class="n">167</td><td class="w">harmful</td><td class="m">adj. 有害的</td></tr>
+<tr data-s="torture n. 酷刑；拷打；v. 拷打； 折磨"><td class="n">164</td><td class="w">torture<div class="ipa">[ˈtɔːtʃə(r)]</div></td><td class="m">n. 酷刑；拷打；v. 拷打； 折磨</td></tr>
+<tr data-s="humiliate v. 使屈辱；使丢脸；使蒙 羞"><td class="n">165</td><td class="w">humiliate<div class="ipa">[hjuːˈmɪlieɪt]</div></td><td class="m">v. 使屈辱；使丢脸；使蒙 羞</td></tr>
+<tr data-s="damage v. 损害；破坏；n. 损害； 破损"><td class="n">166</td><td class="w">damage<div class="ipa">[ˈdæmɪdʒ]</div></td><td class="m">v. 损害；破坏；n. 损害； 破损</td></tr>
+<tr data-s="harmful adj. 有害的"><td class="n">167</td><td class="w">harmful<div class="ipa">[ˈhɑːmf(ə)l]</div></td><td class="m">adj. 有害的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 42</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="mislead v. 误导"><td class="n">168</td><td class="w">mislead</td><td class="m">v. 误导</td></tr>
-<tr data-s="disturb v. 打扰；妨碍"><td class="n">169</td><td class="w">disturb</td><td class="m">v. 打扰；妨碍</td></tr>
-<tr data-s="interfere v. 干涉；干预；干扰"><td class="n">170</td><td class="w">interfere</td><td class="m">v. 干涉；干预；干扰</td></tr>
-<tr data-s="interrupt v. 打断；打扰；打岔"><td class="n">171</td><td class="w">interrupt</td><td class="m">v. 打断；打扰；打岔</td></tr>
+<tr data-s="mislead v. 误导"><td class="n">168</td><td class="w">mislead<div class="ipa">[ˌmɪsˈliːd]</div></td><td class="m">v. 误导</td></tr>
+<tr data-s="disturb v. 打扰；妨碍"><td class="n">169</td><td class="w">disturb<div class="ipa">[dɪˈstɜːb]</div></td><td class="m">v. 打扰；妨碍</td></tr>
+<tr data-s="interfere v. 干涉；干预；干扰"><td class="n">170</td><td class="w">interfere<div class="ipa">[ˌɪntəˈfɪə(r)]</div></td><td class="m">v. 干涉；干预；干扰</td></tr>
+<tr data-s="interrupt v. 打断；打扰；打岔"><td class="n">171</td><td class="w">interrupt<div class="ipa">[ˌɪntəˈrʌpt]</div></td><td class="m">v. 打断；打扰；打岔</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 43</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="retreat v. 撤退；退却；n. 撤退； 退却；静居处"><td class="n">172</td><td class="w">retreat</td><td class="m">v. 撤退；退却；n. 撤退； 退却；静居处</td></tr>
-<tr data-s="shrink v. 收缩；退缩；踌躇不前"><td class="n">173</td><td class="w">shrink</td><td class="m">v. 收缩；退缩；踌躇不前</td></tr>
-<tr data-s="withdraw v. 撤回；撤退；提取"><td class="n">174</td><td class="w">withdraw</td><td class="m">v. 撤回；撤退；提取</td></tr>
-<tr data-s="withstand v. 抵挡；经受住"><td class="n">175</td><td class="w">withstand</td><td class="m">v. 抵挡；经受住</td></tr>
+<tr data-s="retreat v. 撤退；退却；n. 撤退； 退却；静居处"><td class="n">172</td><td class="w">retreat<div class="ipa">[rɪˈtriːt]</div></td><td class="m">v. 撤退；退却；n. 撤退； 退却；静居处</td></tr>
+<tr data-s="shrink v. 收缩；退缩；踌躇不前"><td class="n">173</td><td class="w">shrink<div class="ipa">[ʃrɪŋk]</div></td><td class="m">v. 收缩；退缩；踌躇不前</td></tr>
+<tr data-s="withdraw v. 撤回；撤退；提取"><td class="n">174</td><td class="w">withdraw<div class="ipa">[wɪðˈdrɔː]</div></td><td class="m">v. 撤回；撤退；提取</td></tr>
+<tr data-s="withstand v. 抵挡；经受住"><td class="n">175</td><td class="w">withstand<div class="ipa">[wɪðˈstænd]</div></td><td class="m">v. 抵挡；经受住</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 44</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="compromise n. 妥协；和解；v. 妥协； 和解；损害；危及"><td class="n">176</td><td class="w">compromise</td><td class="m">n. 妥协；和解；v. 妥协； 和解；损害；危及</td></tr>
-<tr data-s="surrender v. 投降"><td class="n">177</td><td class="w">surrender</td><td class="m">v. 投降</td></tr>
-<tr data-s="escape v. 逃避；逃走；n. 逃脱； 逃避"><td class="n">178</td><td class="w">escape</td><td class="m">v. 逃避；逃走；n. 逃脱； 逃避</td></tr>
+<tr data-s="compromise n. 妥协；和解；v. 妥协； 和解；损害；危及"><td class="n">176</td><td class="w">compromise<div class="ipa">[ˈkɒmprəmaɪz]</div></td><td class="m">n. 妥协；和解；v. 妥协； 和解；损害；危及</td></tr>
+<tr data-s="surrender v. 投降"><td class="n">177</td><td class="w">surrender<div class="ipa">[səˈrendə(r)]</div></td><td class="m">v. 投降</td></tr>
+<tr data-s="escape v. 逃避；逃走；n. 逃脱； 逃避"><td class="n">178</td><td class="w">escape<div class="ipa">[ɪˈskeɪp]</div></td><td class="m">v. 逃避；逃走；n. 逃脱； 逃避</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 45</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="avoid v. 避免；避开"><td class="n">179</td><td class="w">avoid</td><td class="m">v. 避免；避开</td></tr>
-<tr data-s="quit v. 停止；辞职； 离开"><td class="n">180</td><td class="w">quit</td><td class="m">v. 停止；辞职； 离开</td></tr>
-<tr data-s="abandon v. 抛弃；放弃；中止"><td class="n">181</td><td class="w">abandon</td><td class="m">v. 抛弃；放弃；中止</td></tr>
-<tr data-s="forgo v. 弃绝；摒绝"><td class="n">182</td><td class="w">forgo</td><td class="m">v. 弃绝；摒绝</td></tr>
-<tr data-s="discard v. 抛开；遗弃；废弃"><td class="n">183</td><td class="w">discard</td><td class="m">v. 抛开；遗弃；废弃</td></tr>
-<tr data-s="rid adj. 摆脱了的；v. 摆脱； 除去"><td class="n">184</td><td class="w">rid</td><td class="m">adj. 摆脱了的；v. 摆脱； 除去</td></tr>
+<tr data-s="avoid v. 避免；避开"><td class="n">179</td><td class="w">avoid<div class="ipa">[əˈvɔɪd]</div></td><td class="m">v. 避免；避开</td></tr>
+<tr data-s="quit v. 停止；辞职； 离开"><td class="n">180</td><td class="w">quit<div class="ipa">[kwɪt]</div></td><td class="m">v. 停止；辞职； 离开</td></tr>
+<tr data-s="abandon v. 抛弃；放弃；中止"><td class="n">181</td><td class="w">abandon<div class="ipa">[əˈbændən]</div></td><td class="m">v. 抛弃；放弃；中止</td></tr>
+<tr data-s="forgo v. 弃绝；摒绝"><td class="n">182</td><td class="w">forgo<div class="ipa">[fɔːˈɡəʊ]</div></td><td class="m">v. 弃绝；摒绝</td></tr>
+<tr data-s="discard v. 抛开；遗弃；废弃"><td class="n">183</td><td class="w">discard<div class="ipa">[dɪˈskɑːd]</div></td><td class="m">v. 抛开；遗弃；废弃</td></tr>
+<tr data-s="rid adj. 摆脱了的；v. 摆脱； 除去"><td class="n">184</td><td class="w">rid<div class="ipa">[rɪd]</div></td><td class="m">adj. 摆脱了的；v. 摆脱； 除去</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 46</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="defend v. 防守；防御；辩护"><td class="n">185</td><td class="w">defend</td><td class="m">v. 防守；防御；辩护</td></tr>
-<tr data-s="safeguard n. 保护措施；v. 保卫；保 护"><td class="n">186</td><td class="w">safeguard</td><td class="m">n. 保护措施；v. 保卫；保 护</td></tr>
-<tr data-s="defeat v. 击败；战胜；使受挫； n. 失败；战胜"><td class="n">187</td><td class="w">defeat</td><td class="m">v. 击败；战胜；使受挫； n. 失败；战胜</td></tr>
-<tr data-s="resist v. 抵制；抵抗"><td class="n">188</td><td class="w">resist</td><td class="m">v. 抵制；抵抗</td></tr>
-<tr data-s="capture v. 逮捕；夺取；吸引；记录； 准确地描述；n. 抓捕；攻占"><td class="n">189</td><td class="w">capture</td><td class="m">v. 逮捕；夺取；吸引；记录； 准确地描述；n. 抓捕；攻占</td></tr>
-<tr data-s="victory n. 胜利；成功"><td class="n">190</td><td class="w">victory</td><td class="m">n. 胜利；成功</td></tr>
+<tr data-s="defend v. 防守；防御；辩护"><td class="n">185</td><td class="w">defend<div class="ipa">[dɪˈfend]</div></td><td class="m">v. 防守；防御；辩护</td></tr>
+<tr data-s="safeguard n. 保护措施；v. 保卫；保 护"><td class="n">186</td><td class="w">safeguard<div class="ipa">[ˈseɪfɡɑːd]</div></td><td class="m">n. 保护措施；v. 保卫；保 护</td></tr>
+<tr data-s="defeat v. 击败；战胜；使受挫； n. 失败；战胜"><td class="n">187</td><td class="w">defeat<div class="ipa">[dɪˈfiːt]</div></td><td class="m">v. 击败；战胜；使受挫； n. 失败；战胜</td></tr>
+<tr data-s="resist v. 抵制；抵抗"><td class="n">188</td><td class="w">resist<div class="ipa">[rɪˈzɪst]</div></td><td class="m">v. 抵制；抵抗</td></tr>
+<tr data-s="capture v. 逮捕；夺取；吸引；记录； 准确地描述；n. 抓捕；攻占"><td class="n">189</td><td class="w">capture<div class="ipa">[ˈkæptʃə(r)]</div></td><td class="m">v. 逮捕；夺取；吸引；记录； 准确地描述；n. 抓捕；攻占</td></tr>
+<tr data-s="victory n. 胜利；成功"><td class="n">190</td><td class="w">victory<div class="ipa">[ˈvɪktəri]</div></td><td class="m">n. 胜利；成功</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 47</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="triumph v. 战胜；成功；n. 胜利； 凯旋"><td class="n">191</td><td class="w">triumph</td><td class="m">v. 战胜；成功；n. 胜利； 凯旋</td></tr>
-<tr data-s="conquer v. 征服；克服"><td class="n">192</td><td class="w">conquer</td><td class="m">v. 征服；克服</td></tr>
+<tr data-s="triumph v. 战胜；成功；n. 胜利； 凯旋"><td class="n">191</td><td class="w">triumph<div class="ipa">[ˈtraɪʌmf]</div></td><td class="m">v. 战胜；成功；n. 胜利； 凯旋</td></tr>
+<tr data-s="conquer v. 征服；克服"><td class="n">192</td><td class="w">conquer<div class="ipa">[ˈkɒŋkə(r)]</div></td><td class="m">v. 征服；克服</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 48</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="monument n. 纪念碑；历史遗迹；不 朽作品"><td class="n">193</td><td class="w">monument</td><td class="m">n. 纪念碑；历史遗迹；不 朽作品</td></tr>
-<tr data-s="tablet n. 药片；丸；(刻有文字 的)匾；"><td class="n">194</td><td class="w">tablet</td><td class="m">n. 药片；丸；(刻有文字 的)匾；</td></tr>
-<tr data-s="statue n. 雕像；雕塑"><td class="n">195</td><td class="w">statue</td><td class="m">n. 雕像；雕塑</td></tr>
-<tr data-s="medal n. 奖章；勋章"><td class="n">196</td><td class="w">medal</td><td class="m">n. 奖章；勋章</td></tr>
+<tr data-s="monument n. 纪念碑；历史遗迹；不 朽作品"><td class="n">193</td><td class="w">monument<div class="ipa">[ˈmɒnjumənt]</div></td><td class="m">n. 纪念碑；历史遗迹；不 朽作品</td></tr>
+<tr data-s="tablet n. 药片；丸；(刻有文字 的)匾；"><td class="n">194</td><td class="w">tablet<div class="ipa">[ˈtæblət]</div></td><td class="m">n. 药片；丸；(刻有文字 的)匾；</td></tr>
+<tr data-s="statue n. 雕像；雕塑"><td class="n">195</td><td class="w">statue<div class="ipa">[ˈstætʃuː]</div></td><td class="m">n. 雕像；雕塑</td></tr>
+<tr data-s="medal n. 奖章；勋章"><td class="n">196</td><td class="w">medal<div class="ipa">[ˈmed(ə)l]</div></td><td class="m">n. 奖章；勋章</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 49</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="honour n. 荣誉；荣幸；尊敬；v. 尊敬；给予荣誉"><td class="n">197</td><td class="w">honour</td><td class="m">n. 荣誉；荣幸；尊敬；v. 尊敬；给予荣誉</td></tr>
-<tr data-s="glorious adj. 光荣的；辉煌的"><td class="n">198</td><td class="w">glorious</td><td class="m">adj. 光荣的；辉煌的</td></tr>
-<tr data-s="contribute v. 捐献；投稿；贡献；促 成"><td class="n">199</td><td class="w">contribute</td><td class="m">v. 捐献；投稿；贡献；促 成</td></tr>
-<tr data-s="devote v. 投入；献身"><td class="n">200</td><td class="w">devote</td><td class="m">v. 投入；献身</td></tr>
-<tr data-s="owe v. 欠；归功于；欠债"><td class="n">201</td><td class="w">owe</td><td class="m">v. 欠；归功于；欠债</td></tr>
+<tr data-s="honour n. 荣誉；荣幸；尊敬；v. 尊敬；给予荣誉"><td class="n">197</td><td class="w">honour<div class="ipa">[ˈɒnə(r)]</div></td><td class="m">n. 荣誉；荣幸；尊敬；v. 尊敬；给予荣誉</td></tr>
+<tr data-s="glorious adj. 光荣的；辉煌的"><td class="n">198</td><td class="w">glorious<div class="ipa">[ˈɡlɔːriəs]</div></td><td class="m">adj. 光荣的；辉煌的</td></tr>
+<tr data-s="contribute v. 捐献；投稿；贡献；促 成"><td class="n">199</td><td class="w">contribute<div class="ipa">[kənˈtrɪbjuːt]</div></td><td class="m">v. 捐献；投稿；贡献；促 成</td></tr>
+<tr data-s="devote v. 投入；献身"><td class="n">200</td><td class="w">devote<div class="ipa">[dɪˈvəʊt]</div></td><td class="m">v. 投入；献身</td></tr>
+<tr data-s="owe v. 欠；归功于；欠债"><td class="n">201</td><td class="w">owe<div class="ipa">[əʊ]</div></td><td class="m">v. 欠；归功于；欠债</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 50</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="patrol n. 巡逻；v. 巡逻"><td class="n">202</td><td class="w">patrol</td><td class="m">n. 巡逻；v. 巡逻</td></tr>
-<tr data-s="guard n. 保卫；警卫；v. 守卫； 警戒"><td class="n">203</td><td class="w">guard</td><td class="m">n. 保卫；警卫；v. 守卫； 警戒</td></tr>
-<tr data-s="camouflage v. 伪装；掩饰；n. 伪装； 掩饰"><td class="n">204</td><td class="w">camouflage</td><td class="m">v. 伪装；掩饰；n. 伪装； 掩饰</td></tr>
-<tr data-s="obstacle n. 障碍"><td class="n">205</td><td class="w">obstacle</td><td class="m">n. 障碍</td></tr>
-<tr data-s="burrow v. 挖洞；钻进；翻寻；n. 地洞"><td class="n">206</td><td class="w">burrow</td><td class="m">v. 挖洞；钻进；翻寻；n. 地洞</td></tr>
-<tr data-s="spy n. 间谍；密探；v. 秘密侦 察；发现"><td class="n">207</td><td class="w">spy</td><td class="m">n. 间谍；密探；v. 秘密侦 察；发现</td></tr>
+<tr data-s="patrol n. 巡逻；v. 巡逻"><td class="n">202</td><td class="w">patrol<div class="ipa">[pəˈtrəʊl]</div></td><td class="m">n. 巡逻；v. 巡逻</td></tr>
+<tr data-s="guard n. 保卫；警卫；v. 守卫； 警戒"><td class="n">203</td><td class="w">guard<div class="ipa">[ɡɑːd]</div></td><td class="m">n. 保卫；警卫；v. 守卫； 警戒</td></tr>
+<tr data-s="camouflage v. 伪装；掩饰；n. 伪装； 掩饰"><td class="n">204</td><td class="w">camouflage<div class="ipa">[ˈkæməflɑːʒ]</div></td><td class="m">v. 伪装；掩饰；n. 伪装； 掩饰</td></tr>
+<tr data-s="obstacle n. 障碍"><td class="n">205</td><td class="w">obstacle<div class="ipa">[ˈɒbstək(ə)l]</div></td><td class="m">n. 障碍</td></tr>
+<tr data-s="burrow v. 挖洞；钻进；翻寻；n. 地洞"><td class="n">206</td><td class="w">burrow<div class="ipa">[ˈbʌrəʊ]</div></td><td class="m">v. 挖洞；钻进；翻寻；n. 地洞</td></tr>
+<tr data-s="spy n. 间谍；密探；v. 秘密侦 察；发现"><td class="n">207</td><td class="w">spy<div class="ipa">[spaɪ]</div></td><td class="m">n. 间谍；密探；v. 秘密侦 察；发现</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 51</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="scout v. 侦察；巡视；搜寻；物色；n. 侦 察；侦察兵；物色人才的人；童子 军"><td class="n">208</td><td class="w">scout</td><td class="m">v. 侦察；巡视；搜寻；物色；n. 侦 察；侦察兵；物色人才的人；童子 军</td></tr>
-<tr data-s="general adj. 总的；普遍的；一般的； 大致的；首席的；n. 将军"><td class="n">209</td><td class="w">general</td><td class="m">adj. 总的；普遍的；一般的； 大致的；首席的；n. 将军</td></tr>
-<tr data-s="soldier n. 士兵；军人"><td class="n">210</td><td class="w">soldier</td><td class="m">n. 士兵；军人</td></tr>
-<tr data-s="veteran n. 老兵；老手；adj. 老练 的"><td class="n">211</td><td class="w">veteran</td><td class="m">n. 老兵；老手；adj. 老练 的</td></tr>
+<tr data-s="scout v. 侦察；巡视；搜寻；物色；n. 侦 察；侦察兵；物色人才的人；童子 军"><td class="n">208</td><td class="w">scout<div class="ipa">[skaʊt]</div></td><td class="m">v. 侦察；巡视；搜寻；物色；n. 侦 察；侦察兵；物色人才的人；童子 军</td></tr>
+<tr data-s="general adj. 总的；普遍的；一般的； 大致的；首席的；n. 将军"><td class="n">209</td><td class="w">general<div class="ipa">[ˈdʒenrəl]</div></td><td class="m">adj. 总的；普遍的；一般的； 大致的；首席的；n. 将军</td></tr>
+<tr data-s="soldier n. 士兵；军人"><td class="n">210</td><td class="w">soldier<div class="ipa">[ˈsəʊldʒə(r)]</div></td><td class="m">n. 士兵；军人</td></tr>
+<tr data-s="veteran n. 老兵；老手；adj. 老练 的"><td class="n">211</td><td class="w">veteran<div class="ipa">[ˈvetərən]</div></td><td class="m">n. 老兵；老手；adj. 老练 的</td></tr>
 </tbody>
 </table><div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit17.html">← Unit 17</a><a href="unit18-card.html">切到例句卡片版</a><a href="unit19.html">Unit 19 →</a></div><footer><div class="wrap" style="padding:0">
  摘自《雅思词汇真经》（刘洪波 编著）第 18 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
@@ -452,27 +457,31 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  var KEY='vj-hide';
  var body=document.body;
  var kind=body.dataset.kind;
- var s={m:false,z:false};
- try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;}}catch(e){}
+ var s={m:false,z:false,i:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z; if(typeof o.i==='boolean')s.i=o.i;}}catch(e){}
  function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
  function paint(){
   body.classList.toggle('hide-m',s.m);
   body.classList.toggle('hide-z',s.z);
-  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all');
+  body.classList.toggle('hide-i',s.i);
+  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all'), ci=document.getElementById('i');
   if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
   if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
+  if(ci){ci.checked=s.i; ci.closest('.sw').classList.toggle('on',s.i);}
   if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
  }
  var cm=document.getElementById('m');
  if(cm) cm.addEventListener('change',function(){s.m=cm.checked; save(); paint();});
  var cz=document.getElementById('z');
  if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
+ var ci=document.getElementById('i');
+ if(ci) ci.addEventListener('change',function(){s.i=ci.checked; save(); paint();});
  var ca=document.getElementById('all');
  if(ca) ca.addEventListener('change',function(){
    s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
  });
  var rs=document.getElementById('reset');
- if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; save(); paint();});
+ if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; s.i=false; save(); paint();});
  var q=document.getElementById('q');
  var items=[].slice.call(document.querySelectorAll('[data-s]'));
  var cnt=document.getElementById('cnt');

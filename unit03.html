@@ -56,6 +56,9 @@ td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-
 td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
  letter-spacing:.2px;word-break:break-word}
 td.m{color:var(--ink)}
+.ipa{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:12px;font-weight:400;
+ color:var(--ink2);letter-spacing:0;margin-top:3px;word-break:break-word}
+.card .w .ipa{font-size:13px;margin-left:8px}
 tr.hit td.w,tr.hit td.m{background:var(--mark)}
 
 .cards{display:grid;gap:12px}
@@ -86,6 +89,7 @@ section.grp .card:last-child{border-bottom:0}
 
 .hide-m .m,.hide-m td.m{display:none}
 .hide-z .zh{display:none}
+.hide-i .ipa{display:none}
 body.hide-m td.m{display:none!important}
 .empty{padding:40px;text-align:center;color:var(--ink2);font-size:14px}
 
@@ -126,253 +130,254 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
   <input id="q" type="search" placeholder="搜索单词或释义…（按 / 聚焦）">
   <label class="sw"><input type="checkbox" id="all"> 默写模式</label>
   <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
+  <label class="sw"><input type="checkbox" id="i"> 隐藏音标</label>
   
   <button class="btn" id="reset">重置</button>
   <span class="count" id="cnt">167 条</span>
  </div>
 </div></div><div class="wrap"><table><thead><tr><th>#</th><th>单词</th><th>释义</th></tr></thead>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 01</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="biologist n. 生物学家"><td class="n">1</td><td class="w">biologist</td><td class="m">n. 生物学家</td></tr>
-<tr data-s="zoologist n. 动物学家"><td class="n">2</td><td class="w">zoologist</td><td class="m">n. 动物学家</td></tr>
-<tr data-s="ecologist n. 生态学家；生态学者"><td class="n">3</td><td class="w">ecologist</td><td class="m">n. 生态学家；生态学者</td></tr>
-<tr data-s="botanist n. 植物学家"><td class="n">4</td><td class="w">botanist</td><td class="m">n. 植物学家</td></tr>
+<tr data-s="biologist n. 生物学家"><td class="n">1</td><td class="w">biologist<div class="ipa">[baɪˈɒlədʒɪst]</div></td><td class="m">n. 生物学家</td></tr>
+<tr data-s="zoologist n. 动物学家"><td class="n">2</td><td class="w">zoologist<div class="ipa">[zəʊˈɒlədʒɪst]</div></td><td class="m">n. 动物学家</td></tr>
+<tr data-s="ecologist n. 生态学家；生态学者"><td class="n">3</td><td class="w">ecologist<div class="ipa">[iˈkɒlədʒɪst]</div></td><td class="m">n. 生态学家；生态学者</td></tr>
+<tr data-s="botanist n. 植物学家"><td class="n">4</td><td class="w">botanist<div class="ipa">[ˈbɒtənɪst]</div></td><td class="m">n. 植物学家</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 02</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="mammal n. 哺乳动物"><td class="n">5</td><td class="w">mammal</td><td class="m">n. 哺乳动物</td></tr>
-<tr data-s="primate n. 灵⻓类(动物)；大主 教"><td class="n">6</td><td class="w">primate</td><td class="m">n. 灵⻓类(动物)；大主 教</td></tr>
-<tr data-s="vertebrate adj. 有脊⻣的(动物)； n. 脊椎动物"><td class="n">7</td><td class="w">vertebrate</td><td class="m">adj. 有脊⻣的(动物)； n. 脊椎动物</td></tr>
-<tr data-s="reptile n. 爬行动物；adj. 爬虫类 的"><td class="n">8</td><td class="w">reptile</td><td class="m">n. 爬行动物；adj. 爬虫类 的</td></tr>
-<tr data-s="amphibian n. 两栖动物"><td class="n">9</td><td class="w">amphibian</td><td class="m">n. 两栖动物</td></tr>
-<tr data-s="carnivore n. ⻝肉动物；⻝虫植物"><td class="n">10</td><td class="w">carnivore</td><td class="m">n. ⻝肉动物；⻝虫植物</td></tr>
+<tr data-s="mammal n. 哺乳动物"><td class="n">5</td><td class="w">mammal<div class="ipa">[ˈmæm(ə)l]</div></td><td class="m">n. 哺乳动物</td></tr>
+<tr data-s="primate n. 灵⻓类(动物)；大主 教"><td class="n">6</td><td class="w">primate<div class="ipa">[ˈpraɪmeɪt]</div></td><td class="m">n. 灵⻓类(动物)；大主 教</td></tr>
+<tr data-s="vertebrate adj. 有脊⻣的(动物)； n. 脊椎动物"><td class="n">7</td><td class="w">vertebrate<div class="ipa">[ˈvɜːtɪbrət]</div></td><td class="m">adj. 有脊⻣的(动物)； n. 脊椎动物</td></tr>
+<tr data-s="reptile n. 爬行动物；adj. 爬虫类 的"><td class="n">8</td><td class="w">reptile<div class="ipa">[ˈreptaɪl]</div></td><td class="m">n. 爬行动物；adj. 爬虫类 的</td></tr>
+<tr data-s="amphibian n. 两栖动物"><td class="n">9</td><td class="w">amphibian<div class="ipa">[æmˈfɪbiən]</div></td><td class="m">n. 两栖动物</td></tr>
+<tr data-s="carnivore n. ⻝肉动物；⻝虫植物"><td class="n">10</td><td class="w">carnivore<div class="ipa">[ˈkɑːnɪvɔː(r)]</div></td><td class="m">n. ⻝肉动物；⻝虫植物</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 03</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="herbivore n. ⻝草动物"><td class="n">11</td><td class="w">herbivore</td><td class="m">n. ⻝草动物</td></tr>
-<tr data-s="creature n. 生物；动物"><td class="n">12</td><td class="w">creature</td><td class="m">n. 生物；动物</td></tr>
-<tr data-s="wildlife n. 野生生物；adj. 野生动 物的"><td class="n">13</td><td class="w">wildlife</td><td class="m">n. 野生生物；adj. 野生动 物的</td></tr>
-<tr data-s="fauna n. 动物群；动物区系"><td class="n">14</td><td class="w">fauna</td><td class="m">n. 动物群；动物区系</td></tr>
-<tr data-s="flora n. 植物群落"><td class="n">15</td><td class="w">flora</td><td class="m">n. 植物群落</td></tr>
-<tr data-s="species n. 物种；种类"><td class="n">16</td><td class="w">species</td><td class="m">n. 物种；种类</td></tr>
+<tr data-s="herbivore n. ⻝草动物"><td class="n">11</td><td class="w">herbivore<div class="ipa">[ˈhɜːbɪvɔː(r)]</div></td><td class="m">n. ⻝草动物</td></tr>
+<tr data-s="creature n. 生物；动物"><td class="n">12</td><td class="w">creature<div class="ipa">[ˈkriːtʃə(r)]</div></td><td class="m">n. 生物；动物</td></tr>
+<tr data-s="wildlife n. 野生生物；adj. 野生动 物的"><td class="n">13</td><td class="w">wildlife<div class="ipa">[ˈwaɪldlaɪf]</div></td><td class="m">n. 野生生物；adj. 野生动 物的</td></tr>
+<tr data-s="fauna n. 动物群；动物区系"><td class="n">14</td><td class="w">fauna<div class="ipa">[ˈfɔːnə]</div></td><td class="m">n. 动物群；动物区系</td></tr>
+<tr data-s="flora n. 植物群落"><td class="n">15</td><td class="w">flora<div class="ipa">[ˈflɔːrə]</div></td><td class="m">n. 植物群落</td></tr>
+<tr data-s="species n. 物种；种类"><td class="n">16</td><td class="w">species<div class="ipa">[ˈspiːʃiːz]</div></td><td class="m">n. 物种；种类</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 04</span><span class="gcnt">8 词</span></td></tr>
-<tr data-s="flock n. 群；v. 聚集；群集"><td class="n">17</td><td class="w">flock</td><td class="m">n. 群；v. 聚集；群集</td></tr>
-<tr data-s="herd n. 兽群；牧群；芸芸众 生；v. 放牧；(强制)集合"><td class="n">18</td><td class="w">herd</td><td class="m">n. 兽群；牧群；芸芸众 生；v. 放牧；(强制)集合</td></tr>
-<tr data-s="swarm n. 群；蜂群；v. 云集；充 满"><td class="n">19</td><td class="w">swarm</td><td class="m">n. 群；蜂群；v. 云集；充 满</td></tr>
-<tr data-s="throng n. 人群；一大群；众多； v. 群集；挤满；涌进"><td class="n">20</td><td class="w">throng</td><td class="m">n. 人群；一大群；众多； v. 群集；挤满；涌进</td></tr>
-<tr data-s="crowd n. 人群；群众；v. 拥挤； 群集"><td class="n">21</td><td class="w">crowd</td><td class="m">n. 人群；群众；v. 拥挤； 群集</td></tr>
-<tr data-s="beast n. 兽；凶残的人"><td class="n">22</td><td class="w">beast</td><td class="m">n. 兽；凶残的人</td></tr>
-<tr data-s="brute n. 野兽；残忍的人；adj. 残忍的；野兽般的；粗暴的"><td class="n">23</td><td class="w">brute</td><td class="m">n. 野兽；残忍的人；adj. 残忍的；野兽般的；粗暴的</td></tr>
-<tr data-s="cruel adj. 残酷的；冷酷的"><td class="n">24</td><td class="w">cruel</td><td class="m">adj. 残酷的；冷酷的</td></tr>
+<tr data-s="flock n. 群；v. 聚集；群集"><td class="n">17</td><td class="w">flock<div class="ipa">[flɒk]</div></td><td class="m">n. 群；v. 聚集；群集</td></tr>
+<tr data-s="herd n. 兽群；牧群；芸芸众 生；v. 放牧；(强制)集合"><td class="n">18</td><td class="w">herd<div class="ipa">[hɜːd]</div></td><td class="m">n. 兽群；牧群；芸芸众 生；v. 放牧；(强制)集合</td></tr>
+<tr data-s="swarm n. 群；蜂群；v. 云集；充 满"><td class="n">19</td><td class="w">swarm<div class="ipa">[swɔːm]</div></td><td class="m">n. 群；蜂群；v. 云集；充 满</td></tr>
+<tr data-s="throng n. 人群；一大群；众多； v. 群集；挤满；涌进"><td class="n">20</td><td class="w">throng<div class="ipa">[θrɒŋ]</div></td><td class="m">n. 人群；一大群；众多； v. 群集；挤满；涌进</td></tr>
+<tr data-s="crowd n. 人群；群众；v. 拥挤； 群集"><td class="n">21</td><td class="w">crowd<div class="ipa">[kraʊd]</div></td><td class="m">n. 人群；群众；v. 拥挤； 群集</td></tr>
+<tr data-s="beast n. 兽；凶残的人"><td class="n">22</td><td class="w">beast<div class="ipa">[biːst]</div></td><td class="m">n. 兽；凶残的人</td></tr>
+<tr data-s="brute n. 野兽；残忍的人；adj. 残忍的；野兽般的；粗暴的"><td class="n">23</td><td class="w">brute<div class="ipa">[bruːt]</div></td><td class="m">n. 野兽；残忍的人；adj. 残忍的；野兽般的；粗暴的</td></tr>
+<tr data-s="cruel adj. 残酷的；冷酷的"><td class="n">24</td><td class="w">cruel<div class="ipa">[ˈkruːəl]</div></td><td class="m">adj. 残酷的；冷酷的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 05</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="originate v. 起源；发源；创始"><td class="n">25</td><td class="w">originate</td><td class="m">v. 起源；发源；创始</td></tr>
-<tr data-s="derive v. 起源；来自；源自；得 到"><td class="n">26</td><td class="w">derive</td><td class="m">v. 起源；来自；源自；得 到</td></tr>
-<tr data-s="stem n. 柄；茎；词干；v. 阻 止；起源于(~ from)"><td class="n">27</td><td class="w">stem</td><td class="m">n. 柄；茎；词干；v. 阻 止；起源于(~ from)</td></tr>
-<tr data-s="ancestor n. 祖先；祖宗"><td class="n">28</td><td class="w">ancestor</td><td class="m">n. 祖先；祖宗</td></tr>
+<tr data-s="originate v. 起源；发源；创始"><td class="n">25</td><td class="w">originate<div class="ipa">[əˈrɪdʒɪneɪt]</div></td><td class="m">v. 起源；发源；创始</td></tr>
+<tr data-s="derive v. 起源；来自；源自；得 到"><td class="n">26</td><td class="w">derive<div class="ipa">[dɪˈraɪv]</div></td><td class="m">v. 起源；来自；源自；得 到</td></tr>
+<tr data-s="stem n. 柄；茎；词干；v. 阻 止；起源于(~ from)"><td class="n">27</td><td class="w">stem<div class="ipa">[stem]</div></td><td class="m">n. 柄；茎；词干；v. 阻 止；起源于(~ from)</td></tr>
+<tr data-s="ancestor n. 祖先；祖宗"><td class="n">28</td><td class="w">ancestor<div class="ipa">[ˈænsestə(r)]</div></td><td class="m">n. 祖先；祖宗</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 06</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="descendant n. 后裔；子孙；后代"><td class="n">29</td><td class="w">descendant</td><td class="m">n. 后裔；子孙；后代</td></tr>
-<tr data-s="offspring n. 后代；子女；幼苗"><td class="n">30</td><td class="w">offspring</td><td class="m">n. 后代；子女；幼苗</td></tr>
-<tr data-s="subgroup n. 子群；小群；小组；小 团体"><td class="n">31</td><td class="w">subgroup</td><td class="m">n. 子群；小群；小组；小 团体</td></tr>
+<tr data-s="descendant n. 后裔；子孙；后代"><td class="n">29</td><td class="w">descendant<div class="ipa">[dɪˈsendənt]</div></td><td class="m">n. 后裔；子孙；后代</td></tr>
+<tr data-s="offspring n. 后代；子女；幼苗"><td class="n">30</td><td class="w">offspring<div class="ipa">[ˈɒfsprɪŋ]</div></td><td class="m">n. 后代；子女；幼苗</td></tr>
+<tr data-s="subgroup n. 子群；小群；小组；小 团体"><td class="n">31</td><td class="w">subgroup<div class="ipa">[ˈsʌbɡruːp]</div></td><td class="m">n. 子群；小群；小组；小 团体</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 07</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="feed v. 喂；吃；饲养；n. 饲 养；喂养"><td class="n">32</td><td class="w">feed</td><td class="m">v. 喂；吃；饲养；n. 饲 养；喂养</td></tr>
-<tr data-s="breed v. 饲养；交配繁殖；n. 品 种"><td class="n">33</td><td class="w">breed</td><td class="m">v. 饲养；交配繁殖；n. 品 种</td></tr>
-<tr data-s="interbreed v. (使)异种交配； (使)杂种繁殖"><td class="n">34</td><td class="w">interbreed</td><td class="m">v. (使)异种交配； (使)杂种繁殖</td></tr>
+<tr data-s="feed v. 喂；吃；饲养；n. 饲 养；喂养"><td class="n">32</td><td class="w">feed<div class="ipa">[fiːd]</div></td><td class="m">v. 喂；吃；饲养；n. 饲 养；喂养</td></tr>
+<tr data-s="breed v. 饲养；交配繁殖；n. 品 种"><td class="n">33</td><td class="w">breed<div class="ipa">[briːd]</div></td><td class="m">v. 饲养；交配繁殖；n. 品 种</td></tr>
+<tr data-s="interbreed v. (使)异种交配； (使)杂种繁殖"><td class="n">34</td><td class="w">interbreed<div class="ipa">[ˌɪntəˈbriːd]</div></td><td class="m">v. (使)异种交配； (使)杂种繁殖</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 08</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="hybridise v. 杂交"><td class="n">35</td><td class="w">hybridise</td><td class="m">v. 杂交</td></tr>
-<tr data-s="proliferate v. 繁殖；激增；扩散"><td class="n">36</td><td class="w">proliferate</td><td class="m">v. 繁殖；激增；扩散</td></tr>
-<tr data-s="sterility n. 无菌；不育；不孕"><td class="n">37</td><td class="w">sterility</td><td class="m">n. 无菌；不育；不孕</td></tr>
+<tr data-s="hybridise v. 杂交"><td class="n">35</td><td class="w">hybridise<div class="ipa">[ˌhaɪbrɪˌdaɪz]</div></td><td class="m">v. 杂交</td></tr>
+<tr data-s="proliferate v. 繁殖；激增；扩散"><td class="n">36</td><td class="w">proliferate<div class="ipa">[prəˈlɪfəreɪt]</div></td><td class="m">v. 繁殖；激增；扩散</td></tr>
+<tr data-s="sterility n. 无菌；不育；不孕"><td class="n">37</td><td class="w">sterility<div class="ipa">[stəˈrɪləti]</div></td><td class="m">n. 无菌；不育；不孕</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 09</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="mate n. 伙伴；伴侣；v. 使 ... 配对；交配"><td class="n">38</td><td class="w">mate</td><td class="m">n. 伙伴；伴侣；v. 使 ... 配对；交配</td></tr>
-<tr data-s="courtship n. 求爱；恋爱；求偶"><td class="n">39</td><td class="w">courtship</td><td class="m">n. 求爱；恋爱；求偶</td></tr>
-<tr data-s="lay v. 放置；安放；下蛋；adj. 外行 的；非专业的；v. 躺；“lie”的过去 式"><td class="n">40</td><td class="w">lay</td><td class="m">v. 放置；安放；下蛋；adj. 外行 的；非专业的；v. 躺；“lie”的过去 式</td></tr>
+<tr data-s="mate n. 伙伴；伴侣；v. 使 ... 配对；交配"><td class="n">38</td><td class="w">mate<div class="ipa">[meɪt]</div></td><td class="m">n. 伙伴；伴侣；v. 使 ... 配对；交配</td></tr>
+<tr data-s="courtship n. 求爱；恋爱；求偶"><td class="n">39</td><td class="w">courtship<div class="ipa">[ˈkɔːtʃɪp]</div></td><td class="m">n. 求爱；恋爱；求偶</td></tr>
+<tr data-s="lay v. 放置；安放；下蛋；adj. 外行 的；非专业的；v. 躺；“lie”的过去 式"><td class="n">40</td><td class="w">lay<div class="ipa">[leɪ]</div></td><td class="m">v. 放置；安放；下蛋；adj. 外行 的；非专业的；v. 躺；“lie”的过去 式</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 10</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="hatch v. 孵出；出壳；秘密策 划；n. 舱口；小窗口"><td class="n">41</td><td class="w">hatch</td><td class="m">v. 孵出；出壳；秘密策 划；n. 舱口；小窗口</td></tr>
-<tr data-s="brood v. 孵(蛋)；沉思；忧思； n. 一窝动物；一大家孩子"><td class="n">42</td><td class="w">brood</td><td class="m">v. 孵(蛋)；沉思；忧思； n. 一窝动物；一大家孩子</td></tr>
-<tr data-s="spawn n. 卵；产物；v. 产卵"><td class="n">43</td><td class="w">spawn</td><td class="m">n. 卵；产物；v. 产卵</td></tr>
-<tr data-s="mature adj. 成熟的；到期的；充 分考虑的；v. 成熟；到期"><td class="n">44</td><td class="w">mature</td><td class="m">adj. 成熟的；到期的；充 分考虑的；v. 成熟；到期</td></tr>
-<tr data-s="skin n. 皮肤；毛皮；外皮；v. 剥皮；削皮"><td class="n">45</td><td class="w">skin</td><td class="m">n. 皮肤；毛皮；外皮；v. 剥皮；削皮</td></tr>
+<tr data-s="hatch v. 孵出；出壳；秘密策 划；n. 舱口；小窗口"><td class="n">41</td><td class="w">hatch<div class="ipa">[hætʃ]</div></td><td class="m">v. 孵出；出壳；秘密策 划；n. 舱口；小窗口</td></tr>
+<tr data-s="brood v. 孵(蛋)；沉思；忧思； n. 一窝动物；一大家孩子"><td class="n">42</td><td class="w">brood<div class="ipa">[bruːd]</div></td><td class="m">v. 孵(蛋)；沉思；忧思； n. 一窝动物；一大家孩子</td></tr>
+<tr data-s="spawn n. 卵；产物；v. 产卵"><td class="n">43</td><td class="w">spawn<div class="ipa">[spɔːn]</div></td><td class="m">n. 卵；产物；v. 产卵</td></tr>
+<tr data-s="mature adj. 成熟的；到期的；充 分考虑的；v. 成熟；到期"><td class="n">44</td><td class="w">mature<div class="ipa">[məˈtʃʊə(r)]</div></td><td class="m">adj. 成熟的；到期的；充 分考虑的；v. 成熟；到期</td></tr>
+<tr data-s="skin n. 皮肤；毛皮；外皮；v. 剥皮；削皮"><td class="n">45</td><td class="w">skin<div class="ipa">[skɪn]</div></td><td class="m">n. 皮肤；毛皮；外皮；v. 剥皮；削皮</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 11</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="claw n. 爪；钳；v. 抓"><td class="n">46</td><td class="w">claw</td><td class="m">n. 爪；钳；v. 抓</td></tr>
-<tr data-s="paw n. 爪子；脚爪"><td class="n">47</td><td class="w">paw</td><td class="m">n. 爪子；脚爪</td></tr>
-<tr data-s="beak n. ⻦喙"><td class="n">48</td><td class="w">beak</td><td class="m">n. ⻦喙</td></tr>
-<tr data-s="fin n. 鳍；鳍状物；尾翼"><td class="n">49</td><td class="w">fin</td><td class="m">n. 鳍；鳍状物；尾翼</td></tr>
-<tr data-s="wing n. 翅膀；翼"><td class="n">50</td><td class="w">wing</td><td class="m">n. 翅膀；翼</td></tr>
+<tr data-s="claw n. 爪；钳；v. 抓"><td class="n">46</td><td class="w">claw<div class="ipa">[klɔː]</div></td><td class="m">n. 爪；钳；v. 抓</td></tr>
+<tr data-s="paw n. 爪子；脚爪"><td class="n">47</td><td class="w">paw<div class="ipa">[pɔː]</div></td><td class="m">n. 爪子；脚爪</td></tr>
+<tr data-s="beak n. ⻦喙"><td class="n">48</td><td class="w">beak<div class="ipa">[biːk]</div></td><td class="m">n. ⻦喙</td></tr>
+<tr data-s="fin n. 鳍；鳍状物；尾翼"><td class="n">49</td><td class="w">fin<div class="ipa">[fɪn]</div></td><td class="m">n. 鳍；鳍状物；尾翼</td></tr>
+<tr data-s="wing n. 翅膀；翼"><td class="n">50</td><td class="w">wing<div class="ipa">[wɪŋ]</div></td><td class="m">n. 翅膀；翼</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 12</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="plume n. 羽毛；羽饰；(一)股；(一) 团；v. 整理羽毛；用羽毛装饰；自 夸"><td class="n">51</td><td class="w">plume</td><td class="m">n. 羽毛；羽饰；(一)股；(一) 团；v. 整理羽毛；用羽毛装饰；自 夸</td></tr>
-<tr data-s="feather n. 羽毛"><td class="n">52</td><td class="w">feather</td><td class="m">n. 羽毛</td></tr>
-<tr data-s="fur n. 毛皮；皮草；软毛"><td class="n">53</td><td class="w">fur</td><td class="m">n. 毛皮；皮草；软毛</td></tr>
-<tr data-s="bristle n. 刚毛；猪鬃；v. 大为恼 怒；耸起毛发"><td class="n">54</td><td class="w">bristle</td><td class="m">n. 刚毛；猪鬃；v. 大为恼 怒；耸起毛发</td></tr>
-<tr data-s="curl v. 卷；蜷缩；n. 卷曲"><td class="n">55</td><td class="w">curl</td><td class="m">v. 卷；蜷缩；n. 卷曲</td></tr>
+<tr data-s="plume n. 羽毛；羽饰；(一)股；(一) 团；v. 整理羽毛；用羽毛装饰；自 夸"><td class="n">51</td><td class="w">plume<div class="ipa">[pluːm]</div></td><td class="m">n. 羽毛；羽饰；(一)股；(一) 团；v. 整理羽毛；用羽毛装饰；自 夸</td></tr>
+<tr data-s="feather n. 羽毛"><td class="n">52</td><td class="w">feather<div class="ipa">[ˈfeðə(r)]</div></td><td class="m">n. 羽毛</td></tr>
+<tr data-s="fur n. 毛皮；皮草；软毛"><td class="n">53</td><td class="w">fur<div class="ipa">[fɜː(r)]</div></td><td class="m">n. 毛皮；皮草；软毛</td></tr>
+<tr data-s="bristle n. 刚毛；猪鬃；v. 大为恼 怒；耸起毛发"><td class="n">54</td><td class="w">bristle<div class="ipa">[ˈbrɪs(ə)l]</div></td><td class="m">n. 刚毛；猪鬃；v. 大为恼 怒；耸起毛发</td></tr>
+<tr data-s="curl v. 卷；蜷缩；n. 卷曲"><td class="n">55</td><td class="w">curl<div class="ipa">[kɜːl]</div></td><td class="m">v. 卷；蜷缩；n. 卷曲</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 13</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="insect n. 昆虫"><td class="n">56</td><td class="w">insect</td><td class="m">n. 昆虫</td></tr>
-<tr data-s="worm n. 蠕虫"><td class="n">57</td><td class="w">worm</td><td class="m">n. 蠕虫</td></tr>
-<tr data-s="pest n. 害虫"><td class="n">58</td><td class="w">pest</td><td class="m">n. 害虫</td></tr>
-<tr data-s="parasite n. 寄生虫；寄生生物；依 赖他人过活者"><td class="n">59</td><td class="w">parasite</td><td class="m">n. 寄生虫；寄生生物；依 赖他人过活者</td></tr>
+<tr data-s="insect n. 昆虫"><td class="n">56</td><td class="w">insect<div class="ipa">[ˈɪnsekt]</div></td><td class="m">n. 昆虫</td></tr>
+<tr data-s="worm n. 蠕虫"><td class="n">57</td><td class="w">worm<div class="ipa">[wɜːm]</div></td><td class="m">n. 蠕虫</td></tr>
+<tr data-s="pest n. 害虫"><td class="n">58</td><td class="w">pest<div class="ipa">[pest]</div></td><td class="m">n. 害虫</td></tr>
+<tr data-s="parasite n. 寄生虫；寄生生物；依 赖他人过活者"><td class="n">59</td><td class="w">parasite<div class="ipa">[ˈpærəsaɪt]</div></td><td class="m">n. 寄生虫；寄生生物；依 赖他人过活者</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 14</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="spider n. 蜘蛛"><td class="n">60</td><td class="w">spider</td><td class="m">n. 蜘蛛</td></tr>
-<tr data-s="butterfly n. 蝴蝶"><td class="n">61</td><td class="w">butterfly</td><td class="m">n. 蝴蝶</td></tr>
-<tr data-s="mosquito n. 蚊子"><td class="n">62</td><td class="w">mosquito</td><td class="m">n. 蚊子</td></tr>
-<tr data-s="cricket n. 板球；蟋蟀"><td class="n">63</td><td class="w">cricket</td><td class="m">n. 板球；蟋蟀</td></tr>
+<tr data-s="spider n. 蜘蛛"><td class="n">60</td><td class="w">spider<div class="ipa">[ˈspaɪdə(r)]</div></td><td class="m">n. 蜘蛛</td></tr>
+<tr data-s="butterfly n. 蝴蝶"><td class="n">61</td><td class="w">butterfly<div class="ipa">[ˈbʌtəflaɪ]</div></td><td class="m">n. 蝴蝶</td></tr>
+<tr data-s="mosquito n. 蚊子"><td class="n">62</td><td class="w">mosquito<div class="ipa">[məˈskiːtəʊ]</div></td><td class="m">n. 蚊子</td></tr>
+<tr data-s="cricket n. 板球；蟋蟀"><td class="n">63</td><td class="w">cricket<div class="ipa">[ˈkrɪkɪt]</div></td><td class="m">n. 板球；蟋蟀</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 15</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="penguin n. 企鹅"><td class="n">64</td><td class="w">penguin</td><td class="m">n. 企鹅</td></tr>
-<tr data-s="seal n. 海豹；印章；v. 密封； 封上"><td class="n">65</td><td class="w">seal</td><td class="m">n. 海豹；印章；v. 密封； 封上</td></tr>
-<tr data-s="tortoise n. 乌龟"><td class="n">66</td><td class="w">tortoise</td><td class="m">n. 乌龟</td></tr>
-<tr data-s="turtle n. 龟；海龟"><td class="n">67</td><td class="w">turtle</td><td class="m">n. 龟；海龟</td></tr>
-<tr data-s="whale n. 鲸；v. 捕鲸"><td class="n">68</td><td class="w">whale</td><td class="m">n. 鲸；v. 捕鲸</td></tr>
-<tr data-s="kangaroo n. 袋鼠"><td class="n">69</td><td class="w">kangaroo</td><td class="m">n. 袋鼠</td></tr>
+<tr data-s="penguin n. 企鹅"><td class="n">64</td><td class="w">penguin<div class="ipa">[ˈpeŋɡwɪn]</div></td><td class="m">n. 企鹅</td></tr>
+<tr data-s="seal n. 海豹；印章；v. 密封； 封上"><td class="n">65</td><td class="w">seal<div class="ipa">[siːl]</div></td><td class="m">n. 海豹；印章；v. 密封； 封上</td></tr>
+<tr data-s="tortoise n. 乌龟"><td class="n">66</td><td class="w">tortoise<div class="ipa">[ˈtɔːtəs]</div></td><td class="m">n. 乌龟</td></tr>
+<tr data-s="turtle n. 龟；海龟"><td class="n">67</td><td class="w">turtle<div class="ipa">[ˈtɜːt(ə)l]</div></td><td class="m">n. 龟；海龟</td></tr>
+<tr data-s="whale n. 鲸；v. 捕鲸"><td class="n">68</td><td class="w">whale<div class="ipa">[weɪl]</div></td><td class="m">n. 鲸；v. 捕鲸</td></tr>
+<tr data-s="kangaroo n. 袋鼠"><td class="n">69</td><td class="w">kangaroo<div class="ipa">[ˌkæŋɡəˈruː]</div></td><td class="m">n. 袋鼠</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 16</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="camel n. 骆驼"><td class="n">70</td><td class="w">camel</td><td class="m">n. 骆驼</td></tr>
-<tr data-s="panda n. 熊猫"><td class="n">71</td><td class="w">panda</td><td class="m">n. 熊猫</td></tr>
+<tr data-s="camel n. 骆驼"><td class="n">70</td><td class="w">camel<div class="ipa">[ˈkæm(ə)l]</div></td><td class="m">n. 骆驼</td></tr>
+<tr data-s="panda n. 熊猫"><td class="n">71</td><td class="w">panda<div class="ipa">[ˈpændə]</div></td><td class="m">n. 熊猫</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 17</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="elephant n. 大象"><td class="n">72</td><td class="w">elephant</td><td class="m">n. 大象</td></tr>
-<tr data-s="ivory n. 象牙；乳白色"><td class="n">73</td><td class="w">ivory</td><td class="m">n. 象牙；乳白色</td></tr>
-<tr data-s="horn n. ⻆；号⻆；喇叭"><td class="n">74</td><td class="w">horn</td><td class="m">n. ⻆；号⻆；喇叭</td></tr>
+<tr data-s="elephant n. 大象"><td class="n">72</td><td class="w">elephant<div class="ipa">[ˈelɪfənt]</div></td><td class="m">n. 大象</td></tr>
+<tr data-s="ivory n. 象牙；乳白色"><td class="n">73</td><td class="w">ivory<div class="ipa">[ˈaɪvəri]</div></td><td class="m">n. 象牙；乳白色</td></tr>
+<tr data-s="horn n. ⻆；号⻆；喇叭"><td class="n">74</td><td class="w">horn<div class="ipa">[hɔːn]</div></td><td class="m">n. ⻆；号⻆；喇叭</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 18</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="bear n. 熊；v. 负荷；带有；忍 受；承受；生(孩子)"><td class="n">75</td><td class="w">bear</td><td class="m">n. 熊；v. 负荷；带有；忍 受；承受；生(孩子)</td></tr>
-<tr data-s="wolf n. 狼；残忍贪婪之人；色 狼；v. 狼吞⻁咽"><td class="n">76</td><td class="w">wolf</td><td class="m">n. 狼；残忍贪婪之人；色 狼；v. 狼吞⻁咽</td></tr>
-<tr data-s="dragon n. ⻰；悍妇"><td class="n">77</td><td class="w">dragon</td><td class="m">n. ⻰；悍妇</td></tr>
-<tr data-s="fox n. 狐狸；狡猾的人"><td class="n">78</td><td class="w">fox</td><td class="m">n. 狐狸；狡猾的人</td></tr>
+<tr data-s="bear n. 熊；v. 负荷；带有；忍 受；承受；生(孩子)"><td class="n">75</td><td class="w">bear<div class="ipa">[beə(r)]</div></td><td class="m">n. 熊；v. 负荷；带有；忍 受；承受；生(孩子)</td></tr>
+<tr data-s="wolf n. 狼；残忍贪婪之人；色 狼；v. 狼吞⻁咽"><td class="n">76</td><td class="w">wolf<div class="ipa">[wʊlf]</div></td><td class="m">n. 狼；残忍贪婪之人；色 狼；v. 狼吞⻁咽</td></tr>
+<tr data-s="dragon n. ⻰；悍妇"><td class="n">77</td><td class="w">dragon<div class="ipa">[ˈdræɡən]</div></td><td class="m">n. ⻰；悍妇</td></tr>
+<tr data-s="fox n. 狐狸；狡猾的人"><td class="n">78</td><td class="w">fox<div class="ipa">[fɒks]</div></td><td class="m">n. 狐狸；狡猾的人</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 19</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="cub n. 幼兽；年轻人"><td class="n">79</td><td class="w">cub</td><td class="m">n. 幼兽；年轻人</td></tr>
-<tr data-s="calf n. 小牛；牛犊；小腿肚"><td class="n">80</td><td class="w">calf</td><td class="m">n. 小牛；牛犊；小腿肚</td></tr>
-<tr data-s="pup n. 小狗；(海豹等)幼崽"><td class="n">81</td><td class="w">pup</td><td class="m">n. 小狗；(海豹等)幼崽</td></tr>
-<tr data-s="lamb n. 羔羊；小羊；羔羊肉"><td class="n">82</td><td class="w">lamb</td><td class="m">n. 羔羊；小羊；羔羊肉</td></tr>
+<tr data-s="cub n. 幼兽；年轻人"><td class="n">79</td><td class="w">cub<div class="ipa">[kʌb]</div></td><td class="m">n. 幼兽；年轻人</td></tr>
+<tr data-s="calf n. 小牛；牛犊；小腿肚"><td class="n">80</td><td class="w">calf<div class="ipa">[kɑːf]</div></td><td class="m">n. 小牛；牛犊；小腿肚</td></tr>
+<tr data-s="pup n. 小狗；(海豹等)幼崽"><td class="n">81</td><td class="w">pup<div class="ipa">[pʌp]</div></td><td class="m">n. 小狗；(海豹等)幼崽</td></tr>
+<tr data-s="lamb n. 羔羊；小羊；羔羊肉"><td class="n">82</td><td class="w">lamb<div class="ipa">[læm]</div></td><td class="m">n. 羔羊；小羊；羔羊肉</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 20</span><span class="gcnt">9 词</span></td></tr>
-<tr data-s="cattle n. 牛(复数名词)；家畜"><td class="n">83</td><td class="w">cattle</td><td class="m">n. 牛(复数名词)；家畜</td></tr>
-<tr data-s="ox n. 公牛；(阉割的)公牛"><td class="n">84</td><td class="w">ox</td><td class="m">n. 公牛；(阉割的)公牛</td></tr>
-<tr data-s="bull n. 公牛；雄性大动物；胡 扯；废话"><td class="n">85</td><td class="w">bull</td><td class="m">n. 公牛；雄性大动物；胡 扯；废话</td></tr>
-<tr data-s="buffalo n. 水牛；野牛"><td class="n">86</td><td class="w">buffalo</td><td class="m">n. 水牛；野牛</td></tr>
-<tr data-s="horse n. ⻢；v. 骑⻢"><td class="n">87</td><td class="w">horse</td><td class="m">n. ⻢；v. 骑⻢</td></tr>
-<tr data-s="zebra n. 斑⻢"><td class="n">88</td><td class="w">zebra</td><td class="m">n. 斑⻢</td></tr>
-<tr data-s="donkey n. 驴"><td class="n">89</td><td class="w">donkey</td><td class="m">n. 驴</td></tr>
-<tr data-s="saddle n. ⻢鞍；鞍座；v. 给 (⻢)装鞍"><td class="n">90</td><td class="w">saddle</td><td class="m">n. ⻢鞍；鞍座；v. 给 (⻢)装鞍</td></tr>
-<tr data-s="harness n. ⻢具；挽具；v. 套⻢ 具；驾驭；利用；治理"><td class="n">91</td><td class="w">harness</td><td class="m">n. ⻢具；挽具；v. 套⻢ 具；驾驭；利用；治理</td></tr>
+<tr data-s="cattle n. 牛(复数名词)；家畜"><td class="n">83</td><td class="w">cattle<div class="ipa">[ˈkæt(ə)l]</div></td><td class="m">n. 牛(复数名词)；家畜</td></tr>
+<tr data-s="ox n. 公牛；(阉割的)公牛"><td class="n">84</td><td class="w">ox<div class="ipa">[ɒks]</div></td><td class="m">n. 公牛；(阉割的)公牛</td></tr>
+<tr data-s="bull n. 公牛；雄性大动物；胡 扯；废话"><td class="n">85</td><td class="w">bull<div class="ipa">[bʊl]</div></td><td class="m">n. 公牛；雄性大动物；胡 扯；废话</td></tr>
+<tr data-s="buffalo n. 水牛；野牛"><td class="n">86</td><td class="w">buffalo<div class="ipa">[ˈbʌfələʊ]</div></td><td class="m">n. 水牛；野牛</td></tr>
+<tr data-s="horse n. ⻢；v. 骑⻢"><td class="n">87</td><td class="w">horse<div class="ipa">[hɔːs]</div></td><td class="m">n. ⻢；v. 骑⻢</td></tr>
+<tr data-s="zebra n. 斑⻢"><td class="n">88</td><td class="w">zebra<div class="ipa">[ˈzebrə]</div></td><td class="m">n. 斑⻢</td></tr>
+<tr data-s="donkey n. 驴"><td class="n">89</td><td class="w">donkey<div class="ipa">[ˈdɒŋki]</div></td><td class="m">n. 驴</td></tr>
+<tr data-s="saddle n. ⻢鞍；鞍座；v. 给 (⻢)装鞍"><td class="n">90</td><td class="w">saddle<div class="ipa">[ˈsæd(ə)l]</div></td><td class="m">n. ⻢鞍；鞍座；v. 给 (⻢)装鞍</td></tr>
+<tr data-s="harness n. ⻢具；挽具；v. 套⻢ 具；驾驭；利用；治理"><td class="n">91</td><td class="w">harness<div class="ipa">[ˈhɑːnɪs]</div></td><td class="m">n. ⻢具；挽具；v. 套⻢ 具；驾驭；利用；治理</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 21</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="falcon n. 猎鹰"><td class="n">92</td><td class="w">falcon</td><td class="m">n. 猎鹰</td></tr>
-<tr data-s="hawk n. 鹰；隼；v. 兜售；沿街 叫卖；鹰扑；用力咳"><td class="n">93</td><td class="w">hawk</td><td class="m">n. 鹰；隼；v. 兜售；沿街 叫卖；鹰扑；用力咳</td></tr>
-<tr data-s="eagle n. 鹰"><td class="n">94</td><td class="w">eagle</td><td class="m">n. 鹰</td></tr>
-<tr data-s="owl n. 猫头鹰"><td class="n">95</td><td class="w">owl</td><td class="m">n. 猫头鹰</td></tr>
+<tr data-s="falcon n. 猎鹰"><td class="n">92</td><td class="w">falcon<div class="ipa">[ˈfɔːlkən]</div></td><td class="m">n. 猎鹰</td></tr>
+<tr data-s="hawk n. 鹰；隼；v. 兜售；沿街 叫卖；鹰扑；用力咳"><td class="n">93</td><td class="w">hawk<div class="ipa">[hɔːk]</div></td><td class="m">n. 鹰；隼；v. 兜售；沿街 叫卖；鹰扑；用力咳</td></tr>
+<tr data-s="eagle n. 鹰"><td class="n">94</td><td class="w">eagle<div class="ipa">[ˈiːɡl]</div></td><td class="m">n. 鹰</td></tr>
+<tr data-s="owl n. 猫头鹰"><td class="n">95</td><td class="w">owl<div class="ipa">[aʊl]</div></td><td class="m">n. 猫头鹰</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 22</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="swallow v. 吞咽；轻信；n. 燕子； 吞咽"><td class="n">96</td><td class="w">swallow</td><td class="m">v. 吞咽；轻信；n. 燕子； 吞咽</td></tr>
-<tr data-s="sparrow n. 麻雀"><td class="n">97</td><td class="w">sparrow</td><td class="m">n. 麻雀</td></tr>
-<tr data-s="pigeon n. 鸽子"><td class="n">98</td><td class="w">pigeon</td><td class="m">n. 鸽子</td></tr>
-<tr data-s="crow n. 乌鸦；雄鸡的啼声；v. 打 鸣；啼叫；欢叫；自鸣得意"><td class="n">99</td><td class="w">crow</td><td class="m">n. 乌鸦；雄鸡的啼声；v. 打 鸣；啼叫；欢叫；自鸣得意</td></tr>
-<tr data-s="swan n. 天鹅；v. 闲逛；随意旅 行"><td class="n">100</td><td class="w">swan</td><td class="m">n. 天鹅；v. 闲逛；随意旅 行</td></tr>
+<tr data-s="swallow v. 吞咽；轻信；n. 燕子； 吞咽"><td class="n">96</td><td class="w">swallow<div class="ipa">[ˈswɒləʊ]</div></td><td class="m">v. 吞咽；轻信；n. 燕子； 吞咽</td></tr>
+<tr data-s="sparrow n. 麻雀"><td class="n">97</td><td class="w">sparrow<div class="ipa">[ˈspærəʊ]</div></td><td class="m">n. 麻雀</td></tr>
+<tr data-s="pigeon n. 鸽子"><td class="n">98</td><td class="w">pigeon<div class="ipa">[ˈpɪdʒɪn]</div></td><td class="m">n. 鸽子</td></tr>
+<tr data-s="crow n. 乌鸦；雄鸡的啼声；v. 打 鸣；啼叫；欢叫；自鸣得意"><td class="n">99</td><td class="w">crow<div class="ipa">[krəʊ]</div></td><td class="m">n. 乌鸦；雄鸡的啼声；v. 打 鸣；啼叫；欢叫；自鸣得意</td></tr>
+<tr data-s="swan n. 天鹅；v. 闲逛；随意旅 行"><td class="n">100</td><td class="w">swan<div class="ipa">[swɒn]</div></td><td class="m">n. 天鹅；v. 闲逛；随意旅 行</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 23</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="goose n. 鹅；雌鹅；鹅肉"><td class="n">101</td><td class="w">goose</td><td class="m">n. 鹅；雌鹅；鹅肉</td></tr>
-<tr data-s="cock n. 公鸡"><td class="n">102</td><td class="w">cock</td><td class="m">n. 公鸡</td></tr>
+<tr data-s="goose n. 鹅；雌鹅；鹅肉"><td class="n">101</td><td class="w">goose<div class="ipa">[ɡuːs]</div></td><td class="m">n. 鹅；雌鹅；鹅肉</td></tr>
+<tr data-s="cock n. 公鸡"><td class="n">102</td><td class="w">cock<div class="ipa">[kɒk]</div></td><td class="m">n. 公鸡</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 24</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="mouse n. 老鼠；鼠标"><td class="n">103</td><td class="w">mouse</td><td class="m">n. 老鼠；鼠标</td></tr>
-<tr data-s="rat n. 老鼠；耗子"><td class="n">104</td><td class="w">rat</td><td class="m">n. 老鼠；耗子</td></tr>
-<tr data-s="squirrel n. 松鼠；v. 贮藏"><td class="n">105</td><td class="w">squirrel</td><td class="m">n. 松鼠；v. 贮藏</td></tr>
-<tr data-s="hare n. 野兔"><td class="n">106</td><td class="w">hare</td><td class="m">n. 野兔</td></tr>
-<tr data-s="frog n. ⻘蛙"><td class="n">107</td><td class="w">frog</td><td class="m">n. ⻘蛙</td></tr>
+<tr data-s="mouse n. 老鼠；鼠标"><td class="n">103</td><td class="w">mouse<div class="ipa">[maʊs]</div></td><td class="m">n. 老鼠；鼠标</td></tr>
+<tr data-s="rat n. 老鼠；耗子"><td class="n">104</td><td class="w">rat<div class="ipa">[ræt]</div></td><td class="m">n. 老鼠；耗子</td></tr>
+<tr data-s="squirrel n. 松鼠；v. 贮藏"><td class="n">105</td><td class="w">squirrel<div class="ipa">[ˈskwɪrəl]</div></td><td class="m">n. 松鼠；v. 贮藏</td></tr>
+<tr data-s="hare n. 野兔"><td class="n">106</td><td class="w">hare<div class="ipa">[heə(r)]</div></td><td class="m">n. 野兔</td></tr>
+<tr data-s="frog n. ⻘蛙"><td class="n">107</td><td class="w">frog<div class="ipa">[frɒɡ]</div></td><td class="m">n. ⻘蛙</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 25</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="behaviour n. 行为；举止；表现"><td class="n">108</td><td class="w">behaviour</td><td class="m">n. 行为；举止；表现</td></tr>
-<tr data-s="bite v. 咬；叮；上钩；n. 咬； 咬伤；上钩"><td class="n">109</td><td class="w">bite</td><td class="m">v. 咬；叮；上钩；n. 咬； 咬伤；上钩</td></tr>
-<tr data-s="sting v. 刺；刺痛；n. 刺；刺痛"><td class="n">110</td><td class="w">sting</td><td class="m">v. 刺；刺痛；n. 刺；刺痛</td></tr>
-<tr data-s="bark v. 狗吠；咆哮；厉声说； n. 犬吠声；树皮"><td class="n">111</td><td class="w">bark</td><td class="m">v. 狗吠；咆哮；厉声说； n. 犬吠声；树皮</td></tr>
-<tr data-s="roar v. 吼叫；咆哮；n. 吼叫； 咆哮"><td class="n">112</td><td class="w">roar</td><td class="m">v. 吼叫；咆哮；n. 吼叫； 咆哮</td></tr>
+<tr data-s="behaviour n. 行为；举止；表现"><td class="n">108</td><td class="w">behaviour<div class="ipa">[bɪˈheɪvjə(r)]</div></td><td class="m">n. 行为；举止；表现</td></tr>
+<tr data-s="bite v. 咬；叮；上钩；n. 咬； 咬伤；上钩"><td class="n">109</td><td class="w">bite<div class="ipa">[baɪt]</div></td><td class="m">v. 咬；叮；上钩；n. 咬； 咬伤；上钩</td></tr>
+<tr data-s="sting v. 刺；刺痛；n. 刺；刺痛"><td class="n">110</td><td class="w">sting<div class="ipa">[stɪŋ]</div></td><td class="m">v. 刺；刺痛；n. 刺；刺痛</td></tr>
+<tr data-s="bark v. 狗吠；咆哮；厉声说； n. 犬吠声；树皮"><td class="n">111</td><td class="w">bark<div class="ipa">[bɑːk]</div></td><td class="m">v. 狗吠；咆哮；厉声说； n. 犬吠声；树皮</td></tr>
+<tr data-s="roar v. 吼叫；咆哮；n. 吼叫； 咆哮"><td class="n">112</td><td class="w">roar<div class="ipa">[rɔː(r)]</div></td><td class="m">v. 吼叫；咆哮；n. 吼叫； 咆哮</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 26</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="rub v. 擦；摩擦；n. 擦；摩 擦；阻碍"><td class="n">113</td><td class="w">rub</td><td class="m">v. 擦；摩擦；n. 擦；摩 擦；阻碍</td></tr>
-<tr data-s="creep v. 爬行；匍匐；蹑手蹑脚地走； 汗毛直竖；n. 讨厌⻤；⻢屁精"><td class="n">114</td><td class="w">creep</td><td class="m">v. 爬行；匍匐；蹑手蹑脚地走； 汗毛直竖；n. 讨厌⻤；⻢屁精</td></tr>
-<tr data-s="crawl v. 爬；爬行"><td class="n">115</td><td class="w">crawl</td><td class="m">v. 爬；爬行</td></tr>
+<tr data-s="rub v. 擦；摩擦；n. 擦；摩 擦；阻碍"><td class="n">113</td><td class="w">rub<div class="ipa">[rʌb]</div></td><td class="m">v. 擦；摩擦；n. 擦；摩 擦；阻碍</td></tr>
+<tr data-s="creep v. 爬行；匍匐；蹑手蹑脚地走； 汗毛直竖；n. 讨厌⻤；⻢屁精"><td class="n">114</td><td class="w">creep<div class="ipa">[kriːp]</div></td><td class="m">v. 爬行；匍匐；蹑手蹑脚地走； 汗毛直竖；n. 讨厌⻤；⻢屁精</td></tr>
+<tr data-s="crawl v. 爬；爬行"><td class="n">115</td><td class="w">crawl<div class="ipa">[krɔːl]</div></td><td class="m">v. 爬；爬行</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 27</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="habitat n. 栖息地；居留地；产地"><td class="n">116</td><td class="w">habitat</td><td class="m">n. 栖息地；居留地；产地</td></tr>
-<tr data-s="nest n. 窝；⻦巢；(能叠放在一起 的)一套物件；v. 筑巢；嵌套"><td class="n">117</td><td class="w">nest</td><td class="m">n. 窝；⻦巢；(能叠放在一起 的)一套物件；v. 筑巢；嵌套</td></tr>
-<tr data-s="hive n. 蜂箱；蜂巢；蜂群；闹市； v. 使(蜂)入蜂箱；群居"><td class="n">118</td><td class="w">hive</td><td class="m">n. 蜂箱；蜂巢；蜂群；闹市； v. 使(蜂)入蜂箱；群居</td></tr>
-<tr data-s="cell n. 细胞；小房间；牢房； 单元格"><td class="n">119</td><td class="w">cell</td><td class="m">n. 细胞；小房间；牢房； 单元格</td></tr>
+<tr data-s="habitat n. 栖息地；居留地；产地"><td class="n">116</td><td class="w">habitat<div class="ipa">[ˈhæbɪtæt]</div></td><td class="m">n. 栖息地；居留地；产地</td></tr>
+<tr data-s="nest n. 窝；⻦巢；(能叠放在一起 的)一套物件；v. 筑巢；嵌套"><td class="n">117</td><td class="w">nest<div class="ipa">[nest]</div></td><td class="m">n. 窝；⻦巢；(能叠放在一起 的)一套物件；v. 筑巢；嵌套</td></tr>
+<tr data-s="hive n. 蜂箱；蜂巢；蜂群；闹市； v. 使(蜂)入蜂箱；群居"><td class="n">118</td><td class="w">hive<div class="ipa">[haɪv]</div></td><td class="m">n. 蜂箱；蜂巢；蜂群；闹市； v. 使(蜂)入蜂箱；群居</td></tr>
+<tr data-s="cell n. 细胞；小房间；牢房； 单元格"><td class="n">119</td><td class="w">cell<div class="ipa">[sel]</div></td><td class="m">n. 细胞；小房间；牢房； 单元格</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 28</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="cage n. 笼子；vt. 把...关进笼子"><td class="n">120</td><td class="w">cage</td><td class="m">n. 笼子；vt. 把...关进笼子</td></tr>
-<tr data-s="stable adj. 稳定的；牢固的；稳 重的；n. ⻢厩；畜舍"><td class="n">121</td><td class="w">stable</td><td class="m">adj. 稳定的；牢固的；稳 重的；n. ⻢厩；畜舍</td></tr>
-<tr data-s="barn n. 谷仓；牲口棚"><td class="n">122</td><td class="w">barn</td><td class="m">n. 谷仓；牲口棚</td></tr>
+<tr data-s="cage n. 笼子；vt. 把...关进笼子"><td class="n">120</td><td class="w">cage<div class="ipa">[keɪdʒ]</div></td><td class="m">n. 笼子；vt. 把...关进笼子</td></tr>
+<tr data-s="stable adj. 稳定的；牢固的；稳 重的；n. ⻢厩；畜舍"><td class="n">121</td><td class="w">stable<div class="ipa">[ˈsteɪb(ə)l]</div></td><td class="m">adj. 稳定的；牢固的；稳 重的；n. ⻢厩；畜舍</td></tr>
+<tr data-s="barn n. 谷仓；牲口棚"><td class="n">122</td><td class="w">barn<div class="ipa">[bɑːn]</div></td><td class="m">n. 谷仓；牲口棚</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 29</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="hedge n. 树篱；防范措施；v. 用 树篱围住；限制；避免"><td class="n">123</td><td class="w">hedge</td><td class="m">n. 树篱；防范措施；v. 用 树篱围住；限制；避免</td></tr>
-<tr data-s="barrier n. 屏障；障碍；栅栏"><td class="n">124</td><td class="w">barrier</td><td class="m">n. 屏障；障碍；栅栏</td></tr>
-<tr data-s="bar n. 棒；条状物；(⻔、窗 的)闩；酒吧；栅栏"><td class="n">125</td><td class="w">bar</td><td class="m">n. 棒；条状物；(⻔、窗 的)闩；酒吧；栅栏</td></tr>
+<tr data-s="hedge n. 树篱；防范措施；v. 用 树篱围住；限制；避免"><td class="n">123</td><td class="w">hedge<div class="ipa">[hedʒ]</div></td><td class="m">n. 树篱；防范措施；v. 用 树篱围住；限制；避免</td></tr>
+<tr data-s="barrier n. 屏障；障碍；栅栏"><td class="n">124</td><td class="w">barrier<div class="ipa">[ˈbæriə(r)]</div></td><td class="m">n. 屏障；障碍；栅栏</td></tr>
+<tr data-s="bar n. 棒；条状物；(⻔、窗 的)闩；酒吧；栅栏"><td class="n">125</td><td class="w">bar<div class="ipa">[bɑː(r)]</div></td><td class="m">n. 棒；条状物；(⻔、窗 的)闩；酒吧；栅栏</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 30</span><span class="gcnt">7 词</span></td></tr>
-<tr data-s="anatomy n. 解剖学；解剖；解剖体 组织构造"><td class="n">126</td><td class="w">anatomy</td><td class="m">n. 解剖学；解剖；解剖体 组织构造</td></tr>
-<tr data-s="epidemic n. 流行病；adj. 流行性的"><td class="n">127</td><td class="w">epidemic</td><td class="m">n. 流行病；adj. 流行性的</td></tr>
-<tr data-s="gene n. 基因"><td class="n">128</td><td class="w">gene</td><td class="m">n. 基因</td></tr>
-<tr data-s="germ n. 病菌；萌芽"><td class="n">129</td><td class="w">germ</td><td class="m">n. 病菌；萌芽</td></tr>
-<tr data-s="bacteria n. 细菌；“bacterium”的 复数"><td class="n">130</td><td class="w">bacteria</td><td class="m">n. 细菌；“bacterium”的 复数</td></tr>
-<tr data-s="virus n. 病毒"><td class="n">131</td><td class="w">virus</td><td class="m">n. 病毒</td></tr>
-<tr data-s="microbe n. 微生物"><td class="n">132</td><td class="w">microbe</td><td class="m">n. 微生物</td></tr>
+<tr data-s="anatomy n. 解剖学；解剖；解剖体 组织构造"><td class="n">126</td><td class="w">anatomy<div class="ipa">[əˈnætəmi]</div></td><td class="m">n. 解剖学；解剖；解剖体 组织构造</td></tr>
+<tr data-s="epidemic n. 流行病；adj. 流行性的"><td class="n">127</td><td class="w">epidemic<div class="ipa">[ˌepɪˈdemɪk]</div></td><td class="m">n. 流行病；adj. 流行性的</td></tr>
+<tr data-s="gene n. 基因"><td class="n">128</td><td class="w">gene<div class="ipa">[dʒiːn]</div></td><td class="m">n. 基因</td></tr>
+<tr data-s="germ n. 病菌；萌芽"><td class="n">129</td><td class="w">germ<div class="ipa">[dʒɜːm]</div></td><td class="m">n. 病菌；萌芽</td></tr>
+<tr data-s="bacteria n. 细菌；“bacterium”的 复数"><td class="n">130</td><td class="w">bacteria<div class="ipa">[bækˈtɪəriə]</div></td><td class="m">n. 细菌；“bacterium”的 复数</td></tr>
+<tr data-s="virus n. 病毒"><td class="n">131</td><td class="w">virus<div class="ipa">[ˈvaɪrəs]</div></td><td class="m">n. 病毒</td></tr>
+<tr data-s="microbe n. 微生物"><td class="n">132</td><td class="w">microbe<div class="ipa">[ˈmaɪkrəʊb]</div></td><td class="m">n. 微生物</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 31</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="metabolism n. 新陈代谢"><td class="n">133</td><td class="w">metabolism</td><td class="m">n. 新陈代谢</td></tr>
-<tr data-s="protein n. 蛋白质"><td class="n">134</td><td class="w">protein</td><td class="m">n. 蛋白质</td></tr>
-<tr data-s="vitamin n. 维生素；维他命"><td class="n">135</td><td class="w">vitamin</td><td class="m">n. 维生素；维他命</td></tr>
+<tr data-s="metabolism n. 新陈代谢"><td class="n">133</td><td class="w">metabolism<div class="ipa">[məˈtæbəlɪzəm]</div></td><td class="m">n. 新陈代谢</td></tr>
+<tr data-s="protein n. 蛋白质"><td class="n">134</td><td class="w">protein<div class="ipa">[ˈprəʊtiːn]</div></td><td class="m">n. 蛋白质</td></tr>
+<tr data-s="vitamin n. 维生素；维他命"><td class="n">135</td><td class="w">vitamin<div class="ipa">[ˈvɪtəmɪn]</div></td><td class="m">n. 维生素；维他命</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 32</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="secrete v. 分泌；隐藏；隐匿"><td class="n">136</td><td class="w">secrete</td><td class="m">v. 分泌；隐藏；隐匿</td></tr>
-<tr data-s="excrete v. 排泄；分泌"><td class="n">137</td><td class="w">excrete</td><td class="m">v. 排泄；分泌</td></tr>
-<tr data-s="devour v. 吞⻝；吞噬；狼吞⻁咽 地吃；如饥似渴地看"><td class="n">138</td><td class="w">devour</td><td class="m">v. 吞⻝；吞噬；狼吞⻁咽 地吃；如饥似渴地看</td></tr>
+<tr data-s="secrete v. 分泌；隐藏；隐匿"><td class="n">136</td><td class="w">secrete<div class="ipa">[sɪˈkriːt]</div></td><td class="m">v. 分泌；隐藏；隐匿</td></tr>
+<tr data-s="excrete v. 排泄；分泌"><td class="n">137</td><td class="w">excrete<div class="ipa">[ɪkˈskriːt]</div></td><td class="m">v. 排泄；分泌</td></tr>
+<tr data-s="devour v. 吞⻝；吞噬；狼吞⻁咽 地吃；如饥似渴地看"><td class="n">138</td><td class="w">devour<div class="ipa">[dɪˈvaʊə(r)]</div></td><td class="m">v. 吞⻝；吞噬；狼吞⻁咽 地吃；如饥似渴地看</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 33</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="instinct n. 本能；直觉"><td class="n">139</td><td class="w">instinct</td><td class="m">n. 本能；直觉</td></tr>
-<tr data-s="intuitive adj. 直觉的"><td class="n">140</td><td class="w">intuitive</td><td class="m">adj. 直觉的</td></tr>
-<tr data-s="potential n. 潜力；adj. 潜在的；可 能的"><td class="n">141</td><td class="w">potential</td><td class="m">n. 潜力；adj. 潜在的；可 能的</td></tr>
-<tr data-s="intelligence n. 智力；才智；情报"><td class="n">142</td><td class="w">intelligence</td><td class="m">n. 智力；才智；情报</td></tr>
-<tr data-s="functional adj. 功能的；实用的；起 作用的"><td class="n">143</td><td class="w">functional</td><td class="m">adj. 功能的；实用的；起 作用的</td></tr>
+<tr data-s="instinct n. 本能；直觉"><td class="n">139</td><td class="w">instinct<div class="ipa">[ˈɪnstɪŋkt]</div></td><td class="m">n. 本能；直觉</td></tr>
+<tr data-s="intuitive adj. 直觉的"><td class="n">140</td><td class="w">intuitive<div class="ipa">[ɪnˈtjuːɪtɪv]</div></td><td class="m">adj. 直觉的</td></tr>
+<tr data-s="potential n. 潜力；adj. 潜在的；可 能的"><td class="n">141</td><td class="w">potential<div class="ipa">[pəˈtenʃ(ə)l]</div></td><td class="m">n. 潜力；adj. 潜在的；可 能的</td></tr>
+<tr data-s="intelligence n. 智力；才智；情报"><td class="n">142</td><td class="w">intelligence<div class="ipa">[ɪnˈtelɪdʒəns]</div></td><td class="m">n. 智力；才智；情报</td></tr>
+<tr data-s="functional adj. 功能的；实用的；起 作用的"><td class="n">143</td><td class="w">functional<div class="ipa">[ˈfʌŋkʃən(ə)l]</div></td><td class="m">adj. 功能的；实用的；起 作用的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 34</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="sensitive adj. 敏感的；感情脆弱 的；体贴的；善解人意的"><td class="n">144</td><td class="w">sensitive</td><td class="m">adj. 敏感的；感情脆弱 的；体贴的；善解人意的</td></tr>
-<tr data-s="flexible adj. 灵活的；柔韧的"><td class="n">145</td><td class="w">flexible</td><td class="m">adj. 灵活的；柔韧的</td></tr>
-<tr data-s="acoustic adj. 声音的；音响的；听 觉的；原声的"><td class="n">146</td><td class="w">acoustic</td><td class="m">adj. 声音的；音响的；听 觉的；原声的</td></tr>
-<tr data-s="optical adj. 视觉的；光学的"><td class="n">147</td><td class="w">optical</td><td class="m">adj. 视觉的；光学的</td></tr>
+<tr data-s="sensitive adj. 敏感的；感情脆弱 的；体贴的；善解人意的"><td class="n">144</td><td class="w">sensitive<div class="ipa">[ˈsensətɪv]</div></td><td class="m">adj. 敏感的；感情脆弱 的；体贴的；善解人意的</td></tr>
+<tr data-s="flexible adj. 灵活的；柔韧的"><td class="n">145</td><td class="w">flexible<div class="ipa">[ˈfleksəb(ə)l]</div></td><td class="m">adj. 灵活的；柔韧的</td></tr>
+<tr data-s="acoustic adj. 声音的；音响的；听 觉的；原声的"><td class="n">146</td><td class="w">acoustic<div class="ipa">[əˈkuːstɪk]</div></td><td class="m">adj. 声音的；音响的；听 觉的；原声的</td></tr>
+<tr data-s="optical adj. 视觉的；光学的"><td class="n">147</td><td class="w">optical<div class="ipa">[ˈɒptɪk(ə)l]</div></td><td class="m">adj. 视觉的；光学的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 35</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="nocturnal adj. 夜间活动的；夜间发 生的"><td class="n">148</td><td class="w">nocturnal</td><td class="m">adj. 夜间活动的；夜间发 生的</td></tr>
-<tr data-s="dormant adj. 休眠的；蛰伏的；暂 停活动的"><td class="n">149</td><td class="w">dormant</td><td class="m">adj. 休眠的；蛰伏的；暂 停活动的</td></tr>
-<tr data-s="hibernation n. 冬眠"><td class="n">150</td><td class="w">hibernation</td><td class="m">n. 冬眠</td></tr>
+<tr data-s="nocturnal adj. 夜间活动的；夜间发 生的"><td class="n">148</td><td class="w">nocturnal<div class="ipa">[nɒkˈtɜːn(ə)l]</div></td><td class="m">adj. 夜间活动的；夜间发 生的</td></tr>
+<tr data-s="dormant adj. 休眠的；蛰伏的；暂 停活动的"><td class="n">149</td><td class="w">dormant<div class="ipa">[ˈdɔːmənt]</div></td><td class="m">adj. 休眠的；蛰伏的；暂 停活动的</td></tr>
+<tr data-s="hibernation n. 冬眠"><td class="n">150</td><td class="w">hibernation<div class="ipa">[ˌhaɪbəˈneɪʃ(ə)n]</div></td><td class="m">n. 冬眠</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 36</span><span class="gcnt">8 词</span></td></tr>
-<tr data-s="track n. 轨道；踪迹；小路；跑 道；v. 追踪；跟踪"><td class="n">151</td><td class="w">track</td><td class="m">n. 轨道；踪迹；小路；跑 道；v. 追踪；跟踪</td></tr>
-<tr data-s="trace n. 痕迹；轨迹；微量；追踪；v. 追踪；追溯；仔细查找；描摹"><td class="n">152</td><td class="w">trace</td><td class="m">n. 痕迹；轨迹；微量；追踪；v. 追踪；追溯；仔细查找；描摹</td></tr>
-<tr data-s="alternate adj. 交替的；轮流的；间隔的；v. (使)交替；(使)轮流；n. 代替 者；候补者"><td class="n">153</td><td class="w">alternate</td><td class="m">adj. 交替的；轮流的；间隔的；v. (使)交替；(使)轮流；n. 代替 者；候补者</td></tr>
-<tr data-s="prey n. 猎物；受害者；受骗 者；v. 捕⻝；坑害；折磨"><td class="n">154</td><td class="w">prey</td><td class="m">n. 猎物；受害者；受骗 者；v. 捕⻝；坑害；折磨</td></tr>
-<tr data-s="predator n. 掠夺者；捕⻝性动物； ⻝肉动物"><td class="n">155</td><td class="w">predator</td><td class="m">n. 掠夺者；捕⻝性动物； ⻝肉动物</td></tr>
-<tr data-s="victim n. 受害者"><td class="n">156</td><td class="w">victim</td><td class="m">n. 受害者</td></tr>
-<tr data-s="captive n. 俘虏；adj. 被俘的,被 监禁的；受控的"><td class="n">157</td><td class="w">captive</td><td class="m">n. 俘虏；adj. 被俘的,被 监禁的；受控的</td></tr>
-<tr data-s="defensive adj. 防卫的；防御的；辩 护的；n. 守势；辩护"><td class="n">158</td><td class="w">defensive</td><td class="m">adj. 防卫的；防御的；辩 护的；n. 守势；辩护</td></tr>
+<tr data-s="track n. 轨道；踪迹；小路；跑 道；v. 追踪；跟踪"><td class="n">151</td><td class="w">track<div class="ipa">[træk]</div></td><td class="m">n. 轨道；踪迹；小路；跑 道；v. 追踪；跟踪</td></tr>
+<tr data-s="trace n. 痕迹；轨迹；微量；追踪；v. 追踪；追溯；仔细查找；描摹"><td class="n">152</td><td class="w">trace<div class="ipa">[treɪs]</div></td><td class="m">n. 痕迹；轨迹；微量；追踪；v. 追踪；追溯；仔细查找；描摹</td></tr>
+<tr data-s="alternate adj. 交替的；轮流的；间隔的；v. (使)交替；(使)轮流；n. 代替 者；候补者"><td class="n">153</td><td class="w">alternate<div class="ipa">[ɔːlˈtɜːnət]</div></td><td class="m">adj. 交替的；轮流的；间隔的；v. (使)交替；(使)轮流；n. 代替 者；候补者</td></tr>
+<tr data-s="prey n. 猎物；受害者；受骗 者；v. 捕⻝；坑害；折磨"><td class="n">154</td><td class="w">prey<div class="ipa">[preɪ]</div></td><td class="m">n. 猎物；受害者；受骗 者；v. 捕⻝；坑害；折磨</td></tr>
+<tr data-s="predator n. 掠夺者；捕⻝性动物； ⻝肉动物"><td class="n">155</td><td class="w">predator<div class="ipa">[ˈpredətə(r)]</div></td><td class="m">n. 掠夺者；捕⻝性动物； ⻝肉动物</td></tr>
+<tr data-s="victim n. 受害者"><td class="n">156</td><td class="w">victim<div class="ipa">[ˈvɪktɪm]</div></td><td class="m">n. 受害者</td></tr>
+<tr data-s="captive n. 俘虏；adj. 被俘的,被 监禁的；受控的"><td class="n">157</td><td class="w">captive<div class="ipa">[ˈkæptɪv]</div></td><td class="m">n. 俘虏；adj. 被俘的,被 监禁的；受控的</td></tr>
+<tr data-s="defensive adj. 防卫的；防御的；辩 护的；n. 守势；辩护"><td class="n">158</td><td class="w">defensive<div class="ipa">[dɪˈfensɪv]</div></td><td class="m">adj. 防卫的；防御的；辩 护的；n. 守势；辩护</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 37</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="undergo v. 经受；经历；遭受"><td class="n">159</td><td class="w">undergo</td><td class="m">v. 经受；经历；遭受</td></tr>
-<tr data-s="suffer v. 遭受；忍受"><td class="n">160</td><td class="w">suffer</td><td class="m">v. 遭受；忍受</td></tr>
-<tr data-s="vulnerable adj. 脆弱的；易受伤的"><td class="n">161</td><td class="w">vulnerable</td><td class="m">adj. 脆弱的；易受伤的</td></tr>
+<tr data-s="undergo v. 经受；经历；遭受"><td class="n">159</td><td class="w">undergo<div class="ipa">[ˌʌndəˈɡəʊ]</div></td><td class="m">v. 经受；经历；遭受</td></tr>
+<tr data-s="suffer v. 遭受；忍受"><td class="n">160</td><td class="w">suffer<div class="ipa">[ˈsʌfə(r)]</div></td><td class="m">v. 遭受；忍受</td></tr>
+<tr data-s="vulnerable adj. 脆弱的；易受伤的"><td class="n">161</td><td class="w">vulnerable<div class="ipa">[ˈvʌlnərəb(ə)l]</div></td><td class="m">adj. 脆弱的；易受伤的</td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 38</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="subsistence n. 生存；生计；生活"><td class="n">162</td><td class="w">subsistence</td><td class="m">n. 生存；生计；生活</td></tr>
-<tr data-s="exist v. 存在；生存；活着"><td class="n">163</td><td class="w">exist</td><td class="m">v. 存在；生存；活着</td></tr>
-<tr data-s="exterminate v. 消灭；灭绝；根除"><td class="n">164</td><td class="w">exterminate</td><td class="m">v. 消灭；灭绝；根除</td></tr>
-<tr data-s="tame adj. 驯化的；温顺的；枯燥无 味的；v. 驯养；制服；控制"><td class="n">165</td><td class="w">tame</td><td class="m">adj. 驯化的；温顺的；枯燥无 味的；v. 驯养；制服；控制</td></tr>
-<tr data-s="keeper n. 看守人；饲养员；管理 人"><td class="n">166</td><td class="w">keeper</td><td class="m">n. 看守人；饲养员；管理 人</td></tr>
-<tr data-s="shepherd n. 牧羊人；牧师；指导 者；v. 照看；引领"><td class="n">167</td><td class="w">shepherd</td><td class="m">n. 牧羊人；牧师；指导 者；v. 照看；引领</td></tr>
+<tr data-s="subsistence n. 生存；生计；生活"><td class="n">162</td><td class="w">subsistence<div class="ipa">[səbˈsɪstəns]</div></td><td class="m">n. 生存；生计；生活</td></tr>
+<tr data-s="exist v. 存在；生存；活着"><td class="n">163</td><td class="w">exist<div class="ipa">[ɪɡˈzɪst]</div></td><td class="m">v. 存在；生存；活着</td></tr>
+<tr data-s="exterminate v. 消灭；灭绝；根除"><td class="n">164</td><td class="w">exterminate<div class="ipa">[ɪkˈstɜːmɪneɪt]</div></td><td class="m">v. 消灭；灭绝；根除</td></tr>
+<tr data-s="tame adj. 驯化的；温顺的；枯燥无 味的；v. 驯养；制服；控制"><td class="n">165</td><td class="w">tame<div class="ipa">[teɪm]</div></td><td class="m">adj. 驯化的；温顺的；枯燥无 味的；v. 驯养；制服；控制</td></tr>
+<tr data-s="keeper n. 看守人；饲养员；管理 人"><td class="n">166</td><td class="w">keeper<div class="ipa">[ˈkiːpə(r)]</div></td><td class="m">n. 看守人；饲养员；管理 人</td></tr>
+<tr data-s="shepherd n. 牧羊人；牧师；指导 者；v. 照看；引领"><td class="n">167</td><td class="w">shepherd<div class="ipa">[ˈʃepəd]</div></td><td class="m">n. 牧羊人；牧师；指导 者；v. 照看；引领</td></tr>
 </tbody>
 </table><div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit02.html">← Unit 02</a><a href="unit03-card.html">切到例句卡片版</a><a href="unit04.html">Unit 04 →</a></div><footer><div class="wrap" style="padding:0">
  摘自《雅思词汇真经》（刘洪波 编著）第 3 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
@@ -382,27 +387,31 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  var KEY='vj-hide';
  var body=document.body;
  var kind=body.dataset.kind;
- var s={m:false,z:false};
- try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;}}catch(e){}
+ var s={m:false,z:false,i:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z; if(typeof o.i==='boolean')s.i=o.i;}}catch(e){}
  function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
  function paint(){
   body.classList.toggle('hide-m',s.m);
   body.classList.toggle('hide-z',s.z);
-  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all');
+  body.classList.toggle('hide-i',s.i);
+  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all'), ci=document.getElementById('i');
   if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
   if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
+  if(ci){ci.checked=s.i; ci.closest('.sw').classList.toggle('on',s.i);}
   if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
  }
  var cm=document.getElementById('m');
  if(cm) cm.addEventListener('change',function(){s.m=cm.checked; save(); paint();});
  var cz=document.getElementById('z');
  if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
+ var ci=document.getElementById('i');
+ if(ci) ci.addEventListener('change',function(){s.i=ci.checked; save(); paint();});
  var ca=document.getElementById('all');
  if(ca) ca.addEventListener('change',function(){
    s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
  });
  var rs=document.getElementById('reset');
- if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; save(); paint();});
+ if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; s.i=false; save(); paint();});
  var q=document.getElementById('q');
  var items=[].slice.call(document.querySelectorAll('[data-s]'));
  var cnt=document.getElementById('cnt');
