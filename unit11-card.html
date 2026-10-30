@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unit 11 · 时尚潮流</title>
+<style>
+:root{
+ --bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da;
+ --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4;
+}
+@media (prefers-color-scheme: dark){
+ :root{ --bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037;
+        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+ font:16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+ -webkit-font-smoothing:antialiased;padding-bottom:64px}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+
+.top{padding:34px 0 18px}
+.back{display:inline-block;font-size:13px;color:var(--ink2);text-decoration:none;
+ border:1px solid var(--line);border-radius:999px;padding:3px 12px;margin-bottom:16px}
+.back:hover{color:var(--accent);border-color:var(--accent)}
+h1{margin:0;font-size:27px;letter-spacing:.2px;font-weight:700}
+h1 .u{color:var(--accent);font-variant-numeric:tabular-nums}
+.sub{margin:6px 0 0;color:var(--ink2);font-size:13.5px}
+
+.toolbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);
+ backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line);
+ padding:10px 0;margin-bottom:18px}
+.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#q{flex:1 1 200px;min-width:150px;padding:8px 13px;border:1px solid var(--line);border-radius:9px;
+ background:var(--panel);color:var(--ink);font-size:14px;outline:none}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.sw{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);
+ border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer;user-select:none;background:var(--panel)}
+.sw input{accent-color:var(--accent);margin:0}
+.sw.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.btn{font:inherit;font-size:13px;color:var(--ink2);background:var(--panel);border:1px solid var(--line);
+ border-radius:999px;padding:5px 12px;cursor:pointer}
+.btn:hover{color:var(--accent);border-color:var(--accent)}
+.count{font-size:12.5px;color:var(--ink2);margin-left:auto;font-variant-numeric:tabular-nums}
+
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);
+ border-radius:12px;overflow:hidden}
+thead th{background:var(--chip);font-size:12.5px;letter-spacing:.06em;color:var(--ink2);
+ font-weight:600;text-align:left;padding:9px 14px;border-bottom:1px solid var(--line)}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--accent-soft)}
+td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-nums}
+td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
+ letter-spacing:.2px;word-break:break-word}
+td.m{color:var(--ink)}
+tr.hit td.w,tr.hit td.m{background:var(--mark)}
+
+.cards{display:grid;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px}.card .w{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:19px;font-weight:700;letter-spacing:.2px}
+.card .w .idx{font-family:inherit;font-size:12px;color:var(--ink2);font-weight:400;margin-right:8px;
+ font-variant-numeric:tabular-nums}
+.card .m{margin:5px 0 0;color:var(--ink);font-size:14.5px}
+.card .ex{margin:10px 0 0;padding:9px 12px;background:var(--accent-soft);border-radius:9px;font-size:14px}
+.card .ex .en{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:14.8px;line-height:1.55}
+.card .ex .zh{color:var(--ink2);margin-top:3px;font-size:13.5px}
+.card .no{color:var(--ink2);font-size:12.5px;margin-top:8px;font-style:italic}
+
+tr.gsep td{background:var(--chip);padding:5px 14px;border-bottom:1px solid var(--line)}
+.gtag{font-size:11.5px;font-weight:700;letter-spacing:.08em;color:var(--accent)}
+.gcnt{font-size:11.5px;color:var(--ink2);margin-left:8px;font-variant-numeric:tabular-nums}
+tbody.grp tr:first-child td{border-top:0}
+tbody.grp + tbody.grp tr.gsep td{border-top:8px solid var(--bg)}
+
+/* 卡片版：一个词群一块面板，组与组之间界限分明 */
+section.grp{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+ margin-bottom:16px;overflow:hidden}
+.ghead{display:flex;align-items:baseline;gap:9px;padding:9px 15px;background:var(--chip);
+ border-bottom:1px solid var(--line)}
+section.grp .cards{display:grid;gap:0;padding:1px 15px}
+section.grp .card{background:transparent;border:0;border-radius:0;padding:13px 0;
+ border-bottom:1px solid var(--line)}
+section.grp .card:last-child{border-bottom:0}
+
+.hide-m .m,.hide-m td.m{display:none}
+.hide-z .zh{display:none}
+body.hide-m td.m{display:none!important}
+.empty{padding:40px;text-align:center;color:var(--ink2);font-size:14px}
+
+.nav{display:flex;justify-content:space-between;gap:10px;margin:26px 0 0}
+.nav a{font-size:13.5px;text-decoration:none;color:var(--ink2);border:1px solid var(--line);
+ border-radius:999px;padding:6px 14px;background:var(--panel)}
+.nav a:hover{color:var(--accent);border-color:var(--accent)}
+.nav a.dis{opacity:.35;pointer-events:none}
+footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
+
+@media (max-width:640px){
+ body{font-size:15px}
+ .wrap{padding:0 12px}
+ h1{font-size:22px}
+ thead{display:none}
+ table,tbody,tr,td{display:block;width:auto}
+ table{border:0;background:transparent;border-radius:0}
+ tbody tr{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:11px 13px;margin-bottom:9px}
+ tbody td{border:0;padding:0}
+ td.n{display:none}
+ tr.gsep{display:block}
+ tr.gsep td{display:block;background:transparent;padding:0 0 6px}
+ tbody.grp{margin-bottom:6px;display:block}
+ td.w{font-size:17px;margin-bottom:3px}
+ td.m{font-size:14px;color:var(--ink2)}
+}
+</style>
+</head>
+<body data-kind="card">
+<div class="wrap"><div class="top">
+ <a class="back" href="index.html">← 全部单元</a>
+ <h1><span class="u">Unit 11</span> · 时尚潮流</h1>
+ <p class="sub">112 词 · 112 条例句</p>
+</div></div>
+<div class="toolbar"><div class="wrap">
+ <div class="tools">
+  <input id="q" type="search" placeholder="搜索单词或释义…（按 / 聚焦）">
+  <label class="sw"><input type="checkbox" id="all"> 默写模式</label>
+  <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
+  <label class="sw"><input type="checkbox" id="z"> 隐藏例句译文</label>
+  <button class="btn" id="reset">重置</button>
+  <span class="count" id="cnt">112 条</span>
+ </div>
+</div></div><div class="wrap">
+<section class="grp"><div class="ghead"><span class="gtag">词群 01</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="fashion n. 时尚；流行；姿态；方式； v. 制作；把...塑造成；使适应"><div class="w"><span class="idx">01</span>fashion</div><div class="m">n. 时尚；流行；姿态；方式； v. 制作；把...塑造成；使适应</div><div class="ex"><div class="en">Loose trousers are the latest fashion.</div><div class="zh">穿宽大的裤子是最新的时尚。</div></div></div>
+<div class="card" data-s="style n. ⻛格；样式；方式；文 体"><div class="w"><span class="idx">02</span>style</div><div class="m">n. ⻛格；样式；方式；文 体</div><div class="ex"><div class="en">The style of this skirt is just in season.</div><div class="zh">这条裙子的样式正在流行。</div></div></div>
+<div class="card" data-s="trend n. 趋势；走向；v. 倾向"><div class="w"><span class="idx">03</span>trend</div><div class="m">n. 趋势；走向；v. 倾向</div><div class="ex"><div class="en">The youth like to follow the latest trends in fashion.</div><div class="zh">年轻人喜好追随最新的时尚潮流。</div></div></div>
+<div class="card" data-s="tendency n. 趋势；倾向"><div class="w"><span class="idx">04</span>tendency</div><div class="m">n. 趋势；倾向</div><div class="ex"><div class="en">There is a growing tendency for people to work at home instead of in offices.</div><div class="zh">入们在家里而不是在办公室里工作的趋势日益显著。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 02</span><span class="gcnt">7 词</span></div><div class="cards">
+<div class="card" data-s="popularity n. 普及；流行"><div class="w"><span class="idx">05</span>popularity</div><div class="m">n. 普及；流行</div><div class="ex"><div class="en">That record made the singer's popularity boom.</div><div class="zh">那张唱片捧红了这位歌手。</div></div></div>
+<div class="card" data-s="vogue n. 时髦；时兴"><div class="w"><span class="idx">06</span>vogue</div><div class="m">n. 时髦；时兴</div><div class="ex"><div class="en">Long hair for men and high boots for ladies are no longer in vogue.</div><div class="zh">男士留长发和女士穿高筒靴不再流行了。</div></div></div>
+<div class="card" data-s="prevail v. 获胜；盛行；劝服"><div class="w"><span class="idx">07</span>prevail</div><div class="m">v. 获胜；盛行；劝服</div><div class="ex"><div class="en">Truth will ultimately prevail.</div><div class="zh">真理终究会获胜。</div></div></div>
+<div class="card" data-s="model n. 模型；模特儿；模范；型号； v. 将...做成模型；当模特儿"><div class="w"><span class="idx">08</span>model</div><div class="m">n. 模型；模特儿；模范；型号； v. 将...做成模型；当模特儿</div><div class="ex"><div class="en">After a brief spell as a model, she got into singing.</div><div class="zh">在短暂地当过一阵子模特儿后,她进入歌唱界。</div></div></div>
+<div class="card" data-s="icon n. 图标；画像；雕像；圣 像；偶像"><div class="w"><span class="idx">09</span>icon</div><div class="m">n. 图标；画像；雕像；圣 像；偶像</div><div class="ex"><div class="en">That sin ger is one of the pop culture icons of 1980s.</div><div class="zh">那位歌手是20世纪80年代的流行文化偶像之一。</div></div></div>
+<div class="card" data-s="idol n. 偶像；神像"><div class="w"><span class="idx">10</span>idol</div><div class="m">n. 偶像；神像</div><div class="ex"><div class="en">That football player is the idol of many young people.</div><div class="zh">这位足球运动员是许多年轻入的偶像。</div></div></div>
+<div class="card" data-s="luxury n. 奢华；奢侈品；难得的 享受"><div class="w"><span class="idx">11</span>luxury</div><div class="m">n. 奢华；奢侈品；难得的 享受</div><div class="ex"><div class="en">The in creasing sales of luxuries are an indication of the country's prosperity.</div><div class="zh">奢侈品的销售量日益升高,这是该国繁荣的表现。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 03</span><span class="gcnt">2 词</span></div><div class="cards">
+<div class="card" data-s="extravagant adj. 奢侈的；过度的"><div class="w"><span class="idx">12</span>extravagant</div><div class="m">adj. 奢侈的；过度的</div><div class="ex"><div class="en">She's very extravagant—she spends all her money on clothes.</div><div class="zh">她很铺张浪费---她把所有的钱都用来买衣服。</div></div></div>
+<div class="card" data-s="jewellery n. 珠宝；首饰"><div class="w"><span class="idx">13</span>jewellery</div><div class="m">n. 珠宝；首饰</div><div class="ex"><div class="en">This piece of jewellery is priceless.</div><div class="zh">这件首饰是无价之宝。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 04</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="jewel n. 宝石；珠宝"><div class="w"><span class="idx">14</span>jewel</div><div class="m">n. 宝石；珠宝</div><div class="ex"><div class="en">That jewel has a beautiful shimmer.</div><div class="zh">那颗宝石闪着美丽的光。</div></div></div>
+<div class="card" data-s="gem n. 宝石；珍品；受人重视 者；v. 饰以宝石"><div class="w"><span class="idx">15</span>gem</div><div class="m">n. 宝石；珍品；受人重视 者；v. 饰以宝石</div><div class="ex"><div class="en">The ring is set with a small red gem.</div><div class="zh">戒指上镶着一颗小红宝石。</div></div></div>
+<div class="card" data-s="jade n. 玉；翡翠"><div class="w"><span class="idx">16</span>jade</div><div class="m">n. 玉；翡翠</div><div class="ex"><div class="en">I have a pair of jade bracelets.</div><div class="zh">我有一对翡翠手镯。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 05</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="adorn v. 装饰；佩戴；使美观"><div class="w"><span class="idx">17</span>adorn</div><div class="m">v. 装饰；佩戴；使美观</div><div class="ex"><div class="en">She likes to adorn herself with jewels.</div><div class="zh">她喜欢用珠宝来装扮自己。</div></div></div>
+<div class="card" data-s="ornament n. 装饰；装饰品；v. 装 饰；美化"><div class="w"><span class="idx">18</span>ornament</div><div class="m">n. 装饰；装饰品；v. 装 饰；美化</div><div class="ex"><div class="en">Clearness ornaments profound thought.</div><div class="zh">清晰性能为深刻的思想增辉。</div></div></div>
+<div class="card" data-s="embellish v. 美化；装饰；渲染"><div class="w"><span class="idx">19</span>embellish</div><div class="m">v. 美化；装饰；渲染</div><div class="ex"><div class="en">The door of the old church was embellished with intricate carvings.</div><div class="zh">老教堂的门是用复杂的雕饰美化的。</div></div></div>
+<div class="card" data-s="embroider v. 刺绣；绣(花)；加以 渲染(或润色)"><div class="w"><span class="idx">20</span>embroider</div><div class="m">v. 刺绣；绣(花)；加以 渲染(或润色)</div><div class="ex"><div class="en">Her shirt is embroidered with roses.</div><div class="zh">她的衬衣上绣着玫瑰花。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 06</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="hairdressing n. 理发；理发业"><div class="w"><span class="idx">21</span>hairdressing</div><div class="m">n. 理发；理发业</div><div class="ex"><div class="en">She has spent much money and tim eon hairdressing.</div><div class="zh">她在美发上花了不少钱和时间。</div></div></div>
+<div class="card" data-s="pigment n. 色素；颜料"><div class="w"><span class="idx">22</span>pigment</div><div class="m">n. 色素；颜料</div><div class="ex"><div class="en">This pigment is a good and common food additive.</div><div class="zh">该色素是一种优质且常见的食品添加剂。</div></div></div>
+<div class="card" data-s="dye v. 给...染色 ；n. 染料"><div class="w"><span class="idx">23</span>dye</div><div class="m">v. 给...染色 ；n. 染料</div><div class="ex"><div class="en">She dyed her hair black.</div><div class="zh">她把头发染黑了。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 07</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="masquerade n. 化妆舞会；伪装；v. 伪 装；冒充"><div class="w"><span class="idx">24</span>masquerade</div><div class="m">n. 化妆舞会；伪装；v. 伪 装；冒充</div><div class="ex"><div class="en">They met at a masquerade in Venice.</div><div class="zh">他们在威尼斯的一场化装舞会上相识。</div></div></div>
+<div class="card" data-s="veil n. 面纱；遮盖物；v. 蒙上 面纱；隐藏；掩饰"><div class="w"><span class="idx">25</span>veil</div><div class="m">n. 面纱；遮盖物；v. 蒙上 面纱；隐藏；掩饰</div><div class="ex"><div class="en">The bride's face was covered with a white veil.</div><div class="zh">新娘的脸上蒙着白色的面纱。</div></div></div>
+<div class="card" data-s="costume n. 服装；衣服；戏服；v. 给...穿上服装"><div class="w"><span class="idx">26</span>costume</div><div class="m">n. 服装；衣服；戏服；v. 给...穿上服装</div><div class="ex"><div class="en">Her national costume showed which country she came from.</div><div class="zh">她的民族服装显示了她来自哪个国家。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 08</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="fascinate v. 强烈吸引住；使着迷"><div class="w"><span class="idx">27</span>fascinate</div><div class="m">v. 强烈吸引住；使着迷</div><div class="ex"><div class="en">This city fascinates him.</div><div class="zh">这座城市令他着迷。</div></div></div>
+<div class="card" data-s="decent adj. 像样的；体面的；正 派的"><div class="w"><span class="idx">28</span>decent</div><div class="m">adj. 像样的；体面的；正 派的</div><div class="ex"><div class="en">He made a decent record.</div><div class="zh">他成绩尚佳。</div></div></div>
+<div class="card" data-s="exquisite adj. 精美的；细腻的；强 烈的"><div class="w"><span class="idx">29</span>exquisite</div><div class="m">adj. 精美的；细腻的；强 烈的</div><div class="ex"><div class="en">The box was decorated with exquisite carvings.</div><div class="zh">盒子上装饰着精致的雕刻。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 09</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="grace n. 优雅；恩宠"><div class="w"><span class="idx">30</span>grace</div><div class="m">n. 优雅；恩宠</div><div class="ex"><div class="en">She was a beautiful girl with the grace and poise of a natural model.</div><div class="zh">她是一个美丽的姑娘,天生有着模特儿的那种优雅仪态。</div></div></div>
+<div class="card" data-s="elegance n. 高雅；典雅；优雅"><div class="w"><span class="idx">31</span>elegance</div><div class="m">n. 高雅；典雅；优雅</div><div class="ex"><div class="en">The building is admired for its simple elegance.</div><div class="zh">这座建筑以简约典雅而受人赞赏。</div></div></div>
+<div class="card" data-s="perfect adj. 完备的；完美的；v. 使完美"><div class="w"><span class="idx">32</span>perfect</div><div class="m">adj. 完备的；完美的；v. 使完美</div><div class="ex"><div class="en">No one expects you to be perfect, but we do expect you to do your best always.</div><div class="zh">没人指望你完美无缺,但是我们盼望你永远尽最大的努力。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 10</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="appearance n. 出现；露面；外观；外 表"><div class="w"><span class="idx">33</span>appearance</div><div class="m">n. 出现；露面；外观；外 表</div><div class="ex"><div class="en">Don't judge by appearances.</div><div class="zh">不能以貌取人。</div></div></div>
+<div class="card" data-s="cosmetics n. 化妆品；美容品； “cosmetic”的复数"><div class="w"><span class="idx">34</span>cosmetics</div><div class="m">n. 化妆品；美容品； “cosmetic”的复数</div><div class="ex"><div class="en">We have many types of cosmetics for sale.</div><div class="zh">我们有许多类型的化妆品在售。</div></div></div>
+<div class="card" data-s="make-up n. 化妆品；性格；构成； 补考"><div class="w"><span class="idx">35</span>make-up</div><div class="m">n. 化妆品；性格；构成； 补考</div><div class="ex"><div class="en">She wears very little make-up.</div><div class="zh">她很少化妆。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 11</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="handsome adj. 英俊的；丰厚的"><div class="w"><span class="idx">36</span>handsome</div><div class="m">adj. 英俊的；丰厚的</div><div class="ex"><div class="en">The waitress received a handsome tip.</div><div class="zh">女侍者收到了数量可观的小费。</div></div></div>
+<div class="card" data-s="charming adj. 迷人的；娇媚的；v. 使 着迷；“charm”的现在分词"><div class="w"><span class="idx">37</span>charming</div><div class="m">adj. 迷人的；娇媚的；v. 使 着迷；“charm”的现在分词</div><div class="ex"><div class="en">Her colourful character makes her very charming.</div><div class="zh">她有趣的性格使她非常富有魅力。</div></div></div>
+<div class="card" data-s="pretty adv. 很；相当；adj. 漂亮 的"><div class="w"><span class="idx">38</span>pretty</div><div class="m">adv. 很；相当；adj. 漂亮 的</div><div class="ex"><div class="en">All the pretty women wore their smartest dresses.</div><div class="zh">所有漂亮女士都穿着自己最漂亮的连衣裙。</div></div></div>
+<div class="card" data-s="beautiful adj. 漂亮的"><div class="w"><span class="idx">39</span>beautiful</div><div class="m">adj. 漂亮的</div><div class="ex"><div class="en">Looking at a beautiful painting always gives one satisfaction.</div><div class="zh">观赏一幅美丽的图画总能给人一种满足感。</div></div></div>
+<div class="card" data-s="ugly adj. 丑陋的；难看的"><div class="w"><span class="idx">40</span>ugly</div><div class="m">adj. 丑陋的；难看的</div><div class="ex"><div class="en">You can't persuade me to buy this ugly vase!</div><div class="zh">你无法说服我买这个丑陋的花瓶!</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 12</span><span class="gcnt">6 词</span></div><div class="cards">
+<div class="card" data-s="dress n. 连衣裙；衣服；v. (给...)穿衣服"><div class="w"><span class="idx">41</span>dress</div><div class="m">n. 连衣裙；衣服；v. (给...)穿衣服</div><div class="ex"><div class="en">She wears a beautiful evening dress.</div><div class="zh">她穿着一件漂亮的晚礼服。</div></div></div>
+<div class="card" data-s="clothe v. 给...穿衣；供给衣服"><div class="w"><span class="idx">42</span>clothe</div><div class="m">v. 给...穿衣；供给衣服</div><div class="ex"><div class="en">He had to work hard to feed and clothe the large family.</div><div class="zh">他必须努力工作才能使一大家子人有饭吃,有衣穿。</div></div></div>
+<div class="card" data-s="uniform adj. 一致的；统一的；n. 制服"><div class="w"><span class="idx">43</span>uniform</div><div class="m">adj. 一致的；统一的；n. 制服</div><div class="ex"><div class="en">Do you have to wear a uniform if you work at McDonald's?</div><div class="zh">在麦当劳供职时必须穿制服吗?</div></div></div>
+<div class="card" data-s="garment n. 衣服；外衣；v. 给...穿 衣服"><div class="w"><span class="idx">44</span>garment</div><div class="m">n. 衣服；外衣；v. 给...穿 衣服</div><div class="ex"><div class="en">This garment should be washed carefully.</div><div class="zh">这件衣服应该小心清洗。</div></div></div>
+<div class="card" data-s="laundry n. 洗衣店；要洗的衣物"><div class="w"><span class="idx">45</span>laundry</div><div class="m">n. 洗衣店；要洗的衣物</div><div class="ex"><div class="en">There's a lot of laundry in the basket.</div><div class="zh">筐里有许多要洗的衣物。</div></div></div>
+<div class="card" data-s="wardrobe n. 衣柜；衣橱"><div class="w"><span class="idx">46</span>wardrobe</div><div class="m">n. 衣柜；衣橱</div><div class="ex"><div class="en">Can you hang these in the wardrobe, please?</div><div class="zh">你能把这些挂在衣柜里吗?</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 13</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="overall adv. 全部；总计；大致上；n. (工作时穿的)罩衣；adj. 总的； 全面的；总体的"><div class="w"><span class="idx">47</span>overall</div><div class="m">adv. 全部；总计；大致上；n. (工作时穿的)罩衣；adj. 总的； 全面的；总体的</div><div class="ex"><div class="en">The shop assistant was wearing a white overall.</div><div class="zh">那店员穿着白色的罩衣。</div></div></div>
+<div class="card" data-s="overcoat n. 大衣；外套"><div class="w"><span class="idx">48</span>overcoat</div><div class="m">n. 大衣；外套</div><div class="ex"><div class="en">He turned his overcoat collar u p.</div><div class="zh">他把大衣的衣领竖了起来。</div></div></div>
+<div class="card" data-s="robe n. ⻓袍；v. (使)穿上⻓ 袍"><div class="w"><span class="idx">49</span>robe</div><div class="m">n. ⻓袍；v. (使)穿上⻓ 袍</div><div class="ex"><div class="en">She was simply dressed in a plain white robe.</div><div class="zh">她只穿了一件朴素的白色长袍。</div></div></div>
+<div class="card" data-s="gown n. ⻓袍；礼服；⻓外衣"><div class="w"><span class="idx">50</span>gown</div><div class="m">n. ⻓袍；礼服；⻓外衣</div><div class="ex"><div class="en">She put on her silk gown and went to the ball.</div><div class="zh">她穿上丝质的礼服,前去参加舞会。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 14</span><span class="gcnt">7 词</span></div><div class="cards">
+<div class="card" data-s="sweater n. 毛衣"><div class="w"><span class="idx">51</span>sweater</div><div class="m">n. 毛衣</div><div class="ex"><div class="en">This woollen sweater may keep you warm in winter.</div><div class="zh">这件羊毛衫可以让你在冬天保暖。</div></div></div>
+<div class="card" data-s="jacket n. 夹克衫"><div class="w"><span class="idx">52</span>jacket</div><div class="m">n. 夹克衫</div><div class="ex"><div class="en">He wore a pair of dark glasses and a jacket all day long.</div><div class="zh">他整天戴着一副墨镜,穿着一件夹克衫。</div></div></div>
+<div class="card" data-s="skirt n. 裙子；下摆；边缘；v. 位 于...的边缘；绕着...走；避开"><div class="w"><span class="idx">53</span>skirt</div><div class="m">n. 裙子；下摆；边缘；v. 位 于...的边缘；绕着...走；避开</div><div class="ex"><div class="en">How many skirts do you have?</div><div class="zh">你有多少条裙子?</div></div></div>
+<div class="card" data-s="jeans n. 牛仔裤"><div class="w"><span class="idx">54</span>jeans</div><div class="m">n. 牛仔裤</div><div class="ex"><div class="en">Jeans are made of jean, denim, or other durable fabrics.</div><div class="zh">牛仔裤是用粗斜纹棉布、蓝粗棉布或其他耐磨布料制成的。</div></div></div>
+<div class="card" data-s="trousers n. 裤子；⻓裤"><div class="w"><span class="idx">55</span>trousers</div><div class="m">n. 裤子；⻓裤</div><div class="ex"><div class="en">These trousers are too long for me.</div><div class="zh">这条裤子对我来说太长了。</div></div></div>
+<div class="card" data-s="clasp n. 钩；扣；紧握；紧抱； v. 抱紧；握紧；扣紧"><div class="w"><span class="idx">56</span>clasp</div><div class="m">n. 钩；扣；紧握；紧抱； v. 抱紧；握紧；扣紧</div><div class="ex"><div class="en">The button won't clasp.</div><div class="zh">这颗扣子扣不上。</div></div></div>
+<div class="card" data-s="button n. 纽扣；按钮"><div class="w"><span class="idx">57</span>button</div><div class="m">n. 纽扣；按钮</div><div class="ex"><div class="en">One of the buttons has come off my coat.</div><div class="zh">我夕卜套上的一颗扣子掉了。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 15</span><span class="gcnt">8 词</span></div><div class="cards">
+<div class="card" data-s="glove n. 手套"><div class="w"><span class="idx">58</span>glove</div><div class="m">n. 手套</div><div class="ex"><div class="en">It's getting cold and I have to take out my woollen gloves.</div><div class="zh">天气变冷了,我不得不把毛线手套拿出来了。</div></div></div>
+<div class="card" data-s="hat n. 帽子"><div class="w"><span class="idx">59</span>hat</div><div class="m">n. 帽子</div><div class="ex"><div class="en">She bought a hat yesterday.</div><div class="zh">她昨天买了一顶帽子。</div></div></div>
+<div class="card" data-s="cap n. 帽子；v. 覆盖...的顶部"><div class="w"><span class="idx">60</span>cap</div><div class="m">n. 帽子；v. 覆盖...的顶部</div><div class="ex"><div class="en">The cap goes well with your suit.</div><div class="zh">这顶帽子跟你的套装很配。</div></div></div>
+<div class="card" data-s="brim n. 边；边缘；帽边；v. (装)满；(使)溢出"><div class="w"><span class="idx">61</span>brim</div><div class="m">n. 边；边缘；帽边；v. (装)满；(使)溢出</div><div class="ex"><div class="en">He drank at the fountain's brim.</div><div class="zh">他在喷泉边喝酒。</div></div></div>
+<div class="card" data-s="scarf n. 围巾；头巾；v. 围(围 巾)；披(披巾)"><div class="w"><span class="idx">62</span>scarf</div><div class="m">n. 围巾；头巾；v. 围(围 巾)；披(披巾)</div><div class="ex"><div class="en">The price of this scarf is below ten dollars.</div><div class="zh">这条围巾的价格不到10美元。</div></div></div>
+<div class="card" data-s="handkerchief n. 手帕；方巾"><div class="w"><span class="idx">63</span>handkerchief</div><div class="m">n. 手帕；方巾</div><div class="ex"><div class="en">He was playing with his handkerchief all the while during the speech.</div><div class="zh">演讲期间,他一直在摆弄手帕。</div></div></div>
+<div class="card" data-s="purse n. 钱包；钱袋；女用小 包；资金；v. 噘嘴"><div class="w"><span class="idx">64</span>purse</div><div class="m">n. 钱包；钱袋；女用小 包；资金；v. 噘嘴</div><div class="ex"><div class="en">My purse was stolen on the bus.</div><div class="zh">我的钱包在公交车上被偷了。</div></div></div>
+<div class="card" data-s="wallet n. 钱包；皮夹；钱夹"><div class="w"><span class="idx">65</span>wallet</div><div class="m">n. 钱包；皮夹；钱夹</div><div class="ex"><div class="en">She placed the receipt in her wallet.</div><div class="zh">她把收条放到皮夹子里了。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 16</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="vest n. 背心；⻢甲；汗衫；v. 授予；使穿衣"><div class="w"><span class="idx">66</span>vest</div><div class="m">n. 背心；⻢甲；汗衫；v. 授予；使穿衣</div><div class="ex"><div class="en">One button on the vest is loose.</div><div class="zh">西装背心上的一粒纽扣松了。</div></div></div>
+<div class="card" data-s="wrap v. 包；缠绕；覆盖；穿外衣；遮 蔽；n. 外套；围巾；包裹；包装材 料"><div class="w"><span class="idx">67</span>wrap</div><div class="m">v. 包；缠绕；覆盖；穿外衣；遮 蔽；n. 外套；围巾；包裹；包装材 料</div><div class="ex"><div class="en">She wrapped the gift in blue paper.</div><div class="zh">她用蓝纸把礼物包了起来。</div></div></div>
+<div class="card" data-s="cloak n. 斗篷；掩护物；v. 隐 瞒；掩饰"><div class="w"><span class="idx">68</span>cloak</div><div class="m">n. 斗篷；掩护物；v. 隐 瞒；掩饰</div><div class="ex"><div class="en">She picked up the old brown cloak and handed it to him.</div><div class="zh">她捡起棕色的旧斗篷递给他。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 17</span><span class="gcnt">7 词</span></div><div class="cards">
+<div class="card" data-s="collar n. 衣领；领子；v. 抓住； 给....上领子"><div class="w"><span class="idx">69</span>collar</div><div class="m">n. 衣领；领子；v. 抓住； 给....上领子</div><div class="ex"><div class="en">He turned up his coat collar against the chilly wind.</div><div class="zh">他竖起大衣领来抵御寒风。</div></div></div>
+<div class="card" data-s="sleeve n. 袖子"><div class="w"><span class="idx">70</span>sleeve</div><div class="m">n. 袖子</div><div class="ex"><div class="en">A stranger pulled at my sleeve as I was leaving.</div><div class="zh">我刚要离去,一个陌生人拽了拽我的袖子。</div></div></div>
+<div class="card" data-s="sock n. 短袜"><div class="w"><span class="idx">71</span>sock</div><div class="m">n. 短袜</div><div class="ex"><div class="en">There is a hole in my sock.</div><div class="zh">我的短袜上有个洞。</div></div></div>
+<div class="card" data-s="stocking n. ⻓袜"><div class="w"><span class="idx">72</span>stocking</div><div class="m">n. ⻓袜</div><div class="ex"><div class="en">The thief masked his face with a stocking.</div><div class="zh">那个贼套上长筒袜遮住脸。</div></div></div>
+<div class="card" data-s="slipper n. 拖鞋"><div class="w"><span class="idx">73</span>slipper</div><div class="m">n. 拖鞋</div><div class="ex"><div class="en">No slipper is allowed in the laboratory.</div><div class="zh">实验室里不允许穿拖鞋。</div></div></div>
+<div class="card" data-s="boot n. 靴子；⻓筒靴"><div class="w"><span class="idx">74</span>boot</div><div class="m">n. 靴子；⻓筒靴</div><div class="ex"><div class="en">My foot won't go into this boot.</div><div class="zh">我的脚穿不上这只靴子。</div></div></div>
+<div class="card" data-s="lace n. 鞋带；饰带；花边；缎 带；v. 系带子；饰以花边"><div class="w"><span class="idx">75</span>lace</div><div class="m">n. 鞋带；饰带；花边；缎 带；v. 系带子；饰以花边</div><div class="ex"><div class="en">He stopped to tie the laces of his sneakers.</div><div class="zh">他停下来把运动鞋的鞋带系上。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 18</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="tailor v. 剪裁；缝制；调整使适 应；n. 裁缝"><div class="w"><span class="idx">76</span>tailor</div><div class="m">v. 剪裁；缝制；调整使适 应；n. 裁缝</div><div class="ex"><div class="en">The tailor can alter your new coat to fit you.</div><div class="zh">裁缝会将你的新外套改合体。</div></div></div>
+<div class="card" data-s="sew v. 缝制；缝补"><div class="w"><span class="idx">77</span>sew</div><div class="m">v. 缝制；缝补</div><div class="ex"><div class="en">The skirt is finished and rm now going to sew a pocket.</div><div class="zh">裙子做好了,我现在要再缝上个口袋。</div></div></div>
+<div class="card" data-s="spin v. 纺(纱)；旋转；疾 驰；n. 旋转"><div class="w"><span class="idx">78</span>spin</div><div class="m">v. 纺(纱)；旋转；疾 驰；n. 旋转</div><div class="ex"><div class="en">We took a spin around the to w n.</div><div class="zh">我们乘车在城里兜了一圈。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 19</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="stitch n. 针脚；缝线；一针；v. 缝；缝合"><div class="w"><span class="idx">79</span>stitch</div><div class="m">n. 针脚；缝线；一针；v. 缝；缝合</div><div class="ex"><div class="en">My mother is stitching a new dress.</div><div class="zh">我妈妈正在缝一条新裙子。</div></div></div>
+<div class="card" data-s="needle n. 针"><div class="w"><span class="idx">80</span>needle</div><div class="m">n. 针</div><div class="ex"><div class="en">The needle pierced her finger.</div><div class="zh">针刺进了她的手指。</div></div></div>
+<div class="card" data-s="pin n. 大头针；别针；v. (用 大头钉等)固定"><div class="w"><span class="idx">81</span>pin</div><div class="m">n. 大头针；别针；v. (用 大头钉等)固定</div><div class="ex"><div class="en">Pin the bills together so you won't lose them.</div><div class="zh">把账单钉在一起以防遗失。</div></div></div>
+<div class="card" data-s="string n. 弦；线；一连串"><div class="w"><span class="idx">82</span>string</div><div class="m">n. 弦；线；一连串</div><div class="ex"><div class="en">We have had a string of complaints about the programme.</div><div class="zh">我们已经收到了对该节目的一连串投诉。</div></div></div>
+<div class="card" data-s="thread n. 线；线索；思路；v. 穿 线于；穿过"><div class="w"><span class="idx">83</span>thread</div><div class="m">n. 线；线索；思路；v. 穿 线于；穿过</div><div class="ex"><div class="en">She is looking for threads which match the cloth.</div><div class="zh">她在找和这块布相配的线。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 20</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="strap n. 带子；皮带；皮条；v. 用带缚住；包扎"><div class="w"><span class="idx">84</span>strap</div><div class="m">n. 带子；皮带；皮条；v. 用带缚住；包扎</div><div class="ex"><div class="en">A safety strap is used to prevent falling.</div><div class="zh">安全带被用来防止滑落。</div></div></div>
+<div class="card" data-s="stripe n. 条纹；类型"><div class="w"><span class="idx">85</span>stripe</div><div class="m">n. 条纹；类型</div><div class="ex"><div class="en">The body of a zebra is marked by black and white stripes.</div><div class="zh">斑马的身体特征是有黑白条纹。</div></div></div>
+<div class="card" data-s="ribbon n. 缎带；带状物；丝带"><div class="w"><span class="idx">86</span>ribbon</div><div class="m">n. 缎带；带状物；丝带</div><div class="ex"><div class="en">Her hair was tied up with a ribbon.</div><div class="zh">她的头发用—条丝带扎着。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 21</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="belt n. 腰带；皮带；传送带"><div class="w"><span class="idx">87</span>belt</div><div class="m">n. 腰带；皮带；传送带</div><div class="ex"><div class="en">A belt of trees grew between the two fields.</div><div class="zh">两块田之间有一条树木带。</div></div></div>
+<div class="card" data-s="chain n. 链条；链子；v. 用铁链 锁住"><div class="w"><span class="idx">88</span>chain</div><div class="m">n. 链条；链子；v. 用铁链 锁住</div><div class="ex"><div class="en">She wore a silver chain around her neck.</div><div class="zh">她的脖子上戴着一条银链子。</div></div></div>
+<div class="card" data-s="bracelet n. 手镯"><div class="w"><span class="idx">89</span>bracelet</div><div class="m">n. 手镯</div><div class="ex"><div class="en">He gave her a silver bracelet.</div><div class="zh">他送给她一只银手镯。</div></div></div>
+<div class="card" data-s="necklace n. 项链"><div class="w"><span class="idx">90</span>necklace</div><div class="m">n. 项链</div><div class="ex"><div class="en">I value this necklace at 5,000 dollars.</div><div class="zh">我估计这条项链值5000美元。</div></div></div>
+<div class="card" data-s="bead n. 有孔的小珠；珠状物； 滴；v. 用珠装饰；形成珠状"><div class="w"><span class="idx">91</span>bead</div><div class="m">n. 有孔的小珠；珠状物； 滴；v. 用珠装饰；形成珠状</div><div class="ex"><div class="en">She wore a string of beads round her neck.</div><div class="zh">她的脖子上挂了一串珠子。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 22</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="textile n. 纺织品；纺织业"><div class="w"><span class="idx">92</span>textile</div><div class="m">n. 纺织品；纺织业</div><div class="ex"><div class="en">He intends to retail textile goods.</div><div class="zh">他打算零售纺织类的商品。</div></div></div>
+<div class="card" data-s="velvet n. 天鹅绒；丝绒；adj. 天 鹅绒的"><div class="w"><span class="idx">93</span>velvet</div><div class="m">n. 天鹅绒；丝绒；adj. 天 鹅绒的</div><div class="ex"><div class="en">The lawn looks like green velvet.</div><div class="zh">草坪看上去就像绿色的天鹅绒。</div></div></div>
+<div class="card" data-s="wool n. 羊毛；毛线"><div class="w"><span class="idx">94</span>wool</div><div class="m">n. 羊毛；毛线</div><div class="ex"><div class="en">He found a job of shearing wool from sheep.</div><div class="zh">他找到一份剪羊毛的工作。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 23</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="patch n. 补丁；一小片；小块 地；v. 打补丁；缝补"><div class="w"><span class="idx">95</span>patch</div><div class="m">n. 补丁；一小片；小块 地；v. 打补丁；缝补</div><div class="ex"><div class="en">She sewed a patch onto the knee of the trousers.</div><div class="zh">她在裤子的膝部缝了个补丁。</div></div></div>
+<div class="card" data-s="rag n. 旧布,破布"><div class="w"><span class="idx">96</span>rag</div><div class="m">n. 旧布,破布</div><div class="ex"><div class="en">He wiped the table with an old rag.</div><div class="zh">他用一块旧布擦桌子。</div></div></div>
+<div class="card" data-s="shabby adj. 破旧的；肮脏破烂 的；衣衫褴褛的"><div class="w"><span class="idx">97</span>shabby</div><div class="m">adj. 破旧的；肮脏破烂 的；衣衫褴褛的</div><div class="ex"><div class="en">His shabby appearanee creates a bad impression.</div><div class="zh">他衣衫褴褛的样子给人留下不好的印象。</div></div></div>
+<div class="card" data-s="tight adj. 紧的；adv. 紧紧地"><div class="w"><span class="idx">98</span>tight</div><div class="m">adj. 紧的；adv. 紧紧地</div><div class="ex"><div class="en">This drawer is too tight for me to open it.</div><div class="zh">这抽屉太紧了,我打不开。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 24</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="colour n. 颜色；v. 着色"><div class="w"><span class="idx">99</span>colour</div><div class="m">n. 颜色；v. 着色</div><div class="ex"><div class="en">Due to the use of natural pigments, these folk paintings retain their colour well.</div><div class="zh">因为使用了天然颜料,这些民俗画的颜色很好地保留了下来。</div></div></div>
+<div class="card" data-s="white adj. 白色的；n. 白色"><div class="w"><span class="idx">100</span>white</div><div class="m">adj. 白色的；n. 白色</div><div class="ex"><div class="en">He was white with fury.</div><div class="zh">他气得脸色发白。</div></div></div>
+<div class="card" data-s="yellow adj. ⻩色的；n. ⻩色"><div class="w"><span class="idx">101</span>yellow</div><div class="m">adj. ⻩色的；n. ⻩色</div><div class="ex"><div class="en">The leaves turn yellow in autumn.</div><div class="zh">秋天时,叶子变黄。</div></div></div>
+<div class="card" data-s="brown adj. 褐色的；棕色的；n. 褐色；棕色"><div class="w"><span class="idx">102</span>brown</div><div class="m">adj. 褐色的；棕色的；n. 褐色；棕色</div><div class="ex"><div class="en">He had brown skin.</div><div class="zh">他的皮肤是褐色的。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 25</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="grey adj. 灰色的；暗淡的；n. 灰色；暗淡"><div class="w"><span class="idx">103</span>grey</div><div class="m">adj. 灰色的；暗淡的；n. 灰色；暗淡</div><div class="ex"><div class="en">He dressed in grey.</div><div class="zh">他穿着灰色衣服。</div></div></div>
+<div class="card" data-s="pink n. 粉红色；adj. 粉红色的"><div class="w"><span class="idx">104</span>pink</div><div class="m">n. 粉红色；adj. 粉红色的</div><div class="ex"><div class="en">She carried a spray of pink roses.</div><div class="zh">她拿着一簇粉红色的玫瑰花。</div></div></div>
+<div class="card" data-s="purple n. 紫色；adj. 紫色的"><div class="w"><span class="idx">105</span>purple</div><div class="m">n. 紫色；adj. 紫色的</div><div class="ex"><div class="en">That girl like to wear purple dresses.</div><div class="zh">那个女孩喜欢穿紫色的连衣裙。</div></div></div>
+<div class="card" data-s="tan n. 晒成棕褐色的肤色；adj. 棕褐色 的；棕⻩色的；v. 将皮肤晒成棕褐 色"><div class="w"><span class="idx">106</span>tan</div><div class="m">n. 晒成棕褐色的肤色；adj. 棕褐色 的；棕⻩色的；v. 将皮肤晒成棕褐 色</div><div class="ex"><div class="en">It took me all summer to get this tan.</div><div class="zh">我花了整个夏天才晒出这样的棕褐色。</div></div></div>
+<div class="card" data-s="fade v. 逐渐消失；褪色；凋谢"><div class="w"><span class="idx">107</span>fade</div><div class="m">v. 逐渐消失；褪色；凋谢</div><div class="ex"><div class="en">Beauty fades like a flower.</div><div class="zh">红颜易逝如花败。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 26</span><span class="gcnt">2 词</span></div><div class="cards">
+<div class="card" data-s="stain n. 污点；v. 玷污"><div class="w"><span class="idx">108</span>stain</div><div class="m">n. 污点；v. 玷污</div><div class="ex"><div class="en">The coffee stained his shirt brow n.</div><div class="zh">咖啡把他的衬衫染上了棕色。</div></div></div>
+<div class="card" data-s="blot n. 污点；墨渍；v. (用纸 或布)吸干；弄脏"><div class="w"><span class="idx">109</span>blot</div><div class="m">n. 污点；墨渍；v. (用纸 或布)吸干；弄脏</div><div class="ex"><div class="en">The new power station is a blot on the landscape.</div><div class="zh">那座新建的发电厂大煞风景。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 27</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="figure n. 数字；身材；重要或有名的 人物；v. 计算；认为；弄懂"><div class="w"><span class="idx">110</span>figure</div><div class="m">n. 数字；身材；重要或有名的 人物；v. 计算；认为；弄懂</div><div class="ex"><div class="en">I could see a tall figure near the door.</div><div class="zh">我可以看见门附近有一个高大的身影。</div></div></div>
+<div class="card" data-s="slender adj. 苗条的；微薄的"><div class="w"><span class="idx">111</span>slender</div><div class="m">adj. 苗条的；微薄的</div><div class="ex"><div class="en">All of us admired her slender fig ure.</div><div class="zh">我们都羡慕她的苗条身材。</div></div></div>
+<div class="card" data-s="slight adj. 轻微的；微小的；细 瘦的；n. 轻慢；v. 轻视"><div class="w"><span class="idx">112</span>slight</div><div class="m">adj. 轻微的；微小的；细 瘦的；n. 轻慢；v. 轻视</div><div class="ex"><div class="en">Our army suffered a slight reverse.</div><div class="zh">我们的部队遭受了轻微的损失。</div></div></div>
+</div></section>
+<div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit10.html">← Unit 10</a><a href="unit11.html">切到纯列表版</a><a href="unit12.html">Unit 12 →</a></div><footer><div class="wrap" style="padding:0">
+ 摘自《雅思词汇真经》（刘洪波 编著）第 11 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
+</div></footer></div>
+<script>
+(function(){
+ var KEY='vj-hide';
+ var body=document.body;
+ var kind=body.dataset.kind;
+ var s={m:false,z:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;}}catch(e){}
+ function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+ function paint(){
+  body.classList.toggle('hide-m',s.m);
+  body.classList.toggle('hide-z',s.z);
+  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all');
+  if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
+  if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
+  if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
+ }
+ var cm=document.getElementById('m');
+ if(cm) cm.addEventListener('change',function(){s.m=cm.checked; save(); paint();});
+ var cz=document.getElementById('z');
+ if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
+ var ca=document.getElementById('all');
+ if(ca) ca.addEventListener('change',function(){
+   s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
+ });
+ var rs=document.getElementById('reset');
+ if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; save(); paint();});
+ var q=document.getElementById('q');
+ var items=[].slice.call(document.querySelectorAll('[data-s]'));
+ var cnt=document.getElementById('cnt');
+ function filter(){
+   var v=(q&&q.value||'').trim().toLowerCase();
+   var n=0;
+   items.forEach(function(el){
+     var hit=!v||el.dataset.s.indexOf(v)>-1;
+     el.style.display=hit?'':'none';
+     if(hit)n++;
+   });
+   if(cnt) cnt.textContent=v? (n+' / '+items.length) : (items.length+' 条');
+   var emp=document.getElementById('empty');
+   if(emp) emp.style.display=(n===0)?'block':'none';
+   document.querySelectorAll('section.grp').forEach(function(sec){
+     var vis=sec.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     sec.style.display=vis?'':'none';
+   });
+   document.querySelectorAll('tbody.grp').forEach(function(tb){
+     var vis=tb.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     tb.style.display=vis?'':'none';
+   });
+ }
+ if(q){q.addEventListener('input',filter);}
+ document.addEventListener('keydown',function(e){
+   if(e.key==='/'&&document.activeElement!==q&&q){e.preventDefault();q.focus();}
+   if(e.key==='Escape'&&document.activeElement===q){q.value='';filter();q.blur();}
+ });
+ paint(); filter();
+})();
+</script>
+</body></html>

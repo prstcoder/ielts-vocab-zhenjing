@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unit 16 · 社会经济</title>
+<style>
+:root{
+ --bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da;
+ --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4;
+}
+@media (prefers-color-scheme: dark){
+ :root{ --bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037;
+        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+ font:16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+ -webkit-font-smoothing:antialiased;padding-bottom:64px}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+
+.top{padding:34px 0 18px}
+.back{display:inline-block;font-size:13px;color:var(--ink2);text-decoration:none;
+ border:1px solid var(--line);border-radius:999px;padding:3px 12px;margin-bottom:16px}
+.back:hover{color:var(--accent);border-color:var(--accent)}
+h1{margin:0;font-size:27px;letter-spacing:.2px;font-weight:700}
+h1 .u{color:var(--accent);font-variant-numeric:tabular-nums}
+.sub{margin:6px 0 0;color:var(--ink2);font-size:13.5px}
+
+.toolbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);
+ backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line);
+ padding:10px 0;margin-bottom:18px}
+.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#q{flex:1 1 200px;min-width:150px;padding:8px 13px;border:1px solid var(--line);border-radius:9px;
+ background:var(--panel);color:var(--ink);font-size:14px;outline:none}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.sw{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);
+ border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer;user-select:none;background:var(--panel)}
+.sw input{accent-color:var(--accent);margin:0}
+.sw.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.btn{font:inherit;font-size:13px;color:var(--ink2);background:var(--panel);border:1px solid var(--line);
+ border-radius:999px;padding:5px 12px;cursor:pointer}
+.btn:hover{color:var(--accent);border-color:var(--accent)}
+.count{font-size:12.5px;color:var(--ink2);margin-left:auto;font-variant-numeric:tabular-nums}
+
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);
+ border-radius:12px;overflow:hidden}
+thead th{background:var(--chip);font-size:12.5px;letter-spacing:.06em;color:var(--ink2);
+ font-weight:600;text-align:left;padding:9px 14px;border-bottom:1px solid var(--line)}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--accent-soft)}
+td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-nums}
+td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
+ letter-spacing:.2px;word-break:break-word}
+td.m{color:var(--ink)}
+tr.hit td.w,tr.hit td.m{background:var(--mark)}
+
+.cards{display:grid;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px}.card .w{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:19px;font-weight:700;letter-spacing:.2px}
+.card .w .idx{font-family:inherit;font-size:12px;color:var(--ink2);font-weight:400;margin-right:8px;
+ font-variant-numeric:tabular-nums}
+.card .m{margin:5px 0 0;color:var(--ink);font-size:14.5px}
+.card .ex{margin:10px 0 0;padding:9px 12px;background:var(--accent-soft);border-radius:9px;font-size:14px}
+.card .ex .en{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:14.8px;line-height:1.55}
+.card .ex .zh{color:var(--ink2);margin-top:3px;font-size:13.5px}
+.card .no{color:var(--ink2);font-size:12.5px;margin-top:8px;font-style:italic}
+
+tr.gsep td{background:var(--chip);padding:5px 14px;border-bottom:1px solid var(--line)}
+.gtag{font-size:11.5px;font-weight:700;letter-spacing:.08em;color:var(--accent)}
+.gcnt{font-size:11.5px;color:var(--ink2);margin-left:8px;font-variant-numeric:tabular-nums}
+tbody.grp tr:first-child td{border-top:0}
+tbody.grp + tbody.grp tr.gsep td{border-top:8px solid var(--bg)}
+
+/* 卡片版：一个词群一块面板，组与组之间界限分明 */
+section.grp{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+ margin-bottom:16px;overflow:hidden}
+.ghead{display:flex;align-items:baseline;gap:9px;padding:9px 15px;background:var(--chip);
+ border-bottom:1px solid var(--line)}
+section.grp .cards{display:grid;gap:0;padding:1px 15px}
+section.grp .card{background:transparent;border:0;border-radius:0;padding:13px 0;
+ border-bottom:1px solid var(--line)}
+section.grp .card:last-child{border-bottom:0}
+
+.hide-m .m,.hide-m td.m{display:none}
+.hide-z .zh{display:none}
+body.hide-m td.m{display:none!important}
+.empty{padding:40px;text-align:center;color:var(--ink2);font-size:14px}
+
+.nav{display:flex;justify-content:space-between;gap:10px;margin:26px 0 0}
+.nav a{font-size:13.5px;text-decoration:none;color:var(--ink2);border:1px solid var(--line);
+ border-radius:999px;padding:6px 14px;background:var(--panel)}
+.nav a:hover{color:var(--accent);border-color:var(--accent)}
+.nav a.dis{opacity:.35;pointer-events:none}
+footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
+
+@media (max-width:640px){
+ body{font-size:15px}
+ .wrap{padding:0 12px}
+ h1{font-size:22px}
+ thead{display:none}
+ table,tbody,tr,td{display:block;width:auto}
+ table{border:0;background:transparent;border-radius:0}
+ tbody tr{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:11px 13px;margin-bottom:9px}
+ tbody td{border:0;padding:0}
+ td.n{display:none}
+ tr.gsep{display:block}
+ tr.gsep td{display:block;background:transparent;padding:0 0 6px}
+ tbody.grp{margin-bottom:6px;display:block}
+ td.w{font-size:17px;margin-bottom:3px}
+ td.m{font-size:14px;color:var(--ink2)}
+}
+</style>
+</head>
+<body data-kind="card">
+<div class="wrap"><div class="top">
+ <a class="back" href="index.html">← 全部单元</a>
+ <h1><span class="u">Unit 16</span> · 社会经济</h1>
+ <p class="sub">169 词 · 169 条例句</p>
+</div></div>
+<div class="toolbar"><div class="wrap">
+ <div class="tools">
+  <input id="q" type="search" placeholder="搜索单词或释义…（按 / 聚焦）">
+  <label class="sw"><input type="checkbox" id="all"> 默写模式</label>
+  <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
+  <label class="sw"><input type="checkbox" id="z"> 隐藏例句译文</label>
+  <button class="btn" id="reset">重置</button>
+  <span class="count" id="cnt">169 条</span>
+ </div>
+</div></div><div class="wrap">
+<section class="grp"><div class="ghead"><span class="gtag">词群 01</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="economy n. 经济；节约"><div class="w"><span class="idx">01</span>economy</div><div class="m">n. 经济；节约</div><div class="ex"><div class="en">As the war debt lightened, the economy of the country developed quickly.</div><div class="zh">由于战争负债减轻,这个国家的经济很快发展起来。</div></div></div>
+<div class="card" data-s="trade n. 贸易；交易；行业；v. 贸易；交易"><div class="w"><span class="idx">02</span>trade</div><div class="m">n. 贸易；交易；行业；v. 贸易；交易</div><div class="ex"><div class="en">China does a lot of trade with many countries.</div><div class="zh">中国和许多国家进行大量贸易。</div></div></div>
+<div class="card" data-s="market n. 市场；商场；销路；行 情；v. 在市场上交易；营销"><div class="w"><span class="idx">03</span>market</div><div class="m">n. 市场；商场；销路；行 情；v. 在市场上交易；营销</div><div class="ex"><div class="en">The market is experiencing depression at the moment.</div><div class="zh">目前的市场正处于萧条期。</div></div></div>
+<div class="card" data-s="industry n. 工业；产业；行业；勤 奋"><div class="w"><span class="idx">04</span>industry</div><div class="m">n. 工业；产业；行业；勤 奋</div><div class="ex"><div class="en">The tourist industry employs many local people.</div><div class="zh">旅游业雇用了许多当地人。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 02</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="merchant n. 商人"><div class="w"><span class="idx">05</span>merchant</div><div class="m">n. 商人</div><div class="ex"><div class="en">The merchant decided to use camels to carry his goods across the desert.</div><div class="zh">商人决定用骆驼载运货物穿过沙漠。</div></div></div>
+<div class="card" data-s="financial adj. 财政的；金融的"><div class="w"><span class="idx">06</span>financial</div><div class="m">adj. 财政的；金融的</div><div class="ex"><div class="en">Southeast Asia's financial crisis taught people an important lesson.</div><div class="zh">东南亚的金融危机给人们上了重要的一课。</div></div></div>
+<div class="card" data-s="fund n. 基金；资金；v. 提供资 金"><div class="w"><span class="idx">07</span>fund</div><div class="m">n. 基金；资金；v. 提供资 金</div><div class="ex"><div class="en">The research is funded by the government.</div><div class="zh">这项研究由政府提供资金。</div></div></div>
+<div class="card" data-s="donate v. 捐赠；捐献"><div class="w"><span class="idx">08</span>donate</div><div class="m">v. 捐赠；捐献</div><div class="ex"><div class="en">She donates blood twice a year.</div><div class="zh">她每年献血两次。</div></div></div>
+<div class="card" data-s="endow v. 捐赠；资助；赋予"><div class="w"><span class="idx">09</span>endow</div><div class="m">v. 捐赠；资助；赋予</div><div class="ex"><div class="en">She is endowed with great writing ability.</div><div class="zh">她拥有杰出的写作天赋。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 03</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="commercial adj. 贸易的；商业的；n. 广告"><div class="w"><span class="idx">10</span>commercial</div><div class="m">adj. 贸易的；商业的；n. 广告</div><div class="ex"><div class="en">The downtown are a is zoned for commercial use.</div><div class="zh">市中心被指定供商业活动使用。</div></div></div>
+<div class="card" data-s="advertise v. 做广告；登广告"><div class="w"><span class="idx">11</span>advertise</div><div class="m">v. 做广告；登广告</div><div class="ex"><div class="en">We advertised in the local press.</div><div class="zh">我们在当地报刊上登了广告。</div></div></div>
+<div class="card" data-s="slogan n. 口号；标语"><div class="w"><span class="idx">12</span>slogan</div><div class="m">n. 口号；标语</div><div class="ex"><div class="en">The advertising slogan was a play on words.</div><div class="zh">那条广告口号是在玩文字游戏。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 04</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="purchase n. 购买；采购；v. 购买； 采购"><div class="w"><span class="idx">13</span>purchase</div><div class="m">n. 购买；采购；v. 购买； 采购</div><div class="ex"><div class="en">The new couple spent some money for the purchase of the furniture necessary for their new house.</div><div class="zh">新婚夫妇花了不少钱给新房子购置必备的家具。</div></div></div>
+<div class="card" data-s="lease n. 租契；v. 出租"><div class="w"><span class="idx">14</span>lease</div><div class="m">n. 租契；v. 出租</div><div class="ex"><div class="en">They signed a two-year lease on the flat.</div><div class="zh">他们签了这套公寓的两年租约。</div></div></div>
+<div class="card" data-s="afford v. 买得起；担负得起；有 时间做；给予"><div class="w"><span class="idx">15</span>afford</div><div class="m">v. 买得起；担负得起；有 时间做；给予</div><div class="ex"><div class="en">Few students can afford to live alone.</div><div class="zh">很少有学生能负担独居的费用。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 05</span><span class="gcnt">2 词</span></div><div class="cards">
+<div class="card" data-s="retail v. 零售；n. 零售"><div class="w"><span class="idx">16</span>retail</div><div class="m">v. 零售；n. 零售</div><div class="ex"><div class="en">These slippers retail at 10 dollars per pair.</div><div class="zh">这些拖鞋的零售价是每双10美元。</div></div></div>
+<div class="card" data-s="grocery n. ⻝品杂货店"><div class="w"><span class="idx">17</span>grocery</div><div class="m">n. ⻝品杂货店</div><div class="ex"><div class="en">Her mother be gan to operate a small grocery.</div><div class="zh">她母亲开始经营一家小型食品杂货店。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 06</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="discount n. 折扣；贴现率；v. 打折 扣；贴现；不全信；不重视"><div class="w"><span class="idx">18</span>discount</div><div class="m">n. 折扣；贴现率；v. 打折 扣；贴现；不全信；不重视</div><div class="ex"><div class="en">I'll sell at a discount in return for a speedy sale.</div><div class="zh">为了尽快售出,我会打折销售。</div></div></div>
+<div class="card" data-s="promotion n. 促进；提升；推广"><div class="w"><span class="idx">19</span>promotion</div><div class="m">n. 促进；提升；推广</div><div class="ex"><div class="en">Last year's sales promotions were quite successful.</div><div class="zh">去年的促销活动相当成功。</div></div></div>
+<div class="card" data-s="voucher n. 代金券；凭单"><div class="w"><span class="idx">20</span>voucher</div><div class="m">n. 代金券；凭单</div><div class="ex"><div class="en">The voucher can be used at most major cinemas.</div><div class="zh">这张代金券能在多数大电影院使用。</div></div></div>
+<div class="card" data-s="coupon n. 优惠券；息票；配给券"><div class="w"><span class="idx">21</span>coupon</div><div class="m">n. 优惠券；息票；配给券</div><div class="ex"><div class="en">I have a coupon for 30% off any dairy product in this supermarket.</div><div class="zh">我有一张优惠券,买这家超市里的乳制品可以享受七折优惠。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 07</span><span class="gcnt">2 词</span></div><div class="cards">
+<div class="card" data-s="currency n. 货币；流通"><div class="w"><span class="idx">22</span>currency</div><div class="m">n. 货币；流通</div><div class="ex"><div class="en">Our currency will not depreciate.</div><div class="zh">我们的货币不会贬值。</div></div></div>
+<div class="card" data-s="exchange n. 交换；交易所；兑换； v. 交换；兑换"><div class="w"><span class="idx">23</span>exchange</div><div class="m">n. 交换；交易所；兑换； v. 交换；兑换</div><div class="ex"><div class="en">It seems the exchange rate fluctuates almost daily.</div><div class="zh">看起来外汇兑换率几乎每天都在上下波动。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 08</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="swap v. 交换；n. 交换"><div class="w"><span class="idx">24</span>swap</div><div class="m">v. 交换；n. 交换</div><div class="ex"><div class="en">She swapped her watch for an antique locket.</div><div class="zh">她用她的手表换了一个古董项链坠。</div></div></div>
+<div class="card" data-s="receipt n. 收据；收条"><div class="w"><span class="idx">25</span>receipt</div><div class="m">n. 收据；收条</div><div class="ex"><div class="en">When you have paid for something, a receipt is given to you.</div><div class="zh">当你为某物付完款时,你就会得到收据。</div></div></div>
+<div class="card" data-s="invoice n. 发票；发货单；v. 开发 票；记清单"><div class="w"><span class="idx">26</span>invoice</div><div class="m">n. 发票；发货单；v. 开发 票；记清单</div><div class="ex"><div class="en">Please send the invoice by email.</div><div class="zh">请通过电子邮件发送发票。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 09</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="tax n. 税；税款；v. 对...征 税；使负重荷"><div class="w"><span class="idx">27</span>tax</div><div class="m">n. 税；税款；v. 对...征 税；使负重荷</div><div class="ex"><div class="en">Governments don't tax children.</div><div class="zh">政府不向孩子们征税。</div></div></div>
+<div class="card" data-s="levy v. 征收；征税；征募；n. 征兵；征税"><div class="w"><span class="idx">28</span>levy</div><div class="m">v. 征收；征税；征募；n. 征兵；征税</div><div class="ex"><div class="en">The government has decided to levy a tax on imported cars.</div><div class="zh">政府决定对进口汽车征税。</div></div></div>
+<div class="card" data-s="tariff n. 关税；税率；(旅馆、 饭店等的)价目表"><div class="w"><span class="idx">29</span>tariff</div><div class="m">n. 关税；税率；(旅馆、 饭店等的)价目表</div><div class="ex"><div class="en">There is a very high tariff on alcohol.</div><div class="zh">酒类商品GATT(GeneralAgreementonTariffsandTrade)即关税及贸易总协定,后被WTO(WorldTradeOrganization,世界贸易组织)取代。</div></div></div>
+<div class="card" data-s="duty n. 责任；职责；义务"><div class="w"><span class="idx">30</span>duty</div><div class="m">n. 责任；职责；义务</div><div class="ex"><div class="en">I feel it my duty to speak frankly to you.</div><div class="zh">我觉得我有义务要坦白地对你说。</div></div></div>
+<div class="card" data-s="impose v. 强加；征收；施加影 响；利用；强制实施"><div class="w"><span class="idx">31</span>impose</div><div class="m">v. 强加；征收；施加影 响；利用；强制实施</div><div class="ex"><div class="en">She often imposed her values on her daughter.</div><div class="zh">她常常把自己的价值观强加给女儿。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 10</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="consume v. 消耗；消费；毁掉；(使)沉 溺；(使)沉迷；(使)充满"><div class="w"><span class="idx">32</span>consume</div><div class="m">v. 消耗；消费；毁掉；(使)沉 溺；(使)沉迷；(使)充满</div><div class="ex"><div class="en">Chinese people consume huge amounts of rice every year.</div><div class="zh">中国人每年都会吃掉大量的大米。</div></div></div>
+<div class="card" data-s="spend v. 花费；消耗；度过"><div class="w"><span class="idx">33</span>spend</div><div class="m">v. 花费；消耗；度过</div><div class="ex"><div class="en">The time I spend in commuting every day adds up to two hours.</div><div class="zh">我每天通勤花费的时间加起来有两个小时。</div></div></div>
+<div class="card" data-s="cost v. 花费；n. 费用；代价"><div class="w"><span class="idx">34</span>cost</div><div class="m">v. 花费；n. 费用；代价</div><div class="ex"><div class="en">I'm determined to attain my purpose at any cost.</div><div class="zh">我决心无论如何都要达到目的。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 11</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="expense n. 费用；开支"><div class="w"><span class="idx">35</span>expense</div><div class="m">n. 费用；开支</div><div class="ex"><div class="en">Societies should try to save every plant and animal species regardless of the expense.</div><div class="zh">社会应不惜代价,尽力挽救每一个动植物物种。</div></div></div>
+<div class="card" data-s="revenue n. 收入；税收"><div class="w"><span class="idx">36</span>revenue</div><div class="m">n. 收入；税收</div><div class="ex"><div class="en">State universities in the U.S. get most of their revenue from taxes.</div><div class="zh">美国的州立大学的大部分收入来自税款。</div></div></div>
+<div class="card" data-s="gross adj. 总的；严重的；过分 的"><div class="w"><span class="idx">37</span>gross</div><div class="m">adj. 总的；严重的；过分 的</div><div class="ex"><div class="en">GDP stands for Gross Domestic Product.</div><div class="zh">表示“国内生产总值”。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 12</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="recession n. 后退；(经济)不景气"><div class="w"><span class="idx">38</span>recession</div><div class="m">n. 后退；(经济)不景气</div><div class="ex"><div class="en">Many shops closed during the recession.</div><div class="zh">经济衰退期间许多商店关门了。</div></div></div>
+<div class="card" data-s="depression n. 抑郁；沮丧；萧条；凹 陷；洼地；低气压区"><div class="w"><span class="idx">39</span>depression</div><div class="m">n. 抑郁；沮丧；萧条；凹 陷；洼地；低气压区</div><div class="ex"><div class="en">A holiday may help him cope with feelings of depression.</div><div class="zh">度假也许能帮助他改善抑郁情绪。</div></div></div>
+<div class="card" data-s="crisis n. 危机；危急关头"><div class="w"><span class="idx">40</span>crisis</div><div class="m">n. 危机；危急关头</div><div class="ex"><div class="en">They suffered huge losses in the financial crisis.</div><div class="zh">他们在金融危机中遭受了巨大的损失。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 13</span><span class="gcnt">6 词</span></div><div class="cards">
+<div class="card" data-s="security n. 安全；防护措施；保 障；担保；抵押品"><div class="w"><span class="idx">41</span>security</div><div class="m">n. 安全；防护措施；保 障；担保；抵押品</div><div class="ex"><div class="en">Airport security has become much stricter.</div><div class="zh">机场安检变得严格得多。</div></div></div>
+<div class="card" data-s="bond n. 纽带；联系；债券；保释金； 协定；v. (使)黏合；相互联结"><div class="w"><span class="idx">42</span>bond</div><div class="m">n. 纽带；联系；债券；保释金； 协定；v. (使)黏合；相互联结</div><div class="ex"><div class="en">He invested his savings in government bonds.</div><div class="zh">他把积蓄投到了政府债券上。</div></div></div>
+<div class="card" data-s="debt n. 债务；欠款"><div class="w"><span class="idx">43</span>debt</div><div class="m">n. 债务；欠款</div><div class="ex"><div class="en">Liabilities are the debt or obligation that a bus in essman must pay in money or services at some time in the future.</div><div class="zh">负债是指某个商人将来必须用货币或服务偿还的债务或义务。</div></div></div>
+<div class="card" data-s="deficit n. 不足额；赤字；亏损"><div class="w"><span class="idx">44</span>deficit</div><div class="m">n. 不足额；赤字；亏损</div><div class="ex"><div class="en">The current trade deceit indicates a serious imbalance between our imports and exports.</div><div class="zh">当前的贸易逆差表明我们的进口和出口之间存在严重的失衡。</div></div></div>
+<div class="card" data-s="inflation n. 膨胀；充气；通货膨胀"><div class="w"><span class="idx">45</span>inflation</div><div class="m">n. 膨胀；充气；通货膨胀</div><div class="ex"><div class="en">Inflation erodes the purchasing power of the families with lower income.</div><div class="zh">通货膨胀使低收入家庭的购买力不断下降。</div></div></div>
+<div class="card" data-s="deflation n. 通货紧缩；放气"><div class="w"><span class="idx">46</span>deflation</div><div class="m">n. 通货紧缩；放气</div><div class="ex"><div class="en">Deflation and financial distress stifled economic growth.</div><div class="zh">通货紧缩和金融困境抑制了经济增长。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 14</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="dwindle v. 缩小；减少"><div class="w"><span class="idx">47</span>dwindle</div><div class="m">v. 缩小；减少</div><div class="ex"><div class="en">The number of people going to the bookstores seems to dwindle steadily.</div><div class="zh">逛书店的人数似乎在持续下降。</div></div></div>
+<div class="card" data-s="decrease v. 减少；降低；n. 减少"><div class="w"><span class="idx">48</span>decrease</div><div class="m">v. 减少；降低；n. 减少</div><div class="ex"><div class="en">Her interest in this subject gradually decreases.</div><div class="zh">她对这个科目的兴趣逐渐减退。</div></div></div>
+<div class="card" data-s="downsize v. 缩小(规模)；裁员"><div class="w"><span class="idx">49</span>downsize</div><div class="m">v. 缩小(规模)；裁员</div><div class="ex"><div class="en">The firm downsized and moved to a smaller office.</div><div class="zh">公司精简后搬进了更小的办公室。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 15</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="decline v. 下降；衰退；谢绝；婉 拒；n. 下降；衰退；婉拒"><div class="w"><span class="idx">50</span>decline</div><div class="m">v. 下降；衰退；谢绝；婉 拒；n. 下降；衰退；婉拒</div><div class="ex"><div class="en">There is a sharp decline in unemployment.</div><div class="zh">失业率急剧下降。</div></div></div>
+<div class="card" data-s="diminish v. 减少；削弱；减损；贬 低"><div class="w"><span class="idx">51</span>diminish</div><div class="m">v. 减少；削弱；减损；贬 低</div><div class="ex"><div class="en">We should try to diminish the cost of production.</div><div class="zh">我们应尽力减少生产成本。</div></div></div>
+<div class="card" data-s="reduce v. 减少；降低；减量"><div class="w"><span class="idx">52</span>reduce</div><div class="m">v. 减少；降低；减量</div><div class="ex"><div class="en">The prices in the shop have been reduced, so it's a good time to buy.</div><div class="zh">商店里的商品价格降低了,所以现在是买东西的好时候。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 16</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="increase n. 增加；增⻓；v. 增加； 增多"><div class="w"><span class="idx">53</span>increase</div><div class="m">n. 增加；增⻓；v. 增加； 增多</div><div class="ex"><div class="en">Sales increased by twelve per cent last year.</div><div class="zh">去年销售额增长了百分之十二。</div></div></div>
+<div class="card" data-s="increment n. 增加；增量"><div class="w"><span class="idx">54</span>increment</div><div class="m">n. 增加；增量</div><div class="ex"><div class="en">Your salary will be $12,000 a year, with annual increments of $500.</div><div class="zh">你的年薪为12,000美元，每年增加500美元。</div></div></div>
+<div class="card" data-s="growth n. 生⻓；增⻓"><div class="w"><span class="idx">55</span>growth</div><div class="m">n. 生⻓；增⻓</div><div class="ex"><div class="en">Cold weather constrained the plant's growth.</div><div class="zh">寒冷的天气抑制了植物的生长。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 17</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="escalate v. (使)升级；(使)恶 化；逐步升高"><div class="w"><span class="idx">56</span>escalate</div><div class="m">v. (使)升级；(使)恶 化；逐步升高</div><div class="ex"><div class="en">The cost of living is escalating in the country.</div><div class="zh">这个国家的生活费用在不断上涨。</div></div></div>
+<div class="card" data-s="expand v. 扩大；膨胀；更充分地 阐述"><div class="w"><span class="idx">57</span>expand</div><div class="m">v. 扩大；膨胀；更充分地 阐述</div><div class="ex"><div class="en">Metals expand when they are heated.</div><div class="zh">金属遇热则膨胀。</div></div></div>
+<div class="card" data-s="influx n. 流入；涌入"><div class="w"><span class="idx">58</span>influx</div><div class="m">n. 流入；涌入</div><div class="ex"><div class="en">The country simply cannot handle this influx of refugees.</div><div class="zh">这个国家实在没有能力应对大批涌入的难民。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 18</span><span class="gcnt">2 词</span></div><div class="cards">
+<div class="card" data-s="affluent adj. 富裕的；丰富的；富 足的"><div class="w"><span class="idx">59</span>affluent</div><div class="m">adj. 富裕的；丰富的；富 足的</div><div class="ex"><div class="en">Giving much to the poor will enrich a man's store.</div><div class="zh">多施舍，财富多。</div></div></div>
+<div class="card" data-s="enrich v. 使富裕；使富足"><div class="w"><span class="idx">60</span>enrich</div><div class="m">v. 使富裕；使富足</div><div class="ex"><div class="en">Giving much to the poor will enrich a man's store.</div><div class="zh">多施舍,财富多。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 19</span><span class="gcnt">6 词</span></div><div class="cards">
+<div class="card" data-s="sufficient adj. 足够的；充足的"><div class="w"><span class="idx">61</span>sufficient</div><div class="m">adj. 足够的；充足的</div><div class="ex"><div class="en">We must work hard, but equally we must get escalator sufficient rest.</div><div class="zh">我们必须努力工作，但同时也要得到充分的休息。</div></div></div>
+<div class="card" data-s="adequate adj. 足够的；尚可的"><div class="w"><span class="idx">62</span>adequate</div><div class="m">adj. 足够的；尚可的</div><div class="ex"><div class="en">We had adequate food for a week's journey.</div><div class="zh">我们有足够的食物可以进行一周的旅行。</div></div></div>
+<div class="card" data-s="spare adj. 多余的；空闲的；备用的；瘦 削的；简陋的；v. 节省；抽出；分 让；宽恕；使免遭"><div class="w"><span class="idx">63</span>spare</div><div class="m">adj. 多余的；空闲的；备用的；瘦 削的；简陋的；v. 节省；抽出；分 让；宽恕；使免遭</div><div class="ex"><div class="en">If you have a spare bed, may I stay tonight?</div><div class="zh">如果你有空余的床,今晚我可以留下吗?</div></div></div>
+<div class="card" data-s="saving n. 节约；v. 保存；拯救； 节省；“save”的现在分词"><div class="w"><span class="idx">64</span>saving</div><div class="m">n. 节约；v. 保存；拯救； 节省；“save”的现在分词</div><div class="ex"><div class="en">A saving of 20% is obtainable under this scheme.</div><div class="zh">按这一计划做,可以节约20%。</div></div></div>
+<div class="card" data-s="redundant adj. 多余的；过剩的；被 裁减的"><div class="w"><span class="idx">65</span>redundant</div><div class="m">adj. 多余的；过剩的；被 裁减的</div><div class="ex"><div class="en">During the financial crisis, many workers were made redundant.</div><div class="zh">在金融危机期间,许多职工被裁。</div></div></div>
+<div class="card" data-s="lack v. 缺乏；短缺；n. 缺乏； 短缺"><div class="w"><span class="idx">66</span>lack</div><div class="m">v. 缺乏；短缺；n. 缺乏； 短缺</div><div class="ex"><div class="en">Serious lack of circulating funds forced the closure of the company.</div><div class="zh">公司因严重缺乏流动资金而被迫关闭。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 20</span><span class="gcnt">6 词</span></div><div class="cards">
+<div class="card" data-s="company n. 公司；陪伴"><div class="w"><span class="idx">67</span>company</div><div class="m">n. 公司；陪伴</div><div class="ex"><div class="en">The company has connections with a number of Canadian firm s.</div><div class="zh">这家公司与一些加拿大公司有业务往来。</div></div></div>
+<div class="card" data-s="firm n. 公司；商行；adj. 坚固 的；结实的"><div class="w"><span class="idx">68</span>firm</div><div class="m">n. 公司；商行；adj. 坚固 的；结实的</div><div class="ex"><div class="en">Because of their common values, they soon formed a firm friendship.</div><div class="zh">因为有着共同的价值观,他们很快就建立起牢固的友谊。</div></div></div>
+<div class="card" data-s="enterprise n. 事业；企业；进取心"><div class="w"><span class="idx">69</span>enterprise</div><div class="m">n. 事业；企业；进取心</div><div class="ex"><div class="en">They are involved in an exciting scientific enterprise.</div><div class="zh">他们投身于一项激动人心的科学事业。</div></div></div>
+<div class="card" data-s="agent n. 代理人；经纪人；动 因；特工；(药)剂"><div class="w"><span class="idx">70</span>agent</div><div class="m">n. 代理人；经纪人；动 因；特工；(药)剂</div><div class="ex"><div class="en">The travel agent has made all the reservations for my journey.</div><div class="zh">旅行代理商已为我的旅程做好了一切预约安排。</div></div></div>
+<div class="card" data-s="entity n. 独立存在体；实体"><div class="w"><span class="idx">71</span>entity</div><div class="m">n. 独立存在体；实体</div><div class="ex"><div class="en">The country is no Ion ger a sovereign entity.</div><div class="zh">这个国家不再是一个拥有主权的实体了。</div></div></div>
+<div class="card" data-s="invest v. 投资；投入"><div class="w"><span class="idx">72</span>invest</div><div class="m">v. 投资；投入</div><div class="ex"><div class="en">The state has planned to invest two million in the dam.</div><div class="zh">该国计划投资200万来修建这个大坝。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 21</span><span class="gcnt">2 词</span></div><div class="cards">
+<div class="card" data-s="input n. 输入；v. 输入"><div class="w"><span class="idx">73</span>input</div><div class="m">n. 输入；v. 输入</div><div class="ex"><div class="en">We must in crease the output with less labour input.</div><div class="zh">我们必须在投入更少劳动力的情况下提高产量。</div></div></div>
+<div class="card" data-s="product n. 产品；产物；成果； 〈数〉积"><div class="w"><span class="idx">74</span>product</div><div class="m">n. 产品；产物；成果； 〈数〉积</div><div class="ex"><div class="en">A series of technical issues delayed the launch of the new product.</div><div class="zh">系列技术问题延误了新产品的上市。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 22</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="acquisition n. 获得；得到的东⻄；收 购"><div class="w"><span class="idx">75</span>acquisition</div><div class="m">n. 获得；得到的东⻄；收 购</div><div class="ex"><div class="en">The acquisition of knowledge is a social activity.</div><div class="zh">获取知识是一种社会性的活动。</div></div></div>
+<div class="card" data-s="goods n. 商品；货物"><div class="w"><span class="idx">76</span>goods</div><div class="m">n. 商品；货物</div><div class="ex"><div class="en">You give me the money and I'll give you the goods.</div><div class="zh">手交钱,—手交货。</div></div></div>
+<div class="card" data-s="cargo n. 货物"><div class="w"><span class="idx">77</span>cargo</div><div class="m">n. 货物</div><div class="ex"><div class="en">The ship is discharging the cargo.</div><div class="zh">船正在卸货。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 23</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="insure v. 保险；确保"><div class="w"><span class="idx">78</span>insure</div><div class="m">v. 保险；确保</div><div class="ex"><div class="en">His talent and commitment will insure his success.</div><div class="zh">他的天赋和投入将确保他成功。</div></div></div>
+<div class="card" data-s="guarantee v. 保证；确保；n. 保证； 保证书"><div class="w"><span class="idx">79</span>guarantee</div><div class="m">v. 保证；确保；n. 保证； 保证书</div><div class="ex"><div class="en">They offer a two-year guarantee on all their household appliances.</div><div class="zh">他们为销售的家用电器提供两年的保修服务。</div></div></div>
+<div class="card" data-s="reliable adj. 可靠的；可信的"><div class="w"><span class="idx">80</span>reliable</div><div class="m">adj. 可靠的；可信的</div><div class="ex"><div class="en">It's not reliable to judge a man only by his looks.</div><div class="zh">单凭容貌来判断一个人是不可靠的。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 24</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="negotiation n. 谈判；协商；磋商"><div class="w"><span class="idx">81</span>negotiation</div><div class="m">n. 谈判；协商；磋商</div><div class="ex"><div class="en">We are satisfied with the smoothness of the negotiation.</div><div class="zh">我们对谈判的顺利进行很满意。</div></div></div>
+<div class="card" data-s="attend v. 出席；参加；照料；注 意；专心"><div class="w"><span class="idx">82</span>attend</div><div class="m">v. 出席；参加；照料；注 意；专心</div><div class="ex"><div class="en">A large number of people attended her birthday party.</div><div class="zh">很多人出席了她的生日聚会。</div></div></div>
+<div class="card" data-s="absent adj. 缺席的；v. 缺席；不 参加"><div class="w"><span class="idx">83</span>absent</div><div class="m">adj. 缺席的；v. 缺席；不 参加</div><div class="ex"><div class="en">Daniel was absent from the house all the next day.</div><div class="zh">丹尼尔第二天一整天都不在家。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 25</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="sale n. 销售；出售；减价销售"><div class="w"><span class="idx">84</span>sale</div><div class="m">n. 销售；出售；减价销售</div><div class="ex"><div class="en">The store discounted all air conditioners for sale.</div><div class="zh">该店给全部待售的空调都打折了。</div></div></div>
+<div class="card" data-s="wholesale n. 成批出售；adj. 批发的；大规模 的；adv. 大批地；大规模地；v. 批发售出"><div class="w"><span class="idx">85</span>wholesale</div><div class="m">n. 成批出售；adj. 批发的；大规模 的；adv. 大批地；大规模地；v. 批发售出</div><div class="ex"><div class="en">These wholesale dealers earned a large sum of money.</div><div class="zh">这些批发商赚了一大笔钱。</div></div></div>
+<div class="card" data-s="auction n. 拍卖；v. 拍卖"><div class="w"><span class="idx">86</span>auction</div><div class="m">n. 拍卖；v. 拍卖</div><div class="ex"><div class="en">His house was sold at an auction.</div><div class="zh">他的房子被拍卖出去了。</div></div></div>
+<div class="card" data-s="bid v. 出价；投标；吩咐；向某人道 (午安等)；n. 出价；投标；努力 争取"><div class="w"><span class="idx">87</span>bid</div><div class="m">v. 出价；投标；吩咐；向某人道 (午安等)；n. 出价；投标；努力 争取</div><div class="ex"><div class="en">They lost the con tract because their bid was too high.</div><div class="zh">他们因投标索价太高而失去了那份合同。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 26</span><span class="gcnt">7 词</span></div><div class="cards">
+<div class="card" data-s="deal n. 交易；协议；v. 处理； 对付；交易"><div class="w"><span class="idx">88</span>deal</div><div class="m">n. 交易；协议；v. 处理； 对付；交易</div><div class="ex"><div class="en">KU deal with the children later.</div><div class="zh">孩子们的事由我以后去处理。</div></div></div>
+<div class="card" data-s="transaction n. 交易；业务"><div class="w"><span class="idx">89</span>transaction</div><div class="m">n. 交易；业务</div><div class="ex"><div class="en">Because sellers and buyers man age business transactions, it leads companies to keeping in touch with custom ers.</div><div class="zh">买卖双方要进行交易,这使商家与顾客保持了联系。</div></div></div>
+<div class="card" data-s="turnover n. 营业额；周转率；人员 流动率"><div class="w"><span class="idx">90</span>turnover</div><div class="m">n. 营业额；周转率；人员 流动率</div><div class="ex"><div class="en">Annual turnover is about 800 million pounds.</div><div class="zh">年营业额约为8亿英镑。</div></div></div>
+<div class="card" data-s="dump v. 倒空；n. 垃圾场"><div class="w"><span class="idx">91</span>dump</div><div class="m">v. 倒空；n. 垃圾场</div><div class="ex"><div class="en">Some people just dump their rubbish in the river.</div><div class="zh">有些人径直往河里倒垃圾。</div></div></div>
+<div class="card" data-s="export v. 输出；出口；n. 输出； 出口"><div class="w"><span class="idx">92</span>export</div><div class="m">v. 输出；出口；n. 输出； 出口</div><div class="ex"><div class="en">Oil has supplanted coffee as our main export.</div><div class="zh">原油已经取代咖啡,成为我们的主要出口商品。</div></div></div>
+<div class="card" data-s="import v. 进口；输入；n. 进口； 输入；重要性；含义"><div class="w"><span class="idx">93</span>import</div><div class="m">v. 进口；输入；n. 进口； 输入；重要性；含义</div><div class="ex"><div class="en">We import a huge am ount of produce from other countries every year.</div><div class="zh">我们每年从其他国家进口大量的农产品。</div></div></div>
+<div class="card" data-s="quota n. 配额；限额；定额"><div class="w"><span class="idx">94</span>quota</div><div class="m">n. 配额；限额；定额</div><div class="ex"><div class="en">The committee reversed its decision on the import quota.</div><div class="zh">委员会撤销了其关于进口货物配额的决定。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 27</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="share v. 共享；分享；n. 分享； 股份"><div class="w"><span class="idx">95</span>share</div><div class="m">v. 共享；分享；n. 分享； 股份</div><div class="ex"><div class="en">He has put all his money in stocks and shares.</div><div class="zh">他把钱都投放到股票里去了。</div></div></div>
+<div class="card" data-s="benefit n. 利益；好处；救济金； v. 有益于；有助于"><div class="w"><span class="idx">96</span>benefit</div><div class="m">n. 利益；好处；救济金； v. 有益于；有助于</div><div class="ex"><div class="en">Regular exercise brings lasting health benefits.</div><div class="zh">经常锻炼会带来持久的健康益处。</div></div></div>
+<div class="card" data-s="interest n. 兴趣；利益；利息；v. 使产生兴趣"><div class="w"><span class="idx">97</span>interest</div><div class="m">n. 兴趣；利益；利息；v. 使产生兴趣</div><div class="ex"><div class="en">You must pay interest on that lo an.</div><div class="zh">你必须为那笔贷款付利息。</div></div></div>
+<div class="card" data-s="stock n. 库存；股票；家畜；v. 备有；贮存"><div class="w"><span class="idx">98</span>stock</div><div class="m">n. 库存；股票；家畜；v. 备有；贮存</div><div class="ex"><div class="en">All stock prices have jumped up this month.</div><div class="zh">本月所有股票的价格都暴涨了。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 28</span><span class="gcnt">2 词</span></div><div class="cards">
+<div class="card" data-s="account n. 账户；叙述；账目；v. 说明；占..."><div class="w"><span class="idx">99</span>account</div><div class="m">n. 账户；叙述；账目；v. 说明；占...</div><div class="ex"><div class="en">Have you got a bank account?</div><div class="zh">你有银行账户吗?</div></div></div>
+<div class="card" data-s="deposit n. 存款；押金；沉淀；v. 存储；堆积"><div class="w"><span class="idx">100</span>deposit</div><div class="m">n. 存款；押金；沉淀；v. 存储；堆积</div><div class="ex"><div class="en">The interest of the current account is lower than that of the deposit account.</div><div class="zh">活期存款的利息比定期存款的低。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 29</span><span class="gcnt">6 词</span></div><div class="cards">
+<div class="card" data-s="instalment n. 部分；分期付款；分期 连载的一部分"><div class="w"><span class="idx">101</span>instalment</div><div class="m">n. 部分；分期付款；分期 连载的一部分</div><div class="ex"><div class="en">Buying goods in instalments has become an epidemic in recent years.</div><div class="zh">近几年来,十分流行用分期付款的办法购物。</div></div></div>
+<div class="card" data-s="cheque n. 支票"><div class="w"><span class="idx">102</span>cheque</div><div class="m">n. 支票</div><div class="ex"><div class="en">The bank cashed my cheque.</div><div class="zh">银行兑现了我的支票。</div></div></div>
+<div class="card" data-s="cash n. 现金"><div class="w"><span class="idx">103</span>cash</div><div class="m">n. 现金</div><div class="ex"><div class="en">He paid for the meal in cash.</div><div class="zh">他用现金支付了这顿饭的费用。</div></div></div>
+<div class="card" data-s="coin n. 硬币；金属钱币；v. 铸 造硬币；杜撰；创造"><div class="w"><span class="idx">104</span>coin</div><div class="m">n. 硬币；金属钱币；v. 铸 造硬币；杜撰；创造</div><div class="ex"><div class="en">We'd better not coin terms which are not intelligible.</div><div class="zh">我们最好不要造一些别人不容易懂的词语。</div></div></div>
+<div class="card" data-s="shilling n. 先令(英国1971年以前 的辅币,等于12便士)"><div class="w"><span class="idx">105</span>shilling</div><div class="m">n. 先令(英国1971年以前 的辅币,等于12便士)</div><div class="ex"><div class="en">Five pence was equal to a shilling.</div><div class="zh">五便士等于—先令。</div></div></div>
+<div class="card" data-s="copper n. 铜；铜币"><div class="w"><span class="idx">106</span>copper</div><div class="m">n. 铜；铜币</div><div class="ex"><div class="en">He polished up the old copper coins.</div><div class="zh">他把旧铜币擦亮。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 30</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="treasure n. 财富；珍宝；宝物；v. 珍爱；珍惜；珍藏"><div class="w"><span class="idx">107</span>treasure</div><div class="m">n. 财富；珍宝；宝物；v. 珍爱；珍惜；珍藏</div><div class="ex"><div class="en">This museum has many art treasures.</div><div class="zh">这家博物馆收藏了许多艺术珍品。</div></div></div>
+<div class="card" data-s="wealth n. 财富；财产"><div class="w"><span class="idx">108</span>wealth</div><div class="m">n. 财富；财产</div><div class="ex"><div class="en">Health is better than wealth.</div><div class="zh">健康胜于财富。</div></div></div>
+<div class="card" data-s="estate n. 庄园；个人全部财产 (遗产)；地产"><div class="w"><span class="idx">109</span>estate</div><div class="m">n. 庄园；个人全部财产 (遗产)；地产</div><div class="ex"><div class="en">The old lady left an estate of three million pounds when she died.</div><div class="zh">这位老妇人去世时留下300万英镑的遗产。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 31</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="possess v. 拥有；占有"><div class="w"><span class="idx">110</span>possess</div><div class="m">v. 拥有；占有</div><div class="ex"><div class="en">She was possessed by the desire to be rich.</div><div class="zh">她被致富的欲望所控制。</div></div></div>
+<div class="card" data-s="legacy n. 遗产；遗赠"><div class="w"><span class="idx">111</span>legacy</div><div class="m">n. 遗产；遗赠</div><div class="ex"><div class="en">The girl received a small legacy from her aunt.</div><div class="zh">这女孩从姑姑那里得到了一小笔遗产。</div></div></div>
+<div class="card" data-s="descend v. 下降；突然造访；突 袭；沦落；起源"><div class="w"><span class="idx">112</span>descend</div><div class="m">v. 下降；突然造访；突 袭；沦落；起源</div><div class="ex"><div class="en">She is said to be descended from a French aristocratic family.</div><div class="zh">据说,她是法国贵族的后裔。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 32</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="worthy adj. 值得尊敬的；值得... 的"><div class="w"><span class="idx">113</span>worthy</div><div class="m">adj. 值得尊敬的；值得... 的</div><div class="ex"><div class="en">This book is worthy of reading.</div><div class="zh">这本书值得一读。</div></div></div>
+<div class="card" data-s="valuable adj. 有价值的；贵重的； 值钱的"><div class="w"><span class="idx">114</span>valuable</div><div class="m">adj. 有价值的；贵重的； 值钱的</div><div class="ex"><div class="en">The old maps are historically valuable.</div><div class="zh">这些古地图具有历史价值。</div></div></div>
+<div class="card" data-s="cheap adj. 便宜的；廉价的"><div class="w"><span class="idx">115</span>cheap</div><div class="m">adj. 便宜的；廉价的</div><div class="ex"><div class="en">Cheap shoes soon wear out.</div><div class="zh">廉价的鞋子不耐穿。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 33</span><span class="gcnt">6 词</span></div><div class="cards">
+<div class="card" data-s="incentive n. 刺激；诱因；动机"><div class="w"><span class="idx">116</span>incentive</div><div class="m">n. 刺激；诱因；动机</div><div class="ex"><div class="en">Tax breaks are an incentive for companies to invest.</div><div class="zh">税收减免是鼓励企业投资的激励措施。</div></div></div>
+<div class="card" data-s="accelerate v. 加速；加快"><div class="w"><span class="idx">117</span>accelerate</div><div class="m">v. 加速；加快</div><div class="ex"><div class="en">The car accelerated smoothly onto the highway.</div><div class="zh">汽车平稳地加速驶上高速公路。</div></div></div>
+<div class="card" data-s="prompt adj. 迅速的；准时的；v. 提 示；促使；n. 提示；提词"><div class="w"><span class="idx">118</span>prompt</div><div class="m">adj. 迅速的；准时的；v. 提 示；促使；n. 提示；提词</div><div class="ex"><div class="en">What prompted you to do such a thing?</div><div class="zh">什么促沉使你做出这种事?</div></div></div>
+<div class="card" data-s="salary n. 薪金"><div class="w"><span class="idx">119</span>salary</div><div class="m">n. 薪金</div><div class="ex"><div class="en">She was employed with a salary of 3,000 dollars a month.</div><div class="zh">她以月薪3000美元受聘。</div></div></div>
+<div class="card" data-s="income n. 收入；收益；所得"><div class="w"><span class="idx">120</span>income</div><div class="m">n. 收入；收益；所得</div><div class="ex"><div class="en">Many staff members made an accusation that the earned incomes were not distributed upon the principle of equality.</div><div class="zh">许多员工控诉工资的分配没有遵循公平原则。</div></div></div>
+<div class="card" data-s="wage n. 工资；v. 发动"><div class="w"><span class="idx">121</span>wage</div><div class="m">n. 工资；v. 发动</div><div class="ex"><div class="en">These workers demanded a wage rise of 5%.</div><div class="zh">这些工人要求获得5%的加薪。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 34</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="payment n. 支付；报酬"><div class="w"><span class="idx">122</span>payment</div><div class="m">n. 支付；报酬</div><div class="ex"><div class="en">Monthly payments start in April.</div><div class="zh">按月付款从四月开始。</div></div></div>
+<div class="card" data-s="refund v. 退还；偿还；n. 退款； 返还款"><div class="w"><span class="idx">123</span>refund</div><div class="m">v. 退还；偿还；n. 退款； 返还款</div><div class="ex"><div class="en">We can refund the price difference.</div><div class="zh">我们可以退还差价。</div></div></div>
+<div class="card" data-s="reimburse v. 偿还；报销"><div class="w"><span class="idx">124</span>reimburse</div><div class="m">v. 偿还；报销</div><div class="ex"><div class="en">We will reimburse the customer for any loss or damage.</div><div class="zh">我们将赔偿顾客所受到的一切损失和损害。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 35</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="payroll n. 职工工资册；工薪总额"><div class="w"><span class="idx">125</span>payroll</div><div class="m">n. 职工工资册；工薪总额</div><div class="ex"><div class="en">Every month she has to make a payroll of the staff.</div><div class="zh">她每月都得制作全体员工的工资名单。</div></div></div>
+<div class="card" data-s="remuneration n. 报酬；酬金"><div class="w"><span class="idx">126</span>remuneration</div><div class="m">n. 报酬；酬金</div><div class="ex"><div class="en">The job offers good remuneration and holidays.</div><div class="zh">这份工作报酬优厚，假期也多。</div></div></div>
+<div class="card" data-s="subsidy n. 补贴；津贴；补助金"><div class="w"><span class="idx">127</span>subsidy</div><div class="m">n. 补贴；津贴；补助金</div><div class="ex"><div class="en">The government has decided to in crease subsidies on farm produce.</div><div class="zh">政府决定增加对农产品的补贴。</div></div></div>
+<div class="card" data-s="earn v. 获得；赚得"><div class="w"><span class="idx">128</span>earn</div><div class="m">v. 获得；赚得</div><div class="ex"><div class="en">He has earned a lot of money this month.</div><div class="zh">这个月,他已经赚了好多钱。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 36</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="undertaking n. 事业；企业；承诺；保证；v. 承 担；从事；保证；“undertake”的 现在分词"><div class="w"><span class="idx">129</span>undertaking</div><div class="m">n. 事业；企业；承诺；保证；v. 承 担；从事；保证；“undertake”的 现在分词</div><div class="ex"><div class="en">I give an undertaking that we shall proceed with the legislation.</div><div class="zh">我保证我们将继续推进该项立法工作。</div></div></div>
+<div class="card" data-s="career n. 事业；生涯"><div class="w"><span class="idx">130</span>career</div><div class="m">n. 事业；生涯</div><div class="ex"><div class="en">After the accident, she realised that her acting career was over.</div><div class="zh">这场事故之后,她意识到自己的演艺生涯结束了。</div></div></div>
+<div class="card" data-s="profession n. 职业；专业"><div class="w"><span class="idx">131</span>profession</div><div class="m">n. 职业；专业</div><div class="ex"><div class="en">The medical profession requires a strong sense of responsibility.</div><div class="zh">医疗职业要求从业者具有很强的责任感。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 37</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="occupation n. 占领；占有；职业；消 遣"><div class="w"><span class="idx">132</span>occupation</div><div class="m">n. 占领；占有；职业；消 遣</div><div class="ex"><div class="en">I regard being a teacher as a decent occupation and I love being a teacher.</div><div class="zh">我觉得教师是个体面的职业,我喜欢当教师。</div></div></div>
+<div class="card" data-s="job n. 工作"><div class="w"><span class="idx">133</span>job</div><div class="m">n. 工作</div><div class="ex"><div class="en">The job is not yet finished.</div><div class="zh">这项工作还没做完。</div></div></div>
+<div class="card" data-s="vocation n. 职业；行业；使命"><div class="w"><span class="idx">134</span>vocation</div><div class="m">n. 职业；行业；使命</div><div class="ex"><div class="en">She struggled for years to find her true vocation.</div><div class="zh">她挣扎了多年才找到真正适合自己的职业。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 38</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="labour n. 劳动；体力劳动；劳工； 分娩；v. 辛勤工作；分娩"><div class="w"><span class="idx">135</span>labour</div><div class="m">n. 劳动；体力劳动；劳工； 分娩；v. 辛勤工作；分娩</div><div class="ex"><div class="en">Many women do hard manual labour.</div><div class="zh">很多妇女从事艰苦的体力劳动。</div></div></div>
+<div class="card" data-s="workforce n. 劳动力；工人总数；职 工总数"><div class="w"><span class="idx">136</span>workforce</div><div class="m">n. 劳动力；工人总数；职 工总数</div><div class="ex"><div class="en">This year, 5% of the workforce will be made redundant.</div><div class="zh">今年将有5%的员工下岗。</div></div></div>
+<div class="card" data-s="workaholic n. 工作狂"><div class="w"><span class="idx">137</span>workaholic</div><div class="m">n. 工作狂</div><div class="ex"><div class="en">I do not want to become a workaholic.</div><div class="zh">我不想成为工作狂。</div></div></div>
+<div class="card" data-s="personnel n. 职员；全体人员；人事 部"><div class="w"><span class="idx">138</span>personnel</div><div class="m">n. 职员；全体人员；人事 部</div><div class="ex"><div class="en">The next project needs new personnel.</div><div class="zh">我们的下一个项目需要新人员。</div></div></div>
+<div class="card" data-s="clerk n. 职员；店员"><div class="w"><span class="idx">139</span>clerk</div><div class="m">n. 职员；店员</div><div class="ex"><div class="en">The clerk was elevated to a man agerial position.</div><div class="zh">那个办事员被提拔到了经理职位。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 39</span><span class="gcnt">6 词</span></div><div class="cards">
+<div class="card" data-s="interview n. 面试；访谈；v. 面试； 接⻅"><div class="w"><span class="idx">140</span>interview</div><div class="m">n. 面试；访谈；v. 面试； 接⻅</div><div class="ex"><div class="en">The interview has drawn considerable attention to the profession.</div><div class="zh">这个访谈使很多人关注这一行业。</div></div></div>
+<div class="card" data-s="résumé n. 简历；履历"><div class="w"><span class="idx">141</span>résumé</div><div class="m">n. 简历；履历</div><div class="ex"><div class="en">Please send your résumé to the address below.</div><div class="zh">请把简历寄到下面的地址。</div></div></div>
+<div class="card" data-s="recommend v. 建议；推荐"><div class="w"><span class="idx">142</span>recommend</div><div class="m">v. 建议；推荐</div><div class="ex"><div class="en">I recommend you to reserve a table in advanee.</div><div class="zh">我建议你提前预约用餐的桌位。</div></div></div>
+<div class="card" data-s="employ v. 雇佣；使用"><div class="w"><span class="idx">143</span>employ</div><div class="m">v. 雇佣；使用</div><div class="ex"><div class="en">They employ casual labour to pick the fruit.</div><div class="zh">他们雇用临时工摘水果。</div></div></div>
+<div class="card" data-s="hire v. 雇用；租用"><div class="w"><span class="idx">144</span>hire</div><div class="m">v. 雇用；租用</div><div class="ex"><div class="en">They hired an advertising company to help sell a new product.</div><div class="zh">他们雇用了一家广告公司来推销一款新产品。</div></div></div>
+<div class="card" data-s="fire n. 火；炮火；热情；激情； v. 射击；开火；解雇；激发"><div class="w"><span class="idx">145</span>fire</div><div class="m">n. 火；炮火；热情；激情； v. 射击；开火；解雇；激发</div><div class="ex"><div class="en">He was fired by his boss.</div><div class="zh">他被他的老板解雇了。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 40</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="lay-off n. 解雇；失业期；停工期"><div class="w"><span class="idx">146</span>lay-off</div><div class="m">n. 解雇；失业期；停工期</div><div class="ex"><div class="en">There are more lay-offs in the IT industry this year.</div><div class="zh">今年,信息技术行业有更多裁员行动。</div></div></div>
+<div class="card" data-s="dismiss v. 解雇；解散；摒除；不 理会；(法律)驳回"><div class="w"><span class="idx">147</span>dismiss</div><div class="m">v. 解雇；解散；摒除；不 理会；(法律)驳回</div><div class="ex"><div class="en">If you are late again, you will be dismissed.</div><div class="zh">如果你再迟到,你就会被解雇。</div></div></div>
+<div class="card" data-s="discharge v. 放出；排出；开除；偿还债务； 履行；卸货；放电；n. 排放；排放 出的物体"><div class="w"><span class="idx">148</span>discharge</div><div class="m">v. 放出；排出；开除；偿还债务； 履行；卸货；放电；n. 排放；排放 出的物体</div><div class="ex"><div class="en">How long will the discharge of the cargo take?</div><div class="zh">卸货需要多久?</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 41</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="resign v. 辞职；使...顺从于 (做)某事"><div class="w"><span class="idx">149</span>resign</div><div class="m">v. 辞职；使...顺从于 (做)某事</div><div class="ex"><div class="en">Katherine was forced to resign from the board of directors.</div><div class="zh">凯瑟琳被迫从董事会辞职。</div></div></div>
+<div class="card" data-s="sack n. 袋子；解雇；v. 解雇； 装入袋子；劫掠"><div class="w"><span class="idx">150</span>sack</div><div class="m">n. 袋子；解雇；v. 解雇； 装入袋子；劫掠</div><div class="ex"><div class="en">The poor guy got sacked yesterday.</div><div class="zh">那个可怜的家伙昨天被炒鳞鱼了。</div></div></div>
+<div class="card" data-s="retire v. 退休；退役"><div class="w"><span class="idx">151</span>retire</div><div class="m">v. 退休；退役</div><div class="ex"><div class="en">If they prove in competent, they should be demoted or asked to retire.</div><div class="zh">如果事实证明他们已不能胜任,应该将他们降级或让他们退休。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 42</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="result n. 结果；成败；成效；比 分；v. 由于；导致"><div class="w"><span class="idx">152</span>result</div><div class="m">n. 结果；成败；成效；比 分；v. 由于；导致</div><div class="ex"><div class="en">As a result, there is often trouble in American families.</div><div class="zh">因此,美国家庭中常常会出现麻烦事。</div></div></div>
+<div class="card" data-s="failure n. 失败"><div class="w"><span class="idx">153</span>failure</div><div class="m">n. 失败</div><div class="ex"><div class="en">His failure may lead to the bankruptcy of the company.</div><div class="zh">他的失败可能导致公司破产。</div></div></div>
+<div class="card" data-s="abortion n. 流产；堕胎"><div class="w"><span class="idx">154</span>abortion</div><div class="m">n. 流产；堕胎</div><div class="ex"><div class="en">His attempt proved an abortion.</div><div class="zh">他的尝试夭折了。</div></div></div>
+<div class="card" data-s="loss n. 损失；丢失；亏损"><div class="w"><span class="idx">155</span>loss</div><div class="m">n. 损失；丢失；亏损</div><div class="ex"><div class="en">They forfeited the bus in ess after only two months and with great loss.</div><div class="zh">才两个月,他们的生意就失败了,而且损失惨重。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 43</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="opportunity n. 机会；时机"><div class="w"><span class="idx">156</span>opportunity</div><div class="m">n. 机会；时机</div><div class="ex"><div class="en">I'd like to take this opportunity to thank everyone for their hard work on the project.</div><div class="zh">我愿借此机会感谢每一位为这个项目辛勤工作的人。</div></div></div>
+<div class="card" data-s="chance n. 机会；可能性；冒险"><div class="w"><span class="idx">157</span>chance</div><div class="m">n. 机会；可能性；冒险</div><div class="ex"><div class="en">Her testimony works against his chance of winning the case.</div><div class="zh">她的证词不利于他胜诉。</div></div></div>
+<div class="card" data-s="choose v. 选择"><div class="w"><span class="idx">158</span>choose</div><div class="m">v. 选择</div><div class="ex"><div class="en">We have many patter ns in stock for you to choose from.</div><div class="zh">我们有多种式样有现货，可供你选择。</div></div></div>
+<div class="card" data-s="change n. 变化；变革；零钱；v. 变化；变革"><div class="w"><span class="idx">159</span>change</div><div class="m">n. 变化；变革；零钱；v. 变化；变革</div><div class="ex"><div class="en">All our previous ideas are now in the melting pot, which means our jobs are bound to change radically.</div><div class="zh">我们从前的观念现在都在变化之中,这意味着我们的工作肯定要有很大变动。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 44</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="solve v. 解决；解答"><div class="w"><span class="idx">160</span>solve</div><div class="m">v. 解决；解答</div><div class="ex"><div class="en">I must alert him to the need to solve the problem.</div><div class="zh">我必须使他认识到解决这个问题的必要性。</div></div></div>
+<div class="card" data-s="develop v. 发展；形成；制订"><div class="w"><span class="idx">161</span>develop</div><div class="m">v. 发展；形成；制订</div><div class="ex"><div class="en">The United States can't develop in isolation from the rest of the world.</div><div class="zh">美国不能孤立于世界独自发展。</div></div></div>
+<div class="card" data-s="sustainable adj. 可以忍受的；可支撑 的；可持续的"><div class="w"><span class="idx">162</span>sustainable</div><div class="m">adj. 可以忍受的；可支撑 的；可持续的</div><div class="ex"><div class="en">Sustainable development is the common target of human beings.</div><div class="zh">可持续发展是人类追求的共同目标。</div></div></div>
+<div class="card" data-s="improve v. 改善；改进；提高"><div class="w"><span class="idx">163</span>improve</div><div class="m">v. 改善；改进；提高</div><div class="ex"><div class="en">He offered a suggestion to improve the plan.</div><div class="zh">他提出一个建议以改进那项计划。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 45</span><span class="gcnt">6 词</span></div><div class="cards">
+<div class="card" data-s="manage v. 管理；设法做到；完成 (困难的事)"><div class="w"><span class="idx">164</span>manage</div><div class="m">v. 管理；设法做到；完成 (困难的事)</div><div class="ex"><div class="en">From this day on, I will manage all my affairs on my own.</div><div class="zh">从今以后,我要独立管理我的一切事务。</div></div></div>
+<div class="card" data-s="regulate v. 管制；调整"><div class="w"><span class="idx">165</span>regulate</div><div class="m">v. 管制；调整</div><div class="ex"><div class="en">Your watch is slow. It needs to be regulated.</div><div class="zh">你的手表走得慢了,需要调一下。</div></div></div>
+<div class="card" data-s="sanction n. 批准；允许；认可；制裁；处 罚；v. 批准；认可；制裁；处罚"><div class="w"><span class="idx">166</span>sanction</div><div class="m">n. 批准；允许；认可；制裁；处 罚；v. 批准；认可；制裁；处罚</div><div class="ex"><div class="en">The minister can only act in this matter with the sanction of parliament.</div><div class="zh">部长只有得到议会批准才能就此事采取行动。</div></div></div>
+<div class="card" data-s="coordinate v. 协调；使配合；搭配；n. 坐标； adj. (在句子中)并列的；坐标的"><div class="w"><span class="idx">167</span>coordinate</div><div class="m">v. 协调；使配合；搭配；n. 坐标； adj. (在句子中)并列的；坐标的</div><div class="ex"><div class="en">Our efforts need to be further coordinated for higher efficiency.</div><div class="zh">为了获得更高的效率,我们的工作需要进一步协调。</div></div></div>
+<div class="card" data-s="cooperate v. 合作；协作"><div class="w"><span class="idx">168</span>cooperate</div><div class="m">v. 合作；协作</div><div class="ex"><div class="en">If they cooperate with each other, everything will run smoothly.</div><div class="zh">如果他们能互相配合,一切都会顺利进展。</div></div></div>
+<div class="card" data-s="collaborate v. 合作；协作；通敌"><div class="w"><span class="idx">169</span>collaborate</div><div class="m">v. 合作；协作；通敌</div><div class="ex"><div class="en">We would like to ask you to collaborate with us.</div><div class="zh">我们想请你们和我们合作。</div></div></div>
+</div></section>
+<div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit15.html">← Unit 15</a><a href="unit16.html">切到纯列表版</a><a href="unit17.html">Unit 17 →</a></div><footer><div class="wrap" style="padding:0">
+ 摘自《雅思词汇真经》（刘洪波 编著）第 16 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
+</div></footer></div>
+<script>
+(function(){
+ var KEY='vj-hide';
+ var body=document.body;
+ var kind=body.dataset.kind;
+ var s={m:false,z:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;}}catch(e){}
+ function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+ function paint(){
+  body.classList.toggle('hide-m',s.m);
+  body.classList.toggle('hide-z',s.z);
+  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all');
+  if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
+  if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
+  if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
+ }
+ var cm=document.getElementById('m');
+ if(cm) cm.addEventListener('change',function(){s.m=cm.checked; save(); paint();});
+ var cz=document.getElementById('z');
+ if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
+ var ca=document.getElementById('all');
+ if(ca) ca.addEventListener('change',function(){
+   s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
+ });
+ var rs=document.getElementById('reset');
+ if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; save(); paint();});
+ var q=document.getElementById('q');
+ var items=[].slice.call(document.querySelectorAll('[data-s]'));
+ var cnt=document.getElementById('cnt');
+ function filter(){
+   var v=(q&&q.value||'').trim().toLowerCase();
+   var n=0;
+   items.forEach(function(el){
+     var hit=!v||el.dataset.s.indexOf(v)>-1;
+     el.style.display=hit?'':'none';
+     if(hit)n++;
+   });
+   if(cnt) cnt.textContent=v? (n+' / '+items.length) : (items.length+' 条');
+   var emp=document.getElementById('empty');
+   if(emp) emp.style.display=(n===0)?'block':'none';
+   document.querySelectorAll('section.grp').forEach(function(sec){
+     var vis=sec.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     sec.style.display=vis?'':'none';
+   });
+   document.querySelectorAll('tbody.grp').forEach(function(tb){
+     var vis=tb.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     tb.style.display=vis?'':'none';
+   });
+ }
+ if(q){q.addEventListener('input',filter);}
+ document.addEventListener('keydown',function(e){
+   if(e.key==='/'&&document.activeElement!==q&&q){e.preventDefault();q.focus();}
+   if(e.key==='Escape'&&document.activeElement===q){q.value='';filter();q.blur();}
+ });
+ paint(); filter();
+})();
+</script>
+</body></html>

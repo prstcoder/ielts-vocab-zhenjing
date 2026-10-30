@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unit 05 · 学校教育</title>
+<style>
+:root{
+ --bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da;
+ --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4;
+}
+@media (prefers-color-scheme: dark){
+ :root{ --bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037;
+        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+ font:16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+ -webkit-font-smoothing:antialiased;padding-bottom:64px}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+
+.top{padding:34px 0 18px}
+.back{display:inline-block;font-size:13px;color:var(--ink2);text-decoration:none;
+ border:1px solid var(--line);border-radius:999px;padding:3px 12px;margin-bottom:16px}
+.back:hover{color:var(--accent);border-color:var(--accent)}
+h1{margin:0;font-size:27px;letter-spacing:.2px;font-weight:700}
+h1 .u{color:var(--accent);font-variant-numeric:tabular-nums}
+.sub{margin:6px 0 0;color:var(--ink2);font-size:13.5px}
+
+.toolbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);
+ backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line);
+ padding:10px 0;margin-bottom:18px}
+.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#q{flex:1 1 200px;min-width:150px;padding:8px 13px;border:1px solid var(--line);border-radius:9px;
+ background:var(--panel);color:var(--ink);font-size:14px;outline:none}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.sw{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);
+ border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer;user-select:none;background:var(--panel)}
+.sw input{accent-color:var(--accent);margin:0}
+.sw.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.btn{font:inherit;font-size:13px;color:var(--ink2);background:var(--panel);border:1px solid var(--line);
+ border-radius:999px;padding:5px 12px;cursor:pointer}
+.btn:hover{color:var(--accent);border-color:var(--accent)}
+.count{font-size:12.5px;color:var(--ink2);margin-left:auto;font-variant-numeric:tabular-nums}
+
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);
+ border-radius:12px;overflow:hidden}
+thead th{background:var(--chip);font-size:12.5px;letter-spacing:.06em;color:var(--ink2);
+ font-weight:600;text-align:left;padding:9px 14px;border-bottom:1px solid var(--line)}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--accent-soft)}
+td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-nums}
+td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
+ letter-spacing:.2px;word-break:break-word}
+td.m{color:var(--ink)}
+tr.hit td.w,tr.hit td.m{background:var(--mark)}
+
+.cards{display:grid;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px}.card .w{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:19px;font-weight:700;letter-spacing:.2px}
+.card .w .idx{font-family:inherit;font-size:12px;color:var(--ink2);font-weight:400;margin-right:8px;
+ font-variant-numeric:tabular-nums}
+.card .m{margin:5px 0 0;color:var(--ink);font-size:14.5px}
+.card .ex{margin:10px 0 0;padding:9px 12px;background:var(--accent-soft);border-radius:9px;font-size:14px}
+.card .ex .en{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:14.8px;line-height:1.55}
+.card .ex .zh{color:var(--ink2);margin-top:3px;font-size:13.5px}
+.card .no{color:var(--ink2);font-size:12.5px;margin-top:8px;font-style:italic}
+
+tr.gsep td{background:var(--chip);padding:5px 14px;border-bottom:1px solid var(--line)}
+.gtag{font-size:11.5px;font-weight:700;letter-spacing:.08em;color:var(--accent)}
+.gcnt{font-size:11.5px;color:var(--ink2);margin-left:8px;font-variant-numeric:tabular-nums}
+tbody.grp tr:first-child td{border-top:0}
+tbody.grp + tbody.grp tr.gsep td{border-top:8px solid var(--bg)}
+
+/* 卡片版：一个词群一块面板，组与组之间界限分明 */
+section.grp{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+ margin-bottom:16px;overflow:hidden}
+.ghead{display:flex;align-items:baseline;gap:9px;padding:9px 15px;background:var(--chip);
+ border-bottom:1px solid var(--line)}
+section.grp .cards{display:grid;gap:0;padding:1px 15px}
+section.grp .card{background:transparent;border:0;border-radius:0;padding:13px 0;
+ border-bottom:1px solid var(--line)}
+section.grp .card:last-child{border-bottom:0}
+
+.hide-m .m,.hide-m td.m{display:none}
+.hide-z .zh{display:none}
+body.hide-m td.m{display:none!important}
+.empty{padding:40px;text-align:center;color:var(--ink2);font-size:14px}
+
+.nav{display:flex;justify-content:space-between;gap:10px;margin:26px 0 0}
+.nav a{font-size:13.5px;text-decoration:none;color:var(--ink2);border:1px solid var(--line);
+ border-radius:999px;padding:6px 14px;background:var(--panel)}
+.nav a:hover{color:var(--accent);border-color:var(--accent)}
+.nav a.dis{opacity:.35;pointer-events:none}
+footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
+
+@media (max-width:640px){
+ body{font-size:15px}
+ .wrap{padding:0 12px}
+ h1{font-size:22px}
+ thead{display:none}
+ table,tbody,tr,td{display:block;width:auto}
+ table{border:0;background:transparent;border-radius:0}
+ tbody tr{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:11px 13px;margin-bottom:9px}
+ tbody td{border:0;padding:0}
+ td.n{display:none}
+ tr.gsep{display:block}
+ tr.gsep td{display:block;background:transparent;padding:0 0 6px}
+ tbody.grp{margin-bottom:6px;display:block}
+ td.w{font-size:17px;margin-bottom:3px}
+ td.m{font-size:14px;color:var(--ink2)}
+}
+</style>
+</head>
+<body data-kind="card">
+<div class="wrap"><div class="top">
+ <a class="back" href="index.html">← 全部单元</a>
+ <h1><span class="u">Unit 05</span> · 学校教育</h1>
+ <p class="sub">400 词 · 400 条例句</p>
+</div></div>
+<div class="toolbar"><div class="wrap">
+ <div class="tools">
+  <input id="q" type="search" placeholder="搜索单词或释义…（按 / 聚焦）">
+  <label class="sw"><input type="checkbox" id="all"> 默写模式</label>
+  <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
+  <label class="sw"><input type="checkbox" id="z"> 隐藏例句译文</label>
+  <button class="btn" id="reset">重置</button>
+  <span class="count" id="cnt">400 条</span>
+ </div>
+</div></div><div class="wrap">
+<section class="grp"><div class="ghead"><span class="gtag">词群 01</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="education n. 教育"><div class="w"><span class="idx">01</span>education</div><div class="m">n. 教育</div><div class="ex"><div class="en">A good education gives your child a good start in life.</div><div class="zh">良好的教育会让你的孩子在人生中有个良好的开端。</div></div></div>
+<div class="card" data-s="primary adj. 最初的；首要的；初 等的；小学的；原来的"><div class="w"><span class="idx">02</span>primary</div><div class="m">adj. 最初的；首要的；初 等的；小学的；原来的</div><div class="ex"><div class="en">The primary cause of his failure was his underestimation of the enemy.</div><div class="zh">他失败的主要原因是他低估了敌人的实力。</div></div></div>
+<div class="card" data-s="secondary adj. 第二的,次要的；中 等的"><div class="w"><span class="idx">03</span>secondary</div><div class="m">adj. 第二的,次要的；中 等的</div><div class="ex"><div class="en">The most important factor is pricelocation is a secondary issue.</div><div class="zh">最重要的因素是价格，位置是次要问题。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 02</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="university n. 大学"><div class="w"><span class="idx">04</span>university</div><div class="m">n. 大学</div><div class="ex"><div class="en">She is a student at Peking University.</div><div class="zh">她是北京大学的学生。</div></div></div>
+<div class="card" data-s="college n. 学院；大学"><div class="w"><span class="idx">05</span>college</div><div class="m">n. 学院；大学</div><div class="ex"><div class="en">Their son will start college in the autumn.</div><div class="zh">他们的儿子将于秋天开始上大学。</div></div></div>
+<div class="card" data-s="institute n. 协会；学院；研究所；机构； v. 建立；制定；开创；开始"><div class="w"><span class="idx">06</span>institute</div><div class="m">n. 协会；学院；研究所；机构； v. 建立；制定；开创；开始</div><div class="ex"><div class="en">The government set up an institute devoted to renewable energy sources.</div><div class="zh">政府设立了一个致力于开发可再生能源的研究所。</div></div></div>
+<div class="card" data-s="academy n. 学院"><div class="w"><span class="idx">07</span>academy</div><div class="m">n. 学院</div><div class="ex"><div class="en">This is an academy of music.</div><div class="zh">这是一所音乐专科学院。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 03</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="learn v. 学习"><div class="w"><span class="idx">08</span>learn</div><div class="m">v. 学习</div><div class="ex"><div class="en">It's more useful to learn modern Ianguages, such as English and French, than Latin.</div><div class="zh">学习英语和法语等现代语言比学习拉丁语更为有用。</div></div></div>
+<div class="card" data-s="study v. 学习；研究；n. 学习； 研究；书房"><div class="w"><span class="idx">09</span>study</div><div class="m">v. 学习；研究；n. 学习； 研究；书房</div><div class="ex"><div class="en">This reference book is very useful to study from.</div><div class="zh">学习这本参考书很有用。</div></div></div>
+<div class="card" data-s="acquire v. 获得；得到；学会"><div class="w"><span class="idx">10</span>acquire</div><div class="m">v. 获得；得到；学会</div><div class="ex"><div class="en">We hope to acquire the knowledge with in happiness.</div><div class="zh">我们希望在快乐中获得知识。</div></div></div>
+<div class="card" data-s="knowledge n. 知识；了解；学问；学 识"><div class="w"><span class="idx">11</span>knowledge</div><div class="m">n. 知识；了解；学问；学 识</div><div class="ex"><div class="en">He has a wide knowledge of classical music.</div><div class="zh">他对古典音乐有广博的知识。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 04</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="expertise n. 专⻔技能；专⻔知识"><div class="w"><span class="idx">12</span>expertise</div><div class="m">n. 专⻔技能；专⻔知识</div><div class="ex"><div class="en">We were amazed at his expertise on herbs.</div><div class="zh">他关于药草的专业知识使我们赞叹不已。</div></div></div>
+<div class="card" data-s="novice n. 新手；初学者；新信徒"><div class="w"><span class="idx">13</span>novice</div><div class="m">n. 新手；初学者；新信徒</div><div class="ex"><div class="en">I'm a complete novice at yoga.</div><div class="zh">练瑜伽我完全是个新手。</div></div></div>
+<div class="card" data-s="recruit v. 征募；招收；招聘；n. 新兵；新成员"><div class="w"><span class="idx">14</span>recruit</div><div class="m">v. 征募；招收；招聘；n. 新兵；新成员</div><div class="ex"><div class="en">The country's first act would be to recruit for the navy.</div><div class="zh">国家的第一个行动将是为海军征募新兵。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 05</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="literate adj. 识字的；有读写能力的；有文 化的；n. 识字的人；有学问的人"><div class="w"><span class="idx">15</span>literate</div><div class="m">adj. 识字的；有读写能力的；有文 化的；n. 识字的人；有学问的人</div><div class="ex"><div class="en">Over one-quarter of the adult population are not fully literate.</div><div class="zh">四分之一以上的成年人不具备完全的读写能力。</div></div></div>
+<div class="card" data-s="illiteracy n. 文盲；无知；缺乏教育"><div class="w"><span class="idx">16</span>illiteracy</div><div class="m">n. 文盲；无知；缺乏教育</div><div class="ex"><div class="en">We must do our best to eliminate illiteracy.</div><div class="zh">我们必须尽力扫除文盲。</div></div></div>
+<div class="card" data-s="numerate v. 数；计算；读(数)； adj. 识数的；有计算能力的"><div class="w"><span class="idx">17</span>numerate</div><div class="m">v. 数；计算；读(数)； adj. 识数的；有计算能力的</div><div class="ex"><div class="en">All students should be numerate and literate when they leave school.</div><div class="zh">所有学生到毕业时都应具备计算和读写的能力。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 06</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="problem n. 难题；问题"><div class="w"><span class="idx">18</span>problem</div><div class="m">n. 难题；问题</div><div class="ex"><div class="en">Heavy traffic poses a problem in many big cities.</div><div class="zh">交通拥挤是许多大城市面临的问题。</div></div></div>
+<div class="card" data-s="issue n. 问题；发行(物)；重要议题； 流出；v. 发行；发表；流出；在... 上挑起争论"><div class="w"><span class="idx">19</span>issue</div><div class="m">n. 问题；发行(物)；重要议题； 流出；v. 发行；发表；流出；在... 上挑起争论</div><div class="ex"><div class="en">On this issue, they thought as one.</div><div class="zh">在这个问题上,他们意见一致。</div></div></div>
+<div class="card" data-s="affair n. 事务；事件；暧昧关系"><div class="w"><span class="idx">20</span>affair</div><div class="m">n. 事务；事件；暧昧关系</div><div class="ex"><div class="en">The minister is busy with important state affairs.</div><div class="zh">部长忙于重要的国务。</div></div></div>
+<div class="card" data-s="controversial adj. 有争议的"><div class="w"><span class="idx">21</span>controversial</div><div class="m">adj. 有争议的</div><div class="ex"><div class="en">The new policy remains highly controversial.</div><div class="zh">新政策仍然极具争议。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 07</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="puzzle n. 谜；难题；拼图；v. (使)迷惑；(使)伤脑筋"><div class="w"><span class="idx">22</span>puzzle</div><div class="m">n. 谜；难题；拼图；v. (使)迷惑；(使)伤脑筋</div><div class="ex"><div class="en">He is puzzled about the matter.</div><div class="zh">他对这件事大惑不解。</div></div></div>
+<div class="card" data-s="riddle n. 谜语；费解的事；v. 解谜； 出谜；使布满窟窿；打洞"><div class="w"><span class="idx">23</span>riddle</div><div class="m">n. 谜语；费解的事；v. 解谜； 出谜；使布满窟窿；打洞</div><div class="ex"><div class="en">He figured out the riddle at last.</div><div class="zh">他最终猜出了这个谜语。</div></div></div>
+<div class="card" data-s="obscure adj. 昏暗的；不清楚的；无名 的；v. 使模糊；使隐晦；使费解"><div class="w"><span class="idx">24</span>obscure</div><div class="m">adj. 昏暗的；不清楚的；无名 的；v. 使模糊；使隐晦；使费解</div><div class="ex"><div class="en">Rules for the game are somewhat obscure.</div><div class="zh">该游戏的规则有点让人费解。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 08</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="instil v. 逐步渗透；逐渐灌输"><div class="w"><span class="idx">25</span>instil</div><div class="m">v. 逐步渗透；逐渐灌输</div><div class="ex"><div class="en">A sense of duty must be instilled in our children.</div><div class="zh">必须向我们的孩子灌输责任感。</div></div></div>
+<div class="card" data-s="cram v. 塞满；填鸭式学习；n. 仓促备考；死记硬背"><div class="w"><span class="idx">26</span>cram</div><div class="m">v. 塞满；填鸭式学习；n. 仓促备考；死记硬背</div><div class="ex"><div class="en">He crammed ten words into one sentence.</div><div class="zh">他把十个词塞进了一个句子里。</div></div></div>
+<div class="card" data-s="emphasise v. 强调；着重"><div class="w"><span class="idx">27</span>emphasise</div><div class="m">v. 强调；着重</div><div class="ex"><div class="en">I tried to emphasise my strengths without sounding boastful.</div><div class="zh">我在强调自己的优点时尽量不让人觉得我是在自我吹嘘。</div></div></div>
+<div class="card" data-s="enhance v. 提高；增强"><div class="w"><span class="idx">28</span>enhance</div><div class="m">v. 提高；增强</div><div class="ex"><div class="en">A good score of IELTS will enhance my cha nee of getting the offer.</div><div class="zh">个好的雅思考试成绩将会使我有更大的希望被录取。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 09</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="enable v. 使能够；使可能"><div class="w"><span class="idx">29</span>enable</div><div class="m">v. 使能够；使可能</div><div class="ex"><div class="en">This diction ary will enable you to un dersta nd English words.</div><div class="zh">这本词典会使你能理解英语单词。</div></div></div>
+<div class="card" data-s="inspire v. 鼓舞；激励；启迪；激 起；促成"><div class="w"><span class="idx">30</span>inspire</div><div class="m">v. 鼓舞；激励；启迪；激 起；促成</div><div class="ex"><div class="en">Our task is to motivate those voters and inspire them to join our cause.</div><div class="zh">我们的任务是调动那些选民的积极性并鼓励他们加入我们的事业。</div></div></div>
+<div class="card" data-s="motive n. 动机；目的"><div class="w"><span class="idx">31</span>motive</div><div class="m">n. 动机；目的</div><div class="ex"><div class="en">His motive for working so hard is that he needs money.</div><div class="zh">他这么拼命工作的动机在于他需要钱。</div></div></div>
+<div class="card" data-s="motivate v. 引起动机；激发；激励"><div class="w"><span class="idx">32</span>motivate</div><div class="m">v. 引起动机；激发；激励</div><div class="ex"><div class="en">Good teachers know how to motivate students.</div><div class="zh">好老师知道如何激发学生。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 10</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="stimulate v. 刺激；激励"><div class="w"><span class="idx">33</span>stimulate</div><div class="m">v. 刺激；激励</div><div class="ex"><div class="en">Lower taxes may stimulate economic growth.</div><div class="zh">降低税收可能刺激经济增长。</div></div></div>
+<div class="card" data-s="spur n. ⻢刺；鞭策；v. 刺激； 鞭策"><div class="w"><span class="idx">34</span>spur</div><div class="m">n. ⻢刺；鞭策；v. 刺激； 鞭策</div><div class="ex"><div class="en">Pride spurred the man to fig ht.</div><div class="zh">自尊心鞭策着这个男人去战斗。</div></div></div>
+<div class="card" data-s="impetus n. 冲力；推动力；刺激"><div class="w"><span class="idx">35</span>impetus</div><div class="m">n. 冲力；推动力；刺激</div><div class="ex"><div class="en">The car ran down the bridge under its own impetus.</div><div class="zh">汽车借着本身的惯性冲下桥。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 11</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="indulge v. 放任；沉溺；使满足； 听任"><div class="w"><span class="idx">36</span>indulge</div><div class="m">v. 放任；沉溺；使满足； 听任</div><div class="ex"><div class="en">She indulged in a long holiday after the exams.</div><div class="zh">考试结束后她尽情享受了一个长假。</div></div></div>
+<div class="card" data-s="spoil v. 宠坏；搞糟；变质；n. 赃物；战利品"><div class="w"><span class="idx">37</span>spoil</div><div class="m">v. 宠坏；搞糟；变质；n. 赃物；战利品</div><div class="ex"><div class="en">You should be careful, because you may make a mistake which will spoil your life.</div><div class="zh">你应该小心一点,因为你可能会犯下一个将毁了你的生活的错误。</div></div></div>
+<div class="card" data-s="abuse v. 滥用；虐待；辱骂；n. 滥用；虐待；辱骂"><div class="w"><span class="idx">38</span>abuse</div><div class="m">v. 滥用；虐待；辱骂；n. 滥用；虐待；辱骂</div><div class="ex"><div class="en">It's easy to abuse one's power.</div><div class="zh">人很容易滥用权力。</div></div></div>
+<div class="card" data-s="intelligent adj. 有才智的；聪明的； 明智的"><div class="w"><span class="idx">39</span>intelligent</div><div class="m">adj. 有才智的；聪明的； 明智的</div><div class="ex"><div class="en">Clara is a highly intelligent girl.</div><div class="zh">克拉拉是一个非常聪明的女孩。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 12</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="clever adj. 聪明的；灵巧的"><div class="w"><span class="idx">40</span>clever</div><div class="m">adj. 聪明的；灵巧的</div><div class="ex"><div class="en">Even clever people may do something stupid when put on the spot.</div><div class="zh">即便是聪明入,在陷入困境时也可能会做出傻事。</div></div></div>
+<div class="card" data-s="smart adj. 聪明的；敏捷的；时髦的；衣 冠楚楚的；v. 剧痛；刺痛；感到难 过"><div class="w"><span class="idx">41</span>smart</div><div class="m">adj. 聪明的；敏捷的；时髦的；衣 冠楚楚的；v. 剧痛；刺痛；感到难 过</div><div class="ex"><div class="en">This boy is very smart. He may become another Stephen Hawking.</div><div class="zh">这男孩很聪明。</div></div></div>
+<div class="card" data-s="all-round adj. 全能的；多方面的； 多才多艺的"><div class="w"><span class="idx">42</span>all-round</div><div class="m">adj. 全能的；多方面的； 多才多艺的</div><div class="ex"><div class="en">She is an all-round artist.</div><div class="zh">她是一位多才多艺的艺术家。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 13</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="genius n. 天才；天赋"><div class="w"><span class="idx">43</span>genius</div><div class="m">n. 天才；天赋</div><div class="ex"><div class="en">His genius is not confined to maths and physics.</div><div class="zh">他的天赋不单体现在数学和物理学上。</div></div></div>
+<div class="card" data-s="elite n. (社会)精英；上层人士； adj. 精英的；出类拔萃的"><div class="w"><span class="idx">44</span>elite</div><div class="m">n. (社会)精英；上层人士； adj. 精英的；出类拔萃的</div><div class="ex"><div class="en">The army was con trolled by a small ruling elite.</div><div class="zh">军队由少数上层统治精英控制。</div></div></div>
+<div class="card" data-s="idiot n. 白痴；笨蛋"><div class="w"><span class="idx">45</span>idiot</div><div class="m">n. 白痴；笨蛋</div><div class="ex"><div class="en">I felt like an idiot for forgetting her name.</div><div class="zh">忘了她的名字让我觉得自己像个白痴。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 14</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="wisdom n. 智慧；明智；学问"><div class="w"><span class="idx">46</span>wisdom</div><div class="m">n. 智慧；明智；学问</div><div class="ex"><div class="en">Confucius's words hold a great deal of wisdom.</div><div class="zh">孔子的话包含着许多智慧思想。</div></div></div>
+<div class="card" data-s="wit n. 机智(的人)；⻛趣(的 人)；才智；头脑；智慧"><div class="w"><span class="idx">47</span>wit</div><div class="m">n. 机智(的人)；⻛趣(的 人)；才智；头脑；智慧</div><div class="ex"><div class="en">Holmes was gregarious, a great wit, a man of wide interests.</div><div class="zh">福尔摩斯爱交际,是个非常风趣的人,而且兴趣广泛。</div></div></div>
+<div class="card" data-s="aptitude n. 天资；天赋；才能"><div class="w"><span class="idx">48</span>aptitude</div><div class="m">n. 天资；天赋；才能</div><div class="ex"><div class="en">That student has an aptitude for music.</div><div class="zh">那个学生有音乐方面的天赋。</div></div></div>
+<div class="card" data-s="capable adj. 有能力的"><div class="w"><span class="idx">49</span>capable</div><div class="m">adj. 有能力的</div><div class="ex"><div class="en">Not every one is capable of judging fine arts.</div><div class="zh">并不是每个人都有能力鉴赏美术品。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 15</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="excellent adj. 优秀的；杰出的；卓 越的"><div class="w"><span class="idx">50</span>excellent</div><div class="m">adj. 优秀的；杰出的；卓 越的</div><div class="ex"><div class="en">She had a high reputation for her excellent detective novels.</div><div class="zh">她因其优秀的侦探小说享有很高的声望。</div></div></div>
+<div class="card" data-s="outstanding adj. 杰出的；尚未处理的"><div class="w"><span class="idx">51</span>outstanding</div><div class="m">adj. 杰出的；尚未处理的</div><div class="ex"><div class="en">He is an outstanding athlete and deserved to win.</div><div class="zh">他是位优秀的运动员,赢得比赛也是理所当然。</div></div></div>
+<div class="card" data-s="brilliant adj. 光辉的；明亮的；灿 烂的；卓越的；极好的"><div class="w"><span class="idx">52</span>brilliant</div><div class="m">adj. 光辉的；明亮的；灿 烂的；卓越的；极好的</div><div class="ex"><div class="en">She drew the curtains and brilliant sun light flooded into the room.</div><div class="zh">她拉开窗帘,耀眼的阳光泻入房间。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 16</span><span class="gcnt">8 词</span></div><div class="cards">
+<div class="card" data-s="prestige n. 声望；威望；威信"><div class="w"><span class="idx">53</span>prestige</div><div class="m">n. 声望；威望；威信</div><div class="ex"><div class="en">These new policies will affect the preside nt's national and international prestige.</div><div class="zh">这些新政策将会影响该总统在全国及国际上的声望。</div></div></div>
+<div class="card" data-s="reputation n. 名声；名誉"><div class="w"><span class="idx">54</span>reputation</div><div class="m">n. 名声；名誉</div><div class="ex"><div class="en">If a company has a good reputation, investors will naturally back it.</div><div class="zh">如果一家公司拥有良好名声,投资人自然会支持它。</div></div></div>
+<div class="card" data-s="eminent adj. 著名的；非凡的；杰 出的"><div class="w"><span class="idx">55</span>eminent</div><div class="m">adj. 著名的；非凡的；杰 出的</div><div class="ex"><div class="en">The students are expecting the arrival of an eminent scientist.</div><div class="zh">同学们正期待一位著名科学家的到来。</div></div></div>
+<div class="card" data-s="notorious adj. 声名狼藉的；臭名昭 著的"><div class="w"><span class="idx">56</span>notorious</div><div class="m">adj. 声名狼藉的；臭名昭 著的</div><div class="ex"><div class="en">The notorious thief was fin ally caught and put to prison.</div><div class="zh">这个声名狼藉的小偷终于被捉到并关进监狱了。</div></div></div>
+<div class="card" data-s="esteem v. 尊重；尊敬；n. 尊重； 尊敬"><div class="w"><span class="idx">57</span>esteem</div><div class="m">v. 尊重；尊敬；n. 尊重； 尊敬</div><div class="ex"><div class="en">I esteem it as a privilege to attend this con fere nee and give a report here.</div><div class="zh">我能参加这个大会并在这里做报告,感到十分荣幸。</div></div></div>
+<div class="card" data-s="respect v. 尊重；尊敬；遵从；n. 尊重；尊敬；方面"><div class="w"><span class="idx">58</span>respect</div><div class="m">v. 尊重；尊敬；遵从；n. 尊重；尊敬；方面</div><div class="ex"><div class="en">You should know how to respect yourself before you can get respect from others.</div><div class="zh">你该先知道如何自尊,然后你才能得到别人的尊重。</div></div></div>
+<div class="card" data-s="diligent adj. 勤勉的；勤奋的"><div class="w"><span class="idx">59</span>diligent</div><div class="m">adj. 勤勉的；勤奋的</div><div class="ex"><div class="en">She is diligent and busy with all kinds of experiments all the tim e.</div><div class="zh">她真勤快,一直都在忙于进行各种实验。</div></div></div>
+<div class="card" data-s="painstaking adj. 辛苦的；苦干的"><div class="w"><span class="idx">60</span>painstaking</div><div class="m">adj. 辛苦的；苦干的</div><div class="ex"><div class="en">The mastery of a language requires painstaking effort.</div><div class="zh">要学好一种语言,必须下苦功。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 17</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="skill n. 技能；技巧；技术"><div class="w"><span class="idx">61</span>skill</div><div class="m">n. 技能；技巧；技术</div><div class="ex"><div class="en">It requires an athlete to have great skill, cool nerves and quick reflexes.</div><div class="zh">那需要运动员有高超的技巧、冷静的头脑和迅速的反应能力。</div></div></div>
+<div class="card" data-s="approach v. 接近；靠近；临近；处理； n. 方法；接近；靠近；路径"><div class="w"><span class="idx">62</span>approach</div><div class="m">v. 接近；靠近；临近；处理； n. 方法；接近；靠近；路径</div><div class="ex"><div class="en">I like his approach to the problem.</div><div class="zh">我喜欢他解决这个问题的方法。</div></div></div>
+<div class="card" data-s="scheme n. 阴谋；计划；v. 密谋； 策划"><div class="w"><span class="idx">63</span>scheme</div><div class="m">n. 阴谋；计划；v. 密谋； 策划</div><div class="ex"><div class="en">All the schemes and intrigues are doomed to failure.</div><div class="zh">一切阴谋诡计都是注定要失败的。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 18</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="headmaster n. 校⻓"><div class="w"><span class="idx">64</span>headmaster</div><div class="m">n. 校⻓</div><div class="ex"><div class="en">His track record as a headmaster was excellent.</div><div class="zh">他作为校长的工作履历非常优秀。</div></div></div>
+<div class="card" data-s="principal adj. 最重要的；主要的；本金的； n. 负责人；首⻓；校⻓；本金"><div class="w"><span class="idx">65</span>principal</div><div class="m">adj. 最重要的；主要的；本金的； n. 负责人；首⻓；校⻓；本金</div><div class="ex"><div class="en">The principal reason for the delay was the weather.</div><div class="zh">延误的主要原因是天气。</div></div></div>
+<div class="card" data-s="dean n. 学院院⻓；系主任"><div class="w"><span class="idx">66</span>dean</div><div class="m">n. 学院院⻓；系主任</div><div class="ex"><div class="en">She is the dean of the Faculty of Social Science.</div><div class="zh">她是社会科学学院的院长。</div></div></div>
+<div class="card" data-s="faculty n. 才能；能力；全体教 员；院系"><div class="w"><span class="idx">67</span>faculty</div><div class="m">n. 才能；能力；全体教 员；院系</div><div class="ex"><div class="en">Faculty members devote most of their time to scholarly research.</div><div class="zh">全体教员的大部分时间都用来从事学术研究了。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 19</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="professor n. 教授；导师"><div class="w"><span class="idx">68</span>professor</div><div class="m">n. 教授；导师</div><div class="ex"><div class="en">Our professor is a learned man with great insight.</div><div class="zh">我们的教授是一个学识渊博且富有洞察力的人。</div></div></div>
+<div class="card" data-s="scholar n. 学者；奖学金获得者"><div class="w"><span class="idx">69</span>scholar</div><div class="m">n. 学者；奖学金获得者</div><div class="ex"><div class="en">He is a serious scholar who is highly respected by his students.</div><div class="zh">他是一位严谨的学者,备受学生们尊敬。</div></div></div>
+<div class="card" data-s="scientist n. 科学家"><div class="w"><span class="idx">70</span>scientist</div><div class="m">n. 科学家</div><div class="ex"><div class="en">I admired him as a true scientist and a very moral man.</div><div class="zh">我钦佩他是一位真正的科学家和一个品行非常端正的人。</div></div></div>
+<div class="card" data-s="mentor n. 导师；顾问；v. 指导； 辅导"><div class="w"><span class="idx">71</span>mentor</div><div class="m">n. 导师；顾问；v. 指导； 辅导</div><div class="ex"><div class="en">He fed on the great ideas of his mentor.</div><div class="zh">他导师的伟大思想滋养了他。</div></div></div>
+<div class="card" data-s="tutor n. 导师；家庭教师；v. 当 家教；指导；辅导"><div class="w"><span class="idx">72</span>tutor</div><div class="m">n. 导师；家庭教师；v. 当 家教；指导；辅导</div><div class="ex"><div class="en">She was my personal tutor at university.</div><div class="zh">她是我大学时的个人指导教师。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 20</span><span class="gcnt">8 词</span></div><div class="cards">
+<div class="card" data-s="lecturer n. 演讲者；讲师；授课老 师"><div class="w"><span class="idx">73</span>lecturer</div><div class="m">n. 演讲者；讲师；授课老 师</div><div class="ex"><div class="en">I have to submit this report to my lecturer.</div><div class="zh">我得把这份报告交给讲师。</div></div></div>
+<div class="card" data-s="assistant n. 助理；助手；adj. 助理 的；辅助的"><div class="w"><span class="idx">74</span>assistant</div><div class="m">n. 助理；助手；adj. 助理 的；辅助的</div><div class="ex"><div class="en">Her assistant was accused of theft and fraud by the police.</div><div class="zh">她的助手被警方指控犯有盗窃和欺诈罪。</div></div></div>
+<div class="card" data-s="candidate n. 候选人；应试者"><div class="w"><span class="idx">75</span>candidate</div><div class="m">n. 候选人；应试者</div><div class="ex"><div class="en">They are interviewing candidates for the position of sales manager.</div><div class="zh">他们正在面试应聘销售经理职位的求职者。</div></div></div>
+<div class="card" data-s="degree n. 度；程度；学位"><div class="w"><span class="idx">76</span>degree</div><div class="m">n. 度；程度；学位</div><div class="ex"><div class="en">He left without completing his degree.</div><div class="zh">他没完成学位课程就离开了大学。</div></div></div>
+<div class="card" data-s="qualify v. 使合格；使具有资格"><div class="w"><span class="idx">77</span>qualify</div><div class="m">v. 使合格；使具有资格</div><div class="ex"><div class="en">His knowledge and skills qualify him for the jo b.</div><div class="zh">他的知识和技能使他有资格担任这项工作。</div></div></div>
+<div class="card" data-s="certify v. 证明；保证；证实"><div class="w"><span class="idx">78</span>certify</div><div class="m">v. 证明；保证；证实</div><div class="ex"><div class="en">I certify on my honour that she is innocent.</div><div class="zh">我用人格担保她是清白无辜的。</div></div></div>
+<div class="card" data-s="license n. 许可证；执照；v. 发许 可证"><div class="w"><span class="idx">79</span>license</div><div class="m">n. 许可证；执照；v. 发许 可证</div><div class="ex"><div class="en">His driving license was suspended for three months.</div><div class="zh">他的驾驶执照被暂扣了三个月。</div></div></div>
+<div class="card" data-s="permit v. 允许；准许；n. 通行 证；许可证；执照"><div class="w"><span class="idx">80</span>permit</div><div class="m">v. 允许；准许；n. 通行 证；许可证；执照</div><div class="ex"><div class="en">You can't work here without a work permit.</div><div class="zh">你没有工作许可证就不能在这里工作。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 21</span><span class="gcnt">6 词</span></div><div class="cards">
+<div class="card" data-s="diploma n. 毕业文凭；学位证书"><div class="w"><span class="idx">81</span>diploma</div><div class="m">n. 毕业文凭；学位证书</div><div class="ex"><div class="en">My cousin won her diploma in only three years.</div><div class="zh">我表妹仅用三年时间就取得了毕业文凭。</div></div></div>
+<div class="card" data-s="diplomat n. 外交官；会耍手腕儿的 人"><div class="w"><span class="idx">82</span>diplomat</div><div class="m">n. 外交官；会耍手腕儿的 人</div><div class="ex"><div class="en">As a natural diplomat, he found it easy to get the two sides to reach a consensus.</div><div class="zh">作为一位天生的外交家,他觉得很容易使双方达成共识。</div></div></div>
+<div class="card" data-s="ambassador n. 大使"><div class="w"><span class="idx">83</span>ambassador</div><div class="m">n. 大使</div><div class="ex"><div class="en">He was appointed ambassador to France.</div><div class="zh">他被任命为驻法国大使。</div></div></div>
+<div class="card" data-s="pupil n. 小学生；瞳孔"><div class="w"><span class="idx">84</span>pupil</div><div class="m">n. 小学生；瞳孔</div><div class="ex"><div class="en">As a girl, she had been a model pupil.</div><div class="zh">还是个小女孩的时候,她是一个模范小学生。</div></div></div>
+<div class="card" data-s="graduate n. 大学毕业生；学士学位 获得者；v. 毕业"><div class="w"><span class="idx">85</span>graduate</div><div class="m">n. 大学毕业生；学士学位 获得者；v. 毕业</div><div class="ex"><div class="en">She will graduate from university next summer.</div><div class="zh">她明年夏天将从大学毕业。</div></div></div>
+<div class="card" data-s="ceremony n. 仪式；典礼"><div class="w"><span class="idx">86</span>ceremony</div><div class="m">n. 仪式；典礼</div><div class="ex"><div class="en">What the old headmaster said at the graduation ceremony dwells in my mind.</div><div class="zh">老校长在毕业典礼上讲的话一直留在我的脑海里。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 22</span><span class="gcnt">8 词</span></div><div class="cards">
+<div class="card" data-s="bachelor n. 未婚男子；单身汉；学 士(本科)"><div class="w"><span class="idx">87</span>bachelor</div><div class="m">n. 未婚男子；单身汉；学 士(本科)</div><div class="ex"><div class="en">Io do the job, you must have at least a bachelor's degree in engineering.</div><div class="zh">要做这项工作,你至少要先取得工程学的学士学位。</div></div></div>
+<div class="card" data-s="master n. 主人；硕士；v. 掌握； 精通"><div class="w"><span class="idx">88</span>master</div><div class="m">n. 主人；硕士；v. 掌握； 精通</div><div class="ex"><div class="en">They are able to master the situation.</div><div class="zh">他们能够控制这个局面。</div></div></div>
+<div class="card" data-s="doctor n. 医生；博士；v. 篡改"><div class="w"><span class="idx">89</span>doctor</div><div class="m">n. 医生；博士；v. 篡改</div><div class="ex"><div class="en">He is a Doctor of Philosophy.</div><div class="zh">他是一位哲学博士。</div></div></div>
+<div class="card" data-s="fresher n. 大学一年级新生；新鲜人； adj. 新鲜的；“fresh”的比较级"><div class="w"><span class="idx">90</span>fresher</div><div class="m">n. 大学一年级新生；新鲜人； adj. 新鲜的；“fresh”的比较级</div><div class="ex"><div class="en">Freshers are welcomed with a week of activities.</div><div class="zh">新生们以一周的活动迎来开学。</div></div></div>
+<div class="card" data-s="sophomore n. (大学)二年级学生"><div class="w"><span class="idx">91</span>sophomore</div><div class="m">n. (大学)二年级学生</div><div class="ex"><div class="en">My sophomore year at college was perhaps the most remarkable year of my life.</div><div class="zh">我上大二的另B年也许是我生命中最不同寻常的一年。</div></div></div>
+<div class="card" data-s="junior adj. 年幼的；(职位或等 级)较低的；n. 年幼者"><div class="w"><span class="idx">92</span>junior</div><div class="m">adj. 年幼的；(职位或等 级)较低的；n. 年幼者</div><div class="ex"><div class="en">Junior staff are encouraged to attend the meeting.</div><div class="zh">公司鼓励初级员工参加这次会议。</div></div></div>
+<div class="card" data-s="senior adj. 高级的；年⻓的；资深的； n. 上司；年⻓者；大四学生"><div class="w"><span class="idx">93</span>senior</div><div class="m">adj. 高级的；年⻓的；资深的； n. 上司；年⻓者；大四学生</div><div class="ex"><div class="en">The seniors defeated the juniors by 4-2.</div><div class="zh">大四学生以4比2战胜了大三学生。</div></div></div>
+<div class="card" data-s="alumni n. 校友；“alumnus”的复 数"><div class="w"><span class="idx">94</span>alumni</div><div class="m">n. 校友；“alumnus”的复 数</div><div class="ex"><div class="en">My alumni and alumna are present at my birthday party.</div><div class="zh">我的校友们都出席了我的生日聚会。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 23</span><span class="gcnt">2 词</span></div><div class="cards">
+<div class="card" data-s="campus n. (大学、学院的)校园"><div class="w"><span class="idx">95</span>campus</div><div class="m">n. (大学、学院的)校园</div><div class="ex"><div class="en">The campus covers an are a of about 1.37 square kilometres.</div><div class="zh">这个校园占地约1.37平方千米。</div></div></div>
+<div class="card" data-s="orientation n. 方向；定位；取向；岗 前训练；入学介绍"><div class="w"><span class="idx">96</span>orientation</div><div class="m">n. 方向；定位；取向；岗 前训练；入学介绍</div><div class="ex"><div class="en">The university will hold a one-day orientation session for freshmen.</div><div class="zh">大学将为大一新生举办为期一天的迎新会。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 24</span><span class="gcnt">10 词</span></div><div class="cards">
+<div class="card" data-s="platform n. 平台；站台；月台"><div class="w"><span class="idx">97</span>platform</div><div class="m">n. 平台；站台；月台</div><div class="ex"><div class="en">He spoke to us from a platform in the lecture hall.</div><div class="zh">他在报告厅的讲台上向我们讲话。</div></div></div>
+<div class="card" data-s="coed n. (男女同校学校的)女 学生；adj. 男女同校的"><div class="w"><span class="idx">98</span>coed</div><div class="m">n. (男女同校学校的)女 学生；adj. 男女同校的</div><div class="ex"><div class="en">A nationwide research is under way for typical coeds.</div><div class="zh">一项针对男女同校大学中的典型女生的全国性调查正在展开。</div></div></div>
+<div class="card" data-s="register v. 注册；登记；n. 登记 簿；现金出纳机"><div class="w"><span class="idx">99</span>register</div><div class="m">v. 注册；登记；n. 登记 簿；现金出纳机</div><div class="ex"><div class="en">All visitors must register at the front desk.</div><div class="zh">所有访客都必须在前台登记。</div></div></div>
+<div class="card" data-s="roster n. 花名册；勤务簿"><div class="w"><span class="idx">100</span>roster</div><div class="m">n. 花名册；勤务簿</div><div class="ex"><div class="en">I am on the roster for tomorrow night.</div><div class="zh">我被排在明晚执勤。</div></div></div>
+<div class="card" data-s="enrol v. 登记；注册；招收； (使)加入"><div class="w"><span class="idx">101</span>enrol</div><div class="m">v. 登记；注册；招收； (使)加入</div><div class="ex"><div class="en">They enrolled that freshman as a member of the club.</div><div class="zh">他们招收了那个大一新生为俱乐部会员。</div></div></div>
+<div class="card" data-s="matriculation n. 入学考试；大学入学许 可；录取入学"><div class="w"><span class="idx">102</span>matriculation</div><div class="m">n. 入学考试；大学入学许 可；录取入学</div><div class="ex"><div class="en">Matriculation was in creasing in many universities in the 1990s.</div><div class="zh">世纪90年代,许多大学的注册入学人数都在增加。</div></div></div>
+<div class="card" data-s="accommodation n. 住处；工作场所；停留处； 膳宿；(交通工具内的)空间"><div class="w"><span class="idx">103</span>accommodation</div><div class="m">n. 住处；工作场所；停留处； 膳宿；(交通工具内的)空间</div><div class="ex"><div class="en">The authorities must provide suitable accommodation for the family.</div><div class="zh">当局必须给这个家庭提供合适的住处。</div></div></div>
+<div class="card" data-s="dorm n. (集体)宿舍"><div class="w"><span class="idx">104</span>dorm</div><div class="m">n. (集体)宿舍</div><div class="ex"><div class="en">Are you going to live in the student's dorm or at home?</div><div class="zh">你打算住在学生宿舍还是住在家里?</div></div></div>
+<div class="card" data-s="dining hall phrase. 餐厅；⻝堂"><div class="w"><span class="idx">105</span>dining hall</div><div class="m">phrase. 餐厅；⻝堂</div><div class="ex"><div class="en">The dining hall serves lunch from eleven.</div><div class="zh">食堂从十一点开始供应午餐。</div></div></div>
+<div class="card" data-s="canteen n. ⻝堂"><div class="w"><span class="idx">106</span>canteen</div><div class="m">n. ⻝堂</div><div class="ex"><div class="en">This canteen is much frequented by students.</div><div class="zh">这是学生们经常来的食堂。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 25</span><span class="gcnt">6 词</span></div><div class="cards">
+<div class="card" data-s="laboratory n. 实验室"><div class="w"><span class="idx">107</span>laboratory</div><div class="m">n. 实验室</div><div class="ex"><div class="en">It is important to check when the laboratory can do the tests.</div><div class="zh">核实一下实验室何时可以进行这些测试,这是很重要的。</div></div></div>
+<div class="card" data-s="experiment n. 实验；试验；v. 做试 验；进行实验"><div class="w"><span class="idx">108</span>experiment</div><div class="m">n. 实验；试验；v. 做试 验；进行实验</div><div class="ex"><div class="en">We will have an experiment in the laboratory this afternoon.</div><div class="zh">我们今天下午要在实验室里做一项实验。</div></div></div>
+<div class="card" data-s="data n. 数据；资料"><div class="w"><span class="idx">109</span>data</div><div class="m">n. 数据；资料</div><div class="ex"><div class="en">The data should be updated once a week.</div><div class="zh">这些数据应该每星期更新一次。</div></div></div>
+<div class="card" data-s="quantity n. 量；数量；大量"><div class="w"><span class="idx">110</span>quantity</div><div class="m">n. 量；数量；大量</div><div class="ex"><div class="en">Our company is more concerned with quality than with quantity.</div><div class="zh">比起数量,我们公司更重视质量。</div></div></div>
+<div class="card" data-s="quality n. 质量；素质；品质"><div class="w"><span class="idx">111</span>quality</div><div class="m">n. 质量；素质；品质</div><div class="ex"><div class="en">It was a bad year for films, in terms of quality rather than quantity.</div><div class="zh">从质量而非数量上看,今年的电影产业表现很差。</div></div></div>
+<div class="card" data-s="library n. 图书馆"><div class="w"><span class="idx">112</span>library</div><div class="m">n. 图书馆</div><div class="ex"><div class="en">I went to the library and returned your books for you.</div><div class="zh">我去了图书馆,替你把书还了。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 26</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="literature n. 文学；文学作品"><div class="w"><span class="idx">113</span>literature</div><div class="m">n. 文学；文学作品</div><div class="ex"><div class="en">She studies nineteenth-century English literature.</div><div class="zh">她研究十九世纪英国文学。</div></div></div>
+<div class="card" data-s="article n. 文章；物品；项目；条 款；冠词"><div class="w"><span class="idx">114</span>article</div><div class="m">n. 文章；物品；项目；条 款；冠词</div><div class="ex"><div class="en">The editor asked him to con tribute a weekly article on European affairs.</div><div class="zh">编辑让他每周写一篇有关欧洲情况的文章。</div></div></div>
+<div class="card" data-s="author n. 作者"><div class="w"><span class="idx">115</span>author</div><div class="m">n. 作者</div><div class="ex"><div class="en">The author's style is subtle and elegant.</div><div class="zh">这个作者的文风机智而优雅。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 27</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="tale n. 故事；叙述；传说"><div class="w"><span class="idx">116</span>tale</div><div class="m">n. 故事；叙述；传说</div><div class="ex"><div class="en">She looks like a princess in a fairy tale.</div><div class="zh">她看上去就像童话故事里的公主。</div></div></div>
+<div class="card" data-s="fiction n. 小说；虚构"><div class="w"><span class="idx">117</span>fiction</div><div class="m">n. 小说；虚构</div><div class="ex"><div class="en">He prefers science fiction to historical novels.</div><div class="zh">比起历史小说，他更喜欢科幻小说。</div></div></div>
+<div class="card" data-s="story n. 故事；小说； 轶事；假 话"><div class="w"><span class="idx">118</span>story</div><div class="m">n. 故事；小说； 轶事；假 话</div><div class="ex"><div class="en">Her little sister often asks her to retell the story.</div><div class="zh">她的妹妹经常要她反复讲这个故事。</div></div></div>
+<div class="card" data-s="diary n. 日记"><div class="w"><span class="idx">119</span>diary</div><div class="m">n. 日记</div><div class="ex"><div class="en">She has kept a diary since she was ten.</div><div class="zh">她从十岁起就坚持写日记。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 28</span><span class="gcnt">9 词</span></div><div class="cards">
+<div class="card" data-s="poetry n. 诗歌；诗作"><div class="w"><span class="idx">120</span>poetry</div><div class="m">n. 诗歌；诗作</div><div class="ex"><div class="en">I myself enjoy cinema, drama, poetry and travelling.</div><div class="zh">我本人喜欢电影、戏剧、诗歌和旅行。</div></div></div>
+<div class="card" data-s="magazine n. 杂志"><div class="w"><span class="idx">121</span>magazine</div><div class="m">n. 杂志</div><div class="ex"><div class="en">This magazine has a large circulation.</div><div class="zh">这份杂志的发行量很大。</div></div></div>
+<div class="card" data-s="journal n. 日志；日记；期刊；杂 志"><div class="w"><span class="idx">122</span>journal</div><div class="m">n. 日志；日记；期刊；杂 志</div><div class="ex"><div class="en">This study was published by two journals of repute.</div><div class="zh">这项研究发表在两份著名杂志上。</div></div></div>
+<div class="card" data-s="coverage n. 覆盖范围；新闻报道"><div class="w"><span class="idx">123</span>coverage</div><div class="m">n. 覆盖范围；新闻报道</div><div class="ex"><div class="en">The wedding of the two movie stars got massive media coverage.</div><div class="zh">这两位电影明星的婚礼得到媒体的广泛报道。</div></div></div>
+<div class="card" data-s="bibliography n. 参考书目；书籍学；文 献学"><div class="w"><span class="idx">124</span>bibliography</div><div class="m">n. 参考书目；书籍学；文 献学</div><div class="ex"><div class="en">The bibliography is a very important part of a paper.</div><div class="zh">参考书目是一篇论文的重要组成部分。</div></div></div>
+<div class="card" data-s="encyclopedia n. 百科全书"><div class="w"><span class="idx">125</span>encyclopedia</div><div class="m">n. 百科全书</div><div class="ex"><div class="en">I know some one who is a walking encyclopedia— she knows about everything.</div><div class="zh">我认识一个人,她是个活百科全书,什么都懂。</div></div></div>
+<div class="card" data-s="biography n. 传记"><div class="w"><span class="idx">126</span>biography</div><div class="m">n. 传记</div><div class="ex"><div class="en">The biography describes his early years in Paris.</div><div class="zh">这本传记记述了他在巴黎的早年生活。</div></div></div>
+<div class="card" data-s="documentary adj. 记录的；文书的；纪 实的；n. 纪录片"><div class="w"><span class="idx">127</span>documentary</div><div class="m">adj. 记录的；文书的；纪 实的；n. 纪录片</div><div class="ex"><div class="en">The documentary left me in a state of shock.</div><div class="zh">那部纪录片使我大为震惊。</div></div></div>
+<div class="card" data-s="series n. 连续；系列"><div class="w"><span class="idx">128</span>series</div><div class="m">n. 连续；系列</div><div class="ex"><div class="en">He published a new book series for English learners.</div><div class="zh">他为英语学习者出了一套新的系列图书。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 29</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="record n. 记录；唱片；v. 记录； 录制"><div class="w"><span class="idx">129</span>record</div><div class="m">n. 记录；唱片；v. 记录； 录制</div><div class="ex"><div class="en">The school keeps a record of every student's progress.</div><div class="zh">学校记录着每个学生的进步。</div></div></div>
+<div class="card" data-s="file n. 文件；档案；锉；v. 把...归档； 用 锉刀锉；提出(离婚诉讼或其他讼 案)"><div class="w"><span class="idx">130</span>file</div><div class="m">n. 文件；档案；锉；v. 把...归档； 用 锉刀锉；提出(离婚诉讼或其他讼 案)</div><div class="ex"><div class="en">The police have a file on him.</div><div class="zh">警方存有他的档案。</div></div></div>
+<div class="card" data-s="profile n. 侧面像；轮廓；简介； 受公众注意的程度"><div class="w"><span class="idx">131</span>profile</div><div class="m">n. 侧面像；轮廓；简介； 受公众注意的程度</div><div class="ex"><div class="en">Her beautiful profile impressed the judges very much.</div><div class="zh">她漂亮的侧面轮廓给评委们留下很深的印象。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 30</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="draft n. 草稿；v. 起草；草拟"><div class="w"><span class="idx">132</span>draft</div><div class="m">n. 草稿；v. 起草；草拟</div><div class="ex"><div class="en">When the first draft was completed, she took a break.</div><div class="zh">当初稿完成以后,她休息了一会儿。</div></div></div>
+<div class="card" data-s="sketch n. 草图；素描；概述；v. 草拟；速写；简述"><div class="w"><span class="idx">133</span>sketch</div><div class="m">n. 草图；素描；概述；v. 草拟；速写；简述</div><div class="ex"><div class="en">I have figured out a basic sketch of a plan.</div><div class="zh">我想出了一个基本的计划框架。</div></div></div>
+<div class="card" data-s="brochure n. 小册子；手册；指南"><div class="w"><span class="idx">134</span>brochure</div><div class="m">n. 小册子；手册；指南</div><div class="ex"><div class="en">I'll send you the company brochure right away.</div><div class="zh">我会立即把公司的宣传册给您寄去。</div></div></div>
+<div class="card" data-s="manual n. 说明书；指南；adj. 手 工的；体力的"><div class="w"><span class="idx">135</span>manual</div><div class="m">n. 说明书；指南；adj. 手 工的；体力的</div><div class="ex"><div class="en">The maintenance manual gives diagrams and instructions for repairing your car.</div><div class="zh">维修手册提供了修理汽车所需的示意图和说明。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 31</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="frame n. 框架；结构；⻣架；模式； v. 制定；框住；陷害；表达"><div class="w"><span class="idx">136</span>frame</div><div class="m">n. 框架；结构；⻣架；模式； v. 制定；框住；陷害；表达</div><div class="ex"><div class="en">The house has a wooden frame which is braced with brick.</div><div class="zh">这幢房子是木结构的,用砖瓦进行了加固。</div></div></div>
+<div class="card" data-s="index n. 指标；索引；指数"><div class="w"><span class="idx">137</span>index</div><div class="m">n. 指标；索引；指数</div><div class="ex"><div class="en">The index is arranged in alphabetical order.</div><div class="zh">这索引是按字母顺序排列的。</div></div></div>
+<div class="card" data-s="catalogue n. 目录"><div class="w"><span class="idx">138</span>catalogue</div><div class="m">n. 目录</div><div class="ex"><div class="en">You can look for the book in the library catalogue.</div><div class="zh">你可以在图书馆的图书目录上查找这本书。</div></div></div>
+<div class="card" data-s="category n. 类别"><div class="w"><span class="idx">139</span>category</div><div class="m">n. 类别</div><div class="ex"><div class="en">There are different categories of books in a library.</div><div class="zh">图书馆里有不同种类的书。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 32</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="inventory n. 详细目录；清单；储 备；存货"><div class="w"><span class="idx">140</span>inventory</div><div class="m">n. 详细目录；清单；储 备；存货</div><div class="ex"><div class="en">We made an inventory of everything in the old museum.</div><div class="zh">我们针对这家老博物馆的所有藏品列了张清单。</div></div></div>
+<div class="card" data-s="content n. 内容；含量；目录； adj. 满足的；v. 使满意"><div class="w"><span class="idx">141</span>content</div><div class="m">n. 内容；含量；目录； adj. 满足的；v. 使满意</div><div class="ex"><div class="en">The calorie content in a regular Coke is very high.</div><div class="zh">一罐普通可乐里的卡路里含量很高。</div></div></div>
+<div class="card" data-s="context n. 上下文；语境；环境"><div class="w"><span class="idx">142</span>context</div><div class="m">n. 上下文；语境；环境</div><div class="ex"><div class="en">We should judge the past in its historic context.</div><div class="zh">我们应当根据时代背景来评判过去的事。</div></div></div>
+<div class="card" data-s="list n. 表；名单；v. 列出； (船)倾斜"><div class="w"><span class="idx">143</span>list</div><div class="m">n. 表；名单；v. 列出； (船)倾斜</div><div class="ex"><div class="en">The results are listed in numerical order.</div><div class="zh">结果是按数字顺序列出的。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 33</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="chapter n. 篇章"><div class="w"><span class="idx">144</span>chapter</div><div class="m">n. 篇章</div><div class="ex"><div class="en">Steamboat travel opened a new chapter in America's exploration of the West.</div><div class="zh">汽船旅行为开发美国西部翻开了新篇章。</div></div></div>
+<div class="card" data-s="volume n. 卷；册；体积；音量"><div class="w"><span class="idx">145</span>volume</div><div class="m">n. 卷；册；体积；音量</div><div class="ex"><div class="en">The volume of this container is one cubic metre.</div><div class="zh">这个容器的容积是一立方米。</div></div></div>
+<div class="card" data-s="reel n. 卷筒；卷轴；卷盘；线轴；v. 卷；绕；踉跄；摇摇晃晃地挪动； 蹒跚"><div class="w"><span class="idx">146</span>reel</div><div class="m">n. 卷筒；卷轴；卷盘；线轴；v. 卷；绕；踉跄；摇摇晃晃地挪动； 蹒跚</div><div class="ex"><div class="en">I put a new reel of film in my camera.</div><div class="zh">我扌巴一卷新胶卷装入照相机。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 34</span><span class="gcnt">2 词</span></div><div class="cards">
+<div class="card" data-s="subject n. 主题；话题；学科；对 象"><div class="w"><span class="idx">147</span>subject</div><div class="m">n. 主题；话题；学科；对 象</div><div class="ex"><div class="en">In the car, she reverted to the subject which is uppermost in her mind.</div><div class="zh">在车里,她又提起了她最关心的那个话题。</div></div></div>
+<div class="card" data-s="object n. 物体；目的；对象；宾 语；v. 反对；有意⻅；讨厌"><div class="w"><span class="idx">148</span>object</div><div class="m">n. 物体；目的；对象；宾 语；v. 反对；有意⻅；讨厌</div><div class="ex"><div class="en">Many residents object to the plan for a new airport.</div><div class="zh">许多居民反对新建机场的计划。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 35</span><span class="gcnt">2 词</span></div><div class="cards">
+<div class="card" data-s="major adj. 主要的；较多的；成年的；大 调的；n. 主修课；成年人；少校； 大调；v. 主修"><div class="w"><span class="idx">149</span>major</div><div class="m">adj. 主要的；较多的；成年的；大 调的；n. 主修课；成年人；少校； 大调；v. 主修</div><div class="ex"><div class="en">Tourism is a major source of income here.</div><div class="zh">旅游业是这里的主要收入来源。</div></div></div>
+<div class="card" data-s="minor adj. 小的；次要的；轻微 的；小调的；n. 未成年人"><div class="w"><span class="idx">150</span>minor</div><div class="m">adj. 小的；次要的；轻微 的；小调的；n. 未成年人</div><div class="ex"><div class="en">The car needs only minor repairs.</div><div class="zh">这辆车只需要小修。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 36</span><span class="gcnt">8 词</span></div><div class="cards">
+<div class="card" data-s="sociology n. 社会学"><div class="w"><span class="idx">151</span>sociology</div><div class="m">n. 社会学</div><div class="ex"><div class="en">A few years ago, sociology was the most popular subject for undergraduates.</div><div class="zh">几年之前,社会学是最受大学本科生欢迎的科目。</div></div></div>
+<div class="card" data-s="politics n. 政治；政治学"><div class="w"><span class="idx">152</span>politics</div><div class="m">n. 政治；政治学</div><div class="ex"><div class="en">He closed dow n the bus in ess and went into politics.</div><div class="zh">他关闭公司,投身政治。</div></div></div>
+<div class="card" data-s="economics n. 经济学；经济"><div class="w"><span class="idx">153</span>economics</div><div class="m">n. 经济学；经济</div><div class="ex"><div class="en">Whenever they start talking about economics, I feel totally out of my depth.</div><div class="zh">每当他们谈起经济学,我就完全不知所云。</div></div></div>
+<div class="card" data-s="marketing n. 营销；促销；销售活动"><div class="w"><span class="idx">154</span>marketing</div><div class="m">n. 营销；促销；销售活动</div><div class="ex"><div class="en">This company puts a high value on marketing.</div><div class="zh">这家公司高度重视市场营销。</div></div></div>
+<div class="card" data-s="accounting n. 会计；会计学；v. 解释说 明；“account”的现在分词"><div class="w"><span class="idx">155</span>accounting</div><div class="m">n. 会计；会计学；v. 解释说 明；“account”的现在分词</div><div class="ex"><div class="en">A company's accounting records must be open for inspection at all times.</div><div class="zh">公司的会计账目必须可以随时公开供人检查。</div></div></div>
+<div class="card" data-s="audit v. 审计；查账；n. 审计； 查账"><div class="w"><span class="idx">156</span>audit</div><div class="m">v. 审计；查账；n. 审计； 查账</div><div class="ex"><div class="en">They worked all day without a break and finished the audit on tim e.</div><div class="zh">他们不停地工作了一整天,按期完成了审计工作。</div></div></div>
+<div class="card" data-s="statistics n. 统计学；统计数字"><div class="w"><span class="idx">157</span>statistics</div><div class="m">n. 统计学；统计数字</div><div class="ex"><div class="en">There is a compulsory course in statistics.</div><div class="zh">有一门统计学的必修课。</div></div></div>
+<div class="card" data-s="psychology n. 心理学；心理"><div class="w"><span class="idx">158</span>psychology</div><div class="m">n. 心理学；心理</div><div class="ex"><div class="en">The professor has considerable expertise in studying a criminal's psychology.</div><div class="zh">这位教授在研究罪犯的心理特征方面十分在行。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 37</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="philosophy n. 哲学"><div class="w"><span class="idx">159</span>philosophy</div><div class="m">n. 哲学</div><div class="ex"><div class="en">She has a master's degree in philosophy.</div><div class="zh">她获得了哲学的硕士学位。</div></div></div>
+<div class="card" data-s="logic n. 逻辑"><div class="w"><span class="idx">160</span>logic</div><div class="m">n. 逻辑</div><div class="ex"><div class="en">Socrates laid the foundations of logic.</div><div class="zh">苏格拉底奠定了逻辑学的基础。</div></div></div>
+<div class="card" data-s="biology n. 生物学"><div class="w"><span class="idx">161</span>biology</div><div class="m">n. 生物学</div><div class="ex"><div class="en">Biology is the study of living things.</div><div class="zh">生物学是对生物的研究。</div></div></div>
+<div class="card" data-s="physics n. 物理学"><div class="w"><span class="idx">162</span>physics</div><div class="m">n. 物理学</div><div class="ex"><div class="en">He is one of the top students in physics.</div><div class="zh">他是物理学的尖子生之一。</div></div></div>
+<div class="card" data-s="chemistry n. 化学"><div class="w"><span class="idx">163</span>chemistry</div><div class="m">n. 化学</div><div class="ex"><div class="en">I am not good at organic chemistry.</div><div class="zh">我的有机化学学得不好。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 38</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="agriculture n. 农业"><div class="w"><span class="idx">164</span>agriculture</div><div class="m">n. 农业</div><div class="ex"><div class="en">In the past, agriculture located a family to a place.</div><div class="zh">过去,农业使家庭安置于固定的地方。</div></div></div>
+<div class="card" data-s="logistics n. 物流；(军事)后勤学"><div class="w"><span class="idx">165</span>logistics</div><div class="m">n. 物流；(军事)后勤学</div><div class="ex"><div class="en">I have a good comma nd in the procedures of logistics.</div><div class="zh">我对物流的每个步骤都很熟悉。</div></div></div>
+<div class="card" data-s="geography n. 地理；地理学"><div class="w"><span class="idx">166</span>geography</div><div class="m">n. 地理；地理学</div><div class="ex"><div class="en">I'd like to introduce you to my geography professor.</div><div class="zh">我想介绍我的地理学教授给你认识。</div></div></div>
+<div class="card" data-s="history n. 历史；历史学"><div class="w"><span class="idx">167</span>history</div><div class="m">n. 历史；历史学</div><div class="ex"><div class="en">China is an oriental country with a long history.</div><div class="zh">中国是一个有着悠久历史的东方国家。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 39</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="engineering n. 工程；工程学"><div class="w"><span class="idx">168</span>engineering</div><div class="m">n. 工程；工程学</div><div class="ex"><div class="en">The percentage of girls in engineering has increased in recent years.</div><div class="zh">近年来,学工程学的女生所占的比例增加了。</div></div></div>
+<div class="card" data-s="mechanics n. 力学；机械学；构成法；运作方 式；n. 技工；机械师；机修工； “mechanic”的复数"><div class="w"><span class="idx">169</span>mechanics</div><div class="m">n. 力学；机械学；构成法；运作方 式；n. 技工；机械师；机修工； “mechanic”的复数</div><div class="ex"><div class="en">He is studying mechanics and now is learning all the parts of an engine.</div><div class="zh">他在学习机械学,目前正在学习引擎的所有部件。</div></div></div>
+<div class="card" data-s="electronics n. 电子学；电子器件"><div class="w"><span class="idx">170</span>electronics</div><div class="m">n. 电子学；电子器件</div><div class="ex"><div class="en">He works for a company that makes consumer electronics.</div><div class="zh">他在一家生产消费电子产品的公司工作。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 40</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="maths n. 数学"><div class="w"><span class="idx">171</span>maths</div><div class="m">n. 数学</div><div class="ex"><div class="en">The teacher will test us in maths.</div><div class="zh">老师将测试我们的数学。</div></div></div>
+<div class="card" data-s="arithmetic n. 算术"><div class="w"><span class="idx">172</span>arithmetic</div><div class="m">n. 算术</div><div class="ex"><div class="en">Arab brought arithmetic and algebra to the fore once again and placed it almost on a par with geometry.</div><div class="zh">阿拉伯人把算术和代数又一次提高到几乎和几何并驾齐驱的地位。</div></div></div>
+<div class="card" data-s="geometry n. 几何学"><div class="w"><span class="idx">173</span>geometry</div><div class="m">n. 几何学</div><div class="ex"><div class="en">Geometry is a piece of cake for me but a big headache for my friend Claire.</div><div class="zh">几何学对我来说是小菜—碟,但是让我的朋友克莱尔很头疼。</div></div></div>
+<div class="card" data-s="algebra n. 代数"><div class="w"><span class="idx">174</span>algebra</div><div class="m">n. 代数</div><div class="ex"><div class="en">The young boy is good at algebra.</div><div class="zh">这个男孩擅长代数。</div></div></div>
+<div class="card" data-s="calculus n. (人体内的)结石；微 积分学"><div class="w"><span class="idx">175</span>calculus</div><div class="m">n. (人体内的)结石；微 积分学</div><div class="ex"><div class="en">Calculus is a difficult course for most college students.</div><div class="zh">微积分对大咅盼大学生来说都是一门很难的课程。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 41</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="plus prep. 加；加上；conj. 加；和； 并且；adj. 正的；加的；超过的； n. 加号；正数；优势"><div class="w"><span class="idx">176</span>plus</div><div class="m">prep. 加；加上；conj. 加；和； 并且；adj. 正的；加的；超过的； n. 加号；正数；优势</div><div class="ex"><div class="en">Intelligenee plus wit makes for an interesting person.</div><div class="zh">智慧加上机智就会造就一个有趣的人。</div></div></div>
+<div class="card" data-s="sum n. 总数；算术；金额；v. 概括"><div class="w"><span class="idx">177</span>sum</div><div class="m">n. 总数；算术；金额；v. 概括</div><div class="ex"><div class="en">The man has decided to give his son a huge sum of money for his independenee from the family.</div><div class="zh">这个男人决定给儿子一大笔钱,让他离家自立。</div></div></div>
+<div class="card" data-s="total n. 总额；总计；v. 共计； 总数达；adj. 总的；全部的"><div class="w"><span class="idx">178</span>total</div><div class="m">n. 总额；总计；v. 共计； 总数达；adj. 总的；全部的</div><div class="ex"><div class="en">In total, over 100,000 people were killed in the tsunami, and a great many people were homeless.</div><div class="zh">在这次海啸中丧生的人总计超过了W万人,还有很多人无家可归。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 42</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="merger n. 合并；兼并"><div class="w"><span class="idx">179</span>merger</div><div class="m">n. 合并；兼并</div><div class="ex"><div class="en">The merger created the largest bank in the country.</div><div class="zh">这次合并造就了国内最大的银行。</div></div></div>
+<div class="card" data-s="equation n. 方程式；等式"><div class="w"><span class="idx">180</span>equation</div><div class="m">n. 方程式；等式</div><div class="ex"><div class="en">If you're trying to lose weight in a healthy way, exercise should be part of the equation.</div><div class="zh">假如你要通过健康的方式来减肥,锻炼应当是必不可少的。</div></div></div>
+<div class="card" data-s="identical adj. 相同的；同样的"><div class="w"><span class="idx">181</span>identical</div><div class="m">adj. 相同的；同样的</div><div class="ex"><div class="en">This is the identical hotel we stayed at last year.</div><div class="zh">这就是我们去年住过的旅馆。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 43</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="minus adj. 零下的；负的；n. 减 号；负号；缺点；prep. 减去"><div class="w"><span class="idx">182</span>minus</div><div class="m">adj. 零下的；负的；n. 减 号；负号；缺点；prep. 减去</div><div class="ex"><div class="en">The temperature is minus 10 degrees now.</div><div class="zh">现在的温度是零下10度。</div></div></div>
+<div class="card" data-s="subtract v. 减去；扣除"><div class="w"><span class="idx">183</span>subtract</div><div class="m">v. 减去；扣除</div><div class="ex"><div class="en">The little girl has begun to learn to add and subtract.</div><div class="zh">这小女孩已幵始学习加减法了。</div></div></div>
+<div class="card" data-s="multiply v. 乘；增加；繁殖"><div class="w"><span class="idx">184</span>multiply</div><div class="m">v. 乘；增加；繁殖</div><div class="ex"><div class="en">Friendships multiply joy and divide grievances.</div><div class="zh">友谊能增进欢乐,分担苦衷。</div></div></div>
+<div class="card" data-s="divide v. 分开；分隔；除以"><div class="w"><span class="idx">185</span>divide</div><div class="m">v. 分开；分隔；除以</div><div class="ex"><div class="en">Divide the total by the number of students.</div><div class="zh">用总数除以学生人数。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 44</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="dividend n. 被除数；股份红利；股 息"><div class="w"><span class="idx">186</span>dividend</div><div class="m">n. 被除数；股份红利；股 息</div><div class="ex"><div class="en">In this sum, twelve is the dividend.</div><div class="zh">在这道除法中，十二是被除数。</div></div></div>
+<div class="card" data-s="remainder n. 剩余物；其余的人；余 数；v. 廉价出售"><div class="w"><span class="idx">187</span>remainder</div><div class="m">n. 剩余物；其余的人；余 数；v. 廉价出售</div><div class="ex"><div class="en">Divide 4 into 13, and the remainder is l.</div><div class="zh">除以4,余数为1。</div></div></div>
+<div class="card" data-s="rational adj. 理性的；理智的；合 理的"><div class="w"><span class="idx">188</span>rational</div><div class="m">adj. 理性的；理智的；合 理的</div><div class="ex"><div class="en">A rational number can be expressed as a ratio of two integers.</div><div class="zh">有理数可以表示成两个整数之比。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 45</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="parameter n. 参数；参量；决定因 素；界限"><div class="w"><span class="idx">189</span>parameter</div><div class="m">n. 参数；参量；决定因 素；界限</div><div class="ex"><div class="en">Cost is an important parameter in the design.</div><div class="zh">成本是设计中的一个重要参数。</div></div></div>
+<div class="card" data-s="variable adj. 可变的；易变的；不稳 定的；n. 变量；易变的东⻄"><div class="w"><span class="idx">190</span>variable</div><div class="m">adj. 可变的；易变的；不稳 定的；n. 变量；易变的东⻄</div><div class="ex"><div class="en">There are some variables that can change our plan.</div><div class="zh">存在一些能够改变我们的计划的不定因素。</div></div></div>
+<div class="card" data-s="even adv. 甚至；甚至于；adj. 偶数 的；平坦的；v. 使平均；使相等； 使平坦"><div class="w"><span class="idx">191</span>even</div><div class="m">adv. 甚至；甚至于；adj. 偶数 的；平坦的；v. 使平均；使相等； 使平坦</div><div class="ex"><div class="en">He won the first round and I won the second, so our scores are even now.</div><div class="zh">他赢了第一局,而我赢了第二局,因此我们的比分现在相等。</div></div></div>
+<div class="card" data-s="odd adj. 奇怪的；奇数的；不成对的； 不经常的；adv. (用于数字后)大 约"><div class="w"><span class="idx">192</span>odd</div><div class="m">adj. 奇怪的；奇数的；不成对的； 不经常的；adv. (用于数字后)大 约</div><div class="ex"><div class="en">Three is an odd number.</div><div class="zh">三是奇数。</div></div></div>
+<div class="card" data-s="mean v. 意思是；打算；导致；有意；对... 严肃认真；adj. 低劣的；吝啬的；平 均的；n. 平均数；中庸；居中"><div class="w"><span class="idx">193</span>mean</div><div class="m">v. 意思是；打算；导致；有意；对... 严肃认真；adj. 低劣的；吝啬的；平 均的；n. 平均数；中庸；居中</div><div class="ex"><div class="en">The professor asked the students to take 200 values and calculate the mean.</div><div class="zh">教授要求学生们取200个值,然后计算其平均值。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 46</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="double n. 两倍；v. (使)加倍； 是...的两倍；把...对折"><div class="w"><span class="idx">194</span>double</div><div class="m">n. 两倍；v. (使)加倍； 是...的两倍；把...对折</div><div class="ex"><div class="en">Many things now cost double what they did a couple of years ago.</div><div class="zh">现在的许多东西比两三年前贵了一倍。</div></div></div>
+<div class="card" data-s="triple adj. 三部分的；三方的；三倍的； n. 三倍的数；三个一组；v. 成为三 倍；使增至三倍"><div class="w"><span class="idx">195</span>triple</div><div class="m">adj. 三部分的；三方的；三倍的； n. 三倍的数；三个一组；v. 成为三 倍；使增至三倍</div><div class="ex"><div class="en">His income tripled.</div><div class="zh">他的收入增至原来的三倍。</div></div></div>
+<div class="card" data-s="quadruple adj. 四倍的；四重的；n. 四部分；v. 成四倍；翻两番"><div class="w"><span class="idx">196</span>quadruple</div><div class="m">adj. 四倍的；四重的；n. 四部分；v. 成四倍；翻两番</div><div class="ex"><div class="en">Our profits have quadrupled in the last decade.</div><div class="zh">在过去的10年里,我们的利润翻了两番。</div></div></div>
+<div class="card" data-s="multiple adj. 多样的；多种的；n. 倍数"><div class="w"><span class="idx">197</span>multiple</div><div class="m">adj. 多样的；多种的；n. 倍数</div><div class="ex"><div class="en">Twelve is a multiple of three.</div><div class="zh">十二是三的倍数。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 47</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="maximum n. 最大限度；最大量； adj. 最多的；最大极限的"><div class="w"><span class="idx">198</span>maximum</div><div class="m">n. 最大限度；最大量； adj. 最多的；最大极限的</div><div class="ex"><div class="en">The maximum load for this truck is ten tonnes.</div><div class="zh">这辆卡车的最大载重量是10吨。</div></div></div>
+<div class="card" data-s="minimum n. 最小值；adj. 最小量的"><div class="w"><span class="idx">199</span>minimum</div><div class="m">n. 最小值；adj. 最小量的</div><div class="ex"><div class="en">You must get a minimum of 60 questions right to pass the test.</div><div class="zh">你必须答对至少60道题才能通过测试。</div></div></div>
+<div class="card" data-s="approximately adv. 大约；大概"><div class="w"><span class="idx">200</span>approximately</div><div class="m">adv. 大约；大概</div><div class="ex"><div class="en">The journey takes approximately two hours.</div><div class="zh">这段路程大约需要两小时。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 48</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="chart n. 图表；v. 作图；记录； 制定"><div class="w"><span class="idx">201</span>chart</div><div class="m">n. 图表；v. 作图；记录； 制定</div><div class="ex"><div class="en">This chart displays the links connecting these groups.</div><div class="zh">这张图显示出这些群体之间的关联。</div></div></div>
+<div class="card" data-s="graph n. 图表；曲线图"><div class="w"><span class="idx">202</span>graph</div><div class="m">n. 图表；曲线图</div><div class="ex"><div class="en">They made a graph of how cold the weather was every day for a month.</div><div class="zh">他们制作了一张图表,显示了一个月内每天天气有多冷。</div></div></div>
+<div class="card" data-s="diagram n. 图表；图解"><div class="w"><span class="idx">203</span>diagram</div><div class="m">n. 图表；图解</div><div class="ex"><div class="en">The diagram explains how the pump works.</div><div class="zh">这张示意图说明了泵的工作原理。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 49</span><span class="gcnt">8 词</span></div><div class="cards">
+<div class="card" data-s="table n. 桌子；台子；表格；v. 把...列入议事日程；搁置"><div class="w"><span class="idx">204</span>table</div><div class="m">n. 桌子；台子；表格；v. 把...列入议事日程；搁置</div><div class="ex"><div class="en">We should create a table for the sales data.</div><div class="zh">我们应该为这些销量数据制作一张表格。</div></div></div>
+<div class="card" data-s="matrix n. 母体；发源地；矩阵"><div class="w"><span class="idx">205</span>matrix</div><div class="m">n. 母体；发源地；矩阵</div><div class="ex"><div class="en">She cannot find the matrix for the competition.</div><div class="zh">她找不到参加比赛用的铸模了O电影《黑客帝国》(TheMatrix)的英文原名表达的是,人们生活在由数字组成的矩阵世界中,一切都是虚幻的,受电脑程序所控制。</div></div></div>
+<div class="card" data-s="rectangle n. 矩形；⻓方形"><div class="w"><span class="idx">206</span>rectangle</div><div class="m">n. 矩形；⻓方形</div><div class="ex"><div class="en">The plate itself is a small rectangle made of gold.</div><div class="zh">这只盘子本身就是个黄金制的小长方形。</div></div></div>
+<div class="card" data-s="cube n. 立方体；立方"><div class="w"><span class="idx">207</span>cube</div><div class="m">n. 立方体；立方</div><div class="ex"><div class="en">She dropped a cube of sugar into her coffee and stirred it with a spoon.</div><div class="zh">她将一块方糖放入咖啡中,然后用勺子搅了搅。</div></div></div>
+<div class="card" data-s="angle n. ⻆；⻆度；视⻆；v. 斜 放；运用手段获得"><div class="w"><span class="idx">208</span>angle</div><div class="m">n. ⻆；⻆度；视⻆；v. 斜 放；运用手段获得</div><div class="ex"><div class="en">The temple is especially beautiful to look at from this angle.</div><div class="zh">从这个角度看,这座寺庙特别美。</div></div></div>
+<div class="card" data-s="triangle n. 三⻆形；三⻆形物"><div class="w"><span class="idx">209</span>triangle</div><div class="m">n. 三⻆形；三⻆形物</div><div class="ex"><div class="en">The three places form a triangle.</div><div class="zh">这三个地方构成一个三角形。</div></div></div>
+<div class="card" data-s="diagonal adj. 对⻆线的；斜的；n. 对⻆线；斜线"><div class="w"><span class="idx">210</span>diagonal</div><div class="m">adj. 对⻆线的；斜的；n. 对⻆线；斜线</div><div class="ex"><div class="en">The two diagonals of a square cross in the centre.</div><div class="zh">正方形的两条对角线相交于正方形的中心。</div></div></div>
+<div class="card" data-s="straight adj. 直的；笔直的；正直的； 率直的；adv. 直；径直；直接"><div class="w"><span class="idx">211</span>straight</div><div class="m">adj. 直的；笔直的；正直的； 率直的；adv. 直；径直；直接</div><div class="ex"><div class="en">The old lady closed her book and looked straight at me.</div><div class="zh">这位老妇人合上了书并直视着我。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 50</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="circle n. 圆；圈；v. 圈出；环绕"><div class="w"><span class="idx">212</span>circle</div><div class="m">n. 圆；圈；v. 圈出；环绕</div><div class="ex"><div class="en">The circle is 10 centimetres in diameter.</div><div class="zh">这个圆形的直径是10厘米。</div></div></div>
+<div class="card" data-s="round adj. 圆的；球形的；十足的；adv. 环绕； 附近；prep. 环绕；在...周围；n. 圆；圆形 物；巡回；回合；v. 绕过；拐过；使成圆形"><div class="w"><span class="idx">213</span>round</div><div class="m">adj. 圆的；球形的；十足的；adv. 环绕； 附近；prep. 环绕；在...周围；n. 圆；圆形 物；巡回；回合；v. 绕过；拐过；使成圆形</div><div class="ex"><div class="en">He went round and round, but could find no way to get out of the room.</div><div class="zh">他转了好几圈,但找不到办法离幵这个房间。</div></div></div>
+<div class="card" data-s="dot n. 小圆点；点；v. 在...上 加点"><div class="w"><span class="idx">214</span>dot</div><div class="m">n. 小圆点；点；v. 在...上 加点</div><div class="ex"><div class="en">On the map, convenience stores are marked by a red dot.</div><div class="zh">在这幅地图上,便利店被用小红点标岀来了。</div></div></div>
+<div class="card" data-s="sphere n. 球体；范围"><div class="w"><span class="idx">215</span>sphere</div><div class="m">n. 球体；范围</div><div class="ex"><div class="en">These problems lie outside my sphere of knowledge.</div><div class="zh">这些问题超出了我的知识范围。</div></div></div>
+<div class="card" data-s="cone n. 圆锥体；圆锥形物；球 果；松球"><div class="w"><span class="idx">216</span>cone</div><div class="m">n. 圆锥体；圆锥形物；球 果；松球</div><div class="ex"><div class="en">The police have sectioned off the road with traffic cones.</div><div class="zh">警察用锥形路标把这条路隔了出来。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 51</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="extent n. ⻓度；广度；程度"><div class="w"><span class="idx">217</span>extent</div><div class="m">n. ⻓度；广度；程度</div><div class="ex"><div class="en">No one cares about the extent of his debts.</div><div class="zh">没有人在意他负债的程度。</div></div></div>
+<div class="card" data-s="width n. 宽度"><div class="w"><span class="idx">218</span>width</div><div class="m">n. 宽度</div><div class="ex"><div class="en">In front of the mountain is a river of great width.</div><div class="zh">这座山前有一条宽阔的河流。</div></div></div>
+<div class="card" data-s="length n. ⻓度"><div class="w"><span class="idx">219</span>length</div><div class="m">n. ⻓度</div><div class="ex"><div class="en">The room is 7 metres in length and 5 metres in breadth.</div><div class="zh">这个房间长7米，宽5米。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 52</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="decimal adj. 小数的；十进位的； n. 小数"><div class="w"><span class="idx">220</span>decimal</div><div class="m">adj. 小数的；十进位的； n. 小数</div><div class="ex"><div class="en">The decimal system is widely used.</div><div class="zh">十进制被广泛运用。</div></div></div>
+<div class="card" data-s="per cent n. 百分之..."><div class="w"><span class="idx">221</span>per cent</div><div class="m">n. 百分之...</div><div class="ex"><div class="en">I am 100 per cent in agreement.</div><div class="zh">我百分之百同意。</div></div></div>
+<div class="card" data-s="proportion n. 比例；份额"><div class="w"><span class="idx">222</span>proportion</div><div class="m">n. 比例；份额</div><div class="ex"><div class="en">This door is very narrow in proportion to its height.</div><div class="zh">就其高度而言,这扇门太窄了。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 53</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="rate n. 比率； 率；速度；进度；价格； 费用；地方税；等级；v. 估价；值 得；定级；(被)认为；被评价"><div class="w"><span class="idx">223</span>rate</div><div class="m">n. 比率； 率；速度；进度；价格； 费用；地方税；等级；v. 估价；值 得；定级；(被)认为；被评价</div><div class="ex"><div class="en">The unemployment rate fell slightly last month.</div><div class="zh">上个月失业率略有下降。</div></div></div>
+<div class="card" data-s="ratio n. 比率；比值"><div class="w"><span class="idx">224</span>ratio</div><div class="m">n. 比率；比值</div><div class="ex"><div class="en">The ratio of 3 to 9 is the same as that of 9 to 27.</div><div class="zh">比9的比率和9比27的比率相同。</div></div></div>
+<div class="card" data-s="fraction n. 小部分；分数"><div class="w"><span class="idx">225</span>fraction</div><div class="m">n. 小部分；分数</div><div class="ex"><div class="en">She spends only a fraction of her earnings on clothes.</div><div class="zh">她只把收入的一小部分用于买衣服。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 54</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="scale n. 规模；等级；秤；刻度；比例 (尺)；v. 改变...大小；攀登"><div class="w"><span class="idx">226</span>scale</div><div class="m">n. 规模；等级；秤；刻度；比例 (尺)；v. 改变...大小；攀登</div><div class="ex"><div class="en">A machine for weighing people has a scale from l pound to 300 pounds on it.</div><div class="zh">称体重的机器上有从1磅到300磅的刻度。</div></div></div>
+<div class="card" data-s="ounce n. 少量；盎司"><div class="w"><span class="idx">227</span>ounce</div><div class="m">n. 少量；盎司</div><div class="ex"><div class="en">An ounce of prevention is worth a pound of cure.</div><div class="zh">预防比补救更重要。</div></div></div>
+<div class="card" data-s="density n. 浓密；密度"><div class="w"><span class="idx">228</span>density</div><div class="m">n. 浓密；密度</div><div class="ex"><div class="en">The population density is highest near the coast.</div><div class="zh">沿海地区人口密度最高。</div></div></div>
+<div class="card" data-s="fahrenheit adj. 华氏温度计的；n. 华 氏温度计"><div class="w"><span class="idx">229</span>Fahrenheit</div><div class="m">adj. 华氏温度计的；n. 华 氏温度计</div><div class="ex"><div class="en">Water freezes at 32 degrees Fahrenheit.</div><div class="zh">水在32华氏度结冰。</div></div></div>
+<div class="card" data-s="mercury n. 水银；汞"><div class="w"><span class="idx">230</span>mercury</div><div class="m">n. 水银；汞</div><div class="ex"><div class="en">The mercury stood at nearly 40°C.</div><div class="zh">水银柱几乎升到了40摄氏度。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 55</span><span class="gcnt">6 词</span></div><div class="cards">
+<div class="card" data-s="battery n. 电池；一组；一连串"><div class="w"><span class="idx">231</span>battery</div><div class="m">n. 电池；一组；一连串</div><div class="ex"><div class="en">You can charge your car battery in this car park.</div><div class="zh">你可以在这座停车场给你的汽车蓄电池充电。</div></div></div>
+<div class="card" data-s="volt n. 伏特"><div class="w"><span class="idx">232</span>volt</div><div class="m">n. 伏特</div><div class="ex"><div class="en">A child miraculously survived a 25,000-volt electric shock.</div><div class="zh">个孩子在遭受2.5万伏的电击后奇迹般地活了下来。</div></div></div>
+<div class="card" data-s="radiate v. 散发；发射(光或 热)；辐射"><div class="w"><span class="idx">233</span>radiate</div><div class="m">v. 散发；发射(光或 热)；辐射</div><div class="ex"><div class="en">Four avenues radiate from the square.</div><div class="zh">四条林荫大道从那广场向四方延伸。</div></div></div>
+<div class="card" data-s="emit v. 发出；发射"><div class="w"><span class="idx">234</span>emit</div><div class="m">v. 发出；发射</div><div class="ex"><div class="en">The tail exhaust pipe of the car emitted poisonous smoke.</div><div class="zh">汽车的尾部排气管排出了有毒的烟。</div></div></div>
+<div class="card" data-s="transparent adj. 透明的；显然的"><div class="w"><span class="idx">235</span>transparent</div><div class="m">adj. 透明的；显然的</div><div class="ex"><div class="en">Not all glass is transparent.</div><div class="zh">并非所有玻璃都是透明的。</div></div></div>
+<div class="card" data-s="hollow adj. 中空的；空洞的"><div class="w"><span class="idx">236</span>hollow</div><div class="m">adj. 中空的；空洞的</div><div class="ex"><div class="en">The trunk of this tree looks solid, but in fact it is hollow.</div><div class="zh">这棵树的树干看上去是实心的,但其实是空心的。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 56</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="ozone n. 臭氧"><div class="w"><span class="idx">237</span>ozone</div><div class="m">n. 臭氧</div><div class="ex"><div class="en">The ozone layer protects the earth from most of the sun's ultraviolet radiation.</div><div class="zh">臭氧层保护地球免受太阳的大部分紫外辐射的侵害。</div></div></div>
+<div class="card" data-s="gravity n. 重力；地心引力；严重 性"><div class="w"><span class="idx">238</span>gravity</div><div class="m">n. 重力；地心引力；严重 性</div><div class="ex"><div class="en">Enormous energy is needed to launch a spacecraft against gravity.</div><div class="zh">我们需要巨大的能量来发射飞船,使其摆脱地球引力。</div></div></div>
+<div class="card" data-s="friction n. 摩擦；不和；争执"><div class="w"><span class="idx">239</span>friction</div><div class="m">n. 摩擦；不和；争执</div><div class="ex"><div class="en">In designing this device, it is necessary to reduce friction as much as possible.</div><div class="zh">在设计这种装置时,必须尽可能减小摩擦力。</div></div></div>
+<div class="card" data-s="eccentric adj. 古怪的；偏离轨道的； n. 怪人；偏离轨道运行"><div class="w"><span class="idx">240</span>eccentric</div><div class="m">adj. 古怪的；偏离轨道的； n. 怪人；偏离轨道运行</div><div class="ex"><div class="en">The old lady has some eccentric habits.</div><div class="zh">这位老妇人有一些古怪的习惯。</div></div></div>
+<div class="card" data-s="displace v. 取代；移置；免职；迫 使...离开家园"><div class="w"><span class="idx">241</span>displace</div><div class="m">v. 取代；移置；免职；迫 使...离开家园</div><div class="ex"><div class="en">A bone in his knee was displaced when he crashed against another player.</div><div class="zh">在与另一名运动员相撞时,他膝部的一块骨头移位了。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 57</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="boil v. 沸腾；煮；煮沸；n. 煮 沸；沸点"><div class="w"><span class="idx">242</span>boil</div><div class="m">v. 沸腾；煮；煮沸；n. 煮 沸；沸点</div><div class="ex"><div class="en">The watched pot never boils.</div><div class="zh">性急烧水水不沸。</div></div></div>
+<div class="card" data-s="melt v. (使)融化；(使)熔 化"><div class="w"><span class="idx">243</span>melt</div><div class="m">v. (使)融化；(使)熔 化</div><div class="ex"><div class="en">Iron melts at a great heat.</div><div class="zh">铁在高温下熔化。</div></div></div>
+<div class="card" data-s="dissolve v. 溶解；解散；散去；失 控"><div class="w"><span class="idx">244</span>dissolve</div><div class="m">v. 溶解；解散；散去；失 控</div><div class="ex"><div class="en">Sugar dissolves in water.</div><div class="zh">糖溶于水。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 58</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="rust n. 铁锈；v. 生锈"><div class="w"><span class="idx">245</span>rust</div><div class="m">n. 铁锈；v. 生锈</div><div class="ex"><div class="en">If you leave your metal tools outside in the rain, they will rust.</div><div class="zh">如果你在雨天把金属工具放在外面,它们会生锈的。</div></div></div>
+<div class="card" data-s="ferment n. 发酵；酵素；动乱；v. (使)发酵；动乱"><div class="w"><span class="idx">246</span>ferment</div><div class="m">n. 发酵；酵素；动乱；v. (使)发酵；动乱</div><div class="ex"><div class="en">The juice is left to ferment for three weeks.</div><div class="zh">果汁要放置三周进行发酵。</div></div></div>
+<div class="card" data-s="dilute v. 稀释；adj. 经稀释的"><div class="w"><span class="idx">247</span>dilute</div><div class="m">v. 稀释；adj. 经稀释的</div><div class="ex"><div class="en">The nurse diluted the drug with saline water.</div><div class="zh">护士用生理盐水把药加以稀释。</div></div></div>
+<div class="card" data-s="acid adj. 酸的；酸性的；刻薄 的；n. 酸"><div class="w"><span class="idx">248</span>acid</div><div class="m">adj. 酸的；酸性的；刻薄 的；n. 酸</div><div class="ex"><div class="en">When she spoke, her tone was like acid.</div><div class="zh">她讲话时的语调很尖刻。</div></div></div>
+<div class="card" data-s="noxious adj. 有害的；有毒的；可 憎的"><div class="w"><span class="idx">249</span>noxious</div><div class="m">adj. 有害的；有毒的；可 憎的</div><div class="ex"><div class="en">Increasing tax on petrol would encourage people to drive cars with fewer noxious emissions.</div><div class="zh">提高汽油税会鼓励人们开有害气体排放更少的车。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 59</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="static adj. 静止的；不变的；n. 静电"><div class="w"><span class="idx">250</span>static</div><div class="m">adj. 静止的；不变的；n. 静电</div><div class="ex"><div class="en">This cloth material has static electricity.</div><div class="zh">这种布料带有静电。</div></div></div>
+<div class="card" data-s="inert adj. 无行动的；无生气 的；惰性的"><div class="w"><span class="idx">251</span>inert</div><div class="m">adj. 无行动的；无生气 的；惰性的</div><div class="ex"><div class="en">Helium and neon are inert gases.</div><div class="zh">氮和氛为惰性气体。</div></div></div>
+<div class="card" data-s="inherent adj. 固有的；内在的；天 生的"><div class="w"><span class="idx">252</span>inherent</div><div class="m">adj. 固有的；内在的；天 生的</div><div class="ex"><div class="en">Polarity is inherent in a magnet.</div><div class="zh">极性是磁铁的固有性质。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 60</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="formula n. 公式；配方；方案；分 子式"><div class="w"><span class="idx">253</span>formula</div><div class="m">n. 公式；配方；方案；分 子式</div><div class="ex"><div class="en">The formula for water is Ho.</div><div class="zh">水的分子式是巴0。</div></div></div>
+<div class="card" data-s="component n. 成分；部分；零件； adj. 组成的；构成的"><div class="w"><span class="idx">254</span>component</div><div class="m">n. 成分；部分；零件； adj. 组成的；构成的</div><div class="ex"><div class="en">Regular exercise is one of the key components of a healthy lifestyle.</div><div class="zh">有规律的锻炼是健康的生活方式的重要组成部分之一。</div></div></div>
+<div class="card" data-s="compose v. 创作；组成；使镇定"><div class="w"><span class="idx">255</span>compose</div><div class="m">v. 创作；组成；使镇定</div><div class="ex"><div class="en">Water is composed of hydrogen and oxygen.</div><div class="zh">水是由氢和氧组成的。</div></div></div>
+<div class="card" data-s="mixture n. 混合物；混合"><div class="w"><span class="idx">256</span>mixture</div><div class="m">n. 混合物；混合</div><div class="ex"><div class="en">Her new play is a mixture of sadness and humour.</div><div class="zh">她的新剧本融悲哀和幽默于一体。</div></div></div>
+<div class="card" data-s="blend v. 混合；配合；融合"><div class="w"><span class="idx">257</span>blend</div><div class="m">v. 混合；配合；融合</div><div class="ex"><div class="en">His manner was a blend of friendliness and respect.</div><div class="zh">他的态度是友好中带有尊敬。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 61</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="theory n. 理论；学说"><div class="w"><span class="idx">258</span>theory</div><div class="m">n. 理论；学说</div><div class="ex"><div class="en">Darwin's theory of evolution changed biology forever.</div><div class="zh">达尔文的进化论永远改变了生物学。</div></div></div>
+<div class="card" data-s="empirical adj. 经验主义的；以经验 为根据的"><div class="w"><span class="idx">259</span>empirical</div><div class="m">adj. 经验主义的；以经验 为根据的</div><div class="ex"><div class="en">His thesis is not very convincing for lack of empirical evidence.</div><div class="zh">他的论文缺乏实验证据，所以不是很有说服力。</div></div></div>
+<div class="card" data-s="practical adj. 实际的；实践的；实 用的"><div class="w"><span class="idx">260</span>practical</div><div class="m">adj. 实际的；实践的；实 用的</div><div class="ex"><div class="en">The course offers practical training in nursing.</div><div class="zh">这门课提供护理方面的实用训练。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 62</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="doctrine n. 学说；教义；教条"><div class="w"><span class="idx">261</span>doctrine</div><div class="m">n. 学说；教义；教条</div><div class="ex"><div class="en">The doctrine is unchangeable.</div><div class="zh">这一信条不容改变。</div></div></div>
+<div class="card" data-s="principle n. 原则；原理"><div class="w"><span class="idx">262</span>principle</div><div class="m">n. 原则；原理</div><div class="ex"><div class="en">A bicycle and a motorcycle are built on the same principle.</div><div class="zh">自行车和摩托车是根据同样的原理制造的。</div></div></div>
+<div class="card" data-s="discipline n. 纪律；训练；惩戒；学科；科 目；v. 训练；约束自己；惩罚"><div class="w"><span class="idx">263</span>discipline</div><div class="m">n. 纪律；训练；惩戒；学科；科 目；v. 训练；约束自己；惩罚</div><div class="ex"><div class="en">It takes years of discipline to become a ballerina.</div><div class="zh">要成为芭蕾舞演员,需经多年训练。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 63</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="term n. 学期；术语；措辞；期限； 条款；v. 把...称作；把...叫做"><div class="w"><span class="idx">264</span>term</div><div class="m">n. 学期；术语；措辞；期限； 条款；v. 把...称作；把...叫做</div><div class="ex"><div class="en">The protocol would have very positive results in the long term.</div><div class="zh">从长远来看,这个议定书会产生非常积极的影响。</div></div></div>
+<div class="card" data-s="semester n. 一学期；半学年"><div class="w"><span class="idx">265</span>semester</div><div class="m">n. 一学期；半学年</div><div class="ex"><div class="en">There are two semesters in a year.</div><div class="zh">年中有两个学期。</div></div></div>
+<div class="card" data-s="timetable n. 时间表；时刻表；课程 表"><div class="w"><span class="idx">266</span>timetable</div><div class="m">n. 时间表；时刻表；课程 表</div><div class="ex"><div class="en">There are eight English classes listed in this termzs timetable.</div><div class="zh">这学期的课程表上列有八节英语课。</div></div></div>
+<div class="card" data-s="schedule n. 日程表；时间表；v. 安 排"><div class="w"><span class="idx">267</span>schedule</div><div class="m">n. 日程表；时间表；v. 安 排</div><div class="ex"><div class="en">The next thing on my schedule is to buy some milk in the supermarket.</div><div class="zh">我的日程安排中要做的下一件事是去超市买牛奶。</div></div></div>
+<div class="card" data-s="deadline n. 最终期限"><div class="w"><span class="idx">268</span>deadline</div><div class="m">n. 最终期限</div><div class="ex"><div class="en">I hope we can finish this before the deadline.</div><div class="zh">我希望我们能在截止日期之前完成这项工作。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 64</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="course n. 课程；过程；一道菜；v. 快 速流动；(思想或感情)涌动"><div class="w"><span class="idx">269</span>course</div><div class="m">n. 课程；过程；一道菜；v. 快 速流动；(思想或感情)涌动</div><div class="ex"><div class="en">She is currently doing a bus in ess studies course at Leeds.</div><div class="zh">她目前在利兹大学修读一门商科课程。</div></div></div>
+<div class="card" data-s="lesson n. 课；功课；课程；教训"><div class="w"><span class="idx">270</span>lesson</div><div class="m">n. 课；功课；课程；教训</div><div class="ex"><div class="en">The lesson from your failure is perhaps a broader one.</div><div class="zh">从你的失败中得出的教训可能具有更广泛的意义。</div></div></div>
+<div class="card" data-s="curriculum n. 课程"><div class="w"><span class="idx">271</span>curriculum</div><div class="m">n. 课程</div><div class="ex"><div class="en">Coding is now part of the school curriculum.</div><div class="zh">编程现在已成为学校课程的一部分。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 65</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="seminar n. 研讨会；专题讨论"><div class="w"><span class="idx">272</span>seminar</div><div class="m">n. 研讨会；专题讨论</div><div class="ex"><div class="en">Why didn't you come to yesterday's seminar?</div><div class="zh">你昨天怎么没来参加讨论课?</div></div></div>
+<div class="card" data-s="forum n. 古罗⻢城镇的广场；论 坛；讨论会"><div class="w"><span class="idx">273</span>forum</div><div class="m">n. 古罗⻢城镇的广场；论 坛；讨论会</div><div class="ex"><div class="en">The forum is now open to all small and medium-sized enterprises.</div><div class="zh">这个论坛目前向所有中小企业敞开大门。</div></div></div>
+<div class="card" data-s="syllabus n. 教学大纲；摘要"><div class="w"><span class="idx">274</span>syllabus</div><div class="m">n. 教学大纲；摘要</div><div class="ex"><div class="en">The syllabus changes every year.</div><div class="zh">教学大纲每年都有变化。</div></div></div>
+<div class="card" data-s="system n. 系统；体系"><div class="w"><span class="idx">275</span>system</div><div class="m">n. 系统；体系</div><div class="ex"><div class="en">The new system is still in the planning stage.</div><div class="zh">新制度仍处于规划阶段。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 66</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="rudimentary adj. 基本的；初步的；未 充分发展的"><div class="w"><span class="idx">276</span>rudimentary</div><div class="m">adj. 基本的；初步的；未 充分发展的</div><div class="ex"><div class="en">He has only a rudimentary knowledge of the dinosaur.</div><div class="zh">他对恐龙只有粗浅的了解。</div></div></div>
+<div class="card" data-s="basic adj. 基本的；基础的"><div class="w"><span class="idx">277</span>basic</div><div class="m">adj. 基本的；基础的</div><div class="ex"><div class="en">Water is a basic human need.</div><div class="zh">水是人类的基本需求。</div></div></div>
+<div class="card" data-s="fundamental adj. 基本的；基础的；根本 的；n. 基本原则；基本原理"><div class="w"><span class="idx">278</span>fundamental</div><div class="m">adj. 基本的；基础的；根本 的；n. 基本原则；基本原理</div><div class="ex"><div class="en">Another fundamental consideration in the conception of a design is function.</div><div class="zh">在构思设计方案时要考虑的另一个基本因素是功能。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 67</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="elementary adj. 基本的；初级的"><div class="w"><span class="idx">279</span>elementary</div><div class="m">adj. 基本的；初级的</div><div class="ex"><div class="en">Their course of study in eludes elementary hygiene and medical theories.</div><div class="zh">他们的课程包括基础卫生学和医疗理论。</div></div></div>
+<div class="card" data-s="profound adj. 深刻的；渊博的；深 奥的；深远的"><div class="w"><span class="idx">280</span>profound</div><div class="m">adj. 深刻的；渊博的；深 奥的；深远的</div><div class="ex"><div class="en">His brother's words have had a profound effect on him.</div><div class="zh">他哥哥的话对他产生了深刻的影响。</div></div></div>
+<div class="card" data-s="surface n. 表面；v. 显露；给...铺 路面"><div class="w"><span class="idx">281</span>surface</div><div class="m">n. 表面；v. 显露；给...铺 路面</div><div class="ex"><div class="en">The surface of the bamboo feels so smooth.</div><div class="zh">竹子的表面摸上去很光滑。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 68</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="compulsory adj. 强制的；必须做的"><div class="w"><span class="idx">282</span>compulsory</div><div class="m">adj. 强制的；必须做的</div><div class="ex"><div class="en">Britain did not introduce compulsory primary education until 1880.</div><div class="zh">直到1880年,英国才开始实行初等义务教育。</div></div></div>
+<div class="card" data-s="prerequisite n. 前提；先决条件；adj. 首要必备的"><div class="w"><span class="idx">283</span>prerequisite</div><div class="m">n. 前提；先决条件；adj. 首要必备的</div><div class="ex"><div class="en">Good eyesight is a prerequisite for the job.</div><div class="zh">良好的视力是这份工作的必备条件。</div></div></div>
+<div class="card" data-s="selective adj. 选择的；选择性的； 精挑细选的"><div class="w"><span class="idx">284</span>selective</div><div class="m">adj. 选择的；选择性的； 精挑细选的</div><div class="ex"><div class="en">The man seemed to have a very selective recall of past events.</div><div class="zh">这个男人好像在回忆过去的事情时非常有选择性。</div></div></div>
+<div class="card" data-s="elective adj. 选举的；选修的；可 选择的；n. 选修课程"><div class="w"><span class="idx">285</span>elective</div><div class="m">adj. 选举的；选修的；可 选择的；n. 选修课程</div><div class="ex"><div class="en">Besides the required courses, I'm taking an elective in computer science.</div><div class="zh">除了必修课外，我正在选修计算机科学专业的一门课。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 69</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="assignment n. 分配；指派；任务；作 业"><div class="w"><span class="idx">286</span>assignment</div><div class="m">n. 分配；指派；任务；作 业</div><div class="ex"><div class="en">A brave fighter never shrinks from dan ger when executing an assignment.</div><div class="zh">个英勇的战士在执行任务时决不害怕危险。</div></div></div>
+<div class="card" data-s="submit v. 提交；屈服"><div class="w"><span class="idx">287</span>submit</div><div class="m">v. 提交；屈服</div><div class="ex"><div class="en">I hope you can submit your term papers before the deadline.</div><div class="zh">我希望你们能在最后限期之前交上你们的学期论文。</div></div></div>
+<div class="card" data-s="preview n. 预审；预看；试映；预习； v. 预映；预看；预习；写预评"><div class="w"><span class="idx">288</span>preview</div><div class="m">n. 预审；预看；试映；预习； v. 预映；预看；预习；写预评</div><div class="ex"><div class="en">Please do the preview and review work.</div><div class="zh">请做好预习和复习工作。</div></div></div>
+<div class="card" data-s="review n. 回顾；复习；审查；评论； v. 回顾；复习；审核；评论"><div class="w"><span class="idx">289</span>review</div><div class="m">n. 回顾；复习；审查；评论； v. 回顾；复习；审核；评论</div><div class="ex"><div class="en">We must hold a careful review of historical events.</div><div class="zh">我们必须谨慎地回顾历史事件。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 70</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="revise v. 修正；温习；校订"><div class="w"><span class="idx">290</span>revise</div><div class="m">v. 修正；温习；校订</div><div class="ex"><div class="en">The author revised the book twice.</div><div class="zh">作者两次修订了这本书。</div></div></div>
+<div class="card" data-s="inspect v. 检查；视察"><div class="w"><span class="idx">291</span>inspect</div><div class="m">v. 检查；视察</div><div class="ex"><div class="en">The mayor will inspect our school tomorrow.</div><div class="zh">市长明天要来视察我们学校。</div></div></div>
+<div class="card" data-s="consult v. 咨询；查询；请教"><div class="w"><span class="idx">292</span>consult</div><div class="m">v. 咨询；查询；请教</div><div class="ex"><div class="en">In this case, I recommended that you consult your doctor.</div><div class="zh">在这种情况下,我建议你去咨询医生。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 71</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="skim v. 撇去；略读；掠过"><div class="w"><span class="idx">293</span>skim</div><div class="m">v. 撇去；略读；掠过</div><div class="ex"><div class="en">It's important for you to skim through this article.</div><div class="zh">略读一下这篇文章对你来说很重要。</div></div></div>
+<div class="card" data-s="scan v. 扫描；浏览；审视；细 看；n. 扫描；浏览；扫描图"><div class="w"><span class="idx">294</span>scan</div><div class="m">v. 扫描；浏览；审视；细 看；n. 扫描；浏览；扫描图</div><div class="ex"><div class="en">I just had a quick scan through your book again.</div><div class="zh">我刚刚又快速浏览了一遍你的书。</div></div></div>
+<div class="card" data-s="scrutinise v. 详细检查；仔细察看"><div class="w"><span class="idx">295</span>scrutinise</div><div class="m">v. 详细检查；仔细察看</div><div class="ex"><div class="en">The jeweller scrutinised the ruby for flaws.</div><div class="zh">宝石商人仔细查看这颗红宝石有无瑕疵。</div></div></div>
+<div class="card" data-s="recite v. 背诵；吟诵；细述"><div class="w"><span class="idx">296</span>recite</div><div class="m">v. 背诵；吟诵；细述</div><div class="ex"><div class="en">Each child had to recite a poem in class.</div><div class="zh">每个孩子都得在课上背诵一首诗。</div></div></div>
+<div class="card" data-s="dictate v. 听写；口授；命令；支 配；影响；n. 指令"><div class="w"><span class="idx">297</span>dictate</div><div class="m">v. 听写；口授；命令；支 配；影响；n. 指令</div><div class="ex"><div class="en">The English teacher dictates to the class every other week.</div><div class="zh">英语老师每隔一周就给这班学生做一次听写。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 72</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="examination n. 考试；检查；审查"><div class="w"><span class="idx">298</span>examination</div><div class="m">n. 考试；检查；审查</div><div class="ex"><div class="en">Did you have to get through an entrance examination?</div><div class="zh">你必须要通过入学考试吗?</div></div></div>
+<div class="card" data-s="test v. 试验；测试；n. 试验； 测验"><div class="w"><span class="idx">299</span>test</div><div class="m">v. 试验；测试；n. 试验； 测验</div><div class="ex"><div class="en">The scientists have already experimented at test sites.</div><div class="zh">科学家已经在试验场所进行了实验。</div></div></div>
+<div class="card" data-s="quiz n. 小测验；知识竞赛"><div class="w"><span class="idx">300</span>quiz</div><div class="m">n. 小测验；知识竞赛</div><div class="ex"><div class="en">The quiz was a good opportunity for him to exhibit his know ledge.</div><div class="zh">这场智力竞赛是他炫耀知识的好机会。</div></div></div>
+<div class="card" data-s="presentation n. 演出；展示；陈述；报 告"><div class="w"><span class="idx">301</span>presentation</div><div class="m">n. 演出；展示；陈述；报 告</div><div class="ex"><div class="en">There is a presentation of our new play tonight.</div><div class="zh">今晚,我们有一出新戏上演。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 73</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="plagiarise v. 抄袭；剽窃"><div class="w"><span class="idx">302</span>plagiarise</div><div class="m">v. 抄袭；剽窃</div><div class="ex"><div class="en">It's not a viable option to plagiarise someone's work.</div><div class="zh">剽窃他人作品的行为是不可取的。</div></div></div>
+<div class="card" data-s="copy n. 复制品；副本；v. 复 制；拷⻉"><div class="w"><span class="idx">303</span>copy</div><div class="m">n. 复制品；副本；v. 复 制；拷⻉</div><div class="ex"><div class="en">This painting is a copy of the one in the museum.</div><div class="zh">这幅画是博物馆中的那幅画的复制品。</div></div></div>
+<div class="card" data-s="print v. 打印；印刷；n. 打印； 印刷"><div class="w"><span class="idx">304</span>print</div><div class="m">v. 打印；印刷；n. 打印； 印刷</div><div class="ex"><div class="en">Please print two copies of the report.</div><div class="zh">请把报告打印两份。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 74</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="thesis n. 论点；论文"><div class="w"><span class="idx">305</span>thesis</div><div class="m">n. 论点；论文</div><div class="ex"><div class="en">She is writing her thesis on urban transport.</div><div class="zh">她正在写关于城市交通的论文。</div></div></div>
+<div class="card" data-s="essay n. 散文；文章；尝试；企 图；v. 企图；尝试"><div class="w"><span class="idx">306</span>essay</div><div class="m">n. 散文；文章；尝试；企 图；v. 企图；尝试</div><div class="ex"><div class="en">This essay represents a considerable improvement on your recent work.</div><div class="zh">这篇短文表明你最近的努力取得了相当大的进步。</div></div></div>
+<div class="card" data-s="paper n. 纸；报纸；论文；试 卷；v. 用墙纸贴"><div class="w"><span class="idx">307</span>paper</div><div class="m">n. 纸；报纸；论文；试 卷；v. 用墙纸贴</div><div class="ex"><div class="en">She is working hard at her term paper in the library.</div><div class="zh">她正在图书馆努力撰写学期论文。</div></div></div>
+<div class="card" data-s="dissertation n. 专题论文；学位论文"><div class="w"><span class="idx">308</span>dissertation</div><div class="m">n. 专题论文；学位论文</div><div class="ex"><div class="en">Each student will have a supervisor to advise on the writing of the dissertation.</div><div class="zh">每个学生都将有一位导师来指导写论文。</div></div></div>
+<div class="card" data-s="project n. 计划；方案；项目；课题； v. 预计；计划；投射；突出"><div class="w"><span class="idx">309</span>project</div><div class="m">n. 计划；方案；项目；课题； v. 预计；计划；投射；突出</div><div class="ex"><div class="en">It is an elaborate project that applies to many purposes.</div><div class="zh">这个方案经过精心设计,适用于多种目标。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 75</span><span class="gcnt">7 词</span></div><div class="cards">
+<div class="card" data-s="heading n. 标题；v. 前进；朝向； “head”的现在分词"><div class="w"><span class="idx">310</span>heading</div><div class="m">n. 标题；v. 前进；朝向； “head”的现在分词</div><div class="ex"><div class="en">The heading was in large print.</div><div class="zh">标题采用了大号字体。</div></div></div>
+<div class="card" data-s="outset n. 开端；起始"><div class="w"><span class="idx">311</span>outset</div><div class="m">n. 开端；起始</div><div class="ex"><div class="en">The scienee fiction fascinates the readers from the outset.</div><div class="zh">这部科幻小说从幵头就引人入胜。</div></div></div>
+<div class="card" data-s="outline n. 轮廓；纲要；v. 描画轮 廓；概述"><div class="w"><span class="idx">312</span>outline</div><div class="m">n. 轮廓；纲要；v. 描画轮 廓；概述</div><div class="ex"><div class="en">These documents provided a broad outline of the country's development after World War II.</div><div class="zh">这些文件勾画出了该国在第二次世界大战后的大致发展情况。</div></div></div>
+<div class="card" data-s="point n. 点；观点；要点；分数； v. 指向；指出；弄尖；瞄准"><div class="w"><span class="idx">313</span>point</div><div class="m">n. 点；观点；要点；分数； v. 指向；指出；弄尖；瞄准</div><div class="ex"><div class="en">That is not the point in question.</div><div class="zh">那不是现在正在讨论的要点。</div></div></div>
+<div class="card" data-s="gist n. 要点；大意；主旨"><div class="w"><span class="idx">314</span>gist</div><div class="m">n. 要点；大意；主旨</div><div class="ex"><div class="en">He cannot understand the gist of their argument.</div><div class="zh">他不明白他们这场争论的主旨。</div></div></div>
+<div class="card" data-s="opinion n. 意⻅；看法；观点"><div class="w"><span class="idx">315</span>opinion</div><div class="m">n. 意⻅；看法；观点</div><div class="ex"><div class="en">She asked her friend s' opinions about her plans.</div><div class="zh">她征求朋友们对她的计划的看法。</div></div></div>
+<div class="card" data-s="introduce v. 介绍；引进"><div class="w"><span class="idx">316</span>introduce</div><div class="m">v. 介绍；引进</div><div class="ex"><div class="en">Britain did not introduce compulsory primary education until 1880.</div><div class="zh">直到1880年,英国才开始实行初等义务教育。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 76</span><span class="gcnt">7 词</span></div><div class="cards">
+<div class="card" data-s="reference n. 提及；涉及；参考；引 用；介绍信"><div class="w"><span class="idx">317</span>reference</div><div class="m">n. 提及；涉及；参考；引 用；介绍信</div><div class="ex"><div class="en">This book is for reference only.</div><div class="zh">这本书仅供参考。</div></div></div>
+<div class="card" data-s="cite v. 引用；提及,举例,引 证；传讯"><div class="w"><span class="idx">318</span>cite</div><div class="m">v. 引用；提及,举例,引 证；传讯</div><div class="ex"><div class="en">I'll just cite some figures for comparison.</div><div class="zh">我要引用一些数字来进行比较。</div></div></div>
+<div class="card" data-s="elicit v. 引出；诱出；探出"><div class="w"><span class="idx">319</span>elicit</div><div class="m">v. 引出；诱出；探出</div><div class="ex"><div class="en">At last, we elicited some important information from him.</div><div class="zh">最终,我们从他那里探得了一些重要的信息。</div></div></div>
+<div class="card" data-s="quote v. 引用；报价；n. 引用； 引文；报价"><div class="w"><span class="idx">320</span>quote</div><div class="m">v. 引用；报价；n. 引用； 引文；报价</div><div class="ex"><div class="en">The author frequently quoted Shakespeare.</div><div class="zh">这名作者经常引用莎士比亚作品里的话。</div></div></div>
+<div class="card" data-s="extract n. 提取物；摘录；精华； 节录；v. 拔出；提取；摘录"><div class="w"><span class="idx">321</span>extract</div><div class="m">n. 提取物；摘录；精华； 节录；v. 拔出；提取；摘录</div><div class="ex"><div class="en">The following extract is taken from his commentary on the movie.</div><div class="zh">下面一段摘自他对这部电影的评论。</div></div></div>
+<div class="card" data-s="abstract adj. 抽象的；非具体的；深奥的； v. 提取；抽取；作...的摘要；n. 摘 要；概要；抽象派艺术作品"><div class="w"><span class="idx">322</span>abstract</div><div class="m">adj. 抽象的；非具体的；深奥的； v. 提取；抽取；作...的摘要；n. 摘 要；概要；抽象派艺术作品</div><div class="ex"><div class="en">Iron is abstracted from ore.</div><div class="zh">铁是从矿石中提取的。</div></div></div>
+<div class="card" data-s="summary n. 总结；摘要"><div class="w"><span class="idx">323</span>summary</div><div class="m">n. 总结；摘要</div><div class="ex"><div class="en">The professor asked the students to make a summary of the reading material.</div><div class="zh">教授要求学生们总结一下这些阅读材料的内容。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 77</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="assume v. 假定；设想；呈现；承 担"><div class="w"><span class="idx">324</span>assume</div><div class="m">v. 假定；设想；呈现；承 担</div><div class="ex"><div class="en">We assume his innocenee before hearing the evidence against it.</div><div class="zh">在未听到对他不利的证词以前,我们假定他是无罪的。</div></div></div>
+<div class="card" data-s="presume v. 假设；假定；设想；冒 昧"><div class="w"><span class="idx">325</span>presume</div><div class="m">v. 假设；假定；设想；冒 昧</div><div class="ex"><div class="en">From his words, I presumed that he had been in France for several yea rs.</div><div class="zh">根据他的话,我想他曾在法国待过几年。</div></div></div>
+<div class="card" data-s="suppose v. 认为；假设；猜想"><div class="w"><span class="idx">326</span>suppose</div><div class="m">v. 认为；假设；猜想</div><div class="ex"><div class="en">Let us suppose another planet with conditions sim ilar to those on the earth.</div><div class="zh">让我们假定有另外一个和地球上的条件相似的行星。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 78</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="hypothesis n. 假设；假说"><div class="w"><span class="idx">327</span>hypothesis</div><div class="m">n. 假设；假说</div><div class="ex"><div class="en">The experiment was designed to test the hypothesis.</div><div class="zh">这个实验旨在检验该假设。</div></div></div>
+<div class="card" data-s="postulate v. 假定；要求；n. 假定； 假设"><div class="w"><span class="idx">328</span>postulate</div><div class="m">v. 假定；要求；n. 假定； 假设</div><div class="ex"><div class="en">The experts have postulated that this disease can be cured in a couple of decades.</div><div class="zh">专家们假定在未来的二三十年内这种疾病将能被治愈。</div></div></div>
+<div class="card" data-s="speculate v. 推测；思索；投机"><div class="w"><span class="idx">329</span>speculate</div><div class="m">v. 推测；思索；投机</div><div class="ex"><div class="en">The doctors could only speculate that he died of cancer.</div><div class="zh">医生只能推测他死于癌症。</div></div></div>
+<div class="card" data-s="predict v. 预言；预测"><div class="w"><span class="idx">330</span>predict</div><div class="m">v. 预言；预测</div><div class="ex"><div class="en">It is virtually impossible to predict the future accurately.</div><div class="zh">精确预言未来的事实际上是办不到的。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 79</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="perceive v. 察觉；理解；发觉"><div class="w"><span class="idx">331</span>perceive</div><div class="m">v. 察觉；理解；发觉</div><div class="ex"><div class="en">I perceived that it was not possible to make her change her mind.</div><div class="zh">我意识到她是不可能改变主意的。</div></div></div>
+<div class="card" data-s="detect v. 察觉；查出；测出"><div class="w"><span class="idx">332</span>detect</div><div class="m">v. 察觉；查出；测出</div><div class="ex"><div class="en">The man is responsible for detecting some kind of weak signals.</div><div class="zh">这个男人负责探测某种微弱的信号。</div></div></div>
+<div class="card" data-s="discern v. 辨明；识别；洞悉"><div class="w"><span class="idx">333</span>discern</div><div class="m">v. 辨明；识别；洞悉</div><div class="ex"><div class="en">The child finds it hard to discern between red and green.</div><div class="zh">那孩子觉得难以分辨红色和绿色。</div></div></div>
+<div class="card" data-s="recognise v. 认出；意识到；承认"><div class="w"><span class="idx">334</span>recognise</div><div class="m">v. 认出；意识到；承认</div><div class="ex"><div class="en">I recognised Peter at once although I hadn't seen him for many years.</div><div class="zh">虽然我有许多年没看到彼得了,但我立即认出了他。</div></div></div>
+<div class="card" data-s="conscious adj. 有意识的；有知觉 的；刻意的"><div class="w"><span class="idx">335</span>conscious</div><div class="m">adj. 有意识的；有知觉 的；刻意的</div><div class="ex"><div class="en">He was conscious of his guilt.</div><div class="zh">他自知有罪。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 80</span><span class="gcnt">7 词</span></div><div class="cards">
+<div class="card" data-s="reckon v. 计算；估计；认为；考 虑到"><div class="w"><span class="idx">336</span>reckon</div><div class="m">v. 计算；估计；认为；考 虑到</div><div class="ex"><div class="en">We had reckoned on your support.</div><div class="zh">我们本指望得到你的支持。</div></div></div>
+<div class="card" data-s="deem v. 认为；觉得"><div class="w"><span class="idx">337</span>deem</div><div class="m">v. 认为；觉得</div><div class="ex"><div class="en">The board deemed it urge nt that these files be printed right away.</div><div class="zh">董事会认为必须马上印出这些文件。</div></div></div>
+<div class="card" data-s="imply v. 暗示；意味"><div class="w"><span class="idx">338</span>imply</div><div class="m">v. 暗示；意味</div><div class="ex"><div class="en">The way he talked implied that he was not willing to accept the agreement.</div><div class="zh">他讲话的方式暗示了他不愿意接受这份协议。</div></div></div>
+<div class="card" data-s="deliberate adj. 深思熟虑的；故意的； v. 深思熟虑；仔细考虑"><div class="w"><span class="idx">339</span>deliberate</div><div class="m">adj. 深思熟虑的；故意的； v. 深思熟虑；仔细考虑</div><div class="ex"><div class="en">She deliberated the question before she made an answer.</div><div class="zh">回答前,她仔细地考虑了这个问题。</div></div></div>
+<div class="card" data-s="represent v. 代表；表现；体现；相 当于"><div class="w"><span class="idx">340</span>represent</div><div class="m">v. 代表；表现；体现；相 当于</div><div class="ex"><div class="en">A committee has been elected to represent us.</div><div class="zh">我们选出了一个委员会来代表我们。</div></div></div>
+<div class="card" data-s="insist v. 坚持；坚决要求"><div class="w"><span class="idx">341</span>insist</div><div class="m">v. 坚持；坚决要求</div><div class="ex"><div class="en">We insist on self-reliance.</div><div class="zh">我们坚决主张自力更生。</div></div></div>
+<div class="card" data-s="persist v. 坚持；持续"><div class="w"><span class="idx">342</span>persist</div><div class="m">v. 坚持；持续</div><div class="ex"><div class="en">On the top of the massive mountains, snow persists throughout the year.</div><div class="zh">在这些大山的山顶,积雪终年不化。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 81</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="understand v. 理解"><div class="w"><span class="idx">343</span>understand</div><div class="m">v. 理解</div><div class="ex"><div class="en">What human beings have understood is just the tip of the iceberg.</div><div class="zh">人类已经理解的事物只是冰山一角。</div></div></div>
+<div class="card" data-s="comprehend v. 理解；领会；包含"><div class="w"><span class="idx">344</span>comprehend</div><div class="m">v. 理解；领会；包含</div><div class="ex"><div class="en">You can say you have comprehended you can use it correctly and effectively.</div><div class="zh">如果你可以正确而有效地使用一个词，你就可以说你已经理解它了。</div></div></div>
+<div class="card" data-s="analyse v. 分析"><div class="w"><span class="idx">345</span>analyse</div><div class="m">v. 分析</div><div class="ex"><div class="en">We should analyse the cause and effect of this event.</div><div class="zh">我们应该分析这个事件的因果关系。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 82</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="diagnose v. 诊断"><div class="w"><span class="idx">346</span>diagnose</div><div class="m">v. 诊断</div><div class="ex"><div class="en">We can use a test to diagnose a variety of diseases.</div><div class="zh">我们可以用一项化验来诊断多种疾病。</div></div></div>
+<div class="card" data-s="infer v. 推断；推知"><div class="w"><span class="idx">347</span>infer</div><div class="m">v. 推断；推知</div><div class="ex"><div class="en">From your smile, I infer that you like this drink.</div><div class="zh">根据你的笑容,我推断你喜欢这杯饮料。</div></div></div>
+<div class="card" data-s="deduce v. 推断；演绎；推论"><div class="w"><span class="idx">348</span>deduce</div><div class="m">v. 推断；演绎；推论</div><div class="ex"><div class="en">We can deduce a conclusion from this premise.</div><div class="zh">我们可以根据这个前提推出结论。</div></div></div>
+<div class="card" data-s="conclude v. 推断出；得出结论；结 束"><div class="w"><span class="idx">349</span>conclude</div><div class="m">v. 推断出；得出结论；结 束</div><div class="ex"><div class="en">What do you conclude from his explanation?</div><div class="zh">你从他的解释中得出了什么结论?</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 83</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="analogy n. 类比；类推；相似"><div class="w"><span class="idx">350</span>analogy</div><div class="m">n. 类比；类推；相似</div><div class="ex"><div class="en">The man drew an analogy between the human skin and a brick wall.</div><div class="zh">这个男人把人的皮肤与砖墙进行了类比。</div></div></div>
+<div class="card" data-s="compare v. 比较；对比；比喻"><div class="w"><span class="idx">351</span>compare</div><div class="m">v. 比较；对比；比喻</div><div class="ex"><div class="en">Your knowledge cannot yet compare with his.</div><div class="zh">你的知识水平还比不上他的。</div></div></div>
+<div class="card" data-s="contrast n. 对照；反差；对立；v. 对比；和...形成对照"><div class="w"><span class="idx">352</span>contrast</div><div class="m">n. 对照；反差；对立；v. 对比；和...形成对照</div><div class="ex"><div class="en">There is a great contrast between good and evil.</div><div class="zh">善与恶之间有明显的差别。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 84</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="overlap v. 交叠；使部分重叠；n. 重叠部分"><div class="w"><span class="idx">353</span>overlap</div><div class="m">v. 交叠；使部分重叠；n. 重叠部分</div><div class="ex"><div class="en">The plots and descriptions in these two novels largely overlap.</div><div class="zh">这两本小说中的故事情节和描写有许多—样的地方。</div></div></div>
+<div class="card" data-s="contradiction n. 矛盾；不一致；反驳"><div class="w"><span class="idx">354</span>contradiction</div><div class="m">n. 矛盾；不一致；反驳</div><div class="ex"><div class="en">Your attitude is in contradiction to your character.</div><div class="zh">你的态度和你的性格矛盾。</div></div></div>
+<div class="card" data-s="disagree v. 不同意；不一致；不适 合；不符"><div class="w"><span class="idx">355</span>disagree</div><div class="m">v. 不同意；不一致；不适 合；不符</div><div class="ex"><div class="en">The two experts disagree about the cause.</div><div class="zh">两位专家对原因意见不一。</div></div></div>
+<div class="card" data-s="differ v. 与...不同；与...相异"><div class="w"><span class="idx">356</span>differ</div><div class="m">v. 与...不同；与...相异</div><div class="ex"><div class="en">The two theories differ from each other in many ways.</div><div class="zh">这两种理论在许多方面彼此相异。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 85</span><span class="gcnt">12 词</span></div><div class="cards">
+<div class="card" data-s="diverse adj. 多种多样的；不同的"><div class="w"><span class="idx">357</span>diverse</div><div class="m">adj. 多种多样的；不同的</div><div class="ex"><div class="en">The original meaning of this word has become more diverse over tim e.</div><div class="zh">随着时间的推移,该词由原本的含义演变出更加多样的意思。</div></div></div>
+<div class="card" data-s="nuance n. 细微差别"><div class="w"><span class="idx">358</span>nuance</div><div class="m">n. 细微差别</div><div class="ex"><div class="en">The translation loses some of the nuance.</div><div class="zh">译文失去了一些细微差别。</div></div></div>
+<div class="card" data-s="inductive adj. 诱导的；归纳的；感 应的"><div class="w"><span class="idx">359</span>inductive</div><div class="m">adj. 诱导的；归纳的；感 应的</div><div class="ex"><div class="en">Inductive reasoning moves from examples to rules.</div><div class="zh">归纳推理从例子走向规则。</div></div></div>
+<div class="card" data-s="detail n. 细节；详情；详细；v. 详述；细说；派遣"><div class="w"><span class="idx">360</span>detail</div><div class="m">n. 细节；详情；详细；v. 详述；细说；派遣</div><div class="ex"><div class="en">No detail was too small to escape the detective's attention.</div><div class="zh">再小的细节都逃不过这位侦探的眼睛。</div></div></div>
+<div class="card" data-s="thorough adj. 彻底的；完全的；详 尽的"><div class="w"><span class="idx">361</span>thorough</div><div class="m">adj. 彻底的；完全的；详 尽的</div><div class="ex"><div class="en">A thorough brushing helps to protect your teeth and gum s.</div><div class="zh">仔细刷牙有助于保护你的牙齿和牙龈。</div></div></div>
+<div class="card" data-s="example n. 例子；实例；榜样"><div class="w"><span class="idx">362</span>example</div><div class="m">n. 例子；实例；榜样</div><div class="ex"><div class="en">Her diligence has set an example to the others.</div><div class="zh">她的勤奋为其他人树立了榜样。</div></div></div>
+<div class="card" data-s="instance n. 例子；场合；情况"><div class="w"><span class="idx">363</span>instance</div><div class="m">n. 例子；场合；情况</div><div class="ex"><div class="en">Now adays, we can read many instances of good people and good deeds in the press.</div><div class="zh">如今,人们能从报刊上看到很多关于好人好事的实例。</div></div></div>
+<div class="card" data-s="confirm v. 证实；确认；批准"><div class="w"><span class="idx">364</span>confirm</div><div class="m">v. 证实；确认；批准</div><div class="ex"><div class="en">Her new film confirmed her as one of our leading directors.</div><div class="zh">她的新电影巩固了其一流导演的地位。</div></div></div>
+<div class="card" data-s="demonstrate v. 演示；展示；证明；示 威"><div class="w"><span class="idx">365</span>demonstrate</div><div class="m">v. 演示；展示；证明；示 威</div><div class="ex"><div class="en">He demonstrated how to use the new machine.</div><div class="zh">他演示了怎样使用这台新机器。</div></div></div>
+<div class="card" data-s="illustrate v. (举例)说明；给(书 籍、杂志等)加插图"><div class="w"><span class="idx">366</span>illustrate</div><div class="m">v. (举例)说明；给(书 籍、杂志等)加插图</div><div class="ex"><div class="en">The book was illustrated with colour photographs.</div><div class="zh">这本书里配上了彩色照片。</div></div></div>
+<div class="card" data-s="manifest v. 表明；显现；使人注意到；adj. 明显的；n. 载货单；旅客名单"><div class="w"><span class="idx">367</span>manifest</div><div class="m">v. 表明；显现；使人注意到；adj. 明显的；n. 载货单；旅客名单</div><div class="ex"><div class="en">Her bravery manifests itself in times of difficulties.</div><div class="zh">在困难时期,她的勇气显现了岀来。</div></div></div>
+<div class="card" data-s="prove v. 证明；证实"><div class="w"><span class="idx">368</span>prove</div><div class="m">v. 证明；证实</div><div class="ex"><div class="en">He has proved his loyalty in the battle.</div><div class="zh">他已在这场战斗中证明了自己的忠诚。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 86</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="determine v. 决心；决定；测定；确 定"><div class="w"><span class="idx">369</span>determine</div><div class="m">v. 决心；决定；测定；确 定</div><div class="ex"><div class="en">He determined to move to another city and start a new life.</div><div class="zh">他决心搬去另一座城市,开启新生活。</div></div></div>
+<div class="card" data-s="decide v. 决定"><div class="w"><span class="idx">370</span>decide</div><div class="m">v. 决定</div><div class="ex"><div class="en">We decided to leave early to avoid traffic.</div><div class="zh">我们决定早走以避开交通拥堵。</div></div></div>
+<div class="card" data-s="resolve v. 决心要；解决；(使) 分解；n. 决心"><div class="w"><span class="idx">371</span>resolve</div><div class="m">v. 决心要；解决；(使) 分解；n. 决心</div><div class="ex"><div class="en">She resolved that she would never eat junk food.</div><div class="zh">她下定决心不再吃垃圾食品。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 87</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="survey v. 调查；勘测；n. 调查； 勘测"><div class="w"><span class="idx">372</span>survey</div><div class="m">v. 调查；勘测；n. 调查； 勘测</div><div class="ex"><div class="en">A recent survey of public opinions shows that many people are worried about the rising house prices.</div><div class="zh">最近的一份民意调查表明,很多人对不断上涨的房价表示忧虑。</div></div></div>
+<div class="card" data-s="research n. 研究；探索；调查；v. 研究；调查；探讨"><div class="w"><span class="idx">373</span>research</div><div class="m">n. 研究；探索；调查；v. 研究；调查；探讨</div><div class="ex"><div class="en">It is a good idea to do some research before you buy a house.</div><div class="zh">买房子之前先进行调查,这是个好主意。</div></div></div>
+<div class="card" data-s="observe v. 观察；注意到；遵守； 评论；庆祝"><div class="w"><span class="idx">374</span>observe</div><div class="m">v. 观察；注意到；遵守； 评论；庆祝</div><div class="ex"><div class="en">I observed a stranger enter my neighbour's home.</div><div class="zh">我看见一个陌生人进了我邻居的家。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 88</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="inquire v. 询问；调查"><div class="w"><span class="idx">375</span>inquire</div><div class="m">v. 询问；调查</div><div class="ex"><div class="en">We must inquire into the matter.</div><div class="zh">我们必须调查此事。</div></div></div>
+<div class="card" data-s="query n. 询问；疑问；问号；v. 询问；怀疑"><div class="w"><span class="idx">376</span>query</div><div class="m">n. 询问；疑问；问号；v. 询问；怀疑</div><div class="ex"><div class="en">I have several queries about the work you gave me.</div><div class="zh">关于你交给我的这件工作,我有几个疑问。</div></div></div>
+<div class="card" data-s="questionnaire n. 调查问卷；调查表"><div class="w"><span class="idx">377</span>questionnaire</div><div class="m">n. 调查问卷；调查表</div><div class="ex"><div class="en">We have sent out nearly 3,000 questionnaires, but only a third of them were returned.</div><div class="zh">我们发出了近3000份问卷,但只收回了三分之一。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 89</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="achieve v. 完成；实现；达到；获 得"><div class="w"><span class="idx">378</span>achieve</div><div class="m">v. 完成；实现；达到；获 得</div><div class="ex"><div class="en">She achieved her goal after two years.</div><div class="zh">她两年后实现了目标。</div></div></div>
+<div class="card" data-s="accomplish v. 完成；实现"><div class="w"><span class="idx">379</span>accomplish</div><div class="m">v. 完成；实现</div><div class="ex"><div class="en">Though the task was challenging, they man aged to accomplish it on tim e.</div><div class="zh">尽管任务很有难度,他们还是设法按时完成了。</div></div></div>
+<div class="card" data-s="attain v. 达到；获得"><div class="w"><span class="idx">380</span>attain</div><div class="m">v. 达到；获得</div><div class="ex"><div class="en">Greater efforts are needed before we can attain our goal.</div><div class="zh">我们得付出更大努力才能达成目标。</div></div></div>
+<div class="card" data-s="credit n. 赞扬；荣誉；赊账；信用；贷 款；学分；v. 相信；给银行账户上 存钱"><div class="w"><span class="idx">381</span>credit</div><div class="m">n. 赞扬；荣誉；赊账；信用；贷 款；学分；v. 相信；给银行账户上 存钱</div><div class="ex"><div class="en">I need three more credits to graduate.</div><div class="zh">我还需要再获得三学分才能毕业。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 90</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="score n. 得分；分数；二十；总 谱；乐谱；v. 得分；记分"><div class="w"><span class="idx">382</span>score</div><div class="m">n. 得分；分数；二十；总 谱；乐谱；v. 得分；记分</div><div class="ex"><div class="en">Now the score in the football game is 1-1.</div><div class="zh">足球比赛现在的比分是1比1。</div></div></div>
+<div class="card" data-s="mark n. 记号；痕迹；分数；v. 做 标记；(使)留痕迹；评分"><div class="w"><span class="idx">383</span>mark</div><div class="m">n. 记号；痕迹；分数；v. 做 标记；(使)留痕迹；评分</div><div class="ex"><div class="en">The teacher marked the essays over the weekend.</div><div class="zh">老师在周末批改了作文。</div></div></div>
+<div class="card" data-s="grade n. 等级；年级；级别；v. 分等级；给...评分"><div class="w"><span class="idx">384</span>grade</div><div class="m">n. 等级；年级；级别；v. 分等级；给...评分</div><div class="ex"><div class="en">This grade of jade can be bought at a fairly low price.</div><div class="zh">这种等级的玉石可以相当低的价格买到。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 91</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="rank n. 列；排；行列；阶层；等级；军 衔；v. 排列；分类；分等级；adj. 繁茂的；恶臭的；讨厌的；极端的"><div class="w"><span class="idx">385</span>rank</div><div class="m">n. 列；排；行列；阶层；等级；军 衔；v. 排列；分类；分等级；adj. 繁茂的；恶臭的；讨厌的；极端的</div><div class="ex"><div class="en">There are people of all ranks and classes.</div><div class="zh">有来自各阶层各阶级的人。</div></div></div>
+<div class="card" data-s="row n. 排；划船；吵闹；v. 划 船；吵架"><div class="w"><span class="idx">386</span>row</div><div class="m">n. 排；划船；吵闹；v. 划 船；吵架</div><div class="ex"><div class="en">A row of children are standing in front of a row of chairs.</div><div class="zh">排小孩站在一排椅子前。</div></div></div>
+<div class="card" data-s="queue n. 行列；⻓队；v. 排队"><div class="w"><span class="idx">387</span>queue</div><div class="m">n. 行列；⻓队；v. 排队</div><div class="ex"><div class="en">You should join the queue in side the bank.</div><div class="zh">在银行里,你应该排队。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 92</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="grant v. 允许；承认；授予；n. 授予物；补助金"><div class="w"><span class="idx">388</span>grant</div><div class="m">v. 允许；承认；授予；n. 授予物；补助金</div><div class="ex"><div class="en">I grant that the book gives us some insights into huma n nature, but gen erally speaking, it is boring.</div><div class="zh">我承认这本书提供了一些关于人性的见解,但总体而言,这本书很无趣。</div></div></div>
+<div class="card" data-s="praise v. 赞美；赞扬；n. 赞美； 赞扬"><div class="w"><span class="idx">389</span>praise</div><div class="m">v. 赞美；赞扬；n. 赞美； 赞扬</div><div class="ex"><div class="en">The teacher praised her for her careful work.</div><div class="zh">老师称赞她做事认真。</div></div></div>
+<div class="card" data-s="appreciate v. 欣赏；理解；感激；增 值"><div class="w"><span class="idx">390</span>appreciate</div><div class="m">v. 欣赏；理解；感激；增 值</div><div class="ex"><div class="en">We appreciate your efforts for the development of the company.</div><div class="zh">我们感激你对公司发展所做的努力。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 93</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="feedback n. 反馈"><div class="w"><span class="idx">391</span>feedback</div><div class="m">n. 反馈</div><div class="ex"><div class="en">We'd appreciate it if you give us some feedback on our new product.</div><div class="zh">如果您能针对我们的新产品给岀反馈意见,我们将感激不尽。</div></div></div>
+<div class="card" data-s="underestimate v. 低估；对...估计不足； n. 低估；轻视"><div class="w"><span class="idx">392</span>underestimate</div><div class="m">v. 低估；对...估计不足； n. 低估；轻视</div><div class="ex"><div class="en">Don't underestimate the difficulty of the job.</div><div class="zh">不要低估了这项工作的困难程度。</div></div></div>
+<div class="card" data-s="overestimate v. 过高估计；n. 过高的估 计"><div class="w"><span class="idx">393</span>overestimate</div><div class="m">v. 过高估计；n. 过高的估 计</div><div class="ex"><div class="en">Most customers overestimated the price of the overcoat.</div><div class="zh">大多数顾客高估了这件大衣的价格。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 94</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="apply v. 申请；应用；涂,敷"><div class="w"><span class="idx">394</span>apply</div><div class="m">v. 申请；应用；涂,敷</div><div class="ex"><div class="en">My cousin applied to four universities and was accepted by all of them.</div><div class="zh">我表妹向四所大学提出了申请,而这些大学都录取了她。</div></div></div>
+<div class="card" data-s="fellowship n. 伙伴关系；情谊；团 体；联谊会；奖学金"><div class="w"><span class="idx">395</span>fellowship</div><div class="m">n. 伙伴关系；情谊；团 体；联谊会；奖学金</div><div class="ex"><div class="en">As a student, he was awarded the fellowship at Harvard.</div><div class="zh">学生时代,他获得过哈佛大学的研究生奖学金。</div></div></div>
+<div class="card" data-s="scholarship n. 奖学金；学问；学识"><div class="w"><span class="idx">396</span>scholarship</div><div class="m">n. 奖学金；学问；学识</div><div class="ex"><div class="en">For a few, scholarships were their main source of support.</div><div class="zh">对于少数学生来说,奖学金是他们的学费的主要来源。</div></div></div>
+<div class="card" data-s="reward n. 奖励；报酬；v. 奖励； 回报"><div class="w"><span class="idx">397</span>reward</div><div class="m">n. 奖励；报酬；v. 奖励； 回报</div><div class="ex"><div class="en">Virtue is its own reward.</div><div class="zh">美德本身即是回报。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 95</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="award v. 颁奖；授予；裁定；n. 奖品；裁定"><div class="w"><span class="idx">398</span>award</div><div class="m">v. 颁奖；授予；裁定；n. 奖品；裁定</div><div class="ex"><div class="en">She received an award for her research.</div><div class="zh">她因研究获得了奖项。</div></div></div>
+<div class="card" data-s="prize n. 奖赏；奖品；奖金；战 利品；v. 珍视；珍藏；估价"><div class="w"><span class="idx">399</span>prize</div><div class="m">n. 奖赏；奖品；奖金；战 利品；v. 珍视；珍藏；估价</div><div class="ex"><div class="en">We prize honour above money.</div><div class="zh">我们珍视荣誉甚于金钱。</div></div></div>
+<div class="card" data-s="fee n. 费用"><div class="w"><span class="idx">400</span>fee</div><div class="m">n. 费用</div><div class="ex"><div class="en">A higher fee does not necessarily mean a better course.</div><div class="zh">收费更高并不意味着课程就一定更好。</div></div></div>
+</div></section>
+<div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit04.html">← Unit 04</a><a href="unit05.html">切到纯列表版</a><a href="unit06.html">Unit 06 →</a></div><footer><div class="wrap" style="padding:0">
+ 摘自《雅思词汇真经》（刘洪波 编著）第 5 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
+</div></footer></div>
+<script>
+(function(){
+ var KEY='vj-hide';
+ var body=document.body;
+ var kind=body.dataset.kind;
+ var s={m:false,z:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;}}catch(e){}
+ function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+ function paint(){
+  body.classList.toggle('hide-m',s.m);
+  body.classList.toggle('hide-z',s.z);
+  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all');
+  if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
+  if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
+  if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
+ }
+ var cm=document.getElementById('m');
+ if(cm) cm.addEventListener('change',function(){s.m=cm.checked; save(); paint();});
+ var cz=document.getElementById('z');
+ if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
+ var ca=document.getElementById('all');
+ if(ca) ca.addEventListener('change',function(){
+   s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
+ });
+ var rs=document.getElementById('reset');
+ if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; save(); paint();});
+ var q=document.getElementById('q');
+ var items=[].slice.call(document.querySelectorAll('[data-s]'));
+ var cnt=document.getElementById('cnt');
+ function filter(){
+   var v=(q&&q.value||'').trim().toLowerCase();
+   var n=0;
+   items.forEach(function(el){
+     var hit=!v||el.dataset.s.indexOf(v)>-1;
+     el.style.display=hit?'':'none';
+     if(hit)n++;
+   });
+   if(cnt) cnt.textContent=v? (n+' / '+items.length) : (items.length+' 条');
+   var emp=document.getElementById('empty');
+   if(emp) emp.style.display=(n===0)?'block':'none';
+   document.querySelectorAll('section.grp').forEach(function(sec){
+     var vis=sec.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     sec.style.display=vis?'':'none';
+   });
+   document.querySelectorAll('tbody.grp').forEach(function(tb){
+     var vis=tb.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     tb.style.display=vis?'':'none';
+   });
+ }
+ if(q){q.addEventListener('input',filter);}
+ document.addEventListener('keydown',function(e){
+   if(e.key==='/'&&document.activeElement!==q&&q){e.preventDefault();q.focus();}
+   if(e.key==='Escape'&&document.activeElement===q){q.value='';filter();q.blur();}
+ });
+ paint(); filter();
+})();
+</script>
+</body></html>

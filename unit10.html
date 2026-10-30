@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unit 10 · 物品材料</title>
+<style>
+:root{
+ --bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da;
+ --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4;
+}
+@media (prefers-color-scheme: dark){
+ :root{ --bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037;
+        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+ font:16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+ -webkit-font-smoothing:antialiased;padding-bottom:64px}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+
+.top{padding:34px 0 18px}
+.back{display:inline-block;font-size:13px;color:var(--ink2);text-decoration:none;
+ border:1px solid var(--line);border-radius:999px;padding:3px 12px;margin-bottom:16px}
+.back:hover{color:var(--accent);border-color:var(--accent)}
+h1{margin:0;font-size:27px;letter-spacing:.2px;font-weight:700}
+h1 .u{color:var(--accent);font-variant-numeric:tabular-nums}
+.sub{margin:6px 0 0;color:var(--ink2);font-size:13.5px}
+
+.toolbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);
+ backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line);
+ padding:10px 0;margin-bottom:18px}
+.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#q{flex:1 1 200px;min-width:150px;padding:8px 13px;border:1px solid var(--line);border-radius:9px;
+ background:var(--panel);color:var(--ink);font-size:14px;outline:none}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.sw{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);
+ border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer;user-select:none;background:var(--panel)}
+.sw input{accent-color:var(--accent);margin:0}
+.sw.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.btn{font:inherit;font-size:13px;color:var(--ink2);background:var(--panel);border:1px solid var(--line);
+ border-radius:999px;padding:5px 12px;cursor:pointer}
+.btn:hover{color:var(--accent);border-color:var(--accent)}
+.count{font-size:12.5px;color:var(--ink2);margin-left:auto;font-variant-numeric:tabular-nums}
+
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);
+ border-radius:12px;overflow:hidden}
+thead th{background:var(--chip);font-size:12.5px;letter-spacing:.06em;color:var(--ink2);
+ font-weight:600;text-align:left;padding:9px 14px;border-bottom:1px solid var(--line)}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--accent-soft)}
+td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-nums}
+td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
+ letter-spacing:.2px;word-break:break-word}
+td.m{color:var(--ink)}
+tr.hit td.w,tr.hit td.m{background:var(--mark)}
+
+.cards{display:grid;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px}.card .w{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:19px;font-weight:700;letter-spacing:.2px}
+.card .w .idx{font-family:inherit;font-size:12px;color:var(--ink2);font-weight:400;margin-right:8px;
+ font-variant-numeric:tabular-nums}
+.card .m{margin:5px 0 0;color:var(--ink);font-size:14.5px}
+.card .ex{margin:10px 0 0;padding:9px 12px;background:var(--accent-soft);border-radius:9px;font-size:14px}
+.card .ex .en{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:14.8px;line-height:1.55}
+.card .ex .zh{color:var(--ink2);margin-top:3px;font-size:13.5px}
+.card .no{color:var(--ink2);font-size:12.5px;margin-top:8px;font-style:italic}
+
+tr.gsep td{background:var(--chip);padding:5px 14px;border-bottom:1px solid var(--line)}
+.gtag{font-size:11.5px;font-weight:700;letter-spacing:.08em;color:var(--accent)}
+.gcnt{font-size:11.5px;color:var(--ink2);margin-left:8px;font-variant-numeric:tabular-nums}
+tbody.grp tr:first-child td{border-top:0}
+tbody.grp + tbody.grp tr.gsep td{border-top:8px solid var(--bg)}
+
+/* 卡片版：一个词群一块面板，组与组之间界限分明 */
+section.grp{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+ margin-bottom:16px;overflow:hidden}
+.ghead{display:flex;align-items:baseline;gap:9px;padding:9px 15px;background:var(--chip);
+ border-bottom:1px solid var(--line)}
+section.grp .cards{display:grid;gap:0;padding:1px 15px}
+section.grp .card{background:transparent;border:0;border-radius:0;padding:13px 0;
+ border-bottom:1px solid var(--line)}
+section.grp .card:last-child{border-bottom:0}
+
+.hide-m .m,.hide-m td.m{display:none}
+.hide-z .zh{display:none}
+body.hide-m td.m{display:none!important}
+.empty{padding:40px;text-align:center;color:var(--ink2);font-size:14px}
+
+.nav{display:flex;justify-content:space-between;gap:10px;margin:26px 0 0}
+.nav a{font-size:13.5px;text-decoration:none;color:var(--ink2);border:1px solid var(--line);
+ border-radius:999px;padding:6px 14px;background:var(--panel)}
+.nav a:hover{color:var(--accent);border-color:var(--accent)}
+.nav a.dis{opacity:.35;pointer-events:none}
+footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
+
+@media (max-width:640px){
+ body{font-size:15px}
+ .wrap{padding:0 12px}
+ h1{font-size:22px}
+ thead{display:none}
+ table,tbody,tr,td{display:block;width:auto}
+ table{border:0;background:transparent;border-radius:0}
+ tbody tr{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:11px 13px;margin-bottom:9px}
+ tbody td{border:0;padding:0}
+ td.n{display:none}
+ tr.gsep{display:block}
+ tr.gsep td{display:block;background:transparent;padding:0 0 6px}
+ tbody.grp{margin-bottom:6px;display:block}
+ td.w{font-size:17px;margin-bottom:3px}
+ td.m{font-size:14px;color:var(--ink2)}
+}
+</style>
+</head>
+<body data-kind="list">
+<div class="wrap"><div class="top">
+ <a class="back" href="index.html">← 全部单元</a>
+ <h1><span class="u">Unit 10</span> · 物品材料</h1>
+ <p class="sub">151 词</p>
+</div></div>
+<div class="toolbar"><div class="wrap">
+ <div class="tools">
+  <input id="q" type="search" placeholder="搜索单词或释义…（按 / 聚焦）">
+  <label class="sw"><input type="checkbox" id="all"> 默写模式</label>
+  <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
+  
+  <button class="btn" id="reset">重置</button>
+  <span class="count" id="cnt">151 条</span>
+ </div>
+</div></div><div class="wrap"><table><thead><tr><th>#</th><th>单词</th><th>释义</th></tr></thead>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 01</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="stuff n. 东⻄；原料；v. 塞；填 充"><td class="n">1</td><td class="w">stuff</td><td class="m">n. 东⻄；原料；v. 塞；填 充</td></tr>
+<tr data-s="item n. 项目；条款；一则； 一 件物品或商品"><td class="n">2</td><td class="w">item</td><td class="m">n. 项目；条款；一则； 一 件物品或商品</td></tr>
+<tr data-s="merchandise n. 商品；货物；v. 推销； 销售"><td class="n">3</td><td class="w">merchandise</td><td class="m">n. 商品；货物；v. 推销； 销售</td></tr>
+<tr data-s="souvenir n. 纪念品；纪念物"><td class="n">4</td><td class="w">souvenir</td><td class="m">n. 纪念品；纪念物</td></tr>
+<tr data-s="artefact n. 人工制品；手工艺品； 加工品"><td class="n">5</td><td class="w">artefact</td><td class="m">n. 人工制品；手工艺品； 加工品</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 02</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="material n. 材料；原料；adj. 物质 的"><td class="n">6</td><td class="w">material</td><td class="m">n. 材料；原料；adj. 物质 的</td></tr>
+<tr data-s="raw adj. 生的；未加工处理过 的"><td class="n">7</td><td class="w">raw</td><td class="m">adj. 生的；未加工处理过 的</td></tr>
+<tr data-s="crude adj. 未加工的；粗鲁的； 简陋的"><td class="n">8</td><td class="w">crude</td><td class="m">adj. 未加工的；粗鲁的； 简陋的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 03</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="necessity n. 需要；必需品"><td class="n">9</td><td class="w">necessity</td><td class="m">n. 需要；必需品</td></tr>
+<tr data-s="outfit n. 全套装备；整套服装；配备；机 构；v. 装备；配置设备；供给服装"><td class="n">10</td><td class="w">outfit</td><td class="m">n. 全套装备；整套服装；配备；机 构；v. 装备；配置设备；供给服装</td></tr>
+<tr data-s="kit n. 成套工具；配套元件； 装备"><td class="n">11</td><td class="w">kit</td><td class="m">n. 成套工具；配套元件； 装备</td></tr>
+<tr data-s="utensil n. 用具；器具"><td class="n">12</td><td class="w">utensil</td><td class="m">n. 用具；器具</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 04</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="garbage n. 垃圾；废物"><td class="n">13</td><td class="w">garbage</td><td class="m">n. 垃圾；废物</td></tr>
+<tr data-s="rubbish n. 垃圾；废物"><td class="n">14</td><td class="w">rubbish</td><td class="m">n. 垃圾；废物</td></tr>
+<tr data-s="trash n. 垃圾；无价值的东⻄； v. 丢弃；损坏；诋毁"><td class="n">15</td><td class="w">trash</td><td class="m">n. 垃圾；无价值的东⻄； v. 丢弃；损坏；诋毁</td></tr>
+<tr data-s="recycle v. 再循环"><td class="n">16</td><td class="w">recycle</td><td class="m">v. 再循环</td></tr>
+<tr data-s="reuse n. 回用；重复使用；再次 使用；v. 再使用；重复使用"><td class="n">17</td><td class="w">reuse</td><td class="m">n. 回用；重复使用；再次 使用；v. 再使用；重复使用</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 05</span><span class="gcnt">9 词</span></td></tr>
+<tr data-s="litter n. 垃圾；杂物；一窝小崽； 担架；v. 乱扔；乱丢杂物"><td class="n">18</td><td class="w">litter</td><td class="m">n. 垃圾；杂物；一窝小崽； 担架；v. 乱扔；乱丢杂物</td></tr>
+<tr data-s="waste n. 垃圾；废物；浪费；v. 浪费；白 费；糟蹋；adj. 荒芜的；废弃的； 丢弃的"><td class="n">19</td><td class="w">waste</td><td class="m">n. 垃圾；废物；浪费；v. 浪费；白 费；糟蹋；adj. 荒芜的；废弃的； 丢弃的</td></tr>
+<tr data-s="junk n. 废旧杂物；无价值的东 ⻄"><td class="n">20</td><td class="w">junk</td><td class="m">n. 废旧杂物；无价值的东 ⻄</td></tr>
+<tr data-s="landfill n. 垃圾填埋(场)；垃圾 堆填(区)"><td class="n">21</td><td class="w">landfill</td><td class="m">n. 垃圾填埋(场)；垃圾 堆填(区)</td></tr>
+<tr data-s="sewerage n. 排水系统；污水"><td class="n">22</td><td class="w">sewerage</td><td class="m">n. 排水系统；污水</td></tr>
+<tr data-s="detergent n. 洗涤剂；洗衣粉；去垢 剂"><td class="n">23</td><td class="w">detergent</td><td class="m">n. 洗涤剂；洗衣粉；去垢 剂</td></tr>
+<tr data-s="lotion n. 洗剂；洗液；乳液；护 肤液"><td class="n">24</td><td class="w">lotion</td><td class="m">n. 洗剂；洗液；乳液；护 肤液</td></tr>
+<tr data-s="shampoo n. 洗发水；洗发精；洗发 香波；v. 洗头发"><td class="n">25</td><td class="w">shampoo</td><td class="m">n. 洗发水；洗发精；洗发 香波；v. 洗头发</td></tr>
+<tr data-s="soap n. 肥皂"><td class="n">26</td><td class="w">soap</td><td class="m">n. 肥皂</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 06</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="tub n. 桶；盆；浴盆"><td class="n">27</td><td class="w">tub</td><td class="m">n. 桶；盆；浴盆</td></tr>
+<tr data-s="plug n. 插头；塞子；栓；宣传； v. 堵；塞；插上；大肆宣传"><td class="n">28</td><td class="w">plug</td><td class="m">n. 插头；塞子；栓；宣传； v. 堵；塞；插上；大肆宣传</td></tr>
+<tr data-s="tap n. 水⻰头；轻拍；轻敲；轻击； v. 轻拍；轻敲；利用；提取"><td class="n">29</td><td class="w">tap</td><td class="m">n. 水⻰头；轻拍；轻敲；轻击； v. 轻拍；轻敲；利用；提取</td></tr>
+<tr data-s="pipe n. 管子；管道；烟斗；v. 吹笛；以管输送"><td class="n">30</td><td class="w">pipe</td><td class="m">n. 管子；管道；烟斗；v. 吹笛；以管输送</td></tr>
+<tr data-s="tube n. 管子；管状物；[英]地 铁；电视机"><td class="n">31</td><td class="w">tube</td><td class="m">n. 管子；管状物；[英]地 铁；电视机</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 07</span><span class="gcnt">9 词</span></td></tr>
+<tr data-s="mop n. 拖把；洗碗刷；乱蓬蓬 的头发；v. 用拖把拖；擦"><td class="n">32</td><td class="w">mop</td><td class="m">n. 拖把；洗碗刷；乱蓬蓬 的头发；v. 用拖把拖；擦</td></tr>
+<tr data-s="broom n. 扫帚"><td class="n">33</td><td class="w">broom</td><td class="m">n. 扫帚</td></tr>
+<tr data-s="sweep v. 扫；打扫；掠过；扫荡； n. 扫；打扫；掠过；席卷"><td class="n">34</td><td class="w">sweep</td><td class="m">v. 扫；打扫；掠过；扫荡； n. 扫；打扫；掠过；席卷</td></tr>
+<tr data-s="mattress n. 褥垫；床垫"><td class="n">35</td><td class="w">mattress</td><td class="m">n. 褥垫；床垫</td></tr>
+<tr data-s="carpet n. 地毯"><td class="n">36</td><td class="w">carpet</td><td class="m">n. 地毯</td></tr>
+<tr data-s="rug n. 小地毯；垫子"><td class="n">37</td><td class="w">rug</td><td class="m">n. 小地毯；垫子</td></tr>
+<tr data-s="mat n. 垫子；席子"><td class="n">38</td><td class="w">mat</td><td class="m">n. 垫子；席子</td></tr>
+<tr data-s="cushion n. 靠垫；软垫；缓冲物；v. 加衬 垫；对...起缓冲作用；减轻..."><td class="n">39</td><td class="w">cushion</td><td class="m">n. 靠垫；软垫；缓冲物；v. 加衬 垫；对...起缓冲作用；减轻...</td></tr>
+<tr data-s="pad n. 垫；爪垫；便笺簿；v. 放轻脚步走"><td class="n">40</td><td class="w">pad</td><td class="m">n. 垫；爪垫；便笺簿；v. 放轻脚步走</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 08</span><span class="gcnt">6 词</span></td></tr>
+<tr data-s="blanket n. 毛毯；厚的覆盖物； adj. 包括所有的；v. 覆盖"><td class="n">41</td><td class="w">blanket</td><td class="m">n. 毛毯；厚的覆盖物； adj. 包括所有的；v. 覆盖</td></tr>
+<tr data-s="quilt n. 被褥；被子"><td class="n">42</td><td class="w">quilt</td><td class="m">n. 被褥；被子</td></tr>
+<tr data-s="sheet n. 薄板；被单；纸张； (薄)片"><td class="n">43</td><td class="w">sheet</td><td class="m">n. 薄板；被单；纸张； (薄)片</td></tr>
+<tr data-s="pillow n. 枕头"><td class="n">44</td><td class="w">pillow</td><td class="m">n. 枕头</td></tr>
+<tr data-s="sponge n. 海绵动物；海绵块；v. 用海绵揩拭"><td class="n">45</td><td class="w">sponge</td><td class="m">n. 海绵动物；海绵块；v. 用海绵揩拭</td></tr>
+<tr data-s="towel n. 毛巾；手巾"><td class="n">46</td><td class="w">towel</td><td class="m">n. 毛巾；手巾</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 09</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="staple n. 订书钉；主要产品；主要部分； 主⻝；v. 用订书机装订；adj. 主要 的；重要的"><td class="n">47</td><td class="w">staple</td><td class="m">n. 订书钉；主要产品；主要部分； 主⻝；v. 用订书机装订；adj. 主要 的；重要的</td></tr>
+<tr data-s="nail n. 钉子；指甲；v. 钉；抓 住；使固定"><td class="n">48</td><td class="w">nail</td><td class="m">n. 钉子；指甲；v. 钉；抓 住；使固定</td></tr>
+<tr data-s="razor n. 剃须刀；刮脸刀"><td class="n">49</td><td class="w">razor</td><td class="m">n. 剃须刀；刮脸刀</td></tr>
+<tr data-s="shave v. 刮；剃"><td class="n">50</td><td class="w">shave</td><td class="m">v. 刮；剃</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 10</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="fuse n. 保险丝；导火线；引信；v. 由于 保险丝烧断而电路不通；熔接；结 合"><td class="n">51</td><td class="w">fuse</td><td class="m">n. 保险丝；导火线；引信；v. 由于 保险丝烧断而电路不通；熔接；结 合</td></tr>
+<tr data-s="cable n. 电缆；钢索"><td class="n">52</td><td class="w">cable</td><td class="m">n. 电缆；钢索</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 11</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="cord n. 细绳；绳索"><td class="n">53</td><td class="w">cord</td><td class="m">n. 细绳；绳索</td></tr>
+<tr data-s="strand n. 一缕；一股；方面；海滨； 河岸；v. 使滞留；使搁浅"><td class="n">54</td><td class="w">strand</td><td class="m">n. 一缕；一股；方面；海滨； 河岸；v. 使滞留；使搁浅</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 12</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="match n. 比赛；火柴；v. 相配"><td class="n">55</td><td class="w">match</td><td class="m">n. 比赛；火柴；v. 相配</td></tr>
+<tr data-s="candle n. 蜡烛"><td class="n">56</td><td class="w">candle</td><td class="m">n. 蜡烛</td></tr>
+<tr data-s="wax n. 蜡；v. 给...上蜡"><td class="n">57</td><td class="w">wax</td><td class="m">n. 蜡；v. 给...上蜡</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 13</span><span class="gcnt">6 词</span></td></tr>
+<tr data-s="portfolio n. 文件夹；公事包；作品 集；部⻓职务；投资组合"><td class="n">58</td><td class="w">portfolio</td><td class="m">n. 文件夹；公事包；作品 集；部⻓职务；投资组合</td></tr>
+<tr data-s="paperback n. 平装书；平装本"><td class="n">59</td><td class="w">paperback</td><td class="m">n. 平装书；平装本</td></tr>
+<tr data-s="pamphlet n. 小册子"><td class="n">60</td><td class="w">pamphlet</td><td class="m">n. 小册子</td></tr>
+<tr data-s="tissue n. 组织；纸巾；薄纸"><td class="n">61</td><td class="w">tissue</td><td class="m">n. 组织；纸巾；薄纸</td></tr>
+<tr data-s="cover v. 遮盖；包括；报道；n. 封面；遮盖物；庇护所"><td class="n">62</td><td class="w">cover</td><td class="m">v. 遮盖；包括；报道；n. 封面；遮盖物；庇护所</td></tr>
+<tr data-s="xerox n. 施乐复印机(商标名称)； 静电复印；v. 复印；影印"><td class="n">63</td><td class="w">Xerox</td><td class="m">n. 施乐复印机(商标名称)； 静电复印；v. 复印；影印</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 14</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="duplicate v. 复制；复印；再做一次；n. 副 本；复制品；完全一样的东⻄； adj. 复制的；副本的；完全一样的"><td class="n">64</td><td class="w">duplicate</td><td class="m">v. 复制；复印；再做一次；n. 副 本；复制品；完全一样的东⻄； adj. 复制的；副本的；完全一样的</td></tr>
+<tr data-s="memorandum n. 备忘录；便笺"><td class="n">65</td><td class="w">memorandum</td><td class="m">n. 备忘录；便笺</td></tr>
+<tr data-s="stationery n. 文具"><td class="n">66</td><td class="w">stationery</td><td class="m">n. 文具</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 15</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="glue n. 胶；胶水；v. 胶合；粘 合；紧附于"><td class="n">67</td><td class="w">glue</td><td class="m">n. 胶；胶水；v. 胶合；粘 合；紧附于</td></tr>
+<tr data-s="ink n. 油墨；墨水；v. 给...上 油墨"><td class="n">68</td><td class="w">ink</td><td class="m">n. 油墨；墨水；v. 给...上 油墨</td></tr>
+<tr data-s="rubber n. 橡胶；橡皮；橡皮擦"><td class="n">69</td><td class="w">rubber</td><td class="m">n. 橡胶；橡皮；橡皮擦</td></tr>
+<tr data-s="scissors n. 剪刀"><td class="n">70</td><td class="w">scissors</td><td class="m">n. 剪刀</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 16</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="shear v. 剪(羊毛)；剪切"><td class="n">71</td><td class="w">shear</td><td class="m">v. 剪(羊毛)；剪切</td></tr>
+<tr data-s="edge n. 边缘；边沿；锋；刃；锋利； 优势；v. 使锋利；使侧着移动"><td class="n">72</td><td class="w">edge</td><td class="m">n. 边缘；边沿；锋；刃；锋利； 优势；v. 使锋利；使侧着移动</td></tr>
+<tr data-s="rim n. 边；缘"><td class="n">73</td><td class="w">rim</td><td class="m">n. 边；缘</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 17</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="element n. 元素；要素；成分"><td class="n">74</td><td class="w">element</td><td class="m">n. 元素；要素；成分</td></tr>
+<tr data-s="factor n. 因素；要素；因数；代理人；倍 数；系数；v. 把...因素包括进去； 分解成因子；做代理商(或管家)"><td class="n">75</td><td class="w">factor</td><td class="m">n. 因素；要素；因数；代理人；倍 数；系数；v. 把...因素包括进去； 分解成因子；做代理商(或管家)</td></tr>
+<tr data-s="section n. 部分；部⻔；章节"><td class="n">76</td><td class="w">section</td><td class="m">n. 部分；部⻔；章节</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 18</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="tag n. 标记；标签；捉人游戏；v. 加 标签于；把...称作；紧随；连接"><td class="n">77</td><td class="w">tag</td><td class="m">n. 标记；标签；捉人游戏；v. 加 标签于；把...称作；紧随；连接</td></tr>
+<tr data-s="label n. 标签；v. 用标签标明"><td class="n">78</td><td class="w">label</td><td class="m">n. 标签；v. 用标签标明</td></tr>
+<tr data-s="badge n. 徽章"><td class="n">79</td><td class="w">badge</td><td class="m">n. 徽章</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 19</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="bolt n. 插销；螺栓；闪电；v. 用插销闩上"><td class="n">80</td><td class="w">bolt</td><td class="m">n. 插销；螺栓；闪电；v. 用插销闩上</td></tr>
+<tr data-s="knob n. 球形把手；旋钮；疙瘩； 节；v. 鼓起；使有球形突出物"><td class="n">81</td><td class="w">knob</td><td class="m">n. 球形把手；旋钮；疙瘩； 节；v. 鼓起；使有球形突出物</td></tr>
+<tr data-s="handle v. 处理；操纵；n. 柄；把 手"><td class="n">82</td><td class="w">handle</td><td class="m">v. 处理；操纵；n. 柄；把 手</td></tr>
+<tr data-s="shutter n. 百叶窗；(照相机的) 快⻔"><td class="n">83</td><td class="w">shutter</td><td class="m">n. 百叶窗；(照相机的) 快⻔</td></tr>
+<tr data-s="curtain n. 帷幕；窗帘"><td class="n">84</td><td class="w">curtain</td><td class="m">n. 帷幕；窗帘</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 20</span><span class="gcnt">6 词</span></td></tr>
+<tr data-s="pane n. 一块窗格玻璃"><td class="n">85</td><td class="w">pane</td><td class="m">n. 一块窗格玻璃</td></tr>
+<tr data-s="opacity n. 不透明；费解；晦涩"><td class="n">86</td><td class="w">opacity</td><td class="m">n. 不透明；费解；晦涩</td></tr>
+<tr data-s="jar n. 缸；坛子；(玻璃)罐子；广口 瓶；v. (使)震动；令人不快；冲 突；不一致"><td class="n">87</td><td class="w">jar</td><td class="m">n. 缸；坛子；(玻璃)罐子；广口 瓶；v. (使)震动；令人不快；冲 突；不一致</td></tr>
+<tr data-s="barrel n. 桶；枪管"><td class="n">88</td><td class="w">barrel</td><td class="m">n. 桶；枪管</td></tr>
+<tr data-s="bucket n. 水桶；吊桶"><td class="n">89</td><td class="w">bucket</td><td class="m">n. 水桶；吊桶</td></tr>
+<tr data-s="pail n. 桶；一桶之量"><td class="n">90</td><td class="w">pail</td><td class="m">n. 桶；一桶之量</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 21</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="phone n. 电话；v. 打电话"><td class="n">91</td><td class="w">phone</td><td class="m">n. 电话；v. 打电话</td></tr>
+<tr data-s="bell n. 钟(声)；铃(声)"><td class="n">92</td><td class="w">bell</td><td class="m">n. 钟(声)；铃(声)</td></tr>
+<tr data-s="camera n. 照相机；摄像机"><td class="n">93</td><td class="w">camera</td><td class="m">n. 照相机；摄像机</td></tr>
+<tr data-s="portable adj. 便携式的；手提的； n. 便携式打字机"><td class="n">94</td><td class="w">portable</td><td class="m">adj. 便携式的；手提的； n. 便携式打字机</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 22</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="spotlight n. 聚光灯；公众注意的中心；v. 聚 光照明； 使公众注意；使突出醒目"><td class="n">95</td><td class="w">spotlight</td><td class="m">n. 聚光灯；公众注意的中心；v. 聚 光照明； 使公众注意；使突出醒目</td></tr>
+<tr data-s="lantern n. 灯笼；提灯"><td class="n">96</td><td class="w">lantern</td><td class="m">n. 灯笼；提灯</td></tr>
+<tr data-s="bulb n. 电灯泡；球茎状物；球 茎；鳞茎"><td class="n">97</td><td class="w">bulb</td><td class="m">n. 电灯泡；球茎状物；球 茎；鳞茎</td></tr>
+<tr data-s="flashlight n. 手电筒；闪光灯"><td class="n">98</td><td class="w">flashlight</td><td class="m">n. 手电筒；闪光灯</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 23</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="refrigerator n. 冰箱"><td class="n">99</td><td class="w">refrigerator</td><td class="m">n. 冰箱</td></tr>
+<tr data-s="fridge n. 冰箱"><td class="n">100</td><td class="w">fridge</td><td class="m">n. 冰箱</td></tr>
+<tr data-s="vacuum n. 真空；空虚；v. 用真空 吸尘器打扫"><td class="n">101</td><td class="w">vacuum</td><td class="m">n. 真空；空虚；v. 用真空 吸尘器打扫</td></tr>
+<tr data-s="fan n. ⻛扇；迷；v. 煽动；吹 拂"><td class="n">102</td><td class="w">fan</td><td class="m">n. ⻛扇；迷；v. 煽动；吹 拂</td></tr>
+<tr data-s="switch v. 转换；n. 开关"><td class="n">103</td><td class="w">switch</td><td class="m">v. 转换；n. 开关</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 24</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="hurdle n. 跨栏；障碍；难关；v. 越过障碍；克服"><td class="n">104</td><td class="w">hurdle</td><td class="m">n. 跨栏；障碍；难关；v. 越过障碍；克服</td></tr>
+<tr data-s="fence n. 篱笆；栅栏；围栏；v. 用篱笆围住；防护；击剑"><td class="n">105</td><td class="w">fence</td><td class="m">n. 篱笆；栅栏；围栏；v. 用篱笆围住；防护；击剑</td></tr>
+<tr data-s="pedal n. 踏板；踩踏板；v. 用脚 踏动"><td class="n">106</td><td class="w">pedal</td><td class="m">n. 踏板；踩踏板；v. 用脚 踏动</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 25</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="shelf n. 架子；搁板"><td class="n">107</td><td class="w">shelf</td><td class="m">n. 架子；搁板</td></tr>
+<tr data-s="ladder n. 梯子；阶梯"><td class="n">108</td><td class="w">ladder</td><td class="m">n. 梯子；阶梯</td></tr>
+<tr data-s="lift v. 举起；抬起；提起；解 除；n. 电梯；搭便⻋"><td class="n">109</td><td class="w">lift</td><td class="m">v. 举起；抬起；提起；解 除；n. 电梯；搭便⻋</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 26</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="stool n. 凳子；粪便"><td class="n">110</td><td class="w">stool</td><td class="m">n. 凳子；粪便</td></tr>
+<tr data-s="drawer n. 抽屉；起草者；开票人"><td class="n">111</td><td class="w">drawer</td><td class="m">n. 抽屉；起草者；开票人</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 27</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="umbrella n. 伞；雨伞"><td class="n">112</td><td class="w">umbrella</td><td class="m">n. 伞；雨伞</td></tr>
+<tr data-s="raincoat n. 雨衣"><td class="n">113</td><td class="w">raincoat</td><td class="m">n. 雨衣</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 28</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="dredge v. 疏浚；挖掘；n. 挖泥 船；疏浚机"><td class="n">114</td><td class="w">dredge</td><td class="m">v. 疏浚；挖掘；n. 挖泥 船；疏浚机</td></tr>
+<tr data-s="can v. 能；n. 金属罐"><td class="n">115</td><td class="w">can</td><td class="m">v. 能；n. 金属罐</td></tr>
+<tr data-s="mill n. 磨坊；磨粉机；面粉厂；工厂； 纺织厂；碾碎器；v. 碾碎；磨碎"><td class="n">116</td><td class="w">mill</td><td class="m">n. 磨坊；磨粉机；面粉厂；工厂； 纺织厂；碾碎器；v. 碾碎；磨碎</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 29</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="forge v. 伪造；制造；建立(联 系等)；n. 锻造⻋间"><td class="n">117</td><td class="w">forge</td><td class="m">v. 伪造；制造；建立(联 系等)；n. 锻造⻋间</td></tr>
+<tr data-s="alloy n. 合金；v. 把...铸成合金"><td class="n">118</td><td class="w">alloy</td><td class="m">n. 合金；v. 把...铸成合金</td></tr>
+<tr data-s="metal n. 金属"><td class="n">119</td><td class="w">metal</td><td class="m">n. 金属</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 30</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="iron n. 铁；铁器；熨斗；镣铐；adj. 铁 制的；坚强的；顽强的；v. 熨烫； 用铁装备"><td class="n">120</td><td class="w">iron</td><td class="m">n. 铁；铁器；熨斗；镣铐；adj. 铁 制的；坚强的；顽强的；v. 熨烫； 用铁装备</td></tr>
+<tr data-s="lead v. 领导；带领；导致；n. 铅"><td class="n">121</td><td class="w">lead</td><td class="m">v. 领导；带领；导致；n. 铅</td></tr>
+<tr data-s="brass n. ⻩铜；⻩铜制品；厚脸 皮"><td class="n">122</td><td class="w">brass</td><td class="m">n. ⻩铜；⻩铜制品；厚脸 皮</td></tr>
+<tr data-s="bronze n. ⻘铜；⻘铜色；adj. ⻘ 铜色的"><td class="n">123</td><td class="w">bronze</td><td class="m">n. ⻘铜；⻘铜色；adj. ⻘ 铜色的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 31</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="cement n. 水泥；胶合剂；黏固粉； v. 用水泥涂；粘牢；巩固"><td class="n">124</td><td class="w">cement</td><td class="m">n. 水泥；胶合剂；黏固粉； v. 用水泥涂；粘牢；巩固</td></tr>
+<tr data-s="lime n. 石灰；酸橙"><td class="n">125</td><td class="w">lime</td><td class="m">n. 石灰；酸橙</td></tr>
+<tr data-s="plaster n. 灰泥；膏药；熟石膏； v. 涂以灰泥；敷以膏药"><td class="n">126</td><td class="w">plaster</td><td class="m">n. 灰泥；膏药；熟石膏； v. 涂以灰泥；敷以膏药</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 32</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="leather n. 皮革"><td class="n">127</td><td class="w">leather</td><td class="m">n. 皮革</td></tr>
+<tr data-s="plastic n. 塑料；adj. 塑料的；可 塑的；不自然的"><td class="n">128</td><td class="w">plastic</td><td class="m">n. 塑料；adj. 塑料的；可 塑的；不自然的</td></tr>
+<tr data-s="fibre n. 纤维"><td class="n">129</td><td class="w">fibre</td><td class="m">n. 纤维</td></tr>
+<tr data-s="fabric n. 织物；布料；构造； (建筑物的)结构"><td class="n">130</td><td class="w">fabric</td><td class="m">n. 织物；布料；构造； (建筑物的)结构</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 33</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="knit v. 编织；编结"><td class="n">131</td><td class="w">knit</td><td class="m">v. 编织；编结</td></tr>
+<tr data-s="weave v. 编织；编制"><td class="n">132</td><td class="w">weave</td><td class="m">v. 编织；编制</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 34</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="canvas n. 帆布；帆布画布"><td class="n">133</td><td class="w">canvas</td><td class="m">n. 帆布；帆布画布</td></tr>
+<tr data-s="linen n. 亚麻布；亚麻织品；adj. 亚麻布制的；亚麻色的"><td class="n">134</td><td class="w">linen</td><td class="m">n. 亚麻布；亚麻织品；adj. 亚麻布制的；亚麻色的</td></tr>
+<tr data-s="cotton n. 棉；棉花；棉布"><td class="n">135</td><td class="w">cotton</td><td class="m">n. 棉；棉花；棉布</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 35</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="nylon n. 尼⻰"><td class="n">136</td><td class="w">nylon</td><td class="m">n. 尼⻰</td></tr>
+<tr data-s="lumber n. 木材；v. 笨拙地移动； 伐木"><td class="n">137</td><td class="w">lumber</td><td class="m">n. 木材；v. 笨拙地移动； 伐木</td></tr>
+<tr data-s="wooden adj. 木制的；木头的；生 硬笨拙的"><td class="n">138</td><td class="w">wooden</td><td class="m">adj. 木制的；木头的；生 硬笨拙的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 36</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="mine n. 矿；地雷；pron. 我的 (东⻄)；v. 采矿；埋地雷"><td class="n">139</td><td class="w">mine</td><td class="m">n. 矿；地雷；pron. 我的 (东⻄)；v. 采矿；埋地雷</td></tr>
+<tr data-s="pit n. 坑；凹洞；矿井；v. 使 凹陷"><td class="n">140</td><td class="w">pit</td><td class="m">n. 坑；凹洞；矿井；v. 使 凹陷</td></tr>
+<tr data-s="fuel n. 燃料；燃油；刺激因 素；v. 加燃料；加剧"><td class="n">141</td><td class="w">fuel</td><td class="m">n. 燃料；燃油；刺激因 素；v. 加燃料；加剧</td></tr>
+<tr data-s="lubricate v. 润滑；加润滑油于"><td class="n">142</td><td class="w">lubricate</td><td class="m">v. 润滑；加润滑油于</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 37</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="diamond n. 钻石；菱形；金刚石"><td class="n">143</td><td class="w">diamond</td><td class="m">n. 钻石；菱形；金刚石</td></tr>
+<tr data-s="crystal n. 水晶；结晶；adj. 晶体 的"><td class="n">144</td><td class="w">crystal</td><td class="m">n. 水晶；结晶；adj. 晶体 的</td></tr>
+<tr data-s="inferior adj. 较差的；次等的；下 级的"><td class="n">145</td><td class="w">inferior</td><td class="m">adj. 较差的；次等的；下 级的</td></tr>
+<tr data-s="counterfeit adj. 伪造的；v. 仿造,伪 造；n. 赝品"><td class="n">146</td><td class="w">counterfeit</td><td class="m">adj. 伪造的；v. 仿造,伪 造；n. 赝品</td></tr>
+<tr data-s="fake n. 赝品；假货；冒充者；v. 伪造； 假装；冒充；adj. 假的；冒充的； 伪造的"><td class="n">147</td><td class="w">fake</td><td class="m">n. 赝品；假货；冒充者；v. 伪造； 假装；冒充；adj. 假的；冒充的； 伪造的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 38</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="fragile adj. 易碎的；不牢固的； 脆弱的"><td class="n">148</td><td class="w">fragile</td><td class="m">adj. 易碎的；不牢固的； 脆弱的</td></tr>
+<tr data-s="miniature adj. 微型的；小型的；v. 使成小型；n. 微型"><td class="n">149</td><td class="w">miniature</td><td class="m">adj. 微型的；小型的；v. 使成小型；n. 微型</td></tr>
+<tr data-s="available adj. 可获得的；可用的； 有空的"><td class="n">150</td><td class="w">available</td><td class="m">adj. 可获得的；可用的； 有空的</td></tr>
+<tr data-s="durable adj. 耐用的；持久的"><td class="n">151</td><td class="w">durable</td><td class="m">adj. 耐用的；持久的</td></tr>
+</tbody>
+</table><div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit09.html">← Unit 09</a><a href="unit10-card.html">切到例句卡片版</a><a href="unit11.html">Unit 11 →</a></div><footer><div class="wrap" style="padding:0">
+ 摘自《雅思词汇真经》（刘洪波 编著）第 10 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
+</div></footer></div>
+<script>
+(function(){
+ var KEY='vj-hide';
+ var body=document.body;
+ var kind=body.dataset.kind;
+ var s={m:false,z:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;}}catch(e){}
+ function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+ function paint(){
+  body.classList.toggle('hide-m',s.m);
+  body.classList.toggle('hide-z',s.z);
+  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all');
+  if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
+  if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
+  if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
+ }
+ var cm=document.getElementById('m');
+ if(cm) cm.addEventListener('change',function(){s.m=cm.checked; save(); paint();});
+ var cz=document.getElementById('z');
+ if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
+ var ca=document.getElementById('all');
+ if(ca) ca.addEventListener('change',function(){
+   s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
+ });
+ var rs=document.getElementById('reset');
+ if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; save(); paint();});
+ var q=document.getElementById('q');
+ var items=[].slice.call(document.querySelectorAll('[data-s]'));
+ var cnt=document.getElementById('cnt');
+ function filter(){
+   var v=(q&&q.value||'').trim().toLowerCase();
+   var n=0;
+   items.forEach(function(el){
+     var hit=!v||el.dataset.s.indexOf(v)>-1;
+     el.style.display=hit?'':'none';
+     if(hit)n++;
+   });
+   if(cnt) cnt.textContent=v? (n+' / '+items.length) : (items.length+' 条');
+   var emp=document.getElementById('empty');
+   if(emp) emp.style.display=(n===0)?'block':'none';
+   document.querySelectorAll('section.grp').forEach(function(sec){
+     var vis=sec.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     sec.style.display=vis?'':'none';
+   });
+   document.querySelectorAll('tbody.grp').forEach(function(tb){
+     var vis=tb.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     tb.style.display=vis?'':'none';
+   });
+ }
+ if(q){q.addEventListener('input',filter);}
+ document.addEventListener('keydown',function(e){
+   if(e.key==='/'&&document.activeElement!==q&&q){e.preventDefault();q.focus();}
+   if(e.key==='Escape'&&document.activeElement===q){q.value='';filter();q.blur();}
+ });
+ paint(); filter();
+})();
+</script>
+</body></html>

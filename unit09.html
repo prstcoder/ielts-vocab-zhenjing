@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unit 09 · 娱乐运动</title>
+<style>
+:root{
+ --bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da;
+ --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4;
+}
+@media (prefers-color-scheme: dark){
+ :root{ --bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037;
+        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+ font:16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+ -webkit-font-smoothing:antialiased;padding-bottom:64px}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+
+.top{padding:34px 0 18px}
+.back{display:inline-block;font-size:13px;color:var(--ink2);text-decoration:none;
+ border:1px solid var(--line);border-radius:999px;padding:3px 12px;margin-bottom:16px}
+.back:hover{color:var(--accent);border-color:var(--accent)}
+h1{margin:0;font-size:27px;letter-spacing:.2px;font-weight:700}
+h1 .u{color:var(--accent);font-variant-numeric:tabular-nums}
+.sub{margin:6px 0 0;color:var(--ink2);font-size:13.5px}
+
+.toolbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);
+ backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line);
+ padding:10px 0;margin-bottom:18px}
+.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#q{flex:1 1 200px;min-width:150px;padding:8px 13px;border:1px solid var(--line);border-radius:9px;
+ background:var(--panel);color:var(--ink);font-size:14px;outline:none}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.sw{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);
+ border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer;user-select:none;background:var(--panel)}
+.sw input{accent-color:var(--accent);margin:0}
+.sw.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.btn{font:inherit;font-size:13px;color:var(--ink2);background:var(--panel);border:1px solid var(--line);
+ border-radius:999px;padding:5px 12px;cursor:pointer}
+.btn:hover{color:var(--accent);border-color:var(--accent)}
+.count{font-size:12.5px;color:var(--ink2);margin-left:auto;font-variant-numeric:tabular-nums}
+
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);
+ border-radius:12px;overflow:hidden}
+thead th{background:var(--chip);font-size:12.5px;letter-spacing:.06em;color:var(--ink2);
+ font-weight:600;text-align:left;padding:9px 14px;border-bottom:1px solid var(--line)}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--accent-soft)}
+td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-nums}
+td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
+ letter-spacing:.2px;word-break:break-word}
+td.m{color:var(--ink)}
+tr.hit td.w,tr.hit td.m{background:var(--mark)}
+
+.cards{display:grid;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px}.card .w{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:19px;font-weight:700;letter-spacing:.2px}
+.card .w .idx{font-family:inherit;font-size:12px;color:var(--ink2);font-weight:400;margin-right:8px;
+ font-variant-numeric:tabular-nums}
+.card .m{margin:5px 0 0;color:var(--ink);font-size:14.5px}
+.card .ex{margin:10px 0 0;padding:9px 12px;background:var(--accent-soft);border-radius:9px;font-size:14px}
+.card .ex .en{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:14.8px;line-height:1.55}
+.card .ex .zh{color:var(--ink2);margin-top:3px;font-size:13.5px}
+.card .no{color:var(--ink2);font-size:12.5px;margin-top:8px;font-style:italic}
+
+tr.gsep td{background:var(--chip);padding:5px 14px;border-bottom:1px solid var(--line)}
+.gtag{font-size:11.5px;font-weight:700;letter-spacing:.08em;color:var(--accent)}
+.gcnt{font-size:11.5px;color:var(--ink2);margin-left:8px;font-variant-numeric:tabular-nums}
+tbody.grp tr:first-child td{border-top:0}
+tbody.grp + tbody.grp tr.gsep td{border-top:8px solid var(--bg)}
+
+/* 卡片版：一个词群一块面板，组与组之间界限分明 */
+section.grp{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+ margin-bottom:16px;overflow:hidden}
+.ghead{display:flex;align-items:baseline;gap:9px;padding:9px 15px;background:var(--chip);
+ border-bottom:1px solid var(--line)}
+section.grp .cards{display:grid;gap:0;padding:1px 15px}
+section.grp .card{background:transparent;border:0;border-radius:0;padding:13px 0;
+ border-bottom:1px solid var(--line)}
+section.grp .card:last-child{border-bottom:0}
+
+.hide-m .m,.hide-m td.m{display:none}
+.hide-z .zh{display:none}
+body.hide-m td.m{display:none!important}
+.empty{padding:40px;text-align:center;color:var(--ink2);font-size:14px}
+
+.nav{display:flex;justify-content:space-between;gap:10px;margin:26px 0 0}
+.nav a{font-size:13.5px;text-decoration:none;color:var(--ink2);border:1px solid var(--line);
+ border-radius:999px;padding:6px 14px;background:var(--panel)}
+.nav a:hover{color:var(--accent);border-color:var(--accent)}
+.nav a.dis{opacity:.35;pointer-events:none}
+footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
+
+@media (max-width:640px){
+ body{font-size:15px}
+ .wrap{padding:0 12px}
+ h1{font-size:22px}
+ thead{display:none}
+ table,tbody,tr,td{display:block;width:auto}
+ table{border:0;background:transparent;border-radius:0}
+ tbody tr{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:11px 13px;margin-bottom:9px}
+ tbody td{border:0;padding:0}
+ td.n{display:none}
+ tr.gsep{display:block}
+ tr.gsep td{display:block;background:transparent;padding:0 0 6px}
+ tbody.grp{margin-bottom:6px;display:block}
+ td.w{font-size:17px;margin-bottom:3px}
+ td.m{font-size:14px;color:var(--ink2)}
+}
+</style>
+</head>
+<body data-kind="list">
+<div class="wrap"><div class="top">
+ <a class="back" href="index.html">← 全部单元</a>
+ <h1><span class="u">Unit 09</span> · 娱乐运动</h1>
+ <p class="sub">172 词</p>
+</div></div>
+<div class="toolbar"><div class="wrap">
+ <div class="tools">
+  <input id="q" type="search" placeholder="搜索单词或释义…（按 / 聚焦）">
+  <label class="sw"><input type="checkbox" id="all"> 默写模式</label>
+  <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
+  
+  <button class="btn" id="reset">重置</button>
+  <span class="count" id="cnt">172 条</span>
+ </div>
+</div></div><div class="wrap"><table><thead><tr><th>#</th><th>单词</th><th>释义</th></tr></thead>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 01</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="medium n. 媒介；方法；adj. 中等 的；适中的"><td class="n">1</td><td class="w">medium</td><td class="m">n. 媒介；方法；adj. 中等 的；适中的</td></tr>
+<tr data-s="press v. 按；压；n. 按；压；出 版社；新闻界"><td class="n">2</td><td class="w">press</td><td class="m">v. 按；压；n. 按；压；出 版社；新闻界</td></tr>
+<tr data-s="journalist n. 新闻记者"><td class="n">3</td><td class="w">journalist</td><td class="m">n. 新闻记者</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 02</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="critic n. 评论家；批评者"><td class="n">4</td><td class="w">critic</td><td class="m">n. 评论家；批评者</td></tr>
+<tr data-s="commentator n. 评论员；解说员"><td class="n">5</td><td class="w">commentator</td><td class="m">n. 评论员；解说员</td></tr>
+<tr data-s="exponent n. 阐述者；拥护者；代表 者；指数"><td class="n">6</td><td class="w">exponent</td><td class="m">n. 阐述者；拥护者；代表 者；指数</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 03</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="announcer n. 广播员；告知者；报幕 员"><td class="n">7</td><td class="w">announcer</td><td class="m">n. 广播员；告知者；报幕 员</td></tr>
+<tr data-s="correspondent n. 通讯记者；通信者"><td class="n">8</td><td class="w">correspondent</td><td class="m">n. 通讯记者；通信者</td></tr>
+<tr data-s="messenger n. 送信者；通信员"><td class="n">9</td><td class="w">messenger</td><td class="m">n. 送信者；通信员</td></tr>
+<tr data-s="editor n. 编辑(者)；剪辑员"><td class="n">10</td><td class="w">editor</td><td class="m">n. 编辑(者)；剪辑员</td></tr>
+<tr data-s="typist n. 打字员"><td class="n">11</td><td class="w">typist</td><td class="m">n. 打字员</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 04</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="handout n. 施舍物；救济品；印刷 品；讲义"><td class="n">12</td><td class="w">handout</td><td class="m">n. 施舍物；救济品；印刷 品；讲义</td></tr>
+<tr data-s="leaflet n. 传单；单⻚宣传品；复 叶的一叶；v. 散发传单"><td class="n">13</td><td class="w">leaflet</td><td class="m">n. 传单；单⻚宣传品；复 叶的一叶；v. 散发传单</td></tr>
+<tr data-s="propaganda n. 宣传"><td class="n">14</td><td class="w">propaganda</td><td class="m">n. 宣传</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 05</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="publish v. 发布；出版"><td class="n">15</td><td class="w">publish</td><td class="m">v. 发布；出版</td></tr>
+<tr data-s="disseminate v. 传播；散播；扩散"><td class="n">16</td><td class="w">disseminate</td><td class="m">v. 传播；散播；扩散</td></tr>
+<tr data-s="foresee v. 预⻅；预知"><td class="n">17</td><td class="w">foresee</td><td class="m">v. 预⻅；预知</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 06</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="anticipate v. 预料；预期；期望；抢 先；提前使用"><td class="n">18</td><td class="w">anticipate</td><td class="m">v. 预料；预期；期望；抢 先；提前使用</td></tr>
+<tr data-s="expect v. 期待；期望；预期"><td class="n">19</td><td class="w">expect</td><td class="m">v. 期待；期望；预期</td></tr>
+<tr data-s="await v. 等待"><td class="n">20</td><td class="w">await</td><td class="m">v. 等待</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 07</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="pastime n. 消遣；娱乐"><td class="n">21</td><td class="w">pastime</td><td class="m">n. 消遣；娱乐</td></tr>
+<tr data-s="entertain v. 娱乐；使快乐；款待； 心存；怀有"><td class="n">22</td><td class="w">entertain</td><td class="m">v. 娱乐；使快乐；款待； 心存；怀有</td></tr>
+<tr data-s="recreation n. 消遣；娱乐"><td class="n">23</td><td class="w">recreation</td><td class="m">n. 消遣；娱乐</td></tr>
+<tr data-s="amuse v. 逗乐；娱乐；消遣"><td class="n">24</td><td class="w">amuse</td><td class="m">v. 逗乐；娱乐；消遣</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 08</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="gossip n. 流言蜚语；爱说⻓道短的人； 闲话；v. 散播(流言蜚语)"><td class="n">25</td><td class="w">gossip</td><td class="m">n. 流言蜚语；爱说⻓道短的人； 闲话；v. 散播(流言蜚语)</td></tr>
+<tr data-s="rumour n. 谣言；v. 谣传"><td class="n">26</td><td class="w">rumour</td><td class="m">n. 谣言；v. 谣传</td></tr>
+<tr data-s="consensus n. 一致；共识"><td class="n">27</td><td class="w">consensus</td><td class="m">n. 一致；共识</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 09</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="festival n. 节日"><td class="n">28</td><td class="w">festival</td><td class="m">n. 节日</td></tr>
+<tr data-s="feast n. 盛宴；宴会；节日；享受；v. 尽 情享用(美味佳肴)；款宴；享乐"><td class="n">29</td><td class="w">feast</td><td class="m">n. 盛宴；宴会；节日；享受；v. 尽 情享用(美味佳肴)；款宴；享乐</td></tr>
+<tr data-s="programme n. 节目；计划；程序；v. 安排；计划；编程"><td class="n">30</td><td class="w">programme</td><td class="m">n. 节目；计划；程序；v. 安排；计划；编程</td></tr>
+<tr data-s="rehearsal n. 排练；预演"><td class="n">31</td><td class="w">rehearsal</td><td class="m">n. 排练；预演</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 10</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="perform v. 表演；执行；履行；表 现"><td class="n">32</td><td class="w">perform</td><td class="m">v. 表演；执行；履行；表 现</td></tr>
+<tr data-s="imitate v. 模仿；仿效"><td class="n">33</td><td class="w">imitate</td><td class="m">v. 模仿；仿效</td></tr>
+<tr data-s="mimic v. 模仿；模拟；n. 模仿者；仿 制品；adj. 模仿的；摹拟的"><td class="n">34</td><td class="w">mimic</td><td class="m">v. 模仿；模拟；n. 模仿者；仿 制品；adj. 模仿的；摹拟的</td></tr>
+<tr data-s="simulate v. 假装；冒充；模仿；模 拟"><td class="n">35</td><td class="w">simulate</td><td class="m">v. 假装；冒充；模仿；模 拟</td></tr>
+<tr data-s="circus n. ⻢戏团"><td class="n">36</td><td class="w">circus</td><td class="m">n. ⻢戏团</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 11</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="magic n. 魔术；魔法；adj. 魔术 (似)的；神奇的"><td class="n">37</td><td class="w">magic</td><td class="m">n. 魔术；魔法；adj. 魔术 (似)的；神奇的</td></tr>
+<tr data-s="drama n. 戏剧；话剧"><td class="n">38</td><td class="w">drama</td><td class="m">n. 戏剧；话剧</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 12</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="concert n. 音乐会；演奏会；一 致；和谐；v. 协调一致行动"><td class="n">39</td><td class="w">concert</td><td class="m">n. 音乐会；演奏会；一 致；和谐；v. 协调一致行动</td></tr>
+<tr data-s="symphony n. 交响乐；交响曲"><td class="n">40</td><td class="w">symphony</td><td class="m">n. 交响乐；交响曲</td></tr>
+<tr data-s="orchestra n. 管弦乐队"><td class="n">41</td><td class="w">orchestra</td><td class="m">n. 管弦乐队</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 13</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="ballet n. 芭蕾舞；芭蕾"><td class="n">42</td><td class="w">ballet</td><td class="m">n. 芭蕾舞；芭蕾</td></tr>
+<tr data-s="opera n. 歌剧"><td class="n">43</td><td class="w">opera</td><td class="m">n. 歌剧</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 14</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="comedy n. 喜剧"><td class="n">44</td><td class="w">comedy</td><td class="m">n. 喜剧</td></tr>
+<tr data-s="tragedy n. 悲剧；灾难；惨事"><td class="n">45</td><td class="w">tragedy</td><td class="m">n. 悲剧；灾难；惨事</td></tr>
+<tr data-s="animation n. 活跃；生气；兴奋；动 画"><td class="n">46</td><td class="w">animation</td><td class="m">n. 活跃；生气；兴奋；动 画</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 15</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="film n. 电影；底片；薄薄的一 层；v. 拍摄电影"><td class="n">47</td><td class="w">film</td><td class="m">n. 电影；底片；薄薄的一 层；v. 拍摄电影</td></tr>
+<tr data-s="movie n. 电影"><td class="n">48</td><td class="w">movie</td><td class="m">n. 电影</td></tr>
+<tr data-s="x-rated adj. x级的"><td class="n">49</td><td class="w">X-rated</td><td class="m">adj. X级的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 16</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="artist n. 艺术家；画家"><td class="n">50</td><td class="w">artist</td><td class="m">n. 艺术家；画家</td></tr>
+<tr data-s="craftsman n. 工匠；手艺人；匠人"><td class="n">51</td><td class="w">craftsman</td><td class="m">n. 工匠；手艺人；匠人</td></tr>
+<tr data-s="painter n. 画家；油漆工"><td class="n">52</td><td class="w">painter</td><td class="m">n. 画家；油漆工</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 17</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="role n. ⻆色；职能；作用"><td class="n">53</td><td class="w">role</td><td class="m">n. ⻆色；职能；作用</td></tr>
+<tr data-s="scene n. 场景；现场；景色"><td class="n">54</td><td class="w">scene</td><td class="m">n. 场景；现场；景色</td></tr>
+<tr data-s="stage n. 阶段；时期；舞台；v. 举行；上演"><td class="n">55</td><td class="w">stage</td><td class="m">n. 阶段；时期；舞台；v. 举行；上演</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 18</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="gallery n. 画廊；美术馆"><td class="n">56</td><td class="w">gallery</td><td class="m">n. 画廊；美术馆</td></tr>
+<tr data-s="exhibition n. 展览；展出"><td class="n">57</td><td class="w">exhibition</td><td class="m">n. 展览；展出</td></tr>
+<tr data-s="aesthetic adj. 审美的；美学的"><td class="n">58</td><td class="w">aesthetic</td><td class="m">adj. 审美的；美学的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 19</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="collect v. 收集"><td class="n">59</td><td class="w">collect</td><td class="m">v. 收集</td></tr>
+<tr data-s="select v. 选择；挑选；adj. 精心 挑选的"><td class="n">60</td><td class="w">select</td><td class="m">v. 选择；挑选；adj. 精心 挑选的</td></tr>
+<tr data-s="opt v. 选择；决定"><td class="n">61</td><td class="w">opt</td><td class="m">v. 选择；决定</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 20</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="photograph n. 照片；相片；v. 照相； 拍照"><td class="n">62</td><td class="w">photograph</td><td class="m">n. 照片；相片；v. 照相； 拍照</td></tr>
+<tr data-s="portrait n. 肖像；画像"><td class="n">63</td><td class="w">portrait</td><td class="m">n. 肖像；画像</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 21</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="painting n. 绘画；油画；v. 刷油漆；用 颜料画；“paint”的现在分词"><td class="n">64</td><td class="w">painting</td><td class="m">n. 绘画；油画；v. 刷油漆；用 颜料画；“paint”的现在分词</td></tr>
+<tr data-s="sculpture n. 雕刻(术)；雕塑品； 雕刻品；v. 雕塑；刻蚀"><td class="n">65</td><td class="w">sculpture</td><td class="m">n. 雕刻(术)；雕塑品； 雕刻品；v. 雕塑；刻蚀</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 22</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="draw v. 拉；拽；画；提取；吸 引"><td class="n">66</td><td class="w">draw</td><td class="m">v. 拉；拽；画；提取；吸 引</td></tr>
+<tr data-s="depict v. 描述；描绘"><td class="n">67</td><td class="w">depict</td><td class="m">v. 描述；描绘</td></tr>
+<tr data-s="describe v. 描述"><td class="n">68</td><td class="w">describe</td><td class="m">v. 描述</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 23</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="carve v. 雕刻；切开"><td class="n">69</td><td class="w">carve</td><td class="m">v. 雕刻；切开</td></tr>
+<tr data-s="improvise v. 即兴创作；即兴表演； 临时准备"><td class="n">70</td><td class="w">improvise</td><td class="m">v. 即兴创作；即兴表演； 临时准备</td></tr>
+<tr data-s="musical adj. 音乐的；擅⻓音乐的；喜欢音 乐的；悦耳的；n. 音乐剧；音乐歌 舞片"><td class="n">71</td><td class="w">musical</td><td class="m">adj. 音乐的；擅⻓音乐的；喜欢音 乐的；悦耳的；n. 音乐剧；音乐歌 舞片</td></tr>
+<tr data-s="classical adj. 古典的"><td class="n">72</td><td class="w">classical</td><td class="m">adj. 古典的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 24</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="jazz n. 爵士乐"><td class="n">73</td><td class="w">jazz</td><td class="m">n. 爵士乐</td></tr>
+<tr data-s="rock n. 岩石；摇滚乐；v. (使) 摇动；震撼；(使)摇晃"><td class="n">74</td><td class="w">rock</td><td class="m">n. 岩石；摇滚乐；v. (使) 摇动；震撼；(使)摇晃</td></tr>
+<tr data-s="hip-hop n. 街舞；嘻哈文化；adj. 嘻哈的；嘻哈文化的"><td class="n">75</td><td class="w">hip-hop</td><td class="m">n. 街舞；嘻哈文化；adj. 嘻哈的；嘻哈文化的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 25</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="pop n. 砰的一声；流行音乐；汽水；v. 发出砰的一声；突然地行动；adj. 流行的；通俗的；adv. 砰地"><td class="n">76</td><td class="w">pop</td><td class="m">n. 砰的一声；流行音乐；汽水；v. 发出砰的一声；突然地行动；adj. 流行的；通俗的；adv. 砰地</td></tr>
+<tr data-s="lyric n. 抒情诗；歌词；adj. 抒 情的"><td class="n">77</td><td class="w">lyric</td><td class="m">n. 抒情诗；歌词；adj. 抒 情的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 26</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="band n. 乐队；带子；一伙"><td class="n">78</td><td class="w">band</td><td class="m">n. 乐队；带子；一伙</td></tr>
+<tr data-s="solo n. 独奏；独唱；独舞；单独表演； adj. 单独的；独唱的；独奏的； adv. 单独地；独自地；独奏地"><td class="n">79</td><td class="w">solo</td><td class="m">n. 独奏；独唱；独舞；单独表演； adj. 单独的；独唱的；独奏的； adv. 单独地；独自地；独奏地</td></tr>
+<tr data-s="melody n. 旋律；曲调"><td class="n">80</td><td class="w">melody</td><td class="m">n. 旋律；曲调</td></tr>
+<tr data-s="rhythm n. 节奏；韵律"><td class="n">81</td><td class="w">rhythm</td><td class="m">n. 节奏；韵律</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 27</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="tone n. 音调；色调；语气；氛围； 强健状况；v. 使协调；使健壮"><td class="n">82</td><td class="w">tone</td><td class="m">n. 音调；色调；语气；氛围； 强健状况；v. 使协调；使健壮</td></tr>
+<tr data-s="tune v. 调整；调音；n. 曲调； 调子"><td class="n">83</td><td class="w">tune</td><td class="m">v. 调整；调音；n. 曲调； 调子</td></tr>
+<tr data-s="disc n. 圆盘；磁碟；唱片"><td class="n">84</td><td class="w">disc</td><td class="m">n. 圆盘；磁碟；唱片</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 28</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="piano n. 钢琴"><td class="n">85</td><td class="w">piano</td><td class="m">n. 钢琴</td></tr>
+<tr data-s="violin n. 小提琴"><td class="n">86</td><td class="w">violin</td><td class="m">n. 小提琴</td></tr>
+<tr data-s="cello n. 大提琴"><td class="n">87</td><td class="w">cello</td><td class="m">n. 大提琴</td></tr>
+<tr data-s="guitar n. 吉他"><td class="n">88</td><td class="w">guitar</td><td class="m">n. 吉他</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 29</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="harmonica n. 口琴"><td class="n">89</td><td class="w">harmonica</td><td class="m">n. 口琴</td></tr>
+<tr data-s="trumpet n. 喇叭；小号；v. 宣扬； 吹嘘"><td class="n">90</td><td class="w">trumpet</td><td class="m">n. 喇叭；小号；v. 宣扬； 吹嘘</td></tr>
+<tr data-s="drum n. 鼓；v. 敲打"><td class="n">91</td><td class="w">drum</td><td class="m">n. 鼓；v. 敲打</td></tr>
+<tr data-s="flute n. ⻓笛"><td class="n">92</td><td class="w">flute</td><td class="m">n. ⻓笛</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 30</span><span class="gcnt">6 词</span></td></tr>
+<tr data-s="competition n. 竞争；比赛"><td class="n">93</td><td class="w">competition</td><td class="m">n. 竞争；比赛</td></tr>
+<tr data-s="tournament n. 锦标赛；比赛；联赛"><td class="n">94</td><td class="w">tournament</td><td class="m">n. 锦标赛；比赛；联赛</td></tr>
+<tr data-s="olympic adj. 奥林匹克的"><td class="n">95</td><td class="w">Olympic</td><td class="m">adj. 奥林匹克的</td></tr>
+<tr data-s="sponsor n. 赞助商；发起人；v. 赞 助；主办"><td class="n">96</td><td class="w">sponsor</td><td class="m">n. 赞助商；发起人；v. 赞 助；主办</td></tr>
+<tr data-s="patron n. 赞助人；资助人；老主 顾"><td class="n">97</td><td class="w">patron</td><td class="m">n. 赞助人；资助人；老主 顾</td></tr>
+<tr data-s="athlete n. 运动员；田径运动员"><td class="n">98</td><td class="w">athlete</td><td class="m">n. 运动员；田径运动员</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 31</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="champion n. 冠军；优胜者；拥护 者；v. 拥护；支持"><td class="n">99</td><td class="w">champion</td><td class="m">n. 冠军；优胜者；拥护 者；v. 拥护；支持</td></tr>
+<tr data-s="spectator n. 观众；旁观者"><td class="n">100</td><td class="w">spectator</td><td class="m">n. 观众；旁观者</td></tr>
+<tr data-s="volunteer n. 志愿者；v. 自愿做"><td class="n">101</td><td class="w">volunteer</td><td class="m">n. 志愿者；v. 自愿做</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 32</span><span class="gcnt">7 词</span></td></tr>
+<tr data-s="famous adj. 著名的；出名的"><td class="n">102</td><td class="w">famous</td><td class="m">adj. 著名的；出名的</td></tr>
+<tr data-s="well-known adj. 众所周知的；著名的"><td class="n">103</td><td class="w">well-known</td><td class="m">adj. 众所周知的；著名的</td></tr>
+<tr data-s="energetic adj. 精力旺盛的；有活力 的"><td class="n">104</td><td class="w">energetic</td><td class="m">adj. 精力旺盛的；有活力 的</td></tr>
+<tr data-s="vigorous adj. 精力充沛的；茂盛的"><td class="n">105</td><td class="w">vigorous</td><td class="m">adj. 精力充沛的；茂盛的</td></tr>
+<tr data-s="stadium n. 体育场；运动场"><td class="n">106</td><td class="w">stadium</td><td class="m">n. 体育场；运动场</td></tr>
+<tr data-s="gym n. 健身房；体育馆"><td class="n">107</td><td class="w">gym</td><td class="m">n. 健身房；体育馆</td></tr>
+<tr data-s="training n. 训练；培训；锻炼；v. 训 练；培训； “train”的现在分词"><td class="n">108</td><td class="w">training</td><td class="m">n. 训练；培训；锻炼；v. 训 练；培训； “train”的现在分词</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 33</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="exercise n. 练习；锻炼；运动；行使； v. 运用；使用；锻炼；使担忧"><td class="n">109</td><td class="w">exercise</td><td class="m">n. 练习；锻炼；运动；行使； v. 运用；使用；锻炼；使担忧</td></tr>
+<tr data-s="indoor adj. 户内的；室内的"><td class="n">110</td><td class="w">indoor</td><td class="m">adj. 户内的；室内的</td></tr>
+<tr data-s="outdoor adj. 户外的"><td class="n">111</td><td class="w">outdoor</td><td class="m">adj. 户外的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 34</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="mobile adj. 可移动的；易变的"><td class="n">112</td><td class="w">mobile</td><td class="m">adj. 可移动的；易变的</td></tr>
+<tr data-s="movement n. 活动；运动；动作；乐 章"><td class="n">113</td><td class="w">movement</td><td class="m">n. 活动；运动；动作；乐 章</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 35</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="yoga n. 瑜伽"><td class="n">114</td><td class="w">yoga</td><td class="m">n. 瑜伽</td></tr>
+<tr data-s="sprawl v. 伸开四肢；蔓延；杂乱无序地拓 展；n. 伸开四肢；蔓延；杂乱无序 的拓展"><td class="n">115</td><td class="w">sprawl</td><td class="m">v. 伸开四肢；蔓延；杂乱无序地拓 展；n. 伸开四肢；蔓延；杂乱无序 的拓展</td></tr>
+<tr data-s="stretch v. 伸展；延伸；持续；n. 伸展；弹性；一段"><td class="n">116</td><td class="w">stretch</td><td class="m">v. 伸展；延伸；持续；n. 伸展；弹性；一段</td></tr>
+<tr data-s="strain n. 压力；拉伤；拉力；(动植物 的)品种；v. 损伤；竭力；拉紧"><td class="n">117</td><td class="w">strain</td><td class="m">n. 压力；拉伤；拉力；(动植物 的)品种；v. 损伤；竭力；拉紧</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 36</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="chess n. 国际象棋"><td class="n">118</td><td class="w">chess</td><td class="m">n. 国际象棋</td></tr>
+<tr data-s="badminton n. 羽毛球运动；羽毛球"><td class="n">119</td><td class="w">badminton</td><td class="m">n. 羽毛球运动；羽毛球</td></tr>
+<tr data-s="golf n. 高尔夫球"><td class="n">120</td><td class="w">golf</td><td class="m">n. 高尔夫球</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 37</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="billiards n. 台球"><td class="n">121</td><td class="w">billiards</td><td class="m">n. 台球</td></tr>
+<tr data-s="soccer n. 足球"><td class="n">122</td><td class="w">soccer</td><td class="m">n. 足球</td></tr>
+<tr data-s="tennis n. 网球"><td class="n">123</td><td class="w">tennis</td><td class="m">n. 网球</td></tr>
+<tr data-s="volleyball n. 排球"><td class="n">124</td><td class="w">volleyball</td><td class="m">n. 排球</td></tr>
+<tr data-s="hockey n. 曲棍球"><td class="n">125</td><td class="w">hockey</td><td class="m">n. 曲棍球</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 38</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="goal n. 目标；进球得分；球⻔"><td class="n">126</td><td class="w">goal</td><td class="m">n. 目标；进球得分；球⻔</td></tr>
+<tr data-s="bat n. 蝙蝠；球拍；球棒；v. 击(球)"><td class="n">127</td><td class="w">bat</td><td class="m">n. 蝙蝠；球拍；球棒；v. 击(球)</td></tr>
+<tr data-s="racket n. 喧哗；球拍；v. 吵闹； 用球拍打"><td class="n">128</td><td class="w">racket</td><td class="m">n. 喧哗；球拍；v. 吵闹； 用球拍打</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 39</span><span class="gcnt">10 词</span></td></tr>
+<tr data-s="kick n. 踢；踹；v. 踢；踹"><td class="n">129</td><td class="w">kick</td><td class="m">n. 踢；踹；v. 踢；踹</td></tr>
+<tr data-s="knock v. 敲；撞；击；打；n. 撞 击；敲击"><td class="n">130</td><td class="w">knock</td><td class="m">v. 敲；撞；击；打；n. 撞 击；敲击</td></tr>
+<tr data-s="flip v. 快速翻转；迅速按；轻弹；轻 击；n. 浏览；空翻；轻抛；捻掷； adj. 轻率的；无礼的；冒失的"><td class="n">131</td><td class="w">flip</td><td class="m">v. 快速翻转；迅速按；轻弹；轻 击；n. 浏览；空翻；轻抛；捻掷； adj. 轻率的；无礼的；冒失的</td></tr>
+<tr data-s="pitch v. 投掷；扎营；(猛地)向前倾跌； 力荐(某主张)；n. 球场；程度(最 高点)；音高；沥⻘；宣传论点"><td class="n">132</td><td class="w">pitch</td><td class="m">v. 投掷；扎营；(猛地)向前倾跌； 力荐(某主张)；n. 球场；程度(最 高点)；音高；沥⻘；宣传论点</td></tr>
+<tr data-s="throw v. 扔；抛；丢；投；n. 扔；抛；摔；投"><td class="n">133</td><td class="w">throw</td><td class="m">v. 扔；抛；丢；投；n. 扔；抛；摔；投</td></tr>
+<tr data-s="toss v. (随意地)抛掷；向后 甩"><td class="n">134</td><td class="w">toss</td><td class="m">v. (随意地)抛掷；向后 甩</td></tr>
+<tr data-s="slide v. (使)滑动；下滑；n. 幻灯片；滑梯"><td class="n">135</td><td class="w">slide</td><td class="m">v. (使)滑动；下滑；n. 幻灯片；滑梯</td></tr>
+<tr data-s="slip v. 滑倒；滑落；溜走；悄悄地 放；n. 滑倒；溜走；疏忽；纸片"><td class="n">136</td><td class="w">slip</td><td class="m">v. 滑倒；滑落；溜走；悄悄地 放；n. 滑倒；溜走；疏忽；纸片</td></tr>
+<tr data-s="glide v. 滑行；滑动；滑翔；轻快无声地 移动；n. 滑行；滑动；滑翔；滑音"><td class="n">137</td><td class="w">glide</td><td class="m">v. 滑行；滑动；滑翔；轻快无声地 移动；n. 滑行；滑动；滑翔；滑音</td></tr>
+<tr data-s="tumble v. 跌倒；摔倒；暴跌；n. 摔倒；混乱；暴跌"><td class="n">138</td><td class="w">tumble</td><td class="m">v. 跌倒；摔倒；暴跌；n. 摔倒；混乱；暴跌</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 40</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="ski v. 滑雪"><td class="n">139</td><td class="w">ski</td><td class="m">v. 滑雪</td></tr>
+<tr data-s="skate v. 溜冰；n. 旱冰鞋"><td class="n">140</td><td class="w">skate</td><td class="m">v. 溜冰；n. 旱冰鞋</td></tr>
+<tr data-s="cycling n. 骑自行⻋；v. 循环；骑自 行⻋；“cycle”的现在分词"><td class="n">141</td><td class="w">cycling</td><td class="m">n. 骑自行⻋；v. 循环；骑自 行⻋；“cycle”的现在分词</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 41</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="dive v. 潜水；跳水；暴跌；n. 潜水；跳水；暴跌"><td class="n">142</td><td class="w">dive</td><td class="m">v. 潜水；跳水；暴跌；n. 潜水；跳水；暴跌</td></tr>
+<tr data-s="drift v. 飘；漂流；漂移；n. 流 动；趋势"><td class="n">143</td><td class="w">drift</td><td class="m">v. 飘；漂流；漂移；n. 流 动；趋势</td></tr>
+<tr data-s="jump n. 跳；跳跃；v. 跳；跳跃"><td class="n">144</td><td class="w">jump</td><td class="m">n. 跳；跳跃；v. 跳；跳跃</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 42</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="leap v. 跳跃；n. 跳跃"><td class="n">145</td><td class="w">leap</td><td class="m">v. 跳跃；n. 跳跃</td></tr>
+<tr data-s="plunge v. 投入；跳入；n. 跳进； 骤降"><td class="n">146</td><td class="w">plunge</td><td class="m">v. 投入；跳入；n. 跳进； 骤降</td></tr>
+<tr data-s="hop v. 单腿跳；跳跃；⻬足跳；跃 过；n. 跳跃；蹦跳；啤酒花"><td class="n">147</td><td class="w">hop</td><td class="m">v. 单腿跳；跳跃；⻬足跳；跃 过；n. 跳跃；蹦跳；啤酒花</td></tr>
+<tr data-s="bounce v. 弹跳；反弹；n. 弹跳； 跳动"><td class="n">148</td><td class="w">bounce</td><td class="m">v. 弹跳；反弹；n. 弹跳； 跳动</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 43</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="tent n. 帐篷；帐棚"><td class="n">149</td><td class="w">tent</td><td class="m">n. 帐篷；帐棚</td></tr>
+<tr data-s="camp n. 营地；阵营；兵营；v. 宿 营；露营；使扎营(住宿)"><td class="n">150</td><td class="w">camp</td><td class="m">n. 营地；阵营；兵营；v. 宿 营；露营；使扎营(住宿)</td></tr>
+<tr data-s="picnic n. 野餐；v. 去野餐"><td class="n">151</td><td class="w">picnic</td><td class="m">n. 野餐；v. 去野餐</td></tr>
+<tr data-s="hunt v. 打猎；搜寻"><td class="n">152</td><td class="w">hunt</td><td class="m">v. 打猎；搜寻</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 44</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="race n. 种族；赛跑；竞争；v. 比赛；快速移动"><td class="n">153</td><td class="w">race</td><td class="m">n. 种族；赛跑；竞争；v. 比赛；快速移动</td></tr>
+<tr data-s="marathon n. ⻢拉松赛跑；持久赛 跑；耐力赛"><td class="n">154</td><td class="w">marathon</td><td class="m">n. ⻢拉松赛跑；持久赛 跑；耐力赛</td></tr>
+<tr data-s="pedestrian n. 行人；步行者；adj. 步 行的；呆板的；平淡无奇的"><td class="n">155</td><td class="w">pedestrian</td><td class="m">n. 行人；步行者；adj. 步 行的；呆板的；平淡无奇的</td></tr>
+<tr data-s="pace n. 一步；步伐；步速；v. 踱步；调整步调"><td class="n">156</td><td class="w">pace</td><td class="m">n. 一步；步伐；步速；v. 踱步；调整步调</td></tr>
+<tr data-s="step n. 步；步骤；踏级；步 伐；v. 踩；踏；行走"><td class="n">157</td><td class="w">step</td><td class="m">n. 步；步骤；踏级；步 伐；v. 踩；踏；行走</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 45</span><span class="gcnt">10 词</span></td></tr>
+<tr data-s="excursion n. 远足；短途旅行；涉猎 某事"><td class="n">158</td><td class="w">excursion</td><td class="m">n. 远足；短途旅行；涉猎 某事</td></tr>
+<tr data-s="cruise v. 乘船游览；航游；缓慢 行进；n. 乘船游览；航游"><td class="n">159</td><td class="w">cruise</td><td class="m">v. 乘船游览；航游；缓慢 行进；n. 乘船游览；航游</td></tr>
+<tr data-s="trip n. 旅行；旅程；v. 绊倒； 出差错；轻快地走"><td class="n">160</td><td class="w">trip</td><td class="m">n. 旅行；旅程；v. 绊倒； 出差错；轻快地走</td></tr>
+<tr data-s="vacation n. 假期；度假"><td class="n">161</td><td class="w">vacation</td><td class="m">n. 假期；度假</td></tr>
+<tr data-s="hike n. 远足；(费用)增加； v. 远足；(费用)增加"><td class="n">162</td><td class="w">hike</td><td class="m">n. 远足；(费用)增加； v. 远足；(费用)增加</td></tr>
+<tr data-s="jog v. 慢跑；轻碰；轻撞；n. 慢跑；轻碰；轻撞"><td class="n">163</td><td class="w">jog</td><td class="m">v. 慢跑；轻碰；轻撞；n. 慢跑；轻碰；轻撞</td></tr>
+<tr data-s="stride v. 大步行走；跨一大步； n. 大步；步伐"><td class="n">164</td><td class="w">stride</td><td class="m">v. 大步行走；跨一大步； n. 大步；步伐</td></tr>
+<tr data-s="wander v. 徘徊；漫游"><td class="n">165</td><td class="w">wander</td><td class="m">v. 徘徊；漫游</td></tr>
+<tr data-s="linger v. 徘徊；逗留；流连；磨 蹭"><td class="n">166</td><td class="w">linger</td><td class="m">v. 徘徊；逗留；流连；磨 蹭</td></tr>
+<tr data-s="lag v. 缓慢移动；滞后；n. 时 间间隔"><td class="n">167</td><td class="w">lag</td><td class="m">v. 缓慢移动；滞后；n. 时 间间隔</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 46</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="climb v. 攀爬；爬升"><td class="n">168</td><td class="w">climb</td><td class="m">v. 攀爬；爬升</td></tr>
+<tr data-s="pull v. 拉；拖；牵；拔；n. 拉；拖；牵；拔"><td class="n">169</td><td class="w">pull</td><td class="m">v. 拉；拖；牵；拔；n. 拉；拖；牵；拔</td></tr>
+<tr data-s="drag v. 拖；硬拉；拖沓；n. 累 赘；阻力"><td class="n">170</td><td class="w">drag</td><td class="m">v. 拖；硬拉；拖沓；n. 累 赘；阻力</td></tr>
+<tr data-s="bend v. (使)弯曲；弯腰；n. 弯曲处"><td class="n">171</td><td class="w">bend</td><td class="m">v. (使)弯曲；弯腰；n. 弯曲处</td></tr>
+<tr data-s="bow n. 弓；蝴蝶结；鞠躬；v. (使)鞠躬"><td class="n">172</td><td class="w">bow</td><td class="m">n. 弓；蝴蝶结；鞠躬；v. (使)鞠躬</td></tr>
+</tbody>
+</table><div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit08.html">← Unit 08</a><a href="unit09-card.html">切到例句卡片版</a><a href="unit10.html">Unit 10 →</a></div><footer><div class="wrap" style="padding:0">
+ 摘自《雅思词汇真经》（刘洪波 编著）第 9 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
+</div></footer></div>
+<script>
+(function(){
+ var KEY='vj-hide';
+ var body=document.body;
+ var kind=body.dataset.kind;
+ var s={m:false,z:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;}}catch(e){}
+ function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+ function paint(){
+  body.classList.toggle('hide-m',s.m);
+  body.classList.toggle('hide-z',s.z);
+  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all');
+  if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
+  if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
+  if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
+ }
+ var cm=document.getElementById('m');
+ if(cm) cm.addEventListener('change',function(){s.m=cm.checked; save(); paint();});
+ var cz=document.getElementById('z');
+ if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
+ var ca=document.getElementById('all');
+ if(ca) ca.addEventListener('change',function(){
+   s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
+ });
+ var rs=document.getElementById('reset');
+ if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; save(); paint();});
+ var q=document.getElementById('q');
+ var items=[].slice.call(document.querySelectorAll('[data-s]'));
+ var cnt=document.getElementById('cnt');
+ function filter(){
+   var v=(q&&q.value||'').trim().toLowerCase();
+   var n=0;
+   items.forEach(function(el){
+     var hit=!v||el.dataset.s.indexOf(v)>-1;
+     el.style.display=hit?'':'none';
+     if(hit)n++;
+   });
+   if(cnt) cnt.textContent=v? (n+' / '+items.length) : (items.length+' 条');
+   var emp=document.getElementById('empty');
+   if(emp) emp.style.display=(n===0)?'block':'none';
+   document.querySelectorAll('section.grp').forEach(function(sec){
+     var vis=sec.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     sec.style.display=vis?'':'none';
+   });
+   document.querySelectorAll('tbody.grp').forEach(function(tb){
+     var vis=tb.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     tb.style.display=vis?'':'none';
+   });
+ }
+ if(q){q.addEventListener('input',filter);}
+ document.addEventListener('keydown',function(e){
+   if(e.key==='/'&&document.activeElement!==q&&q){e.preventDefault();q.focus();}
+   if(e.key==='Escape'&&document.activeElement===q){q.value='';filter();q.blur();}
+ });
+ paint(); filter();
+})();
+</script>
+</body></html>

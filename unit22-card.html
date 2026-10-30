@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unit 22 · 时间日期</title>
+<style>
+:root{
+ --bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da;
+ --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4;
+}
+@media (prefers-color-scheme: dark){
+ :root{ --bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037;
+        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+ font:16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+ -webkit-font-smoothing:antialiased;padding-bottom:64px}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+
+.top{padding:34px 0 18px}
+.back{display:inline-block;font-size:13px;color:var(--ink2);text-decoration:none;
+ border:1px solid var(--line);border-radius:999px;padding:3px 12px;margin-bottom:16px}
+.back:hover{color:var(--accent);border-color:var(--accent)}
+h1{margin:0;font-size:27px;letter-spacing:.2px;font-weight:700}
+h1 .u{color:var(--accent);font-variant-numeric:tabular-nums}
+.sub{margin:6px 0 0;color:var(--ink2);font-size:13.5px}
+
+.toolbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);
+ backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line);
+ padding:10px 0;margin-bottom:18px}
+.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#q{flex:1 1 200px;min-width:150px;padding:8px 13px;border:1px solid var(--line);border-radius:9px;
+ background:var(--panel);color:var(--ink);font-size:14px;outline:none}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.sw{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);
+ border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer;user-select:none;background:var(--panel)}
+.sw input{accent-color:var(--accent);margin:0}
+.sw.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.btn{font:inherit;font-size:13px;color:var(--ink2);background:var(--panel);border:1px solid var(--line);
+ border-radius:999px;padding:5px 12px;cursor:pointer}
+.btn:hover{color:var(--accent);border-color:var(--accent)}
+.count{font-size:12.5px;color:var(--ink2);margin-left:auto;font-variant-numeric:tabular-nums}
+
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);
+ border-radius:12px;overflow:hidden}
+thead th{background:var(--chip);font-size:12.5px;letter-spacing:.06em;color:var(--ink2);
+ font-weight:600;text-align:left;padding:9px 14px;border-bottom:1px solid var(--line)}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--accent-soft)}
+td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-nums}
+td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
+ letter-spacing:.2px;word-break:break-word}
+td.m{color:var(--ink)}
+tr.hit td.w,tr.hit td.m{background:var(--mark)}
+
+.cards{display:grid;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px}.card .w{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:19px;font-weight:700;letter-spacing:.2px}
+.card .w .idx{font-family:inherit;font-size:12px;color:var(--ink2);font-weight:400;margin-right:8px;
+ font-variant-numeric:tabular-nums}
+.card .m{margin:5px 0 0;color:var(--ink);font-size:14.5px}
+.card .ex{margin:10px 0 0;padding:9px 12px;background:var(--accent-soft);border-radius:9px;font-size:14px}
+.card .ex .en{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:14.8px;line-height:1.55}
+.card .ex .zh{color:var(--ink2);margin-top:3px;font-size:13.5px}
+.card .no{color:var(--ink2);font-size:12.5px;margin-top:8px;font-style:italic}
+
+tr.gsep td{background:var(--chip);padding:5px 14px;border-bottom:1px solid var(--line)}
+.gtag{font-size:11.5px;font-weight:700;letter-spacing:.08em;color:var(--accent)}
+.gcnt{font-size:11.5px;color:var(--ink2);margin-left:8px;font-variant-numeric:tabular-nums}
+tbody.grp tr:first-child td{border-top:0}
+tbody.grp + tbody.grp tr.gsep td{border-top:8px solid var(--bg)}
+
+/* 卡片版：一个词群一块面板，组与组之间界限分明 */
+section.grp{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+ margin-bottom:16px;overflow:hidden}
+.ghead{display:flex;align-items:baseline;gap:9px;padding:9px 15px;background:var(--chip);
+ border-bottom:1px solid var(--line)}
+section.grp .cards{display:grid;gap:0;padding:1px 15px}
+section.grp .card{background:transparent;border:0;border-radius:0;padding:13px 0;
+ border-bottom:1px solid var(--line)}
+section.grp .card:last-child{border-bottom:0}
+
+.hide-m .m,.hide-m td.m{display:none}
+.hide-z .zh{display:none}
+body.hide-m td.m{display:none!important}
+.empty{padding:40px;text-align:center;color:var(--ink2);font-size:14px}
+
+.nav{display:flex;justify-content:space-between;gap:10px;margin:26px 0 0}
+.nav a{font-size:13.5px;text-decoration:none;color:var(--ink2);border:1px solid var(--line);
+ border-radius:999px;padding:6px 14px;background:var(--panel)}
+.nav a:hover{color:var(--accent);border-color:var(--accent)}
+.nav a.dis{opacity:.35;pointer-events:none}
+footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
+
+@media (max-width:640px){
+ body{font-size:15px}
+ .wrap{padding:0 12px}
+ h1{font-size:22px}
+ thead{display:none}
+ table,tbody,tr,td{display:block;width:auto}
+ table{border:0;background:transparent;border-radius:0}
+ tbody tr{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:11px 13px;margin-bottom:9px}
+ tbody td{border:0;padding:0}
+ td.n{display:none}
+ tr.gsep{display:block}
+ tr.gsep td{display:block;background:transparent;padding:0 0 6px}
+ tbody.grp{margin-bottom:6px;display:block}
+ td.w{font-size:17px;margin-bottom:3px}
+ td.m{font-size:14px;color:var(--ink2)}
+}
+</style>
+</head>
+<body data-kind="card">
+<div class="wrap"><div class="top">
+ <a class="back" href="index.html">← 全部单元</a>
+ <h1><span class="u">Unit 22</span> · 时间日期</h1>
+ <p class="sub">52 词 · 52 条例句</p>
+</div></div>
+<div class="toolbar"><div class="wrap">
+ <div class="tools">
+  <input id="q" type="search" placeholder="搜索单词或释义…（按 / 聚焦）">
+  <label class="sw"><input type="checkbox" id="all"> 默写模式</label>
+  <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
+  <label class="sw"><input type="checkbox" id="z"> 隐藏例句译文</label>
+  <button class="btn" id="reset">重置</button>
+  <span class="count" id="cnt">52 条</span>
+ </div>
+</div></div><div class="wrap">
+<section class="grp"><div class="ghead"><span class="gtag">词群 01</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="daily adv. 每天；每日；adj. 每 天的；每日的；n. 日报"><div class="w"><span class="idx">01</span>daily</div><div class="m">adv. 每天；每日；adj. 每 天的；每日的；n. 日报</div><div class="ex"><div class="en">The best treatment for the pain is daily exercises.</div><div class="zh">治疗这种疼痛的最好办法就是每天锻炼。</div></div></div>
+<div class="card" data-s="monthly adj. 每月的；每月一次的；adv. 每月一次；每个月；n. 月刊"><div class="w"><span class="idx">02</span>monthly</div><div class="m">adj. 每月的；每月一次的；adv. 每月一次；每个月；n. 月刊</div><div class="ex"><div class="en">The common monthly publications can be found in the library.</div><div class="zh">这家图书馆里有那些常见的月刊。</div></div></div>
+<div class="card" data-s="quarterly adj. 季度的；adv. 每季一 次；n. 季刊"><div class="w"><span class="idx">03</span>quarterly</div><div class="m">adj. 季度的；adv. 每季一 次；n. 季刊</div><div class="ex"><div class="en">This journal is bimonthly, and that one quarterly.</div><div class="zh">这本杂志是双月刊,那本是季刊。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 02</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="annual adj. 每年的；一年一次 的；n. 年刊；年鉴"><div class="w"><span class="idx">04</span>annual</div><div class="m">adj. 每年的；一年一次 的；n. 年刊；年鉴</div><div class="ex"><div class="en">The firm has an annual turnover of 800 million pounds.</div><div class="zh">这家公司的年营业额为8亿英镑。</div></div></div>
+<div class="card" data-s="yearly adj. 每年的；adv. 每年地"><div class="w"><span class="idx">05</span>yearly</div><div class="m">adj. 每年的；adv. 每年地</div><div class="ex"><div class="en">The yearly conference will be held next month.</div><div class="zh">年会将于下个月举行。</div></div></div>
+<div class="card" data-s="anniversary n. 周年纪念日"><div class="w"><span class="idx">06</span>anniversary</div><div class="m">n. 周年纪念日</div><div class="ex"><div class="en">Jack and Kim celebrated their 20th wedding anniversary in January.</div><div class="zh">杰克和金在1月庆祝了他们的结婚20周年纪念日。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 03</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="era n. 时代；纪元"><div class="w"><span class="idx">07</span>era</div><div class="m">n. 时代；纪元</div><div class="ex"><div class="en">We live in an era of rapid change.</div><div class="zh">我们生活在一个快速变化的时代。</div></div></div>
+<div class="card" data-s="present n. 目前；礼物；adj. 在场 的；目前的；v. 呈现；提出"><div class="w"><span class="idx">08</span>present</div><div class="m">n. 目前；礼物；adj. 在场 的；目前的；v. 呈现；提出</div><div class="ex"><div class="en">There's no certain cure for this illness at present.</div><div class="zh">现在,这种病尚无确定的疗法。</div></div></div>
+<div class="card" data-s="contemporary adj. 现代的；当代的；同时代 的；n. 同代人；同辈人；同龄人"><div class="w"><span class="idx">09</span>contemporary</div><div class="m">adj. 现代的；当代的；同时代 的；n. 同代人；同辈人；同龄人</div><div class="ex"><div class="en">These clothes are more contemporary and wearable.</div><div class="zh">这些服装更具当代感,而且穿起来更舒适。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 04</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="medieval adj. 中世纪的；中古的"><div class="w"><span class="idx">10</span>medieval</div><div class="m">adj. 中世纪的；中古的</div><div class="ex"><div class="en">Parents with a medieval attitude toward dating are not popular with the young.</div><div class="zh">对于约会抱有守旧态度的父母是不受年轻人欢迎的。</div></div></div>
+<div class="card" data-s="century n. 世纪；百年"><div class="w"><span class="idx">11</span>century</div><div class="m">n. 世纪；百年</div><div class="ex"><div class="en">It was considered one of the best film s of the 20th ce n tu ry.</div><div class="zh">它被视为20世纪最优秀的电影之一。</div></div></div>
+<div class="card" data-s="millennium n. 一千年；千禧年；(未 来的)太平盛世"><div class="w"><span class="idx">12</span>millennium</div><div class="m">n. 一千年；千禧年；(未 来的)太平盛世</div><div class="ex"><div class="en">What did you do to celebrate the new millennium?</div><div class="zh">你是如何庆祝千禧年的?</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 05</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="million num. 一百万；n. 百万； 百万个"><div class="w"><span class="idx">13</span>million</div><div class="m">num. 一百万；n. 百万； 百万个</div><div class="ex"><div class="en">It was estimated that the damage was over one million dollars.</div><div class="zh">据估计,损失超过了W0万美元。</div></div></div>
+<div class="card" data-s="billion num. 十亿"><div class="w"><span class="idx">14</span>billion</div><div class="m">num. 十亿</div><div class="ex"><div class="en">The human brain contains billions of nerve cells.</div><div class="zh">人类的大脑里有大量神经细胞。</div></div></div>
+<div class="card" data-s="dozen n. 很多； 一打；十二个"><div class="w"><span class="idx">15</span>dozen</div><div class="m">n. 很多； 一打；十二个</div><div class="ex"><div class="en">She bought a dozen eggs.</div><div class="zh">她买了一打鸡蛋。</div></div></div>
+<div class="card" data-s="dawn n. 黎明；破晓；v. 破晓； 开始明朗"><div class="w"><span class="idx">16</span>dawn</div><div class="m">n. 黎明；破晓；v. 破晓； 开始明朗</div><div class="ex"><div class="en">We set sail at dawn and headed for New York.</div><div class="zh">我们在黎明起程,朝着纽约驶去。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 06</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="midday n. 中午；正午"><div class="w"><span class="idx">17</span>midday</div><div class="m">n. 中午；正午</div><div class="ex"><div class="en">We finished work at midday.</div><div class="zh">我们于正午完成了工作。</div></div></div>
+<div class="card" data-s="midnight n. 午夜；子夜"><div class="w"><span class="idx">18</span>midnight</div><div class="m">n. 午夜；子夜</div><div class="ex"><div class="en">According to astronomers, the best time for viewing is between midnight and dawn.</div><div class="zh">据天文学家表示,最佳观赏期在午夜至黎明期间。</div></div></div>
+<div class="card" data-s="overnight adv. 在夜里；突然；adj. 整晚的；突然的"><div class="w"><span class="idx">19</span>overnight</div><div class="m">adv. 在夜里；突然；adj. 整晚的；突然的</div><div class="ex"><div class="en">I stayed overnight at a friend's home.</div><div class="zh">我在朋友家过了一夜。</div></div></div>
+<div class="card" data-s="night n. 夜晚；晚上"><div class="w"><span class="idx">20</span>night</div><div class="m">n. 夜晚；晚上</div><div class="ex"><div class="en">The city's night clubs are open all night for eating, drinking and dancing.</div><div class="zh">该市的夜总会彻夜提供饮食和舞蹈娱乐。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 07</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="modern adj. 现代的；时髦的"><div class="w"><span class="idx">21</span>modern</div><div class="m">adj. 现代的；时髦的</div><div class="ex"><div class="en">The gallery shows modern art.</div><div class="zh">这家美术馆展出当代艺术。</div></div></div>
+<div class="card" data-s="recent adj. 近来的；新近的"><div class="w"><span class="idx">22</span>recent</div><div class="m">adj. 近来的；新近的</div><div class="ex"><div class="en">The vase looked old but was a recent fake.</div><div class="zh">这个花瓶看似古老,却是一件新近制作的贋品。</div></div></div>
+<div class="card" data-s="up-to-date adj. 最新的；最近的；新 式的"><div class="w"><span class="idx">23</span>up-to-date</div><div class="m">adj. 最新的；最近的；新 式的</div><div class="ex"><div class="en">Up-to-date information about the research on climate change can be found on this website.</div><div class="zh">可在该网站上找到关于气候变化研究的最新信息。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 08</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="first n. 第一；adj. 第一的； adv. 第一；首先"><div class="w"><span class="idx">24</span>first</div><div class="m">n. 第一；adj. 第一的； adv. 第一；首先</div><div class="ex"><div class="en">What is your first impression of Beijing?</div><div class="zh">你对北京的第一印象如何?</div></div></div>
+<div class="card" data-s="secondly adv. 第二；其次"><div class="w"><span class="idx">25</span>secondly</div><div class="m">adv. 第二；其次</div><div class="ex"><div class="en">To start with, we don't have enough money. Secondly, werre too busy.</div><div class="zh">首先,我们的钱不够。</div></div></div>
+<div class="card" data-s="finally adv. 最后；终于"><div class="w"><span class="idx">26</span>finally</div><div class="m">adv. 最后；终于</div><div class="ex"><div class="en">Today, I finally get to look at the man that I love and finally say, "Will you please marry me?</div><div class="zh">今天,我终于可以看着我心爱的男人,终于可以说:“你愿意和我结婚吗?</div></div></div>
+<div class="card" data-s="finish v. 完成；结束"><div class="w"><span class="idx">27</span>finish</div><div class="m">v. 完成；结束</div><div class="ex"><div class="en">When would you finish your college course?</div><div class="zh">你什么时候完成大学课程?</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 09</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="immediately adv. 立即；⻢上；conj. 即刻"><div class="w"><span class="idx">28</span>immediately</div><div class="m">adv. 立即；⻢上；conj. 即刻</div><div class="ex"><div class="en">I will then immediately send confirmation and the application process begins.</div><div class="zh">然后,我会立即发送确认书,申请流程就启动了。</div></div></div>
+<div class="card" data-s="instant n. 瞬间；立即；adj. 立即 的；即时的"><div class="w"><span class="idx">29</span>instant</div><div class="m">n. 瞬间；立即；adj. 立即 的；即时的</div><div class="ex"><div class="en">Just for an instant I thought she was going to refuse.</div><div class="zh">有那么一瞬间,我以为她要拒绝了。</div></div></div>
+<div class="card" data-s="moment n. 瞬间；片刻"><div class="w"><span class="idx">30</span>moment</div><div class="m">n. 瞬间；片刻</div><div class="ex"><div class="en">Love is a moment that lasts forever.</div><div class="zh">爱的瞬间就是永恒。</div></div></div>
+<div class="card" data-s="minute n. 分钟；一会儿；adj. 微 小的"><div class="w"><span class="idx">31</span>minute</div><div class="m">n. 分钟；一会儿；adj. 微 小的</div><div class="ex"><div class="en">It's only several minutes from here to the supermarket.</div><div class="zh">从这儿到超市只有几分钟的路程。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 10</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="prior adj. 优先的；在前的"><div class="w"><span class="idx">32</span>prior</div><div class="m">adj. 优先的；在前的</div><div class="ex"><div class="en">I have a prior appointment, so I can't go with you.</div><div class="zh">我预先有约会,所以不能跟你去。</div></div></div>
+<div class="card" data-s="former adj. 以前的；前者的；n. 模子"><div class="w"><span class="idx">33</span>former</div><div class="m">adj. 以前的；前者的；n. 模子</div><div class="ex"><div class="en">Many of his former supporters voted against him.</div><div class="zh">他以前的许多支持者投票反对他。</div></div></div>
+<div class="card" data-s="preceding adj. 在先的；在前的"><div class="w"><span class="idx">34</span>preceding</div><div class="m">adj. 在先的；在前的</div><div class="ex"><div class="en">She had been in Mexico the preceding summer.</div><div class="zh">年夏天,她去过墨西哥。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 11</span><span class="gcnt">4 词</span></div><div class="cards">
+<div class="card" data-s="precedent n. 先例；前例"><div class="w"><span class="idx">35</span>precedent</div><div class="m">n. 先例；前例</div><div class="ex"><div class="en">They were determined to break with precedent.</div><div class="zh">他们决心打破常规。</div></div></div>
+<div class="card" data-s="foremost adj. 最重要的；最好的； adv. 首要地"><div class="w"><span class="idx">36</span>foremost</div><div class="m">adj. 最重要的；最好的； adv. 首要地</div><div class="ex"><div class="en">Safety is our foremost concern.</div><div class="zh">安全是我们最关心的问题。</div></div></div>
+<div class="card" data-s="opening n. 开始；开口；空缺职位；adj. 开 始的；v. 打开；“open”的现在分 词"><div class="w"><span class="idx">37</span>opening</div><div class="m">n. 开始；开口；空缺职位；adj. 开 始的；v. 打开；“open”的现在分 词</div><div class="ex"><div class="en">The book's opening is dull, but the last chapters are interesting.</div><div class="zh">那本书的开头枯燥乏味,但最后几章很有意思。</div></div></div>
+<div class="card" data-s="initially adv. 最初；开始；起初"><div class="w"><span class="idx">38</span>initially</div><div class="m">adv. 最初；开始；起初</div><div class="ex"><div class="en">Initially, I disagreed with their proposal, but later I changed my mind.</div><div class="zh">起初,我不同意他们的提议,不过后来我改了主意。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 12</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="intermediate adj. 中间的；居中的"><div class="w"><span class="idx">39</span>intermediate</div><div class="m">adj. 中间的；居中的</div><div class="ex"><div class="en">This country is still at an intermediate stage of development.</div><div class="zh">这个国家仍正处于发展的中间阶段。</div></div></div>
+<div class="card" data-s="midst n. 中间；中部"><div class="w"><span class="idx">40</span>midst</div><div class="m">n. 中间；中部</div><div class="ex"><div class="en">We're lucky to have such a man in our midst.</div><div class="zh">在我们中间有这样一个人是我们的幸运。</div></div></div>
+<div class="card" data-s="meantime n. 期间；与此同时"><div class="w"><span class="idx">41</span>meantime</div><div class="m">n. 期间；与此同时</div><div class="ex"><div class="en">I like skiing. In the meantime, I know it is very dangerous.</div><div class="zh">我喜欢滑雪,同时也知道这非常危险。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 13</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="meanwhile adv. 与此同时；在此期间"><div class="w"><span class="idx">42</span>meanwhile</div><div class="m">adv. 与此同时；在此期间</div><div class="ex"><div class="en">You can start cooking; meanwhile I will set the table.</div><div class="zh">你可以先开始做饭，同时我来摆桌子。</div></div></div>
+<div class="card" data-s="simultaneous adj. 同时的；同步的"><div class="w"><span class="idx">43</span>simultaneous</div><div class="m">adj. 同时的；同步的</div><div class="ex"><div class="en">This event was almost simultaneous with that one.</div><div class="zh">这个事件几乎是与那个事件同时发生的。</div></div></div>
+<div class="card" data-s="ongoing adj. 正在进行的"><div class="w"><span class="idx">44</span>ongoing</div><div class="m">adj. 正在进行的</div><div class="ex"><div class="en">The discussions are still ongoing.</div><div class="zh">讨论仍在进行。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 14</span><span class="gcnt">3 词</span></div><div class="cards">
+<div class="card" data-s="everlasting adj. 永久的；永恒的；经 久不变的"><div class="w"><span class="idx">45</span>everlasting</div><div class="m">adj. 永久的；永恒的；经 久不变的</div><div class="ex"><div class="en">The man told the woman that he loved her with an everlasting love.</div><div class="zh">男人告诉女人,他对她的爱永恒不变。</div></div></div>
+<div class="card" data-s="permanent adj. 永久的；持久的"><div class="w"><span class="idx">46</span>permanent</div><div class="m">adj. 永久的；持久的</div><div class="ex"><div class="en">We have no permanent friends or enemies, only interests.</div><div class="zh">我们没有永久的朋友或敌人,只有永久的利益。</div></div></div>
+<div class="card" data-s="punctual adj. 准时的"><div class="w"><span class="idx">47</span>punctual</div><div class="m">adj. 准时的</div><div class="ex"><div class="en">He is always reliable and punctual.</div><div class="zh">他总是可靠又守时。</div></div></div>
+</div></section>
+<section class="grp"><div class="ghead"><span class="gtag">词群 15</span><span class="gcnt">5 词</span></div><div class="cards">
+<div class="card" data-s="duration n. 持续时间；期间"><div class="w"><span class="idx">48</span>duration</div><div class="m">n. 持续时间；期间</div><div class="ex"><div class="en">Difficulties will be experienced throughout the duration of the war.</div><div class="zh">在战争期间，人们将经历种种困难。</div></div></div>
+<div class="card" data-s="consecutive adj. 连续的；连贯的"><div class="w"><span class="idx">49</span>consecutive</div><div class="m">adj. 连续的；连贯的</div><div class="ex"><div class="en">He has been absent from school for four consecutive days.</div><div class="zh">他已经连续四天没来上学了。</div></div></div>
+<div class="card" data-s="periodically adv. 周期性地；定期地"><div class="w"><span class="idx">50</span>periodically</div><div class="m">adv. 周期性地；定期地</div><div class="ex"><div class="en">Sea mammals must emerge periodically to breathe.</div><div class="zh">海生哺乳动物必须定时浮出海面呼吸。</div></div></div>
+<div class="card" data-s="imminent adj. 即将发生的；临近的"><div class="w"><span class="idx">51</span>imminent</div><div class="m">adj. 即将发生的；临近的</div><div class="ex"><div class="en">They are unaware of the imminent dan ger.</div><div class="zh">他们没察觉到正在逼近的危险。</div></div></div>
+<div class="card" data-s="incidentally adv. 附带地；偶然地；顺 便地"><div class="w"><span class="idx">52</span>incidentally</div><div class="m">adv. 附带地；偶然地；顺 便地</div><div class="ex"><div class="en">Incidentally, here's good news for you.</div><div class="zh">顺便一提,我给你带了好消息。</div></div></div>
+</div></section>
+<div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit21.html">← Unit 21</a><a href="unit22.html">切到纯列表版</a><a class="dis">下一单元 →</a></div><footer><div class="wrap" style="padding:0">
+ 摘自《雅思词汇真经》（刘洪波 编著）第 22 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
+</div></footer></div>
+<script>
+(function(){
+ var KEY='vj-hide';
+ var body=document.body;
+ var kind=body.dataset.kind;
+ var s={m:false,z:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;}}catch(e){}
+ function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+ function paint(){
+  body.classList.toggle('hide-m',s.m);
+  body.classList.toggle('hide-z',s.z);
+  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all');
+  if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
+  if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
+  if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
+ }
+ var cm=document.getElementById('m');
+ if(cm) cm.addEventListener('change',function(){s.m=cm.checked; save(); paint();});
+ var cz=document.getElementById('z');
+ if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
+ var ca=document.getElementById('all');
+ if(ca) ca.addEventListener('change',function(){
+   s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
+ });
+ var rs=document.getElementById('reset');
+ if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; save(); paint();});
+ var q=document.getElementById('q');
+ var items=[].slice.call(document.querySelectorAll('[data-s]'));
+ var cnt=document.getElementById('cnt');
+ function filter(){
+   var v=(q&&q.value||'').trim().toLowerCase();
+   var n=0;
+   items.forEach(function(el){
+     var hit=!v||el.dataset.s.indexOf(v)>-1;
+     el.style.display=hit?'':'none';
+     if(hit)n++;
+   });
+   if(cnt) cnt.textContent=v? (n+' / '+items.length) : (items.length+' 条');
+   var emp=document.getElementById('empty');
+   if(emp) emp.style.display=(n===0)?'block':'none';
+   document.querySelectorAll('section.grp').forEach(function(sec){
+     var vis=sec.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     sec.style.display=vis?'':'none';
+   });
+   document.querySelectorAll('tbody.grp').forEach(function(tb){
+     var vis=tb.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     tb.style.display=vis?'':'none';
+   });
+ }
+ if(q){q.addEventListener('input',filter);}
+ document.addEventListener('keydown',function(e){
+   if(e.key==='/'&&document.activeElement!==q&&q){e.preventDefault();q.focus();}
+   if(e.key==='Escape'&&document.activeElement===q){q.value='';filter();q.blur();}
+ });
+ paint(); filter();
+})();
+</script>
+</body></html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unit 12 · 饮食健康</title>
+<style>
+:root{
+ --bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da;
+ --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4;
+}
+@media (prefers-color-scheme: dark){
+ :root{ --bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037;
+        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+ font:16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+ -webkit-font-smoothing:antialiased;padding-bottom:64px}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+
+.top{padding:34px 0 18px}
+.back{display:inline-block;font-size:13px;color:var(--ink2);text-decoration:none;
+ border:1px solid var(--line);border-radius:999px;padding:3px 12px;margin-bottom:16px}
+.back:hover{color:var(--accent);border-color:var(--accent)}
+h1{margin:0;font-size:27px;letter-spacing:.2px;font-weight:700}
+h1 .u{color:var(--accent);font-variant-numeric:tabular-nums}
+.sub{margin:6px 0 0;color:var(--ink2);font-size:13.5px}
+
+.toolbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);
+ backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line);
+ padding:10px 0;margin-bottom:18px}
+.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#q{flex:1 1 200px;min-width:150px;padding:8px 13px;border:1px solid var(--line);border-radius:9px;
+ background:var(--panel);color:var(--ink);font-size:14px;outline:none}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.sw{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);
+ border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer;user-select:none;background:var(--panel)}
+.sw input{accent-color:var(--accent);margin:0}
+.sw.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.btn{font:inherit;font-size:13px;color:var(--ink2);background:var(--panel);border:1px solid var(--line);
+ border-radius:999px;padding:5px 12px;cursor:pointer}
+.btn:hover{color:var(--accent);border-color:var(--accent)}
+.count{font-size:12.5px;color:var(--ink2);margin-left:auto;font-variant-numeric:tabular-nums}
+
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);
+ border-radius:12px;overflow:hidden}
+thead th{background:var(--chip);font-size:12.5px;letter-spacing:.06em;color:var(--ink2);
+ font-weight:600;text-align:left;padding:9px 14px;border-bottom:1px solid var(--line)}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--accent-soft)}
+td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-nums}
+td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
+ letter-spacing:.2px;word-break:break-word}
+td.m{color:var(--ink)}
+tr.hit td.w,tr.hit td.m{background:var(--mark)}
+
+.cards{display:grid;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px}.card .w{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:19px;font-weight:700;letter-spacing:.2px}
+.card .w .idx{font-family:inherit;font-size:12px;color:var(--ink2);font-weight:400;margin-right:8px;
+ font-variant-numeric:tabular-nums}
+.card .m{margin:5px 0 0;color:var(--ink);font-size:14.5px}
+.card .ex{margin:10px 0 0;padding:9px 12px;background:var(--accent-soft);border-radius:9px;font-size:14px}
+.card .ex .en{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:14.8px;line-height:1.55}
+.card .ex .zh{color:var(--ink2);margin-top:3px;font-size:13.5px}
+.card .no{color:var(--ink2);font-size:12.5px;margin-top:8px;font-style:italic}
+
+tr.gsep td{background:var(--chip);padding:5px 14px;border-bottom:1px solid var(--line)}
+.gtag{font-size:11.5px;font-weight:700;letter-spacing:.08em;color:var(--accent)}
+.gcnt{font-size:11.5px;color:var(--ink2);margin-left:8px;font-variant-numeric:tabular-nums}
+tbody.grp tr:first-child td{border-top:0}
+tbody.grp + tbody.grp tr.gsep td{border-top:8px solid var(--bg)}
+
+/* 卡片版：一个词群一块面板，组与组之间界限分明 */
+section.grp{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+ margin-bottom:16px;overflow:hidden}
+.ghead{display:flex;align-items:baseline;gap:9px;padding:9px 15px;background:var(--chip);
+ border-bottom:1px solid var(--line)}
+section.grp .cards{display:grid;gap:0;padding:1px 15px}
+section.grp .card{background:transparent;border:0;border-radius:0;padding:13px 0;
+ border-bottom:1px solid var(--line)}
+section.grp .card:last-child{border-bottom:0}
+
+.hide-m .m,.hide-m td.m{display:none}
+.hide-z .zh{display:none}
+body.hide-m td.m{display:none!important}
+.empty{padding:40px;text-align:center;color:var(--ink2);font-size:14px}
+
+.nav{display:flex;justify-content:space-between;gap:10px;margin:26px 0 0}
+.nav a{font-size:13.5px;text-decoration:none;color:var(--ink2);border:1px solid var(--line);
+ border-radius:999px;padding:6px 14px;background:var(--panel)}
+.nav a:hover{color:var(--accent);border-color:var(--accent)}
+.nav a.dis{opacity:.35;pointer-events:none}
+footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
+
+@media (max-width:640px){
+ body{font-size:15px}
+ .wrap{padding:0 12px}
+ h1{font-size:22px}
+ thead{display:none}
+ table,tbody,tr,td{display:block;width:auto}
+ table{border:0;background:transparent;border-radius:0}
+ tbody tr{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:11px 13px;margin-bottom:9px}
+ tbody td{border:0;padding:0}
+ td.n{display:none}
+ tr.gsep{display:block}
+ tr.gsep td{display:block;background:transparent;padding:0 0 6px}
+ tbody.grp{margin-bottom:6px;display:block}
+ td.w{font-size:17px;margin-bottom:3px}
+ td.m{font-size:14px;color:var(--ink2)}
+}
+</style>
+</head>
+<body data-kind="list">
+<div class="wrap"><div class="top">
+ <a class="back" href="index.html">← 全部单元</a>
+ <h1><span class="u">Unit 12</span> · 饮食健康</h1>
+ <p class="sub">169 词</p>
+</div></div>
+<div class="toolbar"><div class="wrap">
+ <div class="tools">
+  <input id="q" type="search" placeholder="搜索单词或释义…（按 / 聚焦）">
+  <label class="sw"><input type="checkbox" id="all"> 默写模式</label>
+  <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
+  
+  <button class="btn" id="reset">重置</button>
+  <span class="count" id="cnt">169 条</span>
+ </div>
+</div></div><div class="wrap"><table><thead><tr><th>#</th><th>单词</th><th>释义</th></tr></thead>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 01</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="food n. ⻝物"><td class="n">1</td><td class="w">food</td><td class="m">n. ⻝物</td></tr>
+<tr data-s="diet n. 日常饮⻝；v. 节制饮⻝"><td class="n">2</td><td class="w">diet</td><td class="m">n. 日常饮⻝；v. 节制饮⻝</td></tr>
+<tr data-s="appetite n. 胃口；⻝欲；嗜好；爱 好"><td class="n">3</td><td class="w">appetite</td><td class="m">n. 胃口；⻝欲；嗜好；爱 好</td></tr>
+<tr data-s="treat v. 对待；招待；治疗；n. 款待"><td class="n">4</td><td class="w">treat</td><td class="m">v. 对待；招待；治疗；n. 款待</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 02</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="cater v. 迎合；满足需要；供应 酒菜"><td class="n">5</td><td class="w">cater</td><td class="m">v. 迎合；满足需要；供应 酒菜</td></tr>
+<tr data-s="provision n. 供应；预备；储粮；规 定；条款"><td class="n">6</td><td class="w">provision</td><td class="m">n. 供应；预备；储粮；规 定；条款</td></tr>
+<tr data-s="edible adj. 可⻝用的；可以吃的"><td class="n">7</td><td class="w">edible</td><td class="m">adj. 可⻝用的；可以吃的</td></tr>
+<tr data-s="recipe n. ⻝谱；烹饪法；处方； 秘诀"><td class="n">8</td><td class="w">recipe</td><td class="m">n. ⻝谱；烹饪法；处方； 秘诀</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 03</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="restaurant n. 餐厅；餐馆"><td class="n">9</td><td class="w">restaurant</td><td class="m">n. 餐厅；餐馆</td></tr>
+<tr data-s="refectory n. ⻝堂；餐厅"><td class="n">10</td><td class="w">refectory</td><td class="m">n. ⻝堂；餐厅</td></tr>
+<tr data-s="cafeteria n. 自助餐厅；自助⻝堂"><td class="n">11</td><td class="w">cafeteria</td><td class="m">n. 自助餐厅；自助⻝堂</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 04</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="buffet n. 自助餐；饮⻝柜台；v. 反复敲打；连续猛击"><td class="n">12</td><td class="w">buffet</td><td class="m">n. 自助餐；饮⻝柜台；v. 反复敲打；连续猛击</td></tr>
+<tr data-s="barbecue n. 户外烧烤；烤肉；烤 架；v. 烧烤"><td class="n">13</td><td class="w">barbecue</td><td class="m">n. 户外烧烤；烤肉；烤 架；v. 烧烤</td></tr>
+<tr data-s="supper n. 晚饭；晚餐"><td class="n">14</td><td class="w">supper</td><td class="m">n. 晚饭；晚餐</td></tr>
+<tr data-s="banquet n. 宴会；盛宴"><td class="n">15</td><td class="w">banquet</td><td class="m">n. 宴会；盛宴</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 05</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="refreshment n. 茶点和饮料；提神；心 旷神怡"><td class="n">16</td><td class="w">refreshment</td><td class="m">n. 茶点和饮料；提神；心 旷神怡</td></tr>
+<tr data-s="snack n. 小吃；点心；快餐"><td class="n">17</td><td class="w">snack</td><td class="m">n. 小吃；点心；快餐</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 06</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="appetiser n. 开胃菜；开胃品"><td class="n">18</td><td class="w">appetiser</td><td class="m">n. 开胃菜；开胃品</td></tr>
+<tr data-s="cuisine n. 烹饪；菜肴；烹调⻛格"><td class="n">19</td><td class="w">cuisine</td><td class="m">n. 烹饪；菜肴；烹调⻛格</td></tr>
+<tr data-s="menu n. 菜单"><td class="n">20</td><td class="w">menu</td><td class="m">n. 菜单</td></tr>
+<tr data-s="order n. 顺序；条理；订单；命令；(生 物学的)目；v. 订购；命令；点 餐；整理"><td class="n">21</td><td class="w">order</td><td class="m">n. 顺序；条理；订单；命令；(生 物学的)目；v. 订购；命令；点 餐；整理</td></tr>
+<tr data-s="takeaway n. 外卖餐馆；外卖⻝物"><td class="n">22</td><td class="w">takeaway</td><td class="m">n. 外卖餐馆；外卖⻝物</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 07</span><span class="gcnt">8 词</span></td></tr>
+<tr data-s="chef n. 主厨；厨师"><td class="n">23</td><td class="w">chef</td><td class="m">n. 主厨；厨师</td></tr>
+<tr data-s="gourmet n. 美⻝家"><td class="n">24</td><td class="w">gourmet</td><td class="m">n. 美⻝家</td></tr>
+<tr data-s="vegetarian n. 素⻝者；⻝草动物； adj. 素⻝者的；素菜的"><td class="n">25</td><td class="w">vegetarian</td><td class="m">n. 素⻝者；⻝草动物； adj. 素⻝者的；素菜的</td></tr>
+<tr data-s="cutlery n. 餐具(刀、叉和匙)"><td class="n">26</td><td class="w">cutlery</td><td class="m">n. 餐具(刀、叉和匙)</td></tr>
+<tr data-s="silver n. 银；银色；银器；adj. 银的；银 色的；v. 镀银于；使 ... 成银色"><td class="n">27</td><td class="w">silver</td><td class="m">n. 银；银色；银器；adj. 银的；银 色的；v. 镀银于；使 ... 成银色</td></tr>
+<tr data-s="ceramic n. 陶瓷制品；陶瓷器； adj. 陶质的；制陶的"><td class="n">28</td><td class="w">ceramic</td><td class="m">n. 陶瓷制品；陶瓷器； adj. 陶质的；制陶的</td></tr>
+<tr data-s="porcelain n. 瓷；瓷器"><td class="n">29</td><td class="w">porcelain</td><td class="m">n. 瓷；瓷器</td></tr>
+<tr data-s="bowl n. 碗；一碗...；碗状物； v. 投掷；滚动"><td class="n">30</td><td class="w">bowl</td><td class="m">n. 碗；一碗...；碗状物； v. 投掷；滚动</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 08</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="dish n. 盘；碟；菜肴"><td class="n">31</td><td class="w">dish</td><td class="m">n. 盘；碟；菜肴</td></tr>
+<tr data-s="saucer n. 茶托；碟子"><td class="n">32</td><td class="w">saucer</td><td class="m">n. 茶托；碟子</td></tr>
+<tr data-s="tray n. 托盘；浅盘"><td class="n">33</td><td class="w">tray</td><td class="m">n. 托盘；浅盘</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 09</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="fork n. 叉子；分岔；分支；v. 分岔；用叉子叉"><td class="n">34</td><td class="w">fork</td><td class="m">n. 叉子；分岔；分支；v. 分岔；用叉子叉</td></tr>
+<tr data-s="knife n. 刀"><td class="n">35</td><td class="w">knife</td><td class="m">n. 刀</td></tr>
+<tr data-s="spoon n. 勺子；汤匙"><td class="n">36</td><td class="w">spoon</td><td class="m">n. 勺子；汤匙</td></tr>
+<tr data-s="glass n. 玻璃；玻璃杯"><td class="n">37</td><td class="w">glass</td><td class="m">n. 玻璃；玻璃杯</td></tr>
+<tr data-s="mug n. (有柄的)大杯；v. 对...行凶抢劫"><td class="n">38</td><td class="w">mug</td><td class="m">n. (有柄的)大杯；v. 对...行凶抢劫</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 10</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="kettle n. 水壶"><td class="n">39</td><td class="w">kettle</td><td class="m">n. 水壶</td></tr>
+<tr data-s="pan n. 平底锅"><td class="n">40</td><td class="w">pan</td><td class="m">n. 平底锅</td></tr>
+<tr data-s="pot n. 壶；锅；罐；瓢；盆； v. 罐装；栽入盆中；射杀"><td class="n">41</td><td class="w">pot</td><td class="m">n. 壶；锅；罐；瓢；盆； v. 罐装；栽入盆中；射杀</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 11</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="stove n. 火炉"><td class="n">42</td><td class="w">stove</td><td class="m">n. 火炉</td></tr>
+<tr data-s="furnace n. 熔炉；火炉"><td class="n">43</td><td class="w">furnace</td><td class="m">n. 熔炉；火炉</td></tr>
+<tr data-s="oven n. 烤箱；烤炉"><td class="n">44</td><td class="w">oven</td><td class="m">n. 烤箱；烤炉</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 12</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="tin n. 锡；罐头"><td class="n">45</td><td class="w">tin</td><td class="m">n. 锡；罐头</td></tr>
+<tr data-s="lid n. 盖子"><td class="n">46</td><td class="w">lid</td><td class="m">n. 盖子</td></tr>
+<tr data-s="drink v. 喝；喝酒；n. 饮料；酒"><td class="n">47</td><td class="w">drink</td><td class="m">v. 喝；喝酒；n. 饮料；酒</td></tr>
+<tr data-s="beverage n. 饮料"><td class="n">48</td><td class="w">beverage</td><td class="m">n. 饮料</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 13</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="juice n. 果汁"><td class="n">49</td><td class="w">juice</td><td class="m">n. 果汁</td></tr>
+<tr data-s="soda n. 苏打；苏打水"><td class="n">50</td><td class="w">soda</td><td class="m">n. 苏打；苏打水</td></tr>
+<tr data-s="coffee n. 咖啡"><td class="n">51</td><td class="w">coffee</td><td class="m">n. 咖啡</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 14</span><span class="gcnt">8 词</span></td></tr>
+<tr data-s="alcohol n. 酒精；乙醇；含酒精的 饮料"><td class="n">52</td><td class="w">alcohol</td><td class="m">n. 酒精；乙醇；含酒精的 饮料</td></tr>
+<tr data-s="liquor n. 酒；烈酒"><td class="n">53</td><td class="w">liquor</td><td class="m">n. 酒；烈酒</td></tr>
+<tr data-s="whisky n. 威士忌"><td class="n">54</td><td class="w">whisky</td><td class="m">n. 威士忌</td></tr>
+<tr data-s="brandy n. 白兰地"><td class="n">55</td><td class="w">brandy</td><td class="m">n. 白兰地</td></tr>
+<tr data-s="drunk adj. 喝醉的；v. 喝；喝 酒；“drink”的过去分词"><td class="n">56</td><td class="w">drunk</td><td class="m">adj. 喝醉的；v. 喝；喝 酒；“drink”的过去分词</td></tr>
+<tr data-s="tobacco n. 烟草；烟叶"><td class="n">57</td><td class="w">tobacco</td><td class="m">n. 烟草；烟叶</td></tr>
+<tr data-s="cigarette n. 香烟；纸烟"><td class="n">58</td><td class="w">cigarette</td><td class="m">n. 香烟；纸烟</td></tr>
+<tr data-s="sober adj. 清醒的；严肃的；素淡 的；v. (使)清醒,变得持重"><td class="n">59</td><td class="w">sober</td><td class="m">adj. 清醒的；严肃的；素淡 的；v. (使)清醒,变得持重</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 15</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="vegetable n. 蔬菜"><td class="n">60</td><td class="w">vegetable</td><td class="m">n. 蔬菜</td></tr>
+<tr data-s="tomato n. ⻄红柿；番茄"><td class="n">61</td><td class="w">tomato</td><td class="m">n. ⻄红柿；番茄</td></tr>
+<tr data-s="potato n. 土豆；⻢铃薯"><td class="n">62</td><td class="w">potato</td><td class="m">n. 土豆；⻢铃薯</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 16</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="pea n. 豌豆"><td class="n">63</td><td class="w">pea</td><td class="m">n. 豌豆</td></tr>
+<tr data-s="bean n. 豆；豆科植物"><td class="n">64</td><td class="w">bean</td><td class="m">n. 豆；豆科植物</td></tr>
+<tr data-s="cucumber n. ⻩瓜"><td class="n">65</td><td class="w">cucumber</td><td class="m">n. ⻩瓜</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 17</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="cabbage n. 卷心菜"><td class="n">66</td><td class="w">cabbage</td><td class="m">n. 卷心菜</td></tr>
+<tr data-s="onion n. 洋葱"><td class="n">67</td><td class="w">onion</td><td class="m">n. 洋葱</td></tr>
+<tr data-s="mushroom n. 蘑菇；v. 迅速增⻓"><td class="n">68</td><td class="w">mushroom</td><td class="m">n. 蘑菇；v. 迅速增⻓</td></tr>
+<tr data-s="eggplant n. 茄子"><td class="n">69</td><td class="w">eggplant</td><td class="m">n. 茄子</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 18</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="carrot n. 胡萝卜"><td class="n">70</td><td class="w">carrot</td><td class="m">n. 胡萝卜</td></tr>
+<tr data-s="turnip n. 芜菁；萝卜"><td class="n">71</td><td class="w">turnip</td><td class="m">n. 芜菁；萝卜</td></tr>
+<tr data-s="radish n. 小萝卜"><td class="n">72</td><td class="w">radish</td><td class="m">n. 小萝卜</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 19</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="peel n. 果皮；v. 剥落；去皮"><td class="n">73</td><td class="w">peel</td><td class="m">n. 果皮；v. 剥落；去皮</td></tr>
+<tr data-s="strip v. 剥去；剥夺；脱衣；n. ⻓条；条状"><td class="n">74</td><td class="w">strip</td><td class="m">v. 剥去；剥夺；脱衣；n. ⻓条；条状</td></tr>
+<tr data-s="hull n. 外壳；皮；船身；船 体；v. 去壳"><td class="n">75</td><td class="w">hull</td><td class="m">n. 外壳；皮；船身；船 体；v. 去壳</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 20</span><span class="gcnt">7 词</span></td></tr>
+<tr data-s="cherry n. 樱桃；樱桃树；adj. 樱 桃色的"><td class="n">76</td><td class="w">cherry</td><td class="m">n. 樱桃；樱桃树；adj. 樱 桃色的</td></tr>
+<tr data-s="berry n. 浆果"><td class="n">77</td><td class="w">berry</td><td class="m">n. 浆果</td></tr>
+<tr data-s="grape n. 葡萄"><td class="n">78</td><td class="w">grape</td><td class="m">n. 葡萄</td></tr>
+<tr data-s="papaya n. 木瓜"><td class="n">79</td><td class="w">papaya</td><td class="m">n. 木瓜</td></tr>
+<tr data-s="peach n. 桃子；桃树；桃红色"><td class="n">80</td><td class="w">peach</td><td class="m">n. 桃子；桃树；桃红色</td></tr>
+<tr data-s="pear n. 梨子"><td class="n">81</td><td class="w">pear</td><td class="m">n. 梨子</td></tr>
+<tr data-s="plum n. 梅子；李子；紫红色；⻘紫色； 令人垂涎的东⻄；adj. 令人垂涎 的；吸引人的"><td class="n">82</td><td class="w">plum</td><td class="m">n. 梅子；李子；紫红色；⻘紫色； 令人垂涎的东⻄；adj. 令人垂涎 的；吸引人的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 21</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="orange adj. 橙色的；n. 橙色；橙 子"><td class="n">83</td><td class="w">orange</td><td class="m">adj. 橙色的；n. 橙色；橙 子</td></tr>
+<tr data-s="melon n. 瓜；甜瓜"><td class="n">84</td><td class="w">melon</td><td class="m">n. 瓜；甜瓜</td></tr>
+<tr data-s="lemon n. 柠檬；柠檬色"><td class="n">85</td><td class="w">lemon</td><td class="m">n. 柠檬；柠檬色</td></tr>
+<tr data-s="kiwi n. 几维⻦；奇异果"><td class="n">86</td><td class="w">kiwi</td><td class="m">n. 几维⻦；奇异果</td></tr>
+<tr data-s="crop n. 农作物；收成；v. 修 剪；种植；收割"><td class="n">87</td><td class="w">crop</td><td class="m">n. 农作物；收成；v. 修 剪；种植；收割</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 22</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="corn n. 玉米；谷物"><td class="n">88</td><td class="w">corn</td><td class="m">n. 玉米；谷物</td></tr>
+<tr data-s="grain n. 谷物；颗粒"><td class="n">89</td><td class="w">grain</td><td class="m">n. 谷物；颗粒</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 23</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="wheat n. 小⻨；小⻨色"><td class="n">90</td><td class="w">wheat</td><td class="m">n. 小⻨；小⻨色</td></tr>
+<tr data-s="reap v. 收割；收获；获得"><td class="n">91</td><td class="w">reap</td><td class="m">v. 收割；收获；获得</td></tr>
+<tr data-s="flour n. 面粉"><td class="n">92</td><td class="w">flour</td><td class="m">n. 面粉</td></tr>
+<tr data-s="porridge n. 粥；⻨片粥"><td class="n">93</td><td class="w">porridge</td><td class="m">n. 粥；⻨片粥</td></tr>
+<tr data-s="paste n. 面团；浆糊；v. 裱糊； 粘贴"><td class="n">94</td><td class="w">paste</td><td class="m">n. 面团；浆糊；v. 裱糊； 粘贴</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 24</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="livestock n. 家畜；牲畜"><td class="n">95</td><td class="w">livestock</td><td class="m">n. 家畜；牲畜</td></tr>
+<tr data-s="chicken n. 鸡肉；鸡"><td class="n">96</td><td class="w">chicken</td><td class="m">n. 鸡肉；鸡</td></tr>
+<tr data-s="turkey n. 火鸡"><td class="n">97</td><td class="w">turkey</td><td class="m">n. 火鸡</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 25</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="beef n. 牛肉"><td class="n">98</td><td class="w">beef</td><td class="m">n. 牛肉</td></tr>
+<tr data-s="pork n. 猪肉"><td class="n">99</td><td class="w">pork</td><td class="m">n. 猪肉</td></tr>
+<tr data-s="mutton n. 羊肉"><td class="n">100</td><td class="w">mutton</td><td class="m">n. 羊肉</td></tr>
+<tr data-s="sausage n. 香肠；腊肠"><td class="n">101</td><td class="w">sausage</td><td class="m">n. 香肠；腊肠</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 26</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="fish n. ⻥；⻥肉；v. 钓⻥；捕 ⻥"><td class="n">102</td><td class="w">fish</td><td class="m">n. ⻥；⻥肉；v. 钓⻥；捕 ⻥</td></tr>
+<tr data-s="pond n. 池塘"><td class="n">103</td><td class="w">pond</td><td class="m">n. 池塘</td></tr>
+<tr data-s="rod n. 杆；棒"><td class="n">104</td><td class="w">rod</td><td class="m">n. 杆；棒</td></tr>
+<tr data-s="dairy adj. 牛奶的；乳品的；n. 乳品店"><td class="n">105</td><td class="w">dairy</td><td class="m">adj. 牛奶的；乳品的；n. 乳品店</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 27</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="milk n. 奶；v. 挤奶"><td class="n">106</td><td class="w">milk</td><td class="m">n. 奶；v. 挤奶</td></tr>
+<tr data-s="yogurt n. 酸奶；酵母乳"><td class="n">107</td><td class="w">yogurt</td><td class="m">n. 酸奶；酵母乳</td></tr>
+<tr data-s="cream n. 奶油；乳脂；护肤霜"><td class="n">108</td><td class="w">cream</td><td class="m">n. 奶油；乳脂；护肤霜</td></tr>
+<tr data-s="cheese n. 奶酪"><td class="n">109</td><td class="w">cheese</td><td class="m">n. 奶酪</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 28</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="butter n. ⻩油；奶油；v. 涂⻩油 于...上"><td class="n">110</td><td class="w">butter</td><td class="m">n. ⻩油；奶油；v. 涂⻩油 于...上</td></tr>
+<tr data-s="salad n. 色拉；沙拉"><td class="n">111</td><td class="w">salad</td><td class="m">n. 色拉；沙拉</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 29</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="sandwich n. 三明治"><td class="n">112</td><td class="w">sandwich</td><td class="m">n. 三明治</td></tr>
+<tr data-s="hamburger n. 汉堡包"><td class="n">113</td><td class="w">hamburger</td><td class="m">n. 汉堡包</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 30</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="loaf n. 一条(面包)；v. 游 荡；虚度光阴"><td class="n">114</td><td class="w">loaf</td><td class="m">n. 一条(面包)；v. 游 荡；虚度光阴</td></tr>
+<tr data-s="pie n. 果馅饼"><td class="n">115</td><td class="w">pie</td><td class="m">n. 果馅饼</td></tr>
+<tr data-s="pizza n. 比萨饼；披萨；意大利 薄饼"><td class="n">116</td><td class="w">pizza</td><td class="m">n. 比萨饼；披萨；意大利 薄饼</td></tr>
+<tr data-s="pasta n. 意大利面⻝"><td class="n">117</td><td class="w">pasta</td><td class="m">n. 意大利面⻝</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 31</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="spaghetti n. 意大利式细面条"><td class="n">118</td><td class="w">spaghetti</td><td class="m">n. 意大利式细面条</td></tr>
+<tr data-s="soup n. 汤"><td class="n">119</td><td class="w">soup</td><td class="m">n. 汤</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 32</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="pudding n. 布丁"><td class="n">120</td><td class="w">pudding</td><td class="m">n. 布丁</td></tr>
+<tr data-s="biscuit n. 饼干"><td class="n">121</td><td class="w">biscuit</td><td class="m">n. 饼干</td></tr>
+<tr data-s="jam n. 果酱；堵塞；困境；v. 挤紧；使堵塞；猛地做"><td class="n">122</td><td class="w">jam</td><td class="m">n. 果酱；堵塞；困境；v. 挤紧；使堵塞；猛地做</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 33</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="nut n. 坚果；螺母；疯子；着 迷的人"><td class="n">123</td><td class="w">nut</td><td class="m">n. 坚果；螺母；疯子；着 迷的人</td></tr>
+<tr data-s="chocolate n. 巧克力；adj. 巧克力的"><td class="n">124</td><td class="w">chocolate</td><td class="m">n. 巧克力；adj. 巧克力的</td></tr>
+<tr data-s="ice cream n. 冰淇淋"><td class="n">125</td><td class="w">ice cream</td><td class="m">n. 冰淇淋</td></tr>
+<tr data-s="vanilla n. 香草；香草精；adj. 寻 常的；无特色的"><td class="n">126</td><td class="w">vanilla</td><td class="m">n. 香草；香草精；adj. 寻 常的；无特色的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 34</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="mustard n. 芥末；芥末酱"><td class="n">127</td><td class="w">mustard</td><td class="m">n. 芥末；芥末酱</td></tr>
+<tr data-s="wasabi n. 芥末"><td class="n">128</td><td class="w">wasabi</td><td class="m">n. 芥末</td></tr>
+<tr data-s="pepper n. 胡椒粉；辣椒；v. 使布 满；向...不断射击"><td class="n">129</td><td class="w">pepper</td><td class="m">n. 胡椒粉；辣椒；v. 使布 满；向...不断射击</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 35</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="ginger n. 生姜"><td class="n">130</td><td class="w">ginger</td><td class="m">n. 生姜</td></tr>
+<tr data-s="garlic n. 大蒜"><td class="n">131</td><td class="w">garlic</td><td class="m">n. 大蒜</td></tr>
+<tr data-s="scallion n. ⻘葱"><td class="n">132</td><td class="w">scallion</td><td class="m">n. ⻘葱</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 36</span><span class="gcnt">10 词</span></td></tr>
+<tr data-s="vinegar n. 醋"><td class="n">133</td><td class="w">vinegar</td><td class="m">n. 醋</td></tr>
+<tr data-s="salt n. 盐；⻝盐；v. 用盐腌； 加盐于"><td class="n">134</td><td class="w">salt</td><td class="m">n. 盐；⻝盐；v. 用盐腌； 加盐于</td></tr>
+<tr data-s="sugar n. 糖；⻝糖；v. 在...中加 糖"><td class="n">135</td><td class="w">sugar</td><td class="m">n. 糖；⻝糖；v. 在...中加 糖</td></tr>
+<tr data-s="candy n. 糖果"><td class="n">136</td><td class="w">candy</td><td class="m">n. 糖果</td></tr>
+<tr data-s="honey n. 蜂蜜；甜蜜；宝⻉"><td class="n">137</td><td class="w">honey</td><td class="m">n. 蜂蜜；甜蜜；宝⻉</td></tr>
+<tr data-s="flavour n. ⻛味；滋味；味道；v. 给...添⻛味；调味"><td class="n">138</td><td class="w">flavour</td><td class="m">n. ⻛味；滋味；味道；v. 给...添⻛味；调味</td></tr>
+<tr data-s="sour adj. 酸的；不友好的；坏 脾气的；v. (使)变酸"><td class="n">139</td><td class="w">sour</td><td class="m">adj. 酸的；不友好的；坏 脾气的；v. (使)变酸</td></tr>
+<tr data-s="sweet adj. 甜的；悦人的"><td class="n">140</td><td class="w">sweet</td><td class="m">adj. 甜的；悦人的</td></tr>
+<tr data-s="bitter adj. 有苦味的；痛苦的； 刺痛的；激烈而不快的"><td class="n">141</td><td class="w">bitter</td><td class="m">adj. 有苦味的；痛苦的； 刺痛的；激烈而不快的</td></tr>
+<tr data-s="spicy adj. 含香料的；辣的；下 流的"><td class="n">142</td><td class="w">spicy</td><td class="m">adj. 含香料的；辣的；下 流的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 37</span><span class="gcnt">9 词</span></td></tr>
+<tr data-s="delicious adj. 美味的；可口的"><td class="n">143</td><td class="w">delicious</td><td class="m">adj. 美味的；可口的</td></tr>
+<tr data-s="yummy adj. 美味的；可口的"><td class="n">144</td><td class="w">yummy</td><td class="m">adj. 美味的；可口的</td></tr>
+<tr data-s="tasty adj. 美味的；可口的"><td class="n">145</td><td class="w">tasty</td><td class="m">adj. 美味的；可口的</td></tr>
+<tr data-s="hunger n. 饥饿；渴求；v. 使饥 饿；渴望"><td class="n">146</td><td class="w">hunger</td><td class="m">n. 饥饿；渴求；v. 使饥 饿；渴望</td></tr>
+<tr data-s="thirsty adj. 口渴的；渴望的"><td class="n">147</td><td class="w">thirsty</td><td class="m">adj. 口渴的；渴望的</td></tr>
+<tr data-s="spice n. 香料；调味品；趣味"><td class="n">148</td><td class="w">spice</td><td class="m">n. 香料；调味品；趣味</td></tr>
+<tr data-s="sauce n. 酱汁；调味汁"><td class="n">149</td><td class="w">sauce</td><td class="m">n. 酱汁；调味汁</td></tr>
+<tr data-s="ketchup n. 番茄酱"><td class="n">150</td><td class="w">ketchup</td><td class="m">n. 番茄酱</td></tr>
+<tr data-s="perfume n. 香水；香味；v. 给...添 加香味"><td class="n">151</td><td class="w">perfume</td><td class="m">n. 香水；香味；v. 给...添 加香味</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 38</span><span class="gcnt">8 词</span></td></tr>
+<tr data-s="ingredient n. 成分；配料；要素；因 素"><td class="n">152</td><td class="w">ingredient</td><td class="m">n. 成分；配料；要素；因 素</td></tr>
+<tr data-s="supplement n. 补充物；附录；附加 费；v. 补充；增加"><td class="n">153</td><td class="w">supplement</td><td class="m">n. 补充物；附录；附加 费；v. 补充；增加</td></tr>
+<tr data-s="digest n. 摘要；文摘；v. 消化； 领会"><td class="n">154</td><td class="w">digest</td><td class="m">n. 摘要；文摘；v. 消化； 领会</td></tr>
+<tr data-s="cook n. 厨师；v. 烹饪"><td class="n">155</td><td class="w">cook</td><td class="m">n. 厨师；v. 烹饪</td></tr>
+<tr data-s="bake v. 烘；烤；焙"><td class="n">156</td><td class="w">bake</td><td class="m">v. 烘；烤；焙</td></tr>
+<tr data-s="fry v. 油炸；油煎"><td class="n">157</td><td class="w">fry</td><td class="m">v. 油炸；油煎</td></tr>
+<tr data-s="roast v. 烤；烘烤；n. 烤肉；烘 烤；adj. 烤的；焙的"><td class="n">158</td><td class="w">roast</td><td class="m">v. 烤；烘烤；n. 烤肉；烘 烤；adj. 烤的；焙的</td></tr>
+<tr data-s="toast n. 烤面包片；敬酒；干杯；v. 向...祝酒；为...干杯；烘烤"><td class="n">159</td><td class="w">toast</td><td class="m">n. 烤面包片；敬酒；干杯；v. 向...祝酒；为...干杯；烘烤</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 39</span><span class="gcnt">7 词</span></td></tr>
+<tr data-s="suck v. 吮；吮吸"><td class="n">160</td><td class="w">suck</td><td class="m">v. 吮；吮吸</td></tr>
+<tr data-s="lick v. 舔；轻拍；吞卷；克 服；n. 舔；少许"><td class="n">161</td><td class="w">lick</td><td class="m">v. 舔；轻拍；吞卷；克 服；n. 舔；少许</td></tr>
+<tr data-s="chew v. 咀嚼"><td class="n">162</td><td class="w">chew</td><td class="m">v. 咀嚼</td></tr>
+<tr data-s="gum n. 树胶；口香糖；牙龈； v. 用胶粘"><td class="n">163</td><td class="w">gum</td><td class="m">n. 树胶；口香糖；牙龈； v. 用胶粘</td></tr>
+<tr data-s="soak v. 浸泡；吸收；n. 浸泡"><td class="n">164</td><td class="w">soak</td><td class="m">v. 浸泡；吸收；n. 浸泡</td></tr>
+<tr data-s="dip v. 浸；蘸；(暂时)减 少；n. 浸；蘸；下降"><td class="n">165</td><td class="w">dip</td><td class="m">v. 浸；蘸；(暂时)减 少；n. 浸；蘸；下降</td></tr>
+<tr data-s="squeeze v. 捏；榨；挤(进)；n. 捏；榨；挤"><td class="n">166</td><td class="w">squeeze</td><td class="m">v. 捏；榨；挤(进)；n. 捏；榨；挤</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 40</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="stir v. 搅拌；搅动；激起"><td class="n">167</td><td class="w">stir</td><td class="m">v. 搅拌；搅动；激起</td></tr>
+<tr data-s="grind v. 碾碎；磨碎；n. 苦差事"><td class="n">168</td><td class="w">grind</td><td class="m">v. 碾碎；磨碎；n. 苦差事</td></tr>
+<tr data-s="slice n. 切片；薄片；部分；片 段；v. 切成片"><td class="n">169</td><td class="w">slice</td><td class="m">n. 切片；薄片；部分；片 段；v. 切成片</td></tr>
+</tbody>
+</table><div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit11.html">← Unit 11</a><a href="unit12-card.html">切到例句卡片版</a><a href="unit13.html">Unit 13 →</a></div><footer><div class="wrap" style="padding:0">
+ 摘自《雅思词汇真经》（刘洪波 编著）第 12 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
+</div></footer></div>
+<script>
+(function(){
+ var KEY='vj-hide';
+ var body=document.body;
+ var kind=body.dataset.kind;
+ var s={m:false,z:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;}}catch(e){}
+ function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+ function paint(){
+  body.classList.toggle('hide-m',s.m);
+  body.classList.toggle('hide-z',s.z);
+  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all');
+  if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
+  if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
+  if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
+ }
+ var cm=document.getElementById('m');
+ if(cm) cm.addEventListener('change',function(){s.m=cm.checked; save(); paint();});
+ var cz=document.getElementById('z');
+ if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
+ var ca=document.getElementById('all');
+ if(ca) ca.addEventListener('change',function(){
+   s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
+ });
+ var rs=document.getElementById('reset');
+ if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; save(); paint();});
+ var q=document.getElementById('q');
+ var items=[].slice.call(document.querySelectorAll('[data-s]'));
+ var cnt=document.getElementById('cnt');
+ function filter(){
+   var v=(q&&q.value||'').trim().toLowerCase();
+   var n=0;
+   items.forEach(function(el){
+     var hit=!v||el.dataset.s.indexOf(v)>-1;
+     el.style.display=hit?'':'none';
+     if(hit)n++;
+   });
+   if(cnt) cnt.textContent=v? (n+' / '+items.length) : (items.length+' 条');
+   var emp=document.getElementById('empty');
+   if(emp) emp.style.display=(n===0)?'block':'none';
+   document.querySelectorAll('section.grp').forEach(function(sec){
+     var vis=sec.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     sec.style.display=vis?'':'none';
+   });
+   document.querySelectorAll('tbody.grp').forEach(function(tb){
+     var vis=tb.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     tb.style.display=vis?'':'none';
+   });
+ }
+ if(q){q.addEventListener('input',filter);}
+ document.addEventListener('keydown',function(e){
+   if(e.key==='/'&&document.activeElement!==q&&q){e.preventDefault();q.focus();}
+   if(e.key==='Escape'&&document.activeElement===q){q.value='';filter();q.blur();}
+ });
+ paint(); filter();
+})();
+</script>
+</body></html>

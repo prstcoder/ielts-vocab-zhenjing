@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unit 08 · 语言演化</title>
+<style>
+:root{
+ --bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da;
+ --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4;
+}
+@media (prefers-color-scheme: dark){
+ :root{ --bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037;
+        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+ font:16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+ -webkit-font-smoothing:antialiased;padding-bottom:64px}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+
+.top{padding:34px 0 18px}
+.back{display:inline-block;font-size:13px;color:var(--ink2);text-decoration:none;
+ border:1px solid var(--line);border-radius:999px;padding:3px 12px;margin-bottom:16px}
+.back:hover{color:var(--accent);border-color:var(--accent)}
+h1{margin:0;font-size:27px;letter-spacing:.2px;font-weight:700}
+h1 .u{color:var(--accent);font-variant-numeric:tabular-nums}
+.sub{margin:6px 0 0;color:var(--ink2);font-size:13.5px}
+
+.toolbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);
+ backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line);
+ padding:10px 0;margin-bottom:18px}
+.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#q{flex:1 1 200px;min-width:150px;padding:8px 13px;border:1px solid var(--line);border-radius:9px;
+ background:var(--panel);color:var(--ink);font-size:14px;outline:none}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.sw{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);
+ border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer;user-select:none;background:var(--panel)}
+.sw input{accent-color:var(--accent);margin:0}
+.sw.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.btn{font:inherit;font-size:13px;color:var(--ink2);background:var(--panel);border:1px solid var(--line);
+ border-radius:999px;padding:5px 12px;cursor:pointer}
+.btn:hover{color:var(--accent);border-color:var(--accent)}
+.count{font-size:12.5px;color:var(--ink2);margin-left:auto;font-variant-numeric:tabular-nums}
+
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);
+ border-radius:12px;overflow:hidden}
+thead th{background:var(--chip);font-size:12.5px;letter-spacing:.06em;color:var(--ink2);
+ font-weight:600;text-align:left;padding:9px 14px;border-bottom:1px solid var(--line)}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--accent-soft)}
+td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-nums}
+td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
+ letter-spacing:.2px;word-break:break-word}
+td.m{color:var(--ink)}
+tr.hit td.w,tr.hit td.m{background:var(--mark)}
+
+.cards{display:grid;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px}.card .w{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:19px;font-weight:700;letter-spacing:.2px}
+.card .w .idx{font-family:inherit;font-size:12px;color:var(--ink2);font-weight:400;margin-right:8px;
+ font-variant-numeric:tabular-nums}
+.card .m{margin:5px 0 0;color:var(--ink);font-size:14.5px}
+.card .ex{margin:10px 0 0;padding:9px 12px;background:var(--accent-soft);border-radius:9px;font-size:14px}
+.card .ex .en{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:14.8px;line-height:1.55}
+.card .ex .zh{color:var(--ink2);margin-top:3px;font-size:13.5px}
+.card .no{color:var(--ink2);font-size:12.5px;margin-top:8px;font-style:italic}
+
+tr.gsep td{background:var(--chip);padding:5px 14px;border-bottom:1px solid var(--line)}
+.gtag{font-size:11.5px;font-weight:700;letter-spacing:.08em;color:var(--accent)}
+.gcnt{font-size:11.5px;color:var(--ink2);margin-left:8px;font-variant-numeric:tabular-nums}
+tbody.grp tr:first-child td{border-top:0}
+tbody.grp + tbody.grp tr.gsep td{border-top:8px solid var(--bg)}
+
+/* 卡片版：一个词群一块面板，组与组之间界限分明 */
+section.grp{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+ margin-bottom:16px;overflow:hidden}
+.ghead{display:flex;align-items:baseline;gap:9px;padding:9px 15px;background:var(--chip);
+ border-bottom:1px solid var(--line)}
+section.grp .cards{display:grid;gap:0;padding:1px 15px}
+section.grp .card{background:transparent;border:0;border-radius:0;padding:13px 0;
+ border-bottom:1px solid var(--line)}
+section.grp .card:last-child{border-bottom:0}
+
+.hide-m .m,.hide-m td.m{display:none}
+.hide-z .zh{display:none}
+body.hide-m td.m{display:none!important}
+.empty{padding:40px;text-align:center;color:var(--ink2);font-size:14px}
+
+.nav{display:flex;justify-content:space-between;gap:10px;margin:26px 0 0}
+.nav a{font-size:13.5px;text-decoration:none;color:var(--ink2);border:1px solid var(--line);
+ border-radius:999px;padding:6px 14px;background:var(--panel)}
+.nav a:hover{color:var(--accent);border-color:var(--accent)}
+.nav a.dis{opacity:.35;pointer-events:none}
+footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
+
+@media (max-width:640px){
+ body{font-size:15px}
+ .wrap{padding:0 12px}
+ h1{font-size:22px}
+ thead{display:none}
+ table,tbody,tr,td{display:block;width:auto}
+ table{border:0;background:transparent;border-radius:0}
+ tbody tr{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:11px 13px;margin-bottom:9px}
+ tbody td{border:0;padding:0}
+ td.n{display:none}
+ tr.gsep{display:block}
+ tr.gsep td{display:block;background:transparent;padding:0 0 6px}
+ tbody.grp{margin-bottom:6px;display:block}
+ td.w{font-size:17px;margin-bottom:3px}
+ td.m{font-size:14px;color:var(--ink2)}
+}
+</style>
+</head>
+<body data-kind="list">
+<div class="wrap"><div class="top">
+ <a class="back" href="index.html">← 全部单元</a>
+ <h1><span class="u">Unit 08</span> · 语言演化</h1>
+ <p class="sub">67 词</p>
+</div></div>
+<div class="toolbar"><div class="wrap">
+ <div class="tools">
+  <input id="q" type="search" placeholder="搜索单词或释义…（按 / 聚焦）">
+  <label class="sw"><input type="checkbox" id="all"> 默写模式</label>
+  <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
+  
+  <button class="btn" id="reset">重置</button>
+  <span class="count" id="cnt">67 条</span>
+ </div>
+</div></div><div class="wrap"><table><thead><tr><th>#</th><th>单词</th><th>释义</th></tr></thead>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 01</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="language n. 语言"><td class="n">1</td><td class="w">language</td><td class="m">n. 语言</td></tr>
+<tr data-s="symbol n. 符号；象征；标志"><td class="n">2</td><td class="w">symbol</td><td class="m">n. 符号；象征；标志</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 02</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="sign n. 标志；符号；告示牌；手 势；征兆；v. 签名；做标记"><td class="n">3</td><td class="w">sign</td><td class="m">n. 标志；符号；告示牌；手 势；征兆；v. 签名；做标记</td></tr>
+<tr data-s="gesture n. 手势；姿态；姿势"><td class="n">4</td><td class="w">gesture</td><td class="m">n. 手势；姿态；姿势</td></tr>
+<tr data-s="handwriting n. 笔迹；手写"><td class="n">5</td><td class="w">handwriting</td><td class="m">n. 笔迹；手写</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 03</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="pictograph n. 象形文字；象形图；古 代石壁画"><td class="n">6</td><td class="w">pictograph</td><td class="m">n. 象形文字；象形图；古 代石壁画</td></tr>
+<tr data-s="wedge n. 楔子；三⻆木；楔形物；v. 把... 楔住 ；将...挤入(或塞进、插入)"><td class="n">7</td><td class="w">wedge</td><td class="m">n. 楔子；三⻆木；楔形物；v. 把... 楔住 ；将...挤入(或塞进、插入)</td></tr>
+<tr data-s="knot n. (树) 节；结；郁结；群； 簇；节；v. 打结；使纠结；紧绷； 使痉挛"><td class="n">8</td><td class="w">knot</td><td class="m">n. (树) 节；结；郁结；群； 簇；节；v. 打结；使纠结；紧绷； 使痉挛</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 04</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="linguistics n. 语言学"><td class="n">9</td><td class="w">linguistics</td><td class="m">n. 语言学</td></tr>
+<tr data-s="semantic adj. 语义的"><td class="n">10</td><td class="w">semantic</td><td class="m">adj. 语义的</td></tr>
+<tr data-s="syntax n. 句法；句子结构学；语 构；语法"><td class="n">11</td><td class="w">syntax</td><td class="m">n. 句法；句子结构学；语 构；语法</td></tr>
+<tr data-s="grammar n. 语法"><td class="n">12</td><td class="w">grammar</td><td class="m">n. 语法</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 05</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="phonetics n. 语音学；adj. 语音的； 发音的"><td class="n">13</td><td class="w">phonetics</td><td class="m">n. 语音学；adj. 语音的； 发音的</td></tr>
+<tr data-s="pronounce v. 发音；宣告"><td class="n">14</td><td class="w">pronounce</td><td class="m">v. 发音；宣告</td></tr>
+<tr data-s="intonation n. 语调；声调；音准"><td class="n">15</td><td class="w">intonation</td><td class="m">n. 语调；声调；音准</td></tr>
+<tr data-s="inflection n. 变音；转调；曲折变化"><td class="n">16</td><td class="w">inflection</td><td class="m">n. 变音；转调；曲折变化</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 06</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="dialect n. 方言；地方话"><td class="n">17</td><td class="w">dialect</td><td class="m">n. 方言；地方话</td></tr>
+<tr data-s="accent n. 口音；腔调；v. 强调； 重读"><td class="n">18</td><td class="w">accent</td><td class="m">n. 口音；腔调；v. 强调； 重读</td></tr>
+<tr data-s="utterance n. 言辞；言语；言论"><td class="n">19</td><td class="w">utterance</td><td class="m">n. 言辞；言语；言论</td></tr>
+<tr data-s="oral adj. 口述的；口头的"><td class="n">20</td><td class="w">oral</td><td class="m">adj. 口述的；口头的</td></tr>
+<tr data-s="verbal adj. 口头的；语言的；用 词的；动词的"><td class="n">21</td><td class="w">verbal</td><td class="m">adj. 口头的；语言的；用 词的；动词的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 07</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="syllable n. 音节"><td class="n">22</td><td class="w">syllable</td><td class="m">n. 音节</td></tr>
+<tr data-s="phoneme n. 音位"><td class="n">23</td><td class="w">phoneme</td><td class="m">n. 音位</td></tr>
+<tr data-s="vowel n. 元音；母音"><td class="n">24</td><td class="w">vowel</td><td class="m">n. 元音；母音</td></tr>
+<tr data-s="consonant n. 辅音；辅音字母；adj. 一致的；相符的"><td class="n">25</td><td class="w">consonant</td><td class="m">n. 辅音；辅音字母；adj. 一致的；相符的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 08</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="alphabet n. 字母表"><td class="n">26</td><td class="w">alphabet</td><td class="m">n. 字母表</td></tr>
+<tr data-s="logogram n. 词符"><td class="n">27</td><td class="w">logogram</td><td class="m">n. 词符</td></tr>
+<tr data-s="vocabulary n. 词汇量；词汇表"><td class="n">28</td><td class="w">vocabulary</td><td class="m">n. 词汇量；词汇表</td></tr>
+<tr data-s="dictionary n. 词典；字典"><td class="n">29</td><td class="w">dictionary</td><td class="m">n. 词典；字典</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 09</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="idiom n. 成语；习语；惯用语"><td class="n">30</td><td class="w">idiom</td><td class="m">n. 成语；习语；惯用语</td></tr>
+<tr data-s="phrase n. 短语；词组；v. 叙述； 措辞"><td class="n">31</td><td class="w">phrase</td><td class="m">n. 短语；词组；v. 叙述； 措辞</td></tr>
+<tr data-s="clause n. 从句；条款"><td class="n">32</td><td class="w">clause</td><td class="m">n. 从句；条款</td></tr>
+<tr data-s="expression n. 表达；表情；措辞"><td class="n">33</td><td class="w">expression</td><td class="m">n. 表达；表情；措辞</td></tr>
+<tr data-s="tense adj. 紧张的；拉紧的；n. 时态"><td class="n">34</td><td class="w">tense</td><td class="m">adj. 紧张的；拉紧的；n. 时态</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 10</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="prefix n. 前缀；v. 在...前面加"><td class="n">35</td><td class="w">prefix</td><td class="m">n. 前缀；v. 在...前面加</td></tr>
+<tr data-s="suffix n. 后缀；词尾"><td class="n">36</td><td class="w">suffix</td><td class="m">n. 后缀；词尾</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 11</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="abbreviation n. 缩写；略号"><td class="n">37</td><td class="w">abbreviation</td><td class="m">n. 缩写；略号</td></tr>
+<tr data-s="synonym n. 同义词"><td class="n">38</td><td class="w">synonym</td><td class="m">n. 同义词</td></tr>
+<tr data-s="antonym n. 反义词"><td class="n">39</td><td class="w">antonym</td><td class="m">n. 反义词</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 12</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="noun n. 名词"><td class="n">40</td><td class="w">noun</td><td class="m">n. 名词</td></tr>
+<tr data-s="singular adj. 单数的；单个的；特 异的"><td class="n">41</td><td class="w">singular</td><td class="m">adj. 单数的；单个的；特 异的</td></tr>
+<tr data-s="plural n. 复数；adj. 复数的；多 元的"><td class="n">42</td><td class="w">plural</td><td class="m">n. 复数；adj. 复数的；多 元的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 13</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="pronoun n. 代词"><td class="n">43</td><td class="w">pronoun</td><td class="m">n. 代词</td></tr>
+<tr data-s="verb n. 动词"><td class="n">44</td><td class="w">verb</td><td class="m">n. 动词</td></tr>
+<tr data-s="adjective adj. 形容词的；n. 形容词"><td class="n">45</td><td class="w">adjective</td><td class="m">adj. 形容词的；n. 形容词</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 14</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="adverb n. 副词"><td class="n">46</td><td class="w">adverb</td><td class="m">n. 副词</td></tr>
+<tr data-s="preposition n. 介词"><td class="n">47</td><td class="w">preposition</td><td class="m">n. 介词</td></tr>
+<tr data-s="conjunction n. 联合；连接词；同时发 生"><td class="n">48</td><td class="w">conjunction</td><td class="m">n. 联合；连接词；同时发 生</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 15</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="consistent adj. 一致的；始终如一的"><td class="n">49</td><td class="w">consistent</td><td class="m">adj. 一致的；始终如一的</td></tr>
+<tr data-s="complicated adj. 复杂的"><td class="n">50</td><td class="w">complicated</td><td class="m">adj. 复杂的</td></tr>
+<tr data-s="complex adj. 复杂的；费解的；n. 综合楼(群)；情结"><td class="n">51</td><td class="w">complex</td><td class="m">adj. 复杂的；费解的；n. 综合楼(群)；情结</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 16</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="compile v. 汇编；编制"><td class="n">52</td><td class="w">compile</td><td class="m">v. 汇编；编制</td></tr>
+<tr data-s="version n. 版本；样式"><td class="n">53</td><td class="w">version</td><td class="m">n. 版本；样式</td></tr>
+<tr data-s="translate v. 翻译；转化"><td class="n">54</td><td class="w">translate</td><td class="m">v. 翻译；转化</td></tr>
+<tr data-s="paraphrase v. 意译；解释；改述；n. 释义；意译；改述"><td class="n">55</td><td class="w">paraphrase</td><td class="m">v. 意译；解释；改述；n. 释义；意译；改述</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 17</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="interpret v. 口译；把...理解为；解 释"><td class="n">56</td><td class="w">interpret</td><td class="m">v. 口译；把...理解为；解 释</td></tr>
+<tr data-s="narrate v. 叙述；给(电视或电 影)作旁白"><td class="n">57</td><td class="w">narrate</td><td class="m">v. 叙述；给(电视或电 影)作旁白</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 18</span><span class="gcnt">10 词</span></td></tr>
+<tr data-s="illuminate v. 照亮；阐明；解释"><td class="n">58</td><td class="w">illuminate</td><td class="m">v. 照亮；阐明；解释</td></tr>
+<tr data-s="decipher v. 破译；解读；n. 密电译 文"><td class="n">59</td><td class="w">decipher</td><td class="m">v. 破译；解读；n. 密电译 文</td></tr>
+<tr data-s="eloquence n. 雄辩；口才"><td class="n">60</td><td class="w">eloquence</td><td class="m">n. 雄辩；口才</td></tr>
+<tr data-s="communicate v. 沟通；交流"><td class="n">61</td><td class="w">communicate</td><td class="m">v. 沟通；交流</td></tr>
+<tr data-s="discussion n. 讨论；商讨"><td class="n">62</td><td class="w">discussion</td><td class="m">n. 讨论；商讨</td></tr>
+<tr data-s="brainstorm v. 脑力激荡；集思广益； n. 计上心头；集体研讨"><td class="n">63</td><td class="w">brainstorm</td><td class="m">v. 脑力激荡；集思广益； n. 计上心头；集体研讨</td></tr>
+<tr data-s="debate v. 辩论；争论；n. 辩论； 争论"><td class="n">64</td><td class="w">debate</td><td class="m">v. 辩论；争论；n. 辩论； 争论</td></tr>
+<tr data-s="commentary n. 解说词；评论；实况报 导"><td class="n">65</td><td class="w">commentary</td><td class="m">n. 解说词；评论；实况报 导</td></tr>
+<tr data-s="negotiate v. 谈判；协商；通过；越 过"><td class="n">66</td><td class="w">negotiate</td><td class="m">v. 谈判；协商；通过；越 过</td></tr>
+<tr data-s="contention n. 争论；论点；争辩"><td class="n">67</td><td class="w">contention</td><td class="m">n. 争论；论点；争辩</td></tr>
+</tbody>
+</table><div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit07.html">← Unit 07</a><a href="unit08-card.html">切到例句卡片版</a><a href="unit09.html">Unit 09 →</a></div><footer><div class="wrap" style="padding:0">
+ 摘自《雅思词汇真经》（刘洪波 编著）第 8 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
+</div></footer></div>
+<script>
+(function(){
+ var KEY='vj-hide';
+ var body=document.body;
+ var kind=body.dataset.kind;
+ var s={m:false,z:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;}}catch(e){}
+ function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+ function paint(){
+  body.classList.toggle('hide-m',s.m);
+  body.classList.toggle('hide-z',s.z);
+  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all');
+  if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
+  if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
+  if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
+ }
+ var cm=document.getElementById('m');
+ if(cm) cm.addEventListener('change',function(){s.m=cm.checked; save(); paint();});
+ var cz=document.getElementById('z');
+ if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
+ var ca=document.getElementById('all');
+ if(ca) ca.addEventListener('change',function(){
+   s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
+ });
+ var rs=document.getElementById('reset');
+ if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; save(); paint();});
+ var q=document.getElementById('q');
+ var items=[].slice.call(document.querySelectorAll('[data-s]'));
+ var cnt=document.getElementById('cnt');
+ function filter(){
+   var v=(q&&q.value||'').trim().toLowerCase();
+   var n=0;
+   items.forEach(function(el){
+     var hit=!v||el.dataset.s.indexOf(v)>-1;
+     el.style.display=hit?'':'none';
+     if(hit)n++;
+   });
+   if(cnt) cnt.textContent=v? (n+' / '+items.length) : (items.length+' 条');
+   var emp=document.getElementById('empty');
+   if(emp) emp.style.display=(n===0)?'block':'none';
+   document.querySelectorAll('section.grp').forEach(function(sec){
+     var vis=sec.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     sec.style.display=vis?'':'none';
+   });
+   document.querySelectorAll('tbody.grp').forEach(function(tb){
+     var vis=tb.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     tb.style.display=vis?'':'none';
+   });
+ }
+ if(q){q.addEventListener('input',filter);}
+ document.addEventListener('keydown',function(e){
+   if(e.key==='/'&&document.activeElement!==q&&q){e.preventDefault();q.focus();}
+   if(e.key==='Escape'&&document.activeElement===q){q.value='';filter();q.blur();}
+ });
+ paint(); filter();
+})();
+</script>
+</body></html>

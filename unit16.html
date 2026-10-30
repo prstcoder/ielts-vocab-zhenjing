@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unit 16 · 社会经济</title>
+<style>
+:root{
+ --bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da;
+ --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4;
+}
+@media (prefers-color-scheme: dark){
+ :root{ --bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037;
+        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+ font:16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+ -webkit-font-smoothing:antialiased;padding-bottom:64px}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+
+.top{padding:34px 0 18px}
+.back{display:inline-block;font-size:13px;color:var(--ink2);text-decoration:none;
+ border:1px solid var(--line);border-radius:999px;padding:3px 12px;margin-bottom:16px}
+.back:hover{color:var(--accent);border-color:var(--accent)}
+h1{margin:0;font-size:27px;letter-spacing:.2px;font-weight:700}
+h1 .u{color:var(--accent);font-variant-numeric:tabular-nums}
+.sub{margin:6px 0 0;color:var(--ink2);font-size:13.5px}
+
+.toolbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);
+ backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line);
+ padding:10px 0;margin-bottom:18px}
+.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#q{flex:1 1 200px;min-width:150px;padding:8px 13px;border:1px solid var(--line);border-radius:9px;
+ background:var(--panel);color:var(--ink);font-size:14px;outline:none}
+#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.sw{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);
+ border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer;user-select:none;background:var(--panel)}
+.sw input{accent-color:var(--accent);margin:0}
+.sw.on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.btn{font:inherit;font-size:13px;color:var(--ink2);background:var(--panel);border:1px solid var(--line);
+ border-radius:999px;padding:5px 12px;cursor:pointer}
+.btn:hover{color:var(--accent);border-color:var(--accent)}
+.count{font-size:12.5px;color:var(--ink2);margin-left:auto;font-variant-numeric:tabular-nums}
+
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);
+ border-radius:12px;overflow:hidden}
+thead th{background:var(--chip);font-size:12.5px;letter-spacing:.06em;color:var(--ink2);
+ font-weight:600;text-align:left;padding:9px 14px;border-bottom:1px solid var(--line)}
+tbody td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--accent-soft)}
+td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-nums}
+td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
+ letter-spacing:.2px;word-break:break-word}
+td.m{color:var(--ink)}
+tr.hit td.w,tr.hit td.m{background:var(--mark)}
+
+.cards{display:grid;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px}.card .w{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:19px;font-weight:700;letter-spacing:.2px}
+.card .w .idx{font-family:inherit;font-size:12px;color:var(--ink2);font-weight:400;margin-right:8px;
+ font-variant-numeric:tabular-nums}
+.card .m{margin:5px 0 0;color:var(--ink);font-size:14.5px}
+.card .ex{margin:10px 0 0;padding:9px 12px;background:var(--accent-soft);border-radius:9px;font-size:14px}
+.card .ex .en{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:14.8px;line-height:1.55}
+.card .ex .zh{color:var(--ink2);margin-top:3px;font-size:13.5px}
+.card .no{color:var(--ink2);font-size:12.5px;margin-top:8px;font-style:italic}
+
+tr.gsep td{background:var(--chip);padding:5px 14px;border-bottom:1px solid var(--line)}
+.gtag{font-size:11.5px;font-weight:700;letter-spacing:.08em;color:var(--accent)}
+.gcnt{font-size:11.5px;color:var(--ink2);margin-left:8px;font-variant-numeric:tabular-nums}
+tbody.grp tr:first-child td{border-top:0}
+tbody.grp + tbody.grp tr.gsep td{border-top:8px solid var(--bg)}
+
+/* 卡片版：一个词群一块面板，组与组之间界限分明 */
+section.grp{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+ margin-bottom:16px;overflow:hidden}
+.ghead{display:flex;align-items:baseline;gap:9px;padding:9px 15px;background:var(--chip);
+ border-bottom:1px solid var(--line)}
+section.grp .cards{display:grid;gap:0;padding:1px 15px}
+section.grp .card{background:transparent;border:0;border-radius:0;padding:13px 0;
+ border-bottom:1px solid var(--line)}
+section.grp .card:last-child{border-bottom:0}
+
+.hide-m .m,.hide-m td.m{display:none}
+.hide-z .zh{display:none}
+body.hide-m td.m{display:none!important}
+.empty{padding:40px;text-align:center;color:var(--ink2);font-size:14px}
+
+.nav{display:flex;justify-content:space-between;gap:10px;margin:26px 0 0}
+.nav a{font-size:13.5px;text-decoration:none;color:var(--ink2);border:1px solid var(--line);
+ border-radius:999px;padding:6px 14px;background:var(--panel)}
+.nav a:hover{color:var(--accent);border-color:var(--accent)}
+.nav a.dis{opacity:.35;pointer-events:none}
+footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
+
+@media (max-width:640px){
+ body{font-size:15px}
+ .wrap{padding:0 12px}
+ h1{font-size:22px}
+ thead{display:none}
+ table,tbody,tr,td{display:block;width:auto}
+ table{border:0;background:transparent;border-radius:0}
+ tbody tr{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:11px 13px;margin-bottom:9px}
+ tbody td{border:0;padding:0}
+ td.n{display:none}
+ tr.gsep{display:block}
+ tr.gsep td{display:block;background:transparent;padding:0 0 6px}
+ tbody.grp{margin-bottom:6px;display:block}
+ td.w{font-size:17px;margin-bottom:3px}
+ td.m{font-size:14px;color:var(--ink2)}
+}
+</style>
+</head>
+<body data-kind="list">
+<div class="wrap"><div class="top">
+ <a class="back" href="index.html">← 全部单元</a>
+ <h1><span class="u">Unit 16</span> · 社会经济</h1>
+ <p class="sub">169 词</p>
+</div></div>
+<div class="toolbar"><div class="wrap">
+ <div class="tools">
+  <input id="q" type="search" placeholder="搜索单词或释义…（按 / 聚焦）">
+  <label class="sw"><input type="checkbox" id="all"> 默写模式</label>
+  <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
+  
+  <button class="btn" id="reset">重置</button>
+  <span class="count" id="cnt">169 条</span>
+ </div>
+</div></div><div class="wrap"><table><thead><tr><th>#</th><th>单词</th><th>释义</th></tr></thead>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 01</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="economy n. 经济；节约"><td class="n">1</td><td class="w">economy</td><td class="m">n. 经济；节约</td></tr>
+<tr data-s="trade n. 贸易；交易；行业；v. 贸易；交易"><td class="n">2</td><td class="w">trade</td><td class="m">n. 贸易；交易；行业；v. 贸易；交易</td></tr>
+<tr data-s="market n. 市场；商场；销路；行 情；v. 在市场上交易；营销"><td class="n">3</td><td class="w">market</td><td class="m">n. 市场；商场；销路；行 情；v. 在市场上交易；营销</td></tr>
+<tr data-s="industry n. 工业；产业；行业；勤 奋"><td class="n">4</td><td class="w">industry</td><td class="m">n. 工业；产业；行业；勤 奋</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 02</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="merchant n. 商人"><td class="n">5</td><td class="w">merchant</td><td class="m">n. 商人</td></tr>
+<tr data-s="financial adj. 财政的；金融的"><td class="n">6</td><td class="w">financial</td><td class="m">adj. 财政的；金融的</td></tr>
+<tr data-s="fund n. 基金；资金；v. 提供资 金"><td class="n">7</td><td class="w">fund</td><td class="m">n. 基金；资金；v. 提供资 金</td></tr>
+<tr data-s="donate v. 捐赠；捐献"><td class="n">8</td><td class="w">donate</td><td class="m">v. 捐赠；捐献</td></tr>
+<tr data-s="endow v. 捐赠；资助；赋予"><td class="n">9</td><td class="w">endow</td><td class="m">v. 捐赠；资助；赋予</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 03</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="commercial adj. 贸易的；商业的；n. 广告"><td class="n">10</td><td class="w">commercial</td><td class="m">adj. 贸易的；商业的；n. 广告</td></tr>
+<tr data-s="advertise v. 做广告；登广告"><td class="n">11</td><td class="w">advertise</td><td class="m">v. 做广告；登广告</td></tr>
+<tr data-s="slogan n. 口号；标语"><td class="n">12</td><td class="w">slogan</td><td class="m">n. 口号；标语</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 04</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="purchase n. 购买；采购；v. 购买； 采购"><td class="n">13</td><td class="w">purchase</td><td class="m">n. 购买；采购；v. 购买； 采购</td></tr>
+<tr data-s="lease n. 租契；v. 出租"><td class="n">14</td><td class="w">lease</td><td class="m">n. 租契；v. 出租</td></tr>
+<tr data-s="afford v. 买得起；担负得起；有 时间做；给予"><td class="n">15</td><td class="w">afford</td><td class="m">v. 买得起；担负得起；有 时间做；给予</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 05</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="retail v. 零售；n. 零售"><td class="n">16</td><td class="w">retail</td><td class="m">v. 零售；n. 零售</td></tr>
+<tr data-s="grocery n. ⻝品杂货店"><td class="n">17</td><td class="w">grocery</td><td class="m">n. ⻝品杂货店</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 06</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="discount n. 折扣；贴现率；v. 打折 扣；贴现；不全信；不重视"><td class="n">18</td><td class="w">discount</td><td class="m">n. 折扣；贴现率；v. 打折 扣；贴现；不全信；不重视</td></tr>
+<tr data-s="promotion n. 促进；提升；推广"><td class="n">19</td><td class="w">promotion</td><td class="m">n. 促进；提升；推广</td></tr>
+<tr data-s="voucher n. 代金券；凭单"><td class="n">20</td><td class="w">voucher</td><td class="m">n. 代金券；凭单</td></tr>
+<tr data-s="coupon n. 优惠券；息票；配给券"><td class="n">21</td><td class="w">coupon</td><td class="m">n. 优惠券；息票；配给券</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 07</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="currency n. 货币；流通"><td class="n">22</td><td class="w">currency</td><td class="m">n. 货币；流通</td></tr>
+<tr data-s="exchange n. 交换；交易所；兑换； v. 交换；兑换"><td class="n">23</td><td class="w">exchange</td><td class="m">n. 交换；交易所；兑换； v. 交换；兑换</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 08</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="swap v. 交换；n. 交换"><td class="n">24</td><td class="w">swap</td><td class="m">v. 交换；n. 交换</td></tr>
+<tr data-s="receipt n. 收据；收条"><td class="n">25</td><td class="w">receipt</td><td class="m">n. 收据；收条</td></tr>
+<tr data-s="invoice n. 发票；发货单；v. 开发 票；记清单"><td class="n">26</td><td class="w">invoice</td><td class="m">n. 发票；发货单；v. 开发 票；记清单</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 09</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="tax n. 税；税款；v. 对...征 税；使负重荷"><td class="n">27</td><td class="w">tax</td><td class="m">n. 税；税款；v. 对...征 税；使负重荷</td></tr>
+<tr data-s="levy v. 征收；征税；征募；n. 征兵；征税"><td class="n">28</td><td class="w">levy</td><td class="m">v. 征收；征税；征募；n. 征兵；征税</td></tr>
+<tr data-s="tariff n. 关税；税率；(旅馆、 饭店等的)价目表"><td class="n">29</td><td class="w">tariff</td><td class="m">n. 关税；税率；(旅馆、 饭店等的)价目表</td></tr>
+<tr data-s="duty n. 责任；职责；义务"><td class="n">30</td><td class="w">duty</td><td class="m">n. 责任；职责；义务</td></tr>
+<tr data-s="impose v. 强加；征收；施加影 响；利用；强制实施"><td class="n">31</td><td class="w">impose</td><td class="m">v. 强加；征收；施加影 响；利用；强制实施</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 10</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="consume v. 消耗；消费；毁掉；(使)沉 溺；(使)沉迷；(使)充满"><td class="n">32</td><td class="w">consume</td><td class="m">v. 消耗；消费；毁掉；(使)沉 溺；(使)沉迷；(使)充满</td></tr>
+<tr data-s="spend v. 花费；消耗；度过"><td class="n">33</td><td class="w">spend</td><td class="m">v. 花费；消耗；度过</td></tr>
+<tr data-s="cost v. 花费；n. 费用；代价"><td class="n">34</td><td class="w">cost</td><td class="m">v. 花费；n. 费用；代价</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 11</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="expense n. 费用；开支"><td class="n">35</td><td class="w">expense</td><td class="m">n. 费用；开支</td></tr>
+<tr data-s="revenue n. 收入；税收"><td class="n">36</td><td class="w">revenue</td><td class="m">n. 收入；税收</td></tr>
+<tr data-s="gross adj. 总的；严重的；过分 的"><td class="n">37</td><td class="w">gross</td><td class="m">adj. 总的；严重的；过分 的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 12</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="recession n. 后退；(经济)不景气"><td class="n">38</td><td class="w">recession</td><td class="m">n. 后退；(经济)不景气</td></tr>
+<tr data-s="depression n. 抑郁；沮丧；萧条；凹 陷；洼地；低气压区"><td class="n">39</td><td class="w">depression</td><td class="m">n. 抑郁；沮丧；萧条；凹 陷；洼地；低气压区</td></tr>
+<tr data-s="crisis n. 危机；危急关头"><td class="n">40</td><td class="w">crisis</td><td class="m">n. 危机；危急关头</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 13</span><span class="gcnt">6 词</span></td></tr>
+<tr data-s="security n. 安全；防护措施；保 障；担保；抵押品"><td class="n">41</td><td class="w">security</td><td class="m">n. 安全；防护措施；保 障；担保；抵押品</td></tr>
+<tr data-s="bond n. 纽带；联系；债券；保释金； 协定；v. (使)黏合；相互联结"><td class="n">42</td><td class="w">bond</td><td class="m">n. 纽带；联系；债券；保释金； 协定；v. (使)黏合；相互联结</td></tr>
+<tr data-s="debt n. 债务；欠款"><td class="n">43</td><td class="w">debt</td><td class="m">n. 债务；欠款</td></tr>
+<tr data-s="deficit n. 不足额；赤字；亏损"><td class="n">44</td><td class="w">deficit</td><td class="m">n. 不足额；赤字；亏损</td></tr>
+<tr data-s="inflation n. 膨胀；充气；通货膨胀"><td class="n">45</td><td class="w">inflation</td><td class="m">n. 膨胀；充气；通货膨胀</td></tr>
+<tr data-s="deflation n. 通货紧缩；放气"><td class="n">46</td><td class="w">deflation</td><td class="m">n. 通货紧缩；放气</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 14</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="dwindle v. 缩小；减少"><td class="n">47</td><td class="w">dwindle</td><td class="m">v. 缩小；减少</td></tr>
+<tr data-s="decrease v. 减少；降低；n. 减少"><td class="n">48</td><td class="w">decrease</td><td class="m">v. 减少；降低；n. 减少</td></tr>
+<tr data-s="downsize v. 缩小(规模)；裁员"><td class="n">49</td><td class="w">downsize</td><td class="m">v. 缩小(规模)；裁员</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 15</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="decline v. 下降；衰退；谢绝；婉 拒；n. 下降；衰退；婉拒"><td class="n">50</td><td class="w">decline</td><td class="m">v. 下降；衰退；谢绝；婉 拒；n. 下降；衰退；婉拒</td></tr>
+<tr data-s="diminish v. 减少；削弱；减损；贬 低"><td class="n">51</td><td class="w">diminish</td><td class="m">v. 减少；削弱；减损；贬 低</td></tr>
+<tr data-s="reduce v. 减少；降低；减量"><td class="n">52</td><td class="w">reduce</td><td class="m">v. 减少；降低；减量</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 16</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="increase n. 增加；增⻓；v. 增加； 增多"><td class="n">53</td><td class="w">increase</td><td class="m">n. 增加；增⻓；v. 增加； 增多</td></tr>
+<tr data-s="increment n. 增加；增量"><td class="n">54</td><td class="w">increment</td><td class="m">n. 增加；增量</td></tr>
+<tr data-s="growth n. 生⻓；增⻓"><td class="n">55</td><td class="w">growth</td><td class="m">n. 生⻓；增⻓</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 17</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="escalate v. (使)升级；(使)恶 化；逐步升高"><td class="n">56</td><td class="w">escalate</td><td class="m">v. (使)升级；(使)恶 化；逐步升高</td></tr>
+<tr data-s="expand v. 扩大；膨胀；更充分地 阐述"><td class="n">57</td><td class="w">expand</td><td class="m">v. 扩大；膨胀；更充分地 阐述</td></tr>
+<tr data-s="influx n. 流入；涌入"><td class="n">58</td><td class="w">influx</td><td class="m">n. 流入；涌入</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 18</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="affluent adj. 富裕的；丰富的；富 足的"><td class="n">59</td><td class="w">affluent</td><td class="m">adj. 富裕的；丰富的；富 足的</td></tr>
+<tr data-s="enrich v. 使富裕；使富足"><td class="n">60</td><td class="w">enrich</td><td class="m">v. 使富裕；使富足</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 19</span><span class="gcnt">6 词</span></td></tr>
+<tr data-s="sufficient adj. 足够的；充足的"><td class="n">61</td><td class="w">sufficient</td><td class="m">adj. 足够的；充足的</td></tr>
+<tr data-s="adequate adj. 足够的；尚可的"><td class="n">62</td><td class="w">adequate</td><td class="m">adj. 足够的；尚可的</td></tr>
+<tr data-s="spare adj. 多余的；空闲的；备用的；瘦 削的；简陋的；v. 节省；抽出；分 让；宽恕；使免遭"><td class="n">63</td><td class="w">spare</td><td class="m">adj. 多余的；空闲的；备用的；瘦 削的；简陋的；v. 节省；抽出；分 让；宽恕；使免遭</td></tr>
+<tr data-s="saving n. 节约；v. 保存；拯救； 节省；“save”的现在分词"><td class="n">64</td><td class="w">saving</td><td class="m">n. 节约；v. 保存；拯救； 节省；“save”的现在分词</td></tr>
+<tr data-s="redundant adj. 多余的；过剩的；被 裁减的"><td class="n">65</td><td class="w">redundant</td><td class="m">adj. 多余的；过剩的；被 裁减的</td></tr>
+<tr data-s="lack v. 缺乏；短缺；n. 缺乏； 短缺"><td class="n">66</td><td class="w">lack</td><td class="m">v. 缺乏；短缺；n. 缺乏； 短缺</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 20</span><span class="gcnt">6 词</span></td></tr>
+<tr data-s="company n. 公司；陪伴"><td class="n">67</td><td class="w">company</td><td class="m">n. 公司；陪伴</td></tr>
+<tr data-s="firm n. 公司；商行；adj. 坚固 的；结实的"><td class="n">68</td><td class="w">firm</td><td class="m">n. 公司；商行；adj. 坚固 的；结实的</td></tr>
+<tr data-s="enterprise n. 事业；企业；进取心"><td class="n">69</td><td class="w">enterprise</td><td class="m">n. 事业；企业；进取心</td></tr>
+<tr data-s="agent n. 代理人；经纪人；动 因；特工；(药)剂"><td class="n">70</td><td class="w">agent</td><td class="m">n. 代理人；经纪人；动 因；特工；(药)剂</td></tr>
+<tr data-s="entity n. 独立存在体；实体"><td class="n">71</td><td class="w">entity</td><td class="m">n. 独立存在体；实体</td></tr>
+<tr data-s="invest v. 投资；投入"><td class="n">72</td><td class="w">invest</td><td class="m">v. 投资；投入</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 21</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="input n. 输入；v. 输入"><td class="n">73</td><td class="w">input</td><td class="m">n. 输入；v. 输入</td></tr>
+<tr data-s="product n. 产品；产物；成果； 〈数〉积"><td class="n">74</td><td class="w">product</td><td class="m">n. 产品；产物；成果； 〈数〉积</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 22</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="acquisition n. 获得；得到的东⻄；收 购"><td class="n">75</td><td class="w">acquisition</td><td class="m">n. 获得；得到的东⻄；收 购</td></tr>
+<tr data-s="goods n. 商品；货物"><td class="n">76</td><td class="w">goods</td><td class="m">n. 商品；货物</td></tr>
+<tr data-s="cargo n. 货物"><td class="n">77</td><td class="w">cargo</td><td class="m">n. 货物</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 23</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="insure v. 保险；确保"><td class="n">78</td><td class="w">insure</td><td class="m">v. 保险；确保</td></tr>
+<tr data-s="guarantee v. 保证；确保；n. 保证； 保证书"><td class="n">79</td><td class="w">guarantee</td><td class="m">v. 保证；确保；n. 保证； 保证书</td></tr>
+<tr data-s="reliable adj. 可靠的；可信的"><td class="n">80</td><td class="w">reliable</td><td class="m">adj. 可靠的；可信的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 24</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="negotiation n. 谈判；协商；磋商"><td class="n">81</td><td class="w">negotiation</td><td class="m">n. 谈判；协商；磋商</td></tr>
+<tr data-s="attend v. 出席；参加；照料；注 意；专心"><td class="n">82</td><td class="w">attend</td><td class="m">v. 出席；参加；照料；注 意；专心</td></tr>
+<tr data-s="absent adj. 缺席的；v. 缺席；不 参加"><td class="n">83</td><td class="w">absent</td><td class="m">adj. 缺席的；v. 缺席；不 参加</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 25</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="sale n. 销售；出售；减价销售"><td class="n">84</td><td class="w">sale</td><td class="m">n. 销售；出售；减价销售</td></tr>
+<tr data-s="wholesale n. 成批出售；adj. 批发的；大规模 的；adv. 大批地；大规模地；v. 批发售出"><td class="n">85</td><td class="w">wholesale</td><td class="m">n. 成批出售；adj. 批发的；大规模 的；adv. 大批地；大规模地；v. 批发售出</td></tr>
+<tr data-s="auction n. 拍卖；v. 拍卖"><td class="n">86</td><td class="w">auction</td><td class="m">n. 拍卖；v. 拍卖</td></tr>
+<tr data-s="bid v. 出价；投标；吩咐；向某人道 (午安等)；n. 出价；投标；努力 争取"><td class="n">87</td><td class="w">bid</td><td class="m">v. 出价；投标；吩咐；向某人道 (午安等)；n. 出价；投标；努力 争取</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 26</span><span class="gcnt">7 词</span></td></tr>
+<tr data-s="deal n. 交易；协议；v. 处理； 对付；交易"><td class="n">88</td><td class="w">deal</td><td class="m">n. 交易；协议；v. 处理； 对付；交易</td></tr>
+<tr data-s="transaction n. 交易；业务"><td class="n">89</td><td class="w">transaction</td><td class="m">n. 交易；业务</td></tr>
+<tr data-s="turnover n. 营业额；周转率；人员 流动率"><td class="n">90</td><td class="w">turnover</td><td class="m">n. 营业额；周转率；人员 流动率</td></tr>
+<tr data-s="dump v. 倒空；n. 垃圾场"><td class="n">91</td><td class="w">dump</td><td class="m">v. 倒空；n. 垃圾场</td></tr>
+<tr data-s="export v. 输出；出口；n. 输出； 出口"><td class="n">92</td><td class="w">export</td><td class="m">v. 输出；出口；n. 输出； 出口</td></tr>
+<tr data-s="import v. 进口；输入；n. 进口； 输入；重要性；含义"><td class="n">93</td><td class="w">import</td><td class="m">v. 进口；输入；n. 进口； 输入；重要性；含义</td></tr>
+<tr data-s="quota n. 配额；限额；定额"><td class="n">94</td><td class="w">quota</td><td class="m">n. 配额；限额；定额</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 27</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="share v. 共享；分享；n. 分享； 股份"><td class="n">95</td><td class="w">share</td><td class="m">v. 共享；分享；n. 分享； 股份</td></tr>
+<tr data-s="benefit n. 利益；好处；救济金； v. 有益于；有助于"><td class="n">96</td><td class="w">benefit</td><td class="m">n. 利益；好处；救济金； v. 有益于；有助于</td></tr>
+<tr data-s="interest n. 兴趣；利益；利息；v. 使产生兴趣"><td class="n">97</td><td class="w">interest</td><td class="m">n. 兴趣；利益；利息；v. 使产生兴趣</td></tr>
+<tr data-s="stock n. 库存；股票；家畜；v. 备有；贮存"><td class="n">98</td><td class="w">stock</td><td class="m">n. 库存；股票；家畜；v. 备有；贮存</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 28</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="account n. 账户；叙述；账目；v. 说明；占..."><td class="n">99</td><td class="w">account</td><td class="m">n. 账户；叙述；账目；v. 说明；占...</td></tr>
+<tr data-s="deposit n. 存款；押金；沉淀；v. 存储；堆积"><td class="n">100</td><td class="w">deposit</td><td class="m">n. 存款；押金；沉淀；v. 存储；堆积</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 29</span><span class="gcnt">6 词</span></td></tr>
+<tr data-s="instalment n. 部分；分期付款；分期 连载的一部分"><td class="n">101</td><td class="w">instalment</td><td class="m">n. 部分；分期付款；分期 连载的一部分</td></tr>
+<tr data-s="cheque n. 支票"><td class="n">102</td><td class="w">cheque</td><td class="m">n. 支票</td></tr>
+<tr data-s="cash n. 现金"><td class="n">103</td><td class="w">cash</td><td class="m">n. 现金</td></tr>
+<tr data-s="coin n. 硬币；金属钱币；v. 铸 造硬币；杜撰；创造"><td class="n">104</td><td class="w">coin</td><td class="m">n. 硬币；金属钱币；v. 铸 造硬币；杜撰；创造</td></tr>
+<tr data-s="shilling n. 先令(英国1971年以前 的辅币,等于12便士)"><td class="n">105</td><td class="w">shilling</td><td class="m">n. 先令(英国1971年以前 的辅币,等于12便士)</td></tr>
+<tr data-s="copper n. 铜；铜币"><td class="n">106</td><td class="w">copper</td><td class="m">n. 铜；铜币</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 30</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="treasure n. 财富；珍宝；宝物；v. 珍爱；珍惜；珍藏"><td class="n">107</td><td class="w">treasure</td><td class="m">n. 财富；珍宝；宝物；v. 珍爱；珍惜；珍藏</td></tr>
+<tr data-s="wealth n. 财富；财产"><td class="n">108</td><td class="w">wealth</td><td class="m">n. 财富；财产</td></tr>
+<tr data-s="estate n. 庄园；个人全部财产 (遗产)；地产"><td class="n">109</td><td class="w">estate</td><td class="m">n. 庄园；个人全部财产 (遗产)；地产</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 31</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="possess v. 拥有；占有"><td class="n">110</td><td class="w">possess</td><td class="m">v. 拥有；占有</td></tr>
+<tr data-s="legacy n. 遗产；遗赠"><td class="n">111</td><td class="w">legacy</td><td class="m">n. 遗产；遗赠</td></tr>
+<tr data-s="descend v. 下降；突然造访；突 袭；沦落；起源"><td class="n">112</td><td class="w">descend</td><td class="m">v. 下降；突然造访；突 袭；沦落；起源</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 32</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="worthy adj. 值得尊敬的；值得... 的"><td class="n">113</td><td class="w">worthy</td><td class="m">adj. 值得尊敬的；值得... 的</td></tr>
+<tr data-s="valuable adj. 有价值的；贵重的； 值钱的"><td class="n">114</td><td class="w">valuable</td><td class="m">adj. 有价值的；贵重的； 值钱的</td></tr>
+<tr data-s="cheap adj. 便宜的；廉价的"><td class="n">115</td><td class="w">cheap</td><td class="m">adj. 便宜的；廉价的</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 33</span><span class="gcnt">6 词</span></td></tr>
+<tr data-s="incentive n. 刺激；诱因；动机"><td class="n">116</td><td class="w">incentive</td><td class="m">n. 刺激；诱因；动机</td></tr>
+<tr data-s="accelerate v. 加速；加快"><td class="n">117</td><td class="w">accelerate</td><td class="m">v. 加速；加快</td></tr>
+<tr data-s="prompt adj. 迅速的；准时的；v. 提 示；促使；n. 提示；提词"><td class="n">118</td><td class="w">prompt</td><td class="m">adj. 迅速的；准时的；v. 提 示；促使；n. 提示；提词</td></tr>
+<tr data-s="salary n. 薪金"><td class="n">119</td><td class="w">salary</td><td class="m">n. 薪金</td></tr>
+<tr data-s="income n. 收入；收益；所得"><td class="n">120</td><td class="w">income</td><td class="m">n. 收入；收益；所得</td></tr>
+<tr data-s="wage n. 工资；v. 发动"><td class="n">121</td><td class="w">wage</td><td class="m">n. 工资；v. 发动</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 34</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="payment n. 支付；报酬"><td class="n">122</td><td class="w">payment</td><td class="m">n. 支付；报酬</td></tr>
+<tr data-s="refund v. 退还；偿还；n. 退款； 返还款"><td class="n">123</td><td class="w">refund</td><td class="m">v. 退还；偿还；n. 退款； 返还款</td></tr>
+<tr data-s="reimburse v. 偿还；报销"><td class="n">124</td><td class="w">reimburse</td><td class="m">v. 偿还；报销</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 35</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="payroll n. 职工工资册；工薪总额"><td class="n">125</td><td class="w">payroll</td><td class="m">n. 职工工资册；工薪总额</td></tr>
+<tr data-s="remuneration n. 报酬；酬金"><td class="n">126</td><td class="w">remuneration</td><td class="m">n. 报酬；酬金</td></tr>
+<tr data-s="subsidy n. 补贴；津贴；补助金"><td class="n">127</td><td class="w">subsidy</td><td class="m">n. 补贴；津贴；补助金</td></tr>
+<tr data-s="earn v. 获得；赚得"><td class="n">128</td><td class="w">earn</td><td class="m">v. 获得；赚得</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 36</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="undertaking n. 事业；企业；承诺；保证；v. 承 担；从事；保证；“undertake”的 现在分词"><td class="n">129</td><td class="w">undertaking</td><td class="m">n. 事业；企业；承诺；保证；v. 承 担；从事；保证；“undertake”的 现在分词</td></tr>
+<tr data-s="career n. 事业；生涯"><td class="n">130</td><td class="w">career</td><td class="m">n. 事业；生涯</td></tr>
+<tr data-s="profession n. 职业；专业"><td class="n">131</td><td class="w">profession</td><td class="m">n. 职业；专业</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 37</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="occupation n. 占领；占有；职业；消 遣"><td class="n">132</td><td class="w">occupation</td><td class="m">n. 占领；占有；职业；消 遣</td></tr>
+<tr data-s="job n. 工作"><td class="n">133</td><td class="w">job</td><td class="m">n. 工作</td></tr>
+<tr data-s="vocation n. 职业；行业；使命"><td class="n">134</td><td class="w">vocation</td><td class="m">n. 职业；行业；使命</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 38</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="labour n. 劳动；体力劳动；劳工； 分娩；v. 辛勤工作；分娩"><td class="n">135</td><td class="w">labour</td><td class="m">n. 劳动；体力劳动；劳工； 分娩；v. 辛勤工作；分娩</td></tr>
+<tr data-s="workforce n. 劳动力；工人总数；职 工总数"><td class="n">136</td><td class="w">workforce</td><td class="m">n. 劳动力；工人总数；职 工总数</td></tr>
+<tr data-s="workaholic n. 工作狂"><td class="n">137</td><td class="w">workaholic</td><td class="m">n. 工作狂</td></tr>
+<tr data-s="personnel n. 职员；全体人员；人事 部"><td class="n">138</td><td class="w">personnel</td><td class="m">n. 职员；全体人员；人事 部</td></tr>
+<tr data-s="clerk n. 职员；店员"><td class="n">139</td><td class="w">clerk</td><td class="m">n. 职员；店员</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 39</span><span class="gcnt">6 词</span></td></tr>
+<tr data-s="interview n. 面试；访谈；v. 面试； 接⻅"><td class="n">140</td><td class="w">interview</td><td class="m">n. 面试；访谈；v. 面试； 接⻅</td></tr>
+<tr data-s="résumé n. 简历；履历"><td class="n">141</td><td class="w">résumé</td><td class="m">n. 简历；履历</td></tr>
+<tr data-s="recommend v. 建议；推荐"><td class="n">142</td><td class="w">recommend</td><td class="m">v. 建议；推荐</td></tr>
+<tr data-s="employ v. 雇佣；使用"><td class="n">143</td><td class="w">employ</td><td class="m">v. 雇佣；使用</td></tr>
+<tr data-s="hire v. 雇用；租用"><td class="n">144</td><td class="w">hire</td><td class="m">v. 雇用；租用</td></tr>
+<tr data-s="fire n. 火；炮火；热情；激情； v. 射击；开火；解雇；激发"><td class="n">145</td><td class="w">fire</td><td class="m">n. 火；炮火；热情；激情； v. 射击；开火；解雇；激发</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 40</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="lay-off n. 解雇；失业期；停工期"><td class="n">146</td><td class="w">lay-off</td><td class="m">n. 解雇；失业期；停工期</td></tr>
+<tr data-s="dismiss v. 解雇；解散；摒除；不 理会；(法律)驳回"><td class="n">147</td><td class="w">dismiss</td><td class="m">v. 解雇；解散；摒除；不 理会；(法律)驳回</td></tr>
+<tr data-s="discharge v. 放出；排出；开除；偿还债务； 履行；卸货；放电；n. 排放；排放 出的物体"><td class="n">148</td><td class="w">discharge</td><td class="m">v. 放出；排出；开除；偿还债务； 履行；卸货；放电；n. 排放；排放 出的物体</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 41</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="resign v. 辞职；使...顺从于 (做)某事"><td class="n">149</td><td class="w">resign</td><td class="m">v. 辞职；使...顺从于 (做)某事</td></tr>
+<tr data-s="sack n. 袋子；解雇；v. 解雇； 装入袋子；劫掠"><td class="n">150</td><td class="w">sack</td><td class="m">n. 袋子；解雇；v. 解雇； 装入袋子；劫掠</td></tr>
+<tr data-s="retire v. 退休；退役"><td class="n">151</td><td class="w">retire</td><td class="m">v. 退休；退役</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 42</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="result n. 结果；成败；成效；比 分；v. 由于；导致"><td class="n">152</td><td class="w">result</td><td class="m">n. 结果；成败；成效；比 分；v. 由于；导致</td></tr>
+<tr data-s="failure n. 失败"><td class="n">153</td><td class="w">failure</td><td class="m">n. 失败</td></tr>
+<tr data-s="abortion n. 流产；堕胎"><td class="n">154</td><td class="w">abortion</td><td class="m">n. 流产；堕胎</td></tr>
+<tr data-s="loss n. 损失；丢失；亏损"><td class="n">155</td><td class="w">loss</td><td class="m">n. 损失；丢失；亏损</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 43</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="opportunity n. 机会；时机"><td class="n">156</td><td class="w">opportunity</td><td class="m">n. 机会；时机</td></tr>
+<tr data-s="chance n. 机会；可能性；冒险"><td class="n">157</td><td class="w">chance</td><td class="m">n. 机会；可能性；冒险</td></tr>
+<tr data-s="choose v. 选择"><td class="n">158</td><td class="w">choose</td><td class="m">v. 选择</td></tr>
+<tr data-s="change n. 变化；变革；零钱；v. 变化；变革"><td class="n">159</td><td class="w">change</td><td class="m">n. 变化；变革；零钱；v. 变化；变革</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 44</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="solve v. 解决；解答"><td class="n">160</td><td class="w">solve</td><td class="m">v. 解决；解答</td></tr>
+<tr data-s="develop v. 发展；形成；制订"><td class="n">161</td><td class="w">develop</td><td class="m">v. 发展；形成；制订</td></tr>
+<tr data-s="sustainable adj. 可以忍受的；可支撑 的；可持续的"><td class="n">162</td><td class="w">sustainable</td><td class="m">adj. 可以忍受的；可支撑 的；可持续的</td></tr>
+<tr data-s="improve v. 改善；改进；提高"><td class="n">163</td><td class="w">improve</td><td class="m">v. 改善；改进；提高</td></tr>
+</tbody>
+<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 45</span><span class="gcnt">6 词</span></td></tr>
+<tr data-s="manage v. 管理；设法做到；完成 (困难的事)"><td class="n">164</td><td class="w">manage</td><td class="m">v. 管理；设法做到；完成 (困难的事)</td></tr>
+<tr data-s="regulate v. 管制；调整"><td class="n">165</td><td class="w">regulate</td><td class="m">v. 管制；调整</td></tr>
+<tr data-s="sanction n. 批准；允许；认可；制裁；处 罚；v. 批准；认可；制裁；处罚"><td class="n">166</td><td class="w">sanction</td><td class="m">n. 批准；允许；认可；制裁；处 罚；v. 批准；认可；制裁；处罚</td></tr>
+<tr data-s="coordinate v. 协调；使配合；搭配；n. 坐标； adj. (在句子中)并列的；坐标的"><td class="n">167</td><td class="w">coordinate</td><td class="m">v. 协调；使配合；搭配；n. 坐标； adj. (在句子中)并列的；坐标的</td></tr>
+<tr data-s="cooperate v. 合作；协作"><td class="n">168</td><td class="w">cooperate</td><td class="m">v. 合作；协作</td></tr>
+<tr data-s="collaborate v. 合作；协作；通敌"><td class="n">169</td><td class="w">collaborate</td><td class="m">v. 合作；协作；通敌</td></tr>
+</tbody>
+</table><div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit15.html">← Unit 15</a><a href="unit16-card.html">切到例句卡片版</a><a href="unit17.html">Unit 17 →</a></div><footer><div class="wrap" style="padding:0">
+ 摘自《雅思词汇真经》（刘洪波 编著）第 16 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
+</div></footer></div>
+<script>
+(function(){
+ var KEY='vj-hide';
+ var body=document.body;
+ var kind=body.dataset.kind;
+ var s={m:false,z:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;}}catch(e){}
+ function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+ function paint(){
+  body.classList.toggle('hide-m',s.m);
+  body.classList.toggle('hide-z',s.z);
+  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all');
+  if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
+  if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
+  if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
+ }
+ var cm=document.getElementById('m');
+ if(cm) cm.addEventListener('change',function(){s.m=cm.checked; save(); paint();});
+ var cz=document.getElementById('z');
+ if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
+ var ca=document.getElementById('all');
+ if(ca) ca.addEventListener('change',function(){
+   s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
+ });
+ var rs=document.getElementById('reset');
+ if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; save(); paint();});
+ var q=document.getElementById('q');
+ var items=[].slice.call(document.querySelectorAll('[data-s]'));
+ var cnt=document.getElementById('cnt');
+ function filter(){
+   var v=(q&&q.value||'').trim().toLowerCase();
+   var n=0;
+   items.forEach(function(el){
+     var hit=!v||el.dataset.s.indexOf(v)>-1;
+     el.style.display=hit?'':'none';
+     if(hit)n++;
+   });
+   if(cnt) cnt.textContent=v? (n+' / '+items.length) : (items.length+' 条');
+   var emp=document.getElementById('empty');
+   if(emp) emp.style.display=(n===0)?'block':'none';
+   document.querySelectorAll('section.grp').forEach(function(sec){
+     var vis=sec.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     sec.style.display=vis?'':'none';
+   });
+   document.querySelectorAll('tbody.grp').forEach(function(tb){
+     var vis=tb.querySelectorAll('[data-s]:not([style*="display: none"])').length;
+     tb.style.display=vis?'':'none';
+   });
+ }
+ if(q){q.addEventListener('input',filter);}
+ document.addEventListener('keydown',function(e){
+   if(e.key==='/'&&document.activeElement!==q&&q){e.preventDefault();q.focus();}
+   if(e.key==='Escape'&&document.activeElement===q){q.value='';filter();q.blur();}
+ });
+ paint(); filter();
+})();
+</script>
+</body></html>
