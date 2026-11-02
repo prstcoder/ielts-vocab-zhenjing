@@ -1075,9 +1075,9 @@ var SYNC=(function(){
  function rpc(fn, body){
   var c=cfg();
   if(!c) return Promise.reject(new Error('未配置'));
-  var ctrl=null, opt={method:'POST',
-   headers:{'Content-Type':'application/json','apikey':c.key,'Authorization':'Bearer '+c.key},
-   body:JSON.stringify(body)};
+  var hd={'Content-Type':'application/json','apikey':c.key};
+  if(/^eyJ/.test(c.key)) hd['Authorization']='Bearer '+c.key;   // 兼容老的 anon JWT
+  var ctrl=null, opt={method:'POST', headers:hd, body:JSON.stringify(body)};
   try{
    ctrl=new AbortController(); opt.signal=ctrl.signal;
    setTimeout(function(){ try{ctrl.abort()}catch(e){} }, 12000);
