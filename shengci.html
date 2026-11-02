@@ -523,7 +523,8 @@ var NB=(function(){
   var mEl=host.querySelector('.m'), ipaEl=host.querySelector('.ipa');
   var mean='';
   if(mEl){var c=mEl.cloneNode(true);var d=c.querySelector('.dv');if(d)c.removeChild(d);mean=c.textContent.trim()}
-  var en=txt(host.querySelector('.ex .en')), zh=txt(host.querySelector('.ex .zh'));
+  var en=txt(host.querySelector('.ex .en'))||host.dataset.e||'',
+      zh=txt(host.querySelector('.ex .zh'))||host.dataset.z||'';
   return {w:w, p:txt(ipaEl), m:mean,
           d:host.dataset.dv||'',
           e:en, z:zh,

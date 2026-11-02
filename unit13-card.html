@@ -536,7 +536,8 @@ var NB=(function(){
   var mEl=host.querySelector('.m'), ipaEl=host.querySelector('.ipa');
   var mean='';
   if(mEl){var c=mEl.cloneNode(true);var d=c.querySelector('.dv');if(d)c.removeChild(d);mean=c.textContent.trim()}
-  var en=txt(host.querySelector('.ex .en')), zh=txt(host.querySelector('.ex .zh'));
+  var en=txt(host.querySelector('.ex .en'))||host.dataset.e||'',
+      zh=txt(host.querySelector('.ex .zh'))||host.dataset.z||'';
   return {w:w, p:txt(ipaEl), m:mean,
           d:host.dataset.dv||'',
           e:en, z:zh,
@@ -633,7 +634,7 @@ window.NB=NB;
 var REC=(function(){
  var KEY='vj-rec', ACC='#b4442e';
  var INT=[0,1,2,4,8,15,30,90];
- var mem=null, root=null, queue=[], idx=0, onlyDue=false, yes=0, no=0, started=false;
+ var mem=null, root=null, queue=[], idx=0, onlyDue=false, yes=0, no=0;
 
  function read(){
   if(mem) return mem;
@@ -650,20 +651,22 @@ var REC=(function(){
   if(m){var c=m.cloneNode(true);var dv=c.querySelector('.dv');if(dv)dv.parentNode.removeChild(dv);
    mean=c.textContent.replace(/\s+/g,' ').trim();}
   var ipa=h.querySelector('.ipa');
-  var en=h.querySelector('.ex .en'), zh=h.querySelector('.ex .zh');
+  var ee=h.querySelector('.ex .en'), zz=h.querySelector('.ex .zh');
+  var en=ee?ee.textContent.replace(/\s+/g,' ').trim():(h.dataset.e||'');
+  var zh=zz?zz.textContent.replace(/\s+/g,' ').trim():(h.dataset.z||'');
   var dl=[];
   (h.dataset.dv||'').split(';;').forEach(function(s){
    if(!s) return; var a=s.split('|'); if(a[0]) dl.push(a[0]);
   });
   return {w:h.dataset.w, p:ipa?ipa.textContent.trim():'', m:mean,
           x:dl.length?('衍生：'+dl.join(' · ')):'',
-          e:en?en.textContent.trim():'', z:zh?zh.textContent.trim():''};
+          e:en, z:zh};
  }
  function items(){
   var out=[], seen={};
   [].slice.call(document.querySelectorAll('[data-w]')).forEach(function(h){
    if(!h.dataset||!h.dataset.w) return;
-   if(h.closest && h.closest('#rcroot')) return;
+   if(h.closest&&h.closest('#rcroot')) return;
    var r=extract(h);
    if(!r||!r.w||seen[r.w]) return;
    seen[r.w]=1; r.h=h; out.push(r);
@@ -671,7 +674,8 @@ var REC=(function(){
   return out;
  }
 
- /* ---- 样式 ---- */
+ var SVG='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg>';
+
  function injectCSS(){
   if(document.getElementById('rcstyle')) return;
   var css = ''
@@ -683,87 +687,91 @@ var REC=(function(){
   + '#rcopen b{font-weight:700;font-variant-numeric:tabular-nums;background:rgba(255,255,255,.26);'
   + 'border-radius:999px;padding:0 6px;font-size:11px}'
   + '@media (max-width:640px){#rcopen{right:12px;font-size:12.5px;padding:8px 13px}}'
-  + '#rcroot{position:fixed;inset:0;z-index:300;display:none;overflow:auto;padding:20px 16px 36px;'
+  + '#rcroot{position:fixed;inset:0;z-index:300;display:none;overflow:auto;padding:20px 16px 40px;'
   + '--rb:#f7f6f3;--rp:#ffffff;--ri:#1f2328;--ri2:#5b6470;--rl:#e6e2da;--rs:rgba(0,0,0,.045);'
   + 'background:var(--rb);color:var(--ri);'
   + 'font:16px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;'
   + '-webkit-font-smoothing:antialiased}'
   + '#rcroot.on{display:block}'
   + '#rcroot *{box-sizing:border-box}'
-  + '#rcroot .rw{max-width:640px;margin:0 auto}'
-  + '#rcroot .bar{display:flex;align-items:center;gap:12px;margin-bottom:12px;font-size:12.5px;color:var(--ri2)}'
-  + '#rcroot .bar .pg{flex:1;height:5px;background:var(--rs);border-radius:99px;overflow:hidden}'
-  + '#rcroot .bar .pg i{display:block;height:100%;width:0;background:'+ACC+';transition:width .25s}'
-  + '#rcroot .bar .num{font-variant-numeric:tabular-nums;white-space:nowrap}'
-  + '#rcroot .x{font:inherit;font-size:21px;line-height:1;background:none;border:0;color:var(--ri2);cursor:pointer;padding:2px 8px}'
-  + '#rcroot .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;'
+  + '#rcroot .rcw{max-width:680px;margin:0 auto}'
+  + '#rcroot .rcbar{display:flex;align-items:center;gap:12px;margin-bottom:12px}'
+  + '#rcroot .rcbar .rcpg{flex:1;height:5px;background:var(--rs);border-radius:99px;overflow:hidden}'
+  + '#rcroot .rcbar .rcpg i{display:block;height:100%;width:0;background:'+ACC+';transition:width .25s}'
+  + '#rcroot .rcnum{font-size:12.5px;color:var(--ri2);font-variant-numeric:tabular-nums;white-space:nowrap}'
+  + '#rcroot .rcx{font:inherit;font-size:21px;line-height:1;background:none;border:0;color:var(--ri2);cursor:pointer;padding:2px 8px}'
+  + '#rcroot .rchd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;'
   + 'font-size:12.5px;color:var(--ri2)}'
-  + '#rcroot .sw{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rl);border-radius:999px;'
-  + 'padding:3px 11px;cursor:pointer;user-select:none;background:var(--rp);white-space:nowrap}'
-  + '#rcroot .sw input{accent-color:'+ACC+';margin:0}'
-  + '#rcroot .card{background:var(--rp);border:1px solid var(--rl);border-radius:20px;padding:34px 26px 26px;'
-  + 'text-align:center;min-height:260px;cursor:pointer;user-select:none;display:flex;flex-direction:column;'
+  + '#rcroot .rcsw{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rl);border-radius:999px;'
+  + 'padding:3px 11px;cursor:pointer;user-select:none;background:var(--rp);white-space:nowrap;margin:0}'
+  + '#rcroot .rcsw input{accent-color:'+ACC+';margin:0}'
+  + '#rcroot .rccard{background:var(--rp);border:1px solid var(--rl);border-radius:20px;padding:30px 26px 24px;'
+  + 'text-align:center;min-height:270px;cursor:pointer;user-select:none;display:flex;flex-direction:column;'
   + 'justify-content:center}'
-  + '#rcroot .wd{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:37px;font-weight:700;'
+  + '#rcroot .rcwd{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:37px;font-weight:700;'
   + 'line-height:1.22;letter-spacing:.3px;word-break:break-word}'
-  + '#rcroot .ipa{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:14px;color:var(--ri2);margin-top:8px}'
-  + '#rcroot .spk2{background:none;border:0;color:var(--ri2);cursor:pointer;padding:6px;margin-top:6px;opacity:.75;align-self:center}'
-  + '#rcroot .spk2:hover{opacity:1;color:'+ACC+'}'
-  + '#rcroot .spk2 svg{width:18px;height:18px;display:block}'
-  + '#rcroot .q{color:var(--ri2);font-size:12.5px;margin-top:22px;opacity:.9}'
-  + '#rcroot .ans{display:none;margin-top:20px;text-align:left;border-top:1px dashed var(--rl);padding-top:16px}'
-  + '#rcroot .ans.on{display:block}'
-  + '#rcroot .ans .m{font-size:17px}'
-  + '#rcroot .ans .x2{margin-top:9px;font-size:13px;color:var(--ri2);line-height:1.85;white-space:pre-line}'
-  + '#rcroot .ans .ex{margin-top:11px;font-size:13.5px;background:var(--rs);border-radius:9px;padding:10px 12px;line-height:1.7}'
-  + '#rcroot .ans .ex .zh{color:var(--ri2);margin-top:3px;font-size:13px}'
-  + '#rcroot .btns{display:flex;gap:10px;margin-top:15px}'
-  + '#rcroot .btns button{flex:1;font:inherit;font-size:15px;font-weight:650;padding:13px 0;border-radius:13px;'
+  + '#rcroot .rcphon{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:14px;color:var(--ri2);margin-top:8px}'
+  + '#rcroot .rcspk{background:none;border:0;color:var(--ri2);cursor:pointer;padding:6px;margin-top:4px;'
+  + 'opacity:.75;align-self:center}'
+  + '#rcroot .rcspk:hover{opacity:1;color:'+ACC+'}'
+  + '#rcroot .rcspk svg{width:18px;height:18px;display:block}'
+  + '#rcroot .rcsen{margin-top:16px;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:15.5px;'
+  + 'line-height:1.7;color:var(--ri);background:var(--rs);border-radius:11px;padding:11px 14px;text-align:left}'
+  + '#rcroot .rcq{color:var(--ri2);font-size:12.5px;margin-top:16px;opacity:.9}'
+  + '#rcroot .rcans{display:none;margin-top:18px;text-align:left;border-top:1px dashed var(--rl);padding-top:16px}'
+  + '#rcroot .rcans.on{display:block}'
+  + '#rcroot .rcdef{font-size:17.5px;line-height:1.6;display:block}'
+  + '#rcroot .rczh{margin-top:10px;font-size:13.5px;line-height:1.8;color:var(--ri2);display:block}'
+  + '#rcroot .rczh .rcbq{font-size:11px;letter-spacing:.06em;opacity:.7;margin-right:6px}'
+  + '#rcroot .rcx2{margin-top:10px;font-size:13px;color:var(--ri2);line-height:1.85;white-space:pre-line;display:block}'
+  + '#rcroot .rcbtns{display:flex;gap:10px;margin-top:15px}'
+  + '#rcroot .rcbtns button{flex:1;font:inherit;font-size:15px;font-weight:650;padding:13px 0;border-radius:13px;'
   + 'cursor:pointer;border:1px solid var(--rl);background:var(--rp);color:var(--ri)}'
-  + '#rcroot .btns button kbd{font:inherit;font-size:11px;opacity:.5;margin-left:4px}'
-  + '#rcroot .btns .no{color:#c0392b}'
-  + '#rcroot .btns .ok{background:'+ACC+';border-color:'+ACC+';color:#fff}'
-  + '#rcroot .btns button:active{transform:translateY(1px)}'
-  + '#rcroot .key{margin-top:13px;text-align:center;font-size:11.5px;color:var(--ri2);opacity:.75}'
-  + '#rcroot .done{text-align:center;padding:40px 10px}'
-  + '#rcroot .done h2{font-size:22px;margin:0 0 10px}'
-  + '#rcroot .done p{color:var(--ri2);font-size:14px;line-height:2}'
-  + '#rcroot .done .acts{display:flex;gap:9px;justify-content:center;margin-top:16px;flex-wrap:wrap}'
-  + '#rcroot .done .acts button{font:inherit;font-size:13.5px;font-weight:650;padding:9px 20px;border-radius:999px;'
+  + '#rcroot .rcbtns button kbd{font:inherit;font-size:11px;opacity:.5;margin-left:4px}'
+  + '#rcroot .rcbtns .rcno{color:#c0392b}'
+  + '#rcroot .rcbtns .rcok{background:'+ACC+';border-color:'+ACC+';color:#fff}'
+  + '#rcroot .rcbtns button:active{transform:translateY(1px)}'
+  + '#rcroot .rckey{margin-top:13px;text-align:center;font-size:11.5px;color:var(--ri2);opacity:.75}'
+  + '#rcroot .rcdone{text-align:center;padding:40px 10px}'
+  + '#rcroot .rcdone h2{font-size:22px;margin:0 0 10px}'
+  + '#rcroot .rcdone p{color:var(--ri2);font-size:14px;line-height:2}'
+  + '#rcroot .rcdone .rcacts{display:flex;gap:9px;justify-content:center;margin-top:16px;flex-wrap:wrap}'
+  + '#rcroot .rcdone .rcacts button{font:inherit;font-size:13.5px;font-weight:650;padding:9px 20px;border-radius:999px;'
   + 'cursor:pointer;border:1px solid var(--rl);background:var(--rp);color:var(--ri)}'
-  + '#rcroot .done .acts .pri{background:'+ACC+';border-color:'+ACC+';color:#fff}'
+  + '#rcroot .rcdone .rcacts .pri{background:'+ACC+';border-color:'+ACC+';color:#fff}'
   + '@media (prefers-color-scheme:dark){#rcroot{--rb:#16181c;--rp:#1d2025;--ri:#e8eaed;--ri2:#9aa3ad;'
   + '--rl:#2c3037;--rs:rgba(255,255,255,.07)}}'
-  + '@media (max-width:520px){#rcroot{padding:14px 11px 26px}#rcroot .wd{font-size:29px}'
-  + '#rcroot .card{padding:26px 17px 20px;min-height:220px}}';
+  + '@media (max-width:520px){#rcroot{padding:14px 11px 26px}#rcroot .rcwd{font-size:29px}'
+  + '#rcroot .rccard{padding:24px 17px 20px;min-height:230px}}';
   var st=document.createElement('style'); st.id='rcstyle'; st.textContent=css;
   document.head.appendChild(st);
  }
 
- var SVG='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg>';
-
- var TMPL='<div class="rw">'
-   +'<div class="bar"><span class="num" id="rcnum">0 / 0</span>'
-   +'<div class="pg"><i id="rcpg"></i></div><button class="x" id="rcx">×</button></div>'
-   +'<div class="hd"><span id="rcinfo"></span>'
-   +'<label class="sw"><input type="checkbox" id="rcdue"> 只背到期</label></div>'
-   +'<div class="card" id="rccard">'
-   +'<div class="wd" id="rcwd"></div><div class="ipa" id="rcipa"></div>'
-   +'<button class="spk2" id="rcspk" title="朗读">'+SVG+'</button>'
-   +'<div class="q" id="rcq">看这个词，认不认识？点卡片看释义</div>'
-   +'<div class="ans" id="rcans"><div class="m" id="rcm"></div>'
-   +'<div class="x2" id="rcx2"></div><div class="ex" id="rcex"></div></div>'
-   +'</div>'
-   +'<div class="btns"><button class="no" id="rcno">不认识 <kbd>1</kbd></button>'
-   +'<button class="ok" id="rcok">认识 <kbd>2</kbd></button></div>'
-   +'<div class="key">空格看释义 · 1 不认识（自动进生词本）· 2 认识 · Esc 退出</div>'
+ var TMPL='<div class="rcw">'
+   +'<div class="rcbar"><span class="rcnum" id="rcnum">0 / 0</span>'
+   +'<div class="rcpg"><i id="rcpg"></i></div><button class="rcx" id="rcx">×</button></div>'
+   +'<div class="rchd"><span id="rcinfo"></span>'
+   +'<label class="rcsw"><input type="checkbox" id="rcdue"> 只背到期</label></div>'
+   +'<div class="rccard" id="rccard">'
+   +'<div class="rcwd" id="rcwd"></div><div class="rcphon" id="rcphon"></div>'
+   +'<button class="rcspk" id="rcspk" title="朗读">'+SVG+'</button>'
+   +'<div class="rcsen" id="rcsen"></div>'
+   +'<div class="rcq" id="rcq">看这个词，认不认识？点卡片看释义</div>'
+   +'<div class="rcans" id="rcans">'
+   +'<div class="rcdef" id="rcdef"></div>'
+   +'<div class="rczh" id="rczh"></div>'
+   +'<div class="rcx2" id="rcx2"></div>'
+   +'</div></div>'
+   +'<div class="rcbtns"><button class="rcno" id="rcno">不认识 <kbd>1</kbd></button>'
+   +'<button class="rcok" id="rcok">认识 <kbd>2</kbd></button></div>'
+   +'<div class="rckey">空格看释义 · 1 不认识（自动进生词本）· 2 认识 · Esc 退出</div>'
    +'</div>';
 
  function build(){
   injectCSS();
   if(!root){ root=document.createElement('div'); root.id='rcroot'; document.body.appendChild(root); }
   root.innerHTML='';
-  var box=document.createElement('div'); box.className='rw'; box.innerHTML=TMPL;
+  var box=document.createElement('div'); box.className='rcw'; box.innerHTML=TMPL;
   root.appendChild(box);
   document.getElementById('rcx').onclick=close;
   document.getElementById('rccard').onclick=reveal;
@@ -802,7 +810,7 @@ var REC=(function(){
    var da=(m[a.w]&&m[a.w].due)||0, db=(m[b.w]&&m[b.w].due)||0;
    return da-db;
   });
-  queue=arr; idx=0; yes=0; no=0; started=true;
+  queue=arr; idx=0; yes=0; no=0;
   build();
   var nDue=arr.filter(function(r){var o=m[r.w]; return o&&(o.due||0)<=now&&(o.lv||0)<7;}).length;
   var nNew=arr.filter(function(r){return !m[r.w]}).length;
@@ -813,22 +821,39 @@ var REC=(function(){
   paint();
  }
 
+ function show(el,on){ if(el) el.style.display=on?'block':'none'; }
+
  function paint(){
   if(idx>=queue.length) return finish();
   var r=queue[idx];
   document.getElementById('rcnum').textContent=(idx+1)+' / '+queue.length;
   document.getElementById('rcpg').style.width=(idx/queue.length*100)+'%';
   document.getElementById('rcwd').textContent=r.w;
-  var ipa=document.getElementById('rcipa');
-  ipa.textContent=r.p||''; ipa.style.display=r.p?'':'none';
-  document.getElementById('rcans').classList.remove('on');
-  var q=document.getElementById('rcq'); q.style.display=''; q.textContent='看这个词，认不认识？点卡片看释义';
-  document.getElementById('rcm').textContent=r.m||'—';
+
+  var phon=document.getElementById('rcphon');
+  phon.textContent=r.p||'';
+  show(phon,!!r.p);
+
+  var ans=document.getElementById('rcans');
+  ans.classList.remove('on');
+  var q=document.getElementById('rcq'); q.style.display='';
+  q.textContent=r.e?'先看下面这句英文猜一下，点卡片对答案':'看这个词，认不认识？点卡片看释义';
+
+  var def=document.getElementById('rcdef');
+  def.textContent=r.m||'—';
+  show(def,!!r.m);
+
+  var zh=document.getElementById('rczh');
+  zh.innerHTML=r.z?('<span class="rcbq">例句译文</span>'+esc(r.z)):'';
+  show(zh,!!r.z);
+
+  var sen=document.getElementById('rcsen');
+  sen.textContent=r.e||'';
+  show(sen,!!r.e);
+
   var x2=document.getElementById('rcx2');
-  x2.textContent=r.x||''; x2.style.display=r.x?'':'none';
-  var ex=document.getElementById('rcex');
-  ex.innerHTML=r.e?('<div class="en">'+esc(r.e)+'</div>'+(r.z?'<div class="zh">'+esc(r.z)+'</div>':'')):'';
-  ex.style.display=r.e?'':'none';
+  x2.textContent=r.x||'';
+  show(x2,!!r.x);
  }
 
  function toBook(r){
@@ -864,17 +889,18 @@ var REC=(function(){
    var o=m[r.w]; if(!o||(o.lv||0)>=7) return;
    if(nxt===null||o.due<nxt) nxt=o.due;
   });
-  var w=root.querySelector('.rw');
-  w.innerHTML='<div class="done"><h2>这一轮背完了</h2>'
+  var w=root.querySelector('.rcw');
+  w.innerHTML='<div class="rcdone"><h2>这一轮背完了</h2>'
    +'<p>共 '+queue.length+' 词 · 认识 <b>'+yes+'</b> 次 · 不认识 <b>'+no+'</b> 次<br>'
-   +(no? '不认识的 '+no+' 个词已自动收进生词本，稍后可以在那里复习<br>':'')
-   +(nxt!==null? '下一次到期：'+fmt(nxt) : '这些词都已经标成「已掌握」🎉')+'</p>'
-   +'<div class="acts"><button class="pri" id="rcagain">再背一轮</button>'
+   +(no?'不认识的 '+no+' 个词已自动收进生词本，稍后可以在那里复习<br>':'')
+   +(nxt!==null?'下一次到期：'+fmt(nxt):'这些词都已经标成「已掌握」🎉')+'</p>'
+   +'<div class="rcacts"><button class="pri" id="rcagain">再背一轮</button>'
    +'<button id="rcback">关掉</button></div></div>';
-  document.getElementById('rcagain').onclick=function(){ root.classList.remove('on');
-   document.body.style.overflow=''; start(); };
+  document.getElementById('rcagain').onclick=function(){
+   root.classList.remove('on'); document.body.style.overflow=''; start();
+  };
   document.getElementById('rcback').onclick=close;
-}
+ }
 
  function close(){
   if(!root) return;
