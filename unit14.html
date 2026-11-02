@@ -7,11 +7,11 @@
 <style>
 :root{
  --bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da;
- --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4;
+ --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4; --green:#2f7d4f;
 }
 @media (prefers-color-scheme: dark){
  :root{ --bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037;
-        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; }
+        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; --green:#6cc38b; }
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -148,6 +148,24 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  td.sv .star{font-size:19px}
  #nbfab{right:12px;bottom:14px;padding:9px 14px;font-size:13px}
 }
+
+/* 朗读按钮 */
+.spk{font-family:inherit;line-height:1;background:transparent;border:0;cursor:pointer;
+ color:var(--ink2);opacity:.4;padding:3px 5px;border-radius:6px;vertical-align:2px;display:inline-flex}
+.spk:hover{opacity:1;color:var(--accent);background:var(--accent-soft)}
+.spk svg{width:13px;height:13px;display:block}
+.card .w .spk svg{width:15px;height:15px}
+.hide-i .spk{display:none}
+
+/* 学习统计 */
+.sp{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 0}
+.spi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:center}
+.spi b{display:block;font-size:20px;font-variant-numeric:tabular-nums;line-height:1.35}
+.spi span{font-size:11.5px;color:var(--ink2)}
+.bars{display:flex;align-items:flex-end;gap:4px;height:46px;margin:14px 0 3px}
+.bars i{flex:1;background:var(--chip);border-radius:3px 3px 0 0;min-height:2px;transition:.2s}
+.bars i.on{background:var(--accent);opacity:.85}
+.axis{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink2);opacity:.75}
 </style>
 </head>
 <body data-kind="list" data-ch="14" data-title="交通旅行">
@@ -164,216 +182,252 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
   <label class="sw"><input type="checkbox" id="i"> 隐藏音标</label>
   
   <label class="sw"><input type="checkbox" id="only"> 只看生词</label>
+  <label class="sw" title="点 ☆ 时把该词的派生词一起收进生词本"><input type="checkbox" id="dvon"> ☆带衍生</label>
   <button class="btn" id="reset">重置</button>
   <span class="count" id="cnt">133 条</span>
  </div>
 </div></div><div class="wrap"><table><thead><tr><th>#</th><th>单词</th><th>释义</th><th></th></tr></thead>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 01</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="navigate v. 导航；绕行；理解；应 付(复杂情况)" data-w="navigate" data-dv="navigation|n.|n. 导航；航行；航海;;navigator|n.|"><td class="n">1</td><td class="w">navigate<div class="ipa">[ˈnævɪɡeɪt]</div></td><td class="m">v. 导航；绕行；理解；应 付(复杂情况)<div class="dv"><b>衍生</b><i>navigation</i><em>n.</em><span class="sep">·</span><i>navigator</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="navigate" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="voyage n. 航行；航海；v. 航行； 远航" data-w="voyage" data-dv="voyager|n.|"><td class="n">2</td><td class="w">voyage<div class="ipa">[ˈvɔɪɪdʒ]</div></td><td class="m">n. 航行；航海；v. 航行； 远航<div class="dv"><b>衍生</b><i>voyager</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="voyage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="aviation n. 航空；航空学；⻜行 (术)" data-w="aviation" data-dv=""><td class="n">3</td><td class="w">aviation<div class="ipa">[ˌeɪviˈeɪʃ(ə)n]</div></td><td class="m">n. 航空；航空学；⻜行 (术)</td><td class="sv"><button class="star" data-star="aviation" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="navigate v. 导航；绕行；理解；应 付(复杂情况)" data-w="navigate" data-dv="navigation|n.|n. 导航；航行；航海;;navigator|n.|"><td class="n">1</td><td class="w">navigate<button class="spk" data-say="navigate" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈnævɪɡeɪt]</div></td><td class="m">v. 导航；绕行；理解；应 付(复杂情况)<div class="dv"><b>衍生</b><i>navigation</i><em>n.</em><span class="sep">·</span><i>navigator</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="navigate" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="voyage n. 航行；航海；v. 航行； 远航" data-w="voyage" data-dv="voyager|n.|"><td class="n">2</td><td class="w">voyage<button class="spk" data-say="voyage" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈvɔɪɪdʒ]</div></td><td class="m">n. 航行；航海；v. 航行； 远航<div class="dv"><b>衍生</b><i>voyager</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="voyage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="aviation n. 航空；航空学；⻜行 (术)" data-w="aviation" data-dv=""><td class="n">3</td><td class="w">aviation<button class="spk" data-say="aviation" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˌeɪviˈeɪʃ(ə)n]</div></td><td class="m">n. 航空；航空学；⻜行 (术)</td><td class="sv"><button class="star" data-star="aviation" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 02</span><span class="gcnt">8 词</span></td></tr>
-<tr data-s="journey n. 旅行；旅程" data-w="journey" data-dv=""><td class="n">4</td><td class="w">journey<div class="ipa">[ˈdʒɜːni]</div></td><td class="m">n. 旅行；旅程</td><td class="sv"><button class="star" data-star="journey" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="travel v. 旅游；旅行；n. 旅游； 旅行" data-w="travel" data-dv="traveler|n.|;;traveling|v.|"><td class="n">5</td><td class="w">travel<div class="ipa">[ˈtræv(ə)l]</div></td><td class="m">v. 旅游；旅行；n. 旅游； 旅行<div class="dv"><b>衍生</b><i>traveler</i><em>n.</em><span class="sep">·</span><i>traveling</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="travel" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="safari n. (在非洲的)旅行；狩 猎旅行" data-w="safari" data-dv=""><td class="n">6</td><td class="w">safari<div class="ipa">[səˈfɑːri]</div></td><td class="m">n. (在非洲的)旅行；狩 猎旅行</td><td class="sv"><button class="star" data-star="safari" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="parade n. 游行；阅兵；v. 游行； 阅兵" data-w="parade" data-dv=""><td class="n">7</td><td class="w">parade<div class="ipa">[pəˈreɪd]</div></td><td class="m">n. 游行；阅兵；v. 游行； 阅兵</td><td class="sv"><button class="star" data-star="parade" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="haunt v. 出没；萦绕；⻓期困 扰；常去；n. 常到之地" data-w="haunt" data-dv=""><td class="n">8</td><td class="w">haunt<div class="ipa">[hɔːnt]</div></td><td class="m">v. 出没；萦绕；⻓期困 扰；常去；n. 常到之地</td><td class="sv"><button class="star" data-star="haunt" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="attraction n. 吸引；吸引力" data-w="attraction" data-dv=""><td class="n">9</td><td class="w">attraction<div class="ipa">[əˈtrækʃ(ə)n]</div></td><td class="m">n. 吸引；吸引力</td><td class="sv"><button class="star" data-star="attraction" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="memorial n. 纪念物； 纪念碑；adj. 纪念的；哀悼的" data-w="memorial" data-dv="memorially|adv.|;;immemorial|adj.|"><td class="n">10</td><td class="w">memorial<div class="ipa">[məˈmɔːriəl]</div></td><td class="m">n. 纪念物； 纪念碑；adj. 纪念的；哀悼的<div class="dv"><b>衍生</b><i>memorially</i><em>adv.</em><span class="sep">·</span><i>immemorial</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="memorial" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="pyramid n. 金字塔；棱锥体" data-w="pyramid" data-dv=""><td class="n">11</td><td class="w">pyramid<div class="ipa">[ˈpɪrəmɪd]</div></td><td class="m">n. 金字塔；棱锥体</td><td class="sv"><button class="star" data-star="pyramid" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="journey n. 旅行；旅程" data-w="journey" data-dv=""><td class="n">4</td><td class="w">journey<button class="spk" data-say="journey" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈdʒɜːni]</div></td><td class="m">n. 旅行；旅程</td><td class="sv"><button class="star" data-star="journey" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="travel v. 旅游；旅行；n. 旅游； 旅行" data-w="travel" data-dv="traveler|n.|;;traveling|v.|"><td class="n">5</td><td class="w">travel<button class="spk" data-say="travel" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈtræv(ə)l]</div></td><td class="m">v. 旅游；旅行；n. 旅游； 旅行<div class="dv"><b>衍生</b><i>traveler</i><em>n.</em><span class="sep">·</span><i>traveling</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="travel" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="safari n. (在非洲的)旅行；狩 猎旅行" data-w="safari" data-dv=""><td class="n">6</td><td class="w">safari<button class="spk" data-say="safari" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[səˈfɑːri]</div></td><td class="m">n. (在非洲的)旅行；狩 猎旅行</td><td class="sv"><button class="star" data-star="safari" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="parade n. 游行；阅兵；v. 游行； 阅兵" data-w="parade" data-dv=""><td class="n">7</td><td class="w">parade<button class="spk" data-say="parade" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[pəˈreɪd]</div></td><td class="m">n. 游行；阅兵；v. 游行； 阅兵</td><td class="sv"><button class="star" data-star="parade" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="haunt v. 出没；萦绕；⻓期困 扰；常去；n. 常到之地" data-w="haunt" data-dv=""><td class="n">8</td><td class="w">haunt<button class="spk" data-say="haunt" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[hɔːnt]</div></td><td class="m">v. 出没；萦绕；⻓期困 扰；常去；n. 常到之地</td><td class="sv"><button class="star" data-star="haunt" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="attraction n. 吸引；吸引力" data-w="attraction" data-dv=""><td class="n">9</td><td class="w">attraction<button class="spk" data-say="attraction" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[əˈtrækʃ(ə)n]</div></td><td class="m">n. 吸引；吸引力</td><td class="sv"><button class="star" data-star="attraction" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="memorial n. 纪念物； 纪念碑；adj. 纪念的；哀悼的" data-w="memorial" data-dv="memorially|adv.|;;immemorial|adj.|"><td class="n">10</td><td class="w">memorial<button class="spk" data-say="memorial" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[məˈmɔːriəl]</div></td><td class="m">n. 纪念物； 纪念碑；adj. 纪念的；哀悼的<div class="dv"><b>衍生</b><i>memorially</i><em>adv.</em><span class="sep">·</span><i>immemorial</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="memorial" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pyramid n. 金字塔；棱锥体" data-w="pyramid" data-dv=""><td class="n">11</td><td class="w">pyramid<button class="spk" data-say="pyramid" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpɪrəmɪd]</div></td><td class="m">n. 金字塔；棱锥体</td><td class="sv"><button class="star" data-star="pyramid" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 03</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="port n. 港口" data-w="port" data-dv=""><td class="n">12</td><td class="w">port<div class="ipa">[pɔːt]</div></td><td class="m">n. 港口</td><td class="sv"><button class="star" data-star="port" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="visa n. 签证" data-w="visa" data-dv=""><td class="n">13</td><td class="w">visa<div class="ipa">[ˈviːzə]</div></td><td class="m">n. 签证</td><td class="sv"><button class="star" data-star="visa" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="traffic n. 交通；流量；非法交 易；v. 非法买卖" data-w="traffic" data-dv=""><td class="n">14</td><td class="w">traffic<div class="ipa">[ˈtræfɪk]</div></td><td class="m">n. 交通；流量；非法交 易；v. 非法买卖</td><td class="sv"><button class="star" data-star="traffic" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="port n. 港口" data-w="port" data-dv=""><td class="n">12</td><td class="w">port<button class="spk" data-say="port" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[pɔːt]</div></td><td class="m">n. 港口</td><td class="sv"><button class="star" data-star="port" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="visa n. 签证" data-w="visa" data-dv=""><td class="n">13</td><td class="w">visa<button class="spk" data-say="visa" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈviːzə]</div></td><td class="m">n. 签证</td><td class="sv"><button class="star" data-star="visa" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="traffic n. 交通；流量；非法交 易；v. 非法买卖" data-w="traffic" data-dv=""><td class="n">14</td><td class="w">traffic<button class="spk" data-say="traffic" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈtræfɪk]</div></td><td class="m">n. 交通；流量；非法交 易；v. 非法买卖</td><td class="sv"><button class="star" data-star="traffic" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 04</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="airline n. 航空公司" data-w="airline" data-dv=""><td class="n">15</td><td class="w">airline<div class="ipa">[ˈeəlaɪn]</div></td><td class="m">n. 航空公司</td><td class="sv"><button class="star" data-star="airline" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="airplane n. ⻜机" data-w="airplane" data-dv=""><td class="n">16</td><td class="w">airplane<div class="ipa">[ˈeəpleɪn]</div></td><td class="m">n. ⻜机</td><td class="sv"><button class="star" data-star="airplane" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="helicopter n. 直升机" data-w="helicopter" data-dv=""><td class="n">17</td><td class="w">helicopter<div class="ipa">[ˈhelɪkɒptə(r)]</div></td><td class="m">n. 直升机</td><td class="sv"><button class="star" data-star="helicopter" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="jet n. 射流；气流；喷射口； 喷气式⻜机；v. 喷射" data-w="jet" data-dv=""><td class="n">18</td><td class="w">jet<div class="ipa">[dʒet]</div></td><td class="m">n. 射流；气流；喷射口； 喷气式⻜机；v. 喷射</td><td class="sv"><button class="star" data-star="jet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="parachute n. 降落伞；v. 跳伞；用降 落伞空投" data-w="parachute" data-dv=""><td class="n">19</td><td class="w">parachute<div class="ipa">[ˈpærəʃuːt]</div></td><td class="m">n. 降落伞；v. 跳伞；用降 落伞空投</td><td class="sv"><button class="star" data-star="parachute" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="airline n. 航空公司" data-w="airline" data-dv=""><td class="n">15</td><td class="w">airline<button class="spk" data-say="airline" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈeəlaɪn]</div></td><td class="m">n. 航空公司</td><td class="sv"><button class="star" data-star="airline" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="airplane n. ⻜机" data-w="airplane" data-dv=""><td class="n">16</td><td class="w">airplane<button class="spk" data-say="airplane" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈeəpleɪn]</div></td><td class="m">n. ⻜机</td><td class="sv"><button class="star" data-star="airplane" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="helicopter n. 直升机" data-w="helicopter" data-dv=""><td class="n">17</td><td class="w">helicopter<button class="spk" data-say="helicopter" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈhelɪkɒptə(r)]</div></td><td class="m">n. 直升机</td><td class="sv"><button class="star" data-star="helicopter" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="jet n. 射流；气流；喷射口； 喷气式⻜机；v. 喷射" data-w="jet" data-dv=""><td class="n">18</td><td class="w">jet<button class="spk" data-say="jet" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[dʒet]</div></td><td class="m">n. 射流；气流；喷射口； 喷气式⻜机；v. 喷射</td><td class="sv"><button class="star" data-star="jet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="parachute n. 降落伞；v. 跳伞；用降 落伞空投" data-w="parachute" data-dv=""><td class="n">19</td><td class="w">parachute<button class="spk" data-say="parachute" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpærəʃuːt]</div></td><td class="m">n. 降落伞；v. 跳伞；用降 落伞空投</td><td class="sv"><button class="star" data-star="parachute" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 05</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="flight n. ⻜行；航班；⻦群； (阶梯的)一段" data-w="flight" data-dv="flightless|adj.|"><td class="n">20</td><td class="w">flight<div class="ipa">[flaɪt]</div></td><td class="m">n. ⻜行；航班；⻦群； (阶梯的)一段<div class="dv"><b>衍生</b><i>flightless</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="flight" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="pilot n. ⻜行员；驾驶员" data-w="pilot" data-dv=""><td class="n">21</td><td class="w">pilot<div class="ipa">[ˈpaɪlət]</div></td><td class="m">n. ⻜行员；驾驶员</td><td class="sv"><button class="star" data-star="pilot" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="passenger n. 旅客；乘客" data-w="passenger" data-dv=""><td class="n">22</td><td class="w">passenger<div class="ipa">[ˈpæsɪndʒə(r)]</div></td><td class="m">n. 旅客；乘客</td><td class="sv"><button class="star" data-star="passenger" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="flight n. ⻜行；航班；⻦群； (阶梯的)一段" data-w="flight" data-dv="flightless|adj.|"><td class="n">20</td><td class="w">flight<button class="spk" data-say="flight" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[flaɪt]</div></td><td class="m">n. ⻜行；航班；⻦群； (阶梯的)一段<div class="dv"><b>衍生</b><i>flightless</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="flight" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pilot n. ⻜行员；驾驶员" data-w="pilot" data-dv=""><td class="n">21</td><td class="w">pilot<button class="spk" data-say="pilot" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpaɪlət]</div></td><td class="m">n. ⻜行员；驾驶员</td><td class="sv"><button class="star" data-star="pilot" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="passenger n. 旅客；乘客" data-w="passenger" data-dv=""><td class="n">22</td><td class="w">passenger<button class="spk" data-say="passenger" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpæsɪndʒə(r)]</div></td><td class="m">n. 旅客；乘客</td><td class="sv"><button class="star" data-star="passenger" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 06</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="baggage n. 行李" data-w="baggage" data-dv=""><td class="n">23</td><td class="w">baggage<div class="ipa">[ˈbæɡɪdʒ]</div></td><td class="m">n. 行李</td><td class="sv"><button class="star" data-star="baggage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="luggage n. 行李" data-w="luggage" data-dv=""><td class="n">24</td><td class="w">luggage<div class="ipa">[ˈlʌɡɪdʒ]</div></td><td class="m">n. 行李</td><td class="sv"><button class="star" data-star="luggage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="baggage n. 行李" data-w="baggage" data-dv=""><td class="n">23</td><td class="w">baggage<button class="spk" data-say="baggage" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈbæɡɪdʒ]</div></td><td class="m">n. 行李</td><td class="sv"><button class="star" data-star="baggage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="luggage n. 行李" data-w="luggage" data-dv=""><td class="n">24</td><td class="w">luggage<button class="spk" data-say="luggage" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈlʌɡɪdʒ]</div></td><td class="m">n. 行李</td><td class="sv"><button class="star" data-star="luggage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 07</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="suitcase n. 手提箱" data-w="suitcase" data-dv=""><td class="n">25</td><td class="w">suitcase<div class="ipa">[ˈsuːtkeɪs]</div></td><td class="m">n. 手提箱</td><td class="sv"><button class="star" data-star="suitcase" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="carry-on n. 手提行李；adj. 手提的" data-w="carry-on" data-dv=""><td class="n">26</td><td class="w">carry-on<div class="ipa">[ˈkæri ɒn]</div></td><td class="m">n. 手提行李；adj. 手提的</td><td class="sv"><button class="star" data-star="carry-on" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="suitcase n. 手提箱" data-w="suitcase" data-dv=""><td class="n">25</td><td class="w">suitcase<button class="spk" data-say="suitcase" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈsuːtkeɪs]</div></td><td class="m">n. 手提箱</td><td class="sv"><button class="star" data-star="suitcase" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="carry-on n. 手提行李；adj. 手提的" data-w="carry-on" data-dv=""><td class="n">26</td><td class="w">carry-on<button class="spk" data-say="carry-on" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈkæri ɒn]</div></td><td class="m">n. 手提行李；adj. 手提的</td><td class="sv"><button class="star" data-star="carry-on" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 08</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="rack n. 架子；支架；⻮条；破坏；v. 折 磨；使痛苦；放在架上；累计(得 分)" data-w="rack" data-dv=""><td class="n">27</td><td class="w">rack<div class="ipa">[ræk]</div></td><td class="m">n. 架子；支架；⻮条；破坏；v. 折 磨；使痛苦；放在架上；累计(得 分)</td><td class="sv"><button class="star" data-star="rack" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="freight n. 货运；货物；运费；v. 运送" data-w="freight" data-dv="freighter|n.|"><td class="n">28</td><td class="w">freight<div class="ipa">[freɪt]</div></td><td class="m">n. 货运；货物；运费；v. 运送<div class="dv"><b>衍生</b><i>freighter</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="freight" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="fare n. ⻋费；票价；费用；v. 进展；成功(或不成功等)" data-w="fare" data-dv=""><td class="n">29</td><td class="w">fare<div class="ipa">[feə(r)]</div></td><td class="m">n. ⻋费；票价；费用；v. 进展；成功(或不成功等)</td><td class="sv"><button class="star" data-star="fare" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="atlas n. 地图册；地图集" data-w="atlas" data-dv=""><td class="n">30</td><td class="w">atlas<div class="ipa">[ˈætləs]</div></td><td class="m">n. 地图册；地图集</td><td class="sv"><button class="star" data-star="atlas" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="rack n. 架子；支架；⻮条；破坏；v. 折 磨；使痛苦；放在架上；累计(得 分)" data-w="rack" data-dv=""><td class="n">27</td><td class="w">rack<button class="spk" data-say="rack" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ræk]</div></td><td class="m">n. 架子；支架；⻮条；破坏；v. 折 磨；使痛苦；放在架上；累计(得 分)</td><td class="sv"><button class="star" data-star="rack" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="freight n. 货运；货物；运费；v. 运送" data-w="freight" data-dv="freighter|n.|"><td class="n">28</td><td class="w">freight<button class="spk" data-say="freight" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[freɪt]</div></td><td class="m">n. 货运；货物；运费；v. 运送<div class="dv"><b>衍生</b><i>freighter</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="freight" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="fare n. ⻋费；票价；费用；v. 进展；成功(或不成功等)" data-w="fare" data-dv=""><td class="n">29</td><td class="w">fare<button class="spk" data-say="fare" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[feə(r)]</div></td><td class="m">n. ⻋费；票价；费用；v. 进展；成功(或不成功等)</td><td class="sv"><button class="star" data-star="fare" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="atlas n. 地图册；地图集" data-w="atlas" data-dv=""><td class="n">30</td><td class="w">atlas<button class="spk" data-say="atlas" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈætləs]</div></td><td class="m">n. 地图册；地图集</td><td class="sv"><button class="star" data-star="atlas" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 09</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="route n. 路线；途径" data-w="route" data-dv=""><td class="n">31</td><td class="w">route<div class="ipa">[ruːt]</div></td><td class="m">n. 路线；途径</td><td class="sv"><button class="star" data-star="route" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="itinerary n. 路线；旅程" data-w="itinerary" data-dv=""><td class="n">32</td><td class="w">itinerary<div class="ipa">[aɪˈtɪnərəri]</div></td><td class="m">n. 路线；旅程</td><td class="sv"><button class="star" data-star="itinerary" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="route n. 路线；途径" data-w="route" data-dv=""><td class="n">31</td><td class="w">route<button class="spk" data-say="route" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ruːt]</div></td><td class="m">n. 路线；途径</td><td class="sv"><button class="star" data-star="route" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="itinerary n. 路线；旅程" data-w="itinerary" data-dv=""><td class="n">32</td><td class="w">itinerary<button class="spk" data-say="itinerary" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[aɪˈtɪnərəri]</div></td><td class="m">n. 路线；旅程</td><td class="sv"><button class="star" data-star="itinerary" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 10</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="passage n. 通过；通道；段落；短 文" data-w="passage" data-dv=""><td class="n">33</td><td class="w">passage<div class="ipa">[ˈpæsɪdʒ]</div></td><td class="m">n. 通过；通道；段落；短 文</td><td class="sv"><button class="star" data-star="passage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="intersection n. 交叉；相交；十字路 口；交叉路口" data-w="intersection" data-dv=""><td class="n">34</td><td class="w">intersection<div class="ipa">[ɪntəˈsekʃ(ə)n]</div></td><td class="m">n. 交叉；相交；十字路 口；交叉路口</td><td class="sv"><button class="star" data-star="intersection" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="cross v. 穿过；交叉；横过；n. 十字架； 十字形记号；adj. 恼怒的；生气的" data-w="cross" data-dv="crossly|adv.|;;crossness|n.|"><td class="n">35</td><td class="w">cross<div class="ipa">[krɒs]</div></td><td class="m">v. 穿过；交叉；横过；n. 十字架； 十字形记号；adj. 恼怒的；生气的<div class="dv"><b>衍生</b><i>crossly</i><em>adv.</em><span class="sep">·</span><i>crossness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="cross" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="passage n. 通过；通道；段落；短 文" data-w="passage" data-dv=""><td class="n">33</td><td class="w">passage<button class="spk" data-say="passage" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpæsɪdʒ]</div></td><td class="m">n. 通过；通道；段落；短 文</td><td class="sv"><button class="star" data-star="passage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="intersection n. 交叉；相交；十字路 口；交叉路口" data-w="intersection" data-dv=""><td class="n">34</td><td class="w">intersection<button class="spk" data-say="intersection" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ɪntəˈsekʃ(ə)n]</div></td><td class="m">n. 交叉；相交；十字路 口；交叉路口</td><td class="sv"><button class="star" data-star="intersection" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cross v. 穿过；交叉；横过；n. 十字架； 十字形记号；adj. 恼怒的；生气的" data-w="cross" data-dv="crossly|adv.|;;crossness|n.|"><td class="n">35</td><td class="w">cross<button class="spk" data-say="cross" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[krɒs]</div></td><td class="m">v. 穿过；交叉；横过；n. 十字架； 十字形记号；adj. 恼怒的；生气的<div class="dv"><b>衍生</b><i>crossly</i><em>adv.</em><span class="sep">·</span><i>crossness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="cross" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 11</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="way n. 道路；方向；路线；方 法；方式" data-w="way" data-dv=""><td class="n">36</td><td class="w">way<div class="ipa">[weɪ]</div></td><td class="m">n. 道路；方向；路线；方 法；方式</td><td class="sv"><button class="star" data-star="way" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="path n. 道路；小路；小径" data-w="path" data-dv=""><td class="n">37</td><td class="w">path<div class="ipa">[pɑːθ]</div></td><td class="m">n. 道路；小路；小径</td><td class="sv"><button class="star" data-star="path" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="lane n. 小路；小巷；航道；⻋ 道；航线" data-w="lane" data-dv=""><td class="n">38</td><td class="w">lane<div class="ipa">[leɪn]</div></td><td class="m">n. 小路；小巷；航道；⻋ 道；航线</td><td class="sv"><button class="star" data-star="lane" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="avenue n. 大街；林荫道；途径" data-w="avenue" data-dv=""><td class="n">39</td><td class="w">avenue<div class="ipa">[ˈævənjuː]</div></td><td class="m">n. 大街；林荫道；途径</td><td class="sv"><button class="star" data-star="avenue" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="highway n. 公路" data-w="highway" data-dv=""><td class="n">40</td><td class="w">highway<div class="ipa">[ˈhaɪweɪ]</div></td><td class="m">n. 公路</td><td class="sv"><button class="star" data-star="highway" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="way n. 道路；方向；路线；方 法；方式" data-w="way" data-dv=""><td class="n">36</td><td class="w">way<button class="spk" data-say="way" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[weɪ]</div></td><td class="m">n. 道路；方向；路线；方 法；方式</td><td class="sv"><button class="star" data-star="way" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="path n. 道路；小路；小径" data-w="path" data-dv=""><td class="n">37</td><td class="w">path<button class="spk" data-say="path" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[pɑːθ]</div></td><td class="m">n. 道路；小路；小径</td><td class="sv"><button class="star" data-star="path" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="lane n. 小路；小巷；航道；⻋ 道；航线" data-w="lane" data-dv=""><td class="n">38</td><td class="w">lane<button class="spk" data-say="lane" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[leɪn]</div></td><td class="m">n. 小路；小巷；航道；⻋ 道；航线</td><td class="sv"><button class="star" data-star="lane" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="avenue n. 大街；林荫道；途径" data-w="avenue" data-dv=""><td class="n">39</td><td class="w">avenue<button class="spk" data-say="avenue" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈævənjuː]</div></td><td class="m">n. 大街；林荫道；途径</td><td class="sv"><button class="star" data-star="avenue" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="highway n. 公路" data-w="highway" data-dv=""><td class="n">40</td><td class="w">highway<button class="spk" data-say="highway" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈhaɪweɪ]</div></td><td class="m">n. 公路</td><td class="sv"><button class="star" data-star="highway" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 12</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="curb v. 勒住；抑制；n. 抑制； 约束；路缘；勒⻢绳" data-w="curb" data-dv=""><td class="n">41</td><td class="w">curb<div class="ipa">[kɜːb]</div></td><td class="m">v. 勒住；抑制；n. 抑制； 约束；路缘；勒⻢绳</td><td class="sv"><button class="star" data-star="curb" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="signpost n. 路标" data-w="signpost" data-dv=""><td class="n">42</td><td class="w">signpost<div class="ipa">[ˈsaɪnpəʊst]</div></td><td class="m">n. 路标</td><td class="sv"><button class="star" data-star="signpost" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="pave v. 铺路；铺设" data-w="pave" data-dv="pavement|n.|"><td class="n">43</td><td class="w">pave<div class="ipa">[peɪv]</div></td><td class="m">v. 铺路；铺设<div class="dv"><b>衍生</b><i>pavement</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="pave" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="curb v. 勒住；抑制；n. 抑制； 约束；路缘；勒⻢绳" data-w="curb" data-dv=""><td class="n">41</td><td class="w">curb<button class="spk" data-say="curb" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[kɜːb]</div></td><td class="m">v. 勒住；抑制；n. 抑制； 约束；路缘；勒⻢绳</td><td class="sv"><button class="star" data-star="curb" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="signpost n. 路标" data-w="signpost" data-dv=""><td class="n">42</td><td class="w">signpost<button class="spk" data-say="signpost" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈsaɪnpəʊst]</div></td><td class="m">n. 路标</td><td class="sv"><button class="star" data-star="signpost" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pave v. 铺路；铺设" data-w="pave" data-dv="pavement|n.|"><td class="n">43</td><td class="w">pave<button class="spk" data-say="pave" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[peɪv]</div></td><td class="m">v. 铺路；铺设<div class="dv"><b>衍生</b><i>pavement</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="pave" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 13</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="vehicle n. ⻋辆；交通工具；媒介 物；传达手段" data-w="vehicle" data-dv=""><td class="n">44</td><td class="w">vehicle<div class="ipa">[ˈviːək(ə)l]</div></td><td class="m">n. ⻋辆；交通工具；媒介 物；传达手段</td><td class="sv"><button class="star" data-star="vehicle" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="auto n. 汽⻋(auto- 作为前缀的时 候表示“自动的”、“自己的”)" data-w="auto" data-dv=""><td class="n">45</td><td class="w">auto<div class="ipa">[ˈɔːtəʊ]</div></td><td class="m">n. 汽⻋(auto- 作为前缀的时 候表示“自动的”、“自己的”)</td><td class="sv"><button class="star" data-star="auto" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="express v. 表达；表示；n. 特快列 ⻋；快件服务；adj. 明确的" data-w="express" data-dv="expressly|adv.|;;expression|n.|n. 表达；表情；措辞;;expressive|adj.|"><td class="n">46</td><td class="w">express<div class="ipa">[ɪkˈspres]</div></td><td class="m">v. 表达；表示；n. 特快列 ⻋；快件服务；adj. 明确的<div class="dv"><b>衍生</b><i>expressly</i><em>adv.</em><span class="sep">·</span><i>expression</i><em>n.</em><span class="sep">·</span><i>expressive</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="express" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="vehicle n. ⻋辆；交通工具；媒介 物；传达手段" data-w="vehicle" data-dv=""><td class="n">44</td><td class="w">vehicle<button class="spk" data-say="vehicle" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈviːək(ə)l]</div></td><td class="m">n. ⻋辆；交通工具；媒介 物；传达手段</td><td class="sv"><button class="star" data-star="vehicle" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="auto n. 汽⻋(auto- 作为前缀的时 候表示“自动的”、“自己的”)" data-w="auto" data-dv=""><td class="n">45</td><td class="w">auto<button class="spk" data-say="auto" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈɔːtəʊ]</div></td><td class="m">n. 汽⻋(auto- 作为前缀的时 候表示“自动的”、“自己的”)</td><td class="sv"><button class="star" data-star="auto" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="express v. 表达；表示；n. 特快列 ⻋；快件服务；adj. 明确的" data-w="express" data-dv="expressly|adv.|;;expression|n.|n. 表达；表情；措辞;;expressive|adj.|"><td class="n">46</td><td class="w">express<button class="spk" data-say="express" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ɪkˈspres]</div></td><td class="m">v. 表达；表示；n. 特快列 ⻋；快件服务；adj. 明确的<div class="dv"><b>衍生</b><i>expressly</i><em>adv.</em><span class="sep">·</span><i>expression</i><em>n.</em><span class="sep">·</span><i>expressive</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="express" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 14</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="tram n. 电⻋；缆⻋；v. 乘电 ⻋；乘缆⻋" data-w="tram" data-dv=""><td class="n">47</td><td class="w">tram<div class="ipa">[træm]</div></td><td class="m">n. 电⻋；缆⻋；v. 乘电 ⻋；乘缆⻋</td><td class="sv"><button class="star" data-star="tram" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="coach n. 教练；⻓途客运汽⻋； 火⻋⻋厢；v. 训练；培训" data-w="coach" data-dv=""><td class="n">48</td><td class="w">coach<div class="ipa">[kəʊtʃ]</div></td><td class="m">n. 教练；⻓途客运汽⻋； 火⻋⻋厢；v. 训练；培训</td><td class="sv"><button class="star" data-star="coach" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="ambulance n. 救护⻋" data-w="ambulance" data-dv=""><td class="n">49</td><td class="w">ambulance<div class="ipa">[ˈæmbjələns]</div></td><td class="m">n. 救护⻋</td><td class="sv"><button class="star" data-star="ambulance" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="tram n. 电⻋；缆⻋；v. 乘电 ⻋；乘缆⻋" data-w="tram" data-dv=""><td class="n">47</td><td class="w">tram<button class="spk" data-say="tram" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[træm]</div></td><td class="m">n. 电⻋；缆⻋；v. 乘电 ⻋；乘缆⻋</td><td class="sv"><button class="star" data-star="tram" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="coach n. 教练；⻓途客运汽⻋； 火⻋⻋厢；v. 训练；培训" data-w="coach" data-dv=""><td class="n">48</td><td class="w">coach<button class="spk" data-say="coach" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[kəʊtʃ]</div></td><td class="m">n. 教练；⻓途客运汽⻋； 火⻋⻋厢；v. 训练；培训</td><td class="sv"><button class="star" data-star="coach" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="ambulance n. 救护⻋" data-w="ambulance" data-dv=""><td class="n">49</td><td class="w">ambulance<button class="spk" data-say="ambulance" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈæmbjələns]</div></td><td class="m">n. 救护⻋</td><td class="sv"><button class="star" data-star="ambulance" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 15</span><span class="gcnt">9 词</span></td></tr>
-<tr data-s="truck n. 卡⻋；手推⻋；敞篷货⻋； v. 用卡⻋运；交易；交往" data-w="truck" data-dv="trucker|n.|"><td class="n">50</td><td class="w">truck<div class="ipa">[trʌk]</div></td><td class="m">n. 卡⻋；手推⻋；敞篷货⻋； v. 用卡⻋运；交易；交往<div class="dv"><b>衍生</b><i>trucker</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="truck" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="lorry n. 卡⻋；载重汽⻋" data-w="lorry" data-dv=""><td class="n">51</td><td class="w">lorry<div class="ipa">[ˈlɒri]</div></td><td class="m">n. 卡⻋；载重汽⻋</td><td class="sv"><button class="star" data-star="lorry" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="van n. 厢式货⻋" data-w="van" data-dv="vanity|n.|"><td class="n">52</td><td class="w">van<div class="ipa">[væn]</div></td><td class="m">n. 厢式货⻋<div class="dv"><b>衍生</b><i>vanity</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="van" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="wagon n. 四轮运货⻢⻋；敞篷货 ⻋" data-w="wagon" data-dv=""><td class="n">53</td><td class="w">wagon<div class="ipa">[ˈwæɡən]</div></td><td class="m">n. 四轮运货⻢⻋；敞篷货 ⻋</td><td class="sv"><button class="star" data-star="wagon" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="carriage n. 四轮⻢⻋；运输；举 止；仪态" data-w="carriage" data-dv=""><td class="n">54</td><td class="w">carriage<div class="ipa">[ˈkærɪdʒ]</div></td><td class="m">n. 四轮⻢⻋；运输；举 止；仪态</td><td class="sv"><button class="star" data-star="carriage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="tractor n. 拖拉机；牵引机" data-w="tractor" data-dv=""><td class="n">55</td><td class="w">tractor<div class="ipa">[ˈtræktə(r)]</div></td><td class="m">n. 拖拉机；牵引机</td><td class="sv"><button class="star" data-star="tractor" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="cart n. 大⻋；手推⻋" data-w="cart" data-dv=""><td class="n">56</td><td class="w">cart<div class="ipa">[kɑːt]</div></td><td class="m">n. 大⻋；手推⻋</td><td class="sv"><button class="star" data-star="cart" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="pedicab n. 人力三轮⻋" data-w="pedicab" data-dv=""><td class="n">57</td><td class="w">pedicab<div class="ipa">[ˈpedɪkæb]</div></td><td class="m">n. 人力三轮⻋</td><td class="sv"><button class="star" data-star="pedicab" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="cycle n. 循环；周期；自行⻋； v. 循环；骑自行⻋" data-w="cycle" data-dv=""><td class="n">58</td><td class="w">cycle<div class="ipa">[ˈsaɪk(ə)l]</div></td><td class="m">n. 循环；周期；自行⻋； v. 循环；骑自行⻋</td><td class="sv"><button class="star" data-star="cycle" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="truck n. 卡⻋；手推⻋；敞篷货⻋； v. 用卡⻋运；交易；交往" data-w="truck" data-dv="trucker|n.|"><td class="n">50</td><td class="w">truck<button class="spk" data-say="truck" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[trʌk]</div></td><td class="m">n. 卡⻋；手推⻋；敞篷货⻋； v. 用卡⻋运；交易；交往<div class="dv"><b>衍生</b><i>trucker</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="truck" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="lorry n. 卡⻋；载重汽⻋" data-w="lorry" data-dv=""><td class="n">51</td><td class="w">lorry<button class="spk" data-say="lorry" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈlɒri]</div></td><td class="m">n. 卡⻋；载重汽⻋</td><td class="sv"><button class="star" data-star="lorry" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="van n. 厢式货⻋" data-w="van" data-dv="vanity|n.|"><td class="n">52</td><td class="w">van<button class="spk" data-say="van" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[væn]</div></td><td class="m">n. 厢式货⻋<div class="dv"><b>衍生</b><i>vanity</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="van" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="wagon n. 四轮运货⻢⻋；敞篷货 ⻋" data-w="wagon" data-dv=""><td class="n">53</td><td class="w">wagon<button class="spk" data-say="wagon" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈwæɡən]</div></td><td class="m">n. 四轮运货⻢⻋；敞篷货 ⻋</td><td class="sv"><button class="star" data-star="wagon" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="carriage n. 四轮⻢⻋；运输；举 止；仪态" data-w="carriage" data-dv=""><td class="n">54</td><td class="w">carriage<button class="spk" data-say="carriage" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈkærɪdʒ]</div></td><td class="m">n. 四轮⻢⻋；运输；举 止；仪态</td><td class="sv"><button class="star" data-star="carriage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="tractor n. 拖拉机；牵引机" data-w="tractor" data-dv=""><td class="n">55</td><td class="w">tractor<button class="spk" data-say="tractor" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈtræktə(r)]</div></td><td class="m">n. 拖拉机；牵引机</td><td class="sv"><button class="star" data-star="tractor" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cart n. 大⻋；手推⻋" data-w="cart" data-dv=""><td class="n">56</td><td class="w">cart<button class="spk" data-say="cart" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[kɑːt]</div></td><td class="m">n. 大⻋；手推⻋</td><td class="sv"><button class="star" data-star="cart" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pedicab n. 人力三轮⻋" data-w="pedicab" data-dv=""><td class="n">57</td><td class="w">pedicab<button class="spk" data-say="pedicab" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpedɪkæb]</div></td><td class="m">n. 人力三轮⻋</td><td class="sv"><button class="star" data-star="pedicab" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cycle n. 循环；周期；自行⻋； v. 循环；骑自行⻋" data-w="cycle" data-dv=""><td class="n">58</td><td class="w">cycle<button class="spk" data-say="cycle" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈsaɪk(ə)l]</div></td><td class="m">n. 循环；周期；自行⻋； v. 循环；骑自行⻋</td><td class="sv"><button class="star" data-star="cycle" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 16</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="garage n. ⻋库；汽⻋修理厂" data-w="garage" data-dv=""><td class="n">59</td><td class="w">garage<div class="ipa">[ˈɡærɑːʒ]</div></td><td class="m">n. ⻋库；汽⻋修理厂</td><td class="sv"><button class="star" data-star="garage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="motor n. ⻢达；发动机；机动⻋" data-w="motor" data-dv="motorist|n.|"><td class="n">60</td><td class="w">motor<div class="ipa">[ˈməʊtə(r)]</div></td><td class="m">n. ⻢达；发动机；机动⻋<div class="dv"><b>衍生</b><i>motorist</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="motor" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="horsepower n. ⻢力" data-w="horsepower" data-dv=""><td class="n">61</td><td class="w">horsepower<div class="ipa">[ˈhɔːspaʊə(r)]</div></td><td class="m">n. ⻢力</td><td class="sv"><button class="star" data-star="horsepower" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="wheel n. ⻋轮；v. 转动" data-w="wheel" data-dv="wheeler|n.|"><td class="n">62</td><td class="w">wheel<div class="ipa">[wiːl]</div></td><td class="m">n. ⻋轮；v. 转动<div class="dv"><b>衍生</b><i>wheeler</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="wheel" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="garage n. ⻋库；汽⻋修理厂" data-w="garage" data-dv=""><td class="n">59</td><td class="w">garage<button class="spk" data-say="garage" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈɡærɑːʒ]</div></td><td class="m">n. ⻋库；汽⻋修理厂</td><td class="sv"><button class="star" data-star="garage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="motor n. ⻢达；发动机；机动⻋" data-w="motor" data-dv="motorist|n.|"><td class="n">60</td><td class="w">motor<button class="spk" data-say="motor" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈməʊtə(r)]</div></td><td class="m">n. ⻢达；发动机；机动⻋<div class="dv"><b>衍生</b><i>motorist</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="motor" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="horsepower n. ⻢力" data-w="horsepower" data-dv=""><td class="n">61</td><td class="w">horsepower<button class="spk" data-say="horsepower" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈhɔːspaʊə(r)]</div></td><td class="m">n. ⻢力</td><td class="sv"><button class="star" data-star="horsepower" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="wheel n. ⻋轮；v. 转动" data-w="wheel" data-dv="wheeler|n.|"><td class="n">62</td><td class="w">wheel<button class="spk" data-say="wheel" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[wiːl]</div></td><td class="m">n. ⻋轮；v. 转动<div class="dv"><b>衍生</b><i>wheeler</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="wheel" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 17</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="brake n. 刹⻋；制动器；v. 刹⻋" data-w="brake" data-dv=""><td class="n">63</td><td class="w">brake<div class="ipa">[breɪk]</div></td><td class="m">n. 刹⻋；制动器；v. 刹⻋</td><td class="sv"><button class="star" data-star="brake" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="tyre n. 轮胎" data-w="tyre" data-dv=""><td class="n">64</td><td class="w">tyre<div class="ipa">[ˈtaɪə(r)]</div></td><td class="m">n. 轮胎</td><td class="sv"><button class="star" data-star="tyre" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="honk n. 雁叫声；汽⻋喇叭声；v. (使 汽⻋喇叭)鸣响；(雁)叫" data-w="honk" data-dv=""><td class="n">65</td><td class="w">honk<div class="ipa">[hɒŋk]</div></td><td class="m">n. 雁叫声；汽⻋喇叭声；v. (使 汽⻋喇叭)鸣响；(雁)叫</td><td class="sv"><button class="star" data-star="honk" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="brake n. 刹⻋；制动器；v. 刹⻋" data-w="brake" data-dv=""><td class="n">63</td><td class="w">brake<button class="spk" data-say="brake" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[breɪk]</div></td><td class="m">n. 刹⻋；制动器；v. 刹⻋</td><td class="sv"><button class="star" data-star="brake" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="tyre n. 轮胎" data-w="tyre" data-dv=""><td class="n">64</td><td class="w">tyre<button class="spk" data-say="tyre" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈtaɪə(r)]</div></td><td class="m">n. 轮胎</td><td class="sv"><button class="star" data-star="tyre" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="honk n. 雁叫声；汽⻋喇叭声；v. (使 汽⻋喇叭)鸣响；(雁)叫" data-w="honk" data-dv=""><td class="n">65</td><td class="w">honk<button class="spk" data-say="honk" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[hɒŋk]</div></td><td class="m">n. 雁叫声；汽⻋喇叭声；v. (使 汽⻋喇叭)鸣响；(雁)叫</td><td class="sv"><button class="star" data-star="honk" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 18</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="crew n. 全体船员；全体人员" data-w="crew" data-dv=""><td class="n">66</td><td class="w">crew<div class="ipa">[kruː]</div></td><td class="m">n. 全体船员；全体人员</td><td class="sv"><button class="star" data-star="crew" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="captain n. 队⻓；船⻓；v. 指挥" data-w="captain" data-dv=""><td class="n">67</td><td class="w">captain<div class="ipa">[ˈkæptɪn]</div></td><td class="m">n. 队⻓；船⻓；v. 指挥</td><td class="sv"><button class="star" data-star="captain" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="steward n. 乘务员；管家；保护者" data-w="steward" data-dv=""><td class="n">68</td><td class="w">steward<div class="ipa">[ˈstjuːəd]</div></td><td class="m">n. 乘务员；管家；保护者</td><td class="sv"><button class="star" data-star="steward" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="crew n. 全体船员；全体人员" data-w="crew" data-dv=""><td class="n">66</td><td class="w">crew<button class="spk" data-say="crew" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[kruː]</div></td><td class="m">n. 全体船员；全体人员</td><td class="sv"><button class="star" data-star="crew" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="captain n. 队⻓；船⻓；v. 指挥" data-w="captain" data-dv=""><td class="n">67</td><td class="w">captain<button class="spk" data-say="captain" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈkæptɪn]</div></td><td class="m">n. 队⻓；船⻓；v. 指挥</td><td class="sv"><button class="star" data-star="captain" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="steward n. 乘务员；管家；保护者" data-w="steward" data-dv=""><td class="n">68</td><td class="w">steward<button class="spk" data-say="steward" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈstjuːəd]</div></td><td class="m">n. 乘务员；管家；保护者</td><td class="sv"><button class="star" data-star="steward" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 19</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="emergency n. 紧急情况" data-w="emergency" data-dv=""><td class="n">69</td><td class="w">emergency<div class="ipa">[ɪˈmɜːdʒənsi]</div></td><td class="m">n. 紧急情况</td><td class="sv"><button class="star" data-star="emergency" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="wreck v. 破坏；毁坏；n. 遇难船 只；失事；残骸" data-w="wreck" data-dv="wrecker|n.|"><td class="n">70</td><td class="w">wreck<div class="ipa">[rek]</div></td><td class="m">v. 破坏；毁坏；n. 遇难船 只；失事；残骸<div class="dv"><b>衍生</b><i>wrecker</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="wreck" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="crash v. 碰撞；坠毁；崩溃；n. 碰撞；坠毁；崩溃" data-w="crash" data-dv="crasher|n.|"><td class="n">71</td><td class="w">crash<div class="ipa">[kræʃ]</div></td><td class="m">v. 碰撞；坠毁；崩溃；n. 碰撞；坠毁；崩溃<div class="dv"><b>衍生</b><i>crasher</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="crash" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="crush v. 挤压；压碎；碾碎；弄皱； 镇压；n. 迷恋；拥挤的人群" data-w="crush" data-dv="crusher|n.|"><td class="n">72</td><td class="w">crush<div class="ipa">[krʌʃ]</div></td><td class="m">v. 挤压；压碎；碾碎；弄皱； 镇压；n. 迷恋；拥挤的人群<div class="dv"><b>衍生</b><i>crusher</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="crush" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="dash n. 短跑；猛冲；破折号； 少量；v. 猛冲；急奔" data-w="dash" data-dv=""><td class="n">73</td><td class="w">dash<div class="ipa">[dæʃ]</div></td><td class="m">n. 短跑；猛冲；破折号； 少量；v. 猛冲；急奔</td><td class="sv"><button class="star" data-star="dash" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="emergency n. 紧急情况" data-w="emergency" data-dv=""><td class="n">69</td><td class="w">emergency<button class="spk" data-say="emergency" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ɪˈmɜːdʒənsi]</div></td><td class="m">n. 紧急情况</td><td class="sv"><button class="star" data-star="emergency" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="wreck v. 破坏；毁坏；n. 遇难船 只；失事；残骸" data-w="wreck" data-dv="wrecker|n.|"><td class="n">70</td><td class="w">wreck<button class="spk" data-say="wreck" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[rek]</div></td><td class="m">v. 破坏；毁坏；n. 遇难船 只；失事；残骸<div class="dv"><b>衍生</b><i>wrecker</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="wreck" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="crash v. 碰撞；坠毁；崩溃；n. 碰撞；坠毁；崩溃" data-w="crash" data-dv="crasher|n.|"><td class="n">71</td><td class="w">crash<button class="spk" data-say="crash" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[kræʃ]</div></td><td class="m">v. 碰撞；坠毁；崩溃；n. 碰撞；坠毁；崩溃<div class="dv"><b>衍生</b><i>crasher</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="crash" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="crush v. 挤压；压碎；碾碎；弄皱； 镇压；n. 迷恋；拥挤的人群" data-w="crush" data-dv="crusher|n.|"><td class="n">72</td><td class="w">crush<button class="spk" data-say="crush" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[krʌʃ]</div></td><td class="m">v. 挤压；压碎；碾碎；弄皱； 镇压；n. 迷恋；拥挤的人群<div class="dv"><b>衍生</b><i>crusher</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="crush" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="dash n. 短跑；猛冲；破折号； 少量；v. 猛冲；急奔" data-w="dash" data-dv=""><td class="n">73</td><td class="w">dash<button class="spk" data-say="dash" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[dæʃ]</div></td><td class="m">n. 短跑；猛冲；破折号； 少量；v. 猛冲；急奔</td><td class="sv"><button class="star" data-star="dash" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 20</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="vanish v. 销声匿迹；突然消失" data-w="vanish" data-dv=""><td class="n">74</td><td class="w">vanish<div class="ipa">[ˈvænɪʃ]</div></td><td class="m">v. 销声匿迹；突然消失</td><td class="sv"><button class="star" data-star="vanish" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="disappear v. 消失；不⻅" data-w="disappear" data-dv="disappearance|n.|"><td class="n">75</td><td class="w">disappear<div class="ipa">[ˌdɪsəˈpɪə(r)]</div></td><td class="m">v. 消失；不⻅<div class="dv"><b>衍生</b><i>disappearance</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="disappear" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="hazard n. 危害；危险；v. 冒险； 使遭受危险" data-w="hazard" data-dv="hazardous|adj.|"><td class="n">76</td><td class="w">hazard<div class="ipa">[ˈhæzəd]</div></td><td class="m">n. 危害；危险；v. 冒险； 使遭受危险<div class="dv"><b>衍生</b><i>hazardous</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="hazard" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="harbour n. 海港；v. 庇护；窝藏" data-w="harbour" data-dv=""><td class="n">77</td><td class="w">harbour<div class="ipa">[ˈhɑːbə(r)]</div></td><td class="m">n. 海港；v. 庇护；窝藏</td><td class="sv"><button class="star" data-star="harbour" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="dock n. 码头；被告席；v. 停靠 码头；扣除(部分工资等)" data-w="dock" data-dv=""><td class="n">78</td><td class="w">dock<div class="ipa">[dɒk]</div></td><td class="m">n. 码头；被告席；v. 停靠 码头；扣除(部分工资等)</td><td class="sv"><button class="star" data-star="dock" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="anchor n. 锚；靠山；台柱子；v. 抛锚；使稳固；主持节目" data-w="anchor" data-dv="anchored|v.|"><td class="n">79</td><td class="w">anchor<div class="ipa">[ˈæŋkə(r)]</div></td><td class="m">n. 锚；靠山；台柱子；v. 抛锚；使稳固；主持节目<div class="dv"><b>衍生</b><i>anchored</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="anchor" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="vanish v. 销声匿迹；突然消失" data-w="vanish" data-dv=""><td class="n">74</td><td class="w">vanish<button class="spk" data-say="vanish" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈvænɪʃ]</div></td><td class="m">v. 销声匿迹；突然消失</td><td class="sv"><button class="star" data-star="vanish" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="disappear v. 消失；不⻅" data-w="disappear" data-dv="disappearance|n.|"><td class="n">75</td><td class="w">disappear<button class="spk" data-say="disappear" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˌdɪsəˈpɪə(r)]</div></td><td class="m">v. 消失；不⻅<div class="dv"><b>衍生</b><i>disappearance</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="disappear" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="hazard n. 危害；危险；v. 冒险； 使遭受危险" data-w="hazard" data-dv="hazardous|adj.|"><td class="n">76</td><td class="w">hazard<button class="spk" data-say="hazard" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈhæzəd]</div></td><td class="m">n. 危害；危险；v. 冒险； 使遭受危险<div class="dv"><b>衍生</b><i>hazardous</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="hazard" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="harbour n. 海港；v. 庇护；窝藏" data-w="harbour" data-dv=""><td class="n">77</td><td class="w">harbour<button class="spk" data-say="harbour" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈhɑːbə(r)]</div></td><td class="m">n. 海港；v. 庇护；窝藏</td><td class="sv"><button class="star" data-star="harbour" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="dock n. 码头；被告席；v. 停靠 码头；扣除(部分工资等)" data-w="dock" data-dv=""><td class="n">78</td><td class="w">dock<button class="spk" data-say="dock" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[dɒk]</div></td><td class="m">n. 码头；被告席；v. 停靠 码头；扣除(部分工资等)</td><td class="sv"><button class="star" data-star="dock" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="anchor n. 锚；靠山；台柱子；v. 抛锚；使稳固；主持节目" data-w="anchor" data-dv="anchored|v.|"><td class="n">79</td><td class="w">anchor<button class="spk" data-say="anchor" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈæŋkə(r)]</div></td><td class="m">n. 锚；靠山；台柱子；v. 抛锚；使稳固；主持节目<div class="dv"><b>衍生</b><i>anchored</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="anchor" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 21</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="submerge v. 潜水；浸没" data-w="submerge" data-dv=""><td class="n">80</td><td class="w">submerge<div class="ipa">[səbˈmɜːdʒ]</div></td><td class="m">v. 潜水；浸没</td><td class="sv"><button class="star" data-star="submerge" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="sailor n. 水手；海员" data-w="sailor" data-dv=""><td class="n">81</td><td class="w">sailor<div class="ipa">[ˈseɪlə(r)]</div></td><td class="m">n. 水手；海员</td><td class="sv"><button class="star" data-star="sailor" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="seaman n. 海员；水兵；水手" data-w="seaman" data-dv=""><td class="n">82</td><td class="w">seaman<div class="ipa">[ˈsiːmən]</div></td><td class="m">n. 海员；水兵；水手</td><td class="sv"><button class="star" data-star="seaman" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="submerge v. 潜水；浸没" data-w="submerge" data-dv=""><td class="n">80</td><td class="w">submerge<button class="spk" data-say="submerge" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[səbˈmɜːdʒ]</div></td><td class="m">v. 潜水；浸没</td><td class="sv"><button class="star" data-star="submerge" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="sailor n. 水手；海员" data-w="sailor" data-dv=""><td class="n">81</td><td class="w">sailor<button class="spk" data-say="sailor" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈseɪlə(r)]</div></td><td class="m">n. 水手；海员</td><td class="sv"><button class="star" data-star="sailor" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="seaman n. 海员；水兵；水手" data-w="seaman" data-dv=""><td class="n">82</td><td class="w">seaman<button class="spk" data-say="seaman" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈsiːmən]</div></td><td class="m">n. 海员；水兵；水手</td><td class="sv"><button class="star" data-star="seaman" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 22</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="carrier n. 病毒携带者；运输公 司；运输工具" data-w="carrier" data-dv=""><td class="n">83</td><td class="w">carrier<div class="ipa">[ˈkæriə(r)]</div></td><td class="m">n. 病毒携带者；运输公 司；运输工具</td><td class="sv"><button class="star" data-star="carrier" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="steamer n. 汽船；轮船" data-w="steamer" data-dv=""><td class="n">84</td><td class="w">steamer<div class="ipa">[ˈstiːmə(r)]</div></td><td class="m">n. 汽船；轮船</td><td class="sv"><button class="star" data-star="steamer" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="liner n. 邮轮；客轮；衬里" data-w="liner" data-dv=""><td class="n">85</td><td class="w">liner<div class="ipa">[ˈlaɪnə(r)]</div></td><td class="m">n. 邮轮；客轮；衬里</td><td class="sv"><button class="star" data-star="liner" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="carrier n. 病毒携带者；运输公 司；运输工具" data-w="carrier" data-dv=""><td class="n">83</td><td class="w">carrier<button class="spk" data-say="carrier" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈkæriə(r)]</div></td><td class="m">n. 病毒携带者；运输公 司；运输工具</td><td class="sv"><button class="star" data-star="carrier" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="steamer n. 汽船；轮船" data-w="steamer" data-dv=""><td class="n">84</td><td class="w">steamer<button class="spk" data-say="steamer" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈstiːmə(r)]</div></td><td class="m">n. 汽船；轮船</td><td class="sv"><button class="star" data-star="steamer" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="liner n. 邮轮；客轮；衬里" data-w="liner" data-dv=""><td class="n">85</td><td class="w">liner<button class="spk" data-say="liner" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈlaɪnə(r)]</div></td><td class="m">n. 邮轮；客轮；衬里</td><td class="sv"><button class="star" data-star="liner" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 23</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="vessel n. 器皿；容器；船；血管" data-w="vessel" data-dv=""><td class="n">86</td><td class="w">vessel<div class="ipa">[ˈves(ə)l]</div></td><td class="m">n. 器皿；容器；船；血管</td><td class="sv"><button class="star" data-star="vessel" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="ferry n. 渡船；渡口；v. 摆渡； 运送" data-w="ferry" data-dv=""><td class="n">87</td><td class="w">ferry<div class="ipa">[ˈferi]</div></td><td class="m">n. 渡船；渡口；v. 摆渡； 运送</td><td class="sv"><button class="star" data-star="ferry" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="sail v. 航行；驾(船)；n. 帆；航行；航海" data-w="sail" data-dv=""><td class="n">88</td><td class="w">sail<div class="ipa">[seɪl]</div></td><td class="m">v. 航行；驾(船)；n. 帆；航行；航海</td><td class="sv"><button class="star" data-star="sail" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="raft n. 木筏；木排；v. 筏运； 乘筏" data-w="raft" data-dv=""><td class="n">89</td><td class="w">raft<div class="ipa">[rɑːft]</div></td><td class="m">n. 木筏；木排；v. 筏运； 乘筏</td><td class="sv"><button class="star" data-star="raft" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="canoe n. 独木舟" data-w="canoe" data-dv=""><td class="n">90</td><td class="w">canoe<div class="ipa">[kəˈnuː]</div></td><td class="m">n. 独木舟</td><td class="sv"><button class="star" data-star="canoe" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="oar n. 桨；橹；船桨" data-w="oar" data-dv=""><td class="n">91</td><td class="w">oar<div class="ipa">[ɔː(r)]</div></td><td class="m">n. 桨；橹；船桨</td><td class="sv"><button class="star" data-star="oar" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="vessel n. 器皿；容器；船；血管" data-w="vessel" data-dv=""><td class="n">86</td><td class="w">vessel<button class="spk" data-say="vessel" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈves(ə)l]</div></td><td class="m">n. 器皿；容器；船；血管</td><td class="sv"><button class="star" data-star="vessel" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="ferry n. 渡船；渡口；v. 摆渡； 运送" data-w="ferry" data-dv=""><td class="n">87</td><td class="w">ferry<button class="spk" data-say="ferry" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈferi]</div></td><td class="m">n. 渡船；渡口；v. 摆渡； 运送</td><td class="sv"><button class="star" data-star="ferry" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="sail v. 航行；驾(船)；n. 帆；航行；航海" data-w="sail" data-dv=""><td class="n">88</td><td class="w">sail<button class="spk" data-say="sail" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[seɪl]</div></td><td class="m">v. 航行；驾(船)；n. 帆；航行；航海</td><td class="sv"><button class="star" data-star="sail" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="raft n. 木筏；木排；v. 筏运； 乘筏" data-w="raft" data-dv=""><td class="n">89</td><td class="w">raft<button class="spk" data-say="raft" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[rɑːft]</div></td><td class="m">n. 木筏；木排；v. 筏运； 乘筏</td><td class="sv"><button class="star" data-star="raft" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="canoe n. 独木舟" data-w="canoe" data-dv=""><td class="n">90</td><td class="w">canoe<button class="spk" data-say="canoe" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[kəˈnuː]</div></td><td class="m">n. 独木舟</td><td class="sv"><button class="star" data-star="canoe" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="oar n. 桨；橹；船桨" data-w="oar" data-dv=""><td class="n">91</td><td class="w">oar<button class="spk" data-say="oar" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ɔː(r)]</div></td><td class="m">n. 桨；橹；船桨</td><td class="sv"><button class="star" data-star="oar" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 24</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="deck n. 甲板；舱面" data-w="deck" data-dv=""><td class="n">92</td><td class="w">deck<div class="ipa">[dek]</div></td><td class="m">n. 甲板；舱面</td><td class="sv"><button class="star" data-star="deck" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="turbine n. 涡轮" data-w="turbine" data-dv=""><td class="n">93</td><td class="w">turbine<div class="ipa">[ˈtɜːbaɪn]</div></td><td class="m">n. 涡轮</td><td class="sv"><button class="star" data-star="turbine" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="propeller n. 螺旋桨；推进器" data-w="propeller" data-dv=""><td class="n">94</td><td class="w">propeller<div class="ipa">[prəˈpelə(r)]</div></td><td class="m">n. 螺旋桨；推进器</td><td class="sv"><button class="star" data-star="propeller" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="deck n. 甲板；舱面" data-w="deck" data-dv=""><td class="n">92</td><td class="w">deck<button class="spk" data-say="deck" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[dek]</div></td><td class="m">n. 甲板；舱面</td><td class="sv"><button class="star" data-star="deck" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="turbine n. 涡轮" data-w="turbine" data-dv=""><td class="n">93</td><td class="w">turbine<button class="spk" data-say="turbine" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈtɜːbaɪn]</div></td><td class="m">n. 涡轮</td><td class="sv"><button class="star" data-star="turbine" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="propeller n. 螺旋桨；推进器" data-w="propeller" data-dv=""><td class="n">94</td><td class="w">propeller<button class="spk" data-say="propeller" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[prəˈpelə(r)]</div></td><td class="m">n. 螺旋桨；推进器</td><td class="sv"><button class="star" data-star="propeller" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 25</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="stern adj. 严厉的,严格的；苛 刻的；n. 船尾" data-w="stern" data-dv="sternly|adv.|;;sternness|n.|"><td class="n">95</td><td class="w">stern<div class="ipa">[stɜːn]</div></td><td class="m">adj. 严厉的,严格的；苛 刻的；n. 船尾<div class="dv"><b>衍生</b><i>sternly</i><em>adv.</em><span class="sep">·</span><i>sternness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="stern" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="aboard adv. 在(船、⻋、⻜机)上； prep. 在(船、⻋、⻜机)上" data-w="aboard" data-dv=""><td class="n">96</td><td class="w">aboard<div class="ipa">[əˈbɔːd]</div></td><td class="m">adv. 在(船、⻋、⻜机)上； prep. 在(船、⻋、⻜机)上</td><td class="sv"><button class="star" data-star="aboard" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="embark v. (使)上船或⻜机； (使)从事" data-w="embark" data-dv=""><td class="n">97</td><td class="w">embark<div class="ipa">[ɪmˈbɑːk]</div></td><td class="m">v. (使)上船或⻜机； (使)从事</td><td class="sv"><button class="star" data-star="embark" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="channel n. 河床；海峡；(水)槽；渠道； 频道；途径；v. 引导；开导；形成 河道" data-w="channel" data-dv="channeling|v.|"><td class="n">98</td><td class="w">channel<div class="ipa">[ˈtʃæn(ə)l]</div></td><td class="m">n. 河床；海峡；(水)槽；渠道； 频道；途径；v. 引导；开导；形成 河道<div class="dv"><b>衍生</b><i>channeling</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="channel" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="canal n. 运河；沟渠" data-w="canal" data-dv=""><td class="n">99</td><td class="w">canal<div class="ipa">[kəˈnæl]</div></td><td class="m">n. 运河；沟渠</td><td class="sv"><button class="star" data-star="canal" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="ditch n. 沟；渠；v. 开沟于；把...开入 沟里；摆脱；抛弃；紧急降落" data-w="ditch" data-dv=""><td class="n">100</td><td class="w">ditch<div class="ipa">[dɪtʃ]</div></td><td class="m">n. 沟；渠；v. 开沟于；把...开入 沟里；摆脱；抛弃；紧急降落</td><td class="sv"><button class="star" data-star="ditch" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="stern adj. 严厉的,严格的；苛 刻的；n. 船尾" data-w="stern" data-dv="sternly|adv.|;;sternness|n.|"><td class="n">95</td><td class="w">stern<button class="spk" data-say="stern" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[stɜːn]</div></td><td class="m">adj. 严厉的,严格的；苛 刻的；n. 船尾<div class="dv"><b>衍生</b><i>sternly</i><em>adv.</em><span class="sep">·</span><i>sternness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="stern" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="aboard adv. 在(船、⻋、⻜机)上； prep. 在(船、⻋、⻜机)上" data-w="aboard" data-dv=""><td class="n">96</td><td class="w">aboard<button class="spk" data-say="aboard" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[əˈbɔːd]</div></td><td class="m">adv. 在(船、⻋、⻜机)上； prep. 在(船、⻋、⻜机)上</td><td class="sv"><button class="star" data-star="aboard" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="embark v. (使)上船或⻜机； (使)从事" data-w="embark" data-dv=""><td class="n">97</td><td class="w">embark<button class="spk" data-say="embark" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ɪmˈbɑːk]</div></td><td class="m">v. (使)上船或⻜机； (使)从事</td><td class="sv"><button class="star" data-star="embark" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="channel n. 河床；海峡；(水)槽；渠道； 频道；途径；v. 引导；开导；形成 河道" data-w="channel" data-dv="channeling|v.|"><td class="n">98</td><td class="w">channel<button class="spk" data-say="channel" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈtʃæn(ə)l]</div></td><td class="m">n. 河床；海峡；(水)槽；渠道； 频道；途径；v. 引导；开导；形成 河道<div class="dv"><b>衍生</b><i>channeling</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="channel" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="canal n. 运河；沟渠" data-w="canal" data-dv=""><td class="n">99</td><td class="w">canal<button class="spk" data-say="canal" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[kəˈnæl]</div></td><td class="m">n. 运河；沟渠</td><td class="sv"><button class="star" data-star="canal" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="ditch n. 沟；渠；v. 开沟于；把...开入 沟里；摆脱；抛弃；紧急降落" data-w="ditch" data-dv=""><td class="n">100</td><td class="w">ditch<button class="spk" data-say="ditch" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[dɪtʃ]</div></td><td class="m">n. 沟；渠；v. 开沟于；把...开入 沟里；摆脱；抛弃；紧急降落</td><td class="sv"><button class="star" data-star="ditch" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 26</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="railroad n. 铁路；v. 由铁路运输； 迫使" data-w="railroad" data-dv=""><td class="n">101</td><td class="w">railroad<div class="ipa">[ˈreɪlrəʊd]</div></td><td class="m">n. 铁路；v. 由铁路运输； 迫使</td><td class="sv"><button class="star" data-star="railroad" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="railway n. 铁路" data-w="railway" data-dv=""><td class="n">102</td><td class="w">railway<div class="ipa">[ˈreɪlweɪ]</div></td><td class="m">n. 铁路</td><td class="sv"><button class="star" data-star="railway" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="locomotive n. 机⻋；火⻋头；adj. 运 动的" data-w="locomotive" data-dv="locomotively|adv.|;;locomotiveness|n.|"><td class="n">103</td><td class="w">locomotive<div class="ipa">[ˌləʊkəˈməʊtɪv]</div></td><td class="m">n. 机⻋；火⻋头；adj. 运 动的<div class="dv"><b>衍生</b><i>locomotively</i><em>adv.</em><span class="sep">·</span><i>locomotiveness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="locomotive" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="railroad n. 铁路；v. 由铁路运输； 迫使" data-w="railroad" data-dv=""><td class="n">101</td><td class="w">railroad<button class="spk" data-say="railroad" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈreɪlrəʊd]</div></td><td class="m">n. 铁路；v. 由铁路运输； 迫使</td><td class="sv"><button class="star" data-star="railroad" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="railway n. 铁路" data-w="railway" data-dv=""><td class="n">102</td><td class="w">railway<button class="spk" data-say="railway" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈreɪlweɪ]</div></td><td class="m">n. 铁路</td><td class="sv"><button class="star" data-star="railway" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="locomotive n. 机⻋；火⻋头；adj. 运 动的" data-w="locomotive" data-dv="locomotively|adv.|;;locomotiveness|n.|"><td class="n">103</td><td class="w">locomotive<button class="spk" data-say="locomotive" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˌləʊkəˈməʊtɪv]</div></td><td class="m">n. 机⻋；火⻋头；adj. 运 动的<div class="dv"><b>衍生</b><i>locomotively</i><em>adv.</em><span class="sep">·</span><i>locomotiveness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="locomotive" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 27</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="subway n. 地铁；地下通道" data-w="subway" data-dv=""><td class="n">104</td><td class="w">subway<div class="ipa">[ˈsʌbweɪ]</div></td><td class="m">n. 地铁；地下通道</td><td class="sv"><button class="star" data-star="subway" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="underground n. 地下；地铁；adj. 地下的； 秘密的；adv. 在地下；秘密地" data-w="underground" data-dv=""><td class="n">105</td><td class="w">underground<div class="ipa">[ˈʌndəɡraʊnd]</div></td><td class="m">n. 地下；地铁；adj. 地下的； 秘密的；adv. 在地下；秘密地</td><td class="sv"><button class="star" data-star="underground" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="tunnel n. 隧道；地道；v. 开凿隧 道" data-w="tunnel" data-dv="tunneling|v.|"><td class="n">106</td><td class="w">tunnel<div class="ipa">[ˈtʌn(ə)l]</div></td><td class="m">n. 隧道；地道；v. 开凿隧 道<div class="dv"><b>衍生</b><i>tunneling</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="tunnel" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="rail n. 横杆；铁轨；v. 咒骂； 责备；抱怨；以横木围栏" data-w="rail" data-dv=""><td class="n">107</td><td class="w">rail<div class="ipa">[reɪl]</div></td><td class="m">n. 横杆；铁轨；v. 咒骂； 责备；抱怨；以横木围栏</td><td class="sv"><button class="star" data-star="rail" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="subway n. 地铁；地下通道" data-w="subway" data-dv=""><td class="n">104</td><td class="w">subway<button class="spk" data-say="subway" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈsʌbweɪ]</div></td><td class="m">n. 地铁；地下通道</td><td class="sv"><button class="star" data-star="subway" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="underground n. 地下；地铁；adj. 地下的； 秘密的；adv. 在地下；秘密地" data-w="underground" data-dv=""><td class="n">105</td><td class="w">underground<button class="spk" data-say="underground" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈʌndəɡraʊnd]</div></td><td class="m">n. 地下；地铁；adj. 地下的； 秘密的；adv. 在地下；秘密地</td><td class="sv"><button class="star" data-star="underground" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="tunnel n. 隧道；地道；v. 开凿隧 道" data-w="tunnel" data-dv="tunneling|v.|"><td class="n">106</td><td class="w">tunnel<button class="spk" data-say="tunnel" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈtʌn(ə)l]</div></td><td class="m">n. 隧道；地道；v. 开凿隧 道<div class="dv"><b>衍生</b><i>tunneling</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="tunnel" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="rail n. 横杆；铁轨；v. 咒骂； 责备；抱怨；以横木围栏" data-w="rail" data-dv=""><td class="n">107</td><td class="w">rail<button class="spk" data-say="rail" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[reɪl]</div></td><td class="m">n. 横杆；铁轨；v. 咒骂； 责备；抱怨；以横木围栏</td><td class="sv"><button class="star" data-star="rail" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 28</span><span class="gcnt">9 词</span></td></tr>
-<tr data-s="depart v. 离开；背离；离 (职)；去世" data-w="depart" data-dv="departure|n.|;;department|n.|n. 部⻔；系；部"><td class="n">108</td><td class="w">depart<div class="ipa">[dɪˈpɑːt]</div></td><td class="m">v. 离开；背离；离 (职)；去世<div class="dv"><b>衍生</b><i>departure</i><em>n.</em><span class="sep">·</span><i>department</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="depart" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="arrive v. 到达；抵达" data-w="arrive" data-dv="arrival|adj.|"><td class="n">109</td><td class="w">arrive<div class="ipa">[əˈraɪv]</div></td><td class="m">v. 到达；抵达<div class="dv"><b>衍生</b><i>arrival</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="arrive" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="destination n. 目的地；终点" data-w="destination" data-dv=""><td class="n">110</td><td class="w">destination<div class="ipa">[ˌdestɪˈneɪʃ(ə)n]</div></td><td class="m">n. 目的地；终点</td><td class="sv"><button class="star" data-star="destination" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="delay v. 推迟；延缓；耽搁；n. 推迟；延缓；耽搁" data-w="delay" data-dv=""><td class="n">111</td><td class="w">delay<div class="ipa">[dɪˈleɪ]</div></td><td class="m">v. 推迟；延缓；耽搁；n. 推迟；延缓；耽搁</td><td class="sv"><button class="star" data-star="delay" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="postpone v. 延期；延迟" data-w="postpone" data-dv="postponement|n.|"><td class="n">112</td><td class="w">postpone<div class="ipa">[pəˈspəʊn]</div></td><td class="m">v. 延期；延迟<div class="dv"><b>衍生</b><i>postponement</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="postpone" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="defer v. 推迟；延缓；服从" data-w="defer" data-dv="deference|n.|;;deferred|v.|"><td class="n">113</td><td class="w">defer<div class="ipa">[dɪˈfɜː(r)]</div></td><td class="m">v. 推迟；延缓；服从<div class="dv"><b>衍生</b><i>deference</i><em>n.</em><span class="sep">·</span><i>deferred</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="defer" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="lull v. 使镇静；使安静；哄骗； 麻痹；n. 间歇期；平静期" data-w="lull" data-dv=""><td class="n">114</td><td class="w">lull<div class="ipa">[lʌl]</div></td><td class="m">v. 使镇静；使安静；哄骗； 麻痹；n. 间歇期；平静期</td><td class="sv"><button class="star" data-star="lull" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="expire v. 终止；期满；断气；死 亡" data-w="expire" data-dv=""><td class="n">115</td><td class="w">expire<div class="ipa">[ɪkˈspaɪə(r)]</div></td><td class="m">v. 终止；期满；断气；死 亡</td><td class="sv"><button class="star" data-star="expire" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="due adj. 预期的；应给的；到 期的" data-w="due" data-dv="dueness|n.|"><td class="n">116</td><td class="w">due<div class="ipa">[djuː]</div></td><td class="m">adj. 预期的；应给的；到 期的<div class="dv"><b>衍生</b><i>dueness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="due" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="depart v. 离开；背离；离 (职)；去世" data-w="depart" data-dv="departure|n.|;;department|n.|n. 部⻔；系；部"><td class="n">108</td><td class="w">depart<button class="spk" data-say="depart" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[dɪˈpɑːt]</div></td><td class="m">v. 离开；背离；离 (职)；去世<div class="dv"><b>衍生</b><i>departure</i><em>n.</em><span class="sep">·</span><i>department</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="depart" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="arrive v. 到达；抵达" data-w="arrive" data-dv="arrival|adj.|"><td class="n">109</td><td class="w">arrive<button class="spk" data-say="arrive" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[əˈraɪv]</div></td><td class="m">v. 到达；抵达<div class="dv"><b>衍生</b><i>arrival</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="arrive" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="destination n. 目的地；终点" data-w="destination" data-dv=""><td class="n">110</td><td class="w">destination<button class="spk" data-say="destination" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˌdestɪˈneɪʃ(ə)n]</div></td><td class="m">n. 目的地；终点</td><td class="sv"><button class="star" data-star="destination" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="delay v. 推迟；延缓；耽搁；n. 推迟；延缓；耽搁" data-w="delay" data-dv=""><td class="n">111</td><td class="w">delay<button class="spk" data-say="delay" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[dɪˈleɪ]</div></td><td class="m">v. 推迟；延缓；耽搁；n. 推迟；延缓；耽搁</td><td class="sv"><button class="star" data-star="delay" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="postpone v. 延期；延迟" data-w="postpone" data-dv="postponement|n.|"><td class="n">112</td><td class="w">postpone<button class="spk" data-say="postpone" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[pəˈspəʊn]</div></td><td class="m">v. 延期；延迟<div class="dv"><b>衍生</b><i>postponement</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="postpone" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="defer v. 推迟；延缓；服从" data-w="defer" data-dv="deference|n.|;;deferred|v.|"><td class="n">113</td><td class="w">defer<button class="spk" data-say="defer" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[dɪˈfɜː(r)]</div></td><td class="m">v. 推迟；延缓；服从<div class="dv"><b>衍生</b><i>deference</i><em>n.</em><span class="sep">·</span><i>deferred</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="defer" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="lull v. 使镇静；使安静；哄骗； 麻痹；n. 间歇期；平静期" data-w="lull" data-dv=""><td class="n">114</td><td class="w">lull<button class="spk" data-say="lull" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[lʌl]</div></td><td class="m">v. 使镇静；使安静；哄骗； 麻痹；n. 间歇期；平静期</td><td class="sv"><button class="star" data-star="lull" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="expire v. 终止；期满；断气；死 亡" data-w="expire" data-dv=""><td class="n">115</td><td class="w">expire<button class="spk" data-say="expire" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ɪkˈspaɪə(r)]</div></td><td class="m">v. 终止；期满；断气；死 亡</td><td class="sv"><button class="star" data-star="expire" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="due adj. 预期的；应给的；到 期的" data-w="due" data-dv="dueness|n.|"><td class="n">116</td><td class="w">due<button class="spk" data-say="due" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[djuː]</div></td><td class="m">adj. 预期的；应给的；到 期的<div class="dv"><b>衍生</b><i>dueness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="due" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 29</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="postage n. 邮资；邮费" data-w="postage" data-dv=""><td class="n">117</td><td class="w">postage<div class="ipa">[ˈpəʊstɪdʒ]</div></td><td class="m">n. 邮资；邮费</td><td class="sv"><button class="star" data-star="postage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="stamp n. 邮票；印记；跺脚；v. 盖印；跺脚" data-w="stamp" data-dv="stamper|n.|"><td class="n">118</td><td class="w">stamp<div class="ipa">[stæmp]</div></td><td class="m">n. 邮票；印记；跺脚；v. 盖印；跺脚<div class="dv"><b>衍生</b><i>stamper</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="stamp" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="mail n. 邮件；v. 邮寄" data-w="mail" data-dv=""><td class="n">119</td><td class="w">mail<div class="ipa">[meɪl]</div></td><td class="m">n. 邮件；v. 邮寄</td><td class="sv"><button class="star" data-star="mail" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="postage n. 邮资；邮费" data-w="postage" data-dv=""><td class="n">117</td><td class="w">postage<button class="spk" data-say="postage" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpəʊstɪdʒ]</div></td><td class="m">n. 邮资；邮费</td><td class="sv"><button class="star" data-star="postage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="stamp n. 邮票；印记；跺脚；v. 盖印；跺脚" data-w="stamp" data-dv="stamper|n.|"><td class="n">118</td><td class="w">stamp<button class="spk" data-say="stamp" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[stæmp]</div></td><td class="m">n. 邮票；印记；跺脚；v. 盖印；跺脚<div class="dv"><b>衍生</b><i>stamper</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="stamp" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="mail n. 邮件；v. 邮寄" data-w="mail" data-dv=""><td class="n">119</td><td class="w">mail<button class="spk" data-say="mail" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[meɪl]</div></td><td class="m">n. 邮件；v. 邮寄</td><td class="sv"><button class="star" data-star="mail" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 30</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="packet n. 小包；小盒" data-w="packet" data-dv=""><td class="n">120</td><td class="w">packet<div class="ipa">[ˈpækɪt]</div></td><td class="m">n. 小包；小盒</td><td class="sv"><button class="star" data-star="packet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="package n. 包；包裹；v. 包装" data-w="package" data-dv=""><td class="n">121</td><td class="w">package<div class="ipa">[ˈpækɪdʒ]</div></td><td class="m">n. 包；包裹；v. 包装</td><td class="sv"><button class="star" data-star="package" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="bind v. 捆绑；约束；装订；n. (非正式)窘境" data-w="bind" data-dv=""><td class="n">122</td><td class="w">bind<div class="ipa">[baɪnd]</div></td><td class="m">v. 捆绑；约束；装订；n. (非正式)窘境</td><td class="sv"><button class="star" data-star="bind" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="packet n. 小包；小盒" data-w="packet" data-dv=""><td class="n">120</td><td class="w">packet<button class="spk" data-say="packet" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpækɪt]</div></td><td class="m">n. 小包；小盒</td><td class="sv"><button class="star" data-star="packet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="package n. 包；包裹；v. 包装" data-w="package" data-dv=""><td class="n">121</td><td class="w">package<button class="spk" data-say="package" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpækɪdʒ]</div></td><td class="m">n. 包；包裹；v. 包装</td><td class="sv"><button class="star" data-star="package" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="bind v. 捆绑；约束；装订；n. (非正式)窘境" data-w="bind" data-dv=""><td class="n">122</td><td class="w">bind<button class="spk" data-say="bind" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[baɪnd]</div></td><td class="m">v. 捆绑；约束；装订；n. (非正式)窘境</td><td class="sv"><button class="star" data-star="bind" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 31</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="parcel n. 包裹；小包；v. 捆扎； 打包" data-w="parcel" data-dv=""><td class="n">123</td><td class="w">parcel<div class="ipa">[ˈpɑːs(ə)l]</div></td><td class="m">n. 包裹；小包；v. 捆扎； 打包</td><td class="sv"><button class="star" data-star="parcel" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="load n. 负荷；载重；v. 承载； 载入" data-w="load" data-dv=""><td class="n">124</td><td class="w">load<div class="ipa">[ləʊd]</div></td><td class="m">n. 负荷；载重；v. 承载； 载入</td><td class="sv"><button class="star" data-star="load" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="burden n. 负担；重担；责任；v. 使负重；烦扰" data-w="burden" data-dv="burdened|v.|"><td class="n">125</td><td class="w">burden<div class="ipa">[ˈbɜːd(ə)n]</div></td><td class="m">n. 负担；重担；责任；v. 使负重；烦扰<div class="dv"><b>衍生</b><i>burdened</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="burden" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="parcel n. 包裹；小包；v. 捆扎； 打包" data-w="parcel" data-dv=""><td class="n">123</td><td class="w">parcel<button class="spk" data-say="parcel" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpɑːs(ə)l]</div></td><td class="m">n. 包裹；小包；v. 捆扎； 打包</td><td class="sv"><button class="star" data-star="parcel" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="load n. 负荷；载重；v. 承载； 载入" data-w="load" data-dv=""><td class="n">124</td><td class="w">load<button class="spk" data-say="load" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ləʊd]</div></td><td class="m">n. 负荷；载重；v. 承载； 载入</td><td class="sv"><button class="star" data-star="load" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="burden n. 负担；重担；责任；v. 使负重；烦扰" data-w="burden" data-dv="burdened|v.|"><td class="n">125</td><td class="w">burden<button class="spk" data-say="burden" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈbɜːd(ə)n]</div></td><td class="m">n. 负担；重担；责任；v. 使负重；烦扰<div class="dv"><b>衍生</b><i>burdened</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="burden" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 32</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="transfer v. 转移；转让；调任；n. 转移；转让；调任" data-w="transfer" data-dv="transference|n.|;;transfered|v.|"><td class="n">126</td><td class="w">transfer<div class="ipa">[trænsˈfɜː(r)]</div></td><td class="m">v. 转移；转让；调任；n. 转移；转让；调任<div class="dv"><b>衍生</b><i>transference</i><em>n.</em><span class="sep">·</span><i>transfered</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="transfer" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="transmit v. 发送；传播；传递" data-w="transmit" data-dv="transmission|n.|"><td class="n">127</td><td class="w">transmit<div class="ipa">[trænzˈmɪt]</div></td><td class="m">v. 发送；传播；传递<div class="dv"><b>衍生</b><i>transmission</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="transmit" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="transit n. 运输；中转；运送；v. 通过；经过；中转" data-w="transit" data-dv=""><td class="n">128</td><td class="w">transit<div class="ipa">[ˈtrænzɪt]</div></td><td class="m">n. 运输；中转；运送；v. 通过；经过；中转</td><td class="sv"><button class="star" data-star="transit" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="transfer v. 转移；转让；调任；n. 转移；转让；调任" data-w="transfer" data-dv="transference|n.|;;transferred|v.|"><td class="n">126</td><td class="w">transfer<button class="spk" data-say="transfer" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[trænsˈfɜː(r)]</div></td><td class="m">v. 转移；转让；调任；n. 转移；转让；调任<div class="dv"><b>衍生</b><i>transference</i><em>n.</em><span class="sep">·</span><i>transferred</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="transfer" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="transmit v. 发送；传播；传递" data-w="transmit" data-dv="transmission|n.|"><td class="n">127</td><td class="w">transmit<button class="spk" data-say="transmit" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[trænzˈmɪt]</div></td><td class="m">v. 发送；传播；传递<div class="dv"><b>衍生</b><i>transmission</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="transmit" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="transit n. 运输；中转；运送；v. 通过；经过；中转" data-w="transit" data-dv=""><td class="n">128</td><td class="w">transit<button class="spk" data-say="transit" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈtrænzɪt]</div></td><td class="m">n. 运输；中转；运送；v. 通过；经过；中转</td><td class="sv"><button class="star" data-star="transit" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 33</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="deliver v. 交付；递送；为...接 生；发表；陈述；予以" data-w="deliver" data-dv="deliverance|n.|;;delivering|v.|"><td class="n">129</td><td class="w">deliver<div class="ipa">[dɪˈlɪvə(r)]</div></td><td class="m">v. 交付；递送；为...接 生；发表；陈述；予以<div class="dv"><b>衍生</b><i>deliverance</i><em>n.</em><span class="sep">·</span><i>delivering</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="deliver" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="convey v. 传达；表达；运送；输 送" data-w="convey" data-dv="conveyance|n.|"><td class="n">130</td><td class="w">convey<div class="ipa">[kənˈveɪ]</div></td><td class="m">v. 传达；表达；运送；输 送<div class="dv"><b>衍生</b><i>conveyance</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="convey" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="speed n. 速度；速率；v. 加速； 加快" data-w="speed" data-dv=""><td class="n">131</td><td class="w">speed<div class="ipa">[spiːd]</div></td><td class="m">n. 速度；速率；v. 加速； 加快</td><td class="sv"><button class="star" data-star="speed" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="velocity n. 速度；速率；迅速" data-w="velocity" data-dv=""><td class="n">132</td><td class="w">velocity<div class="ipa">[vəˈlɒsəti]</div></td><td class="m">n. 速度；速率；迅速</td><td class="sv"><button class="star" data-star="velocity" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="swift adj. 快的；迅速的；敏捷 的；n. 雨燕" data-w="swift" data-dv="swiftly|adv.|;;swiftness|n.|"><td class="n">133</td><td class="w">swift<div class="ipa">[swɪft]</div></td><td class="m">adj. 快的；迅速的；敏捷 的；n. 雨燕<div class="dv"><b>衍生</b><i>swiftly</i><em>adv.</em><span class="sep">·</span><i>swiftness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="swift" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="deliver v. 交付；递送；为...接 生；发表；陈述；予以" data-w="deliver" data-dv="deliverance|n.|;;delivering|v.|"><td class="n">129</td><td class="w">deliver<button class="spk" data-say="deliver" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[dɪˈlɪvə(r)]</div></td><td class="m">v. 交付；递送；为...接 生；发表；陈述；予以<div class="dv"><b>衍生</b><i>deliverance</i><em>n.</em><span class="sep">·</span><i>delivering</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="deliver" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="convey v. 传达；表达；运送；输 送" data-w="convey" data-dv="conveyance|n.|"><td class="n">130</td><td class="w">convey<button class="spk" data-say="convey" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[kənˈveɪ]</div></td><td class="m">v. 传达；表达；运送；输 送<div class="dv"><b>衍生</b><i>conveyance</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="convey" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="speed n. 速度；速率；v. 加速； 加快" data-w="speed" data-dv=""><td class="n">131</td><td class="w">speed<button class="spk" data-say="speed" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[spiːd]</div></td><td class="m">n. 速度；速率；v. 加速； 加快</td><td class="sv"><button class="star" data-star="speed" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="velocity n. 速度；速率；迅速" data-w="velocity" data-dv=""><td class="n">132</td><td class="w">velocity<button class="spk" data-say="velocity" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[vəˈlɒsəti]</div></td><td class="m">n. 速度；速率；迅速</td><td class="sv"><button class="star" data-star="velocity" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="swift adj. 快的；迅速的；敏捷 的；n. 雨燕" data-w="swift" data-dv="swiftly|adv.|;;swiftness|n.|"><td class="n">133</td><td class="w">swift<button class="spk" data-say="swift" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[swɪft]</div></td><td class="m">adj. 快的；迅速的；敏捷 的；n. 雨燕<div class="dv"><b>衍生</b><i>swiftly</i><em>adv.</em><span class="sep">·</span><i>swiftness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="swift" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 </table><div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit13.html">← Unit 13</a><a href="unit14-card.html">切到例句卡片版</a><a href="unit15.html">Unit 15 →</a></div><footer><div class="wrap" style="padding:0">
  摘自《雅思词汇真经》（刘洪波 编著）第 14 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
 </div></footer></div>
 <a id="nbfab" href="shengci.html"><span>生词本</span><b>0</b></a>
 <script>
+/* ---------- 朗读 ---------- */
+var TTS=(function(){
+ var voices=[], pref='en-GB';
+ try{pref=JSON.parse(localStorage.getItem('vj-tts')||'{}').v||'en-GB'}catch(e){}
+ var sup = (typeof speechSynthesis!=='undefined' && typeof SpeechSynthesisUtterance!=='undefined');
+ function load(){ try{voices=speechSynthesis.getVoices()||[]}catch(e){voices=[]} }
+ if(sup){ load(); try{speechSynthesis.onvoiceschanged=load}catch(e){} }
+ function pick(){
+  if(!voices.length) load();
+  var en=voices.filter(function(v){return /^en/i.test(v.lang||'')});
+  var same=en.filter(function(v){return (v.lang||'').replace('_','-').toLowerCase().indexOf(pref.toLowerCase())===0});
+  return same[0] || en.filter(function(v){return /en-GB/i.test(v.lang)})[0] ||
+         en.filter(function(v){return /en-US/i.test(v.lang)})[0] || en[0] || null;
+ }
+ function speak(t, rate){
+  if(!sup||!t) return false;
+  try{
+   speechSynthesis.cancel();
+   var u=new SpeechSynthesisUtterance(t), v=pick();
+   if(v){u.voice=v; u.lang=v.lang;} else u.lang=pref;
+   u.rate=rate||0.92; u.pitch=1;
+   speechSynthesis.speak(u);
+   return true;
+  }catch(e){return false}
+ }
+ function setPref(p){
+  pref=p;
+  try{localStorage.setItem('vj-tts',JSON.stringify({v:p}))}catch(e){}
+  document.querySelectorAll('.ttsvg').forEach(function(b){b.classList.toggle('on',b.dataset.vp===p)});
+ }
+ return {speak:speak,setPref:setPref,pref:function(){return pref},ok:function(){return sup}};
+})();
+window.TTS=TTS;
+
+/* ---------- 生词本 ---------- */
 var NB=(function(){
- var KEY='vj-book';
+ var KEY='vj-book', SETK='vj-set', STK='vj-stat';
  var mem=null, okStore=true;
  function read(){
   if(mem) return mem;
@@ -388,18 +442,53 @@ var NB=(function(){
  }
  function count(){return Object.keys(read()).length}
  function has(w){return !!read()[w]}
+ function addOne(rec){
+  var m=read();
+  if(m[rec.w]) return false;
+  rec.t=Date.now();
+  m[rec.w]=rec; write(); bump('a'); sync(); return true;
+ }
  function toggle(rec){
   var m=read();
-  if(m[rec.w]){delete m[rec.w]}
-  else{rec.t=Date.now(); m[rec.w]=rec}
-  write(); sync(); return !!m[rec.w];
+  if(m[rec.w]){delete m[rec.w]; write(); sync(); return false}
+  rec.t=Date.now(); m[rec.w]=rec; write(); bump('a'); sync(); return true;
  }
  function remove(w){var m=read(); delete m[w]; write(); sync();}
+ function save(rec){var m=read(); m[rec.w]=rec; write(); sync();}
  function all(){
   var m=read(), a=[];
   for(var k in m) a.push(m[k]);
   a.sort(function(x,y){return (y.t||0)-(x.t||0)});
   return a;
+ }
+ /* 设置：加入时是否连带衍生词 */
+ function settings(){ try{return JSON.parse(localStorage.getItem(SETK)||'{}')}catch(e){return {}} }
+ function setSetting(k,v){
+  var s=settings(); s[k]=v;
+  try{localStorage.setItem(SETK,JSON.stringify(s))}catch(e){}
+ }
+ function dvOn(){ var s=settings(); return s.dv!==false }
+ /* 学习统计 */
+ function pad(n){return n<10?'0'+n:''+n}
+ function dayKey(d){d=d||new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+ function stat(){ try{return JSON.parse(localStorage.getItem(STK)||'{}')}catch(e){return {}} }
+ function bump(k,n){
+  var s=stat(), key=dayKey();
+  s[key]=s[key]||{a:0,r:0,c:0};
+  s[key][k]=(s[key][k]||0)+(n||1);
+  var ks=Object.keys(s).sort();
+  if(ks.length>120){ ks.slice(0,ks.length-120).forEach(function(x){delete s[x]}) }
+  try{localStorage.setItem(STK,JSON.stringify(s))}catch(e){}
+ }
+ function streak(){
+  var s=stat(), n=0, d=new Date(), k=dayKey(d);
+  if(!(s[k] && (s[k].r||s[k].a))) d.setDate(d.getDate()-1);
+  for(var i=0;i<400;i++){
+   var o=s[dayKey(d)];
+   if(o && (o.r||o.a)){ n++; d.setDate(d.getDate()-1); }
+   else break;
+  }
+  return n;
  }
  function sync(){
   var n=count();
@@ -412,14 +501,42 @@ var NB=(function(){
     else if(!on) el.setAttribute('title','加入生词本');
   });
  }
+ function parseDv(s){
+  if(!s) return [];
+  return s.split(';;').filter(Boolean).map(function(x){
+   var a=x.split('|'); return {w:a[0], p:a[1]||'', m:a[2]||''};
+  });
+ }
  function onStar(e){
   var b=e.target.closest('.star'); if(!b) return;
   e.preventDefault(); e.stopPropagation();
   var host=b.closest('[data-w]')||b.closest('.card')||b.closest('tr');
-  var rec=entry(host, b.dataset.star);
-  var added=toggle(rec);
+  var w=b.dataset.star;
+  if(has(w)){
+   remove(w);
+   var m=read();
+   Object.keys(m).forEach(function(k){ if(m[k] && m[k].pw===w){ delete m[k] } });
+   write(); sync();
+   return;
+  }
+  var rec=entry(host,w);
+  toggle(rec);
+  if(dvOn()){
+   parseDv(host?host.dataset.dv:'').forEach(function(d){
+     if(!d.w || has(d.w)) return;
+     addOne({w:d.w, p:'', m:d.m||'', d:'', e:'', z:'',
+             c:rec.c, g:rec.g, pv:1, pw:rec.w, pm:rec.m, pp:d.p});
+   });
+  }
   var fab=document.getElementById('nbfab');
-  if(added&&fab){fab.classList.remove('wiggle');void fab.offsetWidth;fab.classList.add('wiggle');}
+  if(fab){fab.classList.remove('wiggle');void fab.offsetWidth;fab.classList.add('wiggle');}
+ }
+ function onSpk(e){
+  var b=e.target.closest('.spk'); if(!b) return;
+  e.preventDefault(); e.stopPropagation();
+  var t=b.dataset.say;
+  if(!t){ var h=b.closest('[data-w]'); t=h?h.dataset.w:''; }
+  TTS.speak(t);
  }
  function txt(el){return el?el.textContent.trim():''}
  function entry(host, w){
@@ -435,11 +552,17 @@ var NB=(function(){
           g:document.body.dataset.title||''};
  }
  document.addEventListener('click',onStar);
- window.addEventListener('storage',function(e){if(e.key===KEY){mem=null;sync();}});
- document.addEventListener('DOMContentLoaded',sync);
+ document.addEventListener('click',onSpk);
+ window.addEventListener('storage',function(e){
+  if(e.key===KEY){mem=null;sync();}
+ });
+ if(document.readyState!=='loading') sync(); else document.addEventListener('DOMContentLoaded',sync);
  sync();
- return {count:count,has:has,all:all,remove:remove,toggle:toggle,sync:sync,read:read};
+ return {count:count,has:has,all:all,remove:remove,toggle:toggle,sync:sync,read:read,
+         save:save,addOne:addOne,dvOn:dvOn,settings:settings,setSetting:setSetting,
+         bump:bump,stat:stat,streak:streak,dayKey:dayKey,parseDv:parseDv};
 })();
+window.NB=NB;
 </script>
 <script>
 (function(){
@@ -469,6 +592,10 @@ var NB=(function(){
  if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
  var ci=document.getElementById('i');
  if(ci) ci.addEventListener('change',function(){s.i=ci.checked; save(); paint();});
+ var cd=document.getElementById('dvon');
+ if(cd){cd.checked=NB.dvOn(); cd.closest('.sw').classList.toggle('on',cd.checked);}
+ if(cd) cd.addEventListener('change',function(){NB.setSetting('dv',cd.checked);
+   cd.closest('.sw').classList.toggle('on',cd.checked);});
  var co=document.getElementById('only');
  if(co) co.addEventListener('change',function(){s.o=co.checked; save(); paint(); filter();});
  var ca=document.getElementById('all');
@@ -508,5 +635,290 @@ var NB=(function(){
  });
  paint(); filter();
 })();
+</script>
+<script>
+/* ================= 背诵模式（独立功能）================= */
+var REC=(function(){
+ var KEY='vj-rec', ACC='#b4442e';
+ var INT=[0,1,2,4,8,15,30,90];
+ var mem=null, root=null, queue=[], idx=0, onlyDue=false, yes=0, no=0, started=false;
+
+ function read(){
+  if(mem) return mem;
+  try{var raw=localStorage.getItem(KEY); mem=raw?JSON.parse(raw):{}}catch(e){mem={}}
+  return mem;
+ }
+ function save(){ try{localStorage.setItem(KEY,JSON.stringify(mem))}catch(e){} }
+ function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];})}
+
+ /* ---- 从页面收集词条 ---- */
+ function extract(h){ 
+  var m=h.querySelector('.m'), mean='';
+  if(m){var c=m.cloneNode(true);var dv=c.querySelector('.dv');if(dv)dv.parentNode.removeChild(dv);
+   mean=c.textContent.replace(/\s+/g,' ').trim();}
+  var ipa=h.querySelector('.ipa');
+  var en=h.querySelector('.ex .en'), zh=h.querySelector('.ex .zh');
+  var dl=[];
+  (h.dataset.dv||'').split(';;').forEach(function(s){
+   if(!s) return; var a=s.split('|'); if(a[0]) dl.push(a[0]);
+  });
+  return {w:h.dataset.w, p:ipa?ipa.textContent.trim():'', m:mean,
+          x:dl.length?('衍生：'+dl.join(' · ')):'',
+          e:en?en.textContent.trim():'', z:zh?zh.textContent.trim():''};
+ }
+ function items(){
+  var out=[], seen={};
+  [].slice.call(document.querySelectorAll('[data-w]')).forEach(function(h){
+   if(!h.dataset||!h.dataset.w) return;
+   if(h.closest && h.closest('#rcroot')) return;
+   var r=extract(h);
+   if(!r||!r.w||seen[r.w]) return;
+   seen[r.w]=1; r.h=h; out.push(r);
+  });
+  return out;
+ }
+
+ /* ---- 样式 ---- */
+ function injectCSS(){
+  if(document.getElementById('rcstyle')) return;
+  var css = ''
+  + '#rcopen{position:fixed;right:20px;bottom:20px;z-index:60;font:inherit;font-size:13px;'
+  + 'font-weight:700;color:#fff;background:'+ACC+';border:1px solid '+ACC+';border-radius:999px;'
+  + 'padding:9px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;line-height:1.4;'
+  + 'box-shadow:0 6px 20px rgba(0,0,0,.22)}'
+  + '#rcopen:hover{filter:brightness(1.08)}'
+  + '#rcopen b{font-weight:700;font-variant-numeric:tabular-nums;background:rgba(255,255,255,.26);'
+  + 'border-radius:999px;padding:0 6px;font-size:11px}'
+  + '@media (max-width:640px){#rcopen{right:12px;font-size:12.5px;padding:8px 13px}}'
+  + '#rcroot{position:fixed;inset:0;z-index:300;display:none;overflow:auto;padding:20px 16px 36px;'
+  + '--rb:#f7f6f3;--rp:#ffffff;--ri:#1f2328;--ri2:#5b6470;--rl:#e6e2da;--rs:rgba(0,0,0,.045);'
+  + 'background:var(--rb);color:var(--ri);'
+  + 'font:16px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;'
+  + '-webkit-font-smoothing:antialiased}'
+  + '#rcroot.on{display:block}'
+  + '#rcroot *{box-sizing:border-box}'
+  + '#rcroot .rw{max-width:640px;margin:0 auto}'
+  + '#rcroot .bar{display:flex;align-items:center;gap:12px;margin-bottom:12px;font-size:12.5px;color:var(--ri2)}'
+  + '#rcroot .bar .pg{flex:1;height:5px;background:var(--rs);border-radius:99px;overflow:hidden}'
+  + '#rcroot .bar .pg i{display:block;height:100%;width:0;background:'+ACC+';transition:width .25s}'
+  + '#rcroot .bar .num{font-variant-numeric:tabular-nums;white-space:nowrap}'
+  + '#rcroot .x{font:inherit;font-size:21px;line-height:1;background:none;border:0;color:var(--ri2);cursor:pointer;padding:2px 8px}'
+  + '#rcroot .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;'
+  + 'font-size:12.5px;color:var(--ri2)}'
+  + '#rcroot .sw{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rl);border-radius:999px;'
+  + 'padding:3px 11px;cursor:pointer;user-select:none;background:var(--rp);white-space:nowrap}'
+  + '#rcroot .sw input{accent-color:'+ACC+';margin:0}'
+  + '#rcroot .card{background:var(--rp);border:1px solid var(--rl);border-radius:20px;padding:34px 26px 26px;'
+  + 'text-align:center;min-height:260px;cursor:pointer;user-select:none;display:flex;flex-direction:column;'
+  + 'justify-content:center}'
+  + '#rcroot .wd{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:37px;font-weight:700;'
+  + 'line-height:1.22;letter-spacing:.3px;word-break:break-word}'
+  + '#rcroot .ipa{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:14px;color:var(--ri2);margin-top:8px}'
+  + '#rcroot .spk2{background:none;border:0;color:var(--ri2);cursor:pointer;padding:6px;margin-top:6px;opacity:.75;align-self:center}'
+  + '#rcroot .spk2:hover{opacity:1;color:'+ACC+'}'
+  + '#rcroot .spk2 svg{width:18px;height:18px;display:block}'
+  + '#rcroot .q{color:var(--ri2);font-size:12.5px;margin-top:22px;opacity:.9}'
+  + '#rcroot .ans{display:none;margin-top:20px;text-align:left;border-top:1px dashed var(--rl);padding-top:16px}'
+  + '#rcroot .ans.on{display:block}'
+  + '#rcroot .ans .m{font-size:17px}'
+  + '#rcroot .ans .x2{margin-top:9px;font-size:13px;color:var(--ri2);line-height:1.85;white-space:pre-line}'
+  + '#rcroot .ans .ex{margin-top:11px;font-size:13.5px;background:var(--rs);border-radius:9px;padding:10px 12px;line-height:1.7}'
+  + '#rcroot .ans .ex .zh{color:var(--ri2);margin-top:3px;font-size:13px}'
+  + '#rcroot .btns{display:flex;gap:10px;margin-top:15px}'
+  + '#rcroot .btns button{flex:1;font:inherit;font-size:15px;font-weight:650;padding:13px 0;border-radius:13px;'
+  + 'cursor:pointer;border:1px solid var(--rl);background:var(--rp);color:var(--ri)}'
+  + '#rcroot .btns button kbd{font:inherit;font-size:11px;opacity:.5;margin-left:4px}'
+  + '#rcroot .btns .no{color:#c0392b}'
+  + '#rcroot .btns .ok{background:'+ACC+';border-color:'+ACC+';color:#fff}'
+  + '#rcroot .btns button:active{transform:translateY(1px)}'
+  + '#rcroot .key{margin-top:13px;text-align:center;font-size:11.5px;color:var(--ri2);opacity:.75}'
+  + '#rcroot .done{text-align:center;padding:40px 10px}'
+  + '#rcroot .done h2{font-size:22px;margin:0 0 10px}'
+  + '#rcroot .done p{color:var(--ri2);font-size:14px;line-height:2}'
+  + '#rcroot .done .acts{display:flex;gap:9px;justify-content:center;margin-top:16px;flex-wrap:wrap}'
+  + '#rcroot .done .acts button{font:inherit;font-size:13.5px;font-weight:650;padding:9px 20px;border-radius:999px;'
+  + 'cursor:pointer;border:1px solid var(--rl);background:var(--rp);color:var(--ri)}'
+  + '#rcroot .done .acts .pri{background:'+ACC+';border-color:'+ACC+';color:#fff}'
+  + '@media (prefers-color-scheme:dark){#rcroot{--rb:#16181c;--rp:#1d2025;--ri:#e8eaed;--ri2:#9aa3ad;'
+  + '--rl:#2c3037;--rs:rgba(255,255,255,.07)}}'
+  + '@media (max-width:520px){#rcroot{padding:14px 11px 26px}#rcroot .wd{font-size:29px}'
+  + '#rcroot .card{padding:26px 17px 20px;min-height:220px}}';
+  var st=document.createElement('style'); st.id='rcstyle'; st.textContent=css;
+  document.head.appendChild(st);
+ }
+
+ var SVG='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg>';
+
+ var TMPL='<div class="rw">'
+   +'<div class="bar"><span class="num" id="rcnum">0 / 0</span>'
+   +'<div class="pg"><i id="rcpg"></i></div><button class="x" id="rcx">×</button></div>'
+   +'<div class="hd"><span id="rcinfo"></span>'
+   +'<label class="sw"><input type="checkbox" id="rcdue"> 只背到期</label></div>'
+   +'<div class="card" id="rccard">'
+   +'<div class="wd" id="rcwd"></div><div class="ipa" id="rcipa"></div>'
+   +'<button class="spk2" id="rcspk" title="朗读">'+SVG+'</button>'
+   +'<div class="q" id="rcq">看这个词，认不认识？点卡片看释义</div>'
+   +'<div class="ans" id="rcans"><div class="m" id="rcm"></div>'
+   +'<div class="x2" id="rcx2"></div><div class="ex" id="rcex"></div></div>'
+   +'</div>'
+   +'<div class="btns"><button class="no" id="rcno">不认识 <kbd>1</kbd></button>'
+   +'<button class="ok" id="rcok">认识 <kbd>2</kbd></button></div>'
+   +'<div class="key">空格看释义 · 1 不认识（自动进生词本）· 2 认识 · Esc 退出</div>'
+   +'</div>';
+
+ function build(){
+  injectCSS();
+  if(!root){ root=document.createElement('div'); root.id='rcroot'; document.body.appendChild(root); }
+  root.innerHTML='';
+  var box=document.createElement('div'); box.className='rw'; box.innerHTML=TMPL;
+  root.appendChild(box);
+  document.getElementById('rcx').onclick=close;
+  document.getElementById('rccard').onclick=reveal;
+  document.getElementById('rcspk').onclick=function(e){
+   e.stopPropagation();
+   if(window.TTS&&queue[idx]) TTS.speak(queue[idx].w);
+  };
+  document.getElementById('rcno').onclick=function(){ grade(false) };
+  document.getElementById('rcok').onclick=function(){ grade(true) };
+  var cd=document.getElementById('rcdue');
+  cd.addEventListener('change',function(){ onlyDue=cd.checked; start(); });
+ }
+
+ function reveal(){
+  if(!queue[idx]) return;
+  document.getElementById('rcans').classList.add('on');
+  document.getElementById('rcq').style.display='none';
+ }
+ function onKey(e){
+  if(!root||!root.classList.contains('on')) return;
+  if(e.key==='Escape'){ close(); return; }
+  if(e.key===' '||e.key==='Enter'){ e.preventDefault(); reveal(); return; }
+  if(e.key==='1'){ e.preventDefault(); grade(false); return; }
+  if(e.key==='2'){ e.preventDefault(); grade(true); return; }
+ }
+
+ function start(){
+  var arr=items();
+  if(!arr.length){ alert('这一页没有可背的词'); return; }
+  var m=read(), now=Date.now();
+  if(onlyDue){
+   arr=arr.filter(function(r){var o=m[r.w]; return o&&(o.due||0)<=now&&(o.lv||0)<7;});
+   if(!arr.length){ alert('这一页没有到期的词。取消「只背到期」可以全部过一遍。'); return; }
+  }
+  arr.sort(function(a,b){
+   var da=(m[a.w]&&m[a.w].due)||0, db=(m[b.w]&&m[b.w].due)||0;
+   return da-db;
+  });
+  queue=arr; idx=0; yes=0; no=0; started=true;
+  build();
+  var nDue=arr.filter(function(r){var o=m[r.w]; return o&&(o.due||0)<=now&&(o.lv||0)<7;}).length;
+  var nNew=arr.filter(function(r){return !m[r.w]}).length;
+  document.getElementById('rcinfo').textContent=arr.length+' 词 · 到期 '+nDue+' · 未背过 '+nNew;
+  document.getElementById('rcdue').checked=onlyDue;
+  root.classList.add('on');
+  document.body.style.overflow='hidden';
+  paint();
+ }
+
+ function paint(){
+  if(idx>=queue.length) return finish();
+  var r=queue[idx];
+  document.getElementById('rcnum').textContent=(idx+1)+' / '+queue.length;
+  document.getElementById('rcpg').style.width=(idx/queue.length*100)+'%';
+  document.getElementById('rcwd').textContent=r.w;
+  var ipa=document.getElementById('rcipa');
+  ipa.textContent=r.p||''; ipa.style.display=r.p?'':'none';
+  document.getElementById('rcans').classList.remove('on');
+  var q=document.getElementById('rcq'); q.style.display=''; q.textContent='看这个词，认不认识？点卡片看释义';
+  document.getElementById('rcm').textContent=r.m||'—';
+  var x2=document.getElementById('rcx2');
+  x2.textContent=r.x||''; x2.style.display=r.x?'':'none';
+  var ex=document.getElementById('rcex');
+  ex.innerHTML=r.e?('<div class="en">'+esc(r.e)+'</div>'+(r.z?'<div class="zh">'+esc(r.z)+'</div>':'')):'';
+  ex.style.display=r.e?'':'none';
+ }
+
+ function toBook(r){
+  if(window.NB&&NB.has&&NB.has(r.w)) return;
+  var st=r.h&&r.h.querySelector?r.h.querySelector('.star'):null;
+  if(st){ if(!st.classList.contains('on')) st.click(); return; }
+  if(window.NB&&NB.addOne) NB.addOne({w:r.w,p:r.p||'',m:r.m||'',y:'',e:'',z:'',d:'',s:'',c:''});
+ }
+
+ function grade(ok){
+  if(idx>=queue.length) return;
+  var r=queue[idx], m=read(), o=m[r.w]||{lv:0,rv:0,wr:0};
+  if(ok){ o.lv=Math.min(7,(o.lv||0)+1); o.due=Date.now()+INT[o.lv]*864e5; }
+  else  { o.lv=0; o.due=Date.now()+10*6e4; o.wr=(o.wr||0)+1; toBook(r); }
+  o.rv=(o.rv||0)+1; o.lrt=Date.now();
+  m[r.w]=o; save();
+  if(ok) yes++; else no++;
+  if(window.NB&&NB.bump) NB.bump('r');
+  idx++; paint();
+ }
+
+ function fmt(ms){
+  var diff=ms-Date.now();
+  if(diff<=0) return '现在';
+  if(diff<3600e3) return Math.max(1,Math.round(diff/6e4))+' 分钟后';
+  var d=Math.round(diff/864e5);
+  return d<=1?'明天':d+' 天后';
+ }
+
+ function finish(){
+  var m=read(), nxt=null;
+  queue.forEach(function(r){
+   var o=m[r.w]; if(!o||(o.lv||0)>=7) return;
+   if(nxt===null||o.due<nxt) nxt=o.due;
+  });
+  var w=root.querySelector('.rw');
+  w.innerHTML='<div class="done"><h2>这一轮背完了</h2>'
+   +'<p>共 '+queue.length+' 词 · 认识 <b>'+yes+'</b> 次 · 不认识 <b>'+no+'</b> 次<br>'
+   +(no? '不认识的 '+no+' 个词已自动收进生词本，稍后可以在那里复习<br>':'')
+   +(nxt!==null? '下一次到期：'+fmt(nxt) : '这些词都已经标成「已掌握」🎉')+'</p>'
+   +'<div class="acts"><button class="pri" id="rcagain">再背一轮</button>'
+   +'<button id="rcback">关掉</button></div></div>';
+  document.getElementById('rcagain').onclick=function(){ root.classList.remove('on');
+   document.body.style.overflow=''; start(); };
+  document.getElementById('rcback').onclick=close;
+}
+
+ function close(){
+  if(!root) return;
+  root.classList.remove('on');
+  document.body.style.overflow='';
+  paintBtn();
+ }
+
+ function paintBtn(){
+  var b=document.getElementById('rcopen'); if(!b) return;
+  var label=b.dataset.label||b.textContent, arr=items(), m=read(), now=Date.now(), d=0;
+  arr.forEach(function(r){ var o=m[r.w]; if(!o) return; if((o.lv||0)>=7) return; if((o.due||0)<=now) d++; });
+  b.innerHTML=esc(label)+(d?' <b>'+d+'</b>':'');
+ }
+
+ function attach(){
+  var tb=document.querySelector('.toolbar');
+  if(!tb||document.getElementById('rcopen')) return;
+  injectCSS();
+  var b=document.createElement('button');
+  b.id='rcopen'; b.type='button';
+  var label='背诵本单元';
+  b.dataset.label=label; b.textContent=label;
+  b.title='逐词自测：不认识的自动进生词本，认识的按遗忘曲线排期';
+  b.onclick=function(e){ e.preventDefault(); start(); };
+  b.style.bottom=(document.getElementById('nbfab')?'74px':'18px');
+  document.body.appendChild(b);
+  paintBtn();
+ }
+
+ document.addEventListener('keydown',onKey);
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',attach);
+ else attach();
+ if(location.hash==='#recite') setTimeout(function(){ if(document.getElementById('rcopen')) start(); },120);
+ return {start:start,items:items,read:read};
+})();
+window.REC=REC;
 </script>
 </body></html>

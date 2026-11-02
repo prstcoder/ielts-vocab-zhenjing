@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>t</title></head><body>
+<pre id="out">loading</pre>
+<iframe id="f" src="unit01.html" style="width:1000px;height:500px;border:0"></iframe>
+<script>
+document.getElementById('f').onload=function(){
+  var d=document.getElementById('f').contentDocument, w=document.getElementById('f').contentWindow;
+  var log=[];
+  try{localStorage.clear()}catch(e){}
+  d.getElementById('dvon').checked=true;
+  d.getElementById('dvon').dispatchEvent(new Event('change'));
+  log.push('dvon='+d.getElementById('dvon').checked);
+  var stars=d.querySelectorAll('.star');
+  stars[0].click();               // atmosphere（有衍生 atmospheric）
+  stars[20].click();              // 第 21 个词
+  var raw=JSON.parse(localStorage.getItem('vj-book'));
+  log.push('条数='+Object.keys(raw).length+' → '+Object.keys(raw).join(','));
+  log.push('atmosphere记录='+JSON.stringify(raw['atmosphere']).slice(0,220));
+  var at=Object.keys(raw).filter(function(k){return raw[k].pv})[0];
+  log.push('派生记录='+at+' '+JSON.stringify(raw[at]).slice(0,220));
+  log.push('统计='+localStorage.getItem('vj-stat'));
+  var r=Object.keys(raw)[0];
+  log.push('fab='+d.getElementById('nbfab').textContent.trim());
+  document.getElementById('out').textContent=log.join('\n');
+};
+</script>
+</body></html>

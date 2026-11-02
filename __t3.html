@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>t3</title>
+<style>html,body{margin:0;background:#ddd}iframe{width:960px;height:660px;border:0;display:block;margin:0 0 12px}</style></head>
+<body>
+<iframe id="a" src="shengci.html"></iframe>
+<iframe id="b" src="shengci.html"></iframe>
+<script>
+var now=Date.now();
+var seed={atmosphere:{w:'atmosphere',p:'[ˈætməsfɪə(r)]',m:'n. 大气；气氛；氛围',d:'atmospheric|adj.;;atmospherically|adv.|',
+  e:'The approaching examination created a tense atmosphere on the campus.',z:'即将到来的考试在校园里制造了一种紧张气氛。',c:'1',g:'自然地理',t:now,due:now},
+  granite:{w:'granite',p:'[ˈɡrænɪt]',m:'n. 花岗岩',d:'',e:'His grave is made of granite.',z:'他的墓是用花岗石造的。',c:'1',g:'自然地理',t:now,due:now},
+  oxygen:{w:'oxygen',p:'[ˈɒksɪdʒən]',m:'n. 氧；氧气',d:'oxide|n.|氧化物',e:'Plants release oxygen into the air.',z:'植物把氧气释放到空气中。',c:'1',g:'自然地理',t:now,due:now}};
+try{localStorage.setItem('vj-book',JSON.stringify(seed));localStorage.setItem('vj-stat',JSON.stringify({'2026-10-28':{a:0,r:12,c:9},'2026-10-30':{a:3,r:20,c:15},'2026-11-01':{a:2,r:8,c:6},'2026-11-02':{a:3,r:5,c:4}}));}catch(e){}
+document.getElementById('a').onload=function(){
+  var d=this.contentDocument, w=this.contentWindow;
+  d.getElementById('startw').click();
+  d.getElementById('win').value='granit';
+  d.getElementById('win').focus();
+  d.getElementById('win').dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
+};
+document.getElementById('b').onload=function(){
+  var d=this.contentDocument;
+  d.getElementById('start').click();
+  d.getElementById('rcard').click();
+};
+</script>
+</body></html>

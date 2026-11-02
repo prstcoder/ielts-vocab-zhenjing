@@ -7,11 +7,11 @@
 <style>
 :root{
  --bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da;
- --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4;
+ --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4; --green:#2f7d4f;
 }
 @media (prefers-color-scheme: dark){
  :root{ --bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037;
-        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; }
+        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; --green:#6cc38b; }
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -148,6 +148,24 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  td.sv .star{font-size:19px}
  #nbfab{right:12px;bottom:14px;padding:9px 14px;font-size:13px}
 }
+
+/* 朗读按钮 */
+.spk{font-family:inherit;line-height:1;background:transparent;border:0;cursor:pointer;
+ color:var(--ink2);opacity:.4;padding:3px 5px;border-radius:6px;vertical-align:2px;display:inline-flex}
+.spk:hover{opacity:1;color:var(--accent);background:var(--accent-soft)}
+.spk svg{width:13px;height:13px;display:block}
+.card .w .spk svg{width:15px;height:15px}
+.hide-i .spk{display:none}
+
+/* 学习统计 */
+.sp{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 0}
+.spi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:center}
+.spi b{display:block;font-size:20px;font-variant-numeric:tabular-nums;line-height:1.35}
+.spi span{font-size:11.5px;color:var(--ink2)}
+.bars{display:flex;align-items:flex-end;gap:4px;height:46px;margin:14px 0 3px}
+.bars i{flex:1;background:var(--chip);border-radius:3px 3px 0 0;min-height:2px;transition:.2s}
+.bars i.on{background:var(--accent);opacity:.85}
+.axis{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink2);opacity:.75}
 </style>
 </head>
 <body data-kind="card" data-ch="8" data-title="语言演化">
@@ -164,120 +182,156 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
   <label class="sw"><input type="checkbox" id="i"> 隐藏音标</label>
   <label class="sw"><input type="checkbox" id="z"> 隐藏例句译文</label>
   <label class="sw"><input type="checkbox" id="only"> 只看生词</label>
+  <label class="sw" title="点 ☆ 时把该词的派生词一起收进生词本"><input type="checkbox" id="dvon"> ☆带衍生</label>
   <button class="btn" id="reset">重置</button>
   <span class="count" id="cnt">67 条</span>
  </div>
 </div></div><div class="wrap">
 <section class="grp"><div class="ghead"><span class="gtag">词群 01</span><span class="gcnt">2 词</span></div><div class="cards">
-<div class="card" data-s="language n. 语言" data-w="language" data-dv=""><div class="w"><span class="idx">01</span>language<span class="ipa">[ˈlæŋɡwɪdʒ]</span><button class="star" data-star="language" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 语言</div><div class="ex"><div class="en">His misunderstanding of language was the primary cause of his other problems.</div><div class="zh">他对语言的误解是引起其他问题的主要原因。</div></div></div>
-<div class="card" data-s="symbol n. 符号；象征；标志" data-w="symbol" data-dv="symbolic|adj.|;;symbolism|n.|;;symbolize|v.|"><div class="w"><span class="idx">02</span>symbol<span class="ipa">[ˈsɪmb(ə)l]</span><button class="star" data-star="symbol" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 符号；象征；标志<div class="dv"><b>衍生</b><i>symbolic</i><em>adj.</em><span class="sep">·</span><i>symbolism</i><em>n.</em><span class="sep">·</span><i>symbolize</i><em>v.</em></div></div><div class="ex"><div class="en">To them, the monarchy is the special symbol of nationhood.</div><div class="zh">在他们看来,君主制是独立国地位的特殊象征。</div></div></div>
+<div class="card" data-s="language n. 语言" data-w="language" data-dv=""><div class="w"><span class="idx">01</span>language<button class="spk" data-say="language" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈlæŋɡwɪdʒ]</span><button class="star" data-star="language" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 语言</div><div class="ex"><div class="en">His misunderstanding of language was the primary cause of his other problems.</div><div class="zh">他对语言的误解是引起其他问题的主要原因。</div></div></div>
+<div class="card" data-s="symbol n. 符号；象征；标志" data-w="symbol" data-dv="symbolic|adj.|;;symbolism|n.|;;symbolize|v.|"><div class="w"><span class="idx">02</span>symbol<button class="spk" data-say="symbol" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈsɪmb(ə)l]</span><button class="star" data-star="symbol" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 符号；象征；标志<div class="dv"><b>衍生</b><i>symbolic</i><em>adj.</em><span class="sep">·</span><i>symbolism</i><em>n.</em><span class="sep">·</span><i>symbolize</i><em>v.</em></div></div><div class="ex"><div class="en">To them, the monarchy is the special symbol of nationhood.</div><div class="zh">在他们看来,君主制是独立国地位的特殊象征。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 02</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="sign n. 标志；符号；告示牌；手 势；征兆；v. 签名；做标记" data-w="sign" data-dv="signature|n.|;;signify|v.|;;signal|n.|n. 信号；标志；v. 用信号 通知"><div class="w"><span class="idx">03</span>sign<span class="ipa">[saɪn]</span><button class="star" data-star="sign" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 标志；符号；告示牌；手 势；征兆；v. 签名；做标记<div class="dv"><b>衍生</b><i>signature</i><em>n.</em><span class="sep">·</span><i>signify</i><em>v.</em><span class="sep">·</span><i>signal</i><em>n.</em></div></div><div class="ex"><div class="en">Her speech yesterday was a signal that her view has changed.</div><div class="zh">她昨天的讲话是一个信号,反映出她的观点已经转变。</div></div></div>
-<div class="card" data-s="gesture n. 手势；姿态；姿势" data-w="gesture" data-dv=""><div class="w"><span class="idx">04</span>gesture<span class="ipa">[ˈdʒestʃə(r)]</span><button class="star" data-star="gesture" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 手势；姿态；姿势</div><div class="ex"><div class="en">He put his arm round her in a protective gesture.</div><div class="zh">他用一只手臂围住她,做出保护的姿势。</div></div></div>
-<div class="card" data-s="handwriting n. 笔迹；手写" data-w="handwriting" data-dv=""><div class="w"><span class="idx">05</span>handwriting<span class="ipa">[ˈhændraɪtɪŋ]</span><button class="star" data-star="handwriting" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 笔迹；手写</div><div class="ex"><div class="en">The address was in Arina's handwriting.</div><div class="zh">地址是安娜的笔迹。</div></div></div>
+<div class="card" data-s="sign n. 标志；符号；告示牌；手 势；征兆；v. 签名；做标记" data-w="sign" data-dv="signature|n.|;;signify|v.|;;signal|n.|n. 信号；标志；v. 用信号 通知"><div class="w"><span class="idx">03</span>sign<button class="spk" data-say="sign" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[saɪn]</span><button class="star" data-star="sign" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 标志；符号；告示牌；手 势；征兆；v. 签名；做标记<div class="dv"><b>衍生</b><i>signature</i><em>n.</em><span class="sep">·</span><i>signify</i><em>v.</em><span class="sep">·</span><i>signal</i><em>n.</em></div></div><div class="ex"><div class="en">Her speech yesterday was a signal that her view has changed.</div><div class="zh">她昨天的讲话是一个信号,反映出她的观点已经转变。</div></div></div>
+<div class="card" data-s="gesture n. 手势；姿态；姿势" data-w="gesture" data-dv=""><div class="w"><span class="idx">04</span>gesture<button class="spk" data-say="gesture" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈdʒestʃə(r)]</span><button class="star" data-star="gesture" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 手势；姿态；姿势</div><div class="ex"><div class="en">He put his arm round her in a protective gesture.</div><div class="zh">他用一只手臂围住她,做出保护的姿势。</div></div></div>
+<div class="card" data-s="handwriting n. 笔迹；手写" data-w="handwriting" data-dv=""><div class="w"><span class="idx">05</span>handwriting<button class="spk" data-say="handwriting" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈhændraɪtɪŋ]</span><button class="star" data-star="handwriting" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 笔迹；手写</div><div class="ex"><div class="en">The address was in Arina's handwriting.</div><div class="zh">地址是安娜的笔迹。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 03</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="pictograph n. 象形文字；象形图；古 代石壁画" data-w="pictograph" data-dv=""><div class="w"><span class="idx">06</span>pictograph<span class="ipa">[ˈpɪktəɡrɑːf]</span><button class="star" data-star="pictograph" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 象形文字；象形图；古 代石壁画</div><div class="ex"><div class="en">Gen erally speaking, the pictograph text.</div><div class="zh">般而言，象形文字是最早的文字。</div></div></div>
-<div class="card" data-s="wedge n. 楔子；三⻆木；楔形物；v. 把... 楔住 ；将...挤入(或塞进、插入)" data-w="wedge" data-dv=""><div class="w"><span class="idx">07</span>wedge<span class="ipa">[wedʒ]</span><button class="star" data-star="wedge" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 楔子；三⻆木；楔形物；v. 把... 楔住 ；将...挤入(或塞进、插入)</div><div class="ex"><div class="en">Put a wedge under the door so that it will stay open.</div><div class="zh">在门底下塞一块楔子,让门能保持开着。</div></div></div>
-<div class="card" data-s="knot n. (树) 节；结；郁结；群； 簇；节；v. 打结；使纠结；紧绷； 使痉挛" data-w="knot" data-dv="knotted|v.|"><div class="w"><span class="idx">08</span>knot<span class="ipa">[nɒt]</span><button class="star" data-star="knot" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. (树) 节；结；郁结；群； 簇；节；v. 打结；使纠结；紧绷； 使痉挛<div class="dv"><b>衍生</b><i>knotted</i><em>v.</em></div></div><div class="ex"><div class="en">He made a knot in the rope.</div><div class="zh">他在绳子上打了个结。</div></div></div>
+<div class="card" data-s="pictograph n. 象形文字；象形图；古 代石壁画" data-w="pictograph" data-dv=""><div class="w"><span class="idx">06</span>pictograph<button class="spk" data-say="pictograph" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈpɪktəɡrɑːf]</span><button class="star" data-star="pictograph" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 象形文字；象形图；古 代石壁画</div><div class="ex"><div class="en">Gen erally speaking, the pictograph text.</div><div class="zh">般而言，象形文字是最早的文字。</div></div></div>
+<div class="card" data-s="wedge n. 楔子；三⻆木；楔形物；v. 把... 楔住 ；将...挤入(或塞进、插入)" data-w="wedge" data-dv=""><div class="w"><span class="idx">07</span>wedge<button class="spk" data-say="wedge" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[wedʒ]</span><button class="star" data-star="wedge" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 楔子；三⻆木；楔形物；v. 把... 楔住 ；将...挤入(或塞进、插入)</div><div class="ex"><div class="en">Put a wedge under the door so that it will stay open.</div><div class="zh">在门底下塞一块楔子,让门能保持开着。</div></div></div>
+<div class="card" data-s="knot n. (树) 节；结；郁结；群； 簇；节；v. 打结；使纠结；紧绷； 使痉挛" data-w="knot" data-dv="knotted|v.|"><div class="w"><span class="idx">08</span>knot<button class="spk" data-say="knot" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[nɒt]</span><button class="star" data-star="knot" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. (树) 节；结；郁结；群； 簇；节；v. 打结；使纠结；紧绷； 使痉挛<div class="dv"><b>衍生</b><i>knotted</i><em>v.</em></div></div><div class="ex"><div class="en">He made a knot in the rope.</div><div class="zh">他在绳子上打了个结。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 04</span><span class="gcnt">4 词</span></div><div class="cards">
-<div class="card" data-s="linguistics n. 语言学" data-w="linguistics" data-dv=""><div class="w"><span class="idx">09</span>linguistics<span class="ipa">[lɪŋˈɡwɪstɪks]</span><button class="star" data-star="linguistics" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 语言学</div><div class="ex"><div class="en">Linguistics studies how languages change over time.</div><div class="zh">语言学研究语言如何随时间变化。</div></div></div>
-<div class="card" data-s="semantic adj. 语义的" data-w="semantic" data-dv=""><div class="w"><span class="idx">10</span>semantic<span class="ipa">[sɪˈmæntɪk]</span><button class="star" data-star="semantic" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 语义的</div><div class="ex"><div class="en">There are two kinds of puns, phonetic pun and semantic pun.</div><div class="zh">双关语分为谐音双关和语义双关两类。</div></div></div>
-<div class="card" data-s="syntax n. 句法；句子结构学；语 构；语法" data-w="syntax" data-dv=""><div class="w"><span class="idx">11</span>syntax<span class="ipa">[ˈsɪntæks]</span><button class="star" data-star="syntax" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 句法；句子结构学；语 构；语法</div><div class="ex"><div class="en">Let's investigate the syntax of Chinese.</div><div class="zh">让我们研究一下汉语的句法。</div></div></div>
-<div class="card" data-s="grammar n. 语法" data-w="grammar" data-dv=""><div class="w"><span class="idx">12</span>grammar<span class="ipa">[ˈɡræmə(r)]</span><button class="star" data-star="grammar" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 语法</div><div class="ex"><div class="en">He was known for his poor grammar and punctuation.</div><div class="zh">他不通语法和标点的用法,这是出了名的。</div></div></div>
+<div class="card" data-s="linguistics n. 语言学" data-w="linguistics" data-dv=""><div class="w"><span class="idx">09</span>linguistics<button class="spk" data-say="linguistics" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[lɪŋˈɡwɪstɪks]</span><button class="star" data-star="linguistics" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 语言学</div><div class="ex"><div class="en">Linguistics studies how languages change over time.</div><div class="zh">语言学研究语言如何随时间变化。</div></div></div>
+<div class="card" data-s="semantic adj. 语义的" data-w="semantic" data-dv=""><div class="w"><span class="idx">10</span>semantic<button class="spk" data-say="semantic" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[sɪˈmæntɪk]</span><button class="star" data-star="semantic" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 语义的</div><div class="ex"><div class="en">There are two kinds of puns, phonetic pun and semantic pun.</div><div class="zh">双关语分为谐音双关和语义双关两类。</div></div></div>
+<div class="card" data-s="syntax n. 句法；句子结构学；语 构；语法" data-w="syntax" data-dv=""><div class="w"><span class="idx">11</span>syntax<button class="spk" data-say="syntax" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈsɪntæks]</span><button class="star" data-star="syntax" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 句法；句子结构学；语 构；语法</div><div class="ex"><div class="en">Let's investigate the syntax of Chinese.</div><div class="zh">让我们研究一下汉语的句法。</div></div></div>
+<div class="card" data-s="grammar n. 语法" data-w="grammar" data-dv=""><div class="w"><span class="idx">12</span>grammar<button class="spk" data-say="grammar" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈɡræmə(r)]</span><button class="star" data-star="grammar" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 语法</div><div class="ex"><div class="en">He was known for his poor grammar and punctuation.</div><div class="zh">他不通语法和标点的用法,这是出了名的。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 05</span><span class="gcnt">4 词</span></div><div class="cards">
-<div class="card" data-s="phonetics n. 语音学；adj. 语音的； 发音的" data-w="phonetics" data-dv=""><div class="w"><span class="idx">13</span>phonetics<span class="ipa">[fəˈnetɪks]</span><button class="star" data-star="phonetics" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 语音学；adj. 语音的； 发音的</div><div class="ex"><div class="en">Daniel Jones is generally referred to be the foremost authority on phonetics.</div><div class="zh">丹尼尔・琼斯通常被认为是语音学方面最具权威性的人。</div></div></div>
-<div class="card" data-s="pronounce v. 发音；宣告" data-w="pronounce" data-dv="pronunciation|n.|"><div class="w"><span class="idx">14</span>pronounce<span class="ipa">[prəˈnaʊns]</span><button class="star" data-star="pronounce" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 发音；宣告<div class="dv"><b>衍生</b><i>pronunciation</i><em>n.</em></div></div><div class="ex"><div class="en">Did I pronounce your name correctly?</div><div class="zh">我念对你的名字了吗?</div></div></div>
-<div class="card" data-s="intonation n. 语调；声调；音准" data-w="intonation" data-dv=""><div class="w"><span class="idx">15</span>intonation<span class="ipa">[ˌɪntəˈneɪʃ(ə)n]</span><button class="star" data-star="intonation" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 语调；声调；音准</div><div class="ex"><div class="en">Some questions are spoken with a rising intonation.</div><div class="zh">一些疑问句是以升调说出来的。</div></div></div>
-<div class="card" data-s="inflection n. 变音；转调；曲折变化" data-w="inflection" data-dv=""><div class="w"><span class="idx">16</span>inflection<span class="ipa">[ɪnˈflekʃ(ə)n]</span><button class="star" data-star="inflection" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 变音；转调；曲折变化</div><div class="ex"><div class="en">She spoke in a low voice, always without inflection.</div><div class="zh">她的嗓音低,说话总是毫无抑扬变化。</div></div></div>
+<div class="card" data-s="phonetics n. 语音学；adj. 语音的； 发音的" data-w="phonetics" data-dv=""><div class="w"><span class="idx">13</span>phonetics<button class="spk" data-say="phonetics" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[fəˈnetɪks]</span><button class="star" data-star="phonetics" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 语音学；adj. 语音的； 发音的</div><div class="ex"><div class="en">Daniel Jones is generally referred to be the foremost authority on phonetics.</div><div class="zh">丹尼尔・琼斯通常被认为是语音学方面最具权威性的人。</div></div></div>
+<div class="card" data-s="pronounce v. 发音；宣告" data-w="pronounce" data-dv="pronunciation|n.|"><div class="w"><span class="idx">14</span>pronounce<button class="spk" data-say="pronounce" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[prəˈnaʊns]</span><button class="star" data-star="pronounce" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 发音；宣告<div class="dv"><b>衍生</b><i>pronunciation</i><em>n.</em></div></div><div class="ex"><div class="en">Did I pronounce your name correctly?</div><div class="zh">我念对你的名字了吗?</div></div></div>
+<div class="card" data-s="intonation n. 语调；声调；音准" data-w="intonation" data-dv=""><div class="w"><span class="idx">15</span>intonation<button class="spk" data-say="intonation" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˌɪntəˈneɪʃ(ə)n]</span><button class="star" data-star="intonation" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 语调；声调；音准</div><div class="ex"><div class="en">Some questions are spoken with a rising intonation.</div><div class="zh">一些疑问句是以升调说出来的。</div></div></div>
+<div class="card" data-s="inflection n. 变音；转调；曲折变化" data-w="inflection" data-dv=""><div class="w"><span class="idx">16</span>inflection<button class="spk" data-say="inflection" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ɪnˈflekʃ(ə)n]</span><button class="star" data-star="inflection" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 变音；转调；曲折变化</div><div class="ex"><div class="en">She spoke in a low voice, always without inflection.</div><div class="zh">她的嗓音低,说话总是毫无抑扬变化。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 06</span><span class="gcnt">5 词</span></div><div class="cards">
-<div class="card" data-s="dialect n. 方言；地方话" data-w="dialect" data-dv=""><div class="w"><span class="idx">17</span>dialect<span class="ipa">[ˈdaɪəlekt]</span><button class="star" data-star="dialect" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 方言；地方话</div><div class="ex"><div class="en">The dialect is spoken principally in the southern are as.</div><div class="zh">这种方言主要在南部地区使用。</div></div></div>
-<div class="card" data-s="accent n. 口音；腔调；v. 强调； 重读" data-w="accent" data-dv=""><div class="w"><span class="idx">18</span>accent<span class="ipa">[ˈæksent]</span><button class="star" data-star="accent" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 口音；腔调；v. 强调； 重读</div><div class="ex"><div class="en">He speaks with a strong southern accent.</div><div class="zh">他说话带有很浓的南方口音。</div></div></div>
-<div class="card" data-s="utterance n. 言辞；言语；言论" data-w="utterance" data-dv=""><div class="w"><span class="idx">19</span>utterance<span class="ipa">[ˈʌtərəns]</span><button class="star" data-star="utterance" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 言辞；言语；言论</div><div class="ex"><div class="en">His every utterance will be scrutinised.</div><div class="zh">他说的每句话都会被仔细审查。</div></div></div>
-<div class="card" data-s="oral adj. 口述的；口头的" data-w="oral" data-dv="orally|adv.|"><div class="w"><span class="idx">20</span>oral<span class="ipa">[ˈɔːrəl]</span><button class="star" data-star="oral" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 口述的；口头的<div class="dv"><b>衍生</b><i>orally</i><em>adv.</em></div></div><div class="ex"><div class="en">Students of English should have a lot of oral ckills.</div><div class="zh">学英语的学生应多做口头练习。</div></div></div>
-<div class="card" data-s="verbal adj. 口头的；语言的；用 词的；动词的" data-w="verbal" data-dv="verbally|adv.|"><div class="w"><span class="idx">21</span>verbal<span class="ipa">[ˈvɜːb(ə)l]</span><button class="star" data-star="verbal" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 口头的；语言的；用 词的；动词的<div class="dv"><b>衍生</b><i>verbally</i><em>adv.</em></div></div><div class="ex"><div class="en">Don't be afraid of verbal abuse or criticism.</div><div class="zh">不要害怕口头上的辱骂或批评。</div></div></div>
+<div class="card" data-s="dialect n. 方言；地方话" data-w="dialect" data-dv=""><div class="w"><span class="idx">17</span>dialect<button class="spk" data-say="dialect" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈdaɪəlekt]</span><button class="star" data-star="dialect" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 方言；地方话</div><div class="ex"><div class="en">The dialect is spoken principally in the southern are as.</div><div class="zh">这种方言主要在南部地区使用。</div></div></div>
+<div class="card" data-s="accent n. 口音；腔调；v. 强调； 重读" data-w="accent" data-dv=""><div class="w"><span class="idx">18</span>accent<button class="spk" data-say="accent" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈæksent]</span><button class="star" data-star="accent" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 口音；腔调；v. 强调； 重读</div><div class="ex"><div class="en">He speaks with a strong southern accent.</div><div class="zh">他说话带有很浓的南方口音。</div></div></div>
+<div class="card" data-s="utterance n. 言辞；言语；言论" data-w="utterance" data-dv=""><div class="w"><span class="idx">19</span>utterance<button class="spk" data-say="utterance" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈʌtərəns]</span><button class="star" data-star="utterance" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 言辞；言语；言论</div><div class="ex"><div class="en">His every utterance will be scrutinised.</div><div class="zh">他说的每句话都会被仔细审查。</div></div></div>
+<div class="card" data-s="oral adj. 口述的；口头的" data-w="oral" data-dv="orally|adv.|"><div class="w"><span class="idx">20</span>oral<button class="spk" data-say="oral" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈɔːrəl]</span><button class="star" data-star="oral" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 口述的；口头的<div class="dv"><b>衍生</b><i>orally</i><em>adv.</em></div></div><div class="ex"><div class="en">Students of English should have a lot of oral ckills.</div><div class="zh">学英语的学生应多做口头练习。</div></div></div>
+<div class="card" data-s="verbal adj. 口头的；语言的；用 词的；动词的" data-w="verbal" data-dv="verbally|adv.|"><div class="w"><span class="idx">21</span>verbal<button class="spk" data-say="verbal" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈvɜːb(ə)l]</span><button class="star" data-star="verbal" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 口头的；语言的；用 词的；动词的<div class="dv"><b>衍生</b><i>verbally</i><em>adv.</em></div></div><div class="ex"><div class="en">Don't be afraid of verbal abuse or criticism.</div><div class="zh">不要害怕口头上的辱骂或批评。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 07</span><span class="gcnt">4 词</span></div><div class="cards">
-<div class="card" data-s="syllable n. 音节" data-w="syllable" data-dv=""><div class="w"><span class="idx">22</span>syllable<span class="ipa">[ˈsɪləb(ə)l]</span><button class="star" data-star="syllable" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 音节</div><div class="ex"><div class="en">The stress is on the last syllable.</div><div class="zh">重音在最后一个音节上。</div></div></div>
-<div class="card" data-s="phoneme n. 音位" data-w="phoneme" data-dv=""><div class="w"><span class="idx">23</span>phoneme<span class="ipa">[ˈfəʊniːm]</span><button class="star" data-star="phoneme" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 音位</div><div class="ex"><div class="en">In actual speech, a phoneme is realised phonetically as a certain phone.</div><div class="zh">在实际会话中,音位以某个音素的形式通过语音体现出来。</div></div></div>
-<div class="card" data-s="vowel n. 元音；母音" data-w="vowel" data-dv=""><div class="w"><span class="idx">24</span>vowel<span class="ipa">[ˈvaʊəl]</span><button class="star" data-star="vowel" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 元音；母音</div><div class="ex"><div class="en">Some languages have only five vowels.</div><div class="zh">有些语言只有五个元音。</div></div></div>
-<div class="card" data-s="consonant n. 辅音；辅音字母；adj. 一致的；相符的" data-w="consonant" data-dv="consonantly|adv.|;;consonantness|n.|"><div class="w"><span class="idx">25</span>consonant<span class="ipa">[ˈkɒnsənənt]</span><button class="star" data-star="consonant" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 辅音；辅音字母；adj. 一致的；相符的<div class="dv"><b>衍生</b><i>consonantly</i><em>adv.</em><span class="sep">·</span><i>consonantness</i><em>n.</em></div></div><div class="ex"><div class="en">These are common consonant clusters at the beginning of words.</div><div class="zh">这些是单词开头常见的辅音组合。</div></div></div>
+<div class="card" data-s="syllable n. 音节" data-w="syllable" data-dv=""><div class="w"><span class="idx">22</span>syllable<button class="spk" data-say="syllable" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈsɪləb(ə)l]</span><button class="star" data-star="syllable" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 音节</div><div class="ex"><div class="en">The stress is on the last syllable.</div><div class="zh">重音在最后一个音节上。</div></div></div>
+<div class="card" data-s="phoneme n. 音位" data-w="phoneme" data-dv=""><div class="w"><span class="idx">23</span>phoneme<button class="spk" data-say="phoneme" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈfəʊniːm]</span><button class="star" data-star="phoneme" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 音位</div><div class="ex"><div class="en">In actual speech, a phoneme is realised phonetically as a certain phone.</div><div class="zh">在实际会话中,音位以某个音素的形式通过语音体现出来。</div></div></div>
+<div class="card" data-s="vowel n. 元音；母音" data-w="vowel" data-dv=""><div class="w"><span class="idx">24</span>vowel<button class="spk" data-say="vowel" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈvaʊəl]</span><button class="star" data-star="vowel" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 元音；母音</div><div class="ex"><div class="en">Some languages have only five vowels.</div><div class="zh">有些语言只有五个元音。</div></div></div>
+<div class="card" data-s="consonant n. 辅音；辅音字母；adj. 一致的；相符的" data-w="consonant" data-dv="consonantly|adv.|;;consonantness|n.|"><div class="w"><span class="idx">25</span>consonant<button class="spk" data-say="consonant" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈkɒnsənənt]</span><button class="star" data-star="consonant" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 辅音；辅音字母；adj. 一致的；相符的<div class="dv"><b>衍生</b><i>consonantly</i><em>adv.</em><span class="sep">·</span><i>consonantness</i><em>n.</em></div></div><div class="ex"><div class="en">These are common consonant clusters at the beginning of words.</div><div class="zh">这些是单词开头常见的辅音组合。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 08</span><span class="gcnt">4 词</span></div><div class="cards">
-<div class="card" data-s="alphabet n. 字母表" data-w="alphabet" data-dv=""><div class="w"><span class="idx">26</span>alphabet<span class="ipa">[ˈælfəbet]</span><button class="star" data-star="alphabet" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 字母表</div><div class="ex"><div class="en">Q comes between Pand R in the English alphabet.</div><div class="zh">在英语字母表中,Q在和之间。</div></div></div>
-<div class="card" data-s="logogram n. 词符" data-w="logogram" data-dv=""><div class="w"><span class="idx">27</span>logogram<span class="ipa">[ˈlɒɡəɡræm]</span><button class="star" data-star="logogram" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 词符</div><div class="ex"><div class="en">Chinese characters are logograms.</div><div class="zh">汉字是表意符号。</div></div></div>
-<div class="card" data-s="vocabulary n. 词汇量；词汇表" data-w="vocabulary" data-dv=""><div class="w"><span class="idx">28</span>vocabulary<span class="ipa">[vəˈkæbjələri]</span><button class="star" data-star="vocabulary" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 词汇量；词汇表</div><div class="ex"><div class="en">His vocabulary was sound and his grammar was excellent.</div><div class="zh">他的词汇丰富,语法也很精通。</div></div></div>
-<div class="card" data-s="dictionary n. 词典；字典" data-w="dictionary" data-dv=""><div class="w"><span class="idx">29</span>dictionary<span class="ipa">[ˈdɪkʃənri]</span><button class="star" data-star="dictionary" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 词典；字典</div><div class="ex"><div class="en">The dictionary is a vast treasure trove of information.</div><div class="zh">那本词典是巨大的信息宝库。</div></div></div>
+<div class="card" data-s="alphabet n. 字母表" data-w="alphabet" data-dv=""><div class="w"><span class="idx">26</span>alphabet<button class="spk" data-say="alphabet" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈælfəbet]</span><button class="star" data-star="alphabet" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 字母表</div><div class="ex"><div class="en">Q comes between Pand R in the English alphabet.</div><div class="zh">在英语字母表中,Q在和之间。</div></div></div>
+<div class="card" data-s="logogram n. 词符" data-w="logogram" data-dv=""><div class="w"><span class="idx">27</span>logogram<button class="spk" data-say="logogram" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈlɒɡəɡræm]</span><button class="star" data-star="logogram" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 词符</div><div class="ex"><div class="en">Chinese characters are logograms.</div><div class="zh">汉字是表意符号。</div></div></div>
+<div class="card" data-s="vocabulary n. 词汇量；词汇表" data-w="vocabulary" data-dv=""><div class="w"><span class="idx">28</span>vocabulary<button class="spk" data-say="vocabulary" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[vəˈkæbjələri]</span><button class="star" data-star="vocabulary" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 词汇量；词汇表</div><div class="ex"><div class="en">His vocabulary was sound and his grammar was excellent.</div><div class="zh">他的词汇丰富,语法也很精通。</div></div></div>
+<div class="card" data-s="dictionary n. 词典；字典" data-w="dictionary" data-dv=""><div class="w"><span class="idx">29</span>dictionary<button class="spk" data-say="dictionary" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈdɪkʃənri]</span><button class="star" data-star="dictionary" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 词典；字典</div><div class="ex"><div class="en">The dictionary is a vast treasure trove of information.</div><div class="zh">那本词典是巨大的信息宝库。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 09</span><span class="gcnt">5 词</span></div><div class="cards">
-<div class="card" data-s="idiom n. 成语；习语；惯用语" data-w="idiom" data-dv=""><div class="w"><span class="idx">30</span>idiom<span class="ipa">[ˈɪdiəm]</span><button class="star" data-star="idiom" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 成语；习语；惯用语</div><div class="ex"><div class="en">"Break the ice" is a common English idiom.</div><div class="zh">“break the ice”是一个常见的英语习语。</div></div></div>
-<div class="card" data-s="phrase n. 短语；词组；v. 叙述； 措辞" data-w="phrase" data-dv=""><div class="w"><span class="idx">31</span>phrase<span class="ipa">[freɪz]</span><button class="star" data-star="phrase" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 短语；词组；v. 叙述； 措辞</div><div class="ex"><div class="en">The phrase was not meant to be taken seriously.</div><div class="zh">该说法是不必当真的。</div></div></div>
-<div class="card" data-s="clause n. 从句；条款" data-w="clause" data-dv=""><div class="w"><span class="idx">32</span>clause<span class="ipa">[klɔːz]</span><button class="star" data-star="clause" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 从句；条款</div><div class="ex"><div class="en">A con fide ntiality clause was added to the contract.</div><div class="zh">合同附加了一条保密条款。</div></div></div>
-<div class="card" data-s="expression n. 表达；表情；措辞" data-w="expression" data-dv=""><div class="w"><span class="idx">33</span>expression<span class="ipa">[ɪkˈspreʃ(ə)n]</span><button class="star" data-star="expression" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 表达；表情；措辞</div><div class="ex"><div class="en">Her expression of gratitude was simple and touching.</div><div class="zh">她把感激之情表达得简单而动人。</div></div></div>
-<div class="card" data-s="tense adj. 紧张的；拉紧的；n. 时态" data-w="tense" data-dv="tensely|adv.|;;tenseness|n.|;;intense|adj.|"><div class="w"><span class="idx">34</span>tense<span class="ipa">[tens]</span><button class="star" data-star="tense" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 紧张的；拉紧的；n. 时态<div class="dv"><b>衍生</b><i>tensely</i><em>adv.</em><span class="sep">·</span><i>tenseness</i><em>n.</em><span class="sep">·</span><i>intense</i><em>adj.</em></div></div><div class="ex"><div class="en">The past tense of go is went.</div><div class="zh">go 的过去式是 went。</div></div></div>
+<div class="card" data-s="idiom n. 成语；习语；惯用语" data-w="idiom" data-dv=""><div class="w"><span class="idx">30</span>idiom<button class="spk" data-say="idiom" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈɪdiəm]</span><button class="star" data-star="idiom" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 成语；习语；惯用语</div><div class="ex"><div class="en">"Break the ice" is a common English idiom.</div><div class="zh">“break the ice”是一个常见的英语习语。</div></div></div>
+<div class="card" data-s="phrase n. 短语；词组；v. 叙述； 措辞" data-w="phrase" data-dv=""><div class="w"><span class="idx">31</span>phrase<button class="spk" data-say="phrase" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[freɪz]</span><button class="star" data-star="phrase" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 短语；词组；v. 叙述； 措辞</div><div class="ex"><div class="en">The phrase was not meant to be taken seriously.</div><div class="zh">该说法是不必当真的。</div></div></div>
+<div class="card" data-s="clause n. 从句；条款" data-w="clause" data-dv=""><div class="w"><span class="idx">32</span>clause<button class="spk" data-say="clause" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[klɔːz]</span><button class="star" data-star="clause" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 从句；条款</div><div class="ex"><div class="en">A con fide ntiality clause was added to the contract.</div><div class="zh">合同附加了一条保密条款。</div></div></div>
+<div class="card" data-s="expression n. 表达；表情；措辞" data-w="expression" data-dv=""><div class="w"><span class="idx">33</span>expression<button class="spk" data-say="expression" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ɪkˈspreʃ(ə)n]</span><button class="star" data-star="expression" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 表达；表情；措辞</div><div class="ex"><div class="en">Her expression of gratitude was simple and touching.</div><div class="zh">她把感激之情表达得简单而动人。</div></div></div>
+<div class="card" data-s="tense adj. 紧张的；拉紧的；n. 时态" data-w="tense" data-dv="tensely|adv.|;;tenseness|n.|;;intense|adj.|"><div class="w"><span class="idx">34</span>tense<button class="spk" data-say="tense" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[tens]</span><button class="star" data-star="tense" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 紧张的；拉紧的；n. 时态<div class="dv"><b>衍生</b><i>tensely</i><em>adv.</em><span class="sep">·</span><i>tenseness</i><em>n.</em><span class="sep">·</span><i>intense</i><em>adj.</em></div></div><div class="ex"><div class="en">The past tense of go is went.</div><div class="zh">go 的过去式是 went。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 10</span><span class="gcnt">2 词</span></div><div class="cards">
-<div class="card" data-s="prefix n. 前缀；v. 在...前面加" data-w="prefix" data-dv=""><div class="w"><span class="idx">35</span>prefix<span class="ipa">[ˈpriːfɪks]</span><button class="star" data-star="prefix" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 前缀；v. 在...前面加</div><div class="ex"><div class="en">To make calls from Canada, use the prefix 01133 before the numbers given here.</div><div class="zh">如果从加拿大打电话过来,要在我们给的号码前加拨01133。</div></div></div>
-<div class="card" data-s="suffix n. 后缀；词尾" data-w="suffix" data-dv=""><div class="w"><span class="idx">36</span>suffix<span class="ipa">[ˈsʌfɪks]</span><button class="star" data-star="suffix" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 后缀；词尾</div><div class="ex"><div class="en">These ships were all numbered with the same suffix.</div><div class="zh">这些船都有编号,且尾标是一样的。</div></div></div>
+<div class="card" data-s="prefix n. 前缀；v. 在...前面加" data-w="prefix" data-dv=""><div class="w"><span class="idx">35</span>prefix<button class="spk" data-say="prefix" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈpriːfɪks]</span><button class="star" data-star="prefix" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 前缀；v. 在...前面加</div><div class="ex"><div class="en">To make calls from Canada, use the prefix 01133 before the numbers given here.</div><div class="zh">如果从加拿大打电话过来,要在我们给的号码前加拨01133。</div></div></div>
+<div class="card" data-s="suffix n. 后缀；词尾" data-w="suffix" data-dv=""><div class="w"><span class="idx">36</span>suffix<button class="spk" data-say="suffix" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈsʌfɪks]</span><button class="star" data-star="suffix" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 后缀；词尾</div><div class="ex"><div class="en">These ships were all numbered with the same suffix.</div><div class="zh">这些船都有编号,且尾标是一样的。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 11</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="abbreviation n. 缩写；略号" data-w="abbreviation" data-dv=""><div class="w"><span class="idx">37</span>abbreviation<span class="ipa">[əˌbriːviˈeɪʃ(ə)n]</span><button class="star" data-star="abbreviation" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 缩写；略号</div><div class="ex"><div class="en">BBC is an abbreviation for British Broadcasting Corporation.</div><div class="zh">是“英国广播公司”的缩写。</div></div></div>
-<div class="card" data-s="synonym n. 同义词" data-w="synonym" data-dv="synonymous|adj.|"><div class="w"><span class="idx">38</span>synonym<span class="ipa">[ˈsɪnənɪm]</span><button class="star" data-star="synonym" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 同义词<div class="dv"><b>衍生</b><i>synonymous</i><em>adj.</em></div></div><div class="ex"><div class="en">Big is a synonym of large.</div><div class="zh">big 是 large 的同义词。</div></div></div>
-<div class="card" data-s="antonym n. 反义词" data-w="antonym" data-dv=""><div class="w"><span class="idx">39</span>antonym<span class="ipa">[ˈæntənɪm]</span><button class="star" data-star="antonym" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 反义词</div><div class="ex"><div class="en">Hot is the antonym of cold.</div><div class="zh">hot 是 cold 的反义词。</div></div></div>
+<div class="card" data-s="abbreviation n. 缩写；略号" data-w="abbreviation" data-dv=""><div class="w"><span class="idx">37</span>abbreviation<button class="spk" data-say="abbreviation" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[əˌbriːviˈeɪʃ(ə)n]</span><button class="star" data-star="abbreviation" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 缩写；略号</div><div class="ex"><div class="en">BBC is an abbreviation for British Broadcasting Corporation.</div><div class="zh">是“英国广播公司”的缩写。</div></div></div>
+<div class="card" data-s="synonym n. 同义词" data-w="synonym" data-dv="synonymous|adj.|"><div class="w"><span class="idx">38</span>synonym<button class="spk" data-say="synonym" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈsɪnənɪm]</span><button class="star" data-star="synonym" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 同义词<div class="dv"><b>衍生</b><i>synonymous</i><em>adj.</em></div></div><div class="ex"><div class="en">Big is a synonym of large.</div><div class="zh">big 是 large 的同义词。</div></div></div>
+<div class="card" data-s="antonym n. 反义词" data-w="antonym" data-dv=""><div class="w"><span class="idx">39</span>antonym<button class="spk" data-say="antonym" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈæntənɪm]</span><button class="star" data-star="antonym" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 反义词</div><div class="ex"><div class="en">Hot is the antonym of cold.</div><div class="zh">hot 是 cold 的反义词。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 12</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="noun n. 名词" data-w="noun" data-dv=""><div class="w"><span class="idx">40</span>noun<span class="ipa">[naʊn]</span><button class="star" data-star="noun" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 名词</div><div class="ex"><div class="en">Every sentence needs a noun or a pronoun.</div><div class="zh">每个句子都需要名词或代词。</div></div></div>
-<div class="card" data-s="singular adj. 单数的；单个的；特 异的" data-w="singular" data-dv="singularly|adv.|;;singularity|n.|;;singularness|n.|"><div class="w"><span class="idx">41</span>singular<span class="ipa">[ˈsɪŋɡjələ(r)]</span><button class="star" data-star="singular" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 单数的；单个的；特 异的<div class="dv"><b>衍生</b><i>singularly</i><em>adv.</em><span class="sep">·</span><i>singularity</i><em>n.</em><span class="sep">·</span><i>singularness</i><em>n.</em></div></div><div class="ex"><div class="en">The young man has a singular ear for music.</div><div class="zh">这个年轻人对音乐有非凡的鉴赏力。</div></div></div>
-<div class="card" data-s="plural n. 复数；adj. 复数的；多 元的" data-w="plural" data-dv="plurally|adv.|"><div class="w"><span class="idx">42</span>plural<span class="ipa">[ˈplʊərəl]</span><button class="star" data-star="plural" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 复数；adj. 复数的；多 元的<div class="dv"><b>衍生</b><i>plurally</i><em>adv.</em></div></div><div class="ex"><div class="en">A plural marriage is forbidden by many countries.</div><div class="zh">一夫多妻或一妻多夫形式的婚姻被许多国家禁止。</div></div></div>
+<div class="card" data-s="noun n. 名词" data-w="noun" data-dv=""><div class="w"><span class="idx">40</span>noun<button class="spk" data-say="noun" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[naʊn]</span><button class="star" data-star="noun" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 名词</div><div class="ex"><div class="en">Every sentence needs a noun or a pronoun.</div><div class="zh">每个句子都需要名词或代词。</div></div></div>
+<div class="card" data-s="singular adj. 单数的；单个的；特 异的" data-w="singular" data-dv="singularly|adv.|;;singularity|n.|;;singularness|n.|"><div class="w"><span class="idx">41</span>singular<button class="spk" data-say="singular" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈsɪŋɡjələ(r)]</span><button class="star" data-star="singular" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 单数的；单个的；特 异的<div class="dv"><b>衍生</b><i>singularly</i><em>adv.</em><span class="sep">·</span><i>singularity</i><em>n.</em><span class="sep">·</span><i>singularness</i><em>n.</em></div></div><div class="ex"><div class="en">The young man has a singular ear for music.</div><div class="zh">这个年轻人对音乐有非凡的鉴赏力。</div></div></div>
+<div class="card" data-s="plural n. 复数；adj. 复数的；多 元的" data-w="plural" data-dv="plurally|adv.|"><div class="w"><span class="idx">42</span>plural<button class="spk" data-say="plural" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈplʊərəl]</span><button class="star" data-star="plural" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 复数；adj. 复数的；多 元的<div class="dv"><b>衍生</b><i>plurally</i><em>adv.</em></div></div><div class="ex"><div class="en">A plural marriage is forbidden by many countries.</div><div class="zh">一夫多妻或一妻多夫形式的婚姻被许多国家禁止。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 13</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="pronoun n. 代词" data-w="pronoun" data-dv=""><div class="w"><span class="idx">43</span>pronoun<span class="ipa">[ˈprəʊnaʊn]</span><button class="star" data-star="pronoun" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 代词</div><div class="ex"><div class="en">He always put the stress on the pronoun.</div><div class="zh">他总是重读代词。</div></div></div>
-<div class="card" data-s="verb n. 动词" data-w="verb" data-dv=""><div class="w"><span class="idx">44</span>verb<span class="ipa">[vɜːb]</span><button class="star" data-star="verb" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 动词</div><div class="ex"><div class="en">A sentence usually contains a subject and a verb.</div><div class="zh">一个句子通常包含主语和动词。</div></div></div>
-<div class="card" data-s="adjective adj. 形容词的；n. 形容词" data-w="adjective" data-dv="adjectively|adv.|"><div class="w"><span class="idx">45</span>adjective<span class="ipa">[ˈædʒɪktɪv]</span><button class="star" data-star="adjective" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 形容词的；n. 形容词<div class="dv"><b>衍生</b><i>adjectively</i><em>adv.</em></div></div><div class="ex"><div class="en">The function of an adjective is to describe or add to the meaning of a noun.</div><div class="zh">形容词的作用是描述某个名词或对其含义进行补充说明。</div></div></div>
+<div class="card" data-s="pronoun n. 代词" data-w="pronoun" data-dv=""><div class="w"><span class="idx">43</span>pronoun<button class="spk" data-say="pronoun" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈprəʊnaʊn]</span><button class="star" data-star="pronoun" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 代词</div><div class="ex"><div class="en">He always put the stress on the pronoun.</div><div class="zh">他总是重读代词。</div></div></div>
+<div class="card" data-s="verb n. 动词" data-w="verb" data-dv=""><div class="w"><span class="idx">44</span>verb<button class="spk" data-say="verb" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[vɜːb]</span><button class="star" data-star="verb" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 动词</div><div class="ex"><div class="en">A sentence usually contains a subject and a verb.</div><div class="zh">一个句子通常包含主语和动词。</div></div></div>
+<div class="card" data-s="adjective adj. 形容词的；n. 形容词" data-w="adjective" data-dv="adjectively|adv.|"><div class="w"><span class="idx">45</span>adjective<button class="spk" data-say="adjective" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈædʒɪktɪv]</span><button class="star" data-star="adjective" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 形容词的；n. 形容词<div class="dv"><b>衍生</b><i>adjectively</i><em>adv.</em></div></div><div class="ex"><div class="en">The function of an adjective is to describe or add to the meaning of a noun.</div><div class="zh">形容词的作用是描述某个名词或对其含义进行补充说明。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 14</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="adverb n. 副词" data-w="adverb" data-dv=""><div class="w"><span class="idx">46</span>adverb<span class="ipa">[ˈædvɜːb]</span><button class="star" data-star="adverb" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 副词</div><div class="ex"><div class="en">The adverb quickly describes how she ran.</div><div class="zh">副词 quickly 描述她怎样跑。</div></div></div>
-<div class="card" data-s="preposition n. 介词" data-w="preposition" data-dv=""><div class="w"><span class="idx">47</span>preposition<span class="ipa">[ˌprepəˈzɪʃ(ə)n]</span><button class="star" data-star="preposition" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 介词</div><div class="ex"><div class="en">The preposition in shows position.</div><div class="zh">介词 in 表示位置。</div></div></div>
-<div class="card" data-s="conjunction n. 联合；连接词；同时发 生" data-w="conjunction" data-dv=""><div class="w"><span class="idx">48</span>conjunction<span class="ipa">[kənˈdʒʌŋkʃ(ə)n]</span><button class="star" data-star="conjunction" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 联合；连接词；同时发 生</div><div class="ex"><div class="en">The word is a temporal conjunction.</div><div class="zh">该词是表示时间的连词。</div></div></div>
+<div class="card" data-s="adverb n. 副词" data-w="adverb" data-dv=""><div class="w"><span class="idx">46</span>adverb<button class="spk" data-say="adverb" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈædvɜːb]</span><button class="star" data-star="adverb" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 副词</div><div class="ex"><div class="en">The adverb quickly describes how she ran.</div><div class="zh">副词 quickly 描述她怎样跑。</div></div></div>
+<div class="card" data-s="preposition n. 介词" data-w="preposition" data-dv=""><div class="w"><span class="idx">47</span>preposition<button class="spk" data-say="preposition" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˌprepəˈzɪʃ(ə)n]</span><button class="star" data-star="preposition" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 介词</div><div class="ex"><div class="en">The preposition in shows position.</div><div class="zh">介词 in 表示位置。</div></div></div>
+<div class="card" data-s="conjunction n. 联合；连接词；同时发 生" data-w="conjunction" data-dv=""><div class="w"><span class="idx">48</span>conjunction<button class="spk" data-say="conjunction" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[kənˈdʒʌŋkʃ(ə)n]</span><button class="star" data-star="conjunction" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 联合；连接词；同时发 生</div><div class="ex"><div class="en">The word is a temporal conjunction.</div><div class="zh">该词是表示时间的连词。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 15</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="consistent adj. 一致的；始终如一的" data-w="consistent" data-dv="consistently|adv.|;;inconsistent|adj.|"><div class="w"><span class="idx">49</span>consistent<span class="ipa">[kənˈsɪstənt]</span><button class="star" data-star="consistent" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 一致的；始终如一的<div class="dv"><b>衍生</b><i>consistently</i><em>adv.</em><span class="sep">·</span><i>inconsistent</i><em>adj.</em></div></div><div class="ex"><div class="en">The policies which will be put into place are clear and consistent.</div><div class="zh">将要实施的这些政策内容清楚连贯。</div></div></div>
-<div class="card" data-s="complicated adj. 复杂的" data-w="complicated" data-dv="complicatedly|adv.|;;complicatedness|n.|;;uncomplicated|adj.|"><div class="w"><span class="idx">50</span>complicated<span class="ipa">[ˈkɒmplɪkeɪtɪd]</span><button class="star" data-star="complicated" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 复杂的<div class="dv"><b>衍生</b><i>complicatedly</i><em>adv.</em><span class="sep">·</span><i>complicatedness</i><em>n.</em><span class="sep">·</span><i>uncomplicated</i><em>adj.</em></div></div><div class="ex"><div class="en">The business is a large, complicated organism.</div><div class="zh">该企业是一个大而复杂的有机组织。</div></div></div>
-<div class="card" data-s="complex adj. 复杂的；费解的；n. 综合楼(群)；情结" data-w="complex" data-dv="complexly|adv.|;;complexity|n.|;;complexness|n.|"><div class="w"><span class="idx">51</span>complex<span class="ipa">[ˈkɒmpleks]</span><button class="star" data-star="complex" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 复杂的；费解的；n. 综合楼(群)；情结<div class="dv"><b>衍生</b><i>complexly</i><em>adv.</em><span class="sep">·</span><i>complexity</i><em>n.</em><span class="sep">·</span><i>complexness</i><em>n.</em></div></div><div class="ex"><div class="en">As tools have become more and more complex, we need more complex controls to control them.</div><div class="zh">随着工具变得越来越复杂,我们需要更复杂的操控装置来控制它们。</div></div></div>
+<div class="card" data-s="consistent adj. 一致的；始终如一的" data-w="consistent" data-dv="consistently|adv.|;;inconsistent|adj.|"><div class="w"><span class="idx">49</span>consistent<button class="spk" data-say="consistent" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[kənˈsɪstənt]</span><button class="star" data-star="consistent" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 一致的；始终如一的<div class="dv"><b>衍生</b><i>consistently</i><em>adv.</em><span class="sep">·</span><i>inconsistent</i><em>adj.</em></div></div><div class="ex"><div class="en">The policies which will be put into place are clear and consistent.</div><div class="zh">将要实施的这些政策内容清楚连贯。</div></div></div>
+<div class="card" data-s="complicated adj. 复杂的" data-w="complicated" data-dv="complicatedly|adv.|;;complicatedness|n.|;;uncomplicated|adj.|"><div class="w"><span class="idx">50</span>complicated<button class="spk" data-say="complicated" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈkɒmplɪkeɪtɪd]</span><button class="star" data-star="complicated" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 复杂的<div class="dv"><b>衍生</b><i>complicatedly</i><em>adv.</em><span class="sep">·</span><i>complicatedness</i><em>n.</em><span class="sep">·</span><i>uncomplicated</i><em>adj.</em></div></div><div class="ex"><div class="en">The business is a large, complicated organism.</div><div class="zh">该企业是一个大而复杂的有机组织。</div></div></div>
+<div class="card" data-s="complex adj. 复杂的；费解的；n. 综合楼(群)；情结" data-w="complex" data-dv="complexly|adv.|;;complexity|n.|;;complexness|n.|"><div class="w"><span class="idx">51</span>complex<button class="spk" data-say="complex" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈkɒmpleks]</span><button class="star" data-star="complex" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 复杂的；费解的；n. 综合楼(群)；情结<div class="dv"><b>衍生</b><i>complexly</i><em>adv.</em><span class="sep">·</span><i>complexity</i><em>n.</em><span class="sep">·</span><i>complexness</i><em>n.</em></div></div><div class="ex"><div class="en">As tools have become more and more complex, we need more complex controls to control them.</div><div class="zh">随着工具变得越来越复杂,我们需要更复杂的操控装置来控制它们。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 16</span><span class="gcnt">4 词</span></div><div class="cards">
-<div class="card" data-s="compile v. 汇编；编制" data-w="compile" data-dv=""><div class="w"><span class="idx">52</span>compile<span class="ipa">[kəmˈpaɪl]</span><button class="star" data-star="compile" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 汇编；编制</div><div class="ex"><div class="en">It takes years of hard work to compile a good dictionary.</div><div class="zh">编纂一部好词典需要数年的艰苦工作。</div></div></div>
-<div class="card" data-s="version n. 版本；样式" data-w="version" data-dv=""><div class="w"><span class="idx">53</span>version<span class="ipa">[ˈvɜːʃ(ə)n]</span><button class="star" data-star="version" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 版本；样式</div><div class="ex"><div class="en">These books are Chinese versions of Shakespeare.</div><div class="zh">这些书是莎士比亚作品的中文译本。</div></div></div>
-<div class="card" data-s="translate v. 翻译；转化" data-w="translate" data-dv="translation|n.|;;translator|n.|"><div class="w"><span class="idx">54</span>translate<span class="ipa">[trænzˈleɪt]</span><button class="star" data-star="translate" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 翻译；转化<div class="dv"><b>衍生</b><i>translation</i><em>n.</em><span class="sep">·</span><i>translator</i><em>n.</em></div></div><div class="ex"><div class="en">No matter how well a poem is translated, something of the spirit of the original work is lost.</div><div class="zh">无论一首诗被翻译得多好,原作中的一些神韵也会丢失。</div></div></div>
-<div class="card" data-s="paraphrase v. 意译；解释；改述；n. 释义；意译；改述" data-w="paraphrase" data-dv=""><div class="w"><span class="idx">55</span>paraphrase<span class="ipa">[ˈpærəfreɪz]</span><button class="star" data-star="paraphrase" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 意译；解释；改述；n. 释义；意译；改述</div><div class="ex"><div class="en">The teacher asked his students to paraphrase *the long sentence.</div><div class="zh">老师让学生改述这个长句。</div></div></div>
+<div class="card" data-s="compile v. 汇编；编制" data-w="compile" data-dv=""><div class="w"><span class="idx">52</span>compile<button class="spk" data-say="compile" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[kəmˈpaɪl]</span><button class="star" data-star="compile" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 汇编；编制</div><div class="ex"><div class="en">It takes years of hard work to compile a good dictionary.</div><div class="zh">编纂一部好词典需要数年的艰苦工作。</div></div></div>
+<div class="card" data-s="version n. 版本；样式" data-w="version" data-dv=""><div class="w"><span class="idx">53</span>version<button class="spk" data-say="version" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈvɜːʃ(ə)n]</span><button class="star" data-star="version" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 版本；样式</div><div class="ex"><div class="en">These books are Chinese versions of Shakespeare.</div><div class="zh">这些书是莎士比亚作品的中文译本。</div></div></div>
+<div class="card" data-s="translate v. 翻译；转化" data-w="translate" data-dv="translation|n.|;;translator|n.|"><div class="w"><span class="idx">54</span>translate<button class="spk" data-say="translate" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[trænzˈleɪt]</span><button class="star" data-star="translate" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 翻译；转化<div class="dv"><b>衍生</b><i>translation</i><em>n.</em><span class="sep">·</span><i>translator</i><em>n.</em></div></div><div class="ex"><div class="en">No matter how well a poem is translated, something of the spirit of the original work is lost.</div><div class="zh">无论一首诗被翻译得多好,原作中的一些神韵也会丢失。</div></div></div>
+<div class="card" data-s="paraphrase v. 意译；解释；改述；n. 释义；意译；改述" data-w="paraphrase" data-dv=""><div class="w"><span class="idx">55</span>paraphrase<button class="spk" data-say="paraphrase" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈpærəfreɪz]</span><button class="star" data-star="paraphrase" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 意译；解释；改述；n. 释义；意译；改述</div><div class="ex"><div class="en">The teacher asked his students to paraphrase *the long sentence.</div><div class="zh">老师让学生改述这个长句。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 17</span><span class="gcnt">2 词</span></div><div class="cards">
-<div class="card" data-s="interpret v. 口译；把...理解为；解 释" data-w="interpret" data-dv="interpreter|n.|;;interpreting|v.|"><div class="w"><span class="idx">56</span>interpret<span class="ipa">[ɪnˈtɜːprət]</span><button class="star" data-star="interpret" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 口译；把...理解为；解 释<div class="dv"><b>衍生</b><i>interpreter</i><em>n.</em><span class="sep">·</span><i>interpreting</i><em>v.</em></div></div><div class="ex"><div class="en">He interpreted the silence as con tempt.</div><div class="zh">他把这沉默看作轻蔑的表示。</div></div></div>
-<div class="card" data-s="narrate v. 叙述；给(电视或电 影)作旁白" data-w="narrate" data-dv="narration|n.|;;narrative|adj.|;;narrator|n.|"><div class="w"><span class="idx">57</span>narrate<span class="ipa">[nəˈreɪt]</span><button class="star" data-star="narrate" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 叙述；给(电视或电 影)作旁白<div class="dv"><b>衍生</b><i>narration</i><em>n.</em><span class="sep">·</span><i>narrative</i><em>adj.</em><span class="sep">·</span><i>narrator</i><em>n.</em></div></div><div class="ex"><div class="en">The film is narrated by an old fisherman.</div><div class="zh">这部影片由一位老渔夫讲述。</div></div></div>
+<div class="card" data-s="interpret v. 口译；把...理解为；解 释" data-w="interpret" data-dv="interpreter|n.|;;interpreting|v.|"><div class="w"><span class="idx">56</span>interpret<button class="spk" data-say="interpret" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ɪnˈtɜːprət]</span><button class="star" data-star="interpret" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 口译；把...理解为；解 释<div class="dv"><b>衍生</b><i>interpreter</i><em>n.</em><span class="sep">·</span><i>interpreting</i><em>v.</em></div></div><div class="ex"><div class="en">He interpreted the silence as con tempt.</div><div class="zh">他把这沉默看作轻蔑的表示。</div></div></div>
+<div class="card" data-s="narrate v. 叙述；给(电视或电 影)作旁白" data-w="narrate" data-dv="narration|n.|;;narrative|adj.|;;narrator|n.|"><div class="w"><span class="idx">57</span>narrate<button class="spk" data-say="narrate" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[nəˈreɪt]</span><button class="star" data-star="narrate" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 叙述；给(电视或电 影)作旁白<div class="dv"><b>衍生</b><i>narration</i><em>n.</em><span class="sep">·</span><i>narrative</i><em>adj.</em><span class="sep">·</span><i>narrator</i><em>n.</em></div></div><div class="ex"><div class="en">The film is narrated by an old fisherman.</div><div class="zh">这部影片由一位老渔夫讲述。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 18</span><span class="gcnt">10 词</span></div><div class="cards">
-<div class="card" data-s="illuminate v. 照亮；阐明；解释" data-w="illuminate" data-dv="illumination|n.|"><div class="w"><span class="idx">58</span>illuminate<span class="ipa">[ɪˈluːmɪneɪt]</span><button class="star" data-star="illuminate" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 照亮；阐明；解释<div class="dv"><b>衍生</b><i>illumination</i><em>n.</em></div></div><div class="ex"><div class="en">We use pictures and drawings to illuminate our subject.</div><div class="zh">我们用照片和图画来阐明主题。</div></div></div>
-<div class="card" data-s="decipher v. 破译；解读；n. 密电译 文" data-w="decipher" data-dv="deciphering|v.|"><div class="w"><span class="idx">59</span>decipher<span class="ipa">[dɪˈsaɪfə(r)]</span><button class="star" data-star="decipher" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 破译；解读；n. 密电译 文<div class="dv"><b>衍生</b><i>deciphering</i><em>v.</em></div></div><div class="ex"><div class="en">We can decipher the code intercepted by the broadcasting station.</div><div class="zh">我们能破译电台截获的密码。</div></div></div>
-<div class="card" data-s="eloquence n. 雄辩；口才" data-w="eloquence" data-dv=""><div class="w"><span class="idx">60</span>eloquence<span class="ipa">[ˈeləkwəns]</span><button class="star" data-star="eloquence" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 雄辩；口才</div><div class="ex"><div class="en">The audienee are struck by her sim ple, spellbinding eloquence.</div><div class="zh">观众们被她那简洁、迷人的雄辩打动了。</div></div></div>
-<div class="card" data-s="communicate v. 沟通；交流" data-w="communicate" data-dv="communication|n.|;;communicator|n.|"><div class="w"><span class="idx">61</span>communicate<span class="ipa">[kəˈmjuːnɪkeɪt]</span><button class="star" data-star="communicate" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 沟通；交流<div class="dv"><b>衍生</b><i>communication</i><em>n.</em><span class="sep">·</span><i>communicator</i><em>n.</em></div></div><div class="ex"><div class="en">We communicated mostly by e-mail.</div><div class="zh">我们主要通过电子邮件来交流。</div></div></div>
-<div class="card" data-s="discussion n. 讨论；商讨" data-w="discussion" data-dv=""><div class="w"><span class="idx">62</span>discussion<span class="ipa">[dɪˈskʌʃ(ə)n]</span><button class="star" data-star="discussion" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 讨论；商讨</div><div class="ex"><div class="en">After a lot of discussion among the directors, the matter was settled in the end.</div><div class="zh">经过董事们的大量讨论,问题最终得到解决。</div></div></div>
-<div class="card" data-s="brainstorm v. 脑力激荡；集思广益； n. 计上心头；集体研讨" data-w="brainstorm" data-dv=""><div class="w"><span class="idx">63</span>brainstorm<span class="ipa">[ˈbreɪnstɔːm]</span><button class="star" data-star="brainstorm" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 脑力激荡；集思广益； n. 计上心头；集体研讨</div><div class="ex"><div class="en">Managers get together and brainstorm a more permanent solution to the problem.</div><div class="zh">经理们聚在一起,群策群力,设法找到一个更长久的解决办法。</div></div></div>
-<div class="card" data-s="debate v. 辩论；争论；n. 辩论； 争论" data-w="debate" data-dv="debatable|adj.|"><div class="w"><span class="idx">64</span>debate<span class="ipa">[dɪˈbeɪt]</span><button class="star" data-star="debate" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 辩论；争论；n. 辩论； 争论<div class="dv"><b>衍生</b><i>debatable</i><em>adj.</em></div></div><div class="ex"><div class="en">The government is debating about the education laws.</div><div class="zh">政府正在就教育法进行讨论。</div></div></div>
-<div class="card" data-s="commentary n. 解说词；评论；实况报 导" data-w="commentary" data-dv=""><div class="w"><span class="idx">65</span>commentary<span class="ipa">[ˈkɒməntri]</span><button class="star" data-star="commentary" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 解说词；评论；实况报 导</div><div class="ex"><div class="en">The con elusion of the commentary really hit the bulKs-eye.</div><div class="zh">评论最后的结论真是一语破的。</div></div></div>
-<div class="card" data-s="negotiate v. 谈判；协商；通过；越 过" data-w="negotiate" data-dv="negotiation|n.|n. 谈判；协商；磋商;;negotiator|n.|"><div class="w"><span class="idx">66</span>negotiate<span class="ipa">[nɪˈɡəʊʃieɪt]</span><button class="star" data-star="negotiate" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 谈判；协商；通过；越 过<div class="dv"><b>衍生</b><i>negotiation</i><em>n.</em><span class="sep">·</span><i>negotiator</i><em>n.</em></div></div><div class="ex"><div class="en">We are not about to negotiate with terrorists.</div><div class="zh">我们是不会和恐怖分子谈判的。</div></div></div>
-<div class="card" data-s="contention n. 争论；论点；争辩" data-w="contention" data-dv=""><div class="w"><span class="idx">67</span>contention<span class="ipa">[kənˈtenʃ(ə)n]</span><button class="star" data-star="contention" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 争论；论点；争辩</div><div class="ex"><div class="en">My contention is that the scheme will never work.</div><div class="zh">我的观点是这个方案行不通。</div></div></div>
+<div class="card" data-s="illuminate v. 照亮；阐明；解释" data-w="illuminate" data-dv="illumination|n.|"><div class="w"><span class="idx">58</span>illuminate<button class="spk" data-say="illuminate" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ɪˈluːmɪneɪt]</span><button class="star" data-star="illuminate" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 照亮；阐明；解释<div class="dv"><b>衍生</b><i>illumination</i><em>n.</em></div></div><div class="ex"><div class="en">We use pictures and drawings to illuminate our subject.</div><div class="zh">我们用照片和图画来阐明主题。</div></div></div>
+<div class="card" data-s="decipher v. 破译；解读；n. 密电译 文" data-w="decipher" data-dv="deciphering|v.|"><div class="w"><span class="idx">59</span>decipher<button class="spk" data-say="decipher" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[dɪˈsaɪfə(r)]</span><button class="star" data-star="decipher" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 破译；解读；n. 密电译 文<div class="dv"><b>衍生</b><i>deciphering</i><em>v.</em></div></div><div class="ex"><div class="en">We can decipher the code intercepted by the broadcasting station.</div><div class="zh">我们能破译电台截获的密码。</div></div></div>
+<div class="card" data-s="eloquence n. 雄辩；口才" data-w="eloquence" data-dv=""><div class="w"><span class="idx">60</span>eloquence<button class="spk" data-say="eloquence" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈeləkwəns]</span><button class="star" data-star="eloquence" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 雄辩；口才</div><div class="ex"><div class="en">The audienee are struck by her sim ple, spellbinding eloquence.</div><div class="zh">观众们被她那简洁、迷人的雄辩打动了。</div></div></div>
+<div class="card" data-s="communicate v. 沟通；交流" data-w="communicate" data-dv="communication|n.|;;communicator|n.|"><div class="w"><span class="idx">61</span>communicate<button class="spk" data-say="communicate" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[kəˈmjuːnɪkeɪt]</span><button class="star" data-star="communicate" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 沟通；交流<div class="dv"><b>衍生</b><i>communication</i><em>n.</em><span class="sep">·</span><i>communicator</i><em>n.</em></div></div><div class="ex"><div class="en">We communicated mostly by e-mail.</div><div class="zh">我们主要通过电子邮件来交流。</div></div></div>
+<div class="card" data-s="discussion n. 讨论；商讨" data-w="discussion" data-dv=""><div class="w"><span class="idx">62</span>discussion<button class="spk" data-say="discussion" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[dɪˈskʌʃ(ə)n]</span><button class="star" data-star="discussion" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 讨论；商讨</div><div class="ex"><div class="en">After a lot of discussion among the directors, the matter was settled in the end.</div><div class="zh">经过董事们的大量讨论,问题最终得到解决。</div></div></div>
+<div class="card" data-s="brainstorm v. 脑力激荡；集思广益； n. 计上心头；集体研讨" data-w="brainstorm" data-dv=""><div class="w"><span class="idx">63</span>brainstorm<button class="spk" data-say="brainstorm" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈbreɪnstɔːm]</span><button class="star" data-star="brainstorm" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 脑力激荡；集思广益； n. 计上心头；集体研讨</div><div class="ex"><div class="en">Managers get together and brainstorm a more permanent solution to the problem.</div><div class="zh">经理们聚在一起,群策群力,设法找到一个更长久的解决办法。</div></div></div>
+<div class="card" data-s="debate v. 辩论；争论；n. 辩论； 争论" data-w="debate" data-dv="debatable|adj.|"><div class="w"><span class="idx">64</span>debate<button class="spk" data-say="debate" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[dɪˈbeɪt]</span><button class="star" data-star="debate" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 辩论；争论；n. 辩论； 争论<div class="dv"><b>衍生</b><i>debatable</i><em>adj.</em></div></div><div class="ex"><div class="en">The government is debating about the education laws.</div><div class="zh">政府正在就教育法进行讨论。</div></div></div>
+<div class="card" data-s="commentary n. 解说词；评论；实况报 导" data-w="commentary" data-dv=""><div class="w"><span class="idx">65</span>commentary<button class="spk" data-say="commentary" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈkɒməntri]</span><button class="star" data-star="commentary" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 解说词；评论；实况报 导</div><div class="ex"><div class="en">The con elusion of the commentary really hit the bulKs-eye.</div><div class="zh">评论最后的结论真是一语破的。</div></div></div>
+<div class="card" data-s="negotiate v. 谈判；协商；通过；越 过" data-w="negotiate" data-dv="negotiation|n.|n. 谈判；协商；磋商;;negotiator|n.|"><div class="w"><span class="idx">66</span>negotiate<button class="spk" data-say="negotiate" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[nɪˈɡəʊʃieɪt]</span><button class="star" data-star="negotiate" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 谈判；协商；通过；越 过<div class="dv"><b>衍生</b><i>negotiation</i><em>n.</em><span class="sep">·</span><i>negotiator</i><em>n.</em></div></div><div class="ex"><div class="en">We are not about to negotiate with terrorists.</div><div class="zh">我们是不会和恐怖分子谈判的。</div></div></div>
+<div class="card" data-s="contention n. 争论；论点；争辩" data-w="contention" data-dv=""><div class="w"><span class="idx">67</span>contention<button class="spk" data-say="contention" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[kənˈtenʃ(ə)n]</span><button class="star" data-star="contention" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 争论；论点；争辩</div><div class="ex"><div class="en">My contention is that the scheme will never work.</div><div class="zh">我的观点是这个方案行不通。</div></div></div>
 </div></section>
 <div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit07.html">← Unit 07</a><a href="unit08.html">切到纯列表版</a><a href="unit09.html">Unit 09 →</a></div><footer><div class="wrap" style="padding:0">
  摘自《雅思词汇真经》（刘洪波 编著）第 8 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
 </div></footer></div>
 <a id="nbfab" href="shengci.html"><span>生词本</span><b>0</b></a>
 <script>
+/* ---------- 朗读 ---------- */
+var TTS=(function(){
+ var voices=[], pref='en-GB';
+ try{pref=JSON.parse(localStorage.getItem('vj-tts')||'{}').v||'en-GB'}catch(e){}
+ var sup = (typeof speechSynthesis!=='undefined' && typeof SpeechSynthesisUtterance!=='undefined');
+ function load(){ try{voices=speechSynthesis.getVoices()||[]}catch(e){voices=[]} }
+ if(sup){ load(); try{speechSynthesis.onvoiceschanged=load}catch(e){} }
+ function pick(){
+  if(!voices.length) load();
+  var en=voices.filter(function(v){return /^en/i.test(v.lang||'')});
+  var same=en.filter(function(v){return (v.lang||'').replace('_','-').toLowerCase().indexOf(pref.toLowerCase())===0});
+  return same[0] || en.filter(function(v){return /en-GB/i.test(v.lang)})[0] ||
+         en.filter(function(v){return /en-US/i.test(v.lang)})[0] || en[0] || null;
+ }
+ function speak(t, rate){
+  if(!sup||!t) return false;
+  try{
+   speechSynthesis.cancel();
+   var u=new SpeechSynthesisUtterance(t), v=pick();
+   if(v){u.voice=v; u.lang=v.lang;} else u.lang=pref;
+   u.rate=rate||0.92; u.pitch=1;
+   speechSynthesis.speak(u);
+   return true;
+  }catch(e){return false}
+ }
+ function setPref(p){
+  pref=p;
+  try{localStorage.setItem('vj-tts',JSON.stringify({v:p}))}catch(e){}
+  document.querySelectorAll('.ttsvg').forEach(function(b){b.classList.toggle('on',b.dataset.vp===p)});
+ }
+ return {speak:speak,setPref:setPref,pref:function(){return pref},ok:function(){return sup}};
+})();
+window.TTS=TTS;
+
+/* ---------- 生词本 ---------- */
 var NB=(function(){
- var KEY='vj-book';
+ var KEY='vj-book', SETK='vj-set', STK='vj-stat';
  var mem=null, okStore=true;
  function read(){
   if(mem) return mem;
@@ -292,18 +346,53 @@ var NB=(function(){
  }
  function count(){return Object.keys(read()).length}
  function has(w){return !!read()[w]}
+ function addOne(rec){
+  var m=read();
+  if(m[rec.w]) return false;
+  rec.t=Date.now();
+  m[rec.w]=rec; write(); bump('a'); sync(); return true;
+ }
  function toggle(rec){
   var m=read();
-  if(m[rec.w]){delete m[rec.w]}
-  else{rec.t=Date.now(); m[rec.w]=rec}
-  write(); sync(); return !!m[rec.w];
+  if(m[rec.w]){delete m[rec.w]; write(); sync(); return false}
+  rec.t=Date.now(); m[rec.w]=rec; write(); bump('a'); sync(); return true;
  }
  function remove(w){var m=read(); delete m[w]; write(); sync();}
+ function save(rec){var m=read(); m[rec.w]=rec; write(); sync();}
  function all(){
   var m=read(), a=[];
   for(var k in m) a.push(m[k]);
   a.sort(function(x,y){return (y.t||0)-(x.t||0)});
   return a;
+ }
+ /* 设置：加入时是否连带衍生词 */
+ function settings(){ try{return JSON.parse(localStorage.getItem(SETK)||'{}')}catch(e){return {}} }
+ function setSetting(k,v){
+  var s=settings(); s[k]=v;
+  try{localStorage.setItem(SETK,JSON.stringify(s))}catch(e){}
+ }
+ function dvOn(){ var s=settings(); return s.dv!==false }
+ /* 学习统计 */
+ function pad(n){return n<10?'0'+n:''+n}
+ function dayKey(d){d=d||new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+ function stat(){ try{return JSON.parse(localStorage.getItem(STK)||'{}')}catch(e){return {}} }
+ function bump(k,n){
+  var s=stat(), key=dayKey();
+  s[key]=s[key]||{a:0,r:0,c:0};
+  s[key][k]=(s[key][k]||0)+(n||1);
+  var ks=Object.keys(s).sort();
+  if(ks.length>120){ ks.slice(0,ks.length-120).forEach(function(x){delete s[x]}) }
+  try{localStorage.setItem(STK,JSON.stringify(s))}catch(e){}
+ }
+ function streak(){
+  var s=stat(), n=0, d=new Date(), k=dayKey(d);
+  if(!(s[k] && (s[k].r||s[k].a))) d.setDate(d.getDate()-1);
+  for(var i=0;i<400;i++){
+   var o=s[dayKey(d)];
+   if(o && (o.r||o.a)){ n++; d.setDate(d.getDate()-1); }
+   else break;
+  }
+  return n;
  }
  function sync(){
   var n=count();
@@ -316,14 +405,42 @@ var NB=(function(){
     else if(!on) el.setAttribute('title','加入生词本');
   });
  }
+ function parseDv(s){
+  if(!s) return [];
+  return s.split(';;').filter(Boolean).map(function(x){
+   var a=x.split('|'); return {w:a[0], p:a[1]||'', m:a[2]||''};
+  });
+ }
  function onStar(e){
   var b=e.target.closest('.star'); if(!b) return;
   e.preventDefault(); e.stopPropagation();
   var host=b.closest('[data-w]')||b.closest('.card')||b.closest('tr');
-  var rec=entry(host, b.dataset.star);
-  var added=toggle(rec);
+  var w=b.dataset.star;
+  if(has(w)){
+   remove(w);
+   var m=read();
+   Object.keys(m).forEach(function(k){ if(m[k] && m[k].pw===w){ delete m[k] } });
+   write(); sync();
+   return;
+  }
+  var rec=entry(host,w);
+  toggle(rec);
+  if(dvOn()){
+   parseDv(host?host.dataset.dv:'').forEach(function(d){
+     if(!d.w || has(d.w)) return;
+     addOne({w:d.w, p:'', m:d.m||'', d:'', e:'', z:'',
+             c:rec.c, g:rec.g, pv:1, pw:rec.w, pm:rec.m, pp:d.p});
+   });
+  }
   var fab=document.getElementById('nbfab');
-  if(added&&fab){fab.classList.remove('wiggle');void fab.offsetWidth;fab.classList.add('wiggle');}
+  if(fab){fab.classList.remove('wiggle');void fab.offsetWidth;fab.classList.add('wiggle');}
+ }
+ function onSpk(e){
+  var b=e.target.closest('.spk'); if(!b) return;
+  e.preventDefault(); e.stopPropagation();
+  var t=b.dataset.say;
+  if(!t){ var h=b.closest('[data-w]'); t=h?h.dataset.w:''; }
+  TTS.speak(t);
  }
  function txt(el){return el?el.textContent.trim():''}
  function entry(host, w){
@@ -339,11 +456,17 @@ var NB=(function(){
           g:document.body.dataset.title||''};
  }
  document.addEventListener('click',onStar);
- window.addEventListener('storage',function(e){if(e.key===KEY){mem=null;sync();}});
- document.addEventListener('DOMContentLoaded',sync);
+ document.addEventListener('click',onSpk);
+ window.addEventListener('storage',function(e){
+  if(e.key===KEY){mem=null;sync();}
+ });
+ if(document.readyState!=='loading') sync(); else document.addEventListener('DOMContentLoaded',sync);
  sync();
- return {count:count,has:has,all:all,remove:remove,toggle:toggle,sync:sync,read:read};
+ return {count:count,has:has,all:all,remove:remove,toggle:toggle,sync:sync,read:read,
+         save:save,addOne:addOne,dvOn:dvOn,settings:settings,setSetting:setSetting,
+         bump:bump,stat:stat,streak:streak,dayKey:dayKey,parseDv:parseDv};
 })();
+window.NB=NB;
 </script>
 <script>
 (function(){
@@ -373,6 +496,10 @@ var NB=(function(){
  if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
  var ci=document.getElementById('i');
  if(ci) ci.addEventListener('change',function(){s.i=ci.checked; save(); paint();});
+ var cd=document.getElementById('dvon');
+ if(cd){cd.checked=NB.dvOn(); cd.closest('.sw').classList.toggle('on',cd.checked);}
+ if(cd) cd.addEventListener('change',function(){NB.setSetting('dv',cd.checked);
+   cd.closest('.sw').classList.toggle('on',cd.checked);});
  var co=document.getElementById('only');
  if(co) co.addEventListener('change',function(){s.o=co.checked; save(); paint(); filter();});
  var ca=document.getElementById('all');
@@ -412,5 +539,290 @@ var NB=(function(){
  });
  paint(); filter();
 })();
+</script>
+<script>
+/* ================= 背诵模式（独立功能）================= */
+var REC=(function(){
+ var KEY='vj-rec', ACC='#b4442e';
+ var INT=[0,1,2,4,8,15,30,90];
+ var mem=null, root=null, queue=[], idx=0, onlyDue=false, yes=0, no=0, started=false;
+
+ function read(){
+  if(mem) return mem;
+  try{var raw=localStorage.getItem(KEY); mem=raw?JSON.parse(raw):{}}catch(e){mem={}}
+  return mem;
+ }
+ function save(){ try{localStorage.setItem(KEY,JSON.stringify(mem))}catch(e){} }
+ function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];})}
+
+ /* ---- 从页面收集词条 ---- */
+ function extract(h){ 
+  var m=h.querySelector('.m'), mean='';
+  if(m){var c=m.cloneNode(true);var dv=c.querySelector('.dv');if(dv)dv.parentNode.removeChild(dv);
+   mean=c.textContent.replace(/\s+/g,' ').trim();}
+  var ipa=h.querySelector('.ipa');
+  var en=h.querySelector('.ex .en'), zh=h.querySelector('.ex .zh');
+  var dl=[];
+  (h.dataset.dv||'').split(';;').forEach(function(s){
+   if(!s) return; var a=s.split('|'); if(a[0]) dl.push(a[0]);
+  });
+  return {w:h.dataset.w, p:ipa?ipa.textContent.trim():'', m:mean,
+          x:dl.length?('衍生：'+dl.join(' · ')):'',
+          e:en?en.textContent.trim():'', z:zh?zh.textContent.trim():''};
+ }
+ function items(){
+  var out=[], seen={};
+  [].slice.call(document.querySelectorAll('[data-w]')).forEach(function(h){
+   if(!h.dataset||!h.dataset.w) return;
+   if(h.closest && h.closest('#rcroot')) return;
+   var r=extract(h);
+   if(!r||!r.w||seen[r.w]) return;
+   seen[r.w]=1; r.h=h; out.push(r);
+  });
+  return out;
+ }
+
+ /* ---- 样式 ---- */
+ function injectCSS(){
+  if(document.getElementById('rcstyle')) return;
+  var css = ''
+  + '#rcopen{position:fixed;right:20px;bottom:20px;z-index:60;font:inherit;font-size:13px;'
+  + 'font-weight:700;color:#fff;background:'+ACC+';border:1px solid '+ACC+';border-radius:999px;'
+  + 'padding:9px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;line-height:1.4;'
+  + 'box-shadow:0 6px 20px rgba(0,0,0,.22)}'
+  + '#rcopen:hover{filter:brightness(1.08)}'
+  + '#rcopen b{font-weight:700;font-variant-numeric:tabular-nums;background:rgba(255,255,255,.26);'
+  + 'border-radius:999px;padding:0 6px;font-size:11px}'
+  + '@media (max-width:640px){#rcopen{right:12px;font-size:12.5px;padding:8px 13px}}'
+  + '#rcroot{position:fixed;inset:0;z-index:300;display:none;overflow:auto;padding:20px 16px 36px;'
+  + '--rb:#f7f6f3;--rp:#ffffff;--ri:#1f2328;--ri2:#5b6470;--rl:#e6e2da;--rs:rgba(0,0,0,.045);'
+  + 'background:var(--rb);color:var(--ri);'
+  + 'font:16px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;'
+  + '-webkit-font-smoothing:antialiased}'
+  + '#rcroot.on{display:block}'
+  + '#rcroot *{box-sizing:border-box}'
+  + '#rcroot .rw{max-width:640px;margin:0 auto}'
+  + '#rcroot .bar{display:flex;align-items:center;gap:12px;margin-bottom:12px;font-size:12.5px;color:var(--ri2)}'
+  + '#rcroot .bar .pg{flex:1;height:5px;background:var(--rs);border-radius:99px;overflow:hidden}'
+  + '#rcroot .bar .pg i{display:block;height:100%;width:0;background:'+ACC+';transition:width .25s}'
+  + '#rcroot .bar .num{font-variant-numeric:tabular-nums;white-space:nowrap}'
+  + '#rcroot .x{font:inherit;font-size:21px;line-height:1;background:none;border:0;color:var(--ri2);cursor:pointer;padding:2px 8px}'
+  + '#rcroot .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;'
+  + 'font-size:12.5px;color:var(--ri2)}'
+  + '#rcroot .sw{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rl);border-radius:999px;'
+  + 'padding:3px 11px;cursor:pointer;user-select:none;background:var(--rp);white-space:nowrap}'
+  + '#rcroot .sw input{accent-color:'+ACC+';margin:0}'
+  + '#rcroot .card{background:var(--rp);border:1px solid var(--rl);border-radius:20px;padding:34px 26px 26px;'
+  + 'text-align:center;min-height:260px;cursor:pointer;user-select:none;display:flex;flex-direction:column;'
+  + 'justify-content:center}'
+  + '#rcroot .wd{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:37px;font-weight:700;'
+  + 'line-height:1.22;letter-spacing:.3px;word-break:break-word}'
+  + '#rcroot .ipa{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:14px;color:var(--ri2);margin-top:8px}'
+  + '#rcroot .spk2{background:none;border:0;color:var(--ri2);cursor:pointer;padding:6px;margin-top:6px;opacity:.75;align-self:center}'
+  + '#rcroot .spk2:hover{opacity:1;color:'+ACC+'}'
+  + '#rcroot .spk2 svg{width:18px;height:18px;display:block}'
+  + '#rcroot .q{color:var(--ri2);font-size:12.5px;margin-top:22px;opacity:.9}'
+  + '#rcroot .ans{display:none;margin-top:20px;text-align:left;border-top:1px dashed var(--rl);padding-top:16px}'
+  + '#rcroot .ans.on{display:block}'
+  + '#rcroot .ans .m{font-size:17px}'
+  + '#rcroot .ans .x2{margin-top:9px;font-size:13px;color:var(--ri2);line-height:1.85;white-space:pre-line}'
+  + '#rcroot .ans .ex{margin-top:11px;font-size:13.5px;background:var(--rs);border-radius:9px;padding:10px 12px;line-height:1.7}'
+  + '#rcroot .ans .ex .zh{color:var(--ri2);margin-top:3px;font-size:13px}'
+  + '#rcroot .btns{display:flex;gap:10px;margin-top:15px}'
+  + '#rcroot .btns button{flex:1;font:inherit;font-size:15px;font-weight:650;padding:13px 0;border-radius:13px;'
+  + 'cursor:pointer;border:1px solid var(--rl);background:var(--rp);color:var(--ri)}'
+  + '#rcroot .btns button kbd{font:inherit;font-size:11px;opacity:.5;margin-left:4px}'
+  + '#rcroot .btns .no{color:#c0392b}'
+  + '#rcroot .btns .ok{background:'+ACC+';border-color:'+ACC+';color:#fff}'
+  + '#rcroot .btns button:active{transform:translateY(1px)}'
+  + '#rcroot .key{margin-top:13px;text-align:center;font-size:11.5px;color:var(--ri2);opacity:.75}'
+  + '#rcroot .done{text-align:center;padding:40px 10px}'
+  + '#rcroot .done h2{font-size:22px;margin:0 0 10px}'
+  + '#rcroot .done p{color:var(--ri2);font-size:14px;line-height:2}'
+  + '#rcroot .done .acts{display:flex;gap:9px;justify-content:center;margin-top:16px;flex-wrap:wrap}'
+  + '#rcroot .done .acts button{font:inherit;font-size:13.5px;font-weight:650;padding:9px 20px;border-radius:999px;'
+  + 'cursor:pointer;border:1px solid var(--rl);background:var(--rp);color:var(--ri)}'
+  + '#rcroot .done .acts .pri{background:'+ACC+';border-color:'+ACC+';color:#fff}'
+  + '@media (prefers-color-scheme:dark){#rcroot{--rb:#16181c;--rp:#1d2025;--ri:#e8eaed;--ri2:#9aa3ad;'
+  + '--rl:#2c3037;--rs:rgba(255,255,255,.07)}}'
+  + '@media (max-width:520px){#rcroot{padding:14px 11px 26px}#rcroot .wd{font-size:29px}'
+  + '#rcroot .card{padding:26px 17px 20px;min-height:220px}}';
+  var st=document.createElement('style'); st.id='rcstyle'; st.textContent=css;
+  document.head.appendChild(st);
+ }
+
+ var SVG='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg>';
+
+ var TMPL='<div class="rw">'
+   +'<div class="bar"><span class="num" id="rcnum">0 / 0</span>'
+   +'<div class="pg"><i id="rcpg"></i></div><button class="x" id="rcx">×</button></div>'
+   +'<div class="hd"><span id="rcinfo"></span>'
+   +'<label class="sw"><input type="checkbox" id="rcdue"> 只背到期</label></div>'
+   +'<div class="card" id="rccard">'
+   +'<div class="wd" id="rcwd"></div><div class="ipa" id="rcipa"></div>'
+   +'<button class="spk2" id="rcspk" title="朗读">'+SVG+'</button>'
+   +'<div class="q" id="rcq">看这个词，认不认识？点卡片看释义</div>'
+   +'<div class="ans" id="rcans"><div class="m" id="rcm"></div>'
+   +'<div class="x2" id="rcx2"></div><div class="ex" id="rcex"></div></div>'
+   +'</div>'
+   +'<div class="btns"><button class="no" id="rcno">不认识 <kbd>1</kbd></button>'
+   +'<button class="ok" id="rcok">认识 <kbd>2</kbd></button></div>'
+   +'<div class="key">空格看释义 · 1 不认识（自动进生词本）· 2 认识 · Esc 退出</div>'
+   +'</div>';
+
+ function build(){
+  injectCSS();
+  if(!root){ root=document.createElement('div'); root.id='rcroot'; document.body.appendChild(root); }
+  root.innerHTML='';
+  var box=document.createElement('div'); box.className='rw'; box.innerHTML=TMPL;
+  root.appendChild(box);
+  document.getElementById('rcx').onclick=close;
+  document.getElementById('rccard').onclick=reveal;
+  document.getElementById('rcspk').onclick=function(e){
+   e.stopPropagation();
+   if(window.TTS&&queue[idx]) TTS.speak(queue[idx].w);
+  };
+  document.getElementById('rcno').onclick=function(){ grade(false) };
+  document.getElementById('rcok').onclick=function(){ grade(true) };
+  var cd=document.getElementById('rcdue');
+  cd.addEventListener('change',function(){ onlyDue=cd.checked; start(); });
+ }
+
+ function reveal(){
+  if(!queue[idx]) return;
+  document.getElementById('rcans').classList.add('on');
+  document.getElementById('rcq').style.display='none';
+ }
+ function onKey(e){
+  if(!root||!root.classList.contains('on')) return;
+  if(e.key==='Escape'){ close(); return; }
+  if(e.key===' '||e.key==='Enter'){ e.preventDefault(); reveal(); return; }
+  if(e.key==='1'){ e.preventDefault(); grade(false); return; }
+  if(e.key==='2'){ e.preventDefault(); grade(true); return; }
+ }
+
+ function start(){
+  var arr=items();
+  if(!arr.length){ alert('这一页没有可背的词'); return; }
+  var m=read(), now=Date.now();
+  if(onlyDue){
+   arr=arr.filter(function(r){var o=m[r.w]; return o&&(o.due||0)<=now&&(o.lv||0)<7;});
+   if(!arr.length){ alert('这一页没有到期的词。取消「只背到期」可以全部过一遍。'); return; }
+  }
+  arr.sort(function(a,b){
+   var da=(m[a.w]&&m[a.w].due)||0, db=(m[b.w]&&m[b.w].due)||0;
+   return da-db;
+  });
+  queue=arr; idx=0; yes=0; no=0; started=true;
+  build();
+  var nDue=arr.filter(function(r){var o=m[r.w]; return o&&(o.due||0)<=now&&(o.lv||0)<7;}).length;
+  var nNew=arr.filter(function(r){return !m[r.w]}).length;
+  document.getElementById('rcinfo').textContent=arr.length+' 词 · 到期 '+nDue+' · 未背过 '+nNew;
+  document.getElementById('rcdue').checked=onlyDue;
+  root.classList.add('on');
+  document.body.style.overflow='hidden';
+  paint();
+ }
+
+ function paint(){
+  if(idx>=queue.length) return finish();
+  var r=queue[idx];
+  document.getElementById('rcnum').textContent=(idx+1)+' / '+queue.length;
+  document.getElementById('rcpg').style.width=(idx/queue.length*100)+'%';
+  document.getElementById('rcwd').textContent=r.w;
+  var ipa=document.getElementById('rcipa');
+  ipa.textContent=r.p||''; ipa.style.display=r.p?'':'none';
+  document.getElementById('rcans').classList.remove('on');
+  var q=document.getElementById('rcq'); q.style.display=''; q.textContent='看这个词，认不认识？点卡片看释义';
+  document.getElementById('rcm').textContent=r.m||'—';
+  var x2=document.getElementById('rcx2');
+  x2.textContent=r.x||''; x2.style.display=r.x?'':'none';
+  var ex=document.getElementById('rcex');
+  ex.innerHTML=r.e?('<div class="en">'+esc(r.e)+'</div>'+(r.z?'<div class="zh">'+esc(r.z)+'</div>':'')):'';
+  ex.style.display=r.e?'':'none';
+ }
+
+ function toBook(r){
+  if(window.NB&&NB.has&&NB.has(r.w)) return;
+  var st=r.h&&r.h.querySelector?r.h.querySelector('.star'):null;
+  if(st){ if(!st.classList.contains('on')) st.click(); return; }
+  if(window.NB&&NB.addOne) NB.addOne({w:r.w,p:r.p||'',m:r.m||'',y:'',e:'',z:'',d:'',s:'',c:''});
+ }
+
+ function grade(ok){
+  if(idx>=queue.length) return;
+  var r=queue[idx], m=read(), o=m[r.w]||{lv:0,rv:0,wr:0};
+  if(ok){ o.lv=Math.min(7,(o.lv||0)+1); o.due=Date.now()+INT[o.lv]*864e5; }
+  else  { o.lv=0; o.due=Date.now()+10*6e4; o.wr=(o.wr||0)+1; toBook(r); }
+  o.rv=(o.rv||0)+1; o.lrt=Date.now();
+  m[r.w]=o; save();
+  if(ok) yes++; else no++;
+  if(window.NB&&NB.bump) NB.bump('r');
+  idx++; paint();
+ }
+
+ function fmt(ms){
+  var diff=ms-Date.now();
+  if(diff<=0) return '现在';
+  if(diff<3600e3) return Math.max(1,Math.round(diff/6e4))+' 分钟后';
+  var d=Math.round(diff/864e5);
+  return d<=1?'明天':d+' 天后';
+ }
+
+ function finish(){
+  var m=read(), nxt=null;
+  queue.forEach(function(r){
+   var o=m[r.w]; if(!o||(o.lv||0)>=7) return;
+   if(nxt===null||o.due<nxt) nxt=o.due;
+  });
+  var w=root.querySelector('.rw');
+  w.innerHTML='<div class="done"><h2>这一轮背完了</h2>'
+   +'<p>共 '+queue.length+' 词 · 认识 <b>'+yes+'</b> 次 · 不认识 <b>'+no+'</b> 次<br>'
+   +(no? '不认识的 '+no+' 个词已自动收进生词本，稍后可以在那里复习<br>':'')
+   +(nxt!==null? '下一次到期：'+fmt(nxt) : '这些词都已经标成「已掌握」🎉')+'</p>'
+   +'<div class="acts"><button class="pri" id="rcagain">再背一轮</button>'
+   +'<button id="rcback">关掉</button></div></div>';
+  document.getElementById('rcagain').onclick=function(){ root.classList.remove('on');
+   document.body.style.overflow=''; start(); };
+  document.getElementById('rcback').onclick=close;
+}
+
+ function close(){
+  if(!root) return;
+  root.classList.remove('on');
+  document.body.style.overflow='';
+  paintBtn();
+ }
+
+ function paintBtn(){
+  var b=document.getElementById('rcopen'); if(!b) return;
+  var label=b.dataset.label||b.textContent, arr=items(), m=read(), now=Date.now(), d=0;
+  arr.forEach(function(r){ var o=m[r.w]; if(!o) return; if((o.lv||0)>=7) return; if((o.due||0)<=now) d++; });
+  b.innerHTML=esc(label)+(d?' <b>'+d+'</b>':'');
+ }
+
+ function attach(){
+  var tb=document.querySelector('.toolbar');
+  if(!tb||document.getElementById('rcopen')) return;
+  injectCSS();
+  var b=document.createElement('button');
+  b.id='rcopen'; b.type='button';
+  var label='背诵本单元';
+  b.dataset.label=label; b.textContent=label;
+  b.title='逐词自测：不认识的自动进生词本，认识的按遗忘曲线排期';
+  b.onclick=function(e){ e.preventDefault(); start(); };
+  b.style.bottom=(document.getElementById('nbfab')?'74px':'18px');
+  document.body.appendChild(b);
+  paintBtn();
+ }
+
+ document.addEventListener('keydown',onKey);
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',attach);
+ else attach();
+ if(location.hash==='#recite') setTimeout(function(){ if(document.getElementById('rcopen')) start(); },120);
+ return {start:start,items:items,read:read};
+})();
+window.REC=REC;
 </script>
 </body></html>

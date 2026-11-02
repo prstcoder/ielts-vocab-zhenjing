@@ -7,11 +7,11 @@
 <style>
 :root{
  --bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da;
- --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4;
+ --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4; --green:#2f7d4f;
 }
 @media (prefers-color-scheme: dark){
  :root{ --bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037;
-        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; }
+        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; --green:#6cc38b; }
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -148,6 +148,24 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  td.sv .star{font-size:19px}
  #nbfab{right:12px;bottom:14px;padding:9px 14px;font-size:13px}
 }
+
+/* 朗读按钮 */
+.spk{font-family:inherit;line-height:1;background:transparent;border:0;cursor:pointer;
+ color:var(--ink2);opacity:.4;padding:3px 5px;border-radius:6px;vertical-align:2px;display:inline-flex}
+.spk:hover{opacity:1;color:var(--accent);background:var(--accent-soft)}
+.spk svg{width:13px;height:13px;display:block}
+.card .w .spk svg{width:15px;height:15px}
+.hide-i .spk{display:none}
+
+/* 学习统计 */
+.sp{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 0}
+.spi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:center}
+.spi b{display:block;font-size:20px;font-variant-numeric:tabular-nums;line-height:1.35}
+.spi span{font-size:11.5px;color:var(--ink2)}
+.bars{display:flex;align-items:flex-end;gap:4px;height:46px;margin:14px 0 3px}
+.bars i{flex:1;background:var(--chip);border-radius:3px 3px 0 0;min-height:2px;transition:.2s}
+.bars i.on{background:var(--accent);opacity:.85}
+.axis{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink2);opacity:.75}
 </style>
 </head>
 <body data-kind="list" data-ch="12" data-title="饮食健康">
@@ -164,266 +182,302 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
   <label class="sw"><input type="checkbox" id="i"> 隐藏音标</label>
   
   <label class="sw"><input type="checkbox" id="only"> 只看生词</label>
+  <label class="sw" title="点 ☆ 时把该词的派生词一起收进生词本"><input type="checkbox" id="dvon"> ☆带衍生</label>
   <button class="btn" id="reset">重置</button>
   <span class="count" id="cnt">169 条</span>
  </div>
 </div></div><div class="wrap"><table><thead><tr><th>#</th><th>单词</th><th>释义</th><th></th></tr></thead>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 01</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="food n. ⻝物" data-w="food" data-dv=""><td class="n">1</td><td class="w">food<div class="ipa">[fuːd]</div></td><td class="m">n. ⻝物</td><td class="sv"><button class="star" data-star="food" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="diet n. 日常饮⻝；v. 节制饮⻝" data-w="diet" data-dv=""><td class="n">2</td><td class="w">diet<div class="ipa">[ˈdaɪət]</div></td><td class="m">n. 日常饮⻝；v. 节制饮⻝</td><td class="sv"><button class="star" data-star="diet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="appetite n. 胃口；⻝欲；嗜好；爱 好" data-w="appetite" data-dv=""><td class="n">3</td><td class="w">appetite<div class="ipa">[ˈæpɪtaɪt]</div></td><td class="m">n. 胃口；⻝欲；嗜好；爱 好</td><td class="sv"><button class="star" data-star="appetite" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="treat v. 对待；招待；治疗；n. 款待" data-w="treat" data-dv="treatment|n.|n. 治疗；处理；待遇;;treatable|adj.|;;treatise|v.|"><td class="n">4</td><td class="w">treat<div class="ipa">[triːt]</div></td><td class="m">v. 对待；招待；治疗；n. 款待<div class="dv"><b>衍生</b><i>treatment</i><em>n.</em><span class="sep">·</span><i>treatable</i><em>adj.</em><span class="sep">·</span><i>treatise</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="treat" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="food n. ⻝物" data-w="food" data-dv=""><td class="n">1</td><td class="w">food<button class="spk" data-say="food" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[fuːd]</div></td><td class="m">n. ⻝物</td><td class="sv"><button class="star" data-star="food" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="diet n. 日常饮⻝；v. 节制饮⻝" data-w="diet" data-dv=""><td class="n">2</td><td class="w">diet<button class="spk" data-say="diet" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈdaɪət]</div></td><td class="m">n. 日常饮⻝；v. 节制饮⻝</td><td class="sv"><button class="star" data-star="diet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="appetite n. 胃口；⻝欲；嗜好；爱 好" data-w="appetite" data-dv=""><td class="n">3</td><td class="w">appetite<button class="spk" data-say="appetite" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈæpɪtaɪt]</div></td><td class="m">n. 胃口；⻝欲；嗜好；爱 好</td><td class="sv"><button class="star" data-star="appetite" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="treat v. 对待；招待；治疗；n. 款待" data-w="treat" data-dv="treatment|n.|n. 治疗；处理；待遇;;treatable|adj.|;;treatise|v.|"><td class="n">4</td><td class="w">treat<button class="spk" data-say="treat" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[triːt]</div></td><td class="m">v. 对待；招待；治疗；n. 款待<div class="dv"><b>衍生</b><i>treatment</i><em>n.</em><span class="sep">·</span><i>treatable</i><em>adj.</em><span class="sep">·</span><i>treatise</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="treat" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 02</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="cater v. 迎合；满足需要；供应 酒菜" data-w="cater" data-dv="caterer|n.|"><td class="n">5</td><td class="w">cater<div class="ipa">[ˈkeɪtə(r)]</div></td><td class="m">v. 迎合；满足需要；供应 酒菜<div class="dv"><b>衍生</b><i>caterer</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="cater" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="provision n. 供应；预备；储粮；规 定；条款" data-w="provision" data-dv="provisional|adj.|"><td class="n">6</td><td class="w">provision<div class="ipa">[prəˈvɪʒ(ə)n]</div></td><td class="m">n. 供应；预备；储粮；规 定；条款<div class="dv"><b>衍生</b><i>provisional</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="provision" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="edible adj. 可⻝用的；可以吃的" data-w="edible" data-dv="edibleness|n.|;;inedible|adj.|"><td class="n">7</td><td class="w">edible<div class="ipa">[ˈedəb(ə)l]</div></td><td class="m">adj. 可⻝用的；可以吃的<div class="dv"><b>衍生</b><i>edibleness</i><em>n.</em><span class="sep">·</span><i>inedible</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="edible" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="recipe n. ⻝谱；烹饪法；处方； 秘诀" data-w="recipe" data-dv=""><td class="n">8</td><td class="w">recipe<div class="ipa">[ˈresəpi]</div></td><td class="m">n. ⻝谱；烹饪法；处方； 秘诀</td><td class="sv"><button class="star" data-star="recipe" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cater v. 迎合；满足需要；供应 酒菜" data-w="cater" data-dv="caterer|n.|"><td class="n">5</td><td class="w">cater<button class="spk" data-say="cater" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈkeɪtə(r)]</div></td><td class="m">v. 迎合；满足需要；供应 酒菜<div class="dv"><b>衍生</b><i>caterer</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="cater" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="provision n. 供应；预备；储粮；规 定；条款" data-w="provision" data-dv="provisional|adj.|"><td class="n">6</td><td class="w">provision<button class="spk" data-say="provision" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[prəˈvɪʒ(ə)n]</div></td><td class="m">n. 供应；预备；储粮；规 定；条款<div class="dv"><b>衍生</b><i>provisional</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="provision" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="edible adj. 可⻝用的；可以吃的" data-w="edible" data-dv="edibleness|n.|;;inedible|adj.|"><td class="n">7</td><td class="w">edible<button class="spk" data-say="edible" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈedəb(ə)l]</div></td><td class="m">adj. 可⻝用的；可以吃的<div class="dv"><b>衍生</b><i>edibleness</i><em>n.</em><span class="sep">·</span><i>inedible</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="edible" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="recipe n. ⻝谱；烹饪法；处方； 秘诀" data-w="recipe" data-dv=""><td class="n">8</td><td class="w">recipe<button class="spk" data-say="recipe" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈresəpi]</div></td><td class="m">n. ⻝谱；烹饪法；处方； 秘诀</td><td class="sv"><button class="star" data-star="recipe" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 03</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="restaurant n. 餐厅；餐馆" data-w="restaurant" data-dv=""><td class="n">9</td><td class="w">restaurant<div class="ipa">[ˈrestrɒnt]</div></td><td class="m">n. 餐厅；餐馆</td><td class="sv"><button class="star" data-star="restaurant" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="refectory n. ⻝堂；餐厅" data-w="refectory" data-dv=""><td class="n">10</td><td class="w">refectory<div class="ipa">[rɪˈfektəri]</div></td><td class="m">n. ⻝堂；餐厅</td><td class="sv"><button class="star" data-star="refectory" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="cafeteria n. 自助餐厅；自助⻝堂" data-w="cafeteria" data-dv=""><td class="n">11</td><td class="w">cafeteria<div class="ipa">[ˌkæfəˈtɪəriə]</div></td><td class="m">n. 自助餐厅；自助⻝堂</td><td class="sv"><button class="star" data-star="cafeteria" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="restaurant n. 餐厅；餐馆" data-w="restaurant" data-dv=""><td class="n">9</td><td class="w">restaurant<button class="spk" data-say="restaurant" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈrestrɒnt]</div></td><td class="m">n. 餐厅；餐馆</td><td class="sv"><button class="star" data-star="restaurant" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="refectory n. ⻝堂；餐厅" data-w="refectory" data-dv=""><td class="n">10</td><td class="w">refectory<button class="spk" data-say="refectory" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[rɪˈfektəri]</div></td><td class="m">n. ⻝堂；餐厅</td><td class="sv"><button class="star" data-star="refectory" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cafeteria n. 自助餐厅；自助⻝堂" data-w="cafeteria" data-dv=""><td class="n">11</td><td class="w">cafeteria<button class="spk" data-say="cafeteria" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˌkæfəˈtɪəriə]</div></td><td class="m">n. 自助餐厅；自助⻝堂</td><td class="sv"><button class="star" data-star="cafeteria" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 04</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="buffet n. 自助餐；饮⻝柜台；v. 反复敲打；连续猛击" data-w="buffet" data-dv=""><td class="n">12</td><td class="w">buffet<div class="ipa">[ˈbʌfeɪ]</div></td><td class="m">n. 自助餐；饮⻝柜台；v. 反复敲打；连续猛击</td><td class="sv"><button class="star" data-star="buffet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="barbecue n. 户外烧烤；烤肉；烤 架；v. 烧烤" data-w="barbecue" data-dv=""><td class="n">13</td><td class="w">barbecue<div class="ipa">[ˈbɑːbɪkjuː]</div></td><td class="m">n. 户外烧烤；烤肉；烤 架；v. 烧烤</td><td class="sv"><button class="star" data-star="barbecue" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="supper n. 晚饭；晚餐" data-w="supper" data-dv=""><td class="n">14</td><td class="w">supper<div class="ipa">[ˈsʌpə(r)]</div></td><td class="m">n. 晚饭；晚餐</td><td class="sv"><button class="star" data-star="supper" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="banquet n. 宴会；盛宴" data-w="banquet" data-dv=""><td class="n">15</td><td class="w">banquet<div class="ipa">[ˈbæŋkwɪt]</div></td><td class="m">n. 宴会；盛宴</td><td class="sv"><button class="star" data-star="banquet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="buffet n. 自助餐；饮⻝柜台；v. 反复敲打；连续猛击" data-w="buffet" data-dv=""><td class="n">12</td><td class="w">buffet<button class="spk" data-say="buffet" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈbʌfeɪ]</div></td><td class="m">n. 自助餐；饮⻝柜台；v. 反复敲打；连续猛击</td><td class="sv"><button class="star" data-star="buffet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="barbecue n. 户外烧烤；烤肉；烤 架；v. 烧烤" data-w="barbecue" data-dv=""><td class="n">13</td><td class="w">barbecue<button class="spk" data-say="barbecue" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈbɑːbɪkjuː]</div></td><td class="m">n. 户外烧烤；烤肉；烤 架；v. 烧烤</td><td class="sv"><button class="star" data-star="barbecue" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="supper n. 晚饭；晚餐" data-w="supper" data-dv=""><td class="n">14</td><td class="w">supper<button class="spk" data-say="supper" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈsʌpə(r)]</div></td><td class="m">n. 晚饭；晚餐</td><td class="sv"><button class="star" data-star="supper" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="banquet n. 宴会；盛宴" data-w="banquet" data-dv=""><td class="n">15</td><td class="w">banquet<button class="spk" data-say="banquet" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈbæŋkwɪt]</div></td><td class="m">n. 宴会；盛宴</td><td class="sv"><button class="star" data-star="banquet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 05</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="refreshment n. 茶点和饮料；提神；心 旷神怡" data-w="refreshment" data-dv=""><td class="n">16</td><td class="w">refreshment<div class="ipa">[rɪˈfreʃmənt]</div></td><td class="m">n. 茶点和饮料；提神；心 旷神怡</td><td class="sv"><button class="star" data-star="refreshment" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="snack n. 小吃；点心；快餐" data-w="snack" data-dv=""><td class="n">17</td><td class="w">snack<div class="ipa">[snæk]</div></td><td class="m">n. 小吃；点心；快餐</td><td class="sv"><button class="star" data-star="snack" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="refreshment n. 茶点和饮料；提神；心 旷神怡" data-w="refreshment" data-dv=""><td class="n">16</td><td class="w">refreshment<button class="spk" data-say="refreshment" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[rɪˈfreʃmənt]</div></td><td class="m">n. 茶点和饮料；提神；心 旷神怡</td><td class="sv"><button class="star" data-star="refreshment" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="snack n. 小吃；点心；快餐" data-w="snack" data-dv=""><td class="n">17</td><td class="w">snack<button class="spk" data-say="snack" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[snæk]</div></td><td class="m">n. 小吃；点心；快餐</td><td class="sv"><button class="star" data-star="snack" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 06</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="appetiser n. 开胃菜；开胃品" data-w="appetiser" data-dv=""><td class="n">18</td><td class="w">appetiser<div class="ipa">[ˈæpɪtaɪzə]</div></td><td class="m">n. 开胃菜；开胃品</td><td class="sv"><button class="star" data-star="appetiser" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="cuisine n. 烹饪；菜肴；烹调⻛格" data-w="cuisine" data-dv=""><td class="n">19</td><td class="w">cuisine<div class="ipa">[kwɪˈziːn]</div></td><td class="m">n. 烹饪；菜肴；烹调⻛格</td><td class="sv"><button class="star" data-star="cuisine" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="menu n. 菜单" data-w="menu" data-dv=""><td class="n">20</td><td class="w">menu<div class="ipa">[ˈmenjuː]</div></td><td class="m">n. 菜单</td><td class="sv"><button class="star" data-star="menu" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="order n. 顺序；条理；订单；命令；(生 物学的)目；v. 订购；命令；点 餐；整理" data-w="order" data-dv=""><td class="n">21</td><td class="w">order<div class="ipa">[ˈɔːdə(r)]</div></td><td class="m">n. 顺序；条理；订单；命令；(生 物学的)目；v. 订购；命令；点 餐；整理</td><td class="sv"><button class="star" data-star="order" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="takeaway n. 外卖餐馆；外卖⻝物" data-w="takeaway" data-dv=""><td class="n">22</td><td class="w">takeaway<div class="ipa">[ˈteɪkəweɪ]</div></td><td class="m">n. 外卖餐馆；外卖⻝物</td><td class="sv"><button class="star" data-star="takeaway" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="appetiser n. 开胃菜；开胃品" data-w="appetiser" data-dv=""><td class="n">18</td><td class="w">appetiser<button class="spk" data-say="appetiser" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈæpɪtaɪzə]</div></td><td class="m">n. 开胃菜；开胃品</td><td class="sv"><button class="star" data-star="appetiser" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cuisine n. 烹饪；菜肴；烹调⻛格" data-w="cuisine" data-dv=""><td class="n">19</td><td class="w">cuisine<button class="spk" data-say="cuisine" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[kwɪˈziːn]</div></td><td class="m">n. 烹饪；菜肴；烹调⻛格</td><td class="sv"><button class="star" data-star="cuisine" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="menu n. 菜单" data-w="menu" data-dv=""><td class="n">20</td><td class="w">menu<button class="spk" data-say="menu" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈmenjuː]</div></td><td class="m">n. 菜单</td><td class="sv"><button class="star" data-star="menu" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="order n. 顺序；条理；订单；命令；(生 物学的)目；v. 订购；命令；点 餐；整理" data-w="order" data-dv=""><td class="n">21</td><td class="w">order<button class="spk" data-say="order" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈɔːdə(r)]</div></td><td class="m">n. 顺序；条理；订单；命令；(生 物学的)目；v. 订购；命令；点 餐；整理</td><td class="sv"><button class="star" data-star="order" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="takeaway n. 外卖餐馆；外卖⻝物" data-w="takeaway" data-dv=""><td class="n">22</td><td class="w">takeaway<button class="spk" data-say="takeaway" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈteɪkəweɪ]</div></td><td class="m">n. 外卖餐馆；外卖⻝物</td><td class="sv"><button class="star" data-star="takeaway" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 07</span><span class="gcnt">8 词</span></td></tr>
-<tr data-s="chef n. 主厨；厨师" data-w="chef" data-dv=""><td class="n">23</td><td class="w">chef<div class="ipa">[ʃef]</div></td><td class="m">n. 主厨；厨师</td><td class="sv"><button class="star" data-star="chef" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="gourmet n. 美⻝家" data-w="gourmet" data-dv=""><td class="n">24</td><td class="w">gourmet<div class="ipa">[ˈɡʊəmeɪ]</div></td><td class="m">n. 美⻝家</td><td class="sv"><button class="star" data-star="gourmet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="vegetarian n. 素⻝者；⻝草动物； adj. 素⻝者的；素菜的" data-w="vegetarian" data-dv=""><td class="n">25</td><td class="w">vegetarian<div class="ipa">[ˌvedʒəˈteəriən]</div></td><td class="m">n. 素⻝者；⻝草动物； adj. 素⻝者的；素菜的</td><td class="sv"><button class="star" data-star="vegetarian" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="cutlery n. 餐具(刀、叉和匙)" data-w="cutlery" data-dv=""><td class="n">26</td><td class="w">cutlery<div class="ipa">[ˈkʌtləri]</div></td><td class="m">n. 餐具(刀、叉和匙)</td><td class="sv"><button class="star" data-star="cutlery" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="silver n. 银；银色；银器；adj. 银的；银 色的；v. 镀银于；使 ... 成银色" data-w="silver" data-dv="silverly|adv.|;;silverness|n.|"><td class="n">27</td><td class="w">silver<div class="ipa">[ˈsɪlvə(r)]</div></td><td class="m">n. 银；银色；银器；adj. 银的；银 色的；v. 镀银于；使 ... 成银色<div class="dv"><b>衍生</b><i>silverly</i><em>adv.</em><span class="sep">·</span><i>silverness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="silver" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="ceramic n. 陶瓷制品；陶瓷器； adj. 陶质的；制陶的" data-w="ceramic" data-dv=""><td class="n">28</td><td class="w">ceramic<div class="ipa">[səˈræmɪk]</div></td><td class="m">n. 陶瓷制品；陶瓷器； adj. 陶质的；制陶的</td><td class="sv"><button class="star" data-star="ceramic" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="porcelain n. 瓷；瓷器" data-w="porcelain" data-dv=""><td class="n">29</td><td class="w">porcelain<div class="ipa">[ˈpɔːsəlɪn]</div></td><td class="m">n. 瓷；瓷器</td><td class="sv"><button class="star" data-star="porcelain" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="bowl n. 碗；一碗...；碗状物； v. 投掷；滚动" data-w="bowl" data-dv=""><td class="n">30</td><td class="w">bowl<div class="ipa">[bəʊl]</div></td><td class="m">n. 碗；一碗...；碗状物； v. 投掷；滚动</td><td class="sv"><button class="star" data-star="bowl" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="chef n. 主厨；厨师" data-w="chef" data-dv=""><td class="n">23</td><td class="w">chef<button class="spk" data-say="chef" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ʃef]</div></td><td class="m">n. 主厨；厨师</td><td class="sv"><button class="star" data-star="chef" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="gourmet n. 美⻝家" data-w="gourmet" data-dv=""><td class="n">24</td><td class="w">gourmet<button class="spk" data-say="gourmet" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈɡʊəmeɪ]</div></td><td class="m">n. 美⻝家</td><td class="sv"><button class="star" data-star="gourmet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="vegetarian n. 素⻝者；⻝草动物； adj. 素⻝者的；素菜的" data-w="vegetarian" data-dv=""><td class="n">25</td><td class="w">vegetarian<button class="spk" data-say="vegetarian" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˌvedʒəˈteəriən]</div></td><td class="m">n. 素⻝者；⻝草动物； adj. 素⻝者的；素菜的</td><td class="sv"><button class="star" data-star="vegetarian" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cutlery n. 餐具(刀、叉和匙)" data-w="cutlery" data-dv=""><td class="n">26</td><td class="w">cutlery<button class="spk" data-say="cutlery" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈkʌtləri]</div></td><td class="m">n. 餐具(刀、叉和匙)</td><td class="sv"><button class="star" data-star="cutlery" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="silver n. 银；银色；银器；adj. 银的；银 色的；v. 镀银于；使 ... 成银色" data-w="silver" data-dv="silverly|adv.|;;silverness|n.|"><td class="n">27</td><td class="w">silver<button class="spk" data-say="silver" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈsɪlvə(r)]</div></td><td class="m">n. 银；银色；银器；adj. 银的；银 色的；v. 镀银于；使 ... 成银色<div class="dv"><b>衍生</b><i>silverly</i><em>adv.</em><span class="sep">·</span><i>silverness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="silver" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="ceramic n. 陶瓷制品；陶瓷器； adj. 陶质的；制陶的" data-w="ceramic" data-dv=""><td class="n">28</td><td class="w">ceramic<button class="spk" data-say="ceramic" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[səˈræmɪk]</div></td><td class="m">n. 陶瓷制品；陶瓷器； adj. 陶质的；制陶的</td><td class="sv"><button class="star" data-star="ceramic" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="porcelain n. 瓷；瓷器" data-w="porcelain" data-dv=""><td class="n">29</td><td class="w">porcelain<button class="spk" data-say="porcelain" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpɔːsəlɪn]</div></td><td class="m">n. 瓷；瓷器</td><td class="sv"><button class="star" data-star="porcelain" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="bowl n. 碗；一碗...；碗状物； v. 投掷；滚动" data-w="bowl" data-dv=""><td class="n">30</td><td class="w">bowl<button class="spk" data-say="bowl" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[bəʊl]</div></td><td class="m">n. 碗；一碗...；碗状物； v. 投掷；滚动</td><td class="sv"><button class="star" data-star="bowl" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 08</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="dish n. 盘；碟；菜肴" data-w="dish" data-dv=""><td class="n">31</td><td class="w">dish<div class="ipa">[dɪʃ]</div></td><td class="m">n. 盘；碟；菜肴</td><td class="sv"><button class="star" data-star="dish" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="saucer n. 茶托；碟子" data-w="saucer" data-dv=""><td class="n">32</td><td class="w">saucer<div class="ipa">[ˈsɔːsə(r)]</div></td><td class="m">n. 茶托；碟子</td><td class="sv"><button class="star" data-star="saucer" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="tray n. 托盘；浅盘" data-w="tray" data-dv=""><td class="n">33</td><td class="w">tray<div class="ipa">[treɪ]</div></td><td class="m">n. 托盘；浅盘</td><td class="sv"><button class="star" data-star="tray" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="dish n. 盘；碟；菜肴" data-w="dish" data-dv=""><td class="n">31</td><td class="w">dish<button class="spk" data-say="dish" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[dɪʃ]</div></td><td class="m">n. 盘；碟；菜肴</td><td class="sv"><button class="star" data-star="dish" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="saucer n. 茶托；碟子" data-w="saucer" data-dv=""><td class="n">32</td><td class="w">saucer<button class="spk" data-say="saucer" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈsɔːsə(r)]</div></td><td class="m">n. 茶托；碟子</td><td class="sv"><button class="star" data-star="saucer" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="tray n. 托盘；浅盘" data-w="tray" data-dv=""><td class="n">33</td><td class="w">tray<button class="spk" data-say="tray" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[treɪ]</div></td><td class="m">n. 托盘；浅盘</td><td class="sv"><button class="star" data-star="tray" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 09</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="fork n. 叉子；分岔；分支；v. 分岔；用叉子叉" data-w="fork" data-dv=""><td class="n">34</td><td class="w">fork<div class="ipa">[fɔːk]</div></td><td class="m">n. 叉子；分岔；分支；v. 分岔；用叉子叉</td><td class="sv"><button class="star" data-star="fork" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="knife n. 刀" data-w="knife" data-dv=""><td class="n">35</td><td class="w">knife<div class="ipa">[naɪf]</div></td><td class="m">n. 刀</td><td class="sv"><button class="star" data-star="knife" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="spoon n. 勺子；汤匙" data-w="spoon" data-dv="spoonful|adj.|"><td class="n">36</td><td class="w">spoon<div class="ipa">[spuːn]</div></td><td class="m">n. 勺子；汤匙<div class="dv"><b>衍生</b><i>spoonful</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="spoon" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="glass n. 玻璃；玻璃杯" data-w="glass" data-dv=""><td class="n">37</td><td class="w">glass<div class="ipa">[ɡlɑːs]</div></td><td class="m">n. 玻璃；玻璃杯</td><td class="sv"><button class="star" data-star="glass" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="mug n. (有柄的)大杯；v. 对...行凶抢劫" data-w="mug" data-dv="mugging|v.|"><td class="n">38</td><td class="w">mug<div class="ipa">[mʌɡ]</div></td><td class="m">n. (有柄的)大杯；v. 对...行凶抢劫<div class="dv"><b>衍生</b><i>mugging</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="mug" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="fork n. 叉子；分岔；分支；v. 分岔；用叉子叉" data-w="fork" data-dv=""><td class="n">34</td><td class="w">fork<button class="spk" data-say="fork" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[fɔːk]</div></td><td class="m">n. 叉子；分岔；分支；v. 分岔；用叉子叉</td><td class="sv"><button class="star" data-star="fork" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="knife n. 刀" data-w="knife" data-dv=""><td class="n">35</td><td class="w">knife<button class="spk" data-say="knife" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[naɪf]</div></td><td class="m">n. 刀</td><td class="sv"><button class="star" data-star="knife" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="spoon n. 勺子；汤匙" data-w="spoon" data-dv="spoonful|adj.|"><td class="n">36</td><td class="w">spoon<button class="spk" data-say="spoon" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[spuːn]</div></td><td class="m">n. 勺子；汤匙<div class="dv"><b>衍生</b><i>spoonful</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="spoon" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="glass n. 玻璃；玻璃杯" data-w="glass" data-dv=""><td class="n">37</td><td class="w">glass<button class="spk" data-say="glass" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ɡlɑːs]</div></td><td class="m">n. 玻璃；玻璃杯</td><td class="sv"><button class="star" data-star="glass" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="mug n. (有柄的)大杯；v. 对...行凶抢劫" data-w="mug" data-dv="mugging|v.|"><td class="n">38</td><td class="w">mug<button class="spk" data-say="mug" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[mʌɡ]</div></td><td class="m">n. (有柄的)大杯；v. 对...行凶抢劫<div class="dv"><b>衍生</b><i>mugging</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="mug" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 10</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="kettle n. 水壶" data-w="kettle" data-dv=""><td class="n">39</td><td class="w">kettle<div class="ipa">[ˈket(ə)l]</div></td><td class="m">n. 水壶</td><td class="sv"><button class="star" data-star="kettle" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="pan n. 平底锅" data-w="pan" data-dv=""><td class="n">40</td><td class="w">pan<div class="ipa">[pæn]</div></td><td class="m">n. 平底锅</td><td class="sv"><button class="star" data-star="pan" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="pot n. 壶；锅；罐；瓢；盆； v. 罐装；栽入盆中；射杀" data-w="pot" data-dv="potent|adj.|adj. 强有力的；有效的;;potted|v.|"><td class="n">41</td><td class="w">pot<div class="ipa">[pɒt]</div></td><td class="m">n. 壶；锅；罐；瓢；盆； v. 罐装；栽入盆中；射杀<div class="dv"><b>衍生</b><i>potent</i><em>adj.</em><span class="sep">·</span><i>potted</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="pot" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="kettle n. 水壶" data-w="kettle" data-dv=""><td class="n">39</td><td class="w">kettle<button class="spk" data-say="kettle" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈket(ə)l]</div></td><td class="m">n. 水壶</td><td class="sv"><button class="star" data-star="kettle" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pan n. 平底锅" data-w="pan" data-dv=""><td class="n">40</td><td class="w">pan<button class="spk" data-say="pan" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[pæn]</div></td><td class="m">n. 平底锅</td><td class="sv"><button class="star" data-star="pan" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pot n. 壶；锅；罐；瓢；盆； v. 罐装；栽入盆中；射杀" data-w="pot" data-dv="potent|adj.|adj. 强有力的；有效的;;potted|v.|"><td class="n">41</td><td class="w">pot<button class="spk" data-say="pot" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[pɒt]</div></td><td class="m">n. 壶；锅；罐；瓢；盆； v. 罐装；栽入盆中；射杀<div class="dv"><b>衍生</b><i>potent</i><em>adj.</em><span class="sep">·</span><i>potted</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="pot" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 11</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="stove n. 火炉" data-w="stove" data-dv=""><td class="n">42</td><td class="w">stove<div class="ipa">[stəʊv]</div></td><td class="m">n. 火炉</td><td class="sv"><button class="star" data-star="stove" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="furnace n. 熔炉；火炉" data-w="furnace" data-dv=""><td class="n">43</td><td class="w">furnace<div class="ipa">[ˈfɜːnɪs]</div></td><td class="m">n. 熔炉；火炉</td><td class="sv"><button class="star" data-star="furnace" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="oven n. 烤箱；烤炉" data-w="oven" data-dv=""><td class="n">44</td><td class="w">oven<div class="ipa">[ˈʌv(ə)n]</div></td><td class="m">n. 烤箱；烤炉</td><td class="sv"><button class="star" data-star="oven" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="stove n. 火炉" data-w="stove" data-dv=""><td class="n">42</td><td class="w">stove<button class="spk" data-say="stove" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[stəʊv]</div></td><td class="m">n. 火炉</td><td class="sv"><button class="star" data-star="stove" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="furnace n. 熔炉；火炉" data-w="furnace" data-dv=""><td class="n">43</td><td class="w">furnace<button class="spk" data-say="furnace" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈfɜːnɪs]</div></td><td class="m">n. 熔炉；火炉</td><td class="sv"><button class="star" data-star="furnace" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="oven n. 烤箱；烤炉" data-w="oven" data-dv=""><td class="n">44</td><td class="w">oven<button class="spk" data-say="oven" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈʌv(ə)n]</div></td><td class="m">n. 烤箱；烤炉</td><td class="sv"><button class="star" data-star="oven" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 12</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="tin n. 锡；罐头" data-w="tin" data-dv=""><td class="n">45</td><td class="w">tin<div class="ipa">[tɪn]</div></td><td class="m">n. 锡；罐头</td><td class="sv"><button class="star" data-star="tin" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="lid n. 盖子" data-w="lid" data-dv=""><td class="n">46</td><td class="w">lid<div class="ipa">[lɪd]</div></td><td class="m">n. 盖子</td><td class="sv"><button class="star" data-star="lid" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="drink v. 喝；喝酒；n. 饮料；酒" data-w="drink" data-dv="drinker|n.|"><td class="n">47</td><td class="w">drink<div class="ipa">[drɪŋk]</div></td><td class="m">v. 喝；喝酒；n. 饮料；酒<div class="dv"><b>衍生</b><i>drinker</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="drink" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="beverage n. 饮料" data-w="beverage" data-dv=""><td class="n">48</td><td class="w">beverage<div class="ipa">[ˈbevərɪdʒ]</div></td><td class="m">n. 饮料</td><td class="sv"><button class="star" data-star="beverage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="tin n. 锡；罐头" data-w="tin" data-dv=""><td class="n">45</td><td class="w">tin<button class="spk" data-say="tin" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[tɪn]</div></td><td class="m">n. 锡；罐头</td><td class="sv"><button class="star" data-star="tin" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="lid n. 盖子" data-w="lid" data-dv=""><td class="n">46</td><td class="w">lid<button class="spk" data-say="lid" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[lɪd]</div></td><td class="m">n. 盖子</td><td class="sv"><button class="star" data-star="lid" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="drink v. 喝；喝酒；n. 饮料；酒" data-w="drink" data-dv="drinker|n.|"><td class="n">47</td><td class="w">drink<button class="spk" data-say="drink" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[drɪŋk]</div></td><td class="m">v. 喝；喝酒；n. 饮料；酒<div class="dv"><b>衍生</b><i>drinker</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="drink" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="beverage n. 饮料" data-w="beverage" data-dv=""><td class="n">48</td><td class="w">beverage<button class="spk" data-say="beverage" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈbevərɪdʒ]</div></td><td class="m">n. 饮料</td><td class="sv"><button class="star" data-star="beverage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 13</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="juice n. 果汁" data-w="juice" data-dv=""><td class="n">49</td><td class="w">juice<div class="ipa">[dʒuːs]</div></td><td class="m">n. 果汁</td><td class="sv"><button class="star" data-star="juice" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="soda n. 苏打；苏打水" data-w="soda" data-dv=""><td class="n">50</td><td class="w">soda<div class="ipa">[ˈsəʊdə]</div></td><td class="m">n. 苏打；苏打水</td><td class="sv"><button class="star" data-star="soda" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="coffee n. 咖啡" data-w="coffee" data-dv=""><td class="n">51</td><td class="w">coffee<div class="ipa">[ˈkɒfi]</div></td><td class="m">n. 咖啡</td><td class="sv"><button class="star" data-star="coffee" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="juice n. 果汁" data-w="juice" data-dv=""><td class="n">49</td><td class="w">juice<button class="spk" data-say="juice" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[dʒuːs]</div></td><td class="m">n. 果汁</td><td class="sv"><button class="star" data-star="juice" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="soda n. 苏打；苏打水" data-w="soda" data-dv=""><td class="n">50</td><td class="w">soda<button class="spk" data-say="soda" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈsəʊdə]</div></td><td class="m">n. 苏打；苏打水</td><td class="sv"><button class="star" data-star="soda" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="coffee n. 咖啡" data-w="coffee" data-dv=""><td class="n">51</td><td class="w">coffee<button class="spk" data-say="coffee" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈkɒfi]</div></td><td class="m">n. 咖啡</td><td class="sv"><button class="star" data-star="coffee" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 14</span><span class="gcnt">8 词</span></td></tr>
-<tr data-s="alcohol n. 酒精；乙醇；含酒精的 饮料" data-w="alcohol" data-dv="alcoholic|adj.|;;alcoholism|n.|"><td class="n">52</td><td class="w">alcohol<div class="ipa">[ˈælkəhɒl]</div></td><td class="m">n. 酒精；乙醇；含酒精的 饮料<div class="dv"><b>衍生</b><i>alcoholic</i><em>adj.</em><span class="sep">·</span><i>alcoholism</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="alcohol" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="liquor n. 酒；烈酒" data-w="liquor" data-dv=""><td class="n">53</td><td class="w">liquor<div class="ipa">[ˈlɪkə(r)]</div></td><td class="m">n. 酒；烈酒</td><td class="sv"><button class="star" data-star="liquor" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="whisky n. 威士忌" data-w="whisky" data-dv=""><td class="n">54</td><td class="w">whisky<div class="ipa">[ˈwɪski]</div></td><td class="m">n. 威士忌</td><td class="sv"><button class="star" data-star="whisky" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="brandy n. 白兰地" data-w="brandy" data-dv=""><td class="n">55</td><td class="w">brandy<div class="ipa">[ˈbrændi]</div></td><td class="m">n. 白兰地</td><td class="sv"><button class="star" data-star="brandy" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="drunk adj. 喝醉的；v. 喝；喝 酒；“drink”的过去分词" data-w="drunk" data-dv="drunker|n.|;;drunken|v.|"><td class="n">56</td><td class="w">drunk<div class="ipa">[drʌŋk]</div></td><td class="m">adj. 喝醉的；v. 喝；喝 酒；“drink”的过去分词<div class="dv"><b>衍生</b><i>drunker</i><em>n.</em><span class="sep">·</span><i>drunken</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="drunk" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="tobacco n. 烟草；烟叶" data-w="tobacco" data-dv=""><td class="n">57</td><td class="w">tobacco<div class="ipa">[təˈbækəʊ]</div></td><td class="m">n. 烟草；烟叶</td><td class="sv"><button class="star" data-star="tobacco" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="cigarette n. 香烟；纸烟" data-w="cigarette" data-dv=""><td class="n">58</td><td class="w">cigarette<div class="ipa">[ˌsɪɡəˈret]</div></td><td class="m">n. 香烟；纸烟</td><td class="sv"><button class="star" data-star="cigarette" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="sober adj. 清醒的；严肃的；素淡 的；v. (使)清醒,变得持重" data-w="sober" data-dv="soberly|adv.|;;soberness|n.|"><td class="n">59</td><td class="w">sober<div class="ipa">[ˈsəʊbə(r)]</div></td><td class="m">adj. 清醒的；严肃的；素淡 的；v. (使)清醒,变得持重<div class="dv"><b>衍生</b><i>soberly</i><em>adv.</em><span class="sep">·</span><i>soberness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="sober" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="alcohol n. 酒精；乙醇；含酒精的 饮料" data-w="alcohol" data-dv="alcoholic|adj.|;;alcoholism|n.|"><td class="n">52</td><td class="w">alcohol<button class="spk" data-say="alcohol" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈælkəhɒl]</div></td><td class="m">n. 酒精；乙醇；含酒精的 饮料<div class="dv"><b>衍生</b><i>alcoholic</i><em>adj.</em><span class="sep">·</span><i>alcoholism</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="alcohol" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="liquor n. 酒；烈酒" data-w="liquor" data-dv=""><td class="n">53</td><td class="w">liquor<button class="spk" data-say="liquor" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈlɪkə(r)]</div></td><td class="m">n. 酒；烈酒</td><td class="sv"><button class="star" data-star="liquor" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="whisky n. 威士忌" data-w="whisky" data-dv=""><td class="n">54</td><td class="w">whisky<button class="spk" data-say="whisky" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈwɪski]</div></td><td class="m">n. 威士忌</td><td class="sv"><button class="star" data-star="whisky" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="brandy n. 白兰地" data-w="brandy" data-dv=""><td class="n">55</td><td class="w">brandy<button class="spk" data-say="brandy" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈbrændi]</div></td><td class="m">n. 白兰地</td><td class="sv"><button class="star" data-star="brandy" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="drunk adj. 喝醉的；v. 喝；喝 酒；“drink”的过去分词" data-w="drunk" data-dv="drunker|n.|;;drunken|v.|"><td class="n">56</td><td class="w">drunk<button class="spk" data-say="drunk" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[drʌŋk]</div></td><td class="m">adj. 喝醉的；v. 喝；喝 酒；“drink”的过去分词<div class="dv"><b>衍生</b><i>drunker</i><em>n.</em><span class="sep">·</span><i>drunken</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="drunk" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="tobacco n. 烟草；烟叶" data-w="tobacco" data-dv=""><td class="n">57</td><td class="w">tobacco<button class="spk" data-say="tobacco" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[təˈbækəʊ]</div></td><td class="m">n. 烟草；烟叶</td><td class="sv"><button class="star" data-star="tobacco" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cigarette n. 香烟；纸烟" data-w="cigarette" data-dv=""><td class="n">58</td><td class="w">cigarette<button class="spk" data-say="cigarette" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˌsɪɡəˈret]</div></td><td class="m">n. 香烟；纸烟</td><td class="sv"><button class="star" data-star="cigarette" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="sober adj. 清醒的；严肃的；素淡 的；v. (使)清醒,变得持重" data-w="sober" data-dv="soberly|adv.|;;soberness|n.|"><td class="n">59</td><td class="w">sober<button class="spk" data-say="sober" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈsəʊbə(r)]</div></td><td class="m">adj. 清醒的；严肃的；素淡 的；v. (使)清醒,变得持重<div class="dv"><b>衍生</b><i>soberly</i><em>adv.</em><span class="sep">·</span><i>soberness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="sober" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 15</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="vegetable n. 蔬菜" data-w="vegetable" data-dv=""><td class="n">60</td><td class="w">vegetable<div class="ipa">[ˈvedʒtəb(ə)l]</div></td><td class="m">n. 蔬菜</td><td class="sv"><button class="star" data-star="vegetable" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="tomato n. ⻄红柿；番茄" data-w="tomato" data-dv=""><td class="n">61</td><td class="w">tomato<div class="ipa">[təˈmɑːtəʊ]</div></td><td class="m">n. ⻄红柿；番茄</td><td class="sv"><button class="star" data-star="tomato" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="potato n. 土豆；⻢铃薯" data-w="potato" data-dv=""><td class="n">62</td><td class="w">potato<div class="ipa">[pəˈteɪtəʊ]</div></td><td class="m">n. 土豆；⻢铃薯</td><td class="sv"><button class="star" data-star="potato" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="vegetable n. 蔬菜" data-w="vegetable" data-dv=""><td class="n">60</td><td class="w">vegetable<button class="spk" data-say="vegetable" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈvedʒtəb(ə)l]</div></td><td class="m">n. 蔬菜</td><td class="sv"><button class="star" data-star="vegetable" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="tomato n. ⻄红柿；番茄" data-w="tomato" data-dv=""><td class="n">61</td><td class="w">tomato<button class="spk" data-say="tomato" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[təˈmɑːtəʊ]</div></td><td class="m">n. ⻄红柿；番茄</td><td class="sv"><button class="star" data-star="tomato" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="potato n. 土豆；⻢铃薯" data-w="potato" data-dv=""><td class="n">62</td><td class="w">potato<button class="spk" data-say="potato" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[pəˈteɪtəʊ]</div></td><td class="m">n. 土豆；⻢铃薯</td><td class="sv"><button class="star" data-star="potato" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 16</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="pea n. 豌豆" data-w="pea" data-dv=""><td class="n">63</td><td class="w">pea<div class="ipa">[piː]</div></td><td class="m">n. 豌豆</td><td class="sv"><button class="star" data-star="pea" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="bean n. 豆；豆科植物" data-w="bean" data-dv=""><td class="n">64</td><td class="w">bean<div class="ipa">[biːn]</div></td><td class="m">n. 豆；豆科植物</td><td class="sv"><button class="star" data-star="bean" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="cucumber n. ⻩瓜" data-w="cucumber" data-dv=""><td class="n">65</td><td class="w">cucumber<div class="ipa">[ˈkjuːkʌmbə(r)]</div></td><td class="m">n. ⻩瓜</td><td class="sv"><button class="star" data-star="cucumber" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pea n. 豌豆" data-w="pea" data-dv=""><td class="n">63</td><td class="w">pea<button class="spk" data-say="pea" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[piː]</div></td><td class="m">n. 豌豆</td><td class="sv"><button class="star" data-star="pea" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="bean n. 豆；豆科植物" data-w="bean" data-dv=""><td class="n">64</td><td class="w">bean<button class="spk" data-say="bean" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[biːn]</div></td><td class="m">n. 豆；豆科植物</td><td class="sv"><button class="star" data-star="bean" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cucumber n. ⻩瓜" data-w="cucumber" data-dv=""><td class="n">65</td><td class="w">cucumber<button class="spk" data-say="cucumber" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈkjuːkʌmbə(r)]</div></td><td class="m">n. ⻩瓜</td><td class="sv"><button class="star" data-star="cucumber" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 17</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="cabbage n. 卷心菜" data-w="cabbage" data-dv=""><td class="n">66</td><td class="w">cabbage<div class="ipa">[ˈkæbɪdʒ]</div></td><td class="m">n. 卷心菜</td><td class="sv"><button class="star" data-star="cabbage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="onion n. 洋葱" data-w="onion" data-dv=""><td class="n">67</td><td class="w">onion<div class="ipa">[ˈʌnjən]</div></td><td class="m">n. 洋葱</td><td class="sv"><button class="star" data-star="onion" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="mushroom n. 蘑菇；v. 迅速增⻓" data-w="mushroom" data-dv=""><td class="n">68</td><td class="w">mushroom<div class="ipa">[ˈmʌʃruːm]</div></td><td class="m">n. 蘑菇；v. 迅速增⻓</td><td class="sv"><button class="star" data-star="mushroom" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="eggplant n. 茄子" data-w="eggplant" data-dv=""><td class="n">69</td><td class="w">eggplant<div class="ipa">[ˈeɡplɑːnt]</div></td><td class="m">n. 茄子</td><td class="sv"><button class="star" data-star="eggplant" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cabbage n. 卷心菜" data-w="cabbage" data-dv=""><td class="n">66</td><td class="w">cabbage<button class="spk" data-say="cabbage" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈkæbɪdʒ]</div></td><td class="m">n. 卷心菜</td><td class="sv"><button class="star" data-star="cabbage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="onion n. 洋葱" data-w="onion" data-dv=""><td class="n">67</td><td class="w">onion<button class="spk" data-say="onion" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈʌnjən]</div></td><td class="m">n. 洋葱</td><td class="sv"><button class="star" data-star="onion" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="mushroom n. 蘑菇；v. 迅速增⻓" data-w="mushroom" data-dv=""><td class="n">68</td><td class="w">mushroom<button class="spk" data-say="mushroom" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈmʌʃruːm]</div></td><td class="m">n. 蘑菇；v. 迅速增⻓</td><td class="sv"><button class="star" data-star="mushroom" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="eggplant n. 茄子" data-w="eggplant" data-dv=""><td class="n">69</td><td class="w">eggplant<button class="spk" data-say="eggplant" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈeɡplɑːnt]</div></td><td class="m">n. 茄子</td><td class="sv"><button class="star" data-star="eggplant" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 18</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="carrot n. 胡萝卜" data-w="carrot" data-dv=""><td class="n">70</td><td class="w">carrot<div class="ipa">[ˈkærət]</div></td><td class="m">n. 胡萝卜</td><td class="sv"><button class="star" data-star="carrot" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="turnip n. 芜菁；萝卜" data-w="turnip" data-dv=""><td class="n">71</td><td class="w">turnip<div class="ipa">[ˈtɜːnɪp]</div></td><td class="m">n. 芜菁；萝卜</td><td class="sv"><button class="star" data-star="turnip" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="radish n. 小萝卜" data-w="radish" data-dv=""><td class="n">72</td><td class="w">radish<div class="ipa">[ˈrædɪʃ]</div></td><td class="m">n. 小萝卜</td><td class="sv"><button class="star" data-star="radish" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="carrot n. 胡萝卜" data-w="carrot" data-dv=""><td class="n">70</td><td class="w">carrot<button class="spk" data-say="carrot" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈkærət]</div></td><td class="m">n. 胡萝卜</td><td class="sv"><button class="star" data-star="carrot" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="turnip n. 芜菁；萝卜" data-w="turnip" data-dv=""><td class="n">71</td><td class="w">turnip<button class="spk" data-say="turnip" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈtɜːnɪp]</div></td><td class="m">n. 芜菁；萝卜</td><td class="sv"><button class="star" data-star="turnip" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="radish n. 小萝卜" data-w="radish" data-dv=""><td class="n">72</td><td class="w">radish<button class="spk" data-say="radish" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈrædɪʃ]</div></td><td class="m">n. 小萝卜</td><td class="sv"><button class="star" data-star="radish" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 19</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="peel n. 果皮；v. 剥落；去皮" data-w="peel" data-dv=""><td class="n">73</td><td class="w">peel<div class="ipa">[piːl]</div></td><td class="m">n. 果皮；v. 剥落；去皮</td><td class="sv"><button class="star" data-star="peel" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="strip v. 剥去；剥夺；脱衣；n. ⻓条；条状" data-w="strip" data-dv="stripping|v.|"><td class="n">74</td><td class="w">strip<div class="ipa">[strɪp]</div></td><td class="m">v. 剥去；剥夺；脱衣；n. ⻓条；条状<div class="dv"><b>衍生</b><i>stripping</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="strip" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="hull n. 外壳；皮；船身；船 体；v. 去壳" data-w="hull" data-dv=""><td class="n">75</td><td class="w">hull<div class="ipa">[hʌl]</div></td><td class="m">n. 外壳；皮；船身；船 体；v. 去壳</td><td class="sv"><button class="star" data-star="hull" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="peel n. 果皮；v. 剥落；去皮" data-w="peel" data-dv=""><td class="n">73</td><td class="w">peel<button class="spk" data-say="peel" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[piːl]</div></td><td class="m">n. 果皮；v. 剥落；去皮</td><td class="sv"><button class="star" data-star="peel" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="strip v. 剥去；剥夺；脱衣；n. ⻓条；条状" data-w="strip" data-dv="stripping|v.|"><td class="n">74</td><td class="w">strip<button class="spk" data-say="strip" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[strɪp]</div></td><td class="m">v. 剥去；剥夺；脱衣；n. ⻓条；条状<div class="dv"><b>衍生</b><i>stripping</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="strip" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="hull n. 外壳；皮；船身；船 体；v. 去壳" data-w="hull" data-dv=""><td class="n">75</td><td class="w">hull<button class="spk" data-say="hull" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[hʌl]</div></td><td class="m">n. 外壳；皮；船身；船 体；v. 去壳</td><td class="sv"><button class="star" data-star="hull" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 20</span><span class="gcnt">7 词</span></td></tr>
-<tr data-s="cherry n. 樱桃；樱桃树；adj. 樱 桃色的" data-w="cherry" data-dv=""><td class="n">76</td><td class="w">cherry<div class="ipa">[ˈtʃeri]</div></td><td class="m">n. 樱桃；樱桃树；adj. 樱 桃色的</td><td class="sv"><button class="star" data-star="cherry" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="berry n. 浆果" data-w="berry" data-dv=""><td class="n">77</td><td class="w">berry<div class="ipa">[ˈberi]</div></td><td class="m">n. 浆果</td><td class="sv"><button class="star" data-star="berry" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="grape n. 葡萄" data-w="grape" data-dv=""><td class="n">78</td><td class="w">grape<div class="ipa">[ɡreɪp]</div></td><td class="m">n. 葡萄</td><td class="sv"><button class="star" data-star="grape" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="papaya n. 木瓜" data-w="papaya" data-dv=""><td class="n">79</td><td class="w">papaya<div class="ipa">[pəˈpaɪə]</div></td><td class="m">n. 木瓜</td><td class="sv"><button class="star" data-star="papaya" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="peach n. 桃子；桃树；桃红色" data-w="peach" data-dv=""><td class="n">80</td><td class="w">peach<div class="ipa">[piːtʃ]</div></td><td class="m">n. 桃子；桃树；桃红色</td><td class="sv"><button class="star" data-star="peach" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="pear n. 梨子" data-w="pear" data-dv=""><td class="n">81</td><td class="w">pear<div class="ipa">[peə(r)]</div></td><td class="m">n. 梨子</td><td class="sv"><button class="star" data-star="pear" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="plum n. 梅子；李子；紫红色；⻘紫色； 令人垂涎的东⻄；adj. 令人垂涎 的；吸引人的" data-w="plum" data-dv=""><td class="n">82</td><td class="w">plum<div class="ipa">[plʌm]</div></td><td class="m">n. 梅子；李子；紫红色；⻘紫色； 令人垂涎的东⻄；adj. 令人垂涎 的；吸引人的</td><td class="sv"><button class="star" data-star="plum" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cherry n. 樱桃；樱桃树；adj. 樱 桃色的" data-w="cherry" data-dv=""><td class="n">76</td><td class="w">cherry<button class="spk" data-say="cherry" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈtʃeri]</div></td><td class="m">n. 樱桃；樱桃树；adj. 樱 桃色的</td><td class="sv"><button class="star" data-star="cherry" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="berry n. 浆果" data-w="berry" data-dv=""><td class="n">77</td><td class="w">berry<button class="spk" data-say="berry" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈberi]</div></td><td class="m">n. 浆果</td><td class="sv"><button class="star" data-star="berry" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="grape n. 葡萄" data-w="grape" data-dv=""><td class="n">78</td><td class="w">grape<button class="spk" data-say="grape" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ɡreɪp]</div></td><td class="m">n. 葡萄</td><td class="sv"><button class="star" data-star="grape" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="papaya n. 木瓜" data-w="papaya" data-dv=""><td class="n">79</td><td class="w">papaya<button class="spk" data-say="papaya" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[pəˈpaɪə]</div></td><td class="m">n. 木瓜</td><td class="sv"><button class="star" data-star="papaya" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="peach n. 桃子；桃树；桃红色" data-w="peach" data-dv=""><td class="n">80</td><td class="w">peach<button class="spk" data-say="peach" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[piːtʃ]</div></td><td class="m">n. 桃子；桃树；桃红色</td><td class="sv"><button class="star" data-star="peach" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pear n. 梨子" data-w="pear" data-dv=""><td class="n">81</td><td class="w">pear<button class="spk" data-say="pear" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[peə(r)]</div></td><td class="m">n. 梨子</td><td class="sv"><button class="star" data-star="pear" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="plum n. 梅子；李子；紫红色；⻘紫色； 令人垂涎的东⻄；adj. 令人垂涎 的；吸引人的" data-w="plum" data-dv=""><td class="n">82</td><td class="w">plum<button class="spk" data-say="plum" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[plʌm]</div></td><td class="m">n. 梅子；李子；紫红色；⻘紫色； 令人垂涎的东⻄；adj. 令人垂涎 的；吸引人的</td><td class="sv"><button class="star" data-star="plum" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 21</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="orange adj. 橙色的；n. 橙色；橙 子" data-w="orange" data-dv=""><td class="n">83</td><td class="w">orange<div class="ipa">[ˈɒrɪndʒ]</div></td><td class="m">adj. 橙色的；n. 橙色；橙 子</td><td class="sv"><button class="star" data-star="orange" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="melon n. 瓜；甜瓜" data-w="melon" data-dv=""><td class="n">84</td><td class="w">melon<div class="ipa">[ˈmelən]</div></td><td class="m">n. 瓜；甜瓜</td><td class="sv"><button class="star" data-star="melon" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="lemon n. 柠檬；柠檬色" data-w="lemon" data-dv=""><td class="n">85</td><td class="w">lemon<div class="ipa">[ˈlemən]</div></td><td class="m">n. 柠檬；柠檬色</td><td class="sv"><button class="star" data-star="lemon" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="kiwi n. 几维⻦；奇异果" data-w="kiwi" data-dv=""><td class="n">86</td><td class="w">kiwi<div class="ipa">[ˈkiːwi]</div></td><td class="m">n. 几维⻦；奇异果</td><td class="sv"><button class="star" data-star="kiwi" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="crop n. 农作物；收成；v. 修 剪；种植；收割" data-w="crop" data-dv="cropped|v.|"><td class="n">87</td><td class="w">crop<div class="ipa">[krɒp]</div></td><td class="m">n. 农作物；收成；v. 修 剪；种植；收割<div class="dv"><b>衍生</b><i>cropped</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="crop" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="orange adj. 橙色的；n. 橙色；橙 子" data-w="orange" data-dv=""><td class="n">83</td><td class="w">orange<button class="spk" data-say="orange" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈɒrɪndʒ]</div></td><td class="m">adj. 橙色的；n. 橙色；橙 子</td><td class="sv"><button class="star" data-star="orange" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="melon n. 瓜；甜瓜" data-w="melon" data-dv=""><td class="n">84</td><td class="w">melon<button class="spk" data-say="melon" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈmelən]</div></td><td class="m">n. 瓜；甜瓜</td><td class="sv"><button class="star" data-star="melon" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="lemon n. 柠檬；柠檬色" data-w="lemon" data-dv=""><td class="n">85</td><td class="w">lemon<button class="spk" data-say="lemon" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈlemən]</div></td><td class="m">n. 柠檬；柠檬色</td><td class="sv"><button class="star" data-star="lemon" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="kiwi n. 几维⻦；奇异果" data-w="kiwi" data-dv=""><td class="n">86</td><td class="w">kiwi<button class="spk" data-say="kiwi" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈkiːwi]</div></td><td class="m">n. 几维⻦；奇异果</td><td class="sv"><button class="star" data-star="kiwi" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="crop n. 农作物；收成；v. 修 剪；种植；收割" data-w="crop" data-dv="cropped|v.|"><td class="n">87</td><td class="w">crop<button class="spk" data-say="crop" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[krɒp]</div></td><td class="m">n. 农作物；收成；v. 修 剪；种植；收割<div class="dv"><b>衍生</b><i>cropped</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="crop" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 22</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="corn n. 玉米；谷物" data-w="corn" data-dv=""><td class="n">88</td><td class="w">corn<div class="ipa">[kɔːn]</div></td><td class="m">n. 玉米；谷物</td><td class="sv"><button class="star" data-star="corn" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="grain n. 谷物；颗粒" data-w="grain" data-dv=""><td class="n">89</td><td class="w">grain<div class="ipa">[ɡreɪn]</div></td><td class="m">n. 谷物；颗粒</td><td class="sv"><button class="star" data-star="grain" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="corn n. 玉米；谷物" data-w="corn" data-dv=""><td class="n">88</td><td class="w">corn<button class="spk" data-say="corn" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[kɔːn]</div></td><td class="m">n. 玉米；谷物</td><td class="sv"><button class="star" data-star="corn" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="grain n. 谷物；颗粒" data-w="grain" data-dv=""><td class="n">89</td><td class="w">grain<button class="spk" data-say="grain" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ɡreɪn]</div></td><td class="m">n. 谷物；颗粒</td><td class="sv"><button class="star" data-star="grain" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 23</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="wheat n. 小⻨；小⻨色" data-w="wheat" data-dv=""><td class="n">90</td><td class="w">wheat<div class="ipa">[wiːt]</div></td><td class="m">n. 小⻨；小⻨色</td><td class="sv"><button class="star" data-star="wheat" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="reap v. 收割；收获；获得" data-w="reap" data-dv=""><td class="n">91</td><td class="w">reap<div class="ipa">[riːp]</div></td><td class="m">v. 收割；收获；获得</td><td class="sv"><button class="star" data-star="reap" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="flour n. 面粉" data-w="flour" data-dv=""><td class="n">92</td><td class="w">flour<div class="ipa">[ˈflaʊə(r)]</div></td><td class="m">n. 面粉</td><td class="sv"><button class="star" data-star="flour" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="porridge n. 粥；⻨片粥" data-w="porridge" data-dv=""><td class="n">93</td><td class="w">porridge<div class="ipa">[ˈpɒrɪdʒ]</div></td><td class="m">n. 粥；⻨片粥</td><td class="sv"><button class="star" data-star="porridge" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="paste n. 面团；浆糊；v. 裱糊； 粘贴" data-w="paste" data-dv=""><td class="n">94</td><td class="w">paste<div class="ipa">[peɪst]</div></td><td class="m">n. 面团；浆糊；v. 裱糊； 粘贴</td><td class="sv"><button class="star" data-star="paste" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="wheat n. 小⻨；小⻨色" data-w="wheat" data-dv=""><td class="n">90</td><td class="w">wheat<button class="spk" data-say="wheat" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[wiːt]</div></td><td class="m">n. 小⻨；小⻨色</td><td class="sv"><button class="star" data-star="wheat" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="reap v. 收割；收获；获得" data-w="reap" data-dv=""><td class="n">91</td><td class="w">reap<button class="spk" data-say="reap" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[riːp]</div></td><td class="m">v. 收割；收获；获得</td><td class="sv"><button class="star" data-star="reap" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="flour n. 面粉" data-w="flour" data-dv=""><td class="n">92</td><td class="w">flour<button class="spk" data-say="flour" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈflaʊə(r)]</div></td><td class="m">n. 面粉</td><td class="sv"><button class="star" data-star="flour" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="porridge n. 粥；⻨片粥" data-w="porridge" data-dv=""><td class="n">93</td><td class="w">porridge<button class="spk" data-say="porridge" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpɒrɪdʒ]</div></td><td class="m">n. 粥；⻨片粥</td><td class="sv"><button class="star" data-star="porridge" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="paste n. 面团；浆糊；v. 裱糊； 粘贴" data-w="paste" data-dv=""><td class="n">94</td><td class="w">paste<button class="spk" data-say="paste" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[peɪst]</div></td><td class="m">n. 面团；浆糊；v. 裱糊； 粘贴</td><td class="sv"><button class="star" data-star="paste" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 24</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="livestock n. 家畜；牲畜" data-w="livestock" data-dv=""><td class="n">95</td><td class="w">livestock<div class="ipa">[ˈlaɪvstɒk]</div></td><td class="m">n. 家畜；牲畜</td><td class="sv"><button class="star" data-star="livestock" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="chicken n. 鸡肉；鸡" data-w="chicken" data-dv=""><td class="n">96</td><td class="w">chicken<div class="ipa">[ˈtʃɪkɪn]</div></td><td class="m">n. 鸡肉；鸡</td><td class="sv"><button class="star" data-star="chicken" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="turkey n. 火鸡" data-w="turkey" data-dv=""><td class="n">97</td><td class="w">turkey<div class="ipa">[ˈtɜːki]</div></td><td class="m">n. 火鸡</td><td class="sv"><button class="star" data-star="turkey" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="livestock n. 家畜；牲畜" data-w="livestock" data-dv=""><td class="n">95</td><td class="w">livestock<button class="spk" data-say="livestock" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈlaɪvstɒk]</div></td><td class="m">n. 家畜；牲畜</td><td class="sv"><button class="star" data-star="livestock" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="chicken n. 鸡肉；鸡" data-w="chicken" data-dv=""><td class="n">96</td><td class="w">chicken<button class="spk" data-say="chicken" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈtʃɪkɪn]</div></td><td class="m">n. 鸡肉；鸡</td><td class="sv"><button class="star" data-star="chicken" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="turkey n. 火鸡" data-w="turkey" data-dv=""><td class="n">97</td><td class="w">turkey<button class="spk" data-say="turkey" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈtɜːki]</div></td><td class="m">n. 火鸡</td><td class="sv"><button class="star" data-star="turkey" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 25</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="beef n. 牛肉" data-w="beef" data-dv=""><td class="n">98</td><td class="w">beef<div class="ipa">[biːf]</div></td><td class="m">n. 牛肉</td><td class="sv"><button class="star" data-star="beef" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="pork n. 猪肉" data-w="pork" data-dv=""><td class="n">99</td><td class="w">pork<div class="ipa">[pɔːk]</div></td><td class="m">n. 猪肉</td><td class="sv"><button class="star" data-star="pork" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="mutton n. 羊肉" data-w="mutton" data-dv=""><td class="n">100</td><td class="w">mutton<div class="ipa">[ˈmʌt(ə)n]</div></td><td class="m">n. 羊肉</td><td class="sv"><button class="star" data-star="mutton" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="sausage n. 香肠；腊肠" data-w="sausage" data-dv=""><td class="n">101</td><td class="w">sausage<div class="ipa">[ˈsɒsɪdʒ]</div></td><td class="m">n. 香肠；腊肠</td><td class="sv"><button class="star" data-star="sausage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="beef n. 牛肉" data-w="beef" data-dv=""><td class="n">98</td><td class="w">beef<button class="spk" data-say="beef" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[biːf]</div></td><td class="m">n. 牛肉</td><td class="sv"><button class="star" data-star="beef" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pork n. 猪肉" data-w="pork" data-dv=""><td class="n">99</td><td class="w">pork<button class="spk" data-say="pork" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[pɔːk]</div></td><td class="m">n. 猪肉</td><td class="sv"><button class="star" data-star="pork" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="mutton n. 羊肉" data-w="mutton" data-dv=""><td class="n">100</td><td class="w">mutton<button class="spk" data-say="mutton" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈmʌt(ə)n]</div></td><td class="m">n. 羊肉</td><td class="sv"><button class="star" data-star="mutton" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="sausage n. 香肠；腊肠" data-w="sausage" data-dv=""><td class="n">101</td><td class="w">sausage<button class="spk" data-say="sausage" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈsɒsɪdʒ]</div></td><td class="m">n. 香肠；腊肠</td><td class="sv"><button class="star" data-star="sausage" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 26</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="fish n. ⻥；⻥肉；v. 钓⻥；捕 ⻥" data-w="fish" data-dv=""><td class="n">102</td><td class="w">fish<div class="ipa">[fɪʃ]</div></td><td class="m">n. ⻥；⻥肉；v. 钓⻥；捕 ⻥</td><td class="sv"><button class="star" data-star="fish" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="pond n. 池塘" data-w="pond" data-dv=""><td class="n">103</td><td class="w">pond<div class="ipa">[pɒnd]</div></td><td class="m">n. 池塘</td><td class="sv"><button class="star" data-star="pond" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="rod n. 杆；棒" data-w="rod" data-dv=""><td class="n">104</td><td class="w">rod<div class="ipa">[rɒd]</div></td><td class="m">n. 杆；棒</td><td class="sv"><button class="star" data-star="rod" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="dairy adj. 牛奶的；乳品的；n. 乳品店" data-w="dairy" data-dv=""><td class="n">105</td><td class="w">dairy<div class="ipa">[ˈdeəri]</div></td><td class="m">adj. 牛奶的；乳品的；n. 乳品店</td><td class="sv"><button class="star" data-star="dairy" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="fish n. ⻥；⻥肉；v. 钓⻥；捕 ⻥" data-w="fish" data-dv=""><td class="n">102</td><td class="w">fish<button class="spk" data-say="fish" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[fɪʃ]</div></td><td class="m">n. ⻥；⻥肉；v. 钓⻥；捕 ⻥</td><td class="sv"><button class="star" data-star="fish" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pond n. 池塘" data-w="pond" data-dv=""><td class="n">103</td><td class="w">pond<button class="spk" data-say="pond" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[pɒnd]</div></td><td class="m">n. 池塘</td><td class="sv"><button class="star" data-star="pond" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="rod n. 杆；棒" data-w="rod" data-dv=""><td class="n">104</td><td class="w">rod<button class="spk" data-say="rod" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[rɒd]</div></td><td class="m">n. 杆；棒</td><td class="sv"><button class="star" data-star="rod" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="dairy adj. 牛奶的；乳品的；n. 乳品店" data-w="dairy" data-dv=""><td class="n">105</td><td class="w">dairy<button class="spk" data-say="dairy" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈdeəri]</div></td><td class="m">adj. 牛奶的；乳品的；n. 乳品店</td><td class="sv"><button class="star" data-star="dairy" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 27</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="milk n. 奶；v. 挤奶" data-w="milk" data-dv=""><td class="n">106</td><td class="w">milk<div class="ipa">[mɪlk]</div></td><td class="m">n. 奶；v. 挤奶</td><td class="sv"><button class="star" data-star="milk" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="yogurt n. 酸奶；酵母乳" data-w="yogurt" data-dv=""><td class="n">107</td><td class="w">yogurt<div class="ipa">[ˈjɒɡət]</div></td><td class="m">n. 酸奶；酵母乳</td><td class="sv"><button class="star" data-star="yogurt" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="cream n. 奶油；乳脂；护肤霜" data-w="cream" data-dv=""><td class="n">108</td><td class="w">cream<div class="ipa">[kriːm]</div></td><td class="m">n. 奶油；乳脂；护肤霜</td><td class="sv"><button class="star" data-star="cream" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="cheese n. 奶酪" data-w="cheese" data-dv=""><td class="n">109</td><td class="w">cheese<div class="ipa">[tʃiːz]</div></td><td class="m">n. 奶酪</td><td class="sv"><button class="star" data-star="cheese" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="milk n. 奶；v. 挤奶" data-w="milk" data-dv=""><td class="n">106</td><td class="w">milk<button class="spk" data-say="milk" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[mɪlk]</div></td><td class="m">n. 奶；v. 挤奶</td><td class="sv"><button class="star" data-star="milk" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="yogurt n. 酸奶；酵母乳" data-w="yogurt" data-dv=""><td class="n">107</td><td class="w">yogurt<button class="spk" data-say="yogurt" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈjɒɡət]</div></td><td class="m">n. 酸奶；酵母乳</td><td class="sv"><button class="star" data-star="yogurt" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cream n. 奶油；乳脂；护肤霜" data-w="cream" data-dv=""><td class="n">108</td><td class="w">cream<button class="spk" data-say="cream" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[kriːm]</div></td><td class="m">n. 奶油；乳脂；护肤霜</td><td class="sv"><button class="star" data-star="cream" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cheese n. 奶酪" data-w="cheese" data-dv=""><td class="n">109</td><td class="w">cheese<button class="spk" data-say="cheese" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[tʃiːz]</div></td><td class="m">n. 奶酪</td><td class="sv"><button class="star" data-star="cheese" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 28</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="butter n. ⻩油；奶油；v. 涂⻩油 于...上" data-w="butter" data-dv="buttering|v.|"><td class="n">110</td><td class="w">butter<div class="ipa">[ˈbʌtə(r)]</div></td><td class="m">n. ⻩油；奶油；v. 涂⻩油 于...上<div class="dv"><b>衍生</b><i>buttering</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="butter" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="salad n. 色拉；沙拉" data-w="salad" data-dv=""><td class="n">111</td><td class="w">salad<div class="ipa">[ˈsæləd]</div></td><td class="m">n. 色拉；沙拉</td><td class="sv"><button class="star" data-star="salad" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="butter n. ⻩油；奶油；v. 涂⻩油 于...上" data-w="butter" data-dv="buttering|v.|"><td class="n">110</td><td class="w">butter<button class="spk" data-say="butter" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈbʌtə(r)]</div></td><td class="m">n. ⻩油；奶油；v. 涂⻩油 于...上<div class="dv"><b>衍生</b><i>buttering</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="butter" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="salad n. 色拉；沙拉" data-w="salad" data-dv=""><td class="n">111</td><td class="w">salad<button class="spk" data-say="salad" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈsæləd]</div></td><td class="m">n. 色拉；沙拉</td><td class="sv"><button class="star" data-star="salad" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 29</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="sandwich n. 三明治" data-w="sandwich" data-dv=""><td class="n">112</td><td class="w">sandwich<div class="ipa">[ˈsænwɪtʃ]</div></td><td class="m">n. 三明治</td><td class="sv"><button class="star" data-star="sandwich" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="hamburger n. 汉堡包" data-w="hamburger" data-dv=""><td class="n">113</td><td class="w">hamburger<div class="ipa">[ˈhæmbɜːɡə(r)]</div></td><td class="m">n. 汉堡包</td><td class="sv"><button class="star" data-star="hamburger" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="sandwich n. 三明治" data-w="sandwich" data-dv=""><td class="n">112</td><td class="w">sandwich<button class="spk" data-say="sandwich" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈsænwɪtʃ]</div></td><td class="m">n. 三明治</td><td class="sv"><button class="star" data-star="sandwich" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="hamburger n. 汉堡包" data-w="hamburger" data-dv=""><td class="n">113</td><td class="w">hamburger<button class="spk" data-say="hamburger" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈhæmbɜːɡə(r)]</div></td><td class="m">n. 汉堡包</td><td class="sv"><button class="star" data-star="hamburger" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 30</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="loaf n. 一条(面包)；v. 游 荡；虚度光阴" data-w="loaf" data-dv=""><td class="n">114</td><td class="w">loaf<div class="ipa">[ləʊf]</div></td><td class="m">n. 一条(面包)；v. 游 荡；虚度光阴</td><td class="sv"><button class="star" data-star="loaf" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="pie n. 果馅饼" data-w="pie" data-dv=""><td class="n">115</td><td class="w">pie<div class="ipa">[paɪ]</div></td><td class="m">n. 果馅饼</td><td class="sv"><button class="star" data-star="pie" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="pizza n. 比萨饼；披萨；意大利 薄饼" data-w="pizza" data-dv=""><td class="n">116</td><td class="w">pizza<div class="ipa">[ˈpiːtsə]</div></td><td class="m">n. 比萨饼；披萨；意大利 薄饼</td><td class="sv"><button class="star" data-star="pizza" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="pasta n. 意大利面⻝" data-w="pasta" data-dv=""><td class="n">117</td><td class="w">pasta<div class="ipa">[ˈpæstə]</div></td><td class="m">n. 意大利面⻝</td><td class="sv"><button class="star" data-star="pasta" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="loaf n. 一条(面包)；v. 游 荡；虚度光阴" data-w="loaf" data-dv=""><td class="n">114</td><td class="w">loaf<button class="spk" data-say="loaf" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ləʊf]</div></td><td class="m">n. 一条(面包)；v. 游 荡；虚度光阴</td><td class="sv"><button class="star" data-star="loaf" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pie n. 果馅饼" data-w="pie" data-dv=""><td class="n">115</td><td class="w">pie<button class="spk" data-say="pie" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[paɪ]</div></td><td class="m">n. 果馅饼</td><td class="sv"><button class="star" data-star="pie" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pizza n. 比萨饼；披萨；意大利 薄饼" data-w="pizza" data-dv=""><td class="n">116</td><td class="w">pizza<button class="spk" data-say="pizza" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpiːtsə]</div></td><td class="m">n. 比萨饼；披萨；意大利 薄饼</td><td class="sv"><button class="star" data-star="pizza" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pasta n. 意大利面⻝" data-w="pasta" data-dv=""><td class="n">117</td><td class="w">pasta<button class="spk" data-say="pasta" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpæstə]</div></td><td class="m">n. 意大利面⻝</td><td class="sv"><button class="star" data-star="pasta" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 31</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="spaghetti n. 意大利式细面条" data-w="spaghetti" data-dv=""><td class="n">118</td><td class="w">spaghetti<div class="ipa">[spəˈɡeti]</div></td><td class="m">n. 意大利式细面条</td><td class="sv"><button class="star" data-star="spaghetti" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="soup n. 汤" data-w="soup" data-dv=""><td class="n">119</td><td class="w">soup<div class="ipa">[suːp]</div></td><td class="m">n. 汤</td><td class="sv"><button class="star" data-star="soup" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="spaghetti n. 意大利式细面条" data-w="spaghetti" data-dv=""><td class="n">118</td><td class="w">spaghetti<button class="spk" data-say="spaghetti" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[spəˈɡeti]</div></td><td class="m">n. 意大利式细面条</td><td class="sv"><button class="star" data-star="spaghetti" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="soup n. 汤" data-w="soup" data-dv=""><td class="n">119</td><td class="w">soup<button class="spk" data-say="soup" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[suːp]</div></td><td class="m">n. 汤</td><td class="sv"><button class="star" data-star="soup" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 32</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="pudding n. 布丁" data-w="pudding" data-dv=""><td class="n">120</td><td class="w">pudding<div class="ipa">[ˈpʊdɪŋ]</div></td><td class="m">n. 布丁</td><td class="sv"><button class="star" data-star="pudding" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="biscuit n. 饼干" data-w="biscuit" data-dv=""><td class="n">121</td><td class="w">biscuit<div class="ipa">[ˈbɪskɪt]</div></td><td class="m">n. 饼干</td><td class="sv"><button class="star" data-star="biscuit" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="jam n. 果酱；堵塞；困境；v. 挤紧；使堵塞；猛地做" data-w="jam" data-dv="jamming|v.|"><td class="n">122</td><td class="w">jam<div class="ipa">[dʒæm]</div></td><td class="m">n. 果酱；堵塞；困境；v. 挤紧；使堵塞；猛地做<div class="dv"><b>衍生</b><i>jamming</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="jam" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pudding n. 布丁" data-w="pudding" data-dv=""><td class="n">120</td><td class="w">pudding<button class="spk" data-say="pudding" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpʊdɪŋ]</div></td><td class="m">n. 布丁</td><td class="sv"><button class="star" data-star="pudding" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="biscuit n. 饼干" data-w="biscuit" data-dv=""><td class="n">121</td><td class="w">biscuit<button class="spk" data-say="biscuit" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈbɪskɪt]</div></td><td class="m">n. 饼干</td><td class="sv"><button class="star" data-star="biscuit" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="jam n. 果酱；堵塞；困境；v. 挤紧；使堵塞；猛地做" data-w="jam" data-dv="jamming|v.|"><td class="n">122</td><td class="w">jam<button class="spk" data-say="jam" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[dʒæm]</div></td><td class="m">n. 果酱；堵塞；困境；v. 挤紧；使堵塞；猛地做<div class="dv"><b>衍生</b><i>jamming</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="jam" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 33</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="nut n. 坚果；螺母；疯子；着 迷的人" data-w="nut" data-dv=""><td class="n">123</td><td class="w">nut<div class="ipa">[nʌt]</div></td><td class="m">n. 坚果；螺母；疯子；着 迷的人</td><td class="sv"><button class="star" data-star="nut" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="chocolate n. 巧克力；adj. 巧克力的" data-w="chocolate" data-dv=""><td class="n">124</td><td class="w">chocolate<div class="ipa">[ˈtʃɒklət]</div></td><td class="m">n. 巧克力；adj. 巧克力的</td><td class="sv"><button class="star" data-star="chocolate" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="ice cream n. 冰淇淋" data-w="ice cream" data-dv=""><td class="n">125</td><td class="w">ice cream<div class="ipa">[ˈaɪs kriːm]</div></td><td class="m">n. 冰淇淋</td><td class="sv"><button class="star" data-star="ice cream" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="vanilla n. 香草；香草精；adj. 寻 常的；无特色的" data-w="vanilla" data-dv=""><td class="n">126</td><td class="w">vanilla<div class="ipa">[vəˈnɪlə]</div></td><td class="m">n. 香草；香草精；adj. 寻 常的；无特色的</td><td class="sv"><button class="star" data-star="vanilla" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="nut n. 坚果；螺母；疯子；着 迷的人" data-w="nut" data-dv=""><td class="n">123</td><td class="w">nut<button class="spk" data-say="nut" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[nʌt]</div></td><td class="m">n. 坚果；螺母；疯子；着 迷的人</td><td class="sv"><button class="star" data-star="nut" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="chocolate n. 巧克力；adj. 巧克力的" data-w="chocolate" data-dv=""><td class="n">124</td><td class="w">chocolate<button class="spk" data-say="chocolate" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈtʃɒklət]</div></td><td class="m">n. 巧克力；adj. 巧克力的</td><td class="sv"><button class="star" data-star="chocolate" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="ice cream n. 冰淇淋" data-w="ice cream" data-dv=""><td class="n">125</td><td class="w">ice cream<button class="spk" data-say="ice cream" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈaɪs kriːm]</div></td><td class="m">n. 冰淇淋</td><td class="sv"><button class="star" data-star="ice cream" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="vanilla n. 香草；香草精；adj. 寻 常的；无特色的" data-w="vanilla" data-dv=""><td class="n">126</td><td class="w">vanilla<button class="spk" data-say="vanilla" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[vəˈnɪlə]</div></td><td class="m">n. 香草；香草精；adj. 寻 常的；无特色的</td><td class="sv"><button class="star" data-star="vanilla" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 34</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="mustard n. 芥末；芥末酱" data-w="mustard" data-dv=""><td class="n">127</td><td class="w">mustard<div class="ipa">[ˈmʌstəd]</div></td><td class="m">n. 芥末；芥末酱</td><td class="sv"><button class="star" data-star="mustard" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="wasabi n. 芥末" data-w="wasabi" data-dv=""><td class="n">128</td><td class="w">wasabi<div class="ipa">[wəˈsɑːbi]</div></td><td class="m">n. 芥末</td><td class="sv"><button class="star" data-star="wasabi" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="pepper n. 胡椒粉；辣椒；v. 使布 满；向...不断射击" data-w="pepper" data-dv="peppered|v.|"><td class="n">129</td><td class="w">pepper<div class="ipa">[ˈpepə(r)]</div></td><td class="m">n. 胡椒粉；辣椒；v. 使布 满；向...不断射击<div class="dv"><b>衍生</b><i>peppered</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="pepper" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="mustard n. 芥末；芥末酱" data-w="mustard" data-dv=""><td class="n">127</td><td class="w">mustard<button class="spk" data-say="mustard" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈmʌstəd]</div></td><td class="m">n. 芥末；芥末酱</td><td class="sv"><button class="star" data-star="mustard" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="wasabi n. 芥末" data-w="wasabi" data-dv=""><td class="n">128</td><td class="w">wasabi<button class="spk" data-say="wasabi" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[wəˈsɑːbi]</div></td><td class="m">n. 芥末</td><td class="sv"><button class="star" data-star="wasabi" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pepper n. 胡椒粉；辣椒；v. 使布 满；向...不断射击" data-w="pepper" data-dv="peppered|v.|"><td class="n">129</td><td class="w">pepper<button class="spk" data-say="pepper" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpepə(r)]</div></td><td class="m">n. 胡椒粉；辣椒；v. 使布 满；向...不断射击<div class="dv"><b>衍生</b><i>peppered</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="pepper" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 35</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="ginger n. 生姜" data-w="ginger" data-dv=""><td class="n">130</td><td class="w">ginger<div class="ipa">[ˈdʒɪndʒə(r)]</div></td><td class="m">n. 生姜</td><td class="sv"><button class="star" data-star="ginger" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="garlic n. 大蒜" data-w="garlic" data-dv=""><td class="n">131</td><td class="w">garlic<div class="ipa">[ˈɡɑːlɪk]</div></td><td class="m">n. 大蒜</td><td class="sv"><button class="star" data-star="garlic" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="scallion n. ⻘葱" data-w="scallion" data-dv=""><td class="n">132</td><td class="w">scallion<div class="ipa">[ˈskæliən]</div></td><td class="m">n. ⻘葱</td><td class="sv"><button class="star" data-star="scallion" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="ginger n. 生姜" data-w="ginger" data-dv=""><td class="n">130</td><td class="w">ginger<button class="spk" data-say="ginger" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈdʒɪndʒə(r)]</div></td><td class="m">n. 生姜</td><td class="sv"><button class="star" data-star="ginger" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="garlic n. 大蒜" data-w="garlic" data-dv=""><td class="n">131</td><td class="w">garlic<button class="spk" data-say="garlic" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈɡɑːlɪk]</div></td><td class="m">n. 大蒜</td><td class="sv"><button class="star" data-star="garlic" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="scallion n. ⻘葱" data-w="scallion" data-dv=""><td class="n">132</td><td class="w">scallion<button class="spk" data-say="scallion" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈskæliən]</div></td><td class="m">n. ⻘葱</td><td class="sv"><button class="star" data-star="scallion" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 36</span><span class="gcnt">10 词</span></td></tr>
-<tr data-s="vinegar n. 醋" data-w="vinegar" data-dv=""><td class="n">133</td><td class="w">vinegar<div class="ipa">[ˈvɪnɪɡə(r)]</div></td><td class="m">n. 醋</td><td class="sv"><button class="star" data-star="vinegar" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="salt n. 盐；⻝盐；v. 用盐腌； 加盐于" data-w="salt" data-dv=""><td class="n">134</td><td class="w">salt<div class="ipa">[sɔːlt]</div></td><td class="m">n. 盐；⻝盐；v. 用盐腌； 加盐于</td><td class="sv"><button class="star" data-star="salt" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="sugar n. 糖；⻝糖；v. 在...中加 糖" data-w="sugar" data-dv=""><td class="n">135</td><td class="w">sugar<div class="ipa">[ˈʃʊɡə(r)]</div></td><td class="m">n. 糖；⻝糖；v. 在...中加 糖</td><td class="sv"><button class="star" data-star="sugar" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="candy n. 糖果" data-w="candy" data-dv=""><td class="n">136</td><td class="w">candy<div class="ipa">[ˈkændi]</div></td><td class="m">n. 糖果</td><td class="sv"><button class="star" data-star="candy" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="honey n. 蜂蜜；甜蜜；宝⻉" data-w="honey" data-dv=""><td class="n">137</td><td class="w">honey<div class="ipa">[ˈhʌni]</div></td><td class="m">n. 蜂蜜；甜蜜；宝⻉</td><td class="sv"><button class="star" data-star="honey" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="flavour n. ⻛味；滋味；味道；v. 给...添⻛味；调味" data-w="flavour" data-dv=""><td class="n">138</td><td class="w">flavour<div class="ipa">[ˈfleɪvə(r)]</div></td><td class="m">n. ⻛味；滋味；味道；v. 给...添⻛味；调味</td><td class="sv"><button class="star" data-star="flavour" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="sour adj. 酸的；不友好的；坏 脾气的；v. (使)变酸" data-w="sour" data-dv="sourly|adv.|;;sourness|n.|"><td class="n">139</td><td class="w">sour<div class="ipa">[ˈsaʊə(r)]</div></td><td class="m">adj. 酸的；不友好的；坏 脾气的；v. (使)变酸<div class="dv"><b>衍生</b><i>sourly</i><em>adv.</em><span class="sep">·</span><i>sourness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="sour" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="sweet adj. 甜的；悦人的" data-w="sweet" data-dv="sweetly|adv.|;;sweetness|n.|;;sweeten|v.|"><td class="n">140</td><td class="w">sweet<div class="ipa">[swiːt]</div></td><td class="m">adj. 甜的；悦人的<div class="dv"><b>衍生</b><i>sweetly</i><em>adv.</em><span class="sep">·</span><i>sweetness</i><em>n.</em><span class="sep">·</span><i>sweeten</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="sweet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="bitter adj. 有苦味的；痛苦的； 刺痛的；激烈而不快的" data-w="bitter" data-dv="bitterly|adv.|;;bitterness|n.|"><td class="n">141</td><td class="w">bitter<div class="ipa">[ˈbɪtə(r)]</div></td><td class="m">adj. 有苦味的；痛苦的； 刺痛的；激烈而不快的<div class="dv"><b>衍生</b><i>bitterly</i><em>adv.</em><span class="sep">·</span><i>bitterness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="bitter" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="spicy adj. 含香料的；辣的；下 流的" data-w="spicy" data-dv="spicily|adv.|;;spiciness|n.|"><td class="n">142</td><td class="w">spicy<div class="ipa">[ˈspaɪsi]</div></td><td class="m">adj. 含香料的；辣的；下 流的<div class="dv"><b>衍生</b><i>spicily</i><em>adv.</em><span class="sep">·</span><i>spiciness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="spicy" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="vinegar n. 醋" data-w="vinegar" data-dv=""><td class="n">133</td><td class="w">vinegar<button class="spk" data-say="vinegar" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈvɪnɪɡə(r)]</div></td><td class="m">n. 醋</td><td class="sv"><button class="star" data-star="vinegar" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="salt n. 盐；⻝盐；v. 用盐腌； 加盐于" data-w="salt" data-dv=""><td class="n">134</td><td class="w">salt<button class="spk" data-say="salt" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[sɔːlt]</div></td><td class="m">n. 盐；⻝盐；v. 用盐腌； 加盐于</td><td class="sv"><button class="star" data-star="salt" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="sugar n. 糖；⻝糖；v. 在...中加 糖" data-w="sugar" data-dv=""><td class="n">135</td><td class="w">sugar<button class="spk" data-say="sugar" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈʃʊɡə(r)]</div></td><td class="m">n. 糖；⻝糖；v. 在...中加 糖</td><td class="sv"><button class="star" data-star="sugar" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="candy n. 糖果" data-w="candy" data-dv=""><td class="n">136</td><td class="w">candy<button class="spk" data-say="candy" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈkændi]</div></td><td class="m">n. 糖果</td><td class="sv"><button class="star" data-star="candy" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="honey n. 蜂蜜；甜蜜；宝⻉" data-w="honey" data-dv=""><td class="n">137</td><td class="w">honey<button class="spk" data-say="honey" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈhʌni]</div></td><td class="m">n. 蜂蜜；甜蜜；宝⻉</td><td class="sv"><button class="star" data-star="honey" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="flavour n. ⻛味；滋味；味道；v. 给...添⻛味；调味" data-w="flavour" data-dv=""><td class="n">138</td><td class="w">flavour<button class="spk" data-say="flavour" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈfleɪvə(r)]</div></td><td class="m">n. ⻛味；滋味；味道；v. 给...添⻛味；调味</td><td class="sv"><button class="star" data-star="flavour" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="sour adj. 酸的；不友好的；坏 脾气的；v. (使)变酸" data-w="sour" data-dv="sourly|adv.|;;sourness|n.|"><td class="n">139</td><td class="w">sour<button class="spk" data-say="sour" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈsaʊə(r)]</div></td><td class="m">adj. 酸的；不友好的；坏 脾气的；v. (使)变酸<div class="dv"><b>衍生</b><i>sourly</i><em>adv.</em><span class="sep">·</span><i>sourness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="sour" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="sweet adj. 甜的；悦人的" data-w="sweet" data-dv="sweetly|adv.|;;sweetness|n.|;;sweeten|v.|"><td class="n">140</td><td class="w">sweet<button class="spk" data-say="sweet" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[swiːt]</div></td><td class="m">adj. 甜的；悦人的<div class="dv"><b>衍生</b><i>sweetly</i><em>adv.</em><span class="sep">·</span><i>sweetness</i><em>n.</em><span class="sep">·</span><i>sweeten</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="sweet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="bitter adj. 有苦味的；痛苦的； 刺痛的；激烈而不快的" data-w="bitter" data-dv="bitterly|adv.|;;bitterness|n.|"><td class="n">141</td><td class="w">bitter<button class="spk" data-say="bitter" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈbɪtə(r)]</div></td><td class="m">adj. 有苦味的；痛苦的； 刺痛的；激烈而不快的<div class="dv"><b>衍生</b><i>bitterly</i><em>adv.</em><span class="sep">·</span><i>bitterness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="bitter" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="spicy adj. 含香料的；辣的；下 流的" data-w="spicy" data-dv="spicily|adv.|;;spiciness|n.|"><td class="n">142</td><td class="w">spicy<button class="spk" data-say="spicy" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈspaɪsi]</div></td><td class="m">adj. 含香料的；辣的；下 流的<div class="dv"><b>衍生</b><i>spicily</i><em>adv.</em><span class="sep">·</span><i>spiciness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="spicy" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 37</span><span class="gcnt">9 词</span></td></tr>
-<tr data-s="delicious adj. 美味的；可口的" data-w="delicious" data-dv="deliciously|adv.|;;deliciousness|n.|"><td class="n">143</td><td class="w">delicious<div class="ipa">[dɪˈlɪʃəs]</div></td><td class="m">adj. 美味的；可口的<div class="dv"><b>衍生</b><i>deliciously</i><em>adv.</em><span class="sep">·</span><i>deliciousness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="delicious" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="yummy adj. 美味的；可口的" data-w="yummy" data-dv=""><td class="n">144</td><td class="w">yummy<div class="ipa">[ˈjʌmi]</div></td><td class="m">adj. 美味的；可口的</td><td class="sv"><button class="star" data-star="yummy" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="tasty adj. 美味的；可口的" data-w="tasty" data-dv="tastily|adv.|;;tastiness|n.|"><td class="n">145</td><td class="w">tasty<div class="ipa">[ˈteɪsti]</div></td><td class="m">adj. 美味的；可口的<div class="dv"><b>衍生</b><i>tastily</i><em>adv.</em><span class="sep">·</span><i>tastiness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="tasty" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="hunger n. 饥饿；渴求；v. 使饥 饿；渴望" data-w="hunger" data-dv=""><td class="n">146</td><td class="w">hunger<div class="ipa">[ˈhʌŋɡə(r)]</div></td><td class="m">n. 饥饿；渴求；v. 使饥 饿；渴望</td><td class="sv"><button class="star" data-star="hunger" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="thirsty adj. 口渴的；渴望的" data-w="thirsty" data-dv="thirstily|adv.|;;thirstiness|n.|"><td class="n">147</td><td class="w">thirsty<div class="ipa">[ˈθɜːsti]</div></td><td class="m">adj. 口渴的；渴望的<div class="dv"><b>衍生</b><i>thirstily</i><em>adv.</em><span class="sep">·</span><i>thirstiness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="thirsty" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="spice n. 香料；调味品；趣味" data-w="spice" data-dv=""><td class="n">148</td><td class="w">spice<div class="ipa">[spaɪs]</div></td><td class="m">n. 香料；调味品；趣味</td><td class="sv"><button class="star" data-star="spice" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="sauce n. 酱汁；调味汁" data-w="sauce" data-dv=""><td class="n">149</td><td class="w">sauce<div class="ipa">[sɔːs]</div></td><td class="m">n. 酱汁；调味汁</td><td class="sv"><button class="star" data-star="sauce" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="ketchup n. 番茄酱" data-w="ketchup" data-dv=""><td class="n">150</td><td class="w">ketchup<div class="ipa">[ˈketʃəp]</div></td><td class="m">n. 番茄酱</td><td class="sv"><button class="star" data-star="ketchup" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="perfume n. 香水；香味；v. 给...添 加香味" data-w="perfume" data-dv=""><td class="n">151</td><td class="w">perfume<div class="ipa">[ˈpɜːfjuːm]</div></td><td class="m">n. 香水；香味；v. 给...添 加香味</td><td class="sv"><button class="star" data-star="perfume" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="delicious adj. 美味的；可口的" data-w="delicious" data-dv="deliciously|adv.|;;deliciousness|n.|"><td class="n">143</td><td class="w">delicious<button class="spk" data-say="delicious" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[dɪˈlɪʃəs]</div></td><td class="m">adj. 美味的；可口的<div class="dv"><b>衍生</b><i>deliciously</i><em>adv.</em><span class="sep">·</span><i>deliciousness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="delicious" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="yummy adj. 美味的；可口的" data-w="yummy" data-dv=""><td class="n">144</td><td class="w">yummy<button class="spk" data-say="yummy" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈjʌmi]</div></td><td class="m">adj. 美味的；可口的</td><td class="sv"><button class="star" data-star="yummy" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="tasty adj. 美味的；可口的" data-w="tasty" data-dv="tastily|adv.|;;tastiness|n.|"><td class="n">145</td><td class="w">tasty<button class="spk" data-say="tasty" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈteɪsti]</div></td><td class="m">adj. 美味的；可口的<div class="dv"><b>衍生</b><i>tastily</i><em>adv.</em><span class="sep">·</span><i>tastiness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="tasty" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="hunger n. 饥饿；渴求；v. 使饥 饿；渴望" data-w="hunger" data-dv=""><td class="n">146</td><td class="w">hunger<button class="spk" data-say="hunger" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈhʌŋɡə(r)]</div></td><td class="m">n. 饥饿；渴求；v. 使饥 饿；渴望</td><td class="sv"><button class="star" data-star="hunger" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="thirsty adj. 口渴的；渴望的" data-w="thirsty" data-dv="thirstily|adv.|;;thirstiness|n.|"><td class="n">147</td><td class="w">thirsty<button class="spk" data-say="thirsty" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈθɜːsti]</div></td><td class="m">adj. 口渴的；渴望的<div class="dv"><b>衍生</b><i>thirstily</i><em>adv.</em><span class="sep">·</span><i>thirstiness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="thirsty" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="spice n. 香料；调味品；趣味" data-w="spice" data-dv=""><td class="n">148</td><td class="w">spice<button class="spk" data-say="spice" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[spaɪs]</div></td><td class="m">n. 香料；调味品；趣味</td><td class="sv"><button class="star" data-star="spice" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="sauce n. 酱汁；调味汁" data-w="sauce" data-dv=""><td class="n">149</td><td class="w">sauce<button class="spk" data-say="sauce" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[sɔːs]</div></td><td class="m">n. 酱汁；调味汁</td><td class="sv"><button class="star" data-star="sauce" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="ketchup n. 番茄酱" data-w="ketchup" data-dv=""><td class="n">150</td><td class="w">ketchup<button class="spk" data-say="ketchup" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈketʃəp]</div></td><td class="m">n. 番茄酱</td><td class="sv"><button class="star" data-star="ketchup" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="perfume n. 香水；香味；v. 给...添 加香味" data-w="perfume" data-dv=""><td class="n">151</td><td class="w">perfume<button class="spk" data-say="perfume" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈpɜːfjuːm]</div></td><td class="m">n. 香水；香味；v. 给...添 加香味</td><td class="sv"><button class="star" data-star="perfume" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 38</span><span class="gcnt">8 词</span></td></tr>
-<tr data-s="ingredient n. 成分；配料；要素；因 素" data-w="ingredient" data-dv=""><td class="n">152</td><td class="w">ingredient<div class="ipa">[ɪnˈɡriːdiənt]</div></td><td class="m">n. 成分；配料；要素；因 素</td><td class="sv"><button class="star" data-star="ingredient" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="supplement n. 补充物；附录；附加 费；v. 补充；增加" data-w="supplement" data-dv="supplemental|adj.|"><td class="n">153</td><td class="w">supplement<div class="ipa">[ˈsʌplɪmənt]</div></td><td class="m">n. 补充物；附录；附加 费；v. 补充；增加<div class="dv"><b>衍生</b><i>supplemental</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="supplement" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="digest n. 摘要；文摘；v. 消化； 领会" data-w="digest" data-dv="digestive|adj.|"><td class="n">154</td><td class="w">digest<div class="ipa">[ˈdaɪdʒest]</div></td><td class="m">n. 摘要；文摘；v. 消化； 领会<div class="dv"><b>衍生</b><i>digestive</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="digest" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="cook n. 厨师；v. 烹饪" data-w="cook" data-dv=""><td class="n">155</td><td class="w">cook<div class="ipa">[kʊk]</div></td><td class="m">n. 厨师；v. 烹饪</td><td class="sv"><button class="star" data-star="cook" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="bake v. 烘；烤；焙" data-w="bake" data-dv=""><td class="n">156</td><td class="w">bake<div class="ipa">[beɪk]</div></td><td class="m">v. 烘；烤；焙</td><td class="sv"><button class="star" data-star="bake" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="fry v. 油炸；油煎" data-w="fry" data-dv="frying|v.|"><td class="n">157</td><td class="w">fry<div class="ipa">[fraɪ]</div></td><td class="m">v. 油炸；油煎<div class="dv"><b>衍生</b><i>frying</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="fry" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="roast v. 烤；烘烤；n. 烤肉；烘 烤；adj. 烤的；焙的" data-w="roast" data-dv=""><td class="n">158</td><td class="w">roast<div class="ipa">[rəʊst]</div></td><td class="m">v. 烤；烘烤；n. 烤肉；烘 烤；adj. 烤的；焙的</td><td class="sv"><button class="star" data-star="roast" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="toast n. 烤面包片；敬酒；干杯；v. 向...祝酒；为...干杯；烘烤" data-w="toast" data-dv="toaster|n.|"><td class="n">159</td><td class="w">toast<div class="ipa">[təʊst]</div></td><td class="m">n. 烤面包片；敬酒；干杯；v. 向...祝酒；为...干杯；烘烤<div class="dv"><b>衍生</b><i>toaster</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="toast" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="ingredient n. 成分；配料；要素；因 素" data-w="ingredient" data-dv=""><td class="n">152</td><td class="w">ingredient<button class="spk" data-say="ingredient" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ɪnˈɡriːdiənt]</div></td><td class="m">n. 成分；配料；要素；因 素</td><td class="sv"><button class="star" data-star="ingredient" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="supplement n. 补充物；附录；附加 费；v. 补充；增加" data-w="supplement" data-dv="supplemental|adj.|"><td class="n">153</td><td class="w">supplement<button class="spk" data-say="supplement" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈsʌplɪmənt]</div></td><td class="m">n. 补充物；附录；附加 费；v. 补充；增加<div class="dv"><b>衍生</b><i>supplemental</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="supplement" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="digest n. 摘要；文摘；v. 消化； 领会" data-w="digest" data-dv="digestive|adj.|"><td class="n">154</td><td class="w">digest<button class="spk" data-say="digest" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ˈdaɪdʒest]</div></td><td class="m">n. 摘要；文摘；v. 消化； 领会<div class="dv"><b>衍生</b><i>digestive</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="digest" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cook n. 厨师；v. 烹饪" data-w="cook" data-dv=""><td class="n">155</td><td class="w">cook<button class="spk" data-say="cook" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[kʊk]</div></td><td class="m">n. 厨师；v. 烹饪</td><td class="sv"><button class="star" data-star="cook" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="bake v. 烘；烤；焙" data-w="bake" data-dv=""><td class="n">156</td><td class="w">bake<button class="spk" data-say="bake" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[beɪk]</div></td><td class="m">v. 烘；烤；焙</td><td class="sv"><button class="star" data-star="bake" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="fry v. 油炸；油煎" data-w="fry" data-dv="frying|v.|"><td class="n">157</td><td class="w">fry<button class="spk" data-say="fry" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[fraɪ]</div></td><td class="m">v. 油炸；油煎<div class="dv"><b>衍生</b><i>frying</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="fry" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="roast v. 烤；烘烤；n. 烤肉；烘 烤；adj. 烤的；焙的" data-w="roast" data-dv=""><td class="n">158</td><td class="w">roast<button class="spk" data-say="roast" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[rəʊst]</div></td><td class="m">v. 烤；烘烤；n. 烤肉；烘 烤；adj. 烤的；焙的</td><td class="sv"><button class="star" data-star="roast" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="toast n. 烤面包片；敬酒；干杯；v. 向...祝酒；为...干杯；烘烤" data-w="toast" data-dv="toaster|n.|"><td class="n">159</td><td class="w">toast<button class="spk" data-say="toast" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[təʊst]</div></td><td class="m">n. 烤面包片；敬酒；干杯；v. 向...祝酒；为...干杯；烘烤<div class="dv"><b>衍生</b><i>toaster</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="toast" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 39</span><span class="gcnt">7 词</span></td></tr>
-<tr data-s="suck v. 吮；吮吸" data-w="suck" data-dv=""><td class="n">160</td><td class="w">suck<div class="ipa">[sʌk]</div></td><td class="m">v. 吮；吮吸</td><td class="sv"><button class="star" data-star="suck" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="lick v. 舔；轻拍；吞卷；克 服；n. 舔；少许" data-w="lick" data-dv=""><td class="n">161</td><td class="w">lick<div class="ipa">[lɪk]</div></td><td class="m">v. 舔；轻拍；吞卷；克 服；n. 舔；少许</td><td class="sv"><button class="star" data-star="lick" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="chew v. 咀嚼" data-w="chew" data-dv=""><td class="n">162</td><td class="w">chew<div class="ipa">[tʃuː]</div></td><td class="m">v. 咀嚼</td><td class="sv"><button class="star" data-star="chew" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="gum n. 树胶；口香糖；牙龈； v. 用胶粘" data-w="gum" data-dv=""><td class="n">163</td><td class="w">gum<div class="ipa">[ɡʌm]</div></td><td class="m">n. 树胶；口香糖；牙龈； v. 用胶粘</td><td class="sv"><button class="star" data-star="gum" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="soak v. 浸泡；吸收；n. 浸泡" data-w="soak" data-dv=""><td class="n">164</td><td class="w">soak<div class="ipa">[səʊk]</div></td><td class="m">v. 浸泡；吸收；n. 浸泡</td><td class="sv"><button class="star" data-star="soak" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="dip v. 浸；蘸；(暂时)减 少；n. 浸；蘸；下降" data-w="dip" data-dv="dipping|v.|"><td class="n">165</td><td class="w">dip<div class="ipa">[dɪp]</div></td><td class="m">v. 浸；蘸；(暂时)减 少；n. 浸；蘸；下降<div class="dv"><b>衍生</b><i>dipping</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="dip" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="squeeze v. 捏；榨；挤(进)；n. 捏；榨；挤" data-w="squeeze" data-dv=""><td class="n">166</td><td class="w">squeeze<div class="ipa">[skwiːz]</div></td><td class="m">v. 捏；榨；挤(进)；n. 捏；榨；挤</td><td class="sv"><button class="star" data-star="squeeze" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="suck v. 吮；吮吸" data-w="suck" data-dv=""><td class="n">160</td><td class="w">suck<button class="spk" data-say="suck" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[sʌk]</div></td><td class="m">v. 吮；吮吸</td><td class="sv"><button class="star" data-star="suck" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="lick v. 舔；轻拍；吞卷；克 服；n. 舔；少许" data-w="lick" data-dv=""><td class="n">161</td><td class="w">lick<button class="spk" data-say="lick" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[lɪk]</div></td><td class="m">v. 舔；轻拍；吞卷；克 服；n. 舔；少许</td><td class="sv"><button class="star" data-star="lick" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="chew v. 咀嚼" data-w="chew" data-dv=""><td class="n">162</td><td class="w">chew<button class="spk" data-say="chew" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[tʃuː]</div></td><td class="m">v. 咀嚼</td><td class="sv"><button class="star" data-star="chew" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="gum n. 树胶；口香糖；牙龈； v. 用胶粘" data-w="gum" data-dv=""><td class="n">163</td><td class="w">gum<button class="spk" data-say="gum" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ɡʌm]</div></td><td class="m">n. 树胶；口香糖；牙龈； v. 用胶粘</td><td class="sv"><button class="star" data-star="gum" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="soak v. 浸泡；吸收；n. 浸泡" data-w="soak" data-dv=""><td class="n">164</td><td class="w">soak<button class="spk" data-say="soak" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[səʊk]</div></td><td class="m">v. 浸泡；吸收；n. 浸泡</td><td class="sv"><button class="star" data-star="soak" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="dip v. 浸；蘸；(暂时)减 少；n. 浸；蘸；下降" data-w="dip" data-dv="dipping|v.|"><td class="n">165</td><td class="w">dip<button class="spk" data-say="dip" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[dɪp]</div></td><td class="m">v. 浸；蘸；(暂时)减 少；n. 浸；蘸；下降<div class="dv"><b>衍生</b><i>dipping</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="dip" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="squeeze v. 捏；榨；挤(进)；n. 捏；榨；挤" data-w="squeeze" data-dv=""><td class="n">166</td><td class="w">squeeze<button class="spk" data-say="squeeze" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[skwiːz]</div></td><td class="m">v. 捏；榨；挤(进)；n. 捏；榨；挤</td><td class="sv"><button class="star" data-star="squeeze" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 <tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 40</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="stir v. 搅拌；搅动；激起" data-w="stir" data-dv="stirring|v.|"><td class="n">167</td><td class="w">stir<div class="ipa">[stɜː(r)]</div></td><td class="m">v. 搅拌；搅动；激起<div class="dv"><b>衍生</b><i>stirring</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="stir" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="grind v. 碾碎；磨碎；n. 苦差事" data-w="grind" data-dv="grinder|n.|"><td class="n">168</td><td class="w">grind<div class="ipa">[ɡraɪnd]</div></td><td class="m">v. 碾碎；磨碎；n. 苦差事<div class="dv"><b>衍生</b><i>grinder</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="grind" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
-<tr data-s="slice n. 切片；薄片；部分；片 段；v. 切成片" data-w="slice" data-dv="slicer|n.|"><td class="n">169</td><td class="w">slice<div class="ipa">[slaɪs]</div></td><td class="m">n. 切片；薄片；部分；片 段；v. 切成片<div class="dv"><b>衍生</b><i>slicer</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="slice" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="stir v. 搅拌；搅动；激起" data-w="stir" data-dv="stirring|v.|"><td class="n">167</td><td class="w">stir<button class="spk" data-say="stir" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[stɜː(r)]</div></td><td class="m">v. 搅拌；搅动；激起<div class="dv"><b>衍生</b><i>stirring</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="stir" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="grind v. 碾碎；磨碎；n. 苦差事" data-w="grind" data-dv="grinder|n.|"><td class="n">168</td><td class="w">grind<button class="spk" data-say="grind" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[ɡraɪnd]</div></td><td class="m">v. 碾碎；磨碎；n. 苦差事<div class="dv"><b>衍生</b><i>grinder</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="grind" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="slice n. 切片；薄片；部分；片 段；v. 切成片" data-w="slice" data-dv="slicer|n.|"><td class="n">169</td><td class="w">slice<button class="spk" data-say="slice" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><div class="ipa">[slaɪs]</div></td><td class="m">n. 切片；薄片；部分；片 段；v. 切成片<div class="dv"><b>衍生</b><i>slicer</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="slice" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 </table><div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit11.html">← Unit 11</a><a href="unit12-card.html">切到例句卡片版</a><a href="unit13.html">Unit 13 →</a></div><footer><div class="wrap" style="padding:0">
  摘自《雅思词汇真经》（刘洪波 编著）第 12 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
 </div></footer></div>
 <a id="nbfab" href="shengci.html"><span>生词本</span><b>0</b></a>
 <script>
+/* ---------- 朗读 ---------- */
+var TTS=(function(){
+ var voices=[], pref='en-GB';
+ try{pref=JSON.parse(localStorage.getItem('vj-tts')||'{}').v||'en-GB'}catch(e){}
+ var sup = (typeof speechSynthesis!=='undefined' && typeof SpeechSynthesisUtterance!=='undefined');
+ function load(){ try{voices=speechSynthesis.getVoices()||[]}catch(e){voices=[]} }
+ if(sup){ load(); try{speechSynthesis.onvoiceschanged=load}catch(e){} }
+ function pick(){
+  if(!voices.length) load();
+  var en=voices.filter(function(v){return /^en/i.test(v.lang||'')});
+  var same=en.filter(function(v){return (v.lang||'').replace('_','-').toLowerCase().indexOf(pref.toLowerCase())===0});
+  return same[0] || en.filter(function(v){return /en-GB/i.test(v.lang)})[0] ||
+         en.filter(function(v){return /en-US/i.test(v.lang)})[0] || en[0] || null;
+ }
+ function speak(t, rate){
+  if(!sup||!t) return false;
+  try{
+   speechSynthesis.cancel();
+   var u=new SpeechSynthesisUtterance(t), v=pick();
+   if(v){u.voice=v; u.lang=v.lang;} else u.lang=pref;
+   u.rate=rate||0.92; u.pitch=1;
+   speechSynthesis.speak(u);
+   return true;
+  }catch(e){return false}
+ }
+ function setPref(p){
+  pref=p;
+  try{localStorage.setItem('vj-tts',JSON.stringify({v:p}))}catch(e){}
+  document.querySelectorAll('.ttsvg').forEach(function(b){b.classList.toggle('on',b.dataset.vp===p)});
+ }
+ return {speak:speak,setPref:setPref,pref:function(){return pref},ok:function(){return sup}};
+})();
+window.TTS=TTS;
+
+/* ---------- 生词本 ---------- */
 var NB=(function(){
- var KEY='vj-book';
+ var KEY='vj-book', SETK='vj-set', STK='vj-stat';
  var mem=null, okStore=true;
  function read(){
   if(mem) return mem;
@@ -438,18 +492,53 @@ var NB=(function(){
  }
  function count(){return Object.keys(read()).length}
  function has(w){return !!read()[w]}
+ function addOne(rec){
+  var m=read();
+  if(m[rec.w]) return false;
+  rec.t=Date.now();
+  m[rec.w]=rec; write(); bump('a'); sync(); return true;
+ }
  function toggle(rec){
   var m=read();
-  if(m[rec.w]){delete m[rec.w]}
-  else{rec.t=Date.now(); m[rec.w]=rec}
-  write(); sync(); return !!m[rec.w];
+  if(m[rec.w]){delete m[rec.w]; write(); sync(); return false}
+  rec.t=Date.now(); m[rec.w]=rec; write(); bump('a'); sync(); return true;
  }
  function remove(w){var m=read(); delete m[w]; write(); sync();}
+ function save(rec){var m=read(); m[rec.w]=rec; write(); sync();}
  function all(){
   var m=read(), a=[];
   for(var k in m) a.push(m[k]);
   a.sort(function(x,y){return (y.t||0)-(x.t||0)});
   return a;
+ }
+ /* 设置：加入时是否连带衍生词 */
+ function settings(){ try{return JSON.parse(localStorage.getItem(SETK)||'{}')}catch(e){return {}} }
+ function setSetting(k,v){
+  var s=settings(); s[k]=v;
+  try{localStorage.setItem(SETK,JSON.stringify(s))}catch(e){}
+ }
+ function dvOn(){ var s=settings(); return s.dv!==false }
+ /* 学习统计 */
+ function pad(n){return n<10?'0'+n:''+n}
+ function dayKey(d){d=d||new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+ function stat(){ try{return JSON.parse(localStorage.getItem(STK)||'{}')}catch(e){return {}} }
+ function bump(k,n){
+  var s=stat(), key=dayKey();
+  s[key]=s[key]||{a:0,r:0,c:0};
+  s[key][k]=(s[key][k]||0)+(n||1);
+  var ks=Object.keys(s).sort();
+  if(ks.length>120){ ks.slice(0,ks.length-120).forEach(function(x){delete s[x]}) }
+  try{localStorage.setItem(STK,JSON.stringify(s))}catch(e){}
+ }
+ function streak(){
+  var s=stat(), n=0, d=new Date(), k=dayKey(d);
+  if(!(s[k] && (s[k].r||s[k].a))) d.setDate(d.getDate()-1);
+  for(var i=0;i<400;i++){
+   var o=s[dayKey(d)];
+   if(o && (o.r||o.a)){ n++; d.setDate(d.getDate()-1); }
+   else break;
+  }
+  return n;
  }
  function sync(){
   var n=count();
@@ -462,14 +551,42 @@ var NB=(function(){
     else if(!on) el.setAttribute('title','加入生词本');
   });
  }
+ function parseDv(s){
+  if(!s) return [];
+  return s.split(';;').filter(Boolean).map(function(x){
+   var a=x.split('|'); return {w:a[0], p:a[1]||'', m:a[2]||''};
+  });
+ }
  function onStar(e){
   var b=e.target.closest('.star'); if(!b) return;
   e.preventDefault(); e.stopPropagation();
   var host=b.closest('[data-w]')||b.closest('.card')||b.closest('tr');
-  var rec=entry(host, b.dataset.star);
-  var added=toggle(rec);
+  var w=b.dataset.star;
+  if(has(w)){
+   remove(w);
+   var m=read();
+   Object.keys(m).forEach(function(k){ if(m[k] && m[k].pw===w){ delete m[k] } });
+   write(); sync();
+   return;
+  }
+  var rec=entry(host,w);
+  toggle(rec);
+  if(dvOn()){
+   parseDv(host?host.dataset.dv:'').forEach(function(d){
+     if(!d.w || has(d.w)) return;
+     addOne({w:d.w, p:'', m:d.m||'', d:'', e:'', z:'',
+             c:rec.c, g:rec.g, pv:1, pw:rec.w, pm:rec.m, pp:d.p});
+   });
+  }
   var fab=document.getElementById('nbfab');
-  if(added&&fab){fab.classList.remove('wiggle');void fab.offsetWidth;fab.classList.add('wiggle');}
+  if(fab){fab.classList.remove('wiggle');void fab.offsetWidth;fab.classList.add('wiggle');}
+ }
+ function onSpk(e){
+  var b=e.target.closest('.spk'); if(!b) return;
+  e.preventDefault(); e.stopPropagation();
+  var t=b.dataset.say;
+  if(!t){ var h=b.closest('[data-w]'); t=h?h.dataset.w:''; }
+  TTS.speak(t);
  }
  function txt(el){return el?el.textContent.trim():''}
  function entry(host, w){
@@ -485,11 +602,17 @@ var NB=(function(){
           g:document.body.dataset.title||''};
  }
  document.addEventListener('click',onStar);
- window.addEventListener('storage',function(e){if(e.key===KEY){mem=null;sync();}});
- document.addEventListener('DOMContentLoaded',sync);
+ document.addEventListener('click',onSpk);
+ window.addEventListener('storage',function(e){
+  if(e.key===KEY){mem=null;sync();}
+ });
+ if(document.readyState!=='loading') sync(); else document.addEventListener('DOMContentLoaded',sync);
  sync();
- return {count:count,has:has,all:all,remove:remove,toggle:toggle,sync:sync,read:read};
+ return {count:count,has:has,all:all,remove:remove,toggle:toggle,sync:sync,read:read,
+         save:save,addOne:addOne,dvOn:dvOn,settings:settings,setSetting:setSetting,
+         bump:bump,stat:stat,streak:streak,dayKey:dayKey,parseDv:parseDv};
 })();
+window.NB=NB;
 </script>
 <script>
 (function(){
@@ -519,6 +642,10 @@ var NB=(function(){
  if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
  var ci=document.getElementById('i');
  if(ci) ci.addEventListener('change',function(){s.i=ci.checked; save(); paint();});
+ var cd=document.getElementById('dvon');
+ if(cd){cd.checked=NB.dvOn(); cd.closest('.sw').classList.toggle('on',cd.checked);}
+ if(cd) cd.addEventListener('change',function(){NB.setSetting('dv',cd.checked);
+   cd.closest('.sw').classList.toggle('on',cd.checked);});
  var co=document.getElementById('only');
  if(co) co.addEventListener('change',function(){s.o=co.checked; save(); paint(); filter();});
  var ca=document.getElementById('all');
@@ -558,5 +685,290 @@ var NB=(function(){
  });
  paint(); filter();
 })();
+</script>
+<script>
+/* ================= 背诵模式（独立功能）================= */
+var REC=(function(){
+ var KEY='vj-rec', ACC='#b4442e';
+ var INT=[0,1,2,4,8,15,30,90];
+ var mem=null, root=null, queue=[], idx=0, onlyDue=false, yes=0, no=0, started=false;
+
+ function read(){
+  if(mem) return mem;
+  try{var raw=localStorage.getItem(KEY); mem=raw?JSON.parse(raw):{}}catch(e){mem={}}
+  return mem;
+ }
+ function save(){ try{localStorage.setItem(KEY,JSON.stringify(mem))}catch(e){} }
+ function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];})}
+
+ /* ---- 从页面收集词条 ---- */
+ function extract(h){ 
+  var m=h.querySelector('.m'), mean='';
+  if(m){var c=m.cloneNode(true);var dv=c.querySelector('.dv');if(dv)dv.parentNode.removeChild(dv);
+   mean=c.textContent.replace(/\s+/g,' ').trim();}
+  var ipa=h.querySelector('.ipa');
+  var en=h.querySelector('.ex .en'), zh=h.querySelector('.ex .zh');
+  var dl=[];
+  (h.dataset.dv||'').split(';;').forEach(function(s){
+   if(!s) return; var a=s.split('|'); if(a[0]) dl.push(a[0]);
+  });
+  return {w:h.dataset.w, p:ipa?ipa.textContent.trim():'', m:mean,
+          x:dl.length?('衍生：'+dl.join(' · ')):'',
+          e:en?en.textContent.trim():'', z:zh?zh.textContent.trim():''};
+ }
+ function items(){
+  var out=[], seen={};
+  [].slice.call(document.querySelectorAll('[data-w]')).forEach(function(h){
+   if(!h.dataset||!h.dataset.w) return;
+   if(h.closest && h.closest('#rcroot')) return;
+   var r=extract(h);
+   if(!r||!r.w||seen[r.w]) return;
+   seen[r.w]=1; r.h=h; out.push(r);
+  });
+  return out;
+ }
+
+ /* ---- 样式 ---- */
+ function injectCSS(){
+  if(document.getElementById('rcstyle')) return;
+  var css = ''
+  + '#rcopen{position:fixed;right:20px;bottom:20px;z-index:60;font:inherit;font-size:13px;'
+  + 'font-weight:700;color:#fff;background:'+ACC+';border:1px solid '+ACC+';border-radius:999px;'
+  + 'padding:9px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;line-height:1.4;'
+  + 'box-shadow:0 6px 20px rgba(0,0,0,.22)}'
+  + '#rcopen:hover{filter:brightness(1.08)}'
+  + '#rcopen b{font-weight:700;font-variant-numeric:tabular-nums;background:rgba(255,255,255,.26);'
+  + 'border-radius:999px;padding:0 6px;font-size:11px}'
+  + '@media (max-width:640px){#rcopen{right:12px;font-size:12.5px;padding:8px 13px}}'
+  + '#rcroot{position:fixed;inset:0;z-index:300;display:none;overflow:auto;padding:20px 16px 36px;'
+  + '--rb:#f7f6f3;--rp:#ffffff;--ri:#1f2328;--ri2:#5b6470;--rl:#e6e2da;--rs:rgba(0,0,0,.045);'
+  + 'background:var(--rb);color:var(--ri);'
+  + 'font:16px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;'
+  + '-webkit-font-smoothing:antialiased}'
+  + '#rcroot.on{display:block}'
+  + '#rcroot *{box-sizing:border-box}'
+  + '#rcroot .rw{max-width:640px;margin:0 auto}'
+  + '#rcroot .bar{display:flex;align-items:center;gap:12px;margin-bottom:12px;font-size:12.5px;color:var(--ri2)}'
+  + '#rcroot .bar .pg{flex:1;height:5px;background:var(--rs);border-radius:99px;overflow:hidden}'
+  + '#rcroot .bar .pg i{display:block;height:100%;width:0;background:'+ACC+';transition:width .25s}'
+  + '#rcroot .bar .num{font-variant-numeric:tabular-nums;white-space:nowrap}'
+  + '#rcroot .x{font:inherit;font-size:21px;line-height:1;background:none;border:0;color:var(--ri2);cursor:pointer;padding:2px 8px}'
+  + '#rcroot .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;'
+  + 'font-size:12.5px;color:var(--ri2)}'
+  + '#rcroot .sw{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rl);border-radius:999px;'
+  + 'padding:3px 11px;cursor:pointer;user-select:none;background:var(--rp);white-space:nowrap}'
+  + '#rcroot .sw input{accent-color:'+ACC+';margin:0}'
+  + '#rcroot .card{background:var(--rp);border:1px solid var(--rl);border-radius:20px;padding:34px 26px 26px;'
+  + 'text-align:center;min-height:260px;cursor:pointer;user-select:none;display:flex;flex-direction:column;'
+  + 'justify-content:center}'
+  + '#rcroot .wd{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:37px;font-weight:700;'
+  + 'line-height:1.22;letter-spacing:.3px;word-break:break-word}'
+  + '#rcroot .ipa{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:14px;color:var(--ri2);margin-top:8px}'
+  + '#rcroot .spk2{background:none;border:0;color:var(--ri2);cursor:pointer;padding:6px;margin-top:6px;opacity:.75;align-self:center}'
+  + '#rcroot .spk2:hover{opacity:1;color:'+ACC+'}'
+  + '#rcroot .spk2 svg{width:18px;height:18px;display:block}'
+  + '#rcroot .q{color:var(--ri2);font-size:12.5px;margin-top:22px;opacity:.9}'
+  + '#rcroot .ans{display:none;margin-top:20px;text-align:left;border-top:1px dashed var(--rl);padding-top:16px}'
+  + '#rcroot .ans.on{display:block}'
+  + '#rcroot .ans .m{font-size:17px}'
+  + '#rcroot .ans .x2{margin-top:9px;font-size:13px;color:var(--ri2);line-height:1.85;white-space:pre-line}'
+  + '#rcroot .ans .ex{margin-top:11px;font-size:13.5px;background:var(--rs);border-radius:9px;padding:10px 12px;line-height:1.7}'
+  + '#rcroot .ans .ex .zh{color:var(--ri2);margin-top:3px;font-size:13px}'
+  + '#rcroot .btns{display:flex;gap:10px;margin-top:15px}'
+  + '#rcroot .btns button{flex:1;font:inherit;font-size:15px;font-weight:650;padding:13px 0;border-radius:13px;'
+  + 'cursor:pointer;border:1px solid var(--rl);background:var(--rp);color:var(--ri)}'
+  + '#rcroot .btns button kbd{font:inherit;font-size:11px;opacity:.5;margin-left:4px}'
+  + '#rcroot .btns .no{color:#c0392b}'
+  + '#rcroot .btns .ok{background:'+ACC+';border-color:'+ACC+';color:#fff}'
+  + '#rcroot .btns button:active{transform:translateY(1px)}'
+  + '#rcroot .key{margin-top:13px;text-align:center;font-size:11.5px;color:var(--ri2);opacity:.75}'
+  + '#rcroot .done{text-align:center;padding:40px 10px}'
+  + '#rcroot .done h2{font-size:22px;margin:0 0 10px}'
+  + '#rcroot .done p{color:var(--ri2);font-size:14px;line-height:2}'
+  + '#rcroot .done .acts{display:flex;gap:9px;justify-content:center;margin-top:16px;flex-wrap:wrap}'
+  + '#rcroot .done .acts button{font:inherit;font-size:13.5px;font-weight:650;padding:9px 20px;border-radius:999px;'
+  + 'cursor:pointer;border:1px solid var(--rl);background:var(--rp);color:var(--ri)}'
+  + '#rcroot .done .acts .pri{background:'+ACC+';border-color:'+ACC+';color:#fff}'
+  + '@media (prefers-color-scheme:dark){#rcroot{--rb:#16181c;--rp:#1d2025;--ri:#e8eaed;--ri2:#9aa3ad;'
+  + '--rl:#2c3037;--rs:rgba(255,255,255,.07)}}'
+  + '@media (max-width:520px){#rcroot{padding:14px 11px 26px}#rcroot .wd{font-size:29px}'
+  + '#rcroot .card{padding:26px 17px 20px;min-height:220px}}';
+  var st=document.createElement('style'); st.id='rcstyle'; st.textContent=css;
+  document.head.appendChild(st);
+ }
+
+ var SVG='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg>';
+
+ var TMPL='<div class="rw">'
+   +'<div class="bar"><span class="num" id="rcnum">0 / 0</span>'
+   +'<div class="pg"><i id="rcpg"></i></div><button class="x" id="rcx">×</button></div>'
+   +'<div class="hd"><span id="rcinfo"></span>'
+   +'<label class="sw"><input type="checkbox" id="rcdue"> 只背到期</label></div>'
+   +'<div class="card" id="rccard">'
+   +'<div class="wd" id="rcwd"></div><div class="ipa" id="rcipa"></div>'
+   +'<button class="spk2" id="rcspk" title="朗读">'+SVG+'</button>'
+   +'<div class="q" id="rcq">看这个词，认不认识？点卡片看释义</div>'
+   +'<div class="ans" id="rcans"><div class="m" id="rcm"></div>'
+   +'<div class="x2" id="rcx2"></div><div class="ex" id="rcex"></div></div>'
+   +'</div>'
+   +'<div class="btns"><button class="no" id="rcno">不认识 <kbd>1</kbd></button>'
+   +'<button class="ok" id="rcok">认识 <kbd>2</kbd></button></div>'
+   +'<div class="key">空格看释义 · 1 不认识（自动进生词本）· 2 认识 · Esc 退出</div>'
+   +'</div>';
+
+ function build(){
+  injectCSS();
+  if(!root){ root=document.createElement('div'); root.id='rcroot'; document.body.appendChild(root); }
+  root.innerHTML='';
+  var box=document.createElement('div'); box.className='rw'; box.innerHTML=TMPL;
+  root.appendChild(box);
+  document.getElementById('rcx').onclick=close;
+  document.getElementById('rccard').onclick=reveal;
+  document.getElementById('rcspk').onclick=function(e){
+   e.stopPropagation();
+   if(window.TTS&&queue[idx]) TTS.speak(queue[idx].w);
+  };
+  document.getElementById('rcno').onclick=function(){ grade(false) };
+  document.getElementById('rcok').onclick=function(){ grade(true) };
+  var cd=document.getElementById('rcdue');
+  cd.addEventListener('change',function(){ onlyDue=cd.checked; start(); });
+ }
+
+ function reveal(){
+  if(!queue[idx]) return;
+  document.getElementById('rcans').classList.add('on');
+  document.getElementById('rcq').style.display='none';
+ }
+ function onKey(e){
+  if(!root||!root.classList.contains('on')) return;
+  if(e.key==='Escape'){ close(); return; }
+  if(e.key===' '||e.key==='Enter'){ e.preventDefault(); reveal(); return; }
+  if(e.key==='1'){ e.preventDefault(); grade(false); return; }
+  if(e.key==='2'){ e.preventDefault(); grade(true); return; }
+ }
+
+ function start(){
+  var arr=items();
+  if(!arr.length){ alert('这一页没有可背的词'); return; }
+  var m=read(), now=Date.now();
+  if(onlyDue){
+   arr=arr.filter(function(r){var o=m[r.w]; return o&&(o.due||0)<=now&&(o.lv||0)<7;});
+   if(!arr.length){ alert('这一页没有到期的词。取消「只背到期」可以全部过一遍。'); return; }
+  }
+  arr.sort(function(a,b){
+   var da=(m[a.w]&&m[a.w].due)||0, db=(m[b.w]&&m[b.w].due)||0;
+   return da-db;
+  });
+  queue=arr; idx=0; yes=0; no=0; started=true;
+  build();
+  var nDue=arr.filter(function(r){var o=m[r.w]; return o&&(o.due||0)<=now&&(o.lv||0)<7;}).length;
+  var nNew=arr.filter(function(r){return !m[r.w]}).length;
+  document.getElementById('rcinfo').textContent=arr.length+' 词 · 到期 '+nDue+' · 未背过 '+nNew;
+  document.getElementById('rcdue').checked=onlyDue;
+  root.classList.add('on');
+  document.body.style.overflow='hidden';
+  paint();
+ }
+
+ function paint(){
+  if(idx>=queue.length) return finish();
+  var r=queue[idx];
+  document.getElementById('rcnum').textContent=(idx+1)+' / '+queue.length;
+  document.getElementById('rcpg').style.width=(idx/queue.length*100)+'%';
+  document.getElementById('rcwd').textContent=r.w;
+  var ipa=document.getElementById('rcipa');
+  ipa.textContent=r.p||''; ipa.style.display=r.p?'':'none';
+  document.getElementById('rcans').classList.remove('on');
+  var q=document.getElementById('rcq'); q.style.display=''; q.textContent='看这个词，认不认识？点卡片看释义';
+  document.getElementById('rcm').textContent=r.m||'—';
+  var x2=document.getElementById('rcx2');
+  x2.textContent=r.x||''; x2.style.display=r.x?'':'none';
+  var ex=document.getElementById('rcex');
+  ex.innerHTML=r.e?('<div class="en">'+esc(r.e)+'</div>'+(r.z?'<div class="zh">'+esc(r.z)+'</div>':'')):'';
+  ex.style.display=r.e?'':'none';
+ }
+
+ function toBook(r){
+  if(window.NB&&NB.has&&NB.has(r.w)) return;
+  var st=r.h&&r.h.querySelector?r.h.querySelector('.star'):null;
+  if(st){ if(!st.classList.contains('on')) st.click(); return; }
+  if(window.NB&&NB.addOne) NB.addOne({w:r.w,p:r.p||'',m:r.m||'',y:'',e:'',z:'',d:'',s:'',c:''});
+ }
+
+ function grade(ok){
+  if(idx>=queue.length) return;
+  var r=queue[idx], m=read(), o=m[r.w]||{lv:0,rv:0,wr:0};
+  if(ok){ o.lv=Math.min(7,(o.lv||0)+1); o.due=Date.now()+INT[o.lv]*864e5; }
+  else  { o.lv=0; o.due=Date.now()+10*6e4; o.wr=(o.wr||0)+1; toBook(r); }
+  o.rv=(o.rv||0)+1; o.lrt=Date.now();
+  m[r.w]=o; save();
+  if(ok) yes++; else no++;
+  if(window.NB&&NB.bump) NB.bump('r');
+  idx++; paint();
+ }
+
+ function fmt(ms){
+  var diff=ms-Date.now();
+  if(diff<=0) return '现在';
+  if(diff<3600e3) return Math.max(1,Math.round(diff/6e4))+' 分钟后';
+  var d=Math.round(diff/864e5);
+  return d<=1?'明天':d+' 天后';
+ }
+
+ function finish(){
+  var m=read(), nxt=null;
+  queue.forEach(function(r){
+   var o=m[r.w]; if(!o||(o.lv||0)>=7) return;
+   if(nxt===null||o.due<nxt) nxt=o.due;
+  });
+  var w=root.querySelector('.rw');
+  w.innerHTML='<div class="done"><h2>这一轮背完了</h2>'
+   +'<p>共 '+queue.length+' 词 · 认识 <b>'+yes+'</b> 次 · 不认识 <b>'+no+'</b> 次<br>'
+   +(no? '不认识的 '+no+' 个词已自动收进生词本，稍后可以在那里复习<br>':'')
+   +(nxt!==null? '下一次到期：'+fmt(nxt) : '这些词都已经标成「已掌握」🎉')+'</p>'
+   +'<div class="acts"><button class="pri" id="rcagain">再背一轮</button>'
+   +'<button id="rcback">关掉</button></div></div>';
+  document.getElementById('rcagain').onclick=function(){ root.classList.remove('on');
+   document.body.style.overflow=''; start(); };
+  document.getElementById('rcback').onclick=close;
+}
+
+ function close(){
+  if(!root) return;
+  root.classList.remove('on');
+  document.body.style.overflow='';
+  paintBtn();
+ }
+
+ function paintBtn(){
+  var b=document.getElementById('rcopen'); if(!b) return;
+  var label=b.dataset.label||b.textContent, arr=items(), m=read(), now=Date.now(), d=0;
+  arr.forEach(function(r){ var o=m[r.w]; if(!o) return; if((o.lv||0)>=7) return; if((o.due||0)<=now) d++; });
+  b.innerHTML=esc(label)+(d?' <b>'+d+'</b>':'');
+ }
+
+ function attach(){
+  var tb=document.querySelector('.toolbar');
+  if(!tb||document.getElementById('rcopen')) return;
+  injectCSS();
+  var b=document.createElement('button');
+  b.id='rcopen'; b.type='button';
+  var label='背诵本单元';
+  b.dataset.label=label; b.textContent=label;
+  b.title='逐词自测：不认识的自动进生词本，认识的按遗忘曲线排期';
+  b.onclick=function(e){ e.preventDefault(); start(); };
+  b.style.bottom=(document.getElementById('nbfab')?'74px':'18px');
+  document.body.appendChild(b);
+  paintBtn();
+ }
+
+ document.addEventListener('keydown',onKey);
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',attach);
+ else attach();
+ if(location.hash==='#recite') setTimeout(function(){ if(document.getElementById('rcopen')) start(); },120);
+ return {start:start,items:items,read:read};
+})();
+window.REC=REC;
 </script>
 </body></html>

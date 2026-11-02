@@ -1,0 +1,44 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>t2</title>
+<style>html,body{margin:0;font:13px/1.5 -apple-system,sans-serif}iframe{width:960px;height:660px;border:0;display:block}
+#out{position:fixed;right:4px;bottom:4px;background:#fff;border:1px solid #ccc;padding:8px;width:420px;white-space:pre-wrap;z-index:9;font-size:11px}</style></head>
+<body>
+<pre id="out">…</pre>
+<script>
+var now=Date.now();
+var seed={atmosphere:{w:'atmosphere',p:'[ˈætməsfɪə(r)]',m:'n. 大气；气氛；氛围',d:'atmospheric|adj.|',
+  e:'The approaching examination created a tense atmosphere.',z:'即将到来的考试制造了紧张气氛。',c:'1',g:'自然地理',t:now,due:now},
+  atmospheric:{w:'atmospheric',p:'',m:'',d:'',e:'',z:'',c:'1',g:'自然地理',t:now,pv:1,pw:'atmosphere',pm:'n. 大气；气氛；氛围',pp:'adj.'},
+  granite:{w:'granite',p:'[ˈɡrænɪt]',m:'n. 花岗岩',d:'',e:'His grave is made of granite.',z:'他的墓是用花岗石造的。',c:'1',g:'自然地理',t:now,due:now}};
+try{localStorage.setItem('vj-book',JSON.stringify(seed));localStorage.removeItem('vj-stat');}catch(e){}
+var f=document.createElement('iframe'); f.id='f'; f.src='shengci.html'; document.body.appendChild(f);
+f.onload=function(){
+  var d=f.contentDocument, w=f.contentWindow, log=[];
+  w.onerror=function(m,u,l,c,e){ log.push('ERR '+(e&&e.stack?e.stack.split('\n')[0]:m)); };
+  d.getElementById('startw').click();
+  log.push('拼写面板='+(d.getElementById('pane-write').style.display!=='none'));
+  log.push('题目='+d.getElementById('wq').textContent.slice(0,30));
+  log.push('当前词='+w.__cw);
+  var input=d.getElementById('win'), fb=d.getElementById('wfb');
+  input.focus();
+  input.value='atmosfere';
+  log.push('设值后 value='+JSON.stringify(input.value)+' 同元素='+(input===d.getElementById('win'))+
+    ' 数量='+d.querySelectorAll('#win').length);
+  input.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
+  log.push('dispatch后 innerHTML长度='+fb.innerHTML.length+' disabled='+input.disabled+'');
+  d.getElementById('wsubmit').click();
+  log.push('点提交后长度='+fb.innerHTML.length+' class='+input.className+' err='+w.__err);
+  log.push('错答反馈='+fb.textContent.trim().slice(0,50));
+  log.push('输入框class='+input.className);
+  d.getElementById('wnext').click();
+  log.push('点继续后='+w.__cw);
+  var ans=w.__cw;
+  input.value=ans;
+  input.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
+  log.push('对答反馈='+fb.textContent.trim().slice(0,40)+' class='+input.className);
+  var rec=JSON.parse(localStorage.getItem('vj-book'))[ans];
+  log.push('答对后 lv='+rec.lv+' wr='+(rec.wr||0)+' 下次='+new Date(rec.due).toLocaleDateString());
+  log.push('统计='+localStorage.getItem('vj-stat'));
+  document.getElementById('out').textContent=log.join('\n');
+};
+</script>
+</body></html>

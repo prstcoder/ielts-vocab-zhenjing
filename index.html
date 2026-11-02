@@ -7,11 +7,11 @@
 <style>
 :root{
  --bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da;
- --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4;
+ --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4; --green:#2f7d4f;
 }
 @media (prefers-color-scheme: dark){
  :root{ --bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037;
-        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; }
+        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; --green:#6cc38b; }
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -149,6 +149,24 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  #nbfab{right:12px;bottom:14px;padding:9px 14px;font-size:13px}
 }
 
+/* 朗读按钮 */
+.spk{font-family:inherit;line-height:1;background:transparent;border:0;cursor:pointer;
+ color:var(--ink2);opacity:.4;padding:3px 5px;border-radius:6px;vertical-align:2px;display:inline-flex}
+.spk:hover{opacity:1;color:var(--accent);background:var(--accent-soft)}
+.spk svg{width:13px;height:13px;display:block}
+.card .w .spk svg{width:15px;height:15px}
+.hide-i .spk{display:none}
+
+/* 学习统计 */
+.sp{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 0}
+.spi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:center}
+.spi b{display:block;font-size:20px;font-variant-numeric:tabular-nums;line-height:1.35}
+.spi span{font-size:11.5px;color:var(--ink2)}
+.bars{display:flex;align-items:flex-end;gap:4px;height:46px;margin:14px 0 3px}
+.bars i{flex:1;background:var(--chip);border-radius:3px 3px 0 0;min-height:2px;transition:.2s}
+.bars i.on{background:var(--accent);opacity:.85}
+.axis{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink2);opacity:.75}
+
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:13px;margin-top:22px}
 .ucard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 16px}
 .ucard:hover{border-color:var(--accent)}
@@ -181,7 +199,7 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
 <div class="wrap">
  <div class="hero">
   <h1>雅思词汇真经 · 分章默写手册</h1>
-  <p class="sub">按书中 22 章拆分，每章含「纯列表版」与「例句卡片版」；支持隐藏词义 / 音标 / 译文，遇到不会的词点 ☆ 收进生词本。</p>
+  <p class="sub">按书中 22 章拆分，每章含「纯列表版」与「例句卡片版」；支持隐藏词义 / 音标 / 译文；每章可「背诵」——词卡一个个跳出来，认识的点认识、不认识的点一下自动进生词本，之后按遗忘曲线复习。</p>
   <div class="stats">
    <div class="stat"><b>3631</b><span>词条</span></div>
    <div class="stat"><b>22</b><span>章节</span></div>
@@ -204,91 +222,91 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
   <div class="ucard" data-k="unit01 自然地理">
  <div class="uh"><span class="un">Unit 01</span><span class="ut">自然地理</span></div>
  <div class="umeta">241 词 · 例句 241</div>
- <div class="ulinks"><a href="unit01.html">列表版</a><a href="unit01-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit01.html">列表版</a><a href="unit01-card.html">例句卡片版</a><a href="unit01.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit02 植物研究">
  <div class="uh"><span class="un">Unit 02</span><span class="ut">植物研究</span></div>
  <div class="umeta">130 词 · 例句 130</div>
- <div class="ulinks"><a href="unit02.html">列表版</a><a href="unit02-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit02.html">列表版</a><a href="unit02-card.html">例句卡片版</a><a href="unit02.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit03 动物保护">
  <div class="uh"><span class="un">Unit 03</span><span class="ut">动物保护</span></div>
  <div class="umeta">167 词 · 例句 167</div>
- <div class="ulinks"><a href="unit03.html">列表版</a><a href="unit03-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit03.html">列表版</a><a href="unit03-card.html">例句卡片版</a><a href="unit03.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit04 太空探索">
  <div class="uh"><span class="un">Unit 04</span><span class="ut">太空探索</span></div>
  <div class="umeta">75 词 · 例句 75</div>
- <div class="ulinks"><a href="unit04.html">列表版</a><a href="unit04-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit04.html">列表版</a><a href="unit04-card.html">例句卡片版</a><a href="unit04.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit05 学校教育">
  <div class="uh"><span class="un">Unit 05</span><span class="ut">学校教育</span></div>
  <div class="umeta">400 词 · 例句 400</div>
- <div class="ulinks"><a href="unit05.html">列表版</a><a href="unit05-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit05.html">列表版</a><a href="unit05-card.html">例句卡片版</a><a href="unit05.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit06 科技发明">
  <div class="uh"><span class="un">Unit 06</span><span class="ut">科技发明</span></div>
  <div class="umeta">118 词 · 例句 118</div>
- <div class="ulinks"><a href="unit06.html">列表版</a><a href="unit06-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit06.html">列表版</a><a href="unit06-card.html">例句卡片版</a><a href="unit06.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit07 文化历史">
  <div class="uh"><span class="un">Unit 07</span><span class="ut">文化历史</span></div>
  <div class="umeta">79 词 · 例句 79</div>
- <div class="ulinks"><a href="unit07.html">列表版</a><a href="unit07-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit07.html">列表版</a><a href="unit07-card.html">例句卡片版</a><a href="unit07.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit08 语言演化">
  <div class="uh"><span class="un">Unit 08</span><span class="ut">语言演化</span></div>
  <div class="umeta">67 词 · 例句 67</div>
- <div class="ulinks"><a href="unit08.html">列表版</a><a href="unit08-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit08.html">列表版</a><a href="unit08-card.html">例句卡片版</a><a href="unit08.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit09 娱乐运动">
  <div class="uh"><span class="un">Unit 09</span><span class="ut">娱乐运动</span></div>
  <div class="umeta">172 词 · 例句 172</div>
- <div class="ulinks"><a href="unit09.html">列表版</a><a href="unit09-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit09.html">列表版</a><a href="unit09-card.html">例句卡片版</a><a href="unit09.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit10 物品材料">
  <div class="uh"><span class="un">Unit 10</span><span class="ut">物品材料</span></div>
  <div class="umeta">151 词 · 例句 151</div>
- <div class="ulinks"><a href="unit10.html">列表版</a><a href="unit10-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit10.html">列表版</a><a href="unit10-card.html">例句卡片版</a><a href="unit10.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit11 时尚潮流">
  <div class="uh"><span class="un">Unit 11</span><span class="ut">时尚潮流</span></div>
  <div class="umeta">112 词 · 例句 112</div>
- <div class="ulinks"><a href="unit11.html">列表版</a><a href="unit11-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit11.html">列表版</a><a href="unit11-card.html">例句卡片版</a><a href="unit11.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit12 饮食健康">
  <div class="uh"><span class="un">Unit 12</span><span class="ut">饮食健康</span></div>
  <div class="umeta">169 词 · 例句 169</div>
- <div class="ulinks"><a href="unit12.html">列表版</a><a href="unit12-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit12.html">列表版</a><a href="unit12-card.html">例句卡片版</a><a href="unit12.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit13 建筑场所">
  <div class="uh"><span class="un">Unit 13</span><span class="ut">建筑场所</span></div>
  <div class="umeta">129 词 · 例句 129</div>
- <div class="ulinks"><a href="unit13.html">列表版</a><a href="unit13-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit13.html">列表版</a><a href="unit13-card.html">例句卡片版</a><a href="unit13.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit14 交通旅行">
  <div class="uh"><span class="un">Unit 14</span><span class="ut">交通旅行</span></div>
  <div class="umeta">133 词 · 例句 133</div>
- <div class="ulinks"><a href="unit14.html">列表版</a><a href="unit14-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit14.html">列表版</a><a href="unit14-card.html">例句卡片版</a><a href="unit14.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit15 国家政府">
  <div class="uh"><span class="un">Unit 15</span><span class="ut">国家政府</span></div>
  <div class="umeta">148 词 · 例句 148</div>
- <div class="ulinks"><a href="unit15.html">列表版</a><a href="unit15-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit15.html">列表版</a><a href="unit15-card.html">例句卡片版</a><a href="unit15.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit16 社会经济">
  <div class="uh"><span class="un">Unit 16</span><span class="ut">社会经济</span></div>
  <div class="umeta">169 词 · 例句 169</div>
- <div class="ulinks"><a href="unit16.html">列表版</a><a href="unit16-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit16.html">列表版</a><a href="unit16-card.html">例句卡片版</a><a href="unit16.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit17 法律法规">
  <div class="uh"><span class="un">Unit 17</span><span class="ut">法律法规</span></div>
  <div class="umeta">114 词 · 例句 114</div>
- <div class="ulinks"><a href="unit17.html">列表版</a><a href="unit17-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit17.html">列表版</a><a href="unit17-card.html">例句卡片版</a><a href="unit17.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit18 沙场争锋">
  <div class="uh"><span class="un">Unit 18</span><span class="ut">沙场争锋</span></div>
  <div class="umeta">211 词 · 例句 211</div>
- <div class="ulinks"><a href="unit18.html">列表版</a><a href="unit18-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit18.html">列表版</a><a href="unit18-card.html">例句卡片版</a><a href="unit18.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit19 社会角色">
  <div class="uh"><span class="un">Unit 19</span><span class="ut">社会角色</span></div>
  <div class="umeta">120 词 · 例句 120</div>
- <div class="ulinks"><a href="unit19.html">列表版</a><a href="unit19-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit19.html">列表版</a><a href="unit19-card.html">例句卡片版</a><a href="unit19.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit20 行为动作">
  <div class="uh"><span class="un">Unit 20</span><span class="ut">行为动作</span></div>
  <div class="umeta">261 词 · 例句 261</div>
- <div class="ulinks"><a href="unit20.html">列表版</a><a href="unit20-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit20.html">列表版</a><a href="unit20-card.html">例句卡片版</a><a href="unit20.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit21 身心健康">
  <div class="uh"><span class="un">Unit 21</span><span class="ut">身心健康</span></div>
  <div class="umeta">413 词 · 例句 413</div>
- <div class="ulinks"><a href="unit21.html">列表版</a><a href="unit21-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit21.html">列表版</a><a href="unit21-card.html">例句卡片版</a><a href="unit21.html#recite">背诵</a></div>
 </div><div class="ucard" data-k="unit22 时间日期">
  <div class="uh"><span class="un">Unit 22</span><span class="ut">时间日期</span></div>
  <div class="umeta">52 词 · 例句 52</div>
- <div class="ulinks"><a href="unit22.html">列表版</a><a href="unit22-card.html">例句卡片版</a></div>
+ <div class="ulinks"><a href="unit22.html">列表版</a><a href="unit22-card.html">例句卡片版</a><a href="unit22.html#recite">背诵</a></div>
 </div>
  </div>
  <footer>内容摘自《雅思词汇真经》（刘洪波 编著），仅供个人学习使用；版权归原作者及出版方所有，如涉侵权请联系删除。<br>
@@ -296,8 +314,43 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
 </div>
 <a id="nbfab" href="shengci.html"><span>生词本</span><b>0</b></a>
 <script>
+/* ---------- 朗读 ---------- */
+var TTS=(function(){
+ var voices=[], pref='en-GB';
+ try{pref=JSON.parse(localStorage.getItem('vj-tts')||'{}').v||'en-GB'}catch(e){}
+ var sup = (typeof speechSynthesis!=='undefined' && typeof SpeechSynthesisUtterance!=='undefined');
+ function load(){ try{voices=speechSynthesis.getVoices()||[]}catch(e){voices=[]} }
+ if(sup){ load(); try{speechSynthesis.onvoiceschanged=load}catch(e){} }
+ function pick(){
+  if(!voices.length) load();
+  var en=voices.filter(function(v){return /^en/i.test(v.lang||'')});
+  var same=en.filter(function(v){return (v.lang||'').replace('_','-').toLowerCase().indexOf(pref.toLowerCase())===0});
+  return same[0] || en.filter(function(v){return /en-GB/i.test(v.lang)})[0] ||
+         en.filter(function(v){return /en-US/i.test(v.lang)})[0] || en[0] || null;
+ }
+ function speak(t, rate){
+  if(!sup||!t) return false;
+  try{
+   speechSynthesis.cancel();
+   var u=new SpeechSynthesisUtterance(t), v=pick();
+   if(v){u.voice=v; u.lang=v.lang;} else u.lang=pref;
+   u.rate=rate||0.92; u.pitch=1;
+   speechSynthesis.speak(u);
+   return true;
+  }catch(e){return false}
+ }
+ function setPref(p){
+  pref=p;
+  try{localStorage.setItem('vj-tts',JSON.stringify({v:p}))}catch(e){}
+  document.querySelectorAll('.ttsvg').forEach(function(b){b.classList.toggle('on',b.dataset.vp===p)});
+ }
+ return {speak:speak,setPref:setPref,pref:function(){return pref},ok:function(){return sup}};
+})();
+window.TTS=TTS;
+
+/* ---------- 生词本 ---------- */
 var NB=(function(){
- var KEY='vj-book';
+ var KEY='vj-book', SETK='vj-set', STK='vj-stat';
  var mem=null, okStore=true;
  function read(){
   if(mem) return mem;
@@ -312,18 +365,53 @@ var NB=(function(){
  }
  function count(){return Object.keys(read()).length}
  function has(w){return !!read()[w]}
+ function addOne(rec){
+  var m=read();
+  if(m[rec.w]) return false;
+  rec.t=Date.now();
+  m[rec.w]=rec; write(); bump('a'); sync(); return true;
+ }
  function toggle(rec){
   var m=read();
-  if(m[rec.w]){delete m[rec.w]}
-  else{rec.t=Date.now(); m[rec.w]=rec}
-  write(); sync(); return !!m[rec.w];
+  if(m[rec.w]){delete m[rec.w]; write(); sync(); return false}
+  rec.t=Date.now(); m[rec.w]=rec; write(); bump('a'); sync(); return true;
  }
  function remove(w){var m=read(); delete m[w]; write(); sync();}
+ function save(rec){var m=read(); m[rec.w]=rec; write(); sync();}
  function all(){
   var m=read(), a=[];
   for(var k in m) a.push(m[k]);
   a.sort(function(x,y){return (y.t||0)-(x.t||0)});
   return a;
+ }
+ /* 设置：加入时是否连带衍生词 */
+ function settings(){ try{return JSON.parse(localStorage.getItem(SETK)||'{}')}catch(e){return {}} }
+ function setSetting(k,v){
+  var s=settings(); s[k]=v;
+  try{localStorage.setItem(SETK,JSON.stringify(s))}catch(e){}
+ }
+ function dvOn(){ var s=settings(); return s.dv!==false }
+ /* 学习统计 */
+ function pad(n){return n<10?'0'+n:''+n}
+ function dayKey(d){d=d||new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+ function stat(){ try{return JSON.parse(localStorage.getItem(STK)||'{}')}catch(e){return {}} }
+ function bump(k,n){
+  var s=stat(), key=dayKey();
+  s[key]=s[key]||{a:0,r:0,c:0};
+  s[key][k]=(s[key][k]||0)+(n||1);
+  var ks=Object.keys(s).sort();
+  if(ks.length>120){ ks.slice(0,ks.length-120).forEach(function(x){delete s[x]}) }
+  try{localStorage.setItem(STK,JSON.stringify(s))}catch(e){}
+ }
+ function streak(){
+  var s=stat(), n=0, d=new Date(), k=dayKey(d);
+  if(!(s[k] && (s[k].r||s[k].a))) d.setDate(d.getDate()-1);
+  for(var i=0;i<400;i++){
+   var o=s[dayKey(d)];
+   if(o && (o.r||o.a)){ n++; d.setDate(d.getDate()-1); }
+   else break;
+  }
+  return n;
  }
  function sync(){
   var n=count();
@@ -336,14 +424,42 @@ var NB=(function(){
     else if(!on) el.setAttribute('title','加入生词本');
   });
  }
+ function parseDv(s){
+  if(!s) return [];
+  return s.split(';;').filter(Boolean).map(function(x){
+   var a=x.split('|'); return {w:a[0], p:a[1]||'', m:a[2]||''};
+  });
+ }
  function onStar(e){
   var b=e.target.closest('.star'); if(!b) return;
   e.preventDefault(); e.stopPropagation();
   var host=b.closest('[data-w]')||b.closest('.card')||b.closest('tr');
-  var rec=entry(host, b.dataset.star);
-  var added=toggle(rec);
+  var w=b.dataset.star;
+  if(has(w)){
+   remove(w);
+   var m=read();
+   Object.keys(m).forEach(function(k){ if(m[k] && m[k].pw===w){ delete m[k] } });
+   write(); sync();
+   return;
+  }
+  var rec=entry(host,w);
+  toggle(rec);
+  if(dvOn()){
+   parseDv(host?host.dataset.dv:'').forEach(function(d){
+     if(!d.w || has(d.w)) return;
+     addOne({w:d.w, p:'', m:d.m||'', d:'', e:'', z:'',
+             c:rec.c, g:rec.g, pv:1, pw:rec.w, pm:rec.m, pp:d.p});
+   });
+  }
   var fab=document.getElementById('nbfab');
-  if(added&&fab){fab.classList.remove('wiggle');void fab.offsetWidth;fab.classList.add('wiggle');}
+  if(fab){fab.classList.remove('wiggle');void fab.offsetWidth;fab.classList.add('wiggle');}
+ }
+ function onSpk(e){
+  var b=e.target.closest('.spk'); if(!b) return;
+  e.preventDefault(); e.stopPropagation();
+  var t=b.dataset.say;
+  if(!t){ var h=b.closest('[data-w]'); t=h?h.dataset.w:''; }
+  TTS.speak(t);
  }
  function txt(el){return el?el.textContent.trim():''}
  function entry(host, w){
@@ -359,11 +475,17 @@ var NB=(function(){
           g:document.body.dataset.title||''};
  }
  document.addEventListener('click',onStar);
- window.addEventListener('storage',function(e){if(e.key===KEY){mem=null;sync();}});
- document.addEventListener('DOMContentLoaded',sync);
+ document.addEventListener('click',onSpk);
+ window.addEventListener('storage',function(e){
+  if(e.key===KEY){mem=null;sync();}
+ });
+ if(document.readyState!=='loading') sync(); else document.addEventListener('DOMContentLoaded',sync);
  sync();
- return {count:count,has:has,all:all,remove:remove,toggle:toggle,sync:sync,read:read};
+ return {count:count,has:has,all:all,remove:remove,toggle:toggle,sync:sync,read:read,
+         save:save,addOne:addOne,dvOn:dvOn,settings:settings,setSetting:setSetting,
+         bump:bump,stat:stat,streak:streak,dayKey:dayKey,parseDv:parseDv};
 })();
+window.NB=NB;
 </script>
 
 <script>
@@ -378,8 +500,12 @@ var NB=(function(){
   });
   cnt.textContent=n+' 章';
  });
- var n=NB.count();
- document.getElementById('nbn').textContent=n;
+ var all=NB.all(), n=all.length, due=0;
+ all.forEach(function(r){ if(!((r.lv||0)>=7) && (r.due||r.t||0)<=Date.now()) due++; });
+ document.getElementById('nbn').textContent=due||n;
+ var tx=document.querySelector('.nbcard .tx span');
+ if(tx) tx.textContent = due? ('今天有 '+due+' 个词到期，点这里开始复习') :
+   (n? '暂无到期词，随时可以重新过一遍' : '点单词旁的 ☆ 收录，可导出、可闪卡复习');
  var fab=document.getElementById('nbfab'); if(fab) fab.style.display='none';
 })();
 </script>

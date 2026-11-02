@@ -7,11 +7,11 @@
 <style>
 :root{
  --bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da;
- --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4;
+ --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4; --green:#2f7d4f;
 }
 @media (prefers-color-scheme: dark){
  :root{ --bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037;
-        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; }
+        --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; --green:#6cc38b; }
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -148,6 +148,24 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  td.sv .star{font-size:19px}
  #nbfab{right:12px;bottom:14px;padding:9px 14px;font-size:13px}
 }
+
+/* 朗读按钮 */
+.spk{font-family:inherit;line-height:1;background:transparent;border:0;cursor:pointer;
+ color:var(--ink2);opacity:.4;padding:3px 5px;border-radius:6px;vertical-align:2px;display:inline-flex}
+.spk:hover{opacity:1;color:var(--accent);background:var(--accent-soft)}
+.spk svg{width:13px;height:13px;display:block}
+.card .w .spk svg{width:15px;height:15px}
+.hide-i .spk{display:none}
+
+/* 学习统计 */
+.sp{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 0}
+.spi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:center}
+.spi b{display:block;font-size:20px;font-variant-numeric:tabular-nums;line-height:1.35}
+.spi span{font-size:11.5px;color:var(--ink2)}
+.bars{display:flex;align-items:flex-end;gap:4px;height:46px;margin:14px 0 3px}
+.bars i{flex:1;background:var(--chip);border-radius:3px 3px 0 0;min-height:2px;transition:.2s}
+.bars i.on{background:var(--accent);opacity:.85}
+.axis{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink2);opacity:.75}
 </style>
 </head>
 <body data-kind="card" data-ch="22" data-title="时间日期">
@@ -164,99 +182,135 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
   <label class="sw"><input type="checkbox" id="i"> 隐藏音标</label>
   <label class="sw"><input type="checkbox" id="z"> 隐藏例句译文</label>
   <label class="sw"><input type="checkbox" id="only"> 只看生词</label>
+  <label class="sw" title="点 ☆ 时把该词的派生词一起收进生词本"><input type="checkbox" id="dvon"> ☆带衍生</label>
   <button class="btn" id="reset">重置</button>
   <span class="count" id="cnt">52 条</span>
  </div>
 </div></div><div class="wrap">
 <section class="grp"><div class="ghead"><span class="gtag">词群 01</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="daily adv. 每天；每日；adj. 每 天的；每日的；n. 日报" data-w="daily" data-dv="dailiness|n.|;;undaily|adj.|"><div class="w"><span class="idx">01</span>daily<span class="ipa">[ˈdeɪli]</span><button class="star" data-star="daily" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 每天；每日；adj. 每 天的；每日的；n. 日报<div class="dv"><b>衍生</b><i>dailiness</i><em>n.</em><span class="sep">·</span><i>undaily</i><em>adj.</em></div></div><div class="ex"><div class="en">The best treatment for the pain is daily exercises.</div><div class="zh">治疗这种疼痛的最好办法就是每天锻炼。</div></div></div>
-<div class="card" data-s="monthly adj. 每月的；每月一次的；adv. 每月一次；每个月；n. 月刊" data-w="monthly" data-dv=""><div class="w"><span class="idx">02</span>monthly<span class="ipa">[ˈmʌnθli]</span><button class="star" data-star="monthly" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 每月的；每月一次的；adv. 每月一次；每个月；n. 月刊</div><div class="ex"><div class="en">The common monthly publications can be found in the library.</div><div class="zh">这家图书馆里有那些常见的月刊。</div></div></div>
-<div class="card" data-s="quarterly adj. 季度的；adv. 每季一 次；n. 季刊" data-w="quarterly" data-dv=""><div class="w"><span class="idx">03</span>quarterly<span class="ipa">[ˈkwɔːtəli]</span><button class="star" data-star="quarterly" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 季度的；adv. 每季一 次；n. 季刊</div><div class="ex"><div class="en">This journal is bimonthly, and that one quarterly.</div><div class="zh">这本杂志是双月刊,那本是季刊。</div></div></div>
+<div class="card" data-s="daily adv. 每天；每日；adj. 每 天的；每日的；n. 日报" data-w="daily" data-dv="dailiness|n.|;;undaily|adj.|"><div class="w"><span class="idx">01</span>daily<button class="spk" data-say="daily" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈdeɪli]</span><button class="star" data-star="daily" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 每天；每日；adj. 每 天的；每日的；n. 日报<div class="dv"><b>衍生</b><i>dailiness</i><em>n.</em><span class="sep">·</span><i>undaily</i><em>adj.</em></div></div><div class="ex"><div class="en">The best treatment for the pain is daily exercises.</div><div class="zh">治疗这种疼痛的最好办法就是每天锻炼。</div></div></div>
+<div class="card" data-s="monthly adj. 每月的；每月一次的；adv. 每月一次；每个月；n. 月刊" data-w="monthly" data-dv=""><div class="w"><span class="idx">02</span>monthly<button class="spk" data-say="monthly" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈmʌnθli]</span><button class="star" data-star="monthly" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 每月的；每月一次的；adv. 每月一次；每个月；n. 月刊</div><div class="ex"><div class="en">The common monthly publications can be found in the library.</div><div class="zh">这家图书馆里有那些常见的月刊。</div></div></div>
+<div class="card" data-s="quarterly adj. 季度的；adv. 每季一 次；n. 季刊" data-w="quarterly" data-dv=""><div class="w"><span class="idx">03</span>quarterly<button class="spk" data-say="quarterly" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈkwɔːtəli]</span><button class="star" data-star="quarterly" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 季度的；adv. 每季一 次；n. 季刊</div><div class="ex"><div class="en">This journal is bimonthly, and that one quarterly.</div><div class="zh">这本杂志是双月刊,那本是季刊。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 02</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="annual adj. 每年的；一年一次 的；n. 年刊；年鉴" data-w="annual" data-dv="annually|adv.|"><div class="w"><span class="idx">04</span>annual<span class="ipa">[ˈænjuəl]</span><button class="star" data-star="annual" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 每年的；一年一次 的；n. 年刊；年鉴<div class="dv"><b>衍生</b><i>annually</i><em>adv.</em></div></div><div class="ex"><div class="en">The firm has an annual turnover of 800 million pounds.</div><div class="zh">这家公司的年营业额为8亿英镑。</div></div></div>
-<div class="card" data-s="yearly adj. 每年的；adv. 每年地" data-w="yearly" data-dv=""><div class="w"><span class="idx">05</span>yearly<span class="ipa">[ˈjɜːli]</span><button class="star" data-star="yearly" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 每年的；adv. 每年地</div><div class="ex"><div class="en">The yearly conference will be held next month.</div><div class="zh">年会将于下个月举行。</div></div></div>
-<div class="card" data-s="anniversary n. 周年纪念日" data-w="anniversary" data-dv=""><div class="w"><span class="idx">06</span>anniversary<span class="ipa">[ˌænɪˈvɜːsəri]</span><button class="star" data-star="anniversary" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 周年纪念日</div><div class="ex"><div class="en">Jack and Kim celebrated their 20th wedding anniversary in January.</div><div class="zh">杰克和金在1月庆祝了他们的结婚20周年纪念日。</div></div></div>
+<div class="card" data-s="annual adj. 每年的；一年一次 的；n. 年刊；年鉴" data-w="annual" data-dv="annually|adv.|"><div class="w"><span class="idx">04</span>annual<button class="spk" data-say="annual" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈænjuəl]</span><button class="star" data-star="annual" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 每年的；一年一次 的；n. 年刊；年鉴<div class="dv"><b>衍生</b><i>annually</i><em>adv.</em></div></div><div class="ex"><div class="en">The firm has an annual turnover of 800 million pounds.</div><div class="zh">这家公司的年营业额为8亿英镑。</div></div></div>
+<div class="card" data-s="yearly adj. 每年的；adv. 每年地" data-w="yearly" data-dv=""><div class="w"><span class="idx">05</span>yearly<button class="spk" data-say="yearly" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈjɜːli]</span><button class="star" data-star="yearly" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 每年的；adv. 每年地</div><div class="ex"><div class="en">The yearly conference will be held next month.</div><div class="zh">年会将于下个月举行。</div></div></div>
+<div class="card" data-s="anniversary n. 周年纪念日" data-w="anniversary" data-dv=""><div class="w"><span class="idx">06</span>anniversary<button class="spk" data-say="anniversary" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˌænɪˈvɜːsəri]</span><button class="star" data-star="anniversary" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 周年纪念日</div><div class="ex"><div class="en">Jack and Kim celebrated their 20th wedding anniversary in January.</div><div class="zh">杰克和金在1月庆祝了他们的结婚20周年纪念日。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 03</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="era n. 时代；纪元" data-w="era" data-dv=""><div class="w"><span class="idx">07</span>era<span class="ipa">[ˈɪərə]</span><button class="star" data-star="era" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 时代；纪元</div><div class="ex"><div class="en">We live in an era of rapid change.</div><div class="zh">我们生活在一个快速变化的时代。</div></div></div>
-<div class="card" data-s="present n. 目前；礼物；adj. 在场 的；目前的；v. 呈现；提出" data-w="present" data-dv="presently|adv.|;;presentness|n.|;;presentable|adj.|"><div class="w"><span class="idx">08</span>present<span class="ipa">[ˈprez(ə)nt]</span><button class="star" data-star="present" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 目前；礼物；adj. 在场 的；目前的；v. 呈现；提出<div class="dv"><b>衍生</b><i>presently</i><em>adv.</em><span class="sep">·</span><i>presentness</i><em>n.</em><span class="sep">·</span><i>presentable</i><em>adj.</em></div></div><div class="ex"><div class="en">There's no certain cure for this illness at present.</div><div class="zh">现在,这种病尚无确定的疗法。</div></div></div>
-<div class="card" data-s="contemporary adj. 现代的；当代的；同时代 的；n. 同代人；同辈人；同龄人" data-w="contemporary" data-dv="contemporarily|adv.|;;contemporariness|n.|"><div class="w"><span class="idx">09</span>contemporary<span class="ipa">[kənˈtemprəri]</span><button class="star" data-star="contemporary" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 现代的；当代的；同时代 的；n. 同代人；同辈人；同龄人<div class="dv"><b>衍生</b><i>contemporarily</i><em>adv.</em><span class="sep">·</span><i>contemporariness</i><em>n.</em></div></div><div class="ex"><div class="en">These clothes are more contemporary and wearable.</div><div class="zh">这些服装更具当代感,而且穿起来更舒适。</div></div></div>
+<div class="card" data-s="era n. 时代；纪元" data-w="era" data-dv=""><div class="w"><span class="idx">07</span>era<button class="spk" data-say="era" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈɪərə]</span><button class="star" data-star="era" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 时代；纪元</div><div class="ex"><div class="en">We live in an era of rapid change.</div><div class="zh">我们生活在一个快速变化的时代。</div></div></div>
+<div class="card" data-s="present n. 目前；礼物；adj. 在场 的；目前的；v. 呈现；提出" data-w="present" data-dv="presently|adv.|;;presentness|n.|;;presentable|adj.|"><div class="w"><span class="idx">08</span>present<button class="spk" data-say="present" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈprez(ə)nt]</span><button class="star" data-star="present" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 目前；礼物；adj. 在场 的；目前的；v. 呈现；提出<div class="dv"><b>衍生</b><i>presently</i><em>adv.</em><span class="sep">·</span><i>presentness</i><em>n.</em><span class="sep">·</span><i>presentable</i><em>adj.</em></div></div><div class="ex"><div class="en">There's no certain cure for this illness at present.</div><div class="zh">现在,这种病尚无确定的疗法。</div></div></div>
+<div class="card" data-s="contemporary adj. 现代的；当代的；同时代 的；n. 同代人；同辈人；同龄人" data-w="contemporary" data-dv="contemporarily|adv.|;;contemporariness|n.|"><div class="w"><span class="idx">09</span>contemporary<button class="spk" data-say="contemporary" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[kənˈtemprəri]</span><button class="star" data-star="contemporary" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 现代的；当代的；同时代 的；n. 同代人；同辈人；同龄人<div class="dv"><b>衍生</b><i>contemporarily</i><em>adv.</em><span class="sep">·</span><i>contemporariness</i><em>n.</em></div></div><div class="ex"><div class="en">These clothes are more contemporary and wearable.</div><div class="zh">这些服装更具当代感,而且穿起来更舒适。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 04</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="medieval adj. 中世纪的；中古的" data-w="medieval" data-dv="medievally|adv.|"><div class="w"><span class="idx">10</span>medieval<span class="ipa">[ˌmediˈiːv(ə)l]</span><button class="star" data-star="medieval" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 中世纪的；中古的<div class="dv"><b>衍生</b><i>medievally</i><em>adv.</em></div></div><div class="ex"><div class="en">Parents with a medieval attitude toward dating are not popular with the young.</div><div class="zh">对于约会抱有守旧态度的父母是不受年轻人欢迎的。</div></div></div>
-<div class="card" data-s="century n. 世纪；百年" data-w="century" data-dv=""><div class="w"><span class="idx">11</span>century<span class="ipa">[ˈsentʃəri]</span><button class="star" data-star="century" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 世纪；百年</div><div class="ex"><div class="en">It was considered one of the best film s of the 20th ce n tu ry.</div><div class="zh">它被视为20世纪最优秀的电影之一。</div></div></div>
-<div class="card" data-s="millennium n. 一千年；千禧年；(未 来的)太平盛世" data-w="millennium" data-dv=""><div class="w"><span class="idx">12</span>millennium<span class="ipa">[mɪˈleniəm]</span><button class="star" data-star="millennium" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 一千年；千禧年；(未 来的)太平盛世</div><div class="ex"><div class="en">What did you do to celebrate the new millennium?</div><div class="zh">你是如何庆祝千禧年的?</div></div></div>
+<div class="card" data-s="medieval adj. 中世纪的；中古的" data-w="medieval" data-dv="medievally|adv.|"><div class="w"><span class="idx">10</span>medieval<button class="spk" data-say="medieval" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˌmediˈiːv(ə)l]</span><button class="star" data-star="medieval" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 中世纪的；中古的<div class="dv"><b>衍生</b><i>medievally</i><em>adv.</em></div></div><div class="ex"><div class="en">Parents with a medieval attitude toward dating are not popular with the young.</div><div class="zh">对于约会抱有守旧态度的父母是不受年轻人欢迎的。</div></div></div>
+<div class="card" data-s="century n. 世纪；百年" data-w="century" data-dv=""><div class="w"><span class="idx">11</span>century<button class="spk" data-say="century" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈsentʃəri]</span><button class="star" data-star="century" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 世纪；百年</div><div class="ex"><div class="en">It was considered one of the best film s of the 20th ce n tu ry.</div><div class="zh">它被视为20世纪最优秀的电影之一。</div></div></div>
+<div class="card" data-s="millennium n. 一千年；千禧年；(未 来的)太平盛世" data-w="millennium" data-dv=""><div class="w"><span class="idx">12</span>millennium<button class="spk" data-say="millennium" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[mɪˈleniəm]</span><button class="star" data-star="millennium" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 一千年；千禧年；(未 来的)太平盛世</div><div class="ex"><div class="en">What did you do to celebrate the new millennium?</div><div class="zh">你是如何庆祝千禧年的?</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 05</span><span class="gcnt">4 词</span></div><div class="cards">
-<div class="card" data-s="million num. 一百万；n. 百万； 百万个" data-w="million" data-dv=""><div class="w"><span class="idx">13</span>million<span class="ipa">[ˈmɪljən]</span><button class="star" data-star="million" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">num. 一百万；n. 百万； 百万个</div><div class="ex"><div class="en">It was estimated that the damage was over one million dollars.</div><div class="zh">据估计,损失超过了W0万美元。</div></div></div>
-<div class="card" data-s="billion num. 十亿" data-w="billion" data-dv=""><div class="w"><span class="idx">14</span>billion<span class="ipa">[ˈbɪljən]</span><button class="star" data-star="billion" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">num. 十亿</div><div class="ex"><div class="en">The human brain contains billions of nerve cells.</div><div class="zh">人类的大脑里有大量神经细胞。</div></div></div>
-<div class="card" data-s="dozen n. 很多； 一打；十二个" data-w="dozen" data-dv=""><div class="w"><span class="idx">15</span>dozen<span class="ipa">[ˈdʌz(ə)n]</span><button class="star" data-star="dozen" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 很多； 一打；十二个</div><div class="ex"><div class="en">She bought a dozen eggs.</div><div class="zh">她买了一打鸡蛋。</div></div></div>
-<div class="card" data-s="dawn n. 黎明；破晓；v. 破晓； 开始明朗" data-w="dawn" data-dv=""><div class="w"><span class="idx">16</span>dawn<span class="ipa">[dɔːn]</span><button class="star" data-star="dawn" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 黎明；破晓；v. 破晓； 开始明朗</div><div class="ex"><div class="en">We set sail at dawn and headed for New York.</div><div class="zh">我们在黎明起程,朝着纽约驶去。</div></div></div>
+<div class="card" data-s="million num. 一百万；n. 百万； 百万个" data-w="million" data-dv=""><div class="w"><span class="idx">13</span>million<button class="spk" data-say="million" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈmɪljən]</span><button class="star" data-star="million" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">num. 一百万；n. 百万； 百万个</div><div class="ex"><div class="en">It was estimated that the damage was over one million dollars.</div><div class="zh">据估计,损失超过了W0万美元。</div></div></div>
+<div class="card" data-s="billion num. 十亿" data-w="billion" data-dv=""><div class="w"><span class="idx">14</span>billion<button class="spk" data-say="billion" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈbɪljən]</span><button class="star" data-star="billion" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">num. 十亿</div><div class="ex"><div class="en">The human brain contains billions of nerve cells.</div><div class="zh">人类的大脑里有大量神经细胞。</div></div></div>
+<div class="card" data-s="dozen n. 很多； 一打；十二个" data-w="dozen" data-dv=""><div class="w"><span class="idx">15</span>dozen<button class="spk" data-say="dozen" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈdʌz(ə)n]</span><button class="star" data-star="dozen" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 很多； 一打；十二个</div><div class="ex"><div class="en">She bought a dozen eggs.</div><div class="zh">她买了一打鸡蛋。</div></div></div>
+<div class="card" data-s="dawn n. 黎明；破晓；v. 破晓； 开始明朗" data-w="dawn" data-dv=""><div class="w"><span class="idx">16</span>dawn<button class="spk" data-say="dawn" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[dɔːn]</span><button class="star" data-star="dawn" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 黎明；破晓；v. 破晓； 开始明朗</div><div class="ex"><div class="en">We set sail at dawn and headed for New York.</div><div class="zh">我们在黎明起程,朝着纽约驶去。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 06</span><span class="gcnt">4 词</span></div><div class="cards">
-<div class="card" data-s="midday n. 中午；正午" data-w="midday" data-dv=""><div class="w"><span class="idx">17</span>midday<span class="ipa">[ˌmɪdˈdeɪ]</span><button class="star" data-star="midday" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 中午；正午</div><div class="ex"><div class="en">We finished work at midday.</div><div class="zh">我们于正午完成了工作。</div></div></div>
-<div class="card" data-s="midnight n. 午夜；子夜" data-w="midnight" data-dv=""><div class="w"><span class="idx">18</span>midnight<span class="ipa">[ˈmɪdnaɪt]</span><button class="star" data-star="midnight" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 午夜；子夜</div><div class="ex"><div class="en">According to astronomers, the best time for viewing is between midnight and dawn.</div><div class="zh">据天文学家表示,最佳观赏期在午夜至黎明期间。</div></div></div>
-<div class="card" data-s="overnight adv. 在夜里；突然；adj. 整晚的；突然的" data-w="overnight" data-dv=""><div class="w"><span class="idx">19</span>overnight<span class="ipa">[ˌəʊvəˈnaɪt]</span><button class="star" data-star="overnight" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 在夜里；突然；adj. 整晚的；突然的</div><div class="ex"><div class="en">I stayed overnight at a friend's home.</div><div class="zh">我在朋友家过了一夜。</div></div></div>
-<div class="card" data-s="night n. 夜晚；晚上" data-w="night" data-dv=""><div class="w"><span class="idx">20</span>night<span class="ipa">[naɪt]</span><button class="star" data-star="night" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 夜晚；晚上</div><div class="ex"><div class="en">The city's night clubs are open all night for eating, drinking and dancing.</div><div class="zh">该市的夜总会彻夜提供饮食和舞蹈娱乐。</div></div></div>
+<div class="card" data-s="midday n. 中午；正午" data-w="midday" data-dv=""><div class="w"><span class="idx">17</span>midday<button class="spk" data-say="midday" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˌmɪdˈdeɪ]</span><button class="star" data-star="midday" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 中午；正午</div><div class="ex"><div class="en">We finished work at midday.</div><div class="zh">我们于正午完成了工作。</div></div></div>
+<div class="card" data-s="midnight n. 午夜；子夜" data-w="midnight" data-dv=""><div class="w"><span class="idx">18</span>midnight<button class="spk" data-say="midnight" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈmɪdnaɪt]</span><button class="star" data-star="midnight" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 午夜；子夜</div><div class="ex"><div class="en">According to astronomers, the best time for viewing is between midnight and dawn.</div><div class="zh">据天文学家表示,最佳观赏期在午夜至黎明期间。</div></div></div>
+<div class="card" data-s="overnight adv. 在夜里；突然；adj. 整晚的；突然的" data-w="overnight" data-dv=""><div class="w"><span class="idx">19</span>overnight<button class="spk" data-say="overnight" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˌəʊvəˈnaɪt]</span><button class="star" data-star="overnight" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 在夜里；突然；adj. 整晚的；突然的</div><div class="ex"><div class="en">I stayed overnight at a friend's home.</div><div class="zh">我在朋友家过了一夜。</div></div></div>
+<div class="card" data-s="night n. 夜晚；晚上" data-w="night" data-dv=""><div class="w"><span class="idx">20</span>night<button class="spk" data-say="night" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[naɪt]</span><button class="star" data-star="night" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 夜晚；晚上</div><div class="ex"><div class="en">The city's night clubs are open all night for eating, drinking and dancing.</div><div class="zh">该市的夜总会彻夜提供饮食和舞蹈娱乐。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 07</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="modern adj. 现代的；时髦的" data-w="modern" data-dv="modernly|adv.|;;modernity|n.|;;modernness|n.|"><div class="w"><span class="idx">21</span>modern<span class="ipa">[ˈmɒd(ə)n]</span><button class="star" data-star="modern" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 现代的；时髦的<div class="dv"><b>衍生</b><i>modernly</i><em>adv.</em><span class="sep">·</span><i>modernity</i><em>n.</em><span class="sep">·</span><i>modernness</i><em>n.</em></div></div><div class="ex"><div class="en">The gallery shows modern art.</div><div class="zh">这家美术馆展出当代艺术。</div></div></div>
-<div class="card" data-s="recent adj. 近来的；新近的" data-w="recent" data-dv="recently|adv.|;;recentness|n.|"><div class="w"><span class="idx">22</span>recent<span class="ipa">[ˈriːs(ə)nt]</span><button class="star" data-star="recent" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 近来的；新近的<div class="dv"><b>衍生</b><i>recently</i><em>adv.</em><span class="sep">·</span><i>recentness</i><em>n.</em></div></div><div class="ex"><div class="en">The vase looked old but was a recent fake.</div><div class="zh">这个花瓶看似古老,却是一件新近制作的贋品。</div></div></div>
-<div class="card" data-s="up-to-date adj. 最新的；最近的；新 式的" data-w="up-to-date" data-dv=""><div class="w"><span class="idx">23</span>up-to-date<span class="ipa">[ˈʌptəˈdeɪt]</span><button class="star" data-star="up-to-date" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 最新的；最近的；新 式的</div><div class="ex"><div class="en">Up-to-date information about the research on climate change can be found on this website.</div><div class="zh">可在该网站上找到关于气候变化研究的最新信息。</div></div></div>
+<div class="card" data-s="modern adj. 现代的；时髦的" data-w="modern" data-dv="modernly|adv.|;;modernity|n.|;;modernness|n.|"><div class="w"><span class="idx">21</span>modern<button class="spk" data-say="modern" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈmɒd(ə)n]</span><button class="star" data-star="modern" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 现代的；时髦的<div class="dv"><b>衍生</b><i>modernly</i><em>adv.</em><span class="sep">·</span><i>modernity</i><em>n.</em><span class="sep">·</span><i>modernness</i><em>n.</em></div></div><div class="ex"><div class="en">The gallery shows modern art.</div><div class="zh">这家美术馆展出当代艺术。</div></div></div>
+<div class="card" data-s="recent adj. 近来的；新近的" data-w="recent" data-dv="recently|adv.|;;recentness|n.|"><div class="w"><span class="idx">22</span>recent<button class="spk" data-say="recent" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈriːs(ə)nt]</span><button class="star" data-star="recent" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 近来的；新近的<div class="dv"><b>衍生</b><i>recently</i><em>adv.</em><span class="sep">·</span><i>recentness</i><em>n.</em></div></div><div class="ex"><div class="en">The vase looked old but was a recent fake.</div><div class="zh">这个花瓶看似古老,却是一件新近制作的贋品。</div></div></div>
+<div class="card" data-s="up-to-date adj. 最新的；最近的；新 式的" data-w="up-to-date" data-dv=""><div class="w"><span class="idx">23</span>up-to-date<button class="spk" data-say="up-to-date" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈʌptəˈdeɪt]</span><button class="star" data-star="up-to-date" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 最新的；最近的；新 式的</div><div class="ex"><div class="en">Up-to-date information about the research on climate change can be found on this website.</div><div class="zh">可在该网站上找到关于气候变化研究的最新信息。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 08</span><span class="gcnt">4 词</span></div><div class="cards">
-<div class="card" data-s="first n. 第一；adj. 第一的； adv. 第一；首先" data-w="first" data-dv="firstly|adv.|;;firstness|n.|"><div class="w"><span class="idx">24</span>first<span class="ipa">[fɜːst]</span><button class="star" data-star="first" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 第一；adj. 第一的； adv. 第一；首先<div class="dv"><b>衍生</b><i>firstly</i><em>adv.</em><span class="sep">·</span><i>firstness</i><em>n.</em></div></div><div class="ex"><div class="en">What is your first impression of Beijing?</div><div class="zh">你对北京的第一印象如何?</div></div></div>
-<div class="card" data-s="secondly adv. 第二；其次" data-w="secondly" data-dv=""><div class="w"><span class="idx">25</span>secondly<span class="ipa">[ˈsekəndli]</span><button class="star" data-star="secondly" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 第二；其次</div><div class="ex"><div class="en">To start with, we don't have enough money. Secondly, werre too busy.</div><div class="zh">首先,我们的钱不够。</div></div></div>
-<div class="card" data-s="finally adv. 最后；终于" data-w="finally" data-dv=""><div class="w"><span class="idx">26</span>finally<span class="ipa">[ˈfaɪnəli]</span><button class="star" data-star="finally" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 最后；终于</div><div class="ex"><div class="en">Today, I finally get to look at the man that I love and finally say, "Will you please marry me?</div><div class="zh">今天,我终于可以看着我心爱的男人,终于可以说:“你愿意和我结婚吗?</div></div></div>
-<div class="card" data-s="finish v. 完成；结束" data-w="finish" data-dv=""><div class="w"><span class="idx">27</span>finish<span class="ipa">[ˈfɪnɪʃ]</span><button class="star" data-star="finish" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 完成；结束</div><div class="ex"><div class="en">When would you finish your college course?</div><div class="zh">你什么时候完成大学课程?</div></div></div>
+<div class="card" data-s="first n. 第一；adj. 第一的； adv. 第一；首先" data-w="first" data-dv="firstly|adv.|;;firstness|n.|"><div class="w"><span class="idx">24</span>first<button class="spk" data-say="first" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[fɜːst]</span><button class="star" data-star="first" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 第一；adj. 第一的； adv. 第一；首先<div class="dv"><b>衍生</b><i>firstly</i><em>adv.</em><span class="sep">·</span><i>firstness</i><em>n.</em></div></div><div class="ex"><div class="en">What is your first impression of Beijing?</div><div class="zh">你对北京的第一印象如何?</div></div></div>
+<div class="card" data-s="secondly adv. 第二；其次" data-w="secondly" data-dv=""><div class="w"><span class="idx">25</span>secondly<button class="spk" data-say="secondly" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈsekəndli]</span><button class="star" data-star="secondly" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 第二；其次</div><div class="ex"><div class="en">To start with, we don't have enough money. Secondly, werre too busy.</div><div class="zh">首先,我们的钱不够。</div></div></div>
+<div class="card" data-s="finally adv. 最后；终于" data-w="finally" data-dv=""><div class="w"><span class="idx">26</span>finally<button class="spk" data-say="finally" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈfaɪnəli]</span><button class="star" data-star="finally" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 最后；终于</div><div class="ex"><div class="en">Today, I finally get to look at the man that I love and finally say, "Will you please marry me?</div><div class="zh">今天,我终于可以看着我心爱的男人,终于可以说:“你愿意和我结婚吗?</div></div></div>
+<div class="card" data-s="finish v. 完成；结束" data-w="finish" data-dv=""><div class="w"><span class="idx">27</span>finish<button class="spk" data-say="finish" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈfɪnɪʃ]</span><button class="star" data-star="finish" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 完成；结束</div><div class="ex"><div class="en">When would you finish your college course?</div><div class="zh">你什么时候完成大学课程?</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 09</span><span class="gcnt">4 词</span></div><div class="cards">
-<div class="card" data-s="immediately adv. 立即；⻢上；conj. 即刻" data-w="immediately" data-dv=""><div class="w"><span class="idx">28</span>immediately<span class="ipa">[ɪˈmiːdiətli]</span><button class="star" data-star="immediately" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 立即；⻢上；conj. 即刻</div><div class="ex"><div class="en">I will then immediately send confirmation and the application process begins.</div><div class="zh">然后,我会立即发送确认书,申请流程就启动了。</div></div></div>
-<div class="card" data-s="instant n. 瞬间；立即；adj. 立即 的；即时的" data-w="instant" data-dv="instantly|adv.|;;instantness|n.|"><div class="w"><span class="idx">29</span>instant<span class="ipa">[ˈɪnstənt]</span><button class="star" data-star="instant" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 瞬间；立即；adj. 立即 的；即时的<div class="dv"><b>衍生</b><i>instantly</i><em>adv.</em><span class="sep">·</span><i>instantness</i><em>n.</em></div></div><div class="ex"><div class="en">Just for an instant I thought she was going to refuse.</div><div class="zh">有那么一瞬间,我以为她要拒绝了。</div></div></div>
-<div class="card" data-s="moment n. 瞬间；片刻" data-w="moment" data-dv="momentous|adj.|"><div class="w"><span class="idx">30</span>moment<span class="ipa">[ˈməʊmənt]</span><button class="star" data-star="moment" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 瞬间；片刻<div class="dv"><b>衍生</b><i>momentous</i><em>adj.</em></div></div><div class="ex"><div class="en">Love is a moment that lasts forever.</div><div class="zh">爱的瞬间就是永恒。</div></div></div>
-<div class="card" data-s="minute n. 分钟；一会儿；adj. 微 小的" data-w="minute" data-dv="minutely|adv.|;;minuteness|n.|"><div class="w"><span class="idx">31</span>minute<span class="ipa">[ˈmɪnɪt]</span><button class="star" data-star="minute" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 分钟；一会儿；adj. 微 小的<div class="dv"><b>衍生</b><i>minutely</i><em>adv.</em><span class="sep">·</span><i>minuteness</i><em>n.</em></div></div><div class="ex"><div class="en">It's only several minutes from here to the supermarket.</div><div class="zh">从这儿到超市只有几分钟的路程。</div></div></div>
+<div class="card" data-s="immediately adv. 立即；⻢上；conj. 即刻" data-w="immediately" data-dv=""><div class="w"><span class="idx">28</span>immediately<button class="spk" data-say="immediately" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ɪˈmiːdiətli]</span><button class="star" data-star="immediately" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 立即；⻢上；conj. 即刻</div><div class="ex"><div class="en">I will then immediately send confirmation and the application process begins.</div><div class="zh">然后,我会立即发送确认书,申请流程就启动了。</div></div></div>
+<div class="card" data-s="instant n. 瞬间；立即；adj. 立即 的；即时的" data-w="instant" data-dv="instantly|adv.|;;instantness|n.|"><div class="w"><span class="idx">29</span>instant<button class="spk" data-say="instant" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈɪnstənt]</span><button class="star" data-star="instant" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 瞬间；立即；adj. 立即 的；即时的<div class="dv"><b>衍生</b><i>instantly</i><em>adv.</em><span class="sep">·</span><i>instantness</i><em>n.</em></div></div><div class="ex"><div class="en">Just for an instant I thought she was going to refuse.</div><div class="zh">有那么一瞬间,我以为她要拒绝了。</div></div></div>
+<div class="card" data-s="moment n. 瞬间；片刻" data-w="moment" data-dv="momentous|adj.|"><div class="w"><span class="idx">30</span>moment<button class="spk" data-say="moment" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈməʊmənt]</span><button class="star" data-star="moment" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 瞬间；片刻<div class="dv"><b>衍生</b><i>momentous</i><em>adj.</em></div></div><div class="ex"><div class="en">Love is a moment that lasts forever.</div><div class="zh">爱的瞬间就是永恒。</div></div></div>
+<div class="card" data-s="minute n. 分钟；一会儿；adj. 微 小的" data-w="minute" data-dv="minutely|adv.|;;minuteness|n.|"><div class="w"><span class="idx">31</span>minute<button class="spk" data-say="minute" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈmɪnɪt]</span><button class="star" data-star="minute" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 分钟；一会儿；adj. 微 小的<div class="dv"><b>衍生</b><i>minutely</i><em>adv.</em><span class="sep">·</span><i>minuteness</i><em>n.</em></div></div><div class="ex"><div class="en">It's only several minutes from here to the supermarket.</div><div class="zh">从这儿到超市只有几分钟的路程。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 10</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="prior adj. 优先的；在前的" data-w="prior" data-dv="priorly|adv.|;;priority|n.|"><div class="w"><span class="idx">32</span>prior<span class="ipa">[ˈpraɪə(r)]</span><button class="star" data-star="prior" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 优先的；在前的<div class="dv"><b>衍生</b><i>priorly</i><em>adv.</em><span class="sep">·</span><i>priority</i><em>n.</em></div></div><div class="ex"><div class="en">I have a prior appointment, so I can't go with you.</div><div class="zh">我预先有约会,所以不能跟你去。</div></div></div>
-<div class="card" data-s="former adj. 以前的；前者的；n. 模子" data-w="former" data-dv="formerly|adv.|;;formerness|n.|;;informer|adj.|"><div class="w"><span class="idx">33</span>former<span class="ipa">[ˈfɔːmə(r)]</span><button class="star" data-star="former" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 以前的；前者的；n. 模子<div class="dv"><b>衍生</b><i>formerly</i><em>adv.</em><span class="sep">·</span><i>formerness</i><em>n.</em><span class="sep">·</span><i>informer</i><em>adj.</em></div></div><div class="ex"><div class="en">Many of his former supporters voted against him.</div><div class="zh">他以前的许多支持者投票反对他。</div></div></div>
-<div class="card" data-s="preceding adj. 在先的；在前的" data-w="preceding" data-dv=""><div class="w"><span class="idx">34</span>preceding<span class="ipa">[prɪˈsiːdɪŋ]</span><button class="star" data-star="preceding" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 在先的；在前的</div><div class="ex"><div class="en">She had been in Mexico the preceding summer.</div><div class="zh">年夏天,她去过墨西哥。</div></div></div>
+<div class="card" data-s="prior adj. 优先的；在前的" data-w="prior" data-dv="priorly|adv.|;;priority|n.|"><div class="w"><span class="idx">32</span>prior<button class="spk" data-say="prior" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈpraɪə(r)]</span><button class="star" data-star="prior" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 优先的；在前的<div class="dv"><b>衍生</b><i>priorly</i><em>adv.</em><span class="sep">·</span><i>priority</i><em>n.</em></div></div><div class="ex"><div class="en">I have a prior appointment, so I can't go with you.</div><div class="zh">我预先有约会,所以不能跟你去。</div></div></div>
+<div class="card" data-s="former adj. 以前的；前者的；n. 模子" data-w="former" data-dv="formerly|adv.|;;formerness|n.|;;informer|adj.|"><div class="w"><span class="idx">33</span>former<button class="spk" data-say="former" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈfɔːmə(r)]</span><button class="star" data-star="former" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 以前的；前者的；n. 模子<div class="dv"><b>衍生</b><i>formerly</i><em>adv.</em><span class="sep">·</span><i>formerness</i><em>n.</em><span class="sep">·</span><i>informer</i><em>adj.</em></div></div><div class="ex"><div class="en">Many of his former supporters voted against him.</div><div class="zh">他以前的许多支持者投票反对他。</div></div></div>
+<div class="card" data-s="preceding adj. 在先的；在前的" data-w="preceding" data-dv=""><div class="w"><span class="idx">34</span>preceding<button class="spk" data-say="preceding" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[prɪˈsiːdɪŋ]</span><button class="star" data-star="preceding" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 在先的；在前的</div><div class="ex"><div class="en">She had been in Mexico the preceding summer.</div><div class="zh">年夏天,她去过墨西哥。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 11</span><span class="gcnt">4 词</span></div><div class="cards">
-<div class="card" data-s="precedent n. 先例；前例" data-w="precedent" data-dv=""><div class="w"><span class="idx">35</span>precedent<span class="ipa">[ˈpresɪdənt]</span><button class="star" data-star="precedent" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 先例；前例</div><div class="ex"><div class="en">They were determined to break with precedent.</div><div class="zh">他们决心打破常规。</div></div></div>
-<div class="card" data-s="foremost adj. 最重要的；最好的； adv. 首要地" data-w="foremost" data-dv="foremostly|adv.|"><div class="w"><span class="idx">36</span>foremost<span class="ipa">[ˈfɔːməʊst]</span><button class="star" data-star="foremost" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 最重要的；最好的； adv. 首要地<div class="dv"><b>衍生</b><i>foremostly</i><em>adv.</em></div></div><div class="ex"><div class="en">Safety is our foremost concern.</div><div class="zh">安全是我们最关心的问题。</div></div></div>
-<div class="card" data-s="opening n. 开始；开口；空缺职位；adj. 开 始的；v. 打开；“open”的现在分 词" data-w="opening" data-dv=""><div class="w"><span class="idx">37</span>opening<span class="ipa">[ˈəʊpənɪŋ]</span><button class="star" data-star="opening" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 开始；开口；空缺职位；adj. 开 始的；v. 打开；“open”的现在分 词</div><div class="ex"><div class="en">The book's opening is dull, but the last chapters are interesting.</div><div class="zh">那本书的开头枯燥乏味,但最后几章很有意思。</div></div></div>
-<div class="card" data-s="initially adv. 最初；开始；起初" data-w="initially" data-dv=""><div class="w"><span class="idx">38</span>initially<span class="ipa">[ɪˈnɪʃəli]</span><button class="star" data-star="initially" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 最初；开始；起初</div><div class="ex"><div class="en">Initially, I disagreed with their proposal, but later I changed my mind.</div><div class="zh">起初,我不同意他们的提议,不过后来我改了主意。</div></div></div>
+<div class="card" data-s="precedent n. 先例；前例" data-w="precedent" data-dv=""><div class="w"><span class="idx">35</span>precedent<button class="spk" data-say="precedent" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈpresɪdənt]</span><button class="star" data-star="precedent" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 先例；前例</div><div class="ex"><div class="en">They were determined to break with precedent.</div><div class="zh">他们决心打破常规。</div></div></div>
+<div class="card" data-s="foremost adj. 最重要的；最好的； adv. 首要地" data-w="foremost" data-dv="foremostly|adv.|"><div class="w"><span class="idx">36</span>foremost<button class="spk" data-say="foremost" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈfɔːməʊst]</span><button class="star" data-star="foremost" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 最重要的；最好的； adv. 首要地<div class="dv"><b>衍生</b><i>foremostly</i><em>adv.</em></div></div><div class="ex"><div class="en">Safety is our foremost concern.</div><div class="zh">安全是我们最关心的问题。</div></div></div>
+<div class="card" data-s="opening n. 开始；开口；空缺职位；adj. 开 始的；v. 打开；“open”的现在分 词" data-w="opening" data-dv=""><div class="w"><span class="idx">37</span>opening<button class="spk" data-say="opening" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈəʊpənɪŋ]</span><button class="star" data-star="opening" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 开始；开口；空缺职位；adj. 开 始的；v. 打开；“open”的现在分 词</div><div class="ex"><div class="en">The book's opening is dull, but the last chapters are interesting.</div><div class="zh">那本书的开头枯燥乏味,但最后几章很有意思。</div></div></div>
+<div class="card" data-s="initially adv. 最初；开始；起初" data-w="initially" data-dv=""><div class="w"><span class="idx">38</span>initially<button class="spk" data-say="initially" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ɪˈnɪʃəli]</span><button class="star" data-star="initially" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 最初；开始；起初</div><div class="ex"><div class="en">Initially, I disagreed with their proposal, but later I changed my mind.</div><div class="zh">起初,我不同意他们的提议,不过后来我改了主意。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 12</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="intermediate adj. 中间的；居中的" data-w="intermediate" data-dv="intermediately|adv.|;;intermediateness|n.|"><div class="w"><span class="idx">39</span>intermediate<span class="ipa">[ˌɪntəˈmiːdiət]</span><button class="star" data-star="intermediate" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 中间的；居中的<div class="dv"><b>衍生</b><i>intermediately</i><em>adv.</em><span class="sep">·</span><i>intermediateness</i><em>n.</em></div></div><div class="ex"><div class="en">This country is still at an intermediate stage of development.</div><div class="zh">这个国家仍正处于发展的中间阶段。</div></div></div>
-<div class="card" data-s="midst n. 中间；中部" data-w="midst" data-dv=""><div class="w"><span class="idx">40</span>midst<span class="ipa">[mɪdst]</span><button class="star" data-star="midst" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 中间；中部</div><div class="ex"><div class="en">We're lucky to have such a man in our midst.</div><div class="zh">在我们中间有这样一个人是我们的幸运。</div></div></div>
-<div class="card" data-s="meantime n. 期间；与此同时" data-w="meantime" data-dv=""><div class="w"><span class="idx">41</span>meantime<span class="ipa">[ˈmiːntaɪm]</span><button class="star" data-star="meantime" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 期间；与此同时</div><div class="ex"><div class="en">I like skiing. In the meantime, I know it is very dangerous.</div><div class="zh">我喜欢滑雪,同时也知道这非常危险。</div></div></div>
+<div class="card" data-s="intermediate adj. 中间的；居中的" data-w="intermediate" data-dv="intermediately|adv.|;;intermediateness|n.|"><div class="w"><span class="idx">39</span>intermediate<button class="spk" data-say="intermediate" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˌɪntəˈmiːdiət]</span><button class="star" data-star="intermediate" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 中间的；居中的<div class="dv"><b>衍生</b><i>intermediately</i><em>adv.</em><span class="sep">·</span><i>intermediateness</i><em>n.</em></div></div><div class="ex"><div class="en">This country is still at an intermediate stage of development.</div><div class="zh">这个国家仍正处于发展的中间阶段。</div></div></div>
+<div class="card" data-s="midst n. 中间；中部" data-w="midst" data-dv=""><div class="w"><span class="idx">40</span>midst<button class="spk" data-say="midst" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[mɪdst]</span><button class="star" data-star="midst" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 中间；中部</div><div class="ex"><div class="en">We're lucky to have such a man in our midst.</div><div class="zh">在我们中间有这样一个人是我们的幸运。</div></div></div>
+<div class="card" data-s="meantime n. 期间；与此同时" data-w="meantime" data-dv=""><div class="w"><span class="idx">41</span>meantime<button class="spk" data-say="meantime" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈmiːntaɪm]</span><button class="star" data-star="meantime" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 期间；与此同时</div><div class="ex"><div class="en">I like skiing. In the meantime, I know it is very dangerous.</div><div class="zh">我喜欢滑雪,同时也知道这非常危险。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 13</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="meanwhile adv. 与此同时；在此期间" data-w="meanwhile" data-dv=""><div class="w"><span class="idx">42</span>meanwhile<span class="ipa">[ˈmiːnwaɪl]</span><button class="star" data-star="meanwhile" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 与此同时；在此期间</div><div class="ex"><div class="en">You can start cooking; meanwhile I will set the table.</div><div class="zh">你可以先开始做饭，同时我来摆桌子。</div></div></div>
-<div class="card" data-s="simultaneous adj. 同时的；同步的" data-w="simultaneous" data-dv="simultaneously|adv.|;;simultaneousness|n.|"><div class="w"><span class="idx">43</span>simultaneous<span class="ipa">[ˌsɪm(ə)lˈteɪniəs]</span><button class="star" data-star="simultaneous" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 同时的；同步的<div class="dv"><b>衍生</b><i>simultaneously</i><em>adv.</em><span class="sep">·</span><i>simultaneousness</i><em>n.</em></div></div><div class="ex"><div class="en">This event was almost simultaneous with that one.</div><div class="zh">这个事件几乎是与那个事件同时发生的。</div></div></div>
-<div class="card" data-s="ongoing adj. 正在进行的" data-w="ongoing" data-dv=""><div class="w"><span class="idx">44</span>ongoing<span class="ipa">[ˈɒnɡəʊɪŋ]</span><button class="star" data-star="ongoing" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 正在进行的</div><div class="ex"><div class="en">The discussions are still ongoing.</div><div class="zh">讨论仍在进行。</div></div></div>
+<div class="card" data-s="meanwhile adv. 与此同时；在此期间" data-w="meanwhile" data-dv=""><div class="w"><span class="idx">42</span>meanwhile<button class="spk" data-say="meanwhile" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈmiːnwaɪl]</span><button class="star" data-star="meanwhile" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 与此同时；在此期间</div><div class="ex"><div class="en">You can start cooking; meanwhile I will set the table.</div><div class="zh">你可以先开始做饭，同时我来摆桌子。</div></div></div>
+<div class="card" data-s="simultaneous adj. 同时的；同步的" data-w="simultaneous" data-dv="simultaneously|adv.|;;simultaneousness|n.|"><div class="w"><span class="idx">43</span>simultaneous<button class="spk" data-say="simultaneous" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˌsɪm(ə)lˈteɪniəs]</span><button class="star" data-star="simultaneous" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 同时的；同步的<div class="dv"><b>衍生</b><i>simultaneously</i><em>adv.</em><span class="sep">·</span><i>simultaneousness</i><em>n.</em></div></div><div class="ex"><div class="en">This event was almost simultaneous with that one.</div><div class="zh">这个事件几乎是与那个事件同时发生的。</div></div></div>
+<div class="card" data-s="ongoing adj. 正在进行的" data-w="ongoing" data-dv=""><div class="w"><span class="idx">44</span>ongoing<button class="spk" data-say="ongoing" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈɒnɡəʊɪŋ]</span><button class="star" data-star="ongoing" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 正在进行的</div><div class="ex"><div class="en">The discussions are still ongoing.</div><div class="zh">讨论仍在进行。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 14</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="everlasting adj. 永久的；永恒的；经 久不变的" data-w="everlasting" data-dv="everlastingly|adv.|;;everlastingness|n.|"><div class="w"><span class="idx">45</span>everlasting<span class="ipa">[ˌevəˈlɑːstɪŋ]</span><button class="star" data-star="everlasting" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 永久的；永恒的；经 久不变的<div class="dv"><b>衍生</b><i>everlastingly</i><em>adv.</em><span class="sep">·</span><i>everlastingness</i><em>n.</em></div></div><div class="ex"><div class="en">The man told the woman that he loved her with an everlasting love.</div><div class="zh">男人告诉女人,他对她的爱永恒不变。</div></div></div>
-<div class="card" data-s="permanent adj. 永久的；持久的" data-w="permanent" data-dv="permanently|adv.|;;permanentness|n.|"><div class="w"><span class="idx">46</span>permanent<span class="ipa">[ˈpɜːmənənt]</span><button class="star" data-star="permanent" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 永久的；持久的<div class="dv"><b>衍生</b><i>permanently</i><em>adv.</em><span class="sep">·</span><i>permanentness</i><em>n.</em></div></div><div class="ex"><div class="en">We have no permanent friends or enemies, only interests.</div><div class="zh">我们没有永久的朋友或敌人,只有永久的利益。</div></div></div>
-<div class="card" data-s="punctual adj. 准时的" data-w="punctual" data-dv="punctually|adv.|;;punctuality|n.|;;punctualness|n.|"><div class="w"><span class="idx">47</span>punctual<span class="ipa">[ˈpʌŋktʃuəl]</span><button class="star" data-star="punctual" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 准时的<div class="dv"><b>衍生</b><i>punctually</i><em>adv.</em><span class="sep">·</span><i>punctuality</i><em>n.</em><span class="sep">·</span><i>punctualness</i><em>n.</em></div></div><div class="ex"><div class="en">He is always reliable and punctual.</div><div class="zh">他总是可靠又守时。</div></div></div>
+<div class="card" data-s="everlasting adj. 永久的；永恒的；经 久不变的" data-w="everlasting" data-dv="everlastingly|adv.|;;everlastingness|n.|"><div class="w"><span class="idx">45</span>everlasting<button class="spk" data-say="everlasting" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˌevəˈlɑːstɪŋ]</span><button class="star" data-star="everlasting" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 永久的；永恒的；经 久不变的<div class="dv"><b>衍生</b><i>everlastingly</i><em>adv.</em><span class="sep">·</span><i>everlastingness</i><em>n.</em></div></div><div class="ex"><div class="en">The man told the woman that he loved her with an everlasting love.</div><div class="zh">男人告诉女人,他对她的爱永恒不变。</div></div></div>
+<div class="card" data-s="permanent adj. 永久的；持久的" data-w="permanent" data-dv="permanently|adv.|;;permanentness|n.|"><div class="w"><span class="idx">46</span>permanent<button class="spk" data-say="permanent" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈpɜːmənənt]</span><button class="star" data-star="permanent" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 永久的；持久的<div class="dv"><b>衍生</b><i>permanently</i><em>adv.</em><span class="sep">·</span><i>permanentness</i><em>n.</em></div></div><div class="ex"><div class="en">We have no permanent friends or enemies, only interests.</div><div class="zh">我们没有永久的朋友或敌人,只有永久的利益。</div></div></div>
+<div class="card" data-s="punctual adj. 准时的" data-w="punctual" data-dv="punctually|adv.|;;punctuality|n.|;;punctualness|n.|"><div class="w"><span class="idx">47</span>punctual<button class="spk" data-say="punctual" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈpʌŋktʃuəl]</span><button class="star" data-star="punctual" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 准时的<div class="dv"><b>衍生</b><i>punctually</i><em>adv.</em><span class="sep">·</span><i>punctuality</i><em>n.</em><span class="sep">·</span><i>punctualness</i><em>n.</em></div></div><div class="ex"><div class="en">He is always reliable and punctual.</div><div class="zh">他总是可靠又守时。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 15</span><span class="gcnt">5 词</span></div><div class="cards">
-<div class="card" data-s="duration n. 持续时间；期间" data-w="duration" data-dv=""><div class="w"><span class="idx">48</span>duration<span class="ipa">[djuˈreɪʃ(ə)n]</span><button class="star" data-star="duration" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 持续时间；期间</div><div class="ex"><div class="en">Difficulties will be experienced throughout the duration of the war.</div><div class="zh">在战争期间，人们将经历种种困难。</div></div></div>
-<div class="card" data-s="consecutive adj. 连续的；连贯的" data-w="consecutive" data-dv="consecutively|adv.|;;consecutiveness|n.|"><div class="w"><span class="idx">49</span>consecutive<span class="ipa">[kənˈsekjətɪv]</span><button class="star" data-star="consecutive" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 连续的；连贯的<div class="dv"><b>衍生</b><i>consecutively</i><em>adv.</em><span class="sep">·</span><i>consecutiveness</i><em>n.</em></div></div><div class="ex"><div class="en">He has been absent from school for four consecutive days.</div><div class="zh">他已经连续四天没来上学了。</div></div></div>
-<div class="card" data-s="periodically adv. 周期性地；定期地" data-w="periodically" data-dv=""><div class="w"><span class="idx">50</span>periodically<span class="ipa">[ˌpɪəriˈɒdɪkli]</span><button class="star" data-star="periodically" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 周期性地；定期地</div><div class="ex"><div class="en">Sea mammals must emerge periodically to breathe.</div><div class="zh">海生哺乳动物必须定时浮出海面呼吸。</div></div></div>
-<div class="card" data-s="imminent adj. 即将发生的；临近的" data-w="imminent" data-dv="imminently|adv.|;;imminentness|n.|"><div class="w"><span class="idx">51</span>imminent<span class="ipa">[ˈɪmɪnənt]</span><button class="star" data-star="imminent" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 即将发生的；临近的<div class="dv"><b>衍生</b><i>imminently</i><em>adv.</em><span class="sep">·</span><i>imminentness</i><em>n.</em></div></div><div class="ex"><div class="en">They are unaware of the imminent dan ger.</div><div class="zh">他们没察觉到正在逼近的危险。</div></div></div>
-<div class="card" data-s="incidentally adv. 附带地；偶然地；顺 便地" data-w="incidentally" data-dv=""><div class="w"><span class="idx">52</span>incidentally<span class="ipa">[ˌɪnsɪˈdentli]</span><button class="star" data-star="incidentally" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 附带地；偶然地；顺 便地</div><div class="ex"><div class="en">Incidentally, here's good news for you.</div><div class="zh">顺便一提,我给你带了好消息。</div></div></div>
+<div class="card" data-s="duration n. 持续时间；期间" data-w="duration" data-dv=""><div class="w"><span class="idx">48</span>duration<button class="spk" data-say="duration" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[djuˈreɪʃ(ə)n]</span><button class="star" data-star="duration" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 持续时间；期间</div><div class="ex"><div class="en">Difficulties will be experienced throughout the duration of the war.</div><div class="zh">在战争期间，人们将经历种种困难。</div></div></div>
+<div class="card" data-s="consecutive adj. 连续的；连贯的" data-w="consecutive" data-dv="consecutively|adv.|;;consecutiveness|n.|"><div class="w"><span class="idx">49</span>consecutive<button class="spk" data-say="consecutive" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[kənˈsekjətɪv]</span><button class="star" data-star="consecutive" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 连续的；连贯的<div class="dv"><b>衍生</b><i>consecutively</i><em>adv.</em><span class="sep">·</span><i>consecutiveness</i><em>n.</em></div></div><div class="ex"><div class="en">He has been absent from school for four consecutive days.</div><div class="zh">他已经连续四天没来上学了。</div></div></div>
+<div class="card" data-s="periodically adv. 周期性地；定期地" data-w="periodically" data-dv=""><div class="w"><span class="idx">50</span>periodically<button class="spk" data-say="periodically" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˌpɪəriˈɒdɪkli]</span><button class="star" data-star="periodically" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 周期性地；定期地</div><div class="ex"><div class="en">Sea mammals must emerge periodically to breathe.</div><div class="zh">海生哺乳动物必须定时浮出海面呼吸。</div></div></div>
+<div class="card" data-s="imminent adj. 即将发生的；临近的" data-w="imminent" data-dv="imminently|adv.|;;imminentness|n.|"><div class="w"><span class="idx">51</span>imminent<button class="spk" data-say="imminent" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˈɪmɪnənt]</span><button class="star" data-star="imminent" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 即将发生的；临近的<div class="dv"><b>衍生</b><i>imminently</i><em>adv.</em><span class="sep">·</span><i>imminentness</i><em>n.</em></div></div><div class="ex"><div class="en">They are unaware of the imminent dan ger.</div><div class="zh">他们没察觉到正在逼近的危险。</div></div></div>
+<div class="card" data-s="incidentally adv. 附带地；偶然地；顺 便地" data-w="incidentally" data-dv=""><div class="w"><span class="idx">52</span>incidentally<button class="spk" data-say="incidentally" title="朗读"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg></button><span class="ipa">[ˌɪnsɪˈdentli]</span><button class="star" data-star="incidentally" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adv. 附带地；偶然地；顺 便地</div><div class="ex"><div class="en">Incidentally, here's good news for you.</div><div class="zh">顺便一提,我给你带了好消息。</div></div></div>
 </div></section>
 <div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit21.html">← Unit 21</a><a href="unit22.html">切到纯列表版</a><a class="dis">下一单元 →</a></div><footer><div class="wrap" style="padding:0">
  摘自《雅思词汇真经》（刘洪波 编著）第 22 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
 </div></footer></div>
 <a id="nbfab" href="shengci.html"><span>生词本</span><b>0</b></a>
 <script>
+/* ---------- 朗读 ---------- */
+var TTS=(function(){
+ var voices=[], pref='en-GB';
+ try{pref=JSON.parse(localStorage.getItem('vj-tts')||'{}').v||'en-GB'}catch(e){}
+ var sup = (typeof speechSynthesis!=='undefined' && typeof SpeechSynthesisUtterance!=='undefined');
+ function load(){ try{voices=speechSynthesis.getVoices()||[]}catch(e){voices=[]} }
+ if(sup){ load(); try{speechSynthesis.onvoiceschanged=load}catch(e){} }
+ function pick(){
+  if(!voices.length) load();
+  var en=voices.filter(function(v){return /^en/i.test(v.lang||'')});
+  var same=en.filter(function(v){return (v.lang||'').replace('_','-').toLowerCase().indexOf(pref.toLowerCase())===0});
+  return same[0] || en.filter(function(v){return /en-GB/i.test(v.lang)})[0] ||
+         en.filter(function(v){return /en-US/i.test(v.lang)})[0] || en[0] || null;
+ }
+ function speak(t, rate){
+  if(!sup||!t) return false;
+  try{
+   speechSynthesis.cancel();
+   var u=new SpeechSynthesisUtterance(t), v=pick();
+   if(v){u.voice=v; u.lang=v.lang;} else u.lang=pref;
+   u.rate=rate||0.92; u.pitch=1;
+   speechSynthesis.speak(u);
+   return true;
+  }catch(e){return false}
+ }
+ function setPref(p){
+  pref=p;
+  try{localStorage.setItem('vj-tts',JSON.stringify({v:p}))}catch(e){}
+  document.querySelectorAll('.ttsvg').forEach(function(b){b.classList.toggle('on',b.dataset.vp===p)});
+ }
+ return {speak:speak,setPref:setPref,pref:function(){return pref},ok:function(){return sup}};
+})();
+window.TTS=TTS;
+
+/* ---------- 生词本 ---------- */
 var NB=(function(){
- var KEY='vj-book';
+ var KEY='vj-book', SETK='vj-set', STK='vj-stat';
  var mem=null, okStore=true;
  function read(){
   if(mem) return mem;
@@ -271,18 +325,53 @@ var NB=(function(){
  }
  function count(){return Object.keys(read()).length}
  function has(w){return !!read()[w]}
+ function addOne(rec){
+  var m=read();
+  if(m[rec.w]) return false;
+  rec.t=Date.now();
+  m[rec.w]=rec; write(); bump('a'); sync(); return true;
+ }
  function toggle(rec){
   var m=read();
-  if(m[rec.w]){delete m[rec.w]}
-  else{rec.t=Date.now(); m[rec.w]=rec}
-  write(); sync(); return !!m[rec.w];
+  if(m[rec.w]){delete m[rec.w]; write(); sync(); return false}
+  rec.t=Date.now(); m[rec.w]=rec; write(); bump('a'); sync(); return true;
  }
  function remove(w){var m=read(); delete m[w]; write(); sync();}
+ function save(rec){var m=read(); m[rec.w]=rec; write(); sync();}
  function all(){
   var m=read(), a=[];
   for(var k in m) a.push(m[k]);
   a.sort(function(x,y){return (y.t||0)-(x.t||0)});
   return a;
+ }
+ /* 设置：加入时是否连带衍生词 */
+ function settings(){ try{return JSON.parse(localStorage.getItem(SETK)||'{}')}catch(e){return {}} }
+ function setSetting(k,v){
+  var s=settings(); s[k]=v;
+  try{localStorage.setItem(SETK,JSON.stringify(s))}catch(e){}
+ }
+ function dvOn(){ var s=settings(); return s.dv!==false }
+ /* 学习统计 */
+ function pad(n){return n<10?'0'+n:''+n}
+ function dayKey(d){d=d||new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+ function stat(){ try{return JSON.parse(localStorage.getItem(STK)||'{}')}catch(e){return {}} }
+ function bump(k,n){
+  var s=stat(), key=dayKey();
+  s[key]=s[key]||{a:0,r:0,c:0};
+  s[key][k]=(s[key][k]||0)+(n||1);
+  var ks=Object.keys(s).sort();
+  if(ks.length>120){ ks.slice(0,ks.length-120).forEach(function(x){delete s[x]}) }
+  try{localStorage.setItem(STK,JSON.stringify(s))}catch(e){}
+ }
+ function streak(){
+  var s=stat(), n=0, d=new Date(), k=dayKey(d);
+  if(!(s[k] && (s[k].r||s[k].a))) d.setDate(d.getDate()-1);
+  for(var i=0;i<400;i++){
+   var o=s[dayKey(d)];
+   if(o && (o.r||o.a)){ n++; d.setDate(d.getDate()-1); }
+   else break;
+  }
+  return n;
  }
  function sync(){
   var n=count();
@@ -295,14 +384,42 @@ var NB=(function(){
     else if(!on) el.setAttribute('title','加入生词本');
   });
  }
+ function parseDv(s){
+  if(!s) return [];
+  return s.split(';;').filter(Boolean).map(function(x){
+   var a=x.split('|'); return {w:a[0], p:a[1]||'', m:a[2]||''};
+  });
+ }
  function onStar(e){
   var b=e.target.closest('.star'); if(!b) return;
   e.preventDefault(); e.stopPropagation();
   var host=b.closest('[data-w]')||b.closest('.card')||b.closest('tr');
-  var rec=entry(host, b.dataset.star);
-  var added=toggle(rec);
+  var w=b.dataset.star;
+  if(has(w)){
+   remove(w);
+   var m=read();
+   Object.keys(m).forEach(function(k){ if(m[k] && m[k].pw===w){ delete m[k] } });
+   write(); sync();
+   return;
+  }
+  var rec=entry(host,w);
+  toggle(rec);
+  if(dvOn()){
+   parseDv(host?host.dataset.dv:'').forEach(function(d){
+     if(!d.w || has(d.w)) return;
+     addOne({w:d.w, p:'', m:d.m||'', d:'', e:'', z:'',
+             c:rec.c, g:rec.g, pv:1, pw:rec.w, pm:rec.m, pp:d.p});
+   });
+  }
   var fab=document.getElementById('nbfab');
-  if(added&&fab){fab.classList.remove('wiggle');void fab.offsetWidth;fab.classList.add('wiggle');}
+  if(fab){fab.classList.remove('wiggle');void fab.offsetWidth;fab.classList.add('wiggle');}
+ }
+ function onSpk(e){
+  var b=e.target.closest('.spk'); if(!b) return;
+  e.preventDefault(); e.stopPropagation();
+  var t=b.dataset.say;
+  if(!t){ var h=b.closest('[data-w]'); t=h?h.dataset.w:''; }
+  TTS.speak(t);
  }
  function txt(el){return el?el.textContent.trim():''}
  function entry(host, w){
@@ -318,11 +435,17 @@ var NB=(function(){
           g:document.body.dataset.title||''};
  }
  document.addEventListener('click',onStar);
- window.addEventListener('storage',function(e){if(e.key===KEY){mem=null;sync();}});
- document.addEventListener('DOMContentLoaded',sync);
+ document.addEventListener('click',onSpk);
+ window.addEventListener('storage',function(e){
+  if(e.key===KEY){mem=null;sync();}
+ });
+ if(document.readyState!=='loading') sync(); else document.addEventListener('DOMContentLoaded',sync);
  sync();
- return {count:count,has:has,all:all,remove:remove,toggle:toggle,sync:sync,read:read};
+ return {count:count,has:has,all:all,remove:remove,toggle:toggle,sync:sync,read:read,
+         save:save,addOne:addOne,dvOn:dvOn,settings:settings,setSetting:setSetting,
+         bump:bump,stat:stat,streak:streak,dayKey:dayKey,parseDv:parseDv};
 })();
+window.NB=NB;
 </script>
 <script>
 (function(){
@@ -352,6 +475,10 @@ var NB=(function(){
  if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
  var ci=document.getElementById('i');
  if(ci) ci.addEventListener('change',function(){s.i=ci.checked; save(); paint();});
+ var cd=document.getElementById('dvon');
+ if(cd){cd.checked=NB.dvOn(); cd.closest('.sw').classList.toggle('on',cd.checked);}
+ if(cd) cd.addEventListener('change',function(){NB.setSetting('dv',cd.checked);
+   cd.closest('.sw').classList.toggle('on',cd.checked);});
  var co=document.getElementById('only');
  if(co) co.addEventListener('change',function(){s.o=co.checked; save(); paint(); filter();});
  var ca=document.getElementById('all');
@@ -391,5 +518,290 @@ var NB=(function(){
  });
  paint(); filter();
 })();
+</script>
+<script>
+/* ================= 背诵模式（独立功能）================= */
+var REC=(function(){
+ var KEY='vj-rec', ACC='#b4442e';
+ var INT=[0,1,2,4,8,15,30,90];
+ var mem=null, root=null, queue=[], idx=0, onlyDue=false, yes=0, no=0, started=false;
+
+ function read(){
+  if(mem) return mem;
+  try{var raw=localStorage.getItem(KEY); mem=raw?JSON.parse(raw):{}}catch(e){mem={}}
+  return mem;
+ }
+ function save(){ try{localStorage.setItem(KEY,JSON.stringify(mem))}catch(e){} }
+ function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];})}
+
+ /* ---- 从页面收集词条 ---- */
+ function extract(h){ 
+  var m=h.querySelector('.m'), mean='';
+  if(m){var c=m.cloneNode(true);var dv=c.querySelector('.dv');if(dv)dv.parentNode.removeChild(dv);
+   mean=c.textContent.replace(/\s+/g,' ').trim();}
+  var ipa=h.querySelector('.ipa');
+  var en=h.querySelector('.ex .en'), zh=h.querySelector('.ex .zh');
+  var dl=[];
+  (h.dataset.dv||'').split(';;').forEach(function(s){
+   if(!s) return; var a=s.split('|'); if(a[0]) dl.push(a[0]);
+  });
+  return {w:h.dataset.w, p:ipa?ipa.textContent.trim():'', m:mean,
+          x:dl.length?('衍生：'+dl.join(' · ')):'',
+          e:en?en.textContent.trim():'', z:zh?zh.textContent.trim():''};
+ }
+ function items(){
+  var out=[], seen={};
+  [].slice.call(document.querySelectorAll('[data-w]')).forEach(function(h){
+   if(!h.dataset||!h.dataset.w) return;
+   if(h.closest && h.closest('#rcroot')) return;
+   var r=extract(h);
+   if(!r||!r.w||seen[r.w]) return;
+   seen[r.w]=1; r.h=h; out.push(r);
+  });
+  return out;
+ }
+
+ /* ---- 样式 ---- */
+ function injectCSS(){
+  if(document.getElementById('rcstyle')) return;
+  var css = ''
+  + '#rcopen{position:fixed;right:20px;bottom:20px;z-index:60;font:inherit;font-size:13px;'
+  + 'font-weight:700;color:#fff;background:'+ACC+';border:1px solid '+ACC+';border-radius:999px;'
+  + 'padding:9px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;line-height:1.4;'
+  + 'box-shadow:0 6px 20px rgba(0,0,0,.22)}'
+  + '#rcopen:hover{filter:brightness(1.08)}'
+  + '#rcopen b{font-weight:700;font-variant-numeric:tabular-nums;background:rgba(255,255,255,.26);'
+  + 'border-radius:999px;padding:0 6px;font-size:11px}'
+  + '@media (max-width:640px){#rcopen{right:12px;font-size:12.5px;padding:8px 13px}}'
+  + '#rcroot{position:fixed;inset:0;z-index:300;display:none;overflow:auto;padding:20px 16px 36px;'
+  + '--rb:#f7f6f3;--rp:#ffffff;--ri:#1f2328;--ri2:#5b6470;--rl:#e6e2da;--rs:rgba(0,0,0,.045);'
+  + 'background:var(--rb);color:var(--ri);'
+  + 'font:16px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;'
+  + '-webkit-font-smoothing:antialiased}'
+  + '#rcroot.on{display:block}'
+  + '#rcroot *{box-sizing:border-box}'
+  + '#rcroot .rw{max-width:640px;margin:0 auto}'
+  + '#rcroot .bar{display:flex;align-items:center;gap:12px;margin-bottom:12px;font-size:12.5px;color:var(--ri2)}'
+  + '#rcroot .bar .pg{flex:1;height:5px;background:var(--rs);border-radius:99px;overflow:hidden}'
+  + '#rcroot .bar .pg i{display:block;height:100%;width:0;background:'+ACC+';transition:width .25s}'
+  + '#rcroot .bar .num{font-variant-numeric:tabular-nums;white-space:nowrap}'
+  + '#rcroot .x{font:inherit;font-size:21px;line-height:1;background:none;border:0;color:var(--ri2);cursor:pointer;padding:2px 8px}'
+  + '#rcroot .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;'
+  + 'font-size:12.5px;color:var(--ri2)}'
+  + '#rcroot .sw{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rl);border-radius:999px;'
+  + 'padding:3px 11px;cursor:pointer;user-select:none;background:var(--rp);white-space:nowrap}'
+  + '#rcroot .sw input{accent-color:'+ACC+';margin:0}'
+  + '#rcroot .card{background:var(--rp);border:1px solid var(--rl);border-radius:20px;padding:34px 26px 26px;'
+  + 'text-align:center;min-height:260px;cursor:pointer;user-select:none;display:flex;flex-direction:column;'
+  + 'justify-content:center}'
+  + '#rcroot .wd{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:37px;font-weight:700;'
+  + 'line-height:1.22;letter-spacing:.3px;word-break:break-word}'
+  + '#rcroot .ipa{font-family:"SF Mono",ui-monospace,Menlo,monospace;font-size:14px;color:var(--ri2);margin-top:8px}'
+  + '#rcroot .spk2{background:none;border:0;color:var(--ri2);cursor:pointer;padding:6px;margin-top:6px;opacity:.75;align-self:center}'
+  + '#rcroot .spk2:hover{opacity:1;color:'+ACC+'}'
+  + '#rcroot .spk2 svg{width:18px;height:18px;display:block}'
+  + '#rcroot .q{color:var(--ri2);font-size:12.5px;margin-top:22px;opacity:.9}'
+  + '#rcroot .ans{display:none;margin-top:20px;text-align:left;border-top:1px dashed var(--rl);padding-top:16px}'
+  + '#rcroot .ans.on{display:block}'
+  + '#rcroot .ans .m{font-size:17px}'
+  + '#rcroot .ans .x2{margin-top:9px;font-size:13px;color:var(--ri2);line-height:1.85;white-space:pre-line}'
+  + '#rcroot .ans .ex{margin-top:11px;font-size:13.5px;background:var(--rs);border-radius:9px;padding:10px 12px;line-height:1.7}'
+  + '#rcroot .ans .ex .zh{color:var(--ri2);margin-top:3px;font-size:13px}'
+  + '#rcroot .btns{display:flex;gap:10px;margin-top:15px}'
+  + '#rcroot .btns button{flex:1;font:inherit;font-size:15px;font-weight:650;padding:13px 0;border-radius:13px;'
+  + 'cursor:pointer;border:1px solid var(--rl);background:var(--rp);color:var(--ri)}'
+  + '#rcroot .btns button kbd{font:inherit;font-size:11px;opacity:.5;margin-left:4px}'
+  + '#rcroot .btns .no{color:#c0392b}'
+  + '#rcroot .btns .ok{background:'+ACC+';border-color:'+ACC+';color:#fff}'
+  + '#rcroot .btns button:active{transform:translateY(1px)}'
+  + '#rcroot .key{margin-top:13px;text-align:center;font-size:11.5px;color:var(--ri2);opacity:.75}'
+  + '#rcroot .done{text-align:center;padding:40px 10px}'
+  + '#rcroot .done h2{font-size:22px;margin:0 0 10px}'
+  + '#rcroot .done p{color:var(--ri2);font-size:14px;line-height:2}'
+  + '#rcroot .done .acts{display:flex;gap:9px;justify-content:center;margin-top:16px;flex-wrap:wrap}'
+  + '#rcroot .done .acts button{font:inherit;font-size:13.5px;font-weight:650;padding:9px 20px;border-radius:999px;'
+  + 'cursor:pointer;border:1px solid var(--rl);background:var(--rp);color:var(--ri)}'
+  + '#rcroot .done .acts .pri{background:'+ACC+';border-color:'+ACC+';color:#fff}'
+  + '@media (prefers-color-scheme:dark){#rcroot{--rb:#16181c;--rp:#1d2025;--ri:#e8eaed;--ri2:#9aa3ad;'
+  + '--rl:#2c3037;--rs:rgba(255,255,255,.07)}}'
+  + '@media (max-width:520px){#rcroot{padding:14px 11px 26px}#rcroot .wd{font-size:29px}'
+  + '#rcroot .card{padding:26px 17px 20px;min-height:220px}}';
+  var st=document.createElement('style'); st.id='rcstyle'; st.textContent=css;
+  document.head.appendChild(st);
+ }
+
+ var SVG='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg>';
+
+ var TMPL='<div class="rw">'
+   +'<div class="bar"><span class="num" id="rcnum">0 / 0</span>'
+   +'<div class="pg"><i id="rcpg"></i></div><button class="x" id="rcx">×</button></div>'
+   +'<div class="hd"><span id="rcinfo"></span>'
+   +'<label class="sw"><input type="checkbox" id="rcdue"> 只背到期</label></div>'
+   +'<div class="card" id="rccard">'
+   +'<div class="wd" id="rcwd"></div><div class="ipa" id="rcipa"></div>'
+   +'<button class="spk2" id="rcspk" title="朗读">'+SVG+'</button>'
+   +'<div class="q" id="rcq">看这个词，认不认识？点卡片看释义</div>'
+   +'<div class="ans" id="rcans"><div class="m" id="rcm"></div>'
+   +'<div class="x2" id="rcx2"></div><div class="ex" id="rcex"></div></div>'
+   +'</div>'
+   +'<div class="btns"><button class="no" id="rcno">不认识 <kbd>1</kbd></button>'
+   +'<button class="ok" id="rcok">认识 <kbd>2</kbd></button></div>'
+   +'<div class="key">空格看释义 · 1 不认识（自动进生词本）· 2 认识 · Esc 退出</div>'
+   +'</div>';
+
+ function build(){
+  injectCSS();
+  if(!root){ root=document.createElement('div'); root.id='rcroot'; document.body.appendChild(root); }
+  root.innerHTML='';
+  var box=document.createElement('div'); box.className='rw'; box.innerHTML=TMPL;
+  root.appendChild(box);
+  document.getElementById('rcx').onclick=close;
+  document.getElementById('rccard').onclick=reveal;
+  document.getElementById('rcspk').onclick=function(e){
+   e.stopPropagation();
+   if(window.TTS&&queue[idx]) TTS.speak(queue[idx].w);
+  };
+  document.getElementById('rcno').onclick=function(){ grade(false) };
+  document.getElementById('rcok').onclick=function(){ grade(true) };
+  var cd=document.getElementById('rcdue');
+  cd.addEventListener('change',function(){ onlyDue=cd.checked; start(); });
+ }
+
+ function reveal(){
+  if(!queue[idx]) return;
+  document.getElementById('rcans').classList.add('on');
+  document.getElementById('rcq').style.display='none';
+ }
+ function onKey(e){
+  if(!root||!root.classList.contains('on')) return;
+  if(e.key==='Escape'){ close(); return; }
+  if(e.key===' '||e.key==='Enter'){ e.preventDefault(); reveal(); return; }
+  if(e.key==='1'){ e.preventDefault(); grade(false); return; }
+  if(e.key==='2'){ e.preventDefault(); grade(true); return; }
+ }
+
+ function start(){
+  var arr=items();
+  if(!arr.length){ alert('这一页没有可背的词'); return; }
+  var m=read(), now=Date.now();
+  if(onlyDue){
+   arr=arr.filter(function(r){var o=m[r.w]; return o&&(o.due||0)<=now&&(o.lv||0)<7;});
+   if(!arr.length){ alert('这一页没有到期的词。取消「只背到期」可以全部过一遍。'); return; }
+  }
+  arr.sort(function(a,b){
+   var da=(m[a.w]&&m[a.w].due)||0, db=(m[b.w]&&m[b.w].due)||0;
+   return da-db;
+  });
+  queue=arr; idx=0; yes=0; no=0; started=true;
+  build();
+  var nDue=arr.filter(function(r){var o=m[r.w]; return o&&(o.due||0)<=now&&(o.lv||0)<7;}).length;
+  var nNew=arr.filter(function(r){return !m[r.w]}).length;
+  document.getElementById('rcinfo').textContent=arr.length+' 词 · 到期 '+nDue+' · 未背过 '+nNew;
+  document.getElementById('rcdue').checked=onlyDue;
+  root.classList.add('on');
+  document.body.style.overflow='hidden';
+  paint();
+ }
+
+ function paint(){
+  if(idx>=queue.length) return finish();
+  var r=queue[idx];
+  document.getElementById('rcnum').textContent=(idx+1)+' / '+queue.length;
+  document.getElementById('rcpg').style.width=(idx/queue.length*100)+'%';
+  document.getElementById('rcwd').textContent=r.w;
+  var ipa=document.getElementById('rcipa');
+  ipa.textContent=r.p||''; ipa.style.display=r.p?'':'none';
+  document.getElementById('rcans').classList.remove('on');
+  var q=document.getElementById('rcq'); q.style.display=''; q.textContent='看这个词，认不认识？点卡片看释义';
+  document.getElementById('rcm').textContent=r.m||'—';
+  var x2=document.getElementById('rcx2');
+  x2.textContent=r.x||''; x2.style.display=r.x?'':'none';
+  var ex=document.getElementById('rcex');
+  ex.innerHTML=r.e?('<div class="en">'+esc(r.e)+'</div>'+(r.z?'<div class="zh">'+esc(r.z)+'</div>':'')):'';
+  ex.style.display=r.e?'':'none';
+ }
+
+ function toBook(r){
+  if(window.NB&&NB.has&&NB.has(r.w)) return;
+  var st=r.h&&r.h.querySelector?r.h.querySelector('.star'):null;
+  if(st){ if(!st.classList.contains('on')) st.click(); return; }
+  if(window.NB&&NB.addOne) NB.addOne({w:r.w,p:r.p||'',m:r.m||'',y:'',e:'',z:'',d:'',s:'',c:''});
+ }
+
+ function grade(ok){
+  if(idx>=queue.length) return;
+  var r=queue[idx], m=read(), o=m[r.w]||{lv:0,rv:0,wr:0};
+  if(ok){ o.lv=Math.min(7,(o.lv||0)+1); o.due=Date.now()+INT[o.lv]*864e5; }
+  else  { o.lv=0; o.due=Date.now()+10*6e4; o.wr=(o.wr||0)+1; toBook(r); }
+  o.rv=(o.rv||0)+1; o.lrt=Date.now();
+  m[r.w]=o; save();
+  if(ok) yes++; else no++;
+  if(window.NB&&NB.bump) NB.bump('r');
+  idx++; paint();
+ }
+
+ function fmt(ms){
+  var diff=ms-Date.now();
+  if(diff<=0) return '现在';
+  if(diff<3600e3) return Math.max(1,Math.round(diff/6e4))+' 分钟后';
+  var d=Math.round(diff/864e5);
+  return d<=1?'明天':d+' 天后';
+ }
+
+ function finish(){
+  var m=read(), nxt=null;
+  queue.forEach(function(r){
+   var o=m[r.w]; if(!o||(o.lv||0)>=7) return;
+   if(nxt===null||o.due<nxt) nxt=o.due;
+  });
+  var w=root.querySelector('.rw');
+  w.innerHTML='<div class="done"><h2>这一轮背完了</h2>'
+   +'<p>共 '+queue.length+' 词 · 认识 <b>'+yes+'</b> 次 · 不认识 <b>'+no+'</b> 次<br>'
+   +(no? '不认识的 '+no+' 个词已自动收进生词本，稍后可以在那里复习<br>':'')
+   +(nxt!==null? '下一次到期：'+fmt(nxt) : '这些词都已经标成「已掌握」🎉')+'</p>'
+   +'<div class="acts"><button class="pri" id="rcagain">再背一轮</button>'
+   +'<button id="rcback">关掉</button></div></div>';
+  document.getElementById('rcagain').onclick=function(){ root.classList.remove('on');
+   document.body.style.overflow=''; start(); };
+  document.getElementById('rcback').onclick=close;
+}
+
+ function close(){
+  if(!root) return;
+  root.classList.remove('on');
+  document.body.style.overflow='';
+  paintBtn();
+ }
+
+ function paintBtn(){
+  var b=document.getElementById('rcopen'); if(!b) return;
+  var label=b.dataset.label||b.textContent, arr=items(), m=read(), now=Date.now(), d=0;
+  arr.forEach(function(r){ var o=m[r.w]; if(!o) return; if((o.lv||0)>=7) return; if((o.due||0)<=now) d++; });
+  b.innerHTML=esc(label)+(d?' <b>'+d+'</b>':'');
+ }
+
+ function attach(){
+  var tb=document.querySelector('.toolbar');
+  if(!tb||document.getElementById('rcopen')) return;
+  injectCSS();
+  var b=document.createElement('button');
+  b.id='rcopen'; b.type='button';
+  var label='背诵本单元';
+  b.dataset.label=label; b.textContent=label;
+  b.title='逐词自测：不认识的自动进生词本，认识的按遗忘曲线排期';
+  b.onclick=function(e){ e.preventDefault(); start(); };
+  b.style.bottom=(document.getElementById('nbfab')?'74px':'18px');
+  document.body.appendChild(b);
+  paintBtn();
+ }
+
+ document.addEventListener('keydown',onKey);
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',attach);
+ else attach();
+ if(location.hash==='#recite') setTimeout(function(){ if(document.getElementById('rcopen')) start(); },120);
+ return {start:start,items:items,read:read};
+})();
+window.REC=REC;
 </script>
 </body></html>
