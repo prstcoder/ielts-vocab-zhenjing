@@ -988,6 +988,17 @@ var SYNC=(function(){
   return m||'同步失败';
  }
 
+ function host(){ var c=cfg(); return c? c.url.replace(/^https?:\/\//,'') : '' }
+ /* 出错后再探一次：能连上但读不到响应 = CORS/暂停；连不上 = DNS/网络 */
+ function refine(){
+  var c=cfg(); if(!c) return;
+  fetch(c.url+'/rest/v1/',{method:'GET',mode:'no-cors',cache:'no-store'}).then(function(){
+   setStat('err','能连到 '+host()+'，但浏览器不让读响应：项目可能被暂停，或被网络/防火墙拦了');
+  },function(){
+   setStat('err','连不上 '+host()+'：域名解析或网络不通（换手机流量或开代理再试）');
+  });
+ }
+
  function cycle(silent){
   var c=cfg(), k=code();
   if(!unlocked()){ setStat('idle','已锁定'); return Promise.resolve(false) }
@@ -1001,7 +1012,7 @@ var SYNC=(function(){
   }).then(function(ok){
    busy=false; return ok;
   }).catch(function(e){
-   busy=false; setStat('err', emsg(e)); return false;
+   busy=false; setStat('err', emsg(e)); refine(); return false;
   });
  }
  function mergeAndPush(rem, tryN){
