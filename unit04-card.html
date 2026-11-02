@@ -17,7 +17,7 @@
 html,body{margin:0;padding:0}
 body{background:var(--bg);color:var(--ink);
  font:16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
- -webkit-font-smoothing:antialiased;padding-bottom:64px}
+ -webkit-font-smoothing:antialiased;padding-bottom:80px}
 a{color:inherit}
 .wrap{max-width:900px;margin:0 auto;padding:0 18px}
 
@@ -53,16 +53,35 @@ tbody td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover td{background:var(--accent-soft)}
 td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-nums}
-td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
+td.w{width:30%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
  letter-spacing:.2px;word-break:break-word}
 td.m{color:var(--ink)}
+td.sv{width:38px;text-align:center;padding-left:0;padding-right:8px}
 .ipa{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:12px;font-weight:400;
  color:var(--ink2);letter-spacing:0;margin-top:3px;word-break:break-word}
 .card .w .ipa{font-size:13px;margin-left:8px}
 tr.hit td.w,tr.hit td.m{background:var(--mark)}
 
+/* 衍生词 */
+.dv{margin-top:6px;font-size:12px;color:var(--ink2);line-height:1.9}
+.dv b{color:var(--accent);font-weight:700;font-size:10.5px;letter-spacing:.08em;margin-right:6px;
+ font-family:-apple-system,sans-serif;vertical-align:1px}
+.dv i{font-style:normal;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:13.5px;color:var(--ink);
+ letter-spacing:.1px}
+.dv em{font-style:normal;font-size:10.5px;opacity:.7;margin-left:2px;font-family:-apple-system,sans-serif}
+.dv .sep{opacity:.3;margin:0 7px}
+.hide-m .dv{display:none}
+
+/* 星标 */
+.star{font-family:inherit;font-size:15px;line-height:1;color:var(--ink2);background:transparent;border:0;
+ cursor:pointer;padding:3px 5px;border-radius:7px;opacity:.4;transition:.15s;vertical-align:2px}
+.star:hover{opacity:1;color:var(--accent);background:var(--accent-soft)}
+.star.on{opacity:1;color:var(--accent)}
+.card .w .star{font-size:17px;margin-left:6px}
+
 .cards{display:grid;gap:12px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px}.card .w{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:19px;font-weight:700;letter-spacing:.2px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px}
+.card .w{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:19px;font-weight:700;letter-spacing:.2px}
 .card .w .idx{font-family:inherit;font-size:12px;color:var(--ink2);font-weight:400;margin-right:8px;
  font-variant-numeric:tabular-nums}
 .card .m{margin:5px 0 0;color:var(--ink);font-size:14.5px}
@@ -77,7 +96,6 @@ tr.gsep td{background:var(--chip);padding:5px 14px;border-bottom:1px solid var(-
 tbody.grp tr:first-child td{border-top:0}
 tbody.grp + tbody.grp tr.gsep td{border-top:8px solid var(--bg)}
 
-/* 卡片版：一个词群一块面板，组与组之间界限分明 */
 section.grp{background:var(--panel);border:1px solid var(--line);border-radius:16px;
  margin-bottom:16px;overflow:hidden}
 .ghead{display:flex;align-items:baseline;gap:9px;padding:9px 15px;background:var(--chip);
@@ -100,6 +118,16 @@ body.hide-m td.m{display:none!important}
 .nav a.dis{opacity:.35;pointer-events:none}
 footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
 
+/* 浮动生词本入口 */
+#nbfab{position:fixed;right:20px;bottom:20px;z-index:60;display:inline-flex;align-items:center;gap:8px;
+ padding:10px 17px;border-radius:999px;background:var(--accent);color:var(--panel);text-decoration:none;
+ font-size:13.5px;font-weight:700;letter-spacing:.02em;box-shadow:0 8px 24px rgba(0,0,0,.22);
+ padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+#nbfab b{font-variant-numeric:tabular-nums;font-size:15px}
+#nbfab:hover{filter:brightness(1.06)}
+#nbfab.wiggle{animation:wig .4s}
+@keyframes wig{0%{transform:scale(1)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
+
 @media (max-width:640px){
  body{font-size:15px}
  .wrap{padding:0 12px}
@@ -108,22 +136,25 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  table,tbody,tr,td{display:block;width:auto}
  table{border:0;background:transparent;border-radius:0}
  tbody tr{background:var(--panel);border:1px solid var(--line);border-radius:12px;
-  padding:11px 13px;margin-bottom:9px}
+  padding:11px 13px;margin-bottom:9px;position:relative}
  tbody td{border:0;padding:0}
  td.n{display:none}
  tr.gsep{display:block}
  tr.gsep td{display:block;background:transparent;padding:0 0 6px}
  tbody.grp{margin-bottom:6px;display:block}
- td.w{font-size:17px;margin-bottom:3px}
+ td.w{font-size:17px;margin-bottom:3px;width:auto}
  td.m{font-size:14px;color:var(--ink2)}
+ td.sv{position:absolute;right:8px;top:9px;width:auto;padding:0}
+ td.sv .star{font-size:19px}
+ #nbfab{right:12px;bottom:14px;padding:9px 14px;font-size:13px}
 }
 </style>
 </head>
-<body data-kind="card">
+<body data-kind="card" data-ch="4" data-title="太空探索">
 <div class="wrap"><div class="top">
  <a class="back" href="index.html">← 全部单元</a>
  <h1><span class="u">Unit 04</span> · 太空探索</h1>
- <p class="sub">75 词 · 75 条例句</p>
+ <p class="sub">75 词 · 75 条例句 · 26 词含衍生词</p>
 </div></div>
 <div class="toolbar"><div class="wrap">
  <div class="tools">
@@ -132,136 +163,212 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
   <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
   <label class="sw"><input type="checkbox" id="i"> 隐藏音标</label>
   <label class="sw"><input type="checkbox" id="z"> 隐藏例句译文</label>
+  <label class="sw"><input type="checkbox" id="only"> 只看生词</label>
   <button class="btn" id="reset">重置</button>
   <span class="count" id="cnt">75 条</span>
  </div>
 </div></div><div class="wrap">
 <section class="grp"><div class="ghead"><span class="gtag">词群 01</span><span class="gcnt">4 词</span></div><div class="cards">
-<div class="card" data-s="galaxy n. 星系；银河；银河系； 一群出色的人(或物)"><div class="w"><span class="idx">01</span>galaxy<span class="ipa">[ˈɡæləksi]</span></div><div class="m">n. 星系；银河；银河系； 一群出色的人(或物)</div><div class="ex"><div class="en">The sun is only a very small star in the Galaxy.</div><div class="zh">太阳只是银河系中一颗很小的恒星。</div></div></div>
-<div class="card" data-s="cosmos n. 宇宙"><div class="w"><span class="idx">02</span>cosmos<span class="ipa">[ˈkɒzmɒs]</span></div><div class="m">n. 宇宙</div><div class="ex"><div class="en">Our world is but a small part of the cosmos.</div><div class="zh">我们的世界仅仅是宇宙的一小部分而已。</div></div></div>
-<div class="card" data-s="universe n. 宇宙"><div class="w"><span class="idx">03</span>universe<span class="ipa">[ˈjuːnɪvɜːs]</span></div><div class="m">n. 宇宙</div><div class="ex"><div class="en">The depth of the universe is immeasurable.</div><div class="zh">宇宙无限深广。</div></div></div>
-<div class="card" data-s="interstellar adj. 星际的"><div class="w"><span class="idx">04</span>interstellar<span class="ipa">[ˌɪntəˈstelə(r)]</span></div><div class="m">adj. 星际的</div><div class="ex"><div class="en">These elements become part of the interstellar gas and dust.</div><div class="zh">这些元素成了星际气体和星际尘埃的一部分。</div></div></div>
+<div class="card" data-s="galaxy n. 星系；银河；银河系； 一群出色的人(或物)" data-w="galaxy" data-dv=""><div class="w"><span class="idx">01</span>galaxy<span class="ipa">[ˈɡæləksi]</span><button class="star" data-star="galaxy" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 星系；银河；银河系； 一群出色的人(或物)</div><div class="ex"><div class="en">The sun is only a very small star in the Galaxy.</div><div class="zh">太阳只是银河系中一颗很小的恒星。</div></div></div>
+<div class="card" data-s="cosmos n. 宇宙" data-w="cosmos" data-dv=""><div class="w"><span class="idx">02</span>cosmos<span class="ipa">[ˈkɒzmɒs]</span><button class="star" data-star="cosmos" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 宇宙</div><div class="ex"><div class="en">Our world is but a small part of the cosmos.</div><div class="zh">我们的世界仅仅是宇宙的一小部分而已。</div></div></div>
+<div class="card" data-s="universe n. 宇宙" data-w="universe" data-dv="universal|adj.|;;university|n.|n. 大学"><div class="w"><span class="idx">03</span>universe<span class="ipa">[ˈjuːnɪvɜːs]</span><button class="star" data-star="universe" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 宇宙<div class="dv"><b>衍生</b><i>universal</i><em>adj.</em><span class="sep">·</span><i>university</i><em>n.</em></div></div><div class="ex"><div class="en">The depth of the universe is immeasurable.</div><div class="zh">宇宙无限深广。</div></div></div>
+<div class="card" data-s="interstellar adj. 星际的" data-w="interstellar" data-dv=""><div class="w"><span class="idx">04</span>interstellar<span class="ipa">[ˌɪntəˈstelə(r)]</span><button class="star" data-star="interstellar" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 星际的</div><div class="ex"><div class="en">These elements become part of the interstellar gas and dust.</div><div class="zh">这些元素成了星际气体和星际尘埃的一部分。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 02</span><span class="gcnt">5 词</span></div><div class="cards">
-<div class="card" data-s="terrestrial adj. 陆地的；地球的；类 似地球的；陆栖的"><div class="w"><span class="idx">05</span>terrestrial<span class="ipa">[təˈrestriəl]</span></div><div class="m">adj. 陆地的；地球的；类 似地球的；陆栖的</div><div class="ex"><div class="en">Forests are home to over 80% of terrestrial biodiversity.</div><div class="zh">陆地生物多样性有八成以上靠森林维持。</div></div></div>
-<div class="card" data-s="celestial adj. 天空的；天体的；天 国的"><div class="w"><span class="idx">06</span>celestial<span class="ipa">[səˈlestiəl]</span></div><div class="m">adj. 天空的；天体的；天 国的</div><div class="ex"><div class="en">The rosy light beamed like a celestial dawn.</div><div class="zh">玫瑰色的光芒闪耀,好像天上的朝霞。</div></div></div>
-<div class="card" data-s="astronomy n. 天文学"><div class="w"><span class="idx">07</span>astronomy<span class="ipa">[əˈstrɒnəmi]</span></div><div class="m">n. 天文学</div><div class="ex"><div class="en">Physics and astronomy are cognate sciences.</div><div class="zh">物理学与天文学是互有关联的学科。</div></div></div>
-<div class="card" data-s="astrology n. 占星术；占星学"><div class="w"><span class="idx">08</span>astrology<span class="ipa">[əˈstrɒlədʒi]</span></div><div class="m">n. 占星术；占星学</div><div class="ex"><div class="en">Some who follow Chinese astrology expect it to be a good year.</div><div class="zh">中国占星术的一些追随者预期今年是个吉祥年。</div></div></div>
-<div class="card" data-s="astronaut n. 宇航员；太空人"><div class="w"><span class="idx">09</span>astronaut<span class="ipa">[ˈæstrənɔːt]</span></div><div class="m">n. 宇航员；太空人</div><div class="ex"><div class="en">An American astronaut is beginning a year­ long trip in space.</div><div class="zh">名美国宇航员开始了长达一年的太空旅行。</div></div></div>
+<div class="card" data-s="terrestrial adj. 陆地的；地球的；类 似地球的；陆栖的" data-w="terrestrial" data-dv="terrestrially|adv.|;;terrestrialness|n.|"><div class="w"><span class="idx">05</span>terrestrial<span class="ipa">[təˈrestriəl]</span><button class="star" data-star="terrestrial" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 陆地的；地球的；类 似地球的；陆栖的<div class="dv"><b>衍生</b><i>terrestrially</i><em>adv.</em><span class="sep">·</span><i>terrestrialness</i><em>n.</em></div></div><div class="ex"><div class="en">Forests are home to over 80% of terrestrial biodiversity.</div><div class="zh">陆地生物多样性有八成以上靠森林维持。</div></div></div>
+<div class="card" data-s="celestial adj. 天空的；天体的；天 国的" data-w="celestial" data-dv="celestially|adv.|;;celestialness|n.|"><div class="w"><span class="idx">06</span>celestial<span class="ipa">[səˈlestiəl]</span><button class="star" data-star="celestial" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 天空的；天体的；天 国的<div class="dv"><b>衍生</b><i>celestially</i><em>adv.</em><span class="sep">·</span><i>celestialness</i><em>n.</em></div></div><div class="ex"><div class="en">The rosy light beamed like a celestial dawn.</div><div class="zh">玫瑰色的光芒闪耀,好像天上的朝霞。</div></div></div>
+<div class="card" data-s="astronomy n. 天文学" data-w="astronomy" data-dv="astronomical|adj.|"><div class="w"><span class="idx">07</span>astronomy<span class="ipa">[əˈstrɒnəmi]</span><button class="star" data-star="astronomy" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 天文学<div class="dv"><b>衍生</b><i>astronomical</i><em>adj.</em></div></div><div class="ex"><div class="en">Physics and astronomy are cognate sciences.</div><div class="zh">物理学与天文学是互有关联的学科。</div></div></div>
+<div class="card" data-s="astrology n. 占星术；占星学" data-w="astrology" data-dv="astrological|adj.|"><div class="w"><span class="idx">08</span>astrology<span class="ipa">[əˈstrɒlədʒi]</span><button class="star" data-star="astrology" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 占星术；占星学<div class="dv"><b>衍生</b><i>astrological</i><em>adj.</em></div></div><div class="ex"><div class="en">Some who follow Chinese astrology expect it to be a good year.</div><div class="zh">中国占星术的一些追随者预期今年是个吉祥年。</div></div></div>
+<div class="card" data-s="astronaut n. 宇航员；太空人" data-w="astronaut" data-dv=""><div class="w"><span class="idx">09</span>astronaut<span class="ipa">[ˈæstrənɔːt]</span><button class="star" data-star="astronaut" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 宇航员；太空人</div><div class="ex"><div class="en">An American astronaut is beginning a year­ long trip in space.</div><div class="zh">名美国宇航员开始了长达一年的太空旅行。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 03</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="comet n. 彗星"><div class="w"><span class="idx">10</span>comet<span class="ipa">[ˈkɒmɪt]</span></div><div class="m">n. 彗星</div><div class="ex"><div class="en">The comet will not return for another seventy years.</div><div class="zh">这颗彗星七十年后才会再次出现。</div></div></div>
-<div class="card" data-s="meteorite n. 陨石；陨星"><div class="w"><span class="idx">11</span>meteorite<span class="ipa">[ˈmiːtiəraɪt]</span></div><div class="m">n. 陨石；陨星</div><div class="ex"><div class="en">He discovered an unusual meteorite.</div><div class="zh">他发现了—块奇异的陨石。</div></div></div>
-<div class="card" data-s="crater n. 火山口；弹坑"><div class="w"><span class="idx">12</span>crater<span class="ipa">[ˈkreɪtə(r)]</span></div><div class="m">n. 火山口；弹坑</div><div class="ex"><div class="en">They came to the lip of a dead volcanic crater.</div><div class="zh">星座。</div></div></div>
+<div class="card" data-s="comet n. 彗星" data-w="comet" data-dv=""><div class="w"><span class="idx">10</span>comet<span class="ipa">[ˈkɒmɪt]</span><button class="star" data-star="comet" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 彗星</div><div class="ex"><div class="en">The comet will not return for another seventy years.</div><div class="zh">这颗彗星七十年后才会再次出现。</div></div></div>
+<div class="card" data-s="meteorite n. 陨石；陨星" data-w="meteorite" data-dv=""><div class="w"><span class="idx">11</span>meteorite<span class="ipa">[ˈmiːtiəraɪt]</span><button class="star" data-star="meteorite" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 陨石；陨星</div><div class="ex"><div class="en">He discovered an unusual meteorite.</div><div class="zh">他发现了—块奇异的陨石。</div></div></div>
+<div class="card" data-s="crater n. 火山口；弹坑" data-w="crater" data-dv=""><div class="w"><span class="idx">12</span>crater<span class="ipa">[ˈkreɪtə(r)]</span><button class="star" data-star="crater" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 火山口；弹坑</div><div class="ex"><div class="en">They came to the lip of a dead volcanic crater.</div><div class="zh">星座。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 04</span><span class="gcnt">4 词</span></div><div class="cards">
-<div class="card" data-s="dust n. 粉尘；尘埃；v. 擦去... 的灰尘"><div class="w"><span class="idx">13</span>dust<span class="ipa">[dʌst]</span></div><div class="m">n. 粉尘；尘埃；v. 擦去... 的灰尘</div><div class="ex"><div class="en">The mirror is covered with a film of dust.</div><div class="zh">镜子蒙上了一层灰尘。</div></div></div>
-<div class="card" data-s="ash n. 灰"><div class="w"><span class="idx">14</span>ash<span class="ipa">[æʃ]</span></div><div class="m">n. 灰</div><div class="ex"><div class="en">A thick layer of ash covered the town after the eruption.</div><div class="zh">火山喷发后，厚厚的火山灰覆盖了整个小镇。</div></div></div>
-<div class="card" data-s="envelope n. 信封"><div class="w"><span class="idx">15</span>envelope<span class="ipa">[ˈenvələʊp]</span></div><div class="m">n. 信封</div><div class="ex"><div class="en">The surface of the sun is a glowing gas envelope.</div><div class="zh">太阳的表面是一层发着光的气体。</div></div></div>
-<div class="card" data-s="chunk n. 厚块；大片"><div class="w"><span class="idx">16</span>chunk<span class="ipa">[tʃʌŋk]</span></div><div class="m">n. 厚块；大片</div><div class="ex"><div class="en">My mother bought a chunk of meat.</div><div class="zh">我妈妈买了—大块肉。</div></div></div>
+<div class="card" data-s="dust n. 粉尘；尘埃；v. 擦去... 的灰尘" data-w="dust" data-dv=""><div class="w"><span class="idx">13</span>dust<span class="ipa">[dʌst]</span><button class="star" data-star="dust" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 粉尘；尘埃；v. 擦去... 的灰尘</div><div class="ex"><div class="en">The mirror is covered with a film of dust.</div><div class="zh">镜子蒙上了一层灰尘。</div></div></div>
+<div class="card" data-s="ash n. 灰" data-w="ash" data-dv=""><div class="w"><span class="idx">14</span>ash<span class="ipa">[æʃ]</span><button class="star" data-star="ash" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 灰</div><div class="ex"><div class="en">A thick layer of ash covered the town after the eruption.</div><div class="zh">火山喷发后，厚厚的火山灰覆盖了整个小镇。</div></div></div>
+<div class="card" data-s="envelope n. 信封" data-w="envelope" data-dv=""><div class="w"><span class="idx">15</span>envelope<span class="ipa">[ˈenvələʊp]</span><button class="star" data-star="envelope" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 信封</div><div class="ex"><div class="en">The surface of the sun is a glowing gas envelope.</div><div class="zh">太阳的表面是一层发着光的气体。</div></div></div>
+<div class="card" data-s="chunk n. 厚块；大片" data-w="chunk" data-dv=""><div class="w"><span class="idx">16</span>chunk<span class="ipa">[tʃʌŋk]</span><button class="star" data-star="chunk" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 厚块；大片</div><div class="ex"><div class="en">My mother bought a chunk of meat.</div><div class="zh">我妈妈买了—大块肉。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 05</span><span class="gcnt">4 词</span></div><div class="cards">
-<div class="card" data-s="spacecraft n. 航天器；宇宙⻜船"><div class="w"><span class="idx">17</span>spacecraft<span class="ipa">[ˈspeɪskrɑːft]</span></div><div class="m">n. 航天器；宇宙⻜船</div><div class="ex"><div class="en">The spacecraft is orbiting the moon.</div><div class="zh">宇宙飞船正绕月球飞行。</div></div></div>
-<div class="card" data-s="spaceship n. 宇宙⻜船；太空船"><div class="w"><span class="idx">18</span>spaceship<span class="ipa">[ˈspeɪsʃɪp]</span></div><div class="m">n. 宇宙⻜船；太空船</div><div class="ex"><div class="en">The scientists are able to calculate accurately when the spaceship will reach the moon.</div><div class="zh">科学家能准确计算出宇宙飞船什么时候抵达月球。</div></div></div>
-<div class="card" data-s="probe n. 探针；探测器；探究； v. 探究；探查"><div class="w"><span class="idx">19</span>probe<span class="ipa">[prəʊb]</span></div><div class="m">n. 探针；探测器；探究； v. 探究；探查</div><div class="ex"><div class="en">Their probe into the cause of the fire proved futile.</div><div class="zh">他们对起火原因的调查没有任何收获。</div></div></div>
-<div class="card" data-s="module n. 模块；组件；单元；功 能块；舱"><div class="w"><span class="idx">20</span>module<span class="ipa">[ˈmɒdjuːl]</span></div><div class="m">n. 模块；组件；单元；功 能块；舱</div><div class="ex"><div class="en">A module is part of a space vehicle that can work independently.</div><div class="zh">太空舱是太空飞船的一部分,可以独立运作。</div></div></div>
+<div class="card" data-s="spacecraft n. 航天器；宇宙⻜船" data-w="spacecraft" data-dv=""><div class="w"><span class="idx">17</span>spacecraft<span class="ipa">[ˈspeɪskrɑːft]</span><button class="star" data-star="spacecraft" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 航天器；宇宙⻜船</div><div class="ex"><div class="en">The spacecraft is orbiting the moon.</div><div class="zh">宇宙飞船正绕月球飞行。</div></div></div>
+<div class="card" data-s="spaceship n. 宇宙⻜船；太空船" data-w="spaceship" data-dv=""><div class="w"><span class="idx">18</span>spaceship<span class="ipa">[ˈspeɪsʃɪp]</span><button class="star" data-star="spaceship" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 宇宙⻜船；太空船</div><div class="ex"><div class="en">The scientists are able to calculate accurately when the spaceship will reach the moon.</div><div class="zh">科学家能准确计算出宇宙飞船什么时候抵达月球。</div></div></div>
+<div class="card" data-s="probe n. 探针；探测器；探究； v. 探究；探查" data-w="probe" data-dv="probable|adj.|"><div class="w"><span class="idx">19</span>probe<span class="ipa">[prəʊb]</span><button class="star" data-star="probe" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 探针；探测器；探究； v. 探究；探查<div class="dv"><b>衍生</b><i>probable</i><em>adj.</em></div></div><div class="ex"><div class="en">Their probe into the cause of the fire proved futile.</div><div class="zh">他们对起火原因的调查没有任何收获。</div></div></div>
+<div class="card" data-s="module n. 模块；组件；单元；功 能块；舱" data-w="module" data-dv=""><div class="w"><span class="idx">20</span>module<span class="ipa">[ˈmɒdjuːl]</span><button class="star" data-star="module" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 模块；组件；单元；功 能块；舱</div><div class="ex"><div class="en">A module is part of a space vehicle that can work independently.</div><div class="zh">太空舱是太空飞船的一部分,可以独立运作。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 06</span><span class="gcnt">4 词</span></div><div class="cards">
-<div class="card" data-s="propulsion n. 推进；推动力"><div class="w"><span class="idx">21</span>propulsion<span class="ipa">[prəˈpʌlʃ(ə)n]</span></div><div class="m">n. 推进；推动力</div><div class="ex"><div class="en">This aircraft works by jet propulsion.</div><div class="zh">这架飞机是喷气推进的。</div></div></div>
-<div class="card" data-s="pressure n. 压力；压强；压迫；v. 对...施加压力"><div class="w"><span class="idx">22</span>pressure<span class="ipa">[ˈpreʃə(r)]</span></div><div class="m">n. 压力；压强；压迫；v. 对...施加压力</div><div class="ex"><div class="en">We will never capitulate to pressure from outside.</div><div class="zh">我们永远不会屈服于外界的压力。</div></div></div>
-<div class="card" data-s="dynamics n. 动力学；动态学"><div class="w"><span class="idx">23</span>dynamics<span class="ipa">[daɪˈnæmɪks]</span></div><div class="m">n. 动力学；动态学</div><div class="ex"><div class="en">The dynamics of the market changed overnight.</div><div class="zh">市场的动态一夜之间发生了变化。</div></div></div>
-<div class="card" data-s="motion n. 运动；动作；提议"><div class="w"><span class="idx">24</span>motion<span class="ipa">[ˈməʊʃ(ə)n]</span></div><div class="m">n. 运动；动作；提议</div><div class="ex"><div class="en">Parts of the film were shown again in slow motion.</div><div class="zh">影片的一些部分被以慢动作重放。</div></div></div>
+<div class="card" data-s="propulsion n. 推进；推动力" data-w="propulsion" data-dv=""><div class="w"><span class="idx">21</span>propulsion<span class="ipa">[prəˈpʌlʃ(ə)n]</span><button class="star" data-star="propulsion" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 推进；推动力</div><div class="ex"><div class="en">This aircraft works by jet propulsion.</div><div class="zh">这架飞机是喷气推进的。</div></div></div>
+<div class="card" data-s="pressure n. 压力；压强；压迫；v. 对...施加压力" data-w="pressure" data-dv=""><div class="w"><span class="idx">22</span>pressure<span class="ipa">[ˈpreʃə(r)]</span><button class="star" data-star="pressure" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 压力；压强；压迫；v. 对...施加压力</div><div class="ex"><div class="en">We will never capitulate to pressure from outside.</div><div class="zh">我们永远不会屈服于外界的压力。</div></div></div>
+<div class="card" data-s="dynamics n. 动力学；动态学" data-w="dynamics" data-dv=""><div class="w"><span class="idx">23</span>dynamics<span class="ipa">[daɪˈnæmɪks]</span><button class="star" data-star="dynamics" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 动力学；动态学</div><div class="ex"><div class="en">The dynamics of the market changed overnight.</div><div class="zh">市场的动态一夜之间发生了变化。</div></div></div>
+<div class="card" data-s="motion n. 运动；动作；提议" data-w="motion" data-dv="motionless|adj.|"><div class="w"><span class="idx">24</span>motion<span class="ipa">[ˈməʊʃ(ə)n]</span><button class="star" data-star="motion" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 运动；动作；提议<div class="dv"><b>衍生</b><i>motionless</i><em>adj.</em></div></div><div class="ex"><div class="en">Parts of the film were shown again in slow motion.</div><div class="zh">影片的一些部分被以慢动作重放。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 07</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="vent n. 排气口；发泄；表达； v. 排放；发泄；表达"><div class="w"><span class="idx">25</span>vent<span class="ipa">[vent]</span></div><div class="m">n. 排气口；发泄；表达； v. 排放；发泄；表达</div><div class="ex"><div class="en">Hot gas escapes through a vent in the rock.</div><div class="zh">热气从岩石的排气口逸出。</div></div></div>
-<div class="card" data-s="tail n. 尾巴；尾随者；v. 跟踪"><div class="w"><span class="idx">26</span>tail<span class="ipa">[teɪl]</span></div><div class="m">n. 尾巴；尾随者；v. 跟踪</div><div class="ex"><div class="en">He drove into the back of my truck and smashed the tail light.</div><div class="zh">他开车追尾了我的卡车,把尾灯撞得粉碎。</div></div></div>
-<div class="card" data-s="curve n. 曲线；弯曲；v. (使) 弯成弧形"><div class="w"><span class="idx">27</span>curve<span class="ipa">[kɜːv]</span></div><div class="m">n. 曲线；弯曲；v. (使) 弯成弧形</div><div class="ex"><div class="en">The stairs ascended in a graceful curve.</div><div class="zh">楼梯以优美的曲线上升。</div></div></div>
+<div class="card" data-s="vent n. 排气口；发泄；表达； v. 排放；发泄；表达" data-w="vent" data-dv="venture|n.|"><div class="w"><span class="idx">25</span>vent<span class="ipa">[vent]</span><button class="star" data-star="vent" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 排气口；发泄；表达； v. 排放；发泄；表达<div class="dv"><b>衍生</b><i>venture</i><em>n.</em></div></div><div class="ex"><div class="en">Hot gas escapes through a vent in the rock.</div><div class="zh">热气从岩石的排气口逸出。</div></div></div>
+<div class="card" data-s="tail n. 尾巴；尾随者；v. 跟踪" data-w="tail" data-dv=""><div class="w"><span class="idx">26</span>tail<span class="ipa">[teɪl]</span><button class="star" data-star="tail" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 尾巴；尾随者；v. 跟踪</div><div class="ex"><div class="en">He drove into the back of my truck and smashed the tail light.</div><div class="zh">他开车追尾了我的卡车,把尾灯撞得粉碎。</div></div></div>
+<div class="card" data-s="curve n. 曲线；弯曲；v. (使) 弯成弧形" data-w="curve" data-dv=""><div class="w"><span class="idx">27</span>curve<span class="ipa">[kɜːv]</span><button class="star" data-star="curve" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 曲线；弯曲；v. (使) 弯成弧形</div><div class="ex"><div class="en">The stairs ascended in a graceful curve.</div><div class="zh">楼梯以优美的曲线上升。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 08</span><span class="gcnt">6 词</span></div><div class="cards">
-<div class="card" data-s="exploration n. 探索；勘探；探险"><div class="w"><span class="idx">28</span>exploration<span class="ipa">[ˌekspləˈreɪʃ(ə)n]</span></div><div class="m">n. 探索；勘探；探险</div><div class="ex"><div class="en">The Elizabethan age was a time of exploration and discovery.</div><div class="zh">英国伊丽莎白女王一世时代是探索和发现的时代。</div></div></div>
-<div class="card" data-s="expedition n. 远征；探险；探险队； 短途旅行；迅速"><div class="w"><span class="idx">29</span>expedition<span class="ipa">[ˌekspəˈdɪʃ(ə)n]</span></div><div class="m">n. 远征；探险；探险队； 短途旅行；迅速</div><div class="ex"><div class="en">This is an expedition to find the beg inning of theYangtze River.</div><div class="zh">这是一次寻找长江源头的探险。</div></div></div>
-<div class="card" data-s="flyby n. ⻜越"><div class="w"><span class="idx">30</span>flyby<span class="ipa">[ˈflaɪbaɪ]</span></div><div class="m">n. ⻜越</div><div class="ex"><div class="en">Because of the flyby height, the plane resembles an increasingly big bird.</div><div class="zh">由于飞掠高度,飞机就像越来越大的鸟。</div></div></div>
-<div class="card" data-s="observatory n. 天文台；气象台"><div class="w"><span class="idx">31</span>observatory<span class="ipa">[əbˈzɜːvətri]</span></div><div class="m">n. 天文台；气象台</div><div class="ex"><div class="en">According to the observatory, there will be a total solar eclipse tom or row.</div><div class="zh">天文台预测,明天将会出现日全食。</div></div></div>
-<div class="card" data-s="telescope n. 望远镜"><div class="w"><span class="idx">32</span>telescope<span class="ipa">[ˈtelɪskəʊp]</span></div><div class="m">n. 望远镜</div><div class="ex"><div class="en">What is the range of this telescope?</div><div class="zh">这架望远镜的观测距离是多远?</div></div></div>
-<div class="card" data-s="spectacle n. 景象；奇观；场面；眼 镜"><div class="w"><span class="idx">33</span>spectacle<span class="ipa">[ˈspektək(ə)l]</span></div><div class="m">n. 景象；奇观；场面；眼 镜</div><div class="ex"><div class="en">The sunrise was a splendid spectacle.</div><div class="zh">日出是个壮观的景象。</div></div></div>
+<div class="card" data-s="exploration n. 探索；勘探；探险" data-w="exploration" data-dv=""><div class="w"><span class="idx">28</span>exploration<span class="ipa">[ˌekspləˈreɪʃ(ə)n]</span><button class="star" data-star="exploration" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 探索；勘探；探险</div><div class="ex"><div class="en">The Elizabethan age was a time of exploration and discovery.</div><div class="zh">英国伊丽莎白女王一世时代是探索和发现的时代。</div></div></div>
+<div class="card" data-s="expedition n. 远征；探险；探险队； 短途旅行；迅速" data-w="expedition" data-dv=""><div class="w"><span class="idx">29</span>expedition<span class="ipa">[ˌekspəˈdɪʃ(ə)n]</span><button class="star" data-star="expedition" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 远征；探险；探险队； 短途旅行；迅速</div><div class="ex"><div class="en">This is an expedition to find the beg inning of theYangtze River.</div><div class="zh">这是一次寻找长江源头的探险。</div></div></div>
+<div class="card" data-s="flyby n. ⻜越" data-w="flyby" data-dv=""><div class="w"><span class="idx">30</span>flyby<span class="ipa">[ˈflaɪbaɪ]</span><button class="star" data-star="flyby" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. ⻜越</div><div class="ex"><div class="en">Because of the flyby height, the plane resembles an increasingly big bird.</div><div class="zh">由于飞掠高度,飞机就像越来越大的鸟。</div></div></div>
+<div class="card" data-s="observatory n. 天文台；气象台" data-w="observatory" data-dv=""><div class="w"><span class="idx">31</span>observatory<span class="ipa">[əbˈzɜːvətri]</span><button class="star" data-star="observatory" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 天文台；气象台</div><div class="ex"><div class="en">According to the observatory, there will be a total solar eclipse tom or row.</div><div class="zh">天文台预测,明天将会出现日全食。</div></div></div>
+<div class="card" data-s="telescope n. 望远镜" data-w="telescope" data-dv=""><div class="w"><span class="idx">32</span>telescope<span class="ipa">[ˈtelɪskəʊp]</span><button class="star" data-star="telescope" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 望远镜</div><div class="ex"><div class="en">What is the range of this telescope?</div><div class="zh">这架望远镜的观测距离是多远?</div></div></div>
+<div class="card" data-s="spectacle n. 景象；奇观；场面；眼 镜" data-w="spectacle" data-dv=""><div class="w"><span class="idx">33</span>spectacle<span class="ipa">[ˈspektək(ə)l]</span><button class="star" data-star="spectacle" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 景象；奇观；场面；眼 镜</div><div class="ex"><div class="en">The sunrise was a splendid spectacle.</div><div class="zh">日出是个壮观的景象。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 09</span><span class="gcnt">8 词</span></div><div class="cards">
-<div class="card" data-s="orbit n. 轨道；v. 绕...轨道而行"><div class="w"><span class="idx">34</span>orbit<span class="ipa">[ˈɔːbɪt]</span></div><div class="m">n. 轨道；v. 绕...轨道而行</div><div class="ex"><div class="en">The earth moves in an approximately circular orbit around the sun.</div><div class="zh">地球在一个近似正圆的轨道上绕着太阳运行。</div></div></div>
-<div class="card" data-s="ecliptic n. ⻩道；adj. ⻩道的"><div class="w"><span class="idx">35</span>ecliptic<span class="ipa">[ɪˈklɪptɪk]</span></div><div class="m">n. ⻩道；adj. ⻩道的</div><div class="ex"><div class="en">Five bright planets move among the stars near the ecliptic.</div><div class="zh">五颗明亮的行星在黄道附近的恒星当中移动。</div></div></div>
-<div class="card" data-s="diameter n. 直径"><div class="w"><span class="idx">36</span>diameter<span class="ipa">[daɪˈæmɪtə(r)]</span></div><div class="m">n. 直径</div><div class="ex"><div class="en">The earth is slightly flat at the poles, so that the polar diameter is slightly less than the equatorial diameter.</div><div class="zh">地球的两极稍扁,所以南北极之间的直径略小于赤道直径。</div></div></div>
-<div class="card" data-s="radius n. 半径；范围"><div class="w"><span class="idx">37</span>radius<span class="ipa">[ˈreɪdiəs]</span></div><div class="m">n. 半径；范围</div><div class="ex"><div class="en">They searched with in one mile radius of the school.</div><div class="zh">他们在学校周围半径一英里的范围内搜索。</div></div></div>
-<div class="card" data-s="substance n. 物质；物品；实质；主 旨；要点"><div class="w"><span class="idx">38</span>substance<span class="ipa">[ˈsʌbstəns]</span></div><div class="m">n. 物质；物品；实质；主 旨；要点</div><div class="ex"><div class="en">Is there a basic substance that everything else is made o f?</div><div class="zh">是否存在一种组成了万物的基本物质?</div></div></div>
-<div class="card" data-s="composition n. 构成；作品,作曲； (学生)作文；创作技巧"><div class="w"><span class="idx">39</span>composition<span class="ipa">[ˌkɒmpəˈzɪʃ(ə)n]</span></div><div class="m">n. 构成；作品,作曲； (学生)作文；创作技巧</div><div class="ex"><div class="en">Scientists study the composition of the soil.</div><div class="zh">科学家研究土壤的成分。</div></div></div>
-<div class="card" data-s="compound n. 化合物；大院；adj. 复合的； 混合的；v. 使复杂化；加重"><div class="w"><span class="idx">40</span>compound<span class="ipa">[ˈkɒmpaʊnd]</span></div><div class="m">n. 化合物；大院；adj. 复合的； 混合的；v. 使复杂化；加重</div><div class="ex"><div class="en">English loves compound w ords: washing machine" and that sort of th in g.</div><div class="zh">英语喜欢用复合词,像是“洗衣机”这一类的。</div></div></div>
-<div class="card" data-s="fossil n. 化石；守旧的事物"><div class="w"><span class="idx">41</span>fossil<span class="ipa">[ˈfɒs(ə)l]</span></div><div class="m">n. 化石；守旧的事物</div><div class="ex"><div class="en">The fossil was found in a layer of limestone.</div><div class="zh">这块化石是在一层石灰岩中发现的。</div></div></div>
+<div class="card" data-s="orbit n. 轨道；v. 绕...轨道而行" data-w="orbit" data-dv="orbital|adj.|;;orbiter|n.|"><div class="w"><span class="idx">34</span>orbit<span class="ipa">[ˈɔːbɪt]</span><button class="star" data-star="orbit" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 轨道；v. 绕...轨道而行<div class="dv"><b>衍生</b><i>orbital</i><em>adj.</em><span class="sep">·</span><i>orbiter</i><em>n.</em></div></div><div class="ex"><div class="en">The earth moves in an approximately circular orbit around the sun.</div><div class="zh">地球在一个近似正圆的轨道上绕着太阳运行。</div></div></div>
+<div class="card" data-s="ecliptic n. ⻩道；adj. ⻩道的" data-w="ecliptic" data-dv=""><div class="w"><span class="idx">35</span>ecliptic<span class="ipa">[ɪˈklɪptɪk]</span><button class="star" data-star="ecliptic" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. ⻩道；adj. ⻩道的</div><div class="ex"><div class="en">Five bright planets move among the stars near the ecliptic.</div><div class="zh">五颗明亮的行星在黄道附近的恒星当中移动。</div></div></div>
+<div class="card" data-s="diameter n. 直径" data-w="diameter" data-dv=""><div class="w"><span class="idx">36</span>diameter<span class="ipa">[daɪˈæmɪtə(r)]</span><button class="star" data-star="diameter" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 直径</div><div class="ex"><div class="en">The earth is slightly flat at the poles, so that the polar diameter is slightly less than the equatorial diameter.</div><div class="zh">地球的两极稍扁,所以南北极之间的直径略小于赤道直径。</div></div></div>
+<div class="card" data-s="radius n. 半径；范围" data-w="radius" data-dv=""><div class="w"><span class="idx">37</span>radius<span class="ipa">[ˈreɪdiəs]</span><button class="star" data-star="radius" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 半径；范围</div><div class="ex"><div class="en">They searched with in one mile radius of the school.</div><div class="zh">他们在学校周围半径一英里的范围内搜索。</div></div></div>
+<div class="card" data-s="substance n. 物质；物品；实质；主 旨；要点" data-w="substance" data-dv="substantial|adj.|"><div class="w"><span class="idx">38</span>substance<span class="ipa">[ˈsʌbstəns]</span><button class="star" data-star="substance" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 物质；物品；实质；主 旨；要点<div class="dv"><b>衍生</b><i>substantial</i><em>adj.</em></div></div><div class="ex"><div class="en">Is there a basic substance that everything else is made o f?</div><div class="zh">是否存在一种组成了万物的基本物质?</div></div></div>
+<div class="card" data-s="composition n. 构成；作品,作曲； (学生)作文；创作技巧" data-w="composition" data-dv=""><div class="w"><span class="idx">39</span>composition<span class="ipa">[ˌkɒmpəˈzɪʃ(ə)n]</span><button class="star" data-star="composition" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 构成；作品,作曲； (学生)作文；创作技巧</div><div class="ex"><div class="en">Scientists study the composition of the soil.</div><div class="zh">科学家研究土壤的成分。</div></div></div>
+<div class="card" data-s="compound n. 化合物；大院；adj. 复合的； 混合的；v. 使复杂化；加重" data-w="compound" data-dv="compoundness|n.|"><div class="w"><span class="idx">40</span>compound<span class="ipa">[ˈkɒmpaʊnd]</span><button class="star" data-star="compound" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 化合物；大院；adj. 复合的； 混合的；v. 使复杂化；加重<div class="dv"><b>衍生</b><i>compoundness</i><em>n.</em></div></div><div class="ex"><div class="en">English loves compound w ords: washing machine" and that sort of th in g.</div><div class="zh">英语喜欢用复合词,像是“洗衣机”这一类的。</div></div></div>
+<div class="card" data-s="fossil n. 化石；守旧的事物" data-w="fossil" data-dv=""><div class="w"><span class="idx">41</span>fossil<span class="ipa">[ˈfɒs(ə)l]</span><button class="star" data-star="fossil" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 化石；守旧的事物</div><div class="ex"><div class="en">The fossil was found in a layer of limestone.</div><div class="zh">这块化石是在一层石灰岩中发现的。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 10</span><span class="gcnt">8 词</span></div><div class="cards">
-<div class="card" data-s="sample n. 样品；样本；v. 尝试, 体验；抽样；节录"><div class="w"><span class="idx">42</span>sample<span class="ipa">[ˈsɑːmp(ə)l]</span></div><div class="m">n. 样品；样本；v. 尝试, 体验；抽样；节录</div><div class="ex"><div class="en">I need nothing but a sample.</div><div class="zh">我需要的不过是一件样品而已。</div></div></div>
-<div class="card" data-s="specimen n. 标本；样品"><div class="w"><span class="idx">43</span>specimen<span class="ipa">[ˈspesɪmən]</span></div><div class="m">n. 标本；样品</div><div class="ex"><div class="en">The biologist brought out a specimen box and showed the items one by one.</div><div class="zh">生物学家拿岀标本箱,—件一件地把标本拿出来。</div></div></div>
-<div class="card" data-s="particle n. 微粒；粒子"><div class="w"><span class="idx">44</span>particle<span class="ipa">[ˈpɑːtɪk(ə)l]</span></div><div class="m">n. 微粒；粒子</div><div class="ex"><div class="en">There are particles of dust everywhere.</div><div class="zh">到处都是尘埃微粒。</div></div></div>
-<div class="card" data-s="molecule n. 分子"><div class="w"><span class="idx">45</span>molecule<span class="ipa">[ˈmɒlɪkjuːl]</span></div><div class="m">n. 分子</div><div class="ex"><div class="en">There is a molecule separator in the lab.</div><div class="zh">实验室里有一台分子分离器。</div></div></div>
-<div class="card" data-s="atom n. 原子"><div class="w"><span class="idx">46</span>atom<span class="ipa">[ˈætəm]</span></div><div class="m">n. 原子</div><div class="ex"><div class="en">A molecule of water is made up of two atoms of hydrogen and one atom of oxygen.</div><div class="zh">个水分子是由两个氢原子和一个氧原子构成的。</div></div></div>
-<div class="card" data-s="ion n. 离子"><div class="w"><span class="idx">47</span>ion<span class="ipa">[ˈaɪən]</span></div><div class="m">n. 离子</div><div class="ex"><div class="en">Both of these particles can produce ion pairs.</div><div class="zh">这两种粒子都能产生离子对。</div></div></div>
-<div class="card" data-s="electron n. 电子"><div class="w"><span class="idx">48</span>electron<span class="ipa">[ɪˈlektrɒn]</span></div><div class="m">n. 电子</div><div class="ex"><div class="en">Electrons are negatively charged with electricity.</div><div class="zh">电子带负电荷。</div></div></div>
-<div class="card" data-s="quantum n. 量子"><div class="w"><span class="idx">49</span>quantum<span class="ipa">[ˈkwɒntəm]</span></div><div class="m">n. 量子</div><div class="ex"><div class="en">In this example, we employed the quantum mechanics principle.</div><div class="zh">在本例中,我们运用了量子力学原理。</div></div></div>
+<div class="card" data-s="sample n. 样品；样本；v. 尝试, 体验；抽样；节录" data-w="sample" data-dv="sampler|n.|"><div class="w"><span class="idx">42</span>sample<span class="ipa">[ˈsɑːmp(ə)l]</span><button class="star" data-star="sample" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 样品；样本；v. 尝试, 体验；抽样；节录<div class="dv"><b>衍生</b><i>sampler</i><em>n.</em></div></div><div class="ex"><div class="en">I need nothing but a sample.</div><div class="zh">我需要的不过是一件样品而已。</div></div></div>
+<div class="card" data-s="specimen n. 标本；样品" data-w="specimen" data-dv=""><div class="w"><span class="idx">43</span>specimen<span class="ipa">[ˈspesɪmən]</span><button class="star" data-star="specimen" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 标本；样品</div><div class="ex"><div class="en">The biologist brought out a specimen box and showed the items one by one.</div><div class="zh">生物学家拿岀标本箱,—件一件地把标本拿出来。</div></div></div>
+<div class="card" data-s="particle n. 微粒；粒子" data-w="particle" data-dv=""><div class="w"><span class="idx">44</span>particle<span class="ipa">[ˈpɑːtɪk(ə)l]</span><button class="star" data-star="particle" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 微粒；粒子</div><div class="ex"><div class="en">There are particles of dust everywhere.</div><div class="zh">到处都是尘埃微粒。</div></div></div>
+<div class="card" data-s="molecule n. 分子" data-w="molecule" data-dv=""><div class="w"><span class="idx">45</span>molecule<span class="ipa">[ˈmɒlɪkjuːl]</span><button class="star" data-star="molecule" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 分子</div><div class="ex"><div class="en">There is a molecule separator in the lab.</div><div class="zh">实验室里有一台分子分离器。</div></div></div>
+<div class="card" data-s="atom n. 原子" data-w="atom" data-dv=""><div class="w"><span class="idx">46</span>atom<span class="ipa">[ˈætəm]</span><button class="star" data-star="atom" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 原子</div><div class="ex"><div class="en">A molecule of water is made up of two atoms of hydrogen and one atom of oxygen.</div><div class="zh">个水分子是由两个氢原子和一个氧原子构成的。</div></div></div>
+<div class="card" data-s="ion n. 离子" data-w="ion" data-dv=""><div class="w"><span class="idx">47</span>ion<span class="ipa">[ˈaɪən]</span><button class="star" data-star="ion" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 离子</div><div class="ex"><div class="en">Both of these particles can produce ion pairs.</div><div class="zh">这两种粒子都能产生离子对。</div></div></div>
+<div class="card" data-s="electron n. 电子" data-w="electron" data-dv="electronic|adj.|"><div class="w"><span class="idx">48</span>electron<span class="ipa">[ɪˈlektrɒn]</span><button class="star" data-star="electron" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 电子<div class="dv"><b>衍生</b><i>electronic</i><em>adj.</em></div></div><div class="ex"><div class="en">Electrons are negatively charged with electricity.</div><div class="zh">电子带负电荷。</div></div></div>
+<div class="card" data-s="quantum n. 量子" data-w="quantum" data-dv=""><div class="w"><span class="idx">49</span>quantum<span class="ipa">[ˈkwɒntəm]</span><button class="star" data-star="quantum" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 量子</div><div class="ex"><div class="en">In this example, we employed the quantum mechanics principle.</div><div class="zh">在本例中,我们运用了量子力学原理。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 11</span><span class="gcnt">9 词</span></div><div class="cards">
-<div class="card" data-s="liquid n. 液体；adj. 液体的；液 态的"><div class="w"><span class="idx">50</span>liquid<span class="ipa">[ˈlɪkwɪd]</span></div><div class="m">n. 液体；adj. 液体的；液 态的</div><div class="ex"><div class="en">If you add too much liquid, the mixture will not be thick enough.</div><div class="zh">如果你加入了太多液体,该混合液的浓度就不够了。</div></div></div>
-<div class="card" data-s="fluid n. 流体；流质；adj. 流动 的"><div class="w"><span class="idx">51</span>fluid<span class="ipa">[ˈfluːɪd]</span></div><div class="m">n. 流体；流质；adj. 流动 的</div><div class="ex"><div class="en">When you are sick, you should drink plenty of fluids.</div><div class="zh">生病时应该多喝流质。</div></div></div>
-<div class="card" data-s="solid n. 固体；立体图形；adj. 固体的；坚固的；可靠的"><div class="w"><span class="idx">52</span>solid<span class="ipa">[ˈsɒlɪd]</span></div><div class="m">n. 固体；立体图形；adj. 固体的；坚固的；可靠的</div><div class="ex"><div class="en">Water becomes solid below zero degrees.</div><div class="zh">水在零度以下变成固体。</div></div></div>
-<div class="card" data-s="synthesise v. 合成；综合"><div class="w"><span class="idx">53</span>synthesise<span class="ipa">[ˈsɪnθəsaɪz]</span></div><div class="m">v. 合成；综合</div><div class="ex"><div class="en">Darwinian theory has been synthesised with modern genetics.</div><div class="zh">达尔文的理论已经和现代遗传学融合在一起了。</div></div></div>
-<div class="card" data-s="formation n. 形成；排列方式"><div class="w"><span class="idx">54</span>formation<span class="ipa">[fɔːˈmeɪʃ(ə)n]</span></div><div class="m">n. 形成；排列方式</div><div class="ex"><div class="en">The formation of ice takes several hours.</div><div class="zh">冰的形成需要几个小时。</div></div></div>
-<div class="card" data-s="method n. 方法；办法"><div class="w"><span class="idx">55</span>method<span class="ipa">[ˈmeθəd]</span></div><div class="m">n. 方法；办法</div><div class="ex"><div class="en">New methods of teaching foreign languages are adopted in this institute.</div><div class="zh">该学院采用了新的外语教学法。</div></div></div>
-<div class="card" data-s="spectrum n. 范围；幅度；光谱；波 谱"><div class="w"><span class="idx">56</span>spectrum<span class="ipa">[ˈspektrəm]</span></div><div class="m">n. 范围；幅度；光谱；波 谱</div><div class="ex"><div class="en">A spectrum is formed by a ray of light passing through a prism.</div><div class="zh">束光通过棱镜就会形成光谱。</div></div></div>
-<div class="card" data-s="dimension n. 尺寸；维度"><div class="w"><span class="idx">57</span>dimension<span class="ipa">[daɪˈmenʃ(ə)n]</span></div><div class="m">n. 尺寸；维度</div><div class="ex"><div class="en">A line has one dimension and a square has two.</div><div class="zh">条线只包含一个维度,而一个正方形包含两个维度。</div></div></div>
-<div class="card" data-s="frequency n. 频率；频数；频繁"><div class="w"><span class="idx">58</span>frequency<span class="ipa">[ˈfriːkwənsi]</span></div><div class="m">n. 频率；频数；频繁</div><div class="ex"><div class="en">This radio signal has a frequency of 800 kilohertz.</div><div class="zh">这个无线电信号的频率是800千赫。</div></div></div>
+<div class="card" data-s="liquid n. 液体；adj. 液体的；液 态的" data-w="liquid" data-dv="liquidly|adv.|;;liquidity|n.|;;liquidness|n.|"><div class="w"><span class="idx">50</span>liquid<span class="ipa">[ˈlɪkwɪd]</span><button class="star" data-star="liquid" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 液体；adj. 液体的；液 态的<div class="dv"><b>衍生</b><i>liquidly</i><em>adv.</em><span class="sep">·</span><i>liquidity</i><em>n.</em><span class="sep">·</span><i>liquidness</i><em>n.</em></div></div><div class="ex"><div class="en">If you add too much liquid, the mixture will not be thick enough.</div><div class="zh">如果你加入了太多液体,该混合液的浓度就不够了。</div></div></div>
+<div class="card" data-s="fluid n. 流体；流质；adj. 流动 的" data-w="fluid" data-dv="fluidly|adv.|;;fluidness|n.|"><div class="w"><span class="idx">51</span>fluid<span class="ipa">[ˈfluːɪd]</span><button class="star" data-star="fluid" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 流体；流质；adj. 流动 的<div class="dv"><b>衍生</b><i>fluidly</i><em>adv.</em><span class="sep">·</span><i>fluidness</i><em>n.</em></div></div><div class="ex"><div class="en">When you are sick, you should drink plenty of fluids.</div><div class="zh">生病时应该多喝流质。</div></div></div>
+<div class="card" data-s="solid n. 固体；立体图形；adj. 固体的；坚固的；可靠的" data-w="solid" data-dv="solidly|adv.|;;solidness|n.|;;solidify|v.|"><div class="w"><span class="idx">52</span>solid<span class="ipa">[ˈsɒlɪd]</span><button class="star" data-star="solid" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 固体；立体图形；adj. 固体的；坚固的；可靠的<div class="dv"><b>衍生</b><i>solidly</i><em>adv.</em><span class="sep">·</span><i>solidness</i><em>n.</em><span class="sep">·</span><i>solidify</i><em>v.</em></div></div><div class="ex"><div class="en">Water becomes solid below zero degrees.</div><div class="zh">水在零度以下变成固体。</div></div></div>
+<div class="card" data-s="synthesise v. 合成；综合" data-w="synthesise" data-dv="photosynthesis||n. 光合作用;;synthesiser|n.|"><div class="w"><span class="idx">53</span>synthesise<span class="ipa">[ˈsɪnθəsaɪz]</span><button class="star" data-star="synthesise" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 合成；综合<div class="dv"><b>衍生</b><i>photosynthesis</i><span class="sep">·</span><i>synthesiser</i><em>n.</em></div></div><div class="ex"><div class="en">Darwinian theory has been synthesised with modern genetics.</div><div class="zh">达尔文的理论已经和现代遗传学融合在一起了。</div></div></div>
+<div class="card" data-s="formation n. 形成；排列方式" data-w="formation" data-dv=""><div class="w"><span class="idx">54</span>formation<span class="ipa">[fɔːˈmeɪʃ(ə)n]</span><button class="star" data-star="formation" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 形成；排列方式</div><div class="ex"><div class="en">The formation of ice takes several hours.</div><div class="zh">冰的形成需要几个小时。</div></div></div>
+<div class="card" data-s="method n. 方法；办法" data-w="method" data-dv=""><div class="w"><span class="idx">55</span>method<span class="ipa">[ˈmeθəd]</span><button class="star" data-star="method" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 方法；办法</div><div class="ex"><div class="en">New methods of teaching foreign languages are adopted in this institute.</div><div class="zh">该学院采用了新的外语教学法。</div></div></div>
+<div class="card" data-s="spectrum n. 范围；幅度；光谱；波 谱" data-w="spectrum" data-dv=""><div class="w"><span class="idx">56</span>spectrum<span class="ipa">[ˈspektrəm]</span><button class="star" data-star="spectrum" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 范围；幅度；光谱；波 谱</div><div class="ex"><div class="en">A spectrum is formed by a ray of light passing through a prism.</div><div class="zh">束光通过棱镜就会形成光谱。</div></div></div>
+<div class="card" data-s="dimension n. 尺寸；维度" data-w="dimension" data-dv="dimensional|adj.|"><div class="w"><span class="idx">57</span>dimension<span class="ipa">[daɪˈmenʃ(ə)n]</span><button class="star" data-star="dimension" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 尺寸；维度<div class="dv"><b>衍生</b><i>dimensional</i><em>adj.</em></div></div><div class="ex"><div class="en">A line has one dimension and a square has two.</div><div class="zh">条线只包含一个维度,而一个正方形包含两个维度。</div></div></div>
+<div class="card" data-s="frequency n. 频率；频数；频繁" data-w="frequency" data-dv=""><div class="w"><span class="idx">58</span>frequency<span class="ipa">[ˈfriːkwənsi]</span><button class="star" data-star="frequency" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 频率；频数；频繁</div><div class="ex"><div class="en">This radio signal has a frequency of 800 kilohertz.</div><div class="zh">这个无线电信号的频率是800千赫。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 12</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="signal n. 信号；标志；v. 用信号 通知"><div class="w"><span class="idx">59</span>signal<span class="ipa">[ˈsɪɡnəl]</span></div><div class="m">n. 信号；标志；v. 用信号 通知</div><div class="ex"><div class="en">Her speech yesterday was a signal that her view has changed.</div><div class="zh">她昨天的讲话是一个信号,反映出她的观点已经转变。</div></div></div>
-<div class="card" data-s="antenna n. 触⻆；天线"><div class="w"><span class="idx">60</span>antenna<span class="ipa">[ænˈtenə]</span></div><div class="m">n. 触⻆；天线</div><div class="ex"><div class="en">You should fix the television antenna before receiving programmes.</div><div class="zh">接收节目前,你应该先修好电视的天线。</div></div></div>
-<div class="card" data-s="circuit n. 回路；环行；电路；巡 回；v. 环行"><div class="w"><span class="idx">61</span>circuit<span class="ipa">[ˈsɜːkɪt]</span></div><div class="m">n. 回路；环行；电路；巡 回；v. 环行</div><div class="ex"><div class="en">For many years, he was top banana on the circuit.</div><div class="zh">许多年来,他都是巡回剧团里的主角。</div></div></div>
+<div class="card" data-s="signal n. 信号；标志；v. 用信号 通知" data-w="signal" data-dv="signaling|v.|"><div class="w"><span class="idx">59</span>signal<span class="ipa">[ˈsɪɡnəl]</span><button class="star" data-star="signal" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 信号；标志；v. 用信号 通知<div class="dv"><b>衍生</b><i>signaling</i><em>v.</em></div></div><div class="ex"><div class="en">Her speech yesterday was a signal that her view has changed.</div><div class="zh">她昨天的讲话是一个信号,反映出她的观点已经转变。</div></div></div>
+<div class="card" data-s="antenna n. 触⻆；天线" data-w="antenna" data-dv=""><div class="w"><span class="idx">60</span>antenna<span class="ipa">[ænˈtenə]</span><button class="star" data-star="antenna" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 触⻆；天线</div><div class="ex"><div class="en">You should fix the television antenna before receiving programmes.</div><div class="zh">接收节目前,你应该先修好电视的天线。</div></div></div>
+<div class="card" data-s="circuit n. 回路；环行；电路；巡 回；v. 环行" data-w="circuit" data-dv=""><div class="w"><span class="idx">61</span>circuit<span class="ipa">[ˈsɜːkɪt]</span><button class="star" data-star="circuit" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 回路；环行；电路；巡 回；v. 环行</div><div class="ex"><div class="en">For many years, he was top banana on the circuit.</div><div class="zh">许多年来,他都是巡回剧团里的主角。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 13</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="refraction n. 折光；折射"><div class="w"><span class="idx">62</span>refraction<span class="ipa">[rɪˈfrækʃ(ə)n]</span></div><div class="m">n. 折光；折射</div><div class="ex"><div class="en">Over water the diurnal change in refraction is likely to be small.</div><div class="zh">在水上,折射的周日变化可能是很小的。</div></div></div>
-<div class="card" data-s="ultraviolet adj. 紫外的；紫外线的； n. 紫外线辐射；紫外光"><div class="w"><span class="idx">63</span>ultraviolet<span class="ipa">[ˌʌltrəˈvaɪələt]</span></div><div class="m">adj. 紫外的；紫外线的； n. 紫外线辐射；紫外光</div><div class="ex"><div class="en">The ozone layer absorbs most of the sun's ultraviolet radiation.</div><div class="zh">臭氧层吸收了太阳的大部分紫外辐射。</div></div></div>
-<div class="card" data-s="radioactive adj. 放射性的"><div class="w"><span class="idx">64</span>radioactive<span class="ipa">[ˌreɪdiəʊˈæktɪv]</span></div><div class="m">adj. 放射性的</div><div class="ex"><div class="en">Nuclear energy gives millions heat light, and z power, just as it creates unwanted radioactive side effects.</div><div class="zh">核能源带给无数人热、光和电力,却也带来了人们并不想得到的放射性副作用。</div></div></div>
+<div class="card" data-s="refraction n. 折光；折射" data-w="refraction" data-dv=""><div class="w"><span class="idx">62</span>refraction<span class="ipa">[rɪˈfrækʃ(ə)n]</span><button class="star" data-star="refraction" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 折光；折射</div><div class="ex"><div class="en">Over water the diurnal change in refraction is likely to be small.</div><div class="zh">在水上,折射的周日变化可能是很小的。</div></div></div>
+<div class="card" data-s="ultraviolet adj. 紫外的；紫外线的； n. 紫外线辐射；紫外光" data-w="ultraviolet" data-dv=""><div class="w"><span class="idx">63</span>ultraviolet<span class="ipa">[ˌʌltrəˈvaɪələt]</span><button class="star" data-star="ultraviolet" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 紫外的；紫外线的； n. 紫外线辐射；紫外光</div><div class="ex"><div class="en">The ozone layer absorbs most of the sun's ultraviolet radiation.</div><div class="zh">臭氧层吸收了太阳的大部分紫外辐射。</div></div></div>
+<div class="card" data-s="radioactive adj. 放射性的" data-w="radioactive" data-dv="radioactively|adv.|;;radioactivity|n.|"><div class="w"><span class="idx">64</span>radioactive<span class="ipa">[ˌreɪdiəʊˈæktɪv]</span><button class="star" data-star="radioactive" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 放射性的<div class="dv"><b>衍生</b><i>radioactively</i><em>adv.</em><span class="sep">·</span><i>radioactivity</i><em>n.</em></div></div><div class="ex"><div class="en">Nuclear energy gives millions heat light, and z power, just as it creates unwanted radioactive side effects.</div><div class="zh">核能源带给无数人热、光和电力,却也带来了人们并不想得到的放射性副作用。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 14</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="distinct adj. 有区别的；清晰的； 明显的"><div class="w"><span class="idx">65</span>distinct<span class="ipa">[dɪˈstɪŋkt]</span></div><div class="m">adj. 有区别的；清晰的； 明显的</div><div class="ex"><div class="en">Those two ideas are quite distinct from each other.</div><div class="zh">这两种观点截然不同。</div></div></div>
-<div class="card" data-s="discernible adj. 可辨别的"><div class="w"><span class="idx">66</span>discernible<span class="ipa">[dɪˈsɜːnəb(ə)l]</span></div><div class="m">adj. 可辨别的</div><div class="ex"><div class="en">Night fell, but the outline of the factory buildings was still discernible.</div><div class="zh">夜幕降临了,但厂房的轮廓还是能看清的。</div></div></div>
-<div class="card" data-s="invisible adj. 看不⻅的；无形的"><div class="w"><span class="idx">67</span>invisible<span class="ipa">[ɪnˈvɪzəb(ə)l]</span></div><div class="m">adj. 看不⻅的；无形的</div><div class="ex"><div class="en">Some stars are invisible to the naked eye.</div><div class="zh">有些恒星是肉眼看不见的。</div></div></div>
+<div class="card" data-s="distinct adj. 有区别的；清晰的； 明显的" data-w="distinct" data-dv="distinctly|adv.|;;distinctness|n.|;;indistinct|adj.|"><div class="w"><span class="idx">65</span>distinct<span class="ipa">[dɪˈstɪŋkt]</span><button class="star" data-star="distinct" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 有区别的；清晰的； 明显的<div class="dv"><b>衍生</b><i>distinctly</i><em>adv.</em><span class="sep">·</span><i>distinctness</i><em>n.</em><span class="sep">·</span><i>indistinct</i><em>adj.</em></div></div><div class="ex"><div class="en">Those two ideas are quite distinct from each other.</div><div class="zh">这两种观点截然不同。</div></div></div>
+<div class="card" data-s="discernible adj. 可辨别的" data-w="discernible" data-dv="discernibly|adv.|;;discernibleness|n.|"><div class="w"><span class="idx">66</span>discernible<span class="ipa">[dɪˈsɜːnəb(ə)l]</span><button class="star" data-star="discernible" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 可辨别的<div class="dv"><b>衍生</b><i>discernibly</i><em>adv.</em><span class="sep">·</span><i>discernibleness</i><em>n.</em></div></div><div class="ex"><div class="en">Night fell, but the outline of the factory buildings was still discernible.</div><div class="zh">夜幕降临了,但厂房的轮廓还是能看清的。</div></div></div>
+<div class="card" data-s="invisible adj. 看不⻅的；无形的" data-w="invisible" data-dv="invisibly|adv.|;;invisibleness|n.|"><div class="w"><span class="idx">67</span>invisible<span class="ipa">[ɪnˈvɪzəb(ə)l]</span><button class="star" data-star="invisible" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 看不⻅的；无形的<div class="dv"><b>衍生</b><i>invisibly</i><em>adv.</em><span class="sep">·</span><i>invisibleness</i><em>n.</em></div></div><div class="ex"><div class="en">Some stars are invisible to the naked eye.</div><div class="zh">有些恒星是肉眼看不见的。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 15</span><span class="gcnt">3 词</span></div><div class="cards">
-<div class="card" data-s="collision n. 碰撞；冲突"><div class="w"><span class="idx">68</span>collision<span class="ipa">[kəˈlɪʒ(ə)n]</span></div><div class="m">n. 碰撞；冲突</div><div class="ex"><div class="en">He is responsible for the rear-end collision.</div><div class="zh">他要为这起追尾撞车事故负责。</div></div></div>
-<div class="card" data-s="squash v. 把...压扁(或压坏)；(使) 挤进；制止；n. 拥挤；壁球"><div class="w"><span class="idx">69</span>squash<span class="ipa">[skwɒʃ]</span></div><div class="m">v. 把...压扁(或压坏)；(使) 挤进；制止；n. 拥挤；壁球</div><div class="ex"><div class="en">I sat on my hat and squashed it.</div><div class="zh">我坐在自己的帽子上,把它给压扁了。</div></div></div>
-<div class="card" data-s="fragment n. 碎片；断片；片段；v. (使)成碎片；(使)分裂"><div class="w"><span class="idx">70</span>fragment<span class="ipa">[ˈfræɡmənt]</span></div><div class="m">n. 碎片；断片；片段；v. (使)成碎片；(使)分裂</div><div class="ex"><div class="en">Archaeologists pieced together the fragments of the vase.</div><div class="zh">考古学家把花瓶的碎片拼合起来。</div></div></div>
+<div class="card" data-s="collision n. 碰撞；冲突" data-w="collision" data-dv=""><div class="w"><span class="idx">68</span>collision<span class="ipa">[kəˈlɪʒ(ə)n]</span><button class="star" data-star="collision" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 碰撞；冲突</div><div class="ex"><div class="en">He is responsible for the rear-end collision.</div><div class="zh">他要为这起追尾撞车事故负责。</div></div></div>
+<div class="card" data-s="squash v. 把...压扁(或压坏)；(使) 挤进；制止；n. 拥挤；壁球" data-w="squash" data-dv=""><div class="w"><span class="idx">69</span>squash<span class="ipa">[skwɒʃ]</span><button class="star" data-star="squash" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 把...压扁(或压坏)；(使) 挤进；制止；n. 拥挤；壁球</div><div class="ex"><div class="en">I sat on my hat and squashed it.</div><div class="zh">我坐在自己的帽子上,把它给压扁了。</div></div></div>
+<div class="card" data-s="fragment n. 碎片；断片；片段；v. (使)成碎片；(使)分裂" data-w="fragment" data-dv=""><div class="w"><span class="idx">70</span>fragment<span class="ipa">[ˈfræɡmənt]</span><button class="star" data-star="fragment" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">n. 碎片；断片；片段；v. (使)成碎片；(使)分裂</div><div class="ex"><div class="en">Archaeologists pieced together the fragments of the vase.</div><div class="zh">考古学家把花瓶的碎片拼合起来。</div></div></div>
 </div></section>
 <section class="grp"><div class="ghead"><span class="gtag">词群 16</span><span class="gcnt">5 词</span></div><div class="cards">
-<div class="card" data-s="cataclysmic adj. 灾难性的；大变动的"><div class="w"><span class="idx">71</span>cataclysmic<span class="ipa">[ˌkætəˈklɪzmɪk]</span></div><div class="m">adj. 灾难性的；大变动的</div><div class="ex"><div class="en">One can readily trace the disappearanee of dinosaurs to a cataclysmic event.</div><div class="zh">人们可以很容易地把恐龙消失的原因追究到一场灾难性事件上。</div></div></div>
-<div class="card" data-s="overwhelming adj. 势不可挡的；压倒的；无法抗 拒的；v. 淹没；覆盖；压倒；控 制；“overwhelm”的现在分词"><div class="w"><span class="idx">72</span>overwhelming<span class="ipa">[ˌəʊvəˈwelmɪŋ]</span></div><div class="m">adj. 势不可挡的；压倒的；无法抗 拒的；v. 淹没；覆盖；压倒；控 制；“overwhelm”的现在分词</div><div class="ex"><div class="en">The flood was overwhelming and the city was soon flooded.</div><div class="zh">洪水来势凶猛,这座城市很快就被淹没了。</div></div></div>
-<div class="card" data-s="despair v. 绝望；n. 绝望"><div class="w"><span class="idx">73</span>despair<span class="ipa">[dɪˈspeə(r)]</span></div><div class="m">v. 绝望；n. 绝望</div><div class="ex"><div class="en">He gave up in despair after the third failure.</div><div class="zh">第三次失败后他绝望地放弃了。</div></div></div>
-<div class="card" data-s="desperate adj. 绝望的；不顾一切 的；拼死的；极度渴望的"><div class="w"><span class="idx">74</span>desperate<span class="ipa">[ˈdespərət]</span></div><div class="m">adj. 绝望的；不顾一切 的；拼死的；极度渴望的</div><div class="ex"><div class="en">The man lost in the desert was desperate for water.</div><div class="zh">这个在沙漠中迷失方向的人极想喝水。</div></div></div>
-<div class="card" data-s="hopeless adj. 绝望的"><div class="w"><span class="idx">75</span>hopeless<span class="ipa">[ˈhəʊpləs]</span></div><div class="m">adj. 绝望的</div><div class="ex"><div class="en">He feels that his cha nces of winning the con test are hopeless.</div><div class="zh">他感觉自己没有希望在竞赛中获胜。</div></div></div>
+<div class="card" data-s="cataclysmic adj. 灾难性的；大变动的" data-w="cataclysmic" data-dv=""><div class="w"><span class="idx">71</span>cataclysmic<span class="ipa">[ˌkætəˈklɪzmɪk]</span><button class="star" data-star="cataclysmic" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 灾难性的；大变动的</div><div class="ex"><div class="en">One can readily trace the disappearanee of dinosaurs to a cataclysmic event.</div><div class="zh">人们可以很容易地把恐龙消失的原因追究到一场灾难性事件上。</div></div></div>
+<div class="card" data-s="overwhelming adj. 势不可挡的；压倒的；无法抗 拒的；v. 淹没；覆盖；压倒；控 制；“overwhelm”的现在分词" data-w="overwhelming" data-dv="overwhelmingly|adv.|;;overwhelmingness|n.|"><div class="w"><span class="idx">72</span>overwhelming<span class="ipa">[ˌəʊvəˈwelmɪŋ]</span><button class="star" data-star="overwhelming" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 势不可挡的；压倒的；无法抗 拒的；v. 淹没；覆盖；压倒；控 制；“overwhelm”的现在分词<div class="dv"><b>衍生</b><i>overwhelmingly</i><em>adv.</em><span class="sep">·</span><i>overwhelmingness</i><em>n.</em></div></div><div class="ex"><div class="en">The flood was overwhelming and the city was soon flooded.</div><div class="zh">洪水来势凶猛,这座城市很快就被淹没了。</div></div></div>
+<div class="card" data-s="despair v. 绝望；n. 绝望" data-w="despair" data-dv=""><div class="w"><span class="idx">73</span>despair<span class="ipa">[dɪˈspeə(r)]</span><button class="star" data-star="despair" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">v. 绝望；n. 绝望</div><div class="ex"><div class="en">He gave up in despair after the third failure.</div><div class="zh">第三次失败后他绝望地放弃了。</div></div></div>
+<div class="card" data-s="desperate adj. 绝望的；不顾一切 的；拼死的；极度渴望的" data-w="desperate" data-dv="desperately|adv.|;;desperateness|n.|"><div class="w"><span class="idx">74</span>desperate<span class="ipa">[ˈdespərət]</span><button class="star" data-star="desperate" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 绝望的；不顾一切 的；拼死的；极度渴望的<div class="dv"><b>衍生</b><i>desperately</i><em>adv.</em><span class="sep">·</span><i>desperateness</i><em>n.</em></div></div><div class="ex"><div class="en">The man lost in the desert was desperate for water.</div><div class="zh">这个在沙漠中迷失方向的人极想喝水。</div></div></div>
+<div class="card" data-s="hopeless adj. 绝望的" data-w="hopeless" data-dv="hopelessly|adv.|;;hopelessness|n.|"><div class="w"><span class="idx">75</span>hopeless<span class="ipa">[ˈhəʊpləs]</span><button class="star" data-star="hopeless" aria-label="加入生词本" title="加入生词本">☆</button></div><div class="m">adj. 绝望的<div class="dv"><b>衍生</b><i>hopelessly</i><em>adv.</em><span class="sep">·</span><i>hopelessness</i><em>n.</em></div></div><div class="ex"><div class="en">He feels that his cha nces of winning the con test are hopeless.</div><div class="zh">他感觉自己没有希望在竞赛中获胜。</div></div></div>
 </div></section>
 <div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit03.html">← Unit 03</a><a href="unit04.html">切到纯列表版</a><a href="unit05.html">Unit 05 →</a></div><footer><div class="wrap" style="padding:0">
  摘自《雅思词汇真经》（刘洪波 编著）第 4 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
 </div></footer></div>
+<a id="nbfab" href="shengci.html"><span>生词本</span><b>0</b></a>
+<script>
+var NB=(function(){
+ var KEY='vj-book';
+ var mem=null, okStore=true;
+ function read(){
+  if(mem) return mem;
+  try{var raw=localStorage.getItem(KEY); mem=raw?JSON.parse(raw):{}}catch(e){okStore=false; mem={}}
+  return mem;
+ }
+ function write(){
+  try{localStorage.setItem(KEY,JSON.stringify(mem))}catch(e){
+    okStore=false;
+    alert('浏览器不允许本地存储，生词本无法保存（请用 https 打开，或关闭无痕模式）');
+  }
+ }
+ function count(){return Object.keys(read()).length}
+ function has(w){return !!read()[w]}
+ function toggle(rec){
+  var m=read();
+  if(m[rec.w]){delete m[rec.w]}
+  else{rec.t=Date.now(); m[rec.w]=rec}
+  write(); sync(); return !!m[rec.w];
+ }
+ function remove(w){var m=read(); delete m[w]; write(); sync();}
+ function all(){
+  var m=read(), a=[];
+  for(var k in m) a.push(m[k]);
+  a.sort(function(x,y){return (y.t||0)-(x.t||0)});
+  return a;
+ }
+ function sync(){
+  var n=count();
+  document.querySelectorAll('#nbfab b').forEach(function(el){el.textContent=n});
+  document.querySelectorAll('.star').forEach(function(el){
+    var on=has(el.dataset.star), was=el.classList.contains('on');
+    el.classList.toggle('on',on);
+    el.textContent=on?'★':'☆';
+    if(on&&!was) el.setAttribute('title','已在生词本（点击移出）');
+    else if(!on) el.setAttribute('title','加入生词本');
+  });
+ }
+ function onStar(e){
+  var b=e.target.closest('.star'); if(!b) return;
+  e.preventDefault(); e.stopPropagation();
+  var host=b.closest('[data-w]')||b.closest('.card')||b.closest('tr');
+  var rec=entry(host, b.dataset.star);
+  var added=toggle(rec);
+  var fab=document.getElementById('nbfab');
+  if(added&&fab){fab.classList.remove('wiggle');void fab.offsetWidth;fab.classList.add('wiggle');}
+ }
+ function txt(el){return el?el.textContent.trim():''}
+ function entry(host, w){
+  if(!host) return {w:w};
+  var mEl=host.querySelector('.m'), ipaEl=host.querySelector('.ipa');
+  var mean='';
+  if(mEl){var c=mEl.cloneNode(true);var d=c.querySelector('.dv');if(d)c.removeChild(d);mean=c.textContent.trim()}
+  var en=txt(host.querySelector('.ex .en')), zh=txt(host.querySelector('.ex .zh'));
+  return {w:w, p:txt(ipaEl), m:mean,
+          d:host.dataset.dv||'',
+          e:en, z:zh,
+          c:document.body.dataset.ch||'',
+          g:document.body.dataset.title||''};
+ }
+ document.addEventListener('click',onStar);
+ window.addEventListener('storage',function(e){if(e.key===KEY){mem=null;sync();}});
+ document.addEventListener('DOMContentLoaded',sync);
+ sync();
+ return {count:count,has:has,all:all,remove:remove,toggle:toggle,sync:sync,read:read};
+})();
+</script>
 <script>
 (function(){
  var KEY='vj-hide';
  var body=document.body;
  var kind=body.dataset.kind;
- var s={m:false,z:false,i:false};
- try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z; if(typeof o.i==='boolean')s.i=o.i;}}catch(e){}
+ var s={m:false,z:false,i:false,o:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw);
+   if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;
+   if(typeof o.i==='boolean')s.i=o.i; if(typeof o.o==='boolean')s.o=o.o;}}catch(e){}
  function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
  function paint(){
   body.classList.toggle('hide-m',s.m);
   body.classList.toggle('hide-z',s.z);
   body.classList.toggle('hide-i',s.i);
-  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all'), ci=document.getElementById('i');
+  var cm=document.getElementById('m'), cz=document.getElementById('z'),
+      ca=document.getElementById('all'), ci=document.getElementById('i'), co=document.getElementById('only');
   if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
   if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
   if(ci){ci.checked=s.i; ci.closest('.sw').classList.toggle('on',s.i);}
+  if(co){co.checked=s.o; co.closest('.sw').classList.toggle('on',s.o);}
   if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
  }
  var cm=document.getElementById('m');
@@ -270,12 +377,14 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
  var ci=document.getElementById('i');
  if(ci) ci.addEventListener('change',function(){s.i=ci.checked; save(); paint();});
+ var co=document.getElementById('only');
+ if(co) co.addEventListener('change',function(){s.o=co.checked; save(); paint(); filter();});
  var ca=document.getElementById('all');
  if(ca) ca.addEventListener('change',function(){
    s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
  });
  var rs=document.getElementById('reset');
- if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; s.i=false; save(); paint();});
+ if(rs) rs.addEventListener('click',function(){s.m=false;s.z=false;s.i=false;s.o=false;save();paint();filter();});
  var q=document.getElementById('q');
  var items=[].slice.call(document.querySelectorAll('[data-s]'));
  var cnt=document.getElementById('cnt');
@@ -283,11 +392,11 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
    var v=(q&&q.value||'').trim().toLowerCase();
    var n=0;
    items.forEach(function(el){
-     var hit=!v||el.dataset.s.indexOf(v)>-1;
+     var hit=(!v||el.dataset.s.indexOf(v)>-1) && (!s.o||NB.has(el.dataset.w));
      el.style.display=hit?'':'none';
      if(hit)n++;
    });
-   if(cnt) cnt.textContent=v? (n+' / '+items.length) : (items.length+' 条');
+   if(cnt) cnt.textContent=(v||s.o)? (n+' / '+items.length) : (items.length+' 条');
    var emp=document.getElementById('empty');
    if(emp) emp.style.display=(n===0)?'block':'none';
    document.querySelectorAll('section.grp').forEach(function(sec){
@@ -299,9 +408,10 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
      tb.style.display=vis?'':'none';
    });
  }
- if(q){q.addEventListener('input',filter);}
+ window.__filter=filter;
+ q.addEventListener('input',filter);
  document.addEventListener('keydown',function(e){
-   if(e.key==='/'&&document.activeElement!==q&&q){e.preventDefault();q.focus();}
+   if(e.key==='/'&&document.activeElement!==q){e.preventDefault();q.focus();}
    if(e.key==='Escape'&&document.activeElement===q){q.value='';filter();q.blur();}
  });
  paint(); filter();

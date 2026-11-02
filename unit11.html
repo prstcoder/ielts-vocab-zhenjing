@@ -17,7 +17,7 @@
 html,body{margin:0;padding:0}
 body{background:var(--bg);color:var(--ink);
  font:16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
- -webkit-font-smoothing:antialiased;padding-bottom:64px}
+ -webkit-font-smoothing:antialiased;padding-bottom:80px}
 a{color:inherit}
 .wrap{max-width:900px;margin:0 auto;padding:0 18px}
 
@@ -53,16 +53,35 @@ tbody td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover td{background:var(--accent-soft)}
 td.n{width:52px;color:var(--ink2);font-size:12.5px;font-variant-numeric:tabular-nums}
-td.w{width:32%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
+td.w{width:30%;font-weight:650;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:16.5px;
  letter-spacing:.2px;word-break:break-word}
 td.m{color:var(--ink)}
+td.sv{width:38px;text-align:center;padding-left:0;padding-right:8px}
 .ipa{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:12px;font-weight:400;
  color:var(--ink2);letter-spacing:0;margin-top:3px;word-break:break-word}
 .card .w .ipa{font-size:13px;margin-left:8px}
 tr.hit td.w,tr.hit td.m{background:var(--mark)}
 
+/* 衍生词 */
+.dv{margin-top:6px;font-size:12px;color:var(--ink2);line-height:1.9}
+.dv b{color:var(--accent);font-weight:700;font-size:10.5px;letter-spacing:.08em;margin-right:6px;
+ font-family:-apple-system,sans-serif;vertical-align:1px}
+.dv i{font-style:normal;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:13.5px;color:var(--ink);
+ letter-spacing:.1px}
+.dv em{font-style:normal;font-size:10.5px;opacity:.7;margin-left:2px;font-family:-apple-system,sans-serif}
+.dv .sep{opacity:.3;margin:0 7px}
+.hide-m .dv{display:none}
+
+/* 星标 */
+.star{font-family:inherit;font-size:15px;line-height:1;color:var(--ink2);background:transparent;border:0;
+ cursor:pointer;padding:3px 5px;border-radius:7px;opacity:.4;transition:.15s;vertical-align:2px}
+.star:hover{opacity:1;color:var(--accent);background:var(--accent-soft)}
+.star.on{opacity:1;color:var(--accent)}
+.card .w .star{font-size:17px;margin-left:6px}
+
 .cards{display:grid;gap:12px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px}.card .w{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:19px;font-weight:700;letter-spacing:.2px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px 17px}
+.card .w{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:19px;font-weight:700;letter-spacing:.2px}
 .card .w .idx{font-family:inherit;font-size:12px;color:var(--ink2);font-weight:400;margin-right:8px;
  font-variant-numeric:tabular-nums}
 .card .m{margin:5px 0 0;color:var(--ink);font-size:14.5px}
@@ -77,7 +96,6 @@ tr.gsep td{background:var(--chip);padding:5px 14px;border-bottom:1px solid var(-
 tbody.grp tr:first-child td{border-top:0}
 tbody.grp + tbody.grp tr.gsep td{border-top:8px solid var(--bg)}
 
-/* 卡片版：一个词群一块面板，组与组之间界限分明 */
 section.grp{background:var(--panel);border:1px solid var(--line);border-radius:16px;
  margin-bottom:16px;overflow:hidden}
 .ghead{display:flex;align-items:baseline;gap:9px;padding:9px 15px;background:var(--chip);
@@ -100,6 +118,16 @@ body.hide-m td.m{display:none!important}
 .nav a.dis{opacity:.35;pointer-events:none}
 footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
 
+/* 浮动生词本入口 */
+#nbfab{position:fixed;right:20px;bottom:20px;z-index:60;display:inline-flex;align-items:center;gap:8px;
+ padding:10px 17px;border-radius:999px;background:var(--accent);color:var(--panel);text-decoration:none;
+ font-size:13.5px;font-weight:700;letter-spacing:.02em;box-shadow:0 8px 24px rgba(0,0,0,.22);
+ padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+#nbfab b{font-variant-numeric:tabular-nums;font-size:15px}
+#nbfab:hover{filter:brightness(1.06)}
+#nbfab.wiggle{animation:wig .4s}
+@keyframes wig{0%{transform:scale(1)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
+
 @media (max-width:640px){
  body{font-size:15px}
  .wrap{padding:0 12px}
@@ -108,22 +136,25 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  table,tbody,tr,td{display:block;width:auto}
  table{border:0;background:transparent;border-radius:0}
  tbody tr{background:var(--panel);border:1px solid var(--line);border-radius:12px;
-  padding:11px 13px;margin-bottom:9px}
+  padding:11px 13px;margin-bottom:9px;position:relative}
  tbody td{border:0;padding:0}
  td.n{display:none}
  tr.gsep{display:block}
  tr.gsep td{display:block;background:transparent;padding:0 0 6px}
  tbody.grp{margin-bottom:6px;display:block}
- td.w{font-size:17px;margin-bottom:3px}
+ td.w{font-size:17px;margin-bottom:3px;width:auto}
  td.m{font-size:14px;color:var(--ink2)}
+ td.sv{position:absolute;right:8px;top:9px;width:auto;padding:0}
+ td.sv .star{font-size:19px}
+ #nbfab{right:12px;bottom:14px;padding:9px 14px;font-size:13px}
 }
 </style>
 </head>
-<body data-kind="list">
+<body data-kind="list" data-ch="11" data-title="时尚潮流">
 <div class="wrap"><div class="top">
  <a class="back" href="index.html">← 全部单元</a>
  <h1><span class="u">Unit 11</span> · 时尚潮流</h1>
- <p class="sub">112 词</p>
+ <p class="sub">112 词 · 42 词含衍生词</p>
 </div></div>
 <div class="toolbar"><div class="wrap">
  <div class="tools">
@@ -132,195 +163,271 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
   <label class="sw"><input type="checkbox" id="m"> 隐藏词义</label>
   <label class="sw"><input type="checkbox" id="i"> 隐藏音标</label>
   
+  <label class="sw"><input type="checkbox" id="only"> 只看生词</label>
   <button class="btn" id="reset">重置</button>
   <span class="count" id="cnt">112 条</span>
  </div>
-</div></div><div class="wrap"><table><thead><tr><th>#</th><th>单词</th><th>释义</th></tr></thead>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 01</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="fashion n. 时尚；流行；姿态；方式； v. 制作；把...塑造成；使适应"><td class="n">1</td><td class="w">fashion<div class="ipa">[ˈfæʃ(ə)n]</div></td><td class="m">n. 时尚；流行；姿态；方式； v. 制作；把...塑造成；使适应</td></tr>
-<tr data-s="style n. ⻛格；样式；方式；文 体"><td class="n">2</td><td class="w">style<div class="ipa">[staɪl]</div></td><td class="m">n. ⻛格；样式；方式；文 体</td></tr>
-<tr data-s="trend n. 趋势；走向；v. 倾向"><td class="n">3</td><td class="w">trend<div class="ipa">[trend]</div></td><td class="m">n. 趋势；走向；v. 倾向</td></tr>
-<tr data-s="tendency n. 趋势；倾向"><td class="n">4</td><td class="w">tendency<div class="ipa">[ˈtendənsi]</div></td><td class="m">n. 趋势；倾向</td></tr>
+</div></div><div class="wrap"><table><thead><tr><th>#</th><th>单词</th><th>释义</th><th></th></tr></thead>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 01</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="fashion n. 时尚；流行；姿态；方式； v. 制作；把...塑造成；使适应" data-w="fashion" data-dv="fashionable|adj.|"><td class="n">1</td><td class="w">fashion<div class="ipa">[ˈfæʃ(ə)n]</div></td><td class="m">n. 时尚；流行；姿态；方式； v. 制作；把...塑造成；使适应<div class="dv"><b>衍生</b><i>fashionable</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="fashion" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="style n. ⻛格；样式；方式；文 体" data-w="style" data-dv=""><td class="n">2</td><td class="w">style<div class="ipa">[staɪl]</div></td><td class="m">n. ⻛格；样式；方式；文 体</td><td class="sv"><button class="star" data-star="style" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="trend n. 趋势；走向；v. 倾向" data-w="trend" data-dv=""><td class="n">3</td><td class="w">trend<div class="ipa">[trend]</div></td><td class="m">n. 趋势；走向；v. 倾向</td><td class="sv"><button class="star" data-star="trend" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="tendency n. 趋势；倾向" data-w="tendency" data-dv=""><td class="n">4</td><td class="w">tendency<div class="ipa">[ˈtendənsi]</div></td><td class="m">n. 趋势；倾向</td><td class="sv"><button class="star" data-star="tendency" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 02</span><span class="gcnt">7 词</span></td></tr>
-<tr data-s="popularity n. 普及；流行"><td class="n">5</td><td class="w">popularity<div class="ipa">[ˌpɒpjuˈlærəti]</div></td><td class="m">n. 普及；流行</td></tr>
-<tr data-s="vogue n. 时髦；时兴"><td class="n">6</td><td class="w">vogue<div class="ipa">[vəʊɡ]</div></td><td class="m">n. 时髦；时兴</td></tr>
-<tr data-s="prevail v. 获胜；盛行；劝服"><td class="n">7</td><td class="w">prevail<div class="ipa">[prɪˈveɪl]</div></td><td class="m">v. 获胜；盛行；劝服</td></tr>
-<tr data-s="model n. 模型；模特儿；模范；型号； v. 将...做成模型；当模特儿"><td class="n">8</td><td class="w">model<div class="ipa">[ˈmɒd(ə)l]</div></td><td class="m">n. 模型；模特儿；模范；型号； v. 将...做成模型；当模特儿</td></tr>
-<tr data-s="icon n. 图标；画像；雕像；圣 像；偶像"><td class="n">9</td><td class="w">icon<div class="ipa">[ˈaɪkɒn]</div></td><td class="m">n. 图标；画像；雕像；圣 像；偶像</td></tr>
-<tr data-s="idol n. 偶像；神像"><td class="n">10</td><td class="w">idol<div class="ipa">[ˈaɪd(ə)l]</div></td><td class="m">n. 偶像；神像</td></tr>
-<tr data-s="luxury n. 奢华；奢侈品；难得的 享受"><td class="n">11</td><td class="w">luxury<div class="ipa">[ˈlʌkʃəri]</div></td><td class="m">n. 奢华；奢侈品；难得的 享受</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 02</span><span class="gcnt">7 词</span></td></tr>
+<tr data-s="popularity n. 普及；流行" data-w="popularity" data-dv=""><td class="n">5</td><td class="w">popularity<div class="ipa">[ˌpɒpjuˈlærəti]</div></td><td class="m">n. 普及；流行</td><td class="sv"><button class="star" data-star="popularity" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="vogue n. 时髦；时兴" data-w="vogue" data-dv=""><td class="n">6</td><td class="w">vogue<div class="ipa">[vəʊɡ]</div></td><td class="m">n. 时髦；时兴</td><td class="sv"><button class="star" data-star="vogue" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="prevail v. 获胜；盛行；劝服" data-w="prevail" data-dv=""><td class="n">7</td><td class="w">prevail<div class="ipa">[prɪˈveɪl]</div></td><td class="m">v. 获胜；盛行；劝服</td><td class="sv"><button class="star" data-star="prevail" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="model n. 模型；模特儿；模范；型号； v. 将...做成模型；当模特儿" data-w="model" data-dv="modelling|v.|"><td class="n">8</td><td class="w">model<div class="ipa">[ˈmɒd(ə)l]</div></td><td class="m">n. 模型；模特儿；模范；型号； v. 将...做成模型；当模特儿<div class="dv"><b>衍生</b><i>modelling</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="model" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="icon n. 图标；画像；雕像；圣 像；偶像" data-w="icon" data-dv=""><td class="n">9</td><td class="w">icon<div class="ipa">[ˈaɪkɒn]</div></td><td class="m">n. 图标；画像；雕像；圣 像；偶像</td><td class="sv"><button class="star" data-star="icon" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="idol n. 偶像；神像" data-w="idol" data-dv="idolize|v.|;;idolise|v.|"><td class="n">10</td><td class="w">idol<div class="ipa">[ˈaɪd(ə)l]</div></td><td class="m">n. 偶像；神像<div class="dv"><b>衍生</b><i>idolize</i><em>v.</em><span class="sep">·</span><i>idolise</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="idol" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="luxury n. 奢华；奢侈品；难得的 享受" data-w="luxury" data-dv=""><td class="n">11</td><td class="w">luxury<div class="ipa">[ˈlʌkʃəri]</div></td><td class="m">n. 奢华；奢侈品；难得的 享受</td><td class="sv"><button class="star" data-star="luxury" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 03</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="extravagant adj. 奢侈的；过度的"><td class="n">12</td><td class="w">extravagant<div class="ipa">[ɪkˈstrævəɡənt]</div></td><td class="m">adj. 奢侈的；过度的</td></tr>
-<tr data-s="jewellery n. 珠宝；首饰"><td class="n">13</td><td class="w">jewellery<div class="ipa">[ˈdʒuːəlri]</div></td><td class="m">n. 珠宝；首饰</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 03</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="extravagant adj. 奢侈的；过度的" data-w="extravagant" data-dv="extravagantly|adv.|;;extravagantness|n.|"><td class="n">12</td><td class="w">extravagant<div class="ipa">[ɪkˈstrævəɡənt]</div></td><td class="m">adj. 奢侈的；过度的<div class="dv"><b>衍生</b><i>extravagantly</i><em>adv.</em><span class="sep">·</span><i>extravagantness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="extravagant" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="jewellery n. 珠宝；首饰" data-w="jewellery" data-dv=""><td class="n">13</td><td class="w">jewellery<div class="ipa">[ˈdʒuːəlri]</div></td><td class="m">n. 珠宝；首饰</td><td class="sv"><button class="star" data-star="jewellery" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 04</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="jewel n. 宝石；珠宝"><td class="n">14</td><td class="w">jewel<div class="ipa">[ˈdʒuːəl]</div></td><td class="m">n. 宝石；珠宝</td></tr>
-<tr data-s="gem n. 宝石；珍品；受人重视 者；v. 饰以宝石"><td class="n">15</td><td class="w">gem<div class="ipa">[dʒem]</div></td><td class="m">n. 宝石；珍品；受人重视 者；v. 饰以宝石</td></tr>
-<tr data-s="jade n. 玉；翡翠"><td class="n">16</td><td class="w">jade<div class="ipa">[dʒeɪd]</div></td><td class="m">n. 玉；翡翠</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 04</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="jewel n. 宝石；珠宝" data-w="jewel" data-dv=""><td class="n">14</td><td class="w">jewel<div class="ipa">[ˈdʒuːəl]</div></td><td class="m">n. 宝石；珠宝</td><td class="sv"><button class="star" data-star="jewel" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="gem n. 宝石；珍品；受人重视 者；v. 饰以宝石" data-w="gem" data-dv=""><td class="n">15</td><td class="w">gem<div class="ipa">[dʒem]</div></td><td class="m">n. 宝石；珍品；受人重视 者；v. 饰以宝石</td><td class="sv"><button class="star" data-star="gem" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="jade n. 玉；翡翠" data-w="jade" data-dv=""><td class="n">16</td><td class="w">jade<div class="ipa">[dʒeɪd]</div></td><td class="m">n. 玉；翡翠</td><td class="sv"><button class="star" data-star="jade" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 05</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="adorn v. 装饰；佩戴；使美观"><td class="n">17</td><td class="w">adorn<div class="ipa">[əˈdɔːn]</div></td><td class="m">v. 装饰；佩戴；使美观</td></tr>
-<tr data-s="ornament n. 装饰；装饰品；v. 装 饰；美化"><td class="n">18</td><td class="w">ornament<div class="ipa">[ˈɔːnəmənt]</div></td><td class="m">n. 装饰；装饰品；v. 装 饰；美化</td></tr>
-<tr data-s="embellish v. 美化；装饰；渲染"><td class="n">19</td><td class="w">embellish<div class="ipa">[ɪmˈbelɪʃ]</div></td><td class="m">v. 美化；装饰；渲染</td></tr>
-<tr data-s="embroider v. 刺绣；绣(花)；加以 渲染(或润色)"><td class="n">20</td><td class="w">embroider<div class="ipa">[ɪmˈbrɔɪdə(r)]</div></td><td class="m">v. 刺绣；绣(花)；加以 渲染(或润色)</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 05</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="adorn v. 装饰；佩戴；使美观" data-w="adorn" data-dv=""><td class="n">17</td><td class="w">adorn<div class="ipa">[əˈdɔːn]</div></td><td class="m">v. 装饰；佩戴；使美观</td><td class="sv"><button class="star" data-star="adorn" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="ornament n. 装饰；装饰品；v. 装 饰；美化" data-w="ornament" data-dv="ornamental|adj.|"><td class="n">18</td><td class="w">ornament<div class="ipa">[ˈɔːnəmənt]</div></td><td class="m">n. 装饰；装饰品；v. 装 饰；美化<div class="dv"><b>衍生</b><i>ornamental</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="ornament" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="embellish v. 美化；装饰；渲染" data-w="embellish" data-dv=""><td class="n">19</td><td class="w">embellish<div class="ipa">[ɪmˈbelɪʃ]</div></td><td class="m">v. 美化；装饰；渲染</td><td class="sv"><button class="star" data-star="embellish" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="embroider v. 刺绣；绣(花)；加以 渲染(或润色)" data-w="embroider" data-dv="embroidered|v.|"><td class="n">20</td><td class="w">embroider<div class="ipa">[ɪmˈbrɔɪdə(r)]</div></td><td class="m">v. 刺绣；绣(花)；加以 渲染(或润色)<div class="dv"><b>衍生</b><i>embroidered</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="embroider" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 06</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="hairdressing n. 理发；理发业"><td class="n">21</td><td class="w">hairdressing<div class="ipa">[ˈheədresɪŋ]</div></td><td class="m">n. 理发；理发业</td></tr>
-<tr data-s="pigment n. 色素；颜料"><td class="n">22</td><td class="w">pigment<div class="ipa">[ˈpɪɡmənt]</div></td><td class="m">n. 色素；颜料</td></tr>
-<tr data-s="dye v. 给...染色 ；n. 染料"><td class="n">23</td><td class="w">dye<div class="ipa">[daɪ]</div></td><td class="m">v. 给...染色 ；n. 染料</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 06</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="hairdressing n. 理发；理发业" data-w="hairdressing" data-dv=""><td class="n">21</td><td class="w">hairdressing<div class="ipa">[ˈheədresɪŋ]</div></td><td class="m">n. 理发；理发业</td><td class="sv"><button class="star" data-star="hairdressing" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pigment n. 色素；颜料" data-w="pigment" data-dv=""><td class="n">22</td><td class="w">pigment<div class="ipa">[ˈpɪɡmənt]</div></td><td class="m">n. 色素；颜料</td><td class="sv"><button class="star" data-star="pigment" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="dye v. 给...染色 ；n. 染料" data-w="dye" data-dv=""><td class="n">23</td><td class="w">dye<div class="ipa">[daɪ]</div></td><td class="m">v. 给...染色 ；n. 染料</td><td class="sv"><button class="star" data-star="dye" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 07</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="masquerade n. 化妆舞会；伪装；v. 伪 装；冒充"><td class="n">24</td><td class="w">masquerade<div class="ipa">[mɑːskəˈreɪd]</div></td><td class="m">n. 化妆舞会；伪装；v. 伪 装；冒充</td></tr>
-<tr data-s="veil n. 面纱；遮盖物；v. 蒙上 面纱；隐藏；掩饰"><td class="n">25</td><td class="w">veil<div class="ipa">[veɪl]</div></td><td class="m">n. 面纱；遮盖物；v. 蒙上 面纱；隐藏；掩饰</td></tr>
-<tr data-s="costume n. 服装；衣服；戏服；v. 给...穿上服装"><td class="n">26</td><td class="w">costume<div class="ipa">[ˈkɒstjuːm]</div></td><td class="m">n. 服装；衣服；戏服；v. 给...穿上服装</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 07</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="masquerade n. 化妆舞会；伪装；v. 伪 装；冒充" data-w="masquerade" data-dv=""><td class="n">24</td><td class="w">masquerade<div class="ipa">[mɑːskəˈreɪd]</div></td><td class="m">n. 化妆舞会；伪装；v. 伪 装；冒充</td><td class="sv"><button class="star" data-star="masquerade" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="veil n. 面纱；遮盖物；v. 蒙上 面纱；隐藏；掩饰" data-w="veil" data-dv=""><td class="n">25</td><td class="w">veil<div class="ipa">[veɪl]</div></td><td class="m">n. 面纱；遮盖物；v. 蒙上 面纱；隐藏；掩饰</td><td class="sv"><button class="star" data-star="veil" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="costume n. 服装；衣服；戏服；v. 给...穿上服装" data-w="costume" data-dv=""><td class="n">26</td><td class="w">costume<div class="ipa">[ˈkɒstjuːm]</div></td><td class="m">n. 服装；衣服；戏服；v. 给...穿上服装</td><td class="sv"><button class="star" data-star="costume" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 08</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="fascinate v. 强烈吸引住；使着迷"><td class="n">27</td><td class="w">fascinate<div class="ipa">[ˈfæsɪneɪt]</div></td><td class="m">v. 强烈吸引住；使着迷</td></tr>
-<tr data-s="decent adj. 像样的；体面的；正 派的"><td class="n">28</td><td class="w">decent<div class="ipa">[ˈdiːs(ə)nt]</div></td><td class="m">adj. 像样的；体面的；正 派的</td></tr>
-<tr data-s="exquisite adj. 精美的；细腻的；强 烈的"><td class="n">29</td><td class="w">exquisite<div class="ipa">[ɪkˈskwɪzɪt]</div></td><td class="m">adj. 精美的；细腻的；强 烈的</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 08</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="fascinate v. 强烈吸引住；使着迷" data-w="fascinate" data-dv="fascination|n.|"><td class="n">27</td><td class="w">fascinate<div class="ipa">[ˈfæsɪneɪt]</div></td><td class="m">v. 强烈吸引住；使着迷<div class="dv"><b>衍生</b><i>fascination</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="fascinate" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="decent adj. 像样的；体面的；正 派的" data-w="decent" data-dv="decently|adv.|;;decentness|n.|;;indecent|adj.|"><td class="n">28</td><td class="w">decent<div class="ipa">[ˈdiːs(ə)nt]</div></td><td class="m">adj. 像样的；体面的；正 派的<div class="dv"><b>衍生</b><i>decently</i><em>adv.</em><span class="sep">·</span><i>decentness</i><em>n.</em><span class="sep">·</span><i>indecent</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="decent" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="exquisite adj. 精美的；细腻的；强 烈的" data-w="exquisite" data-dv="exquisitely|adv.|;;exquisiteness|n.|"><td class="n">29</td><td class="w">exquisite<div class="ipa">[ɪkˈskwɪzɪt]</div></td><td class="m">adj. 精美的；细腻的；强 烈的<div class="dv"><b>衍生</b><i>exquisitely</i><em>adv.</em><span class="sep">·</span><i>exquisiteness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="exquisite" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 09</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="grace n. 优雅；恩宠"><td class="n">30</td><td class="w">grace<div class="ipa">[ɡreɪs]</div></td><td class="m">n. 优雅；恩宠</td></tr>
-<tr data-s="elegance n. 高雅；典雅；优雅"><td class="n">31</td><td class="w">elegance<div class="ipa">[ˈelɪɡəns]</div></td><td class="m">n. 高雅；典雅；优雅</td></tr>
-<tr data-s="perfect adj. 完备的；完美的；v. 使完美"><td class="n">32</td><td class="w">perfect<div class="ipa">[ˈpɜːfɪkt]</div></td><td class="m">adj. 完备的；完美的；v. 使完美</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 09</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="grace n. 优雅；恩宠" data-w="grace" data-dv="graceful|adj.|"><td class="n">30</td><td class="w">grace<div class="ipa">[ɡreɪs]</div></td><td class="m">n. 优雅；恩宠<div class="dv"><b>衍生</b><i>graceful</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="grace" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="elegance n. 高雅；典雅；优雅" data-w="elegance" data-dv=""><td class="n">31</td><td class="w">elegance<div class="ipa">[ˈelɪɡəns]</div></td><td class="m">n. 高雅；典雅；优雅</td><td class="sv"><button class="star" data-star="elegance" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="perfect adj. 完备的；完美的；v. 使完美" data-w="perfect" data-dv="perfectly|adv.|;;perfection|n.|;;perfectness|n.|"><td class="n">32</td><td class="w">perfect<div class="ipa">[ˈpɜːfɪkt]</div></td><td class="m">adj. 完备的；完美的；v. 使完美<div class="dv"><b>衍生</b><i>perfectly</i><em>adv.</em><span class="sep">·</span><i>perfection</i><em>n.</em><span class="sep">·</span><i>perfectness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="perfect" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 10</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="appearance n. 出现；露面；外观；外 表"><td class="n">33</td><td class="w">appearance<div class="ipa">[əˈpɪərəns]</div></td><td class="m">n. 出现；露面；外观；外 表</td></tr>
-<tr data-s="cosmetics n. 化妆品；美容品； “cosmetic”的复数"><td class="n">34</td><td class="w">cosmetics<div class="ipa">[kɒzˈmetɪks]</div></td><td class="m">n. 化妆品；美容品； “cosmetic”的复数</td></tr>
-<tr data-s="make-up n. 化妆品；性格；构成； 补考"><td class="n">35</td><td class="w">make-up<div class="ipa">[ˈmeɪk ʌp]</div></td><td class="m">n. 化妆品；性格；构成； 补考</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 10</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="appearance n. 出现；露面；外观；外 表" data-w="appearance" data-dv=""><td class="n">33</td><td class="w">appearance<div class="ipa">[əˈpɪərəns]</div></td><td class="m">n. 出现；露面；外观；外 表</td><td class="sv"><button class="star" data-star="appearance" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cosmetics n. 化妆品；美容品； “cosmetic”的复数" data-w="cosmetics" data-dv=""><td class="n">34</td><td class="w">cosmetics<div class="ipa">[kɒzˈmetɪks]</div></td><td class="m">n. 化妆品；美容品； “cosmetic”的复数</td><td class="sv"><button class="star" data-star="cosmetics" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="make-up n. 化妆品；性格；构成； 补考" data-w="make-up" data-dv=""><td class="n">35</td><td class="w">make-up<div class="ipa">[ˈmeɪk ʌp]</div></td><td class="m">n. 化妆品；性格；构成； 补考</td><td class="sv"><button class="star" data-star="make-up" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 11</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="handsome adj. 英俊的；丰厚的"><td class="n">36</td><td class="w">handsome<div class="ipa">[ˈhænsəm]</div></td><td class="m">adj. 英俊的；丰厚的</td></tr>
-<tr data-s="charming adj. 迷人的；娇媚的；v. 使 着迷；“charm”的现在分词"><td class="n">37</td><td class="w">charming<div class="ipa">[ˈtʃɑːmɪŋ]</div></td><td class="m">adj. 迷人的；娇媚的；v. 使 着迷；“charm”的现在分词</td></tr>
-<tr data-s="pretty adv. 很；相当；adj. 漂亮 的"><td class="n">38</td><td class="w">pretty<div class="ipa">[ˈprɪti]</div></td><td class="m">adv. 很；相当；adj. 漂亮 的</td></tr>
-<tr data-s="beautiful adj. 漂亮的"><td class="n">39</td><td class="w">beautiful<div class="ipa">[ˈbjuːtɪf(ə)l]</div></td><td class="m">adj. 漂亮的</td></tr>
-<tr data-s="ugly adj. 丑陋的；难看的"><td class="n">40</td><td class="w">ugly<div class="ipa">[ˈʌɡli]</div></td><td class="m">adj. 丑陋的；难看的</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 11</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="handsome adj. 英俊的；丰厚的" data-w="handsome" data-dv="handsomely|adv.|;;handsomeness|n.|"><td class="n">36</td><td class="w">handsome<div class="ipa">[ˈhænsəm]</div></td><td class="m">adj. 英俊的；丰厚的<div class="dv"><b>衍生</b><i>handsomely</i><em>adv.</em><span class="sep">·</span><i>handsomeness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="handsome" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="charming adj. 迷人的；娇媚的；v. 使 着迷；“charm”的现在分词" data-w="charming" data-dv="charmingly|adv.|;;charmingness|n.|"><td class="n">37</td><td class="w">charming<div class="ipa">[ˈtʃɑːmɪŋ]</div></td><td class="m">adj. 迷人的；娇媚的；v. 使 着迷；“charm”的现在分词<div class="dv"><b>衍生</b><i>charmingly</i><em>adv.</em><span class="sep">·</span><i>charmingness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="charming" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pretty adv. 很；相当；adj. 漂亮 的" data-w="pretty" data-dv="prettily|adv.|;;prettiness|n.|"><td class="n">38</td><td class="w">pretty<div class="ipa">[ˈprɪti]</div></td><td class="m">adv. 很；相当；adj. 漂亮 的<div class="dv"><b>衍生</b><i>prettily</i><em>adv.</em><span class="sep">·</span><i>prettiness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="pretty" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="beautiful adj. 漂亮的" data-w="beautiful" data-dv="beautifully|adv.|;;beautifulness|n.|"><td class="n">39</td><td class="w">beautiful<div class="ipa">[ˈbjuːtɪf(ə)l]</div></td><td class="m">adj. 漂亮的<div class="dv"><b>衍生</b><i>beautifully</i><em>adv.</em><span class="sep">·</span><i>beautifulness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="beautiful" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="ugly adj. 丑陋的；难看的" data-w="ugly" data-dv="uglily|adv.|;;ugliness|n.|;;unugly|adj.|"><td class="n">40</td><td class="w">ugly<div class="ipa">[ˈʌɡli]</div></td><td class="m">adj. 丑陋的；难看的<div class="dv"><b>衍生</b><i>uglily</i><em>adv.</em><span class="sep">·</span><i>ugliness</i><em>n.</em><span class="sep">·</span><i>unugly</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="ugly" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 12</span><span class="gcnt">6 词</span></td></tr>
-<tr data-s="dress n. 连衣裙；衣服；v. (给...)穿衣服"><td class="n">41</td><td class="w">dress<div class="ipa">[dres]</div></td><td class="m">n. 连衣裙；衣服；v. (给...)穿衣服</td></tr>
-<tr data-s="clothe v. 给...穿衣；供给衣服"><td class="n">42</td><td class="w">clothe<div class="ipa">[kləʊð]</div></td><td class="m">v. 给...穿衣；供给衣服</td></tr>
-<tr data-s="uniform adj. 一致的；统一的；n. 制服"><td class="n">43</td><td class="w">uniform<div class="ipa">[ˈjuːnɪfɔːm]</div></td><td class="m">adj. 一致的；统一的；n. 制服</td></tr>
-<tr data-s="garment n. 衣服；外衣；v. 给...穿 衣服"><td class="n">44</td><td class="w">garment<div class="ipa">[ˈɡɑːmənt]</div></td><td class="m">n. 衣服；外衣；v. 给...穿 衣服</td></tr>
-<tr data-s="laundry n. 洗衣店；要洗的衣物"><td class="n">45</td><td class="w">laundry<div class="ipa">[ˈlɔːndri]</div></td><td class="m">n. 洗衣店；要洗的衣物</td></tr>
-<tr data-s="wardrobe n. 衣柜；衣橱"><td class="n">46</td><td class="w">wardrobe<div class="ipa">[ˈwɔːdrəʊb]</div></td><td class="m">n. 衣柜；衣橱</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 12</span><span class="gcnt">6 词</span></td></tr>
+<tr data-s="dress n. 连衣裙；衣服；v. (给...)穿衣服" data-w="dress" data-dv="dresser|n.|"><td class="n">41</td><td class="w">dress<div class="ipa">[dres]</div></td><td class="m">n. 连衣裙；衣服；v. (给...)穿衣服<div class="dv"><b>衍生</b><i>dresser</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="dress" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="clothe v. 给...穿衣；供给衣服" data-w="clothe" data-dv=""><td class="n">42</td><td class="w">clothe<div class="ipa">[kləʊð]</div></td><td class="m">v. 给...穿衣；供给衣服</td><td class="sv"><button class="star" data-star="clothe" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="uniform adj. 一致的；统一的；n. 制服" data-w="uniform" data-dv="uniformly|adv.|;;uniformness|n.|"><td class="n">43</td><td class="w">uniform<div class="ipa">[ˈjuːnɪfɔːm]</div></td><td class="m">adj. 一致的；统一的；n. 制服<div class="dv"><b>衍生</b><i>uniformly</i><em>adv.</em><span class="sep">·</span><i>uniformness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="uniform" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="garment n. 衣服；外衣；v. 给...穿 衣服" data-w="garment" data-dv=""><td class="n">44</td><td class="w">garment<div class="ipa">[ˈɡɑːmənt]</div></td><td class="m">n. 衣服；外衣；v. 给...穿 衣服</td><td class="sv"><button class="star" data-star="garment" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="laundry n. 洗衣店；要洗的衣物" data-w="laundry" data-dv=""><td class="n">45</td><td class="w">laundry<div class="ipa">[ˈlɔːndri]</div></td><td class="m">n. 洗衣店；要洗的衣物</td><td class="sv"><button class="star" data-star="laundry" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="wardrobe n. 衣柜；衣橱" data-w="wardrobe" data-dv=""><td class="n">46</td><td class="w">wardrobe<div class="ipa">[ˈwɔːdrəʊb]</div></td><td class="m">n. 衣柜；衣橱</td><td class="sv"><button class="star" data-star="wardrobe" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 13</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="overall adv. 全部；总计；大致上；n. (工作时穿的)罩衣；adj. 总的； 全面的；总体的"><td class="n">47</td><td class="w">overall<div class="ipa">[ˌəʊvərˈɔːl]</div></td><td class="m">adv. 全部；总计；大致上；n. (工作时穿的)罩衣；adj. 总的； 全面的；总体的</td></tr>
-<tr data-s="overcoat n. 大衣；外套"><td class="n">48</td><td class="w">overcoat<div class="ipa">[ˈəʊvəkəʊt]</div></td><td class="m">n. 大衣；外套</td></tr>
-<tr data-s="robe n. ⻓袍；v. (使)穿上⻓ 袍"><td class="n">49</td><td class="w">robe<div class="ipa">[rəʊb]</div></td><td class="m">n. ⻓袍；v. (使)穿上⻓ 袍</td></tr>
-<tr data-s="gown n. ⻓袍；礼服；⻓外衣"><td class="n">50</td><td class="w">gown<div class="ipa">[ɡaʊn]</div></td><td class="m">n. ⻓袍；礼服；⻓外衣</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 13</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="overall adv. 全部；总计；大致上；n. (工作时穿的)罩衣；adj. 总的； 全面的；总体的" data-w="overall" data-dv=""><td class="n">47</td><td class="w">overall<div class="ipa">[ˌəʊvərˈɔːl]</div></td><td class="m">adv. 全部；总计；大致上；n. (工作时穿的)罩衣；adj. 总的； 全面的；总体的</td><td class="sv"><button class="star" data-star="overall" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="overcoat n. 大衣；外套" data-w="overcoat" data-dv=""><td class="n">48</td><td class="w">overcoat<div class="ipa">[ˈəʊvəkəʊt]</div></td><td class="m">n. 大衣；外套</td><td class="sv"><button class="star" data-star="overcoat" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="robe n. ⻓袍；v. (使)穿上⻓ 袍" data-w="robe" data-dv=""><td class="n">49</td><td class="w">robe<div class="ipa">[rəʊb]</div></td><td class="m">n. ⻓袍；v. (使)穿上⻓ 袍</td><td class="sv"><button class="star" data-star="robe" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="gown n. ⻓袍；礼服；⻓外衣" data-w="gown" data-dv=""><td class="n">50</td><td class="w">gown<div class="ipa">[ɡaʊn]</div></td><td class="m">n. ⻓袍；礼服；⻓外衣</td><td class="sv"><button class="star" data-star="gown" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 14</span><span class="gcnt">7 词</span></td></tr>
-<tr data-s="sweater n. 毛衣"><td class="n">51</td><td class="w">sweater<div class="ipa">[ˈswetə(r)]</div></td><td class="m">n. 毛衣</td></tr>
-<tr data-s="jacket n. 夹克衫"><td class="n">52</td><td class="w">jacket<div class="ipa">[ˈdʒækɪt]</div></td><td class="m">n. 夹克衫</td></tr>
-<tr data-s="skirt n. 裙子；下摆；边缘；v. 位 于...的边缘；绕着...走；避开"><td class="n">53</td><td class="w">skirt<div class="ipa">[skɜːt]</div></td><td class="m">n. 裙子；下摆；边缘；v. 位 于...的边缘；绕着...走；避开</td></tr>
-<tr data-s="jeans n. 牛仔裤"><td class="n">54</td><td class="w">jeans<div class="ipa">[dʒiːnz]</div></td><td class="m">n. 牛仔裤</td></tr>
-<tr data-s="trousers n. 裤子；⻓裤"><td class="n">55</td><td class="w">trousers<div class="ipa">[ˈtraʊzəz]</div></td><td class="m">n. 裤子；⻓裤</td></tr>
-<tr data-s="clasp n. 钩；扣；紧握；紧抱； v. 抱紧；握紧；扣紧"><td class="n">56</td><td class="w">clasp<div class="ipa">[klɑːsp]</div></td><td class="m">n. 钩；扣；紧握；紧抱； v. 抱紧；握紧；扣紧</td></tr>
-<tr data-s="button n. 纽扣；按钮"><td class="n">57</td><td class="w">button<div class="ipa">[ˈbʌt(ə)n]</div></td><td class="m">n. 纽扣；按钮</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 14</span><span class="gcnt">7 词</span></td></tr>
+<tr data-s="sweater n. 毛衣" data-w="sweater" data-dv=""><td class="n">51</td><td class="w">sweater<div class="ipa">[ˈswetə(r)]</div></td><td class="m">n. 毛衣</td><td class="sv"><button class="star" data-star="sweater" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="jacket n. 夹克衫" data-w="jacket" data-dv=""><td class="n">52</td><td class="w">jacket<div class="ipa">[ˈdʒækɪt]</div></td><td class="m">n. 夹克衫</td><td class="sv"><button class="star" data-star="jacket" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="skirt n. 裙子；下摆；边缘；v. 位 于...的边缘；绕着...走；避开" data-w="skirt" data-dv=""><td class="n">53</td><td class="w">skirt<div class="ipa">[skɜːt]</div></td><td class="m">n. 裙子；下摆；边缘；v. 位 于...的边缘；绕着...走；避开</td><td class="sv"><button class="star" data-star="skirt" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="jeans n. 牛仔裤" data-w="jeans" data-dv=""><td class="n">54</td><td class="w">jeans<div class="ipa">[dʒiːnz]</div></td><td class="m">n. 牛仔裤</td><td class="sv"><button class="star" data-star="jeans" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="trousers n. 裤子；⻓裤" data-w="trousers" data-dv=""><td class="n">55</td><td class="w">trousers<div class="ipa">[ˈtraʊzəz]</div></td><td class="m">n. 裤子；⻓裤</td><td class="sv"><button class="star" data-star="trousers" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="clasp n. 钩；扣；紧握；紧抱； v. 抱紧；握紧；扣紧" data-w="clasp" data-dv=""><td class="n">56</td><td class="w">clasp<div class="ipa">[klɑːsp]</div></td><td class="m">n. 钩；扣；紧握；紧抱； v. 抱紧；握紧；扣紧</td><td class="sv"><button class="star" data-star="clasp" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="button n. 纽扣；按钮" data-w="button" data-dv=""><td class="n">57</td><td class="w">button<div class="ipa">[ˈbʌt(ə)n]</div></td><td class="m">n. 纽扣；按钮</td><td class="sv"><button class="star" data-star="button" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 15</span><span class="gcnt">8 词</span></td></tr>
-<tr data-s="glove n. 手套"><td class="n">58</td><td class="w">glove<div class="ipa">[ɡlʌv]</div></td><td class="m">n. 手套</td></tr>
-<tr data-s="hat n. 帽子"><td class="n">59</td><td class="w">hat<div class="ipa">[hæt]</div></td><td class="m">n. 帽子</td></tr>
-<tr data-s="cap n. 帽子；v. 覆盖...的顶部"><td class="n">60</td><td class="w">cap<div class="ipa">[kæp]</div></td><td class="m">n. 帽子；v. 覆盖...的顶部</td></tr>
-<tr data-s="brim n. 边；边缘；帽边；v. (装)满；(使)溢出"><td class="n">61</td><td class="w">brim<div class="ipa">[brɪm]</div></td><td class="m">n. 边；边缘；帽边；v. (装)满；(使)溢出</td></tr>
-<tr data-s="scarf n. 围巾；头巾；v. 围(围 巾)；披(披巾)"><td class="n">62</td><td class="w">scarf<div class="ipa">[skɑːf]</div></td><td class="m">n. 围巾；头巾；v. 围(围 巾)；披(披巾)</td></tr>
-<tr data-s="handkerchief n. 手帕；方巾"><td class="n">63</td><td class="w">handkerchief<div class="ipa">[ˈhæŋkətʃiːf]</div></td><td class="m">n. 手帕；方巾</td></tr>
-<tr data-s="purse n. 钱包；钱袋；女用小 包；资金；v. 噘嘴"><td class="n">64</td><td class="w">purse<div class="ipa">[pɜːs]</div></td><td class="m">n. 钱包；钱袋；女用小 包；资金；v. 噘嘴</td></tr>
-<tr data-s="wallet n. 钱包；皮夹；钱夹"><td class="n">65</td><td class="w">wallet<div class="ipa">[ˈwɒlɪt]</div></td><td class="m">n. 钱包；皮夹；钱夹</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 15</span><span class="gcnt">8 词</span></td></tr>
+<tr data-s="glove n. 手套" data-w="glove" data-dv=""><td class="n">58</td><td class="w">glove<div class="ipa">[ɡlʌv]</div></td><td class="m">n. 手套</td><td class="sv"><button class="star" data-star="glove" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="hat n. 帽子" data-w="hat" data-dv=""><td class="n">59</td><td class="w">hat<div class="ipa">[hæt]</div></td><td class="m">n. 帽子</td><td class="sv"><button class="star" data-star="hat" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cap n. 帽子；v. 覆盖...的顶部" data-w="cap" data-dv="capable|adj.|adj. 有能力的;;capped|v.|"><td class="n">60</td><td class="w">cap<div class="ipa">[kæp]</div></td><td class="m">n. 帽子；v. 覆盖...的顶部<div class="dv"><b>衍生</b><i>capable</i><em>adj.</em><span class="sep">·</span><i>capped</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="cap" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="brim n. 边；边缘；帽边；v. (装)满；(使)溢出" data-w="brim" data-dv="brimming|v.|"><td class="n">61</td><td class="w">brim<div class="ipa">[brɪm]</div></td><td class="m">n. 边；边缘；帽边；v. (装)满；(使)溢出<div class="dv"><b>衍生</b><i>brimming</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="brim" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="scarf n. 围巾；头巾；v. 围(围 巾)；披(披巾)" data-w="scarf" data-dv=""><td class="n">62</td><td class="w">scarf<div class="ipa">[skɑːf]</div></td><td class="m">n. 围巾；头巾；v. 围(围 巾)；披(披巾)</td><td class="sv"><button class="star" data-star="scarf" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="handkerchief n. 手帕；方巾" data-w="handkerchief" data-dv=""><td class="n">63</td><td class="w">handkerchief<div class="ipa">[ˈhæŋkətʃiːf]</div></td><td class="m">n. 手帕；方巾</td><td class="sv"><button class="star" data-star="handkerchief" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="purse n. 钱包；钱袋；女用小 包；资金；v. 噘嘴" data-w="purse" data-dv="purser|n.|"><td class="n">64</td><td class="w">purse<div class="ipa">[pɜːs]</div></td><td class="m">n. 钱包；钱袋；女用小 包；资金；v. 噘嘴<div class="dv"><b>衍生</b><i>purser</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="purse" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="wallet n. 钱包；皮夹；钱夹" data-w="wallet" data-dv=""><td class="n">65</td><td class="w">wallet<div class="ipa">[ˈwɒlɪt]</div></td><td class="m">n. 钱包；皮夹；钱夹</td><td class="sv"><button class="star" data-star="wallet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 16</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="vest n. 背心；⻢甲；汗衫；v. 授予；使穿衣"><td class="n">66</td><td class="w">vest<div class="ipa">[vest]</div></td><td class="m">n. 背心；⻢甲；汗衫；v. 授予；使穿衣</td></tr>
-<tr data-s="wrap v. 包；缠绕；覆盖；穿外衣；遮 蔽；n. 外套；围巾；包裹；包装材 料"><td class="n">67</td><td class="w">wrap<div class="ipa">[ræp]</div></td><td class="m">v. 包；缠绕；覆盖；穿外衣；遮 蔽；n. 外套；围巾；包裹；包装材 料</td></tr>
-<tr data-s="cloak n. 斗篷；掩护物；v. 隐 瞒；掩饰"><td class="n">68</td><td class="w">cloak<div class="ipa">[kləʊk]</div></td><td class="m">n. 斗篷；掩护物；v. 隐 瞒；掩饰</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 16</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="vest n. 背心；⻢甲；汗衫；v. 授予；使穿衣" data-w="vest" data-dv="vestal|n.|"><td class="n">66</td><td class="w">vest<div class="ipa">[vest]</div></td><td class="m">n. 背心；⻢甲；汗衫；v. 授予；使穿衣<div class="dv"><b>衍生</b><i>vestal</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="vest" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="wrap v. 包；缠绕；覆盖；穿外衣；遮 蔽；n. 外套；围巾；包裹；包装材 料" data-w="wrap" data-dv="wrapping|v.|"><td class="n">67</td><td class="w">wrap<div class="ipa">[ræp]</div></td><td class="m">v. 包；缠绕；覆盖；穿外衣；遮 蔽；n. 外套；围巾；包裹；包装材 料<div class="dv"><b>衍生</b><i>wrapping</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="wrap" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="cloak n. 斗篷；掩护物；v. 隐 瞒；掩饰" data-w="cloak" data-dv=""><td class="n">68</td><td class="w">cloak<div class="ipa">[kləʊk]</div></td><td class="m">n. 斗篷；掩护物；v. 隐 瞒；掩饰</td><td class="sv"><button class="star" data-star="cloak" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 17</span><span class="gcnt">7 词</span></td></tr>
-<tr data-s="collar n. 衣领；领子；v. 抓住； 给....上领子"><td class="n">69</td><td class="w">collar<div class="ipa">[ˈkɒlə(r)]</div></td><td class="m">n. 衣领；领子；v. 抓住； 给....上领子</td></tr>
-<tr data-s="sleeve n. 袖子"><td class="n">70</td><td class="w">sleeve<div class="ipa">[sliːv]</div></td><td class="m">n. 袖子</td></tr>
-<tr data-s="sock n. 短袜"><td class="n">71</td><td class="w">sock<div class="ipa">[sɒk]</div></td><td class="m">n. 短袜</td></tr>
-<tr data-s="stocking n. ⻓袜"><td class="n">72</td><td class="w">stocking<div class="ipa">[ˈstɒkɪŋ]</div></td><td class="m">n. ⻓袜</td></tr>
-<tr data-s="slipper n. 拖鞋"><td class="n">73</td><td class="w">slipper<div class="ipa">[ˈslɪpə(r)]</div></td><td class="m">n. 拖鞋</td></tr>
-<tr data-s="boot n. 靴子；⻓筒靴"><td class="n">74</td><td class="w">boot<div class="ipa">[buːt]</div></td><td class="m">n. 靴子；⻓筒靴</td></tr>
-<tr data-s="lace n. 鞋带；饰带；花边；缎 带；v. 系带子；饰以花边"><td class="n">75</td><td class="w">lace<div class="ipa">[leɪs]</div></td><td class="m">n. 鞋带；饰带；花边；缎 带；v. 系带子；饰以花边</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 17</span><span class="gcnt">7 词</span></td></tr>
+<tr data-s="collar n. 衣领；领子；v. 抓住； 给....上领子" data-w="collar" data-dv="collared|v.|"><td class="n">69</td><td class="w">collar<div class="ipa">[ˈkɒlə(r)]</div></td><td class="m">n. 衣领；领子；v. 抓住； 给....上领子<div class="dv"><b>衍生</b><i>collared</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="collar" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="sleeve n. 袖子" data-w="sleeve" data-dv=""><td class="n">70</td><td class="w">sleeve<div class="ipa">[sliːv]</div></td><td class="m">n. 袖子</td><td class="sv"><button class="star" data-star="sleeve" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="sock n. 短袜" data-w="sock" data-dv=""><td class="n">71</td><td class="w">sock<div class="ipa">[sɒk]</div></td><td class="m">n. 短袜</td><td class="sv"><button class="star" data-star="sock" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="stocking n. ⻓袜" data-w="stocking" data-dv=""><td class="n">72</td><td class="w">stocking<div class="ipa">[ˈstɒkɪŋ]</div></td><td class="m">n. ⻓袜</td><td class="sv"><button class="star" data-star="stocking" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="slipper n. 拖鞋" data-w="slipper" data-dv=""><td class="n">73</td><td class="w">slipper<div class="ipa">[ˈslɪpə(r)]</div></td><td class="m">n. 拖鞋</td><td class="sv"><button class="star" data-star="slipper" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="boot n. 靴子；⻓筒靴" data-w="boot" data-dv=""><td class="n">74</td><td class="w">boot<div class="ipa">[buːt]</div></td><td class="m">n. 靴子；⻓筒靴</td><td class="sv"><button class="star" data-star="boot" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="lace n. 鞋带；饰带；花边；缎 带；v. 系带子；饰以花边" data-w="lace" data-dv=""><td class="n">75</td><td class="w">lace<div class="ipa">[leɪs]</div></td><td class="m">n. 鞋带；饰带；花边；缎 带；v. 系带子；饰以花边</td><td class="sv"><button class="star" data-star="lace" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 18</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="tailor v. 剪裁；缝制；调整使适 应；n. 裁缝"><td class="n">76</td><td class="w">tailor<div class="ipa">[ˈteɪlə(r)]</div></td><td class="m">v. 剪裁；缝制；调整使适 应；n. 裁缝</td></tr>
-<tr data-s="sew v. 缝制；缝补"><td class="n">77</td><td class="w">sew<div class="ipa">[səʊ]</div></td><td class="m">v. 缝制；缝补</td></tr>
-<tr data-s="spin v. 纺(纱)；旋转；疾 驰；n. 旋转"><td class="n">78</td><td class="w">spin<div class="ipa">[spɪn]</div></td><td class="m">v. 纺(纱)；旋转；疾 驰；n. 旋转</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 18</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="tailor v. 剪裁；缝制；调整使适 应；n. 裁缝" data-w="tailor" data-dv="tailoring|v.|"><td class="n">76</td><td class="w">tailor<div class="ipa">[ˈteɪlə(r)]</div></td><td class="m">v. 剪裁；缝制；调整使适 应；n. 裁缝<div class="dv"><b>衍生</b><i>tailoring</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="tailor" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="sew v. 缝制；缝补" data-w="sew" data-dv=""><td class="n">77</td><td class="w">sew<div class="ipa">[səʊ]</div></td><td class="m">v. 缝制；缝补</td><td class="sv"><button class="star" data-star="sew" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="spin v. 纺(纱)；旋转；疾 驰；n. 旋转" data-w="spin" data-dv="spinal|n.|;;spinning|v.|"><td class="n">78</td><td class="w">spin<div class="ipa">[spɪn]</div></td><td class="m">v. 纺(纱)；旋转；疾 驰；n. 旋转<div class="dv"><b>衍生</b><i>spinal</i><em>n.</em><span class="sep">·</span><i>spinning</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="spin" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 19</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="stitch n. 针脚；缝线；一针；v. 缝；缝合"><td class="n">79</td><td class="w">stitch<div class="ipa">[stɪtʃ]</div></td><td class="m">n. 针脚；缝线；一针；v. 缝；缝合</td></tr>
-<tr data-s="needle n. 针"><td class="n">80</td><td class="w">needle<div class="ipa">[ˈniːd(ə)l]</div></td><td class="m">n. 针</td></tr>
-<tr data-s="pin n. 大头针；别针；v. (用 大头钉等)固定"><td class="n">81</td><td class="w">pin<div class="ipa">[pɪn]</div></td><td class="m">n. 大头针；别针；v. (用 大头钉等)固定</td></tr>
-<tr data-s="string n. 弦；线；一连串"><td class="n">82</td><td class="w">string<div class="ipa">[strɪŋ]</div></td><td class="m">n. 弦；线；一连串</td></tr>
-<tr data-s="thread n. 线；线索；思路；v. 穿 线于；穿过"><td class="n">83</td><td class="w">thread<div class="ipa">[θred]</div></td><td class="m">n. 线；线索；思路；v. 穿 线于；穿过</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 19</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="stitch n. 针脚；缝线；一针；v. 缝；缝合" data-w="stitch" data-dv=""><td class="n">79</td><td class="w">stitch<div class="ipa">[stɪtʃ]</div></td><td class="m">n. 针脚；缝线；一针；v. 缝；缝合</td><td class="sv"><button class="star" data-star="stitch" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="needle n. 针" data-w="needle" data-dv=""><td class="n">80</td><td class="w">needle<div class="ipa">[ˈniːd(ə)l]</div></td><td class="m">n. 针</td><td class="sv"><button class="star" data-star="needle" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pin n. 大头针；别针；v. (用 大头钉等)固定" data-w="pin" data-dv="pinning|v.|"><td class="n">81</td><td class="w">pin<div class="ipa">[pɪn]</div></td><td class="m">n. 大头针；别针；v. (用 大头钉等)固定<div class="dv"><b>衍生</b><i>pinning</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="pin" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="string n. 弦；线；一连串" data-w="string" data-dv=""><td class="n">82</td><td class="w">string<div class="ipa">[strɪŋ]</div></td><td class="m">n. 弦；线；一连串</td><td class="sv"><button class="star" data-star="string" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="thread n. 线；线索；思路；v. 穿 线于；穿过" data-w="thread" data-dv=""><td class="n">83</td><td class="w">thread<div class="ipa">[θred]</div></td><td class="m">n. 线；线索；思路；v. 穿 线于；穿过</td><td class="sv"><button class="star" data-star="thread" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 20</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="strap n. 带子；皮带；皮条；v. 用带缚住；包扎"><td class="n">84</td><td class="w">strap<div class="ipa">[stræp]</div></td><td class="m">n. 带子；皮带；皮条；v. 用带缚住；包扎</td></tr>
-<tr data-s="stripe n. 条纹；类型"><td class="n">85</td><td class="w">stripe<div class="ipa">[straɪp]</div></td><td class="m">n. 条纹；类型</td></tr>
-<tr data-s="ribbon n. 缎带；带状物；丝带"><td class="n">86</td><td class="w">ribbon<div class="ipa">[ˈrɪbən]</div></td><td class="m">n. 缎带；带状物；丝带</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 20</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="strap n. 带子；皮带；皮条；v. 用带缚住；包扎" data-w="strap" data-dv="strapless|adj.|;;strapping|v.|"><td class="n">84</td><td class="w">strap<div class="ipa">[stræp]</div></td><td class="m">n. 带子；皮带；皮条；v. 用带缚住；包扎<div class="dv"><b>衍生</b><i>strapless</i><em>adj.</em><span class="sep">·</span><i>strapping</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="strap" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="stripe n. 条纹；类型" data-w="stripe" data-dv=""><td class="n">85</td><td class="w">stripe<div class="ipa">[straɪp]</div></td><td class="m">n. 条纹；类型</td><td class="sv"><button class="star" data-star="stripe" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="ribbon n. 缎带；带状物；丝带" data-w="ribbon" data-dv=""><td class="n">86</td><td class="w">ribbon<div class="ipa">[ˈrɪbən]</div></td><td class="m">n. 缎带；带状物；丝带</td><td class="sv"><button class="star" data-star="ribbon" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 21</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="belt n. 腰带；皮带；传送带"><td class="n">87</td><td class="w">belt<div class="ipa">[belt]</div></td><td class="m">n. 腰带；皮带；传送带</td></tr>
-<tr data-s="chain n. 链条；链子；v. 用铁链 锁住"><td class="n">88</td><td class="w">chain<div class="ipa">[tʃeɪn]</div></td><td class="m">n. 链条；链子；v. 用铁链 锁住</td></tr>
-<tr data-s="bracelet n. 手镯"><td class="n">89</td><td class="w">bracelet<div class="ipa">[ˈbreɪslət]</div></td><td class="m">n. 手镯</td></tr>
-<tr data-s="necklace n. 项链"><td class="n">90</td><td class="w">necklace<div class="ipa">[ˈnekləs]</div></td><td class="m">n. 项链</td></tr>
-<tr data-s="bead n. 有孔的小珠；珠状物； 滴；v. 用珠装饰；形成珠状"><td class="n">91</td><td class="w">bead<div class="ipa">[biːd]</div></td><td class="m">n. 有孔的小珠；珠状物； 滴；v. 用珠装饰；形成珠状</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 21</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="belt n. 腰带；皮带；传送带" data-w="belt" data-dv=""><td class="n">87</td><td class="w">belt<div class="ipa">[belt]</div></td><td class="m">n. 腰带；皮带；传送带</td><td class="sv"><button class="star" data-star="belt" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="chain n. 链条；链子；v. 用铁链 锁住" data-w="chain" data-dv=""><td class="n">88</td><td class="w">chain<div class="ipa">[tʃeɪn]</div></td><td class="m">n. 链条；链子；v. 用铁链 锁住</td><td class="sv"><button class="star" data-star="chain" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="bracelet n. 手镯" data-w="bracelet" data-dv=""><td class="n">89</td><td class="w">bracelet<div class="ipa">[ˈbreɪslət]</div></td><td class="m">n. 手镯</td><td class="sv"><button class="star" data-star="bracelet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="necklace n. 项链" data-w="necklace" data-dv=""><td class="n">90</td><td class="w">necklace<div class="ipa">[ˈnekləs]</div></td><td class="m">n. 项链</td><td class="sv"><button class="star" data-star="necklace" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="bead n. 有孔的小珠；珠状物； 滴；v. 用珠装饰；形成珠状" data-w="bead" data-dv=""><td class="n">91</td><td class="w">bead<div class="ipa">[biːd]</div></td><td class="m">n. 有孔的小珠；珠状物； 滴；v. 用珠装饰；形成珠状</td><td class="sv"><button class="star" data-star="bead" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 22</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="textile n. 纺织品；纺织业"><td class="n">92</td><td class="w">textile<div class="ipa">[ˈtekstaɪl]</div></td><td class="m">n. 纺织品；纺织业</td></tr>
-<tr data-s="velvet n. 天鹅绒；丝绒；adj. 天 鹅绒的"><td class="n">93</td><td class="w">velvet<div class="ipa">[ˈvelvɪt]</div></td><td class="m">n. 天鹅绒；丝绒；adj. 天 鹅绒的</td></tr>
-<tr data-s="wool n. 羊毛；毛线"><td class="n">94</td><td class="w">wool<div class="ipa">[wʊl]</div></td><td class="m">n. 羊毛；毛线</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 22</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="textile n. 纺织品；纺织业" data-w="textile" data-dv=""><td class="n">92</td><td class="w">textile<div class="ipa">[ˈtekstaɪl]</div></td><td class="m">n. 纺织品；纺织业</td><td class="sv"><button class="star" data-star="textile" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="velvet n. 天鹅绒；丝绒；adj. 天 鹅绒的" data-w="velvet" data-dv=""><td class="n">93</td><td class="w">velvet<div class="ipa">[ˈvelvɪt]</div></td><td class="m">n. 天鹅绒；丝绒；adj. 天 鹅绒的</td><td class="sv"><button class="star" data-star="velvet" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="wool n. 羊毛；毛线" data-w="wool" data-dv="woolen|v.|"><td class="n">94</td><td class="w">wool<div class="ipa">[wʊl]</div></td><td class="m">n. 羊毛；毛线<div class="dv"><b>衍生</b><i>woolen</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="wool" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 23</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="patch n. 补丁；一小片；小块 地；v. 打补丁；缝补"><td class="n">95</td><td class="w">patch<div class="ipa">[pætʃ]</div></td><td class="m">n. 补丁；一小片；小块 地；v. 打补丁；缝补</td></tr>
-<tr data-s="rag n. 旧布,破布"><td class="n">96</td><td class="w">rag<div class="ipa">[ræɡ]</div></td><td class="m">n. 旧布,破布</td></tr>
-<tr data-s="shabby adj. 破旧的；肮脏破烂 的；衣衫褴褛的"><td class="n">97</td><td class="w">shabby<div class="ipa">[ˈʃæbi]</div></td><td class="m">adj. 破旧的；肮脏破烂 的；衣衫褴褛的</td></tr>
-<tr data-s="tight adj. 紧的；adv. 紧紧地"><td class="n">98</td><td class="w">tight<div class="ipa">[taɪt]</div></td><td class="m">adj. 紧的；adv. 紧紧地</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 23</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="patch n. 补丁；一小片；小块 地；v. 打补丁；缝补" data-w="patch" data-dv=""><td class="n">95</td><td class="w">patch<div class="ipa">[pætʃ]</div></td><td class="m">n. 补丁；一小片；小块 地；v. 打补丁；缝补</td><td class="sv"><button class="star" data-star="patch" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="rag n. 旧布,破布" data-w="rag" data-dv=""><td class="n">96</td><td class="w">rag<div class="ipa">[ræɡ]</div></td><td class="m">n. 旧布,破布</td><td class="sv"><button class="star" data-star="rag" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="shabby adj. 破旧的；肮脏破烂 的；衣衫褴褛的" data-w="shabby" data-dv="shabbily|adv.|;;shabbiness|n.|"><td class="n">97</td><td class="w">shabby<div class="ipa">[ˈʃæbi]</div></td><td class="m">adj. 破旧的；肮脏破烂 的；衣衫褴褛的<div class="dv"><b>衍生</b><i>shabbily</i><em>adv.</em><span class="sep">·</span><i>shabbiness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="shabby" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="tight adj. 紧的；adv. 紧紧地" data-w="tight" data-dv="tightly|adv.|;;tightness|n.|;;tighten|v.|"><td class="n">98</td><td class="w">tight<div class="ipa">[taɪt]</div></td><td class="m">adj. 紧的；adv. 紧紧地<div class="dv"><b>衍生</b><i>tightly</i><em>adv.</em><span class="sep">·</span><i>tightness</i><em>n.</em><span class="sep">·</span><i>tighten</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="tight" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 24</span><span class="gcnt">4 词</span></td></tr>
-<tr data-s="colour n. 颜色；v. 着色"><td class="n">99</td><td class="w">colour<div class="ipa">[ˈkʌlə(r)]</div></td><td class="m">n. 颜色；v. 着色</td></tr>
-<tr data-s="white adj. 白色的；n. 白色"><td class="n">100</td><td class="w">white<div class="ipa">[waɪt]</div></td><td class="m">adj. 白色的；n. 白色</td></tr>
-<tr data-s="yellow adj. ⻩色的；n. ⻩色"><td class="n">101</td><td class="w">yellow<div class="ipa">[ˈjeləʊ]</div></td><td class="m">adj. ⻩色的；n. ⻩色</td></tr>
-<tr data-s="brown adj. 褐色的；棕色的；n. 褐色；棕色"><td class="n">102</td><td class="w">brown<div class="ipa">[braʊn]</div></td><td class="m">adj. 褐色的；棕色的；n. 褐色；棕色</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 24</span><span class="gcnt">4 词</span></td></tr>
+<tr data-s="colour n. 颜色；v. 着色" data-w="colour" data-dv="colourful|adj.|"><td class="n">99</td><td class="w">colour<div class="ipa">[ˈkʌlə(r)]</div></td><td class="m">n. 颜色；v. 着色<div class="dv"><b>衍生</b><i>colourful</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="colour" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="white adj. 白色的；n. 白色" data-w="white" data-dv="whitely|adv.|;;whiteness|n.|"><td class="n">100</td><td class="w">white<div class="ipa">[waɪt]</div></td><td class="m">adj. 白色的；n. 白色<div class="dv"><b>衍生</b><i>whitely</i><em>adv.</em><span class="sep">·</span><i>whiteness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="white" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="yellow adj. ⻩色的；n. ⻩色" data-w="yellow" data-dv="yellowly|adv.|;;yellowness|n.|"><td class="n">101</td><td class="w">yellow<div class="ipa">[ˈjeləʊ]</div></td><td class="m">adj. ⻩色的；n. ⻩色<div class="dv"><b>衍生</b><i>yellowly</i><em>adv.</em><span class="sep">·</span><i>yellowness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="yellow" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="brown adj. 褐色的；棕色的；n. 褐色；棕色" data-w="brown" data-dv="brownly|adv.|;;brownness|n.|"><td class="n">102</td><td class="w">brown<div class="ipa">[braʊn]</div></td><td class="m">adj. 褐色的；棕色的；n. 褐色；棕色<div class="dv"><b>衍生</b><i>brownly</i><em>adv.</em><span class="sep">·</span><i>brownness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="brown" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 25</span><span class="gcnt">5 词</span></td></tr>
-<tr data-s="grey adj. 灰色的；暗淡的；n. 灰色；暗淡"><td class="n">103</td><td class="w">grey<div class="ipa">[ɡreɪ]</div></td><td class="m">adj. 灰色的；暗淡的；n. 灰色；暗淡</td></tr>
-<tr data-s="pink n. 粉红色；adj. 粉红色的"><td class="n">104</td><td class="w">pink<div class="ipa">[pɪŋk]</div></td><td class="m">n. 粉红色；adj. 粉红色的</td></tr>
-<tr data-s="purple n. 紫色；adj. 紫色的"><td class="n">105</td><td class="w">purple<div class="ipa">[ˈpɜːp(ə)l]</div></td><td class="m">n. 紫色；adj. 紫色的</td></tr>
-<tr data-s="tan n. 晒成棕褐色的肤色；adj. 棕褐色 的；棕⻩色的；v. 将皮肤晒成棕褐 色"><td class="n">106</td><td class="w">tan<div class="ipa">[tæn]</div></td><td class="m">n. 晒成棕褐色的肤色；adj. 棕褐色 的；棕⻩色的；v. 将皮肤晒成棕褐 色</td></tr>
-<tr data-s="fade v. 逐渐消失；褪色；凋谢"><td class="n">107</td><td class="w">fade<div class="ipa">[feɪd]</div></td><td class="m">v. 逐渐消失；褪色；凋谢</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 25</span><span class="gcnt">5 词</span></td></tr>
+<tr data-s="grey adj. 灰色的；暗淡的；n. 灰色；暗淡" data-w="grey" data-dv="greyly|adv.|;;greyness|n.|"><td class="n">103</td><td class="w">grey<div class="ipa">[ɡreɪ]</div></td><td class="m">adj. 灰色的；暗淡的；n. 灰色；暗淡<div class="dv"><b>衍生</b><i>greyly</i><em>adv.</em><span class="sep">·</span><i>greyness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="grey" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="pink n. 粉红色；adj. 粉红色的" data-w="pink" data-dv="pinkly|adv.|;;pinkness|n.|"><td class="n">104</td><td class="w">pink<div class="ipa">[pɪŋk]</div></td><td class="m">n. 粉红色；adj. 粉红色的<div class="dv"><b>衍生</b><i>pinkly</i><em>adv.</em><span class="sep">·</span><i>pinkness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="pink" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="purple n. 紫色；adj. 紫色的" data-w="purple" data-dv="purply|adv.|;;purplely|adv.|;;purpleness|n.|"><td class="n">105</td><td class="w">purple<div class="ipa">[ˈpɜːp(ə)l]</div></td><td class="m">n. 紫色；adj. 紫色的<div class="dv"><b>衍生</b><i>purply</i><em>adv.</em><span class="sep">·</span><i>purplely</i><em>adv.</em><span class="sep">·</span><i>purpleness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="purple" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="tan n. 晒成棕褐色的肤色；adj. 棕褐色 的；棕⻩色的；v. 将皮肤晒成棕褐 色" data-w="tan" data-dv="tanning|v.|"><td class="n">106</td><td class="w">tan<div class="ipa">[tæn]</div></td><td class="m">n. 晒成棕褐色的肤色；adj. 棕褐色 的；棕⻩色的；v. 将皮肤晒成棕褐 色<div class="dv"><b>衍生</b><i>tanning</i><em>v.</em></div></td><td class="sv"><button class="star" data-star="tan" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="fade v. 逐渐消失；褪色；凋谢" data-w="fade" data-dv=""><td class="n">107</td><td class="w">fade<div class="ipa">[feɪd]</div></td><td class="m">v. 逐渐消失；褪色；凋谢</td><td class="sv"><button class="star" data-star="fade" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 26</span><span class="gcnt">2 词</span></td></tr>
-<tr data-s="stain n. 污点；v. 玷污"><td class="n">108</td><td class="w">stain<div class="ipa">[steɪn]</div></td><td class="m">n. 污点；v. 玷污</td></tr>
-<tr data-s="blot n. 污点；墨渍；v. (用纸 或布)吸干；弄脏"><td class="n">109</td><td class="w">blot<div class="ipa">[blɒt]</div></td><td class="m">n. 污点；墨渍；v. (用纸 或布)吸干；弄脏</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 26</span><span class="gcnt">2 词</span></td></tr>
+<tr data-s="stain n. 污点；v. 玷污" data-w="stain" data-dv="stainless|adj.|"><td class="n">108</td><td class="w">stain<div class="ipa">[steɪn]</div></td><td class="m">n. 污点；v. 玷污<div class="dv"><b>衍生</b><i>stainless</i><em>adj.</em></div></td><td class="sv"><button class="star" data-star="stain" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="blot n. 污点；墨渍；v. (用纸 或布)吸干；弄脏" data-w="blot" data-dv=""><td class="n">109</td><td class="w">blot<div class="ipa">[blɒt]</div></td><td class="m">n. 污点；墨渍；v. (用纸 或布)吸干；弄脏</td><td class="sv"><button class="star" data-star="blot" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
-<tbody class="grp"><tr class="gsep"><td colspan="3"><span class="gtag">词群 27</span><span class="gcnt">3 词</span></td></tr>
-<tr data-s="figure n. 数字；身材；重要或有名的 人物；v. 计算；认为；弄懂"><td class="n">110</td><td class="w">figure<div class="ipa">[ˈfɪɡə(r)]</div></td><td class="m">n. 数字；身材；重要或有名的 人物；v. 计算；认为；弄懂</td></tr>
-<tr data-s="slender adj. 苗条的；微薄的"><td class="n">111</td><td class="w">slender<div class="ipa">[ˈslendə(r)]</div></td><td class="m">adj. 苗条的；微薄的</td></tr>
-<tr data-s="slight adj. 轻微的；微小的；细 瘦的；n. 轻慢；v. 轻视"><td class="n">112</td><td class="w">slight<div class="ipa">[slaɪt]</div></td><td class="m">adj. 轻微的；微小的；细 瘦的；n. 轻慢；v. 轻视</td></tr>
+<tbody class="grp"><tr class="gsep"><td colspan="4"><span class="gtag">词群 27</span><span class="gcnt">3 词</span></td></tr>
+<tr data-s="figure n. 数字；身材；重要或有名的 人物；v. 计算；认为；弄懂" data-w="figure" data-dv=""><td class="n">110</td><td class="w">figure<div class="ipa">[ˈfɪɡə(r)]</div></td><td class="m">n. 数字；身材；重要或有名的 人物；v. 计算；认为；弄懂</td><td class="sv"><button class="star" data-star="figure" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="slender adj. 苗条的；微薄的" data-w="slender" data-dv="slenderly|adv.|;;slenderness|n.|"><td class="n">111</td><td class="w">slender<div class="ipa">[ˈslendə(r)]</div></td><td class="m">adj. 苗条的；微薄的<div class="dv"><b>衍生</b><i>slenderly</i><em>adv.</em><span class="sep">·</span><i>slenderness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="slender" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
+<tr data-s="slight adj. 轻微的；微小的；细 瘦的；n. 轻慢；v. 轻视" data-w="slight" data-dv="slightly|adv.|;;slightness|n.|"><td class="n">112</td><td class="w">slight<div class="ipa">[slaɪt]</div></td><td class="m">adj. 轻微的；微小的；细 瘦的；n. 轻慢；v. 轻视<div class="dv"><b>衍生</b><i>slightly</i><em>adv.</em><span class="sep">·</span><i>slightness</i><em>n.</em></div></td><td class="sv"><button class="star" data-star="slight" aria-label="加入生词本" title="加入生词本">☆</button></td></tr>
 </tbody>
 </table><div class="empty" id="empty" style="display:none">没有匹配的单词</div><div class="nav"><a href="unit10.html">← Unit 10</a><a href="unit11-card.html">切到例句卡片版</a><a href="unit12.html">Unit 12 →</a></div><footer><div class="wrap" style="padding:0">
  摘自《雅思词汇真经》（刘洪波 编著）第 11 章，仅用于个人学习；版权归原作者及出版方所有，如涉侵权请联系删除。
 </div></footer></div>
+<a id="nbfab" href="shengci.html"><span>生词本</span><b>0</b></a>
+<script>
+var NB=(function(){
+ var KEY='vj-book';
+ var mem=null, okStore=true;
+ function read(){
+  if(mem) return mem;
+  try{var raw=localStorage.getItem(KEY); mem=raw?JSON.parse(raw):{}}catch(e){okStore=false; mem={}}
+  return mem;
+ }
+ function write(){
+  try{localStorage.setItem(KEY,JSON.stringify(mem))}catch(e){
+    okStore=false;
+    alert('浏览器不允许本地存储，生词本无法保存（请用 https 打开，或关闭无痕模式）');
+  }
+ }
+ function count(){return Object.keys(read()).length}
+ function has(w){return !!read()[w]}
+ function toggle(rec){
+  var m=read();
+  if(m[rec.w]){delete m[rec.w]}
+  else{rec.t=Date.now(); m[rec.w]=rec}
+  write(); sync(); return !!m[rec.w];
+ }
+ function remove(w){var m=read(); delete m[w]; write(); sync();}
+ function all(){
+  var m=read(), a=[];
+  for(var k in m) a.push(m[k]);
+  a.sort(function(x,y){return (y.t||0)-(x.t||0)});
+  return a;
+ }
+ function sync(){
+  var n=count();
+  document.querySelectorAll('#nbfab b').forEach(function(el){el.textContent=n});
+  document.querySelectorAll('.star').forEach(function(el){
+    var on=has(el.dataset.star), was=el.classList.contains('on');
+    el.classList.toggle('on',on);
+    el.textContent=on?'★':'☆';
+    if(on&&!was) el.setAttribute('title','已在生词本（点击移出）');
+    else if(!on) el.setAttribute('title','加入生词本');
+  });
+ }
+ function onStar(e){
+  var b=e.target.closest('.star'); if(!b) return;
+  e.preventDefault(); e.stopPropagation();
+  var host=b.closest('[data-w]')||b.closest('.card')||b.closest('tr');
+  var rec=entry(host, b.dataset.star);
+  var added=toggle(rec);
+  var fab=document.getElementById('nbfab');
+  if(added&&fab){fab.classList.remove('wiggle');void fab.offsetWidth;fab.classList.add('wiggle');}
+ }
+ function txt(el){return el?el.textContent.trim():''}
+ function entry(host, w){
+  if(!host) return {w:w};
+  var mEl=host.querySelector('.m'), ipaEl=host.querySelector('.ipa');
+  var mean='';
+  if(mEl){var c=mEl.cloneNode(true);var d=c.querySelector('.dv');if(d)c.removeChild(d);mean=c.textContent.trim()}
+  var en=txt(host.querySelector('.ex .en')), zh=txt(host.querySelector('.ex .zh'));
+  return {w:w, p:txt(ipaEl), m:mean,
+          d:host.dataset.dv||'',
+          e:en, z:zh,
+          c:document.body.dataset.ch||'',
+          g:document.body.dataset.title||''};
+ }
+ document.addEventListener('click',onStar);
+ window.addEventListener('storage',function(e){if(e.key===KEY){mem=null;sync();}});
+ document.addEventListener('DOMContentLoaded',sync);
+ sync();
+ return {count:count,has:has,all:all,remove:remove,toggle:toggle,sync:sync,read:read};
+})();
+</script>
 <script>
 (function(){
  var KEY='vj-hide';
  var body=document.body;
  var kind=body.dataset.kind;
- var s={m:false,z:false,i:false};
- try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw); if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z; if(typeof o.i==='boolean')s.i=o.i;}}catch(e){}
+ var s={m:false,z:false,i:false,o:false};
+ try{var raw=localStorage.getItem(KEY); if(raw){var o=JSON.parse(raw);
+   if(typeof o.m==='boolean')s.m=o.m; if(typeof o.z==='boolean')s.z=o.z;
+   if(typeof o.i==='boolean')s.i=o.i; if(typeof o.o==='boolean')s.o=o.o;}}catch(e){}
  function save(){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
  function paint(){
   body.classList.toggle('hide-m',s.m);
   body.classList.toggle('hide-z',s.z);
   body.classList.toggle('hide-i',s.i);
-  var cm=document.getElementById('m'), cz=document.getElementById('z'), ca=document.getElementById('all'), ci=document.getElementById('i');
+  var cm=document.getElementById('m'), cz=document.getElementById('z'),
+      ca=document.getElementById('all'), ci=document.getElementById('i'), co=document.getElementById('only');
   if(cm){cm.checked=s.m; cm.closest('.sw').classList.toggle('on',s.m);}
   if(cz){cz.checked=s.z; cz.closest('.sw').classList.toggle('on',s.z);}
   if(ci){ci.checked=s.i; ci.closest('.sw').classList.toggle('on',s.i);}
+  if(co){co.checked=s.o; co.closest('.sw').classList.toggle('on',s.o);}
   if(ca){ca.checked=s.m&&(s.z||kind!=='card'); ca.closest('.sw').classList.toggle('on',ca.checked);}
  }
  var cm=document.getElementById('m');
@@ -329,12 +436,14 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  if(cz) cz.addEventListener('change',function(){s.z=cz.checked; save(); paint();});
  var ci=document.getElementById('i');
  if(ci) ci.addEventListener('change',function(){s.i=ci.checked; save(); paint();});
+ var co=document.getElementById('only');
+ if(co) co.addEventListener('change',function(){s.o=co.checked; save(); paint(); filter();});
  var ca=document.getElementById('all');
  if(ca) ca.addEventListener('change',function(){
    s.m=ca.checked; if(kind==='card') s.z=ca.checked; save(); paint();
  });
  var rs=document.getElementById('reset');
- if(rs) rs.addEventListener('click',function(){s.m=false; s.z=false; s.i=false; save(); paint();});
+ if(rs) rs.addEventListener('click',function(){s.m=false;s.z=false;s.i=false;s.o=false;save();paint();filter();});
  var q=document.getElementById('q');
  var items=[].slice.call(document.querySelectorAll('[data-s]'));
  var cnt=document.getElementById('cnt');
@@ -342,11 +451,11 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
    var v=(q&&q.value||'').trim().toLowerCase();
    var n=0;
    items.forEach(function(el){
-     var hit=!v||el.dataset.s.indexOf(v)>-1;
+     var hit=(!v||el.dataset.s.indexOf(v)>-1) && (!s.o||NB.has(el.dataset.w));
      el.style.display=hit?'':'none';
      if(hit)n++;
    });
-   if(cnt) cnt.textContent=v? (n+' / '+items.length) : (items.length+' 条');
+   if(cnt) cnt.textContent=(v||s.o)? (n+' / '+items.length) : (items.length+' 条');
    var emp=document.getElementById('empty');
    if(emp) emp.style.display=(n===0)?'block':'none';
    document.querySelectorAll('section.grp').forEach(function(sec){
@@ -358,9 +467,10 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
      tb.style.display=vis?'':'none';
    });
  }
- if(q){q.addEventListener('input',filter);}
+ window.__filter=filter;
+ q.addEventListener('input',filter);
  document.addEventListener('keydown',function(e){
-   if(e.key==='/'&&document.activeElement!==q&&q){e.preventDefault();q.focus();}
+   if(e.key==='/'&&document.activeElement!==q){e.preventDefault();q.focus();}
    if(e.key==='Escape'&&document.activeElement===q){q.value='';filter();q.blur();}
  });
  paint(); filter();
