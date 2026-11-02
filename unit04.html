@@ -550,7 +550,7 @@ window.NB=NB;
 var REC=(function(){
  var KEY='vj-rec', ACC='#b4442e';
  var INT=[0,1,2,4,8,15,30,90];
- var mem=null, root=null, queue=[], idx=0, onlyDue=false, yes=0, no=0;
+ var mem=null, root=null, queue=[], idx=0, onlyDue=false, yes=0, no=0, waiting=false;
 
  function read(){
   if(mem) return mem;
@@ -679,8 +679,9 @@ var REC=(function(){
    +'<div class="rcx2" id="rcx2"></div>'
    +'</div></div>'
    +'<div class="rcbtns"><button class="rcno" id="rcno">不认识 <kbd>1</kbd></button>'
-   +'<button class="rcok" id="rcok">认识 <kbd>2</kbd></button></div>'
-   +'<div class="rckey">空格看释义 · 1 不认识（自动进生词本）· 2 认识 · Esc 退出</div>'
+   +'<button class="rcok" id="rcok">认识 <kbd>2</kbd></button>'
+   +'<button class="rcok" id="rcnext" style="display:none">下一个 <kbd>空格</kbd></button></div>'
+   +'<div class="rckey" id="rckey">空格看释义 · 1 不认识（先看释义再翻页）· 2 认识 · Esc 退出</div>'
    +'</div>';
 
  function build(){
@@ -690,13 +691,14 @@ var REC=(function(){
   var box=document.createElement('div'); box.className='rcw'; box.innerHTML=TMPL;
   root.appendChild(box);
   document.getElementById('rcx').onclick=close;
-  document.getElementById('rccard').onclick=reveal;
+  document.getElementById('rccard').onclick=tap;
   document.getElementById('rcspk').onclick=function(e){
    e.stopPropagation();
    if(window.TTS&&queue[idx]) TTS.speak(queue[idx].w);
   };
   document.getElementById('rcno').onclick=function(){ grade(false) };
   document.getElementById('rcok').onclick=function(){ grade(true) };
+  document.getElementById('rcnext').onclick=next;
   var cd=document.getElementById('rcdue');
   cd.addEventListener('change',function(){ onlyDue=cd.checked; start(); });
  }
@@ -709,9 +711,9 @@ var REC=(function(){
  function onKey(e){
   if(!root||!root.classList.contains('on')) return;
   if(e.key==='Escape'){ close(); return; }
-  if(e.key===' '||e.key==='Enter'){ e.preventDefault(); reveal(); return; }
-  if(e.key==='1'){ e.preventDefault(); grade(false); return; }
-  if(e.key==='2'){ e.preventDefault(); grade(true); return; }
+  if(e.key===' '||e.key==='Enter'){ e.preventDefault(); if(waiting){ next(); } else { reveal(); } return; }
+  if(e.key==='1'){ e.preventDefault(); if(waiting){ next(); } else { grade(false); } return; }
+  if(e.key==='2'){ e.preventDefault(); if(waiting){ next(); } else { grade(true); } return; }
  }
 
  function start(){
@@ -745,6 +747,14 @@ var REC=(function(){
   document.getElementById('rcnum').textContent=(idx+1)+' / '+queue.length;
   document.getElementById('rcpg').style.width=(idx/queue.length*100)+'%';
   document.getElementById('rcwd').textContent=r.w;
+
+  waiting=false;
+  var _bn=document.getElementById('rcno'), _bk=document.getElementById('rcok'), _bx=document.getElementById('rcnext');
+  if(_bn) _bn.style.display='';
+  if(_bk) _bk.style.display='';
+  if(_bx) _bx.style.display='none';
+  var _kk2=document.getElementById('rckey');
+  if(_kk2) _kk2.textContent='空格看释义 · 1 不认识（先看释义再翻页）· 2 认识 · Esc 退出';
 
   var phon=document.getElementById('rcphon');
   phon.textContent=r.p||'';
@@ -781,6 +791,7 @@ var REC=(function(){
 
  function grade(ok){
   if(idx>=queue.length) return;
+  if(waiting) return next();
   var r=queue[idx], m=read(), o=m[r.w]||{lv:0,rv:0,wr:0};
   if(ok){ o.lv=Math.min(7,(o.lv||0)+1); o.due=Date.now()+INT[o.lv]*864e5; }
   else  { o.lv=0; o.due=Date.now()+10*6e4; o.wr=(o.wr||0)+1; toBook(r); }
@@ -788,7 +799,25 @@ var REC=(function(){
   m[r.w]=o; save();
   if(ok) yes++; else no++;
   if(window.NB&&NB.bump) NB.bump('r');
+  if(!ok){
+   /* 不认识：先揭晓释义，停在这个词上等你看完再翻页 */
+   waiting=true;
+   document.getElementById('rcans').classList.add('on');
+   document.getElementById('rcq').style.display='none';
+   document.getElementById('rcno').style.display='none';
+   document.getElementById('rcok').style.display='none';
+   document.getElementById('rcnext').style.display='';
+   var kk=document.getElementById('rckey');
+   if(kk) kk.textContent='看完点「下一个」继续 · 空格 / 回车也行';
+   return;
+  }
   idx++; paint();
+ }
+
+ function tap(){ if(waiting){ return next() } reveal() }
+ function next(){
+  if(!waiting) return;
+  waiting=false; idx++; paint();
  }
 
  function fmt(ms){
