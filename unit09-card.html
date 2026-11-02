@@ -1004,6 +1004,7 @@ var REC=(function(){
   paintBtn();
  }
 
+ window.addEventListener('storage',function(e){ if(e.key===KEY){ mem=null } });
  document.addEventListener('keydown',onKey);
  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',attach);
  else attach();
@@ -1011,5 +1012,329 @@ var REC=(function(){
  return {start:start,items:items,read:read};
 })();
 window.REC=REC;
+</script>
+<script>
+/* ================= 多设备同步（同步码）================= */
+var SYNC=(function(){
+ var SITE='vj', K_BOOK='vj-book', K_REC='vj-rec', K_STAT='vj-stat', ACC='#b4442e';
+ var CFG='sync-cfg', CODEK='sync-code', LASTK='sync-last';
+ var UI=!!window.SYNC_UI;
+ var applying=false, timer=null, busy=false, lastAt=0, status={s:'idle',m:''};
+
+ /* ---------- 配置 ---------- */
+ function cfg(){
+  var c=window.SYNC_CONFIG;
+  if(c&&c.url&&c.key) return c;
+  try{var o=JSON.parse(localStorage.getItem(CFG)||'null'); if(o&&o.url&&o.key) return o;}catch(e){}
+  return null;
+ }
+ function setCfg(url,key){
+  localStorage.setItem(CFG,JSON.stringify({url:url.replace(/\/+$/,''),key:key}));
+ }
+ function code(){ return (localStorage.getItem(CODEK)||'').trim() }
+ function setCode(c){ localStorage.setItem(CODEK,c) }
+
+ /* 码：10 位，去掉 0/O/1/I 之类易混字符，显示成 4-4-2 */
+ var AB='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+ function newCode(){
+  var s='';
+  var rnd=window.crypto&&window.crypto.getRandomValues?function(n){
+    var a=new Uint8Array(n); window.crypto.getRandomValues(a); return a; }:function(n){
+    var a=[]; for(var i=0;i<n;i++) a.push(Math.floor(Math.random()*256)); return a; };
+  var a=rnd(10);
+  for(var i=0;i<10;i++) s+=AB.charAt(a[i]%AB.length);
+  return s;
+ }
+ function pretty(c){
+  c=(c||'').toUpperCase().replace(/[^A-Z2-9]/g,'');
+  if(c.length===10) return c.slice(0,4)+'-'+c.slice(4,8)+'-'+c.slice(8);
+  return c;
+ }
+
+ /* ---------- 读写本地 ---------- */
+ function rd(k){ try{return JSON.parse(localStorage.getItem(k)||'{}')||{}}catch(e){return {}} }
+ function wr(k,o){
+  var s=JSON.stringify(o||{});
+  if(localStorage.getItem(k)===s) return false;
+  applying=true;
+  try{ localStorage.setItem(k,s) }finally{ applying=false }
+  return true;
+ }
+ function local(){ return {book:rd(K_BOOK), rec:rd(K_REC), stat:rd(K_STAT)} }
+
+ /* ---------- 合并：词条按最后修改时间取新，统计按天取大 ---------- */
+ function ts(x){ return x? (x.lrt||x.t||0) : 0 }
+ function pick(a,b){ if(!a) return b; if(!b) return a; return ts(b)>ts(a)? b : a }
+ function mergeMap(l,r){
+  var out={}, k;
+  l=l||{}; r=r||{};
+  for(k in l) out[k]=l[k];
+  for(k in r) out[k]= out[k]? pick(out[k],r[k]) : r[k];
+  return out;
+ }
+ function mergeStat(l,r){
+  var out={}, k;
+  l=l||{}; r=r||{};
+  for(k in l) out[k]={a:l[k].a||0,r:l[k].r||0,c:l[k].c||0};
+  for(k in r){
+   var t=out[k]||{a:0,r:0,c:0}, s=r[k]||{};
+   out[k]={a:Math.max(t.a,s.a||0), r:Math.max(t.r,s.r||0), c:Math.max(t.c,s.c||0)};
+  }
+  return out;
+ }
+ function mergeSite(localDoc, remote){
+  remote=remote||{};
+  return {
+   book: mergeMap(localDoc.book, remote.book),
+   rec:  mergeMap(localDoc.rec,  remote.rec),
+   stat: mergeStat(localDoc.stat, remote.stat)
+  };
+ }
+ function same(a,b){ return JSON.stringify(a)===JSON.stringify(b) }
+
+ /* ---------- 网络 ---------- */
+ function rpc(fn, body){
+  var c=cfg();
+  if(!c) return Promise.reject(new Error('未配置'));
+  var ctrl=null, opt={method:'POST',
+   headers:{'Content-Type':'application/json','apikey':c.key,'Authorization':'Bearer '+c.key},
+   body:JSON.stringify(body)};
+  try{
+   ctrl=new AbortController(); opt.signal=ctrl.signal;
+   setTimeout(function(){ try{ctrl.abort()}catch(e){} }, 12000);
+  }catch(e){}
+  return fetch(c.url+'/rest/v1/rpc/'+fn, opt).then(function(r){
+   if(!r.ok) return r.text().then(function(t){ throw new Error('HTTP '+r.status+' '+(t||'').slice(0,120)) });
+   return r.json();
+  });
+ }
+
+ /* ---------- 同步一轮 ---------- */
+ function emsg(e){
+  var m=(e&&e.message)||'';
+  if(/Failed to fetch|NetworkError|Load failed|Network request failed/i.test(m))
+   return '连不上服务器：检查网络，或确认项目地址填对了';
+  if(/abort/i.test(m)) return '请求超时，稍后再试';
+  if(/HTTP 40[13]/.test(m)) return 'anon key 不对或没权限，确认那段 SQL 已经跑过';
+  if(/HTTP 404/.test(m)) return '找不到接口：项目地址可能填错，或 SQL 还没跑';
+  return m||'同步失败';
+ }
+
+ function cycle(silent){
+  var c=cfg(), k=code();
+  if(!c||!k){ setStat('idle',''); return Promise.resolve(false) }
+  if(busy) return Promise.resolve(false);
+  busy=true; setStat('run','同步中…');
+  var remote=null;
+  return rpc('sync_pull',{p_code:k}).then(function(r){
+   remote=r||{ver:0,payload:{}};
+   return mergeAndPush(remote);
+  }).then(function(ok){
+   busy=false; return ok;
+  }).catch(function(e){
+   busy=false; setStat('err', emsg(e)); return false;
+  });
+ }
+ function mergeAndPush(rem, tryN){
+  tryN=tryN||0;
+  var doc=rem.payload||{};
+  var cur=local();
+  var merged=mergeSite(cur, doc[SITE]);
+  var next={v:1};
+  for(var k in doc) if(k!=='v') next[k]=doc[k];
+  next[SITE]=merged;
+  var changed = !same(cur.book,merged.book) || !same(cur.rec,merged.rec) || !same(cur.stat,merged.stat);
+  return rpc('sync_push',{p_code:code(), p_payload:next, p_base:rem.ver}).then(function(res){
+   if(res&&res.ok){
+    if(changed) applyLocal(merged);
+    lastAt=Date.now();
+    try{localStorage.setItem(LASTK,String(lastAt))}catch(e){}
+    setStat('ok', changed? '已同步（合并了远端数据）' : '已同步');
+    return true;
+   }
+   if(res&&res.reason==='conflict'&&tryN<2){
+    return mergeAndPush({ver:res.ver,payload:res.payload||{}}, tryN+1);
+   }
+   setStat('err','写入冲突，稍后重试');
+   return false;
+  });
+ }
+
+ function applyLocal(doc){
+  var ch=wr(K_BOOK,doc.book);
+  var ch2=wr(K_REC,doc.rec);
+  wr(K_STAT,doc.stat);
+  try{
+   window.dispatchEvent(new StorageEvent('storage',{key:K_BOOK}));
+   window.dispatchEvent(new StorageEvent('storage',{key:K_REC}));
+  }catch(e){
+   window.dispatchEvent(new Event('storage'));
+  }
+  if(ch||ch2){
+   try{ if(window.NB&&NB.sync) NB.sync(); }catch(e){}
+   try{ if(window.REC&&REC.refresh) REC.refresh(); }catch(e){}
+  }
+  setStat('ok','已拉取远端更新');
+  if(UI) renderPanel();
+ }
+
+ /* ---------- 自动：本地一改就排队上传 ---------- */
+ function schedule(){
+  if(applying) return;
+  if(!cfg()||!code()) return;
+  clearTimeout(timer);
+  timer=setTimeout(function(){ cycle(true) }, 2500);
+ }
+ var _set=localStorage.setItem.bind(localStorage);
+ try{
+  localStorage.setItem=function(k,v){
+   _set(k,v);
+   if(k===K_BOOK||k===K_REC||k===K_STAT) schedule();
+  };
+ }catch(e){}
+
+ /* ---------- UI ---------- */
+ function setStat(s,m){
+  status={s:s,m:m};
+  if(!UI) return;
+  var el=document.getElementById('sy-state');
+  if(el){
+   el.className='sy-state sy-'+s;
+   el.textContent = m || ({idle:'未同步',run:'同步中…',ok:'已同步',err:'同步失败'}[s]||'');
+  }
+ }
+ function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];})}
+
+ function css(){
+  if(document.getElementById('systyle')) return;
+  var st=document.createElement('style'); st.id='systyle';
+  st.textContent=''
+  +'.sy-box{margin:16px 0 0;border:1px solid var(--line,#e6e2da);border-radius:14px;padding:14px 16px;'
+  +'background:var(--panel,#fff);font-size:13.5px}'
+  +'.sy-box h3{margin:0 0 6px;font-size:14px;display:flex;align-items:center;gap:8px}'
+  +'.sy-box h3 .dot{width:7px;height:7px;border-radius:50%;background:#bbb}'
+  +'.sy-state{font-size:12px;color:#888;margin-left:auto;font-weight:400}'
+  +'.sy-state.sy-ok{color:#2f7d4f}.sy-state.sy-err{color:#c0392b}.sy-state.sy-run{color:'+ACC+'}'
+  +'.sy-p{color:#777;line-height:1.7;margin:6px 0 10px}'
+  +'.sy-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}'
+  +'.sy-in{flex:1 1 160px;min-width:120px;font:inherit;font-size:13px;padding:7px 11px;'
+  +'border:1px solid var(--line,#e6e2da);border-radius:9px;background:#fff;color:inherit;outline:none}'
+  +'.sy-in:focus{border-color:'+ACC+';box-shadow:0 0 0 3px rgba(0,0,0,.05)}'
+  +'.sy-btn{font:inherit;font-size:12.5px;font-weight:650;padding:6px 14px;border-radius:999px;cursor:pointer;'
+  +'border:1px solid var(--line,#e6e2da);background:#fff;color:inherit}'
+  +'.sy-btn:hover{border-color:'+ACC+';color:'+ACC+'}'
+  +'.sy-btn.pri{background:'+ACC+';border-color:'+ACC+';color:#fff}'
+  +'.sy-btn.pri:hover{filter:brightness(1.08);color:#fff}'
+  +'.sy-code{font-family:"SF Mono",Menlo,monospace;font-size:16px;letter-spacing:1.5px;font-weight:700;'
+  +'padding:5px 12px;border-radius:9px;background:rgba(0,0,0,.045)}'
+  +'@media (prefers-color-scheme:dark){.sy-box,.sy-btn,.sy-in{background:#1d2025;border-color:#2c3037}'
+  +'.sy-code{background:rgba(255,255,255,.08)}}'
+  ;
+  document.head.appendChild(st);
+ }
+
+ function panelHtml(){
+  var c=cfg(), k=code();
+  if(!c){
+   return '<h3><span class="dot"></span>多设备同步<span class="sy-state sy-idle" id="sy-state">未配置</span></h3>'
+    +'<p class="sy-p">需要先填一次 Supabase 项目地址和 anon key（同一个浏览器只需填一次，两个站点共用）。'
+    +'完整步骤见仓库里的 <code>supabase-setup.sql</code> 与 README。</p>'
+    +'<div class="sy-row"><input class="sy-in" id="sy-url" placeholder="https://xxxx.supabase.co">'
+    +'<input class="sy-in" id="sy-key" placeholder="anon public key">'
+    +'<button class="sy-btn pri" id="sy-savecfg">保存配置</button></div>';
+  }
+  if(!k){
+   return '<h3><span class="dot"></span>多设备同步<span class="sy-state sy-idle" id="sy-state">未启用</span></h3>'
+    +'<p class="sy-p">生成一串同步码，在另一台设备输入同一串码，两边的生词本和背诵进度就会合并。'
+    +'<br>码等于钥匙：谁拿到码谁就能读写你的数据，别公开。</p>'
+    +'<div class="sy-row"><button class="sy-btn pri" id="sy-new">生成新的同步码</button>'
+    +'<input class="sy-in" id="sy-input" placeholder="或输入已有的码，如 K7F3-9QW2-M4" style="max-width:260px">'
+    +'<button class="sy-btn" id="sy-join">用这个码</button></div>';
+  }
+  return '<h3><span class="dot" style="background:'+ACC+'"></span>多设备同步'
+   +'<span class="sy-state sy-'+status.s+'" id="sy-state">'+esc(status.m||'已启用')+'</span></h3>'
+   +'<div class="sy-row"><span class="sy-code" id="sy-code">'+esc(pretty(k))+'</span>'
+   +'<button class="sy-btn" id="sy-copy">复制</button>'
+   +'<button class="sy-btn pri" id="sy-now">立即同步</button>'
+   +'<button class="sy-btn" id="sy-off">停用</button></div>'
+   +'<p class="sy-p" style="margin:10px 0 0">数据改动后会自动上传；换设备时输入这串码即可取回。'
+   +'<span id="sy-last">'+lastText()+'</span></p>';
+ }
+ function lastText(){
+  var t=+(localStorage.getItem(LASTK)||0);
+  if(!t) return '';
+  var d=new Date(t), p=function(n){return n<10?'0'+n:''+n};
+  return '上次同步：'+d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes());
+ }
+
+ function renderPanel(){
+  if(!UI) return;
+  var box=document.getElementById('syncbox');
+  if(!box){
+   var wrap=document.querySelector('.wrap'); if(!wrap) return;
+   box=document.createElement('div'); box.id='syncbox'; box.className='sy-box';
+   var anchor=document.querySelector('.acts')||document.querySelector('.hd')||wrap.firstChild;
+   if(anchor&&anchor.parentNode) anchor.parentNode.insertBefore(box, anchor.nextSibling);
+   else wrap.appendChild(box);
+  }
+  box.innerHTML=panelHtml();
+  bind();
+ }
+
+ function bind(){
+  var q=function(id){return document.getElementById(id)};
+  var a;
+  if(a=q('sy-savecfg')) a.onclick=function(){
+   var u=q('sy-url').value.trim(), k=q('sy-key').value.trim();
+   if(!/^https?:\/\//.test(u)||k.length<20) return alert('地址要以 https:// 开头，key 是完整的 anon public key');
+   setCfg(u,k); renderPanel();
+  };
+  if(a=q('sy-new')) a.onclick=function(){
+   if(!confirm('生成新的同步码？\n\n已经在用另一个码的设备不会自动跟过来。')) return;
+   setCode(newCode()); renderPanel(); cycle().then(renderPanel);
+  };
+  if(a=q('sy-join')) a.onclick=function(){
+   var c=pretty(q('sy-input').value);
+   if(c.length<8) return alert('码看起来不对，至少要 8 位');
+   setCode(c); renderPanel(); cycle().then(renderPanel);
+  };
+  if(a=q('sy-copy')) a.onclick=function(){
+   var t=pretty(code());
+   if(navigator.clipboard) navigator.clipboard.writeText(t).then(function(){ a.textContent='已复制' },function(){ prompt('复制这串码：',t) });
+   else prompt('复制这串码：',t);
+   setTimeout(function(){ a.textContent='复制' },1500);
+  };
+  if(a=q('sy-now')) a.onclick=function(){ cycle().then(renderPanel) };
+  if(a=q('sy-off')) a.onclick=function(){
+   if(!confirm('停用同步？本机数据会保留，只是不再上传。')) return;
+   localStorage.removeItem(CODEK); renderPanel();
+  };
+ }
+
+ /* ---------- 启动 ---------- */
+ function boot(){
+  css();
+  lastAt=+(localStorage.getItem(LASTK)||0);
+  if(UI) renderPanel();
+  if(cfg()&&code()) setTimeout(function(){ cycle(true).then(renderPanel) }, 400);
+  window.addEventListener('online',function(){ if(cfg()&&code()) cycle(true) });
+  document.addEventListener('visibilitychange',function(){
+   if(document.visibilityState==='hidden'&&cfg()&&code()) cycle(true);
+  });
+ }
+
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
+ else boot();
+
+ return {
+  ready:function(){return !!(cfg()&&code())},
+  sync:function(){ return cycle() },
+  code:function(){ return pretty(code()) },
+  config:cfg, setConfig:setCfg, generate:newCode,
+  merge:mergeSite
+ };
+})();
+window.SYNC=SYNC;
 </script>
 </body></html>
