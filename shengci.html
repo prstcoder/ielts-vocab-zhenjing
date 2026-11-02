@@ -261,7 +261,7 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
  <div class="top">
   <a class="back" href="index.html">← 全部单元</a>
   <h1>生词本</h1>
-  <p class="sub">按遗忘曲线安排复习：答对一次就往后推一天、两天、四天……答错的词明天还会回来。数据默认只存在本机浏览器；想让手机和电脑共用，用下面的同步码。</p>
+  <p class="sub">按遗忘曲线安排复习：答对一次就往后推一天、两天、四天……答错的词明天还会回来。数据只存在本机浏览器。</p>
  </div>
 
  <div class="hd">
@@ -909,6 +909,7 @@ window.NB=NB;
 /* ================= 多设备同步（同步码）================= */
 var SYNC=(function(){
  var SITE='vj', K_BOOK='vj-book', K_REC='vj-rec', K_STAT='vj-stat', ACC='#b4442e';
+ var OFF=true;   /* 总开关：true = 页面上不显示入口、也不发任何请求；改回 false 重新生成即可恢复 */
  var BAKED={url:'https://yqoxysoegjlnutcinnid.supabase.co', key:'sb_publishable_-J9znbu9mI4VzoBzN-8xZA_5K7JQLuQ'};
  var PWH='40cb6b16335fa8699278328ba343c0bf8ce0acde95c33b03f525e09e02408a9c', UNLK='sync-unlock';
  var CFG='sync-cfg', CODEK='sync-code', LASTK='sync-last';
@@ -1074,6 +1075,7 @@ var SYNC=(function(){
  }
 
  function cycle(silent){
+  if(OFF) return Promise.resolve(false);
   var c=cfg(), k=code();
   if(!unlocked()){ setStat('idle','已锁定'); return Promise.resolve(false) }
   if(!c||!k){ setStat('idle',''); return Promise.resolve(false) }
@@ -1134,6 +1136,7 @@ var SYNC=(function(){
 
  /* ---------- 自动：本地一改就排队上传 ---------- */
  function schedule(){
+  if(OFF) return;
   if(applying) return;
   if(!unlocked()) return;
   if(!cfg()||!code()) return;
@@ -1307,6 +1310,7 @@ var SYNC=(function(){
 
  /* ---------- 启动 ---------- */
  function boot(){
+  if(OFF) return;
   css();
   lastAt=+(localStorage.getItem(LASTK)||0);
   if(UI) renderPanel();
@@ -1321,7 +1325,8 @@ var SYNC=(function(){
  else boot();
 
  return {
-  ready:function(){return unlocked()&&!!(cfg()&&code())},
+  ready:function(){return !OFF&&unlocked()&&!!(cfg()&&code())},
+  off:function(){return OFF},
   unlocked:unlocked,
   sync:function(){ return cycle() },
   code:function(){ return pretty(code()) },

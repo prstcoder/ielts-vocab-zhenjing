@@ -996,6 +996,7 @@ window.REC=REC;
 /* ================= 多设备同步（同步码）================= */
 var SYNC=(function(){
  var SITE='vj', K_BOOK='vj-book', K_REC='vj-rec', K_STAT='vj-stat', ACC='#b4442e';
+ var OFF=true;   /* 总开关：true = 页面上不显示入口、也不发任何请求；改回 false 重新生成即可恢复 */
  var BAKED={url:'https://yqoxysoegjlnutcinnid.supabase.co', key:'sb_publishable_-J9znbu9mI4VzoBzN-8xZA_5K7JQLuQ'};
  var PWH='40cb6b16335fa8699278328ba343c0bf8ce0acde95c33b03f525e09e02408a9c', UNLK='sync-unlock';
  var CFG='sync-cfg', CODEK='sync-code', LASTK='sync-last';
@@ -1161,6 +1162,7 @@ var SYNC=(function(){
  }
 
  function cycle(silent){
+  if(OFF) return Promise.resolve(false);
   var c=cfg(), k=code();
   if(!unlocked()){ setStat('idle','已锁定'); return Promise.resolve(false) }
   if(!c||!k){ setStat('idle',''); return Promise.resolve(false) }
@@ -1221,6 +1223,7 @@ var SYNC=(function(){
 
  /* ---------- 自动：本地一改就排队上传 ---------- */
  function schedule(){
+  if(OFF) return;
   if(applying) return;
   if(!unlocked()) return;
   if(!cfg()||!code()) return;
@@ -1394,6 +1397,7 @@ var SYNC=(function(){
 
  /* ---------- 启动 ---------- */
  function boot(){
+  if(OFF) return;
   css();
   lastAt=+(localStorage.getItem(LASTK)||0);
   if(UI) renderPanel();
@@ -1408,7 +1412,8 @@ var SYNC=(function(){
  else boot();
 
  return {
-  ready:function(){return unlocked()&&!!(cfg()&&code())},
+  ready:function(){return !OFF&&unlocked()&&!!(cfg()&&code())},
+  off:function(){return OFF},
   unlocked:unlocked,
   sync:function(){ return cycle() },
   code:function(){ return pretty(code()) },
