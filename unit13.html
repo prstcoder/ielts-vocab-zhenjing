@@ -944,15 +944,17 @@ window.REC=REC;
 /* ================= 多设备同步（同步码）================= */
 var SYNC=(function(){
  var SITE='vj', K_BOOK='vj-book', K_REC='vj-rec', K_STAT='vj-stat', ACC='#b4442e';
+ var BAKED={url:'https://yqoxysoegjlnutcinnid.supabase.co', key:'sb_publishable_-J9znbu9mI4VzoBzN-8xZA_5K7JQLuQ'};
  var CFG='sync-cfg', CODEK='sync-code', LASTK='sync-last';
  var UI=!!window.SYNC_UI;
  var applying=false, timer=null, busy=false, lastAt=0, status={s:'idle',m:''};
 
  /* ---------- 配置 ---------- */
  function cfg(){
+  try{var o=JSON.parse(localStorage.getItem(CFG)||'null'); if(o&&o.url&&o.key) return o;}catch(e){}
+  if(BAKED&&BAKED.url&&BAKED.key&&BAKED.key.indexOf('_')>-1) return BAKED;
   var c=window.SYNC_CONFIG;
   if(c&&c.url&&c.key) return c;
-  try{var o=JSON.parse(localStorage.getItem(CFG)||'null'); if(o&&o.url&&o.key) return o;}catch(e){}
   return null;
  }
  function setCfg(url,key){
@@ -1184,7 +1186,8 @@ var SYNC=(function(){
    +'<div class="sy-row"><span class="sy-code" id="sy-code">'+esc(pretty(k))+'</span>'
    +'<button class="sy-btn" id="sy-copy">复制</button>'
    +'<button class="sy-btn pri" id="sy-now">立即同步</button>'
-   +'<button class="sy-btn" id="sy-off">停用</button></div>'
+   +'<button class="sy-btn" id="sy-off">停用</button>'
+   +'<button class="sy-btn" id="sy-cfg2" title="项目地址或 key 换了时用">换配置</button></div>'
    +'<p class="sy-p" style="margin:10px 0 0">数据改动后会自动上传；换设备时输入这串码即可取回。'
    +'<span id="sy-last">'+lastText()+'</span></p>';
  }
@@ -1233,6 +1236,13 @@ var SYNC=(function(){
    setTimeout(function(){ a.textContent='复制' },1500);
   };
   if(a=q('sy-now')) a.onclick=function(){ cycle().then(renderPanel) };
+  if(a=q('sy-cfg2')) a.onclick=function(){
+   var u=prompt('Supabase Project URL：',(cfg()||{}).url||'');
+   if(!u) return;
+   var k=prompt('anon / publishable key：','');
+   if(!k) return;
+   setCfg(u.trim(),k.trim()); renderPanel(); cycle().then(renderPanel);
+  };
   if(a=q('sy-off')) a.onclick=function(){
    if(!confirm('停用同步？本机数据会保留，只是不再上传。')) return;
    localStorage.removeItem(CODEK); renderPanel();

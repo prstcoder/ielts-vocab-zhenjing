@@ -68,13 +68,14 @@ unit01-card.html    第 1 章 · 例句卡片版
 
 1. 打开 [supabase.com](https://supabase.com) 注册（免费）→ New project，等它建好
 2. 左侧 **SQL Editor** → 把仓库里的 `supabase-setup.sql` 全文粘进去 → Run
-3. **Project Settings → API** 里复制两个值：`Project URL` 和 `anon public` key
+**在网页里开启（已内置配置，不用填地址和 key）**
 
-**在网页里开启**
+3. 打开 `shengci.html` → 找到「多设备同步」→ 点「生成新的同步码」，得到形如 `K7F3-9QW2-M4` 的一串码
+4. 另一台设备打开同一页，把码粘进输入框 → 点「用这个码」→ 两边自动合并
 
-4. 打开 `shengci.html`（生词本）→ 找到「多设备同步」→ 填入上面两个值 → 保存配置
-5. 点「生成新的同步码」，得到形如 `K7F3-9QW2-M4` 的一串码
-6. 另一台设备打开同一页，填同样的 URL / key，输入这串码 → 两边自动合并
+本仓库页面已内置一个免费的 Supabase 项目（项目地址与 publishable key 直接写在 HTML 里）。这个 key 属于「可公开」的类型，只被授权调用两个 `security definer` 函数，数据表本身对匿名用户完全不可读，放进页面没有安全风险；同步码是从 32 个字符里随机取 10 位（约 10^15 种组合），猜不到别人的码。
+
+想换成**自己的** Supabase 项目：跑完上面第 2 步的 SQL 后，在已启用的面板里点「换配置」，填入你的 `Project URL` 和 `anon` / `publishable` key，再重新生成同步码即可（只影响本机，不改内置默认值）。
 
 **行为说明**
 
