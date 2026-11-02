@@ -1013,6 +1013,7 @@ window.REC=REC;
 var SYNC=(function(){
  var SITE='vj', K_BOOK='vj-book', K_REC='vj-rec', K_STAT='vj-stat', ACC='#b4442e';
  var BAKED={url:'https://yqoxysoegjlnutcinnid.supabase.co', key:'sb_publishable_-J9znbu9mI4VzoBzN-8xZA_5K7JQLuQ'};
+ var PWH='40cb6b16335fa8699278328ba343c0bf8ce0acde95c33b03f525e09e02408a9c', UNLK='sync-unlock';
  var CFG='sync-cfg', CODEK='sync-code', LASTK='sync-last';
  var UI=!!window.SYNC_UI;
  var applying=false, timer=null, busy=false, lastAt=0, status={s:'idle',m:''};
@@ -1046,6 +1047,53 @@ var SYNC=(function(){
   c=(c||'').toUpperCase().replace(/[^A-Z2-9]/g,'');
   if(c.length===10) return c.slice(0,4)+'-'+c.slice(4,8)+'-'+c.slice(8);
   return c;
+ }
+
+ /* ---------- 访问密码：页面里只放 SHA-256，解锁状态记在本机 ---------- */
+ function gate(){ return !!(PWH&&PWH.length===64) }
+ function unlocked(){ return !gate() || localStorage.getItem(UNLK)===PWH }
+ function _u8(s){
+  var t=unescape(encodeURIComponent(String(s))), o=[];
+  for(var i=0;i<t.length;i++) o.push(t.charCodeAt(i));
+  return o;
+ }
+ function sha256hex(s){
+  var K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+         0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+         0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+         0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+         0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+         0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+         0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+         0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  var H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  var m=_u8(s), l=m.length*8, i, t;
+  m.push(0x80);
+  while(m.length%64!==56) m.push(0);
+  m.push(0,0,0,0,(l>>>24)&255,(l>>>16)&255,(l>>>8)&255,l&255);
+  function rr(x,n){ return (x>>>n)|(x<<(32-n)) }
+  var w=new Array(64);
+  for(i=0;i<m.length;i+=64){
+   for(t=0;t<16;t++) w[t]=((m[i+t*4]<<24)|(m[i+t*4+1]<<16)|(m[i+t*4+2]<<8)|m[i+t*4+3])|0;
+   for(t=16;t<64;t++){
+    var x=w[t-15], y=w[t-2];
+    var s0=rr(x,7)^rr(x,18)^(x>>>3), s1=rr(y,17)^rr(y,19)^(y>>>10);
+    w[t]=(w[t-16]+s0+w[t-7]+s1)|0;
+   }
+   var a=H[0],b=H[1],c=H[2],d=H[3],e=H[4],f=H[5],g=H[6],h=H[7];
+   for(t=0;t<64;t++){
+    var S1=rr(e,6)^rr(e,11)^rr(e,25), ch=(e&f)^(~e&g);
+    var t1=(h+S1+ch+K[t]+w[t])|0;
+    var S0=rr(a,2)^rr(a,13)^rr(a,22), maj=(a&b)^(a&c)^(b&c);
+    var t2=(S0+maj)|0;
+    h=g; g=f; f=e; e=(d+t1)|0; d=c; c=b; b=a; a=(t1+t2)|0;
+   }
+   H[0]=(H[0]+a)|0; H[1]=(H[1]+b)|0; H[2]=(H[2]+c)|0; H[3]=(H[3]+d)|0;
+   H[4]=(H[4]+e)|0; H[5]=(H[5]+f)|0; H[6]=(H[6]+g)|0; H[7]=(H[7]+h)|0;
+  }
+  var out='';
+  for(i=0;i<8;i++) out+=('00000000'+(H[i]>>>0).toString(16)).slice(-8);
+  return out;
  }
 
  /* ---------- 读写本地 ---------- */
@@ -1119,6 +1167,7 @@ var SYNC=(function(){
 
  function cycle(silent){
   var c=cfg(), k=code();
+  if(!unlocked()){ setStat('idle','已锁定'); return Promise.resolve(false) }
   if(!c||!k){ setStat('idle',''); return Promise.resolve(false) }
   if(busy) return Promise.resolve(false);
   busy=true; setStat('run','同步中…');
@@ -1178,6 +1227,7 @@ var SYNC=(function(){
  /* ---------- 自动：本地一改就排队上传 ---------- */
  function schedule(){
   if(applying) return;
+  if(!unlocked()) return;
   if(!cfg()||!code()) return;
   clearTimeout(timer);
   timer=setTimeout(function(){ cycle(true) }, 2500);
@@ -1233,13 +1283,21 @@ var SYNC=(function(){
 
  function panelHtml(){
   var c=cfg(), k=code();
+  if(!unlocked()){
+   return '<h3><span class="dot"></span>多设备同步<span class="sy-state sy-idle" id="sy-state">已锁定</span></h3>'
+    +'<p class="sy-p">这个功能需要访问密码。输入一次就记在本机，以后不用再输。'
+    +'<br>不知道密码就继续用本机——生词本和背诵进度照常在本地保存。</p>'
+    +'<div class="sy-row"><input class="sy-in" id="sy-pw" type="password" placeholder="访问密码" '
+    +'autocomplete="off" style="max-width:220px"><button class="sy-btn pri" id="sy-unlock">解锁</button></div>';
+  }
   if(!c){
    return '<h3><span class="dot"></span>多设备同步<span class="sy-state sy-idle" id="sy-state">未配置</span></h3>'
     +'<p class="sy-p">需要先填一次 Supabase 项目地址和 anon key（同一个浏览器只需填一次，两个站点共用）。'
     +'完整步骤见仓库里的 <code>supabase-setup.sql</code> 与 README。</p>'
     +'<div class="sy-row"><input class="sy-in" id="sy-url" placeholder="https://xxxx.supabase.co">'
     +'<input class="sy-in" id="sy-key" placeholder="anon public key">'
-    +'<button class="sy-btn pri" id="sy-savecfg">保存配置</button></div>';
+    +'<button class="sy-btn pri" id="sy-savecfg">保存配置</button>'
+    +'<button class="sy-btn" id="sy-lock">锁定</button></div>';
   }
   if(!k){
    return '<h3><span class="dot"></span>多设备同步<span class="sy-state sy-idle" id="sy-state">未启用</span></h3>'
@@ -1247,7 +1305,8 @@ var SYNC=(function(){
     +'<br>码等于钥匙：谁拿到码谁就能读写你的数据，别公开。</p>'
     +'<div class="sy-row"><button class="sy-btn pri" id="sy-new">生成新的同步码</button>'
     +'<input class="sy-in" id="sy-input" placeholder="或输入已有的码，如 K7F3-9QW2-M4" style="max-width:260px">'
-    +'<button class="sy-btn" id="sy-join">用这个码</button></div>';
+    +'<button class="sy-btn" id="sy-join">用这个码</button>'
+    +'<button class="sy-btn" id="sy-lock" title="锁上后本机要重新输密码">锁定</button></div>';
   }
   return '<h3><span class="dot" style="background:'+ACC+'"></span>多设备同步'
    +'<span class="sy-state sy-'+status.s+'" id="sy-state">'+esc(status.m||'已启用')+'</span></h3>'
@@ -1255,7 +1314,8 @@ var SYNC=(function(){
    +'<button class="sy-btn" id="sy-copy">复制</button>'
    +'<button class="sy-btn pri" id="sy-now">立即同步</button>'
    +'<button class="sy-btn" id="sy-off">停用</button>'
-   +'<button class="sy-btn" id="sy-cfg2" title="项目地址或 key 换了时用">换配置</button></div>'
+   +'<button class="sy-btn" id="sy-cfg2" title="项目地址或 key 换了时用">换配置</button>'
+   +'<button class="sy-btn" id="sy-lock" title="锁上后本机要重新输密码">锁定</button></div>'
    +'<p class="sy-p" style="margin:10px 0 0">数据改动后会自动上传；换设备时输入这串码即可取回。'
    +'<span id="sy-last">'+lastText()+'</span></p>';
  }
@@ -1280,9 +1340,29 @@ var SYNC=(function(){
   bind();
  }
 
+ function tryPw(){
+  var el=document.getElementById('sy-pw'); if(!el) return;
+  var v=(el.value||'').trim();
+  if(!v){ el.focus(); return }
+  if(sha256hex(v)===PWH){
+   localStorage.setItem(UNLK,PWH);
+   renderPanel();
+   if(cfg()&&code()) cycle().then(renderPanel);
+  }else{
+   var st=document.getElementById('sy-state');
+   if(st){ st.className='sy-state sy-err'; st.textContent='密码不对' }
+   el.value=''; el.focus();
+  }
+ }
+
  function bind(){
   var q=function(id){return document.getElementById(id)};
   var a;
+  if(a=q('sy-unlock')) a.onclick=function(){ tryPw() };
+  if(a=q('sy-pw')) a.onkeydown=function(e){ if(e.key==='Enter'||e.keyCode===13){ e.preventDefault(); tryPw() } };
+  if(a=q('sy-lock')) a.onclick=function(){
+   localStorage.removeItem(UNLK); renderPanel();
+  };
   if(a=q('sy-savecfg')) a.onclick=function(){
    var u=q('sy-url').value.trim(), k=q('sy-key').value.trim();
    if(!/^https?:\/\//.test(u)||k.length<20) return alert('地址要以 https:// 开头，key 是完整的 anon public key');
@@ -1322,7 +1402,7 @@ var SYNC=(function(){
   css();
   lastAt=+(localStorage.getItem(LASTK)||0);
   if(UI) renderPanel();
-  if(cfg()&&code()) setTimeout(function(){ cycle(true).then(renderPanel) }, 400);
+  if(unlocked()&&cfg()&&code()) setTimeout(function(){ cycle(true).then(renderPanel) }, 400);
   window.addEventListener('online',function(){ if(cfg()&&code()) cycle(true) });
   document.addEventListener('visibilitychange',function(){
    if(document.visibilityState==='hidden'&&cfg()&&code()) cycle(true);
@@ -1333,7 +1413,8 @@ var SYNC=(function(){
  else boot();
 
  return {
-  ready:function(){return !!(cfg()&&code())},
+  ready:function(){return unlocked()&&!!(cfg()&&code())},
+  unlocked:unlocked,
   sync:function(){ return cycle() },
   code:function(){ return pretty(code()) },
   config:cfg, setConfig:setCfg, generate:newCode,
