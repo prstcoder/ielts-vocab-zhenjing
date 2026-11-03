@@ -166,6 +166,10 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
 .bars i{flex:1;background:var(--chip);border-radius:3px 3px 0 0;min-height:2px;transition:.2s}
 .bars i.on{background:var(--accent);opacity:.85}
 .axis{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink2);opacity:.75}
+
+/* 手动主题：html.dark / html.light 覆盖系统偏好 */
+html.dark{color-scheme:dark;--bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037; --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; --green:#6cc38b;}
+html.light{color-scheme:light;--bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da; --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4; --green:#2f7d4f;}
 </style>
 </head>
 <body data-kind="list" data-ch="1" data-title="自然地理">
@@ -1571,5 +1575,290 @@ var SYNC=(function(){
  };
 })();
 window.SYNC=SYNC;
+</script>
+<script>
+/* ================= 阅读工具：字号 / 主题 / 连播 ================= */
+var FT=(function(){
+ var FS='ft-fs', TH='ft-th', SIZES=[1,1.14,1.28];
+ function get(k,d){ try{var v=localStorage.getItem(k); return v==null?d:v}catch(e){ return d } }
+ function set(k,v){ try{ localStorage.setItem(k,v) }catch(e){} }
+ function style(){
+  if(document.getElementById('ftstyle')) return;
+  var s=document.createElement('style'); s.id='ftstyle'; s.textContent="\n#ftui{position:fixed;left:14px;bottom:14px;z-index:70;display:flex;align-items:center;gap:2px;\n background:var(--panel,#fff);border:1px solid var(--line,#e6e2da);border-radius:999px;padding:4px 5px;\n box-shadow:0 6px 18px rgba(0,0,0,.10);font:12px/1 -apple-system,BlinkMacSystemFont,'PingFang SC',system-ui,sans-serif}\n#ftui button{font:inherit;font-size:12px;font-weight:600;color:var(--ink2,#5b6470);background:transparent;\n border:0;border-radius:999px;padding:6px 8px;cursor:pointer;min-width:25px;line-height:1}\n#ftui button:hover{background:var(--accent-soft,#fdf1ec);color:var(--accent,#b4442e)}\n#ftui button.on{background:var(--accent,#b4442e);color:#fff}\n.ftbtn{font:inherit;font-size:12.5px;font-weight:650;color:var(--accent,#b4442e);background:var(--accent-soft,#fdf1ec);\n border:1px solid color-mix(in srgb,var(--accent,#b4442e) 30%,transparent);border-radius:999px;\n padding:5px 13px;cursor:pointer;white-space:nowrap}\n.ftbtn:hover{filter:brightness(.97)}\n.ftbtn.on{background:var(--accent,#b4442e);color:#fff;border-color:var(--accent,#b4442e)}\n[data-w].ft-speaking{outline:2px solid var(--accent,#b4442e);outline-offset:2px;border-radius:6px;\n background:var(--accent-soft,#fdf1ec)}\n#czroot{position:fixed;inset:0;z-index:330;display:none;background:var(--bg,#f7f6f3);overflow:auto}\n#czroot.on{display:block}\n.cz-wrap{max-width:720px;margin:0 auto;padding:22px 18px 70px}\n.cz-bar{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink2,#5b6470);margin-bottom:14px}\n.cz-bar .sp{flex:1}\n.cz-bar button,.cz-acts button{font:inherit;font-size:13px;font-weight:650;border-radius:10px;cursor:pointer;\n border:1px solid var(--line,#e6e2da);background:var(--panel,#fff);color:var(--ink,#1f2328);padding:8px 14px}\n.cz-card{background:var(--panel,#fff);border:1px solid var(--line,#e6e2da);border-radius:16px;padding:22px 22px 18px}\n.cz-w{font-size:22px;font-weight:700;letter-spacing:.2px}\n.cz-m{font-size:13.5px;color:var(--ink2,#5b6470);margin-top:6px;line-height:1.7}\n.cz-sen{font-size:16.5px;line-height:2.15;margin-top:16px}\n.cz-sen input{font:inherit;font-size:16px;font-weight:650;color:var(--accent,#b4442e);\n background:var(--accent-soft,#fdf1ec);border:1px dashed var(--accent,#b4442e);border-radius:8px;\n padding:2px 8px;width:9.5em;text-align:center;outline:none}\n.cz-sen input:focus{border-style:solid}\n.cz-sen input.ok{background:rgba(47,125,79,.12);border-color:var(--green,#2f7d4f);color:var(--green,#2f7d4f);border-style:solid}\n.cz-sen input.no{background:rgba(192,57,43,.10);border-color:#c0392b;color:#c0392b;border-style:solid}\n.cz-acts{display:flex;gap:9px;margin-top:18px;flex-wrap:wrap}\n.cz-acts .pri{background:var(--accent,#b4442e);border-color:var(--accent,#b4442e);color:#fff}\n.cz-res{margin-top:16px;font-size:14px;line-height:1.9;display:none}\n.cz-res.on{display:block}\n.cz-res b{color:var(--green,#2f7d4f)}\n.cz-res .bad{color:#c0392b;font-weight:700}\n.cz-zh{margin-top:6px;font-size:13px;color:var(--ink2,#5b6470)}\n@media (max-width:600px){.cz-card{padding:18px 16px 14px}.cz-sen{font-size:15.5px;line-height:2}#ftui{bottom:78px}}\n";
+  document.head.appendChild(s);
+ }
+ function fs(){ var n=parseInt(get(FS,'0'),10); return isNaN(n)?0:Math.min(2,Math.max(0,n)) }
+ function applyFS(){ try{ document.body.style.zoom=SIZES[fs()] }catch(e){} }
+ function tmode(){ return get(TH,'') }
+ function applyTH(){
+  var t=tmode(), h=document.documentElement;
+  h.classList.toggle('dark',t==='dark');
+  h.classList.toggle('light',t==='light');
+  paint();
+ }
+ function paint(){
+  var b=document.getElementById('ftth'); if(!b) return;
+  var t=tmode();
+  b.textContent = t==='dark'?'深':(t==='light'?'浅':'自');
+  b.className = t?'on':'';
+  b.title = t==='dark'?'主题：深色 · 点一下切浅色':(t==='light'?'主题：浅色 · 点一下回跟随系统':'主题：跟随系统 · 点一下切深色');
+ }
+ function cycleTH(){ var t=tmode(); set(TH, t===''?'dark':(t==='dark'?'light':'')); applyTH() }
+
+ /* ---- 连播 ---- */
+ var P={on:false,i:0,list:[],btn:null};
+ function canSpeak(){ return typeof speechSynthesis!=='undefined' && typeof SpeechSynthesisUtterance!=='undefined' }
+ function voice(){
+  try{
+   var vs=speechSynthesis.getVoices()||[], en=[];
+   for(var i=0;i<vs.length;i++) if(/^en/i.test(vs[i].lang||'')) en.push(vs[i]);
+   for(var j=0;j<en.length;j++) if(/en-GB/i.test(en[j].lang)) return en[j];
+   return en[0]||null;
+  }catch(e){ return null }
+ }
+ function unmark(){ var a=document.querySelectorAll('.ft-speaking'); for(var i=0;i<a.length;i++) a[i].classList.remove('ft-speaking') }
+ function stopPlay(){
+  P.on=false; try{ speechSynthesis.cancel() }catch(e){}
+  unmark(); if(P.btn){ P.btn.textContent='连播'; P.btn.classList.remove('on') }
+ }
+ function step(){
+  if(!P.on) return;
+  if(P.i>=P.list.length){ stopPlay(); return }
+  var el=P.list[P.i++]; unmark();
+  el.classList.add('ft-speaking');
+  try{ el.scrollIntoView({block:'center',behavior:'smooth'}) }catch(e){}
+  var w=el.getAttribute('data-w')||'';
+  try{
+   speechSynthesis.cancel();
+   var u=new SpeechSynthesisUtterance(w), v=voice();
+   if(v){ u.voice=v; u.lang=v.lang } else u.lang='en-GB';
+   u.rate=0.9;
+   var adv=false, go=function(){ if(adv) return; adv=true; setTimeout(step,200) };
+   u.onend=go; u.onerror=go;
+   speechSynthesis.speak(u);
+   setTimeout(go, 1500 + w.length*140);   /* 没有语音时也能自动往下走 */
+  }catch(e){ stopPlay() }
+ }
+ function play(btn){
+  if(P.on){ stopPlay(); return }
+  var pools=document.querySelectorAll('[data-w]'), list=[];
+  for(var i=0;i<pools.length;i++){
+   var el=pools[i];
+   if(!el.getAttribute('data-w')) continue;
+   if(el.offsetParent===null) continue;
+   list.push(el);
+  }
+  if(!list.length){ alert('这一页没有可朗读的词'); return }
+  P.list=list; P.i=0; P.on=true; P.btn=btn;
+  btn.textContent='停止'; btn.classList.add('on');
+  step();
+ }
+
+ /* ---- 挂载 ---- */
+ function mount(){
+  style(); applyFS(); applyTH();
+  var bar=document.createElement('div'); bar.id='ftui';
+  bar.innerHTML='<button data-a="fs-" title="字号小一点">A−</button>'
+   +'<button data-a="fs+" title="字号大一点">A+</button>'
+   +'<button data-a="th" id="ftth"></button>';
+  document.body.appendChild(bar);
+  bar.addEventListener('click',function(e){
+   var a=e.target&&e.target.getAttribute?e.target.getAttribute('data-a'):null;
+   if(!a) return;
+   if(a==='fs-'){ set(FS,String(Math.max(0,fs()-1))); applyFS() }
+   if(a==='fs+'){ set(FS,String(Math.min(2,fs()+1))); applyFS() }
+   if(a==='th'){ cycleTH() }
+  });
+  paint();
+  document.addEventListener('keydown',function(e){
+   if(e.target&&/input|textarea/i.test(e.target.tagName)) return;
+   if(e.key==='['){ set(FS,String(Math.max(0,fs()-1))); applyFS() }
+   if(e.key===']'){ set(FS,String(Math.min(2,fs()+1))); applyFS() }
+  });
+ }
+ function host(){ return document.querySelector('.toolbar')||document.querySelector('.acts')||document.querySelector('.top') }
+ function btn(label,fn,title){
+  var h=host(); if(!h) return null;
+  var b=document.createElement('button'); b.type='button'; b.className='ftbtn';
+  b.textContent=label; if(title) b.title=title;
+  b.addEventListener('click',function(){ fn(b) });
+  h.appendChild(b); return b;
+ }
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',mount); else mount();
+ return {btn:btn,play:play,stop:stopPlay,fs:fs,theme:tmode,setTheme:function(t){ set(TH,t); applyTH() }};
+})();
+
+/* ================= 例句挖空练习 ================= */
+var CZ=(function(){
+ var items=[], idx=0, ok=0, bad=0, cur=null, root=null, done=[];
+ function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c] }) }
+ function norm(s){ return String(s==null?'':s).trim().toLowerCase().replace(/^[^a-z]+|[^a-z]+$/g,'') }
+ function collect(){
+  var out=[], seen={}, all=document.querySelectorAll('[data-w]');
+  for(var i=0;i<all.length;i++){
+   var h=all[i], w=h.getAttribute('data-w');
+   if(!w||seen[w]) continue; seen[w]=1;
+   var en='', zh='', m='';
+   var ee=h.querySelector('.ex .en'), zz=h.querySelector('.ex .zh');
+   if(ee) en=ee.textContent.replace(/\s+/g,' ').trim();
+   if(zz) zh=zz.textContent.replace(/\s+/g,' ').trim();
+   if(!en&&h.getAttribute('data-e')) en=h.getAttribute('data-e');
+   if(!zh&&h.getAttribute('data-z')) zh=h.getAttribute('data-z');
+   var mm=h.querySelector('.m')||h.querySelector('.mean');
+   if(mm){
+    var c=mm.cloneNode(true), dv=c.querySelector('.dv');
+    if(dv&&dv.parentNode) dv.parentNode.removeChild(dv);
+    m=c.textContent.replace(/\s+/g,' ').trim();
+   }
+   if(!m&&h.getAttribute('data-m')) m=h.getAttribute('data-m');
+   if(!en) continue;
+   out.push({w:w,e:en,z:zh,m:m});
+  }
+  return out;
+ }
+ /* 在例句里找到目标词（含变形），返回出现的那一段原词 */
+ function findToken(sen,w){
+  var toks=sen.match(/[A-Za-z][A-Za-z'\-]*/g)||[];
+  var base=norm(w).replace(/[^a-z'\-]/g,'');
+  if(!base) return '';
+  var best='', bl=0;
+  for(var i=0;i<toks.length;i++){
+   var t=norm(toks[i]), n=0, lim=Math.min(base.length,t.length);
+   while(n<lim && base.charAt(n)===t.charAt(n)) n++;
+   if(n>bl && n>=Math.min(4,base.length)){ bl=n; best=toks[i] }
+  }
+  return best;
+ }
+ function build(){
+  if(root) return;
+  var st=document.createElement('style'); st.textContent="\n#ftui{position:fixed;left:14px;bottom:14px;z-index:70;display:flex;align-items:center;gap:2px;\n background:var(--panel,#fff);border:1px solid var(--line,#e6e2da);border-radius:999px;padding:4px 5px;\n box-shadow:0 6px 18px rgba(0,0,0,.10);font:12px/1 -apple-system,BlinkMacSystemFont,'PingFang SC',system-ui,sans-serif}\n#ftui button{font:inherit;font-size:12px;font-weight:600;color:var(--ink2,#5b6470);background:transparent;\n border:0;border-radius:999px;padding:6px 8px;cursor:pointer;min-width:25px;line-height:1}\n#ftui button:hover{background:var(--accent-soft,#fdf1ec);color:var(--accent,#b4442e)}\n#ftui button.on{background:var(--accent,#b4442e);color:#fff}\n.ftbtn{font:inherit;font-size:12.5px;font-weight:650;color:var(--accent,#b4442e);background:var(--accent-soft,#fdf1ec);\n border:1px solid color-mix(in srgb,var(--accent,#b4442e) 30%,transparent);border-radius:999px;\n padding:5px 13px;cursor:pointer;white-space:nowrap}\n.ftbtn:hover{filter:brightness(.97)}\n.ftbtn.on{background:var(--accent,#b4442e);color:#fff;border-color:var(--accent,#b4442e)}\n[data-w].ft-speaking{outline:2px solid var(--accent,#b4442e);outline-offset:2px;border-radius:6px;\n background:var(--accent-soft,#fdf1ec)}\n#czroot{position:fixed;inset:0;z-index:330;display:none;background:var(--bg,#f7f6f3);overflow:auto}\n#czroot.on{display:block}\n.cz-wrap{max-width:720px;margin:0 auto;padding:22px 18px 70px}\n.cz-bar{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink2,#5b6470);margin-bottom:14px}\n.cz-bar .sp{flex:1}\n.cz-bar button,.cz-acts button{font:inherit;font-size:13px;font-weight:650;border-radius:10px;cursor:pointer;\n border:1px solid var(--line,#e6e2da);background:var(--panel,#fff);color:var(--ink,#1f2328);padding:8px 14px}\n.cz-card{background:var(--panel,#fff);border:1px solid var(--line,#e6e2da);border-radius:16px;padding:22px 22px 18px}\n.cz-w{font-size:22px;font-weight:700;letter-spacing:.2px}\n.cz-m{font-size:13.5px;color:var(--ink2,#5b6470);margin-top:6px;line-height:1.7}\n.cz-sen{font-size:16.5px;line-height:2.15;margin-top:16px}\n.cz-sen input{font:inherit;font-size:16px;font-weight:650;color:var(--accent,#b4442e);\n background:var(--accent-soft,#fdf1ec);border:1px dashed var(--accent,#b4442e);border-radius:8px;\n padding:2px 8px;width:9.5em;text-align:center;outline:none}\n.cz-sen input:focus{border-style:solid}\n.cz-sen input.ok{background:rgba(47,125,79,.12);border-color:var(--green,#2f7d4f);color:var(--green,#2f7d4f);border-style:solid}\n.cz-sen input.no{background:rgba(192,57,43,.10);border-color:#c0392b;color:#c0392b;border-style:solid}\n.cz-acts{display:flex;gap:9px;margin-top:18px;flex-wrap:wrap}\n.cz-acts .pri{background:var(--accent,#b4442e);border-color:var(--accent,#b4442e);color:#fff}\n.cz-res{margin-top:16px;font-size:14px;line-height:1.9;display:none}\n.cz-res.on{display:block}\n.cz-res b{color:var(--green,#2f7d4f)}\n.cz-res .bad{color:#c0392b;font-weight:700}\n.cz-zh{margin-top:6px;font-size:13px;color:var(--ink2,#5b6470)}\n@media (max-width:600px){.cz-card{padding:18px 16px 14px}.cz-sen{font-size:15.5px;line-height:2}#ftui{bottom:78px}}\n"; document.head.appendChild(st);
+  root=document.createElement('div'); root.id='czroot';
+  root.innerHTML='<div class="cz-wrap">'
+   +'<div class="cz-bar"><span id="cznum"></span><span class="sp"></span><span id="czacc"></span>'
+   +'<button id="czx">关闭</button></div>'
+   +'<div class="cz-card">'
+   +'<div class="cz-w" id="czw"></div><div class="cz-m" id="czm"></div>'
+   +'<div class="cz-sen" id="czsen"></div>'
+   +'<div class="cz-acts"><button class="pri" id="czck">检查</button>'
+   +'<button id="czhint">首字母提示</button><button id="czskip">跳过</button></div>'
+   +'<div class="cz-res" id="czres"></div></div></div>';
+  document.body.appendChild(root);
+  root.querySelector('#czx').onclick=close;
+  root.querySelector('#czck').onclick=act;
+  root.querySelector('#czhint').onclick=hint;
+  root.querySelector('#czskip').onclick=function(){ reveal(false,true) };
+  root.addEventListener('keydown',function(e){
+   if(e.key==='Enter'){ e.preventDefault(); act() }
+   if(e.key==='Escape'){ close() }
+  });
+  root.addEventListener('input',function(){},false);
+ }
+ function start(){
+  var list=collect();
+  if(!list.length){ alert('这一页没有带例句的词'); return }
+  var qs=[];
+  for(var i=0;i<list.length;i++){
+   var r=list[i], tok=findToken(r.e,r.w);
+   if(!tok) continue;
+   qs.push({w:r.w,e:r.e,z:r.z,m:r.m,tok:tok});
+  }
+  if(!qs.length){ alert('这些例句里没找到目标词，换一页试试'); return }
+  build();
+  items=qs; idx=0; ok=0; bad=0; done=[];
+  root.classList.add('on'); document.body.style.overflow='hidden';
+  paintQ();
+ }
+ function close(){ if(root){ root.classList.remove('on') } document.body.style.overflow='' }
+ function paintQ(){
+  if(idx>=items.length) return finish();
+  cur=items[idx];
+  document.getElementById('cznum').textContent=(idx+1)+' / '+items.length;
+  var wt=document.getElementById('czw');
+  wt.textContent=''; wt.style.display='none';
+  document.getElementById('czm').textContent=cur.m||'（这一页没给词义）';
+  var sen=cur.e, tok=cur.tok;
+  var pos=sen.indexOf(tok);
+  var before=sen.slice(0,pos), after=sen.slice(pos+tok.length);
+  var box=document.getElementById('czsen');
+  box.innerHTML=esc(before)+'<input id="czin" autocomplete="off" autocapitalize="off" spellcheck="false">'+esc(after);
+  var res=document.getElementById('czres'); res.className='cz-res'; res.innerHTML='';
+  var ck=document.getElementById('czck'); ck.textContent='检查'; ck.className='pri';
+  var inp=document.getElementById('czin');
+  inp.value=''; inp.className=''; inp.focus();
+  document.getElementById('czacc').textContent='对 '+ok+' · 错 '+bad;
+ }
+ function hint(){
+  var inp=document.getElementById('czin'); if(!inp||!cur) return;
+  if(inp.value) return;
+  inp.value=cur.tok.charAt(0);
+  inp.focus();
+ }
+ function act(){
+  if(!cur) return;
+  var ck=document.getElementById('czck');
+  if(ck.textContent==='下一个'){ idx++; paintQ(); return }
+  var inp=document.getElementById('czin'); if(!inp) return;
+  if(!inp.value.trim()) return;
+  reveal(true,false);
+ }
+ function reveal(judge,skipped){
+  var inp=document.getElementById('czin');
+  var res=document.getElementById('czres');
+  var ans=cur.tok, good=false;
+  if(judge&&inp){
+   var v=norm(inp.value), t=norm(ans);
+   good = (v===t) || (t.indexOf(v)===0 && v.length>=Math.min(4,t.length));
+  }
+  if(judge){
+   if(good){ ok++; inp.className='ok' } else { bad++; inp.className='no' }
+  }
+  if(inp){ inp.disabled=true; if(!inp.value) inp.value=ans }
+  res.className='cz-res on';
+  res.innerHTML = skipped ? ('<div>先看答案：<b>'+esc(ans)+'</b></div>')
+    : (good ? ('<div>✓ 对了：<b>'+esc(ans)+'</b></div>')
+            : ('<div><span class="bad">✗ 不对</span>　正确答案：<b>'+esc(ans)+'</b></div>'))
+   + (cur.z?('<div class="cz-zh">'+esc(cur.z)+'</div>'):'');
+  var wt=document.getElementById('czw');
+  wt.textContent=cur.w; wt.style.display='';
+  var ck=document.getElementById('czck'); ck.textContent='下一个'; ck.className='pri';
+  document.getElementById('czacc').textContent='对 '+ok+' · 错 '+bad;
+  try{ ck.focus() }catch(e){}
+ }
+ function finish(){
+  var w=document.querySelector('.cz-card');
+  var pct=items.length?Math.round(ok/items.length*100):0;
+  w.innerHTML='<div style="text-align:center;padding:26px 8px">'
+   +'<div style="font-size:20px;font-weight:700">这一轮做完了</div>'
+   +'<p style="color:var(--ink2,#5b6470);font-size:14px;line-height:2;margin-top:10px">'
+   +'共 '+items.length+' 题 · 对 <b style="color:var(--green,#2f7d4f)">'+ok+'</b> · 错 <b style="color:#c0392b">'+bad+'</b> · 正确率 '+pct+'%</p>'
+   +'<div class="cz-acts" style="justify-content:center;margin-top:18px">'
+   +'<button class="pri" id="czagain">再来一轮</button><button id="czquit">关闭</button></div></div>';
+  document.getElementById('czagain').onclick=function(){ idx=0; ok=0; bad=0; rebuild(); };
+  document.getElementById('czquit').onclick=close;
+ }
+ function rebuild(){
+  var st=document.createElement('div');
+  root.querySelector('.cz-wrap').innerHTML='<div class="cz-bar"><span id="cznum"></span><span class="sp"></span><span id="czacc"></span>'
+   +'<button id="czx">关闭</button></div>'
+   +'<div class="cz-card"><div class="cz-w" id="czw"></div><div class="cz-m" id="czm"></div>'
+   +'<div class="cz-sen" id="czsen"></div>'
+   +'<div class="cz-acts"><button class="pri" id="czck">检查</button>'
+   +'<button id="czhint">首字母提示</button><button id="czskip">跳过</button></div>'
+   +'<div class="cz-res" id="czres"></div></div>';
+  root.querySelector('#czx').onclick=close;
+  root.querySelector('#czck').onclick=act;
+  root.querySelector('#czhint').onclick=hint;
+  root.querySelector('#czskip').onclick=function(){ reveal(false,true) };
+  paintQ();
+ }
+ return {start:start,close:close};
+})();
+
+/* 工具按钮 */
+(function(){
+ if(typeof speechSynthesis!=='undefined') FT.btn('连播',function(b){ FT.play(b) },'从本页第一个词开始逐个朗读');
+ FT.btn('填空',function(){ CZ.start() },'用例句做填空练习：把例句里的这个词挖成空格');
+})();
 </script>
 </body></html>
