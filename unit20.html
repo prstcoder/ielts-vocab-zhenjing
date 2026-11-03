@@ -825,6 +825,7 @@ window.NB=NB;
 /* ================= 背诵模式（独立功能）================= */
 var REC=(function(){
  var KEY='vj-rec', ACC='#b4442e';
+ var CH=(document.body.dataset.ch||'');   /* 章节号：首页热力图按章汇总 */
  var INT=[0,1,2,4,8,15,30,90];
  var mem=null, root=null, queue=[], idx=0, onlyDue=false, yes=0, no=0, waiting=false;
 
@@ -1071,7 +1072,7 @@ var REC=(function(){
   var r=queue[idx], m=read(), o=m[r.w]||{lv:0,rv:0,wr:0};
   if(ok){ o.lv=Math.min(7,(o.lv||0)+1); o.due=Date.now()+INT[o.lv]*864e5; }
   else  { o.lv=0; o.due=Date.now()+10*6e4; o.wr=(o.wr||0)+1; toBook(r); }
-  o.rv=(o.rv||0)+1; o.lrt=Date.now();
+  o.rv=(o.rv||0)+1; o.lrt=Date.now(); if(CH) o.ch=CH;
   m[r.w]=o; save();
   if(ok) yes++; else no++;
   if(window.NB&&NB.bump) NB.bump('r');

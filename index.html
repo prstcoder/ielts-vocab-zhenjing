@@ -194,6 +194,38 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
 .nbcard .tx span{font-size:12.5px;color:var(--ink2)}
 .nbcard .go{font-size:13px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:6px 14px}
 
+/* 今日任务卡 */
+.today{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:18px}
+.tk{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;
+ text-decoration:none;color:inherit;display:block}
+.tk:hover{border-color:var(--accent)}
+.tk .lb{font-size:11.5px;color:var(--ink2);letter-spacing:.04em;white-space:nowrap}
+.tk .v{font-size:23px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:2px;line-height:1.25}
+.tk .v small{font-size:11.5px;font-weight:500;color:var(--ink2);margin-left:2px}
+.tk.hot .v{color:var(--accent)}
+.tk .sub2{font-size:11.5px;color:var(--ink2);margin-top:2px}
+#exd{font:inherit;font-size:11.5px;color:var(--ink2);background:var(--bg);border:1px solid var(--line);
+ border-radius:7px;padding:2px 5px;margin-top:5px;width:100%;max-width:132px}
+
+/* 22 章完成度热力图 */
+.hmwrap{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px 16px;margin-top:14px}
+.hmh{display:flex;align-items:baseline;gap:10px;margin-bottom:11px;flex-wrap:wrap}
+.hmh b{font-size:14px}
+.hmh span{font-size:12px;color:var(--ink2);font-variant-numeric:tabular-nums}
+.hmh .lg{margin-left:auto;display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink2)}
+.hmh .lg i{width:11px;height:11px;border-radius:3px;border:1px solid var(--line);display:block}
+.hm{display:grid;grid-template-columns:repeat(11,1fr);gap:5px}
+.hc{position:relative;height:30px;border-radius:6px;border:1px solid var(--line);display:flex;
+ align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--ink2);
+ text-decoration:none;background:var(--chip);font-variant-numeric:tabular-nums;transition:.15s}
+.hc:hover{outline:2px solid var(--accent);outline-offset:1px}
+.hc.done::after{content:'';position:absolute;right:3px;top:3px;width:4px;height:4px;border-radius:50%;background:var(--green,#2f7d4f)}
+@media (max-width:640px){
+ .today{grid-template-columns:1fr 1fr}
+ .hm{grid-template-columns:repeat(6,1fr)}
+ .hmh .lg{display:none}
+}
+
 /* 手动主题：html.dark / html.light 覆盖系统偏好 */
 html.dark{color-scheme:dark;--bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037; --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; --green:#6cc38b;}
 html.light{color-scheme:light;--bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da; --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4; --green:#2f7d4f;}
@@ -211,11 +243,52 @@ html.light{color-scheme:light;--bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --in
    <div class="stat"><b>100%</b><span>中英例句覆盖</span></div>
   </div>
  </div>
+ <div class="today">
+  <a class="tk hot" href="shengci.html">
+   <div class="lb">今天该复习</div>
+   <div class="v" id="tkdue">0</div>
+   <div class="sub2" id="tkdsub">—</div>
+  </a>
+  <a class="tk" href="shengci.html">
+   <div class="lb">已掌握</div>
+   <div class="v" id="tkm">0</div>
+   <div class="sub2" id="tkmr">—</div>
+  </a>
+  <div class="tk">
+   <div class="lb">背过的词</div>
+   <div class="v" id="tkl">0</div>
+   <div class="sub2" id="tklsub">—</div>
+  </div>
+  <div class="tk">
+   <div class="lb">连续打卡</div>
+   <div class="v" id="tks">0<small>天</small></div>
+   <div class="sub2">今天学一点就续上</div>
+  </div>
+  <div class="tk">
+   <div class="lb">距离考试</div>
+   <div class="v" id="tkd">—</div>
+   <div class="sub2" id="tkdsub2">设置考试日期</div>
+   <input type="date" id="exd" aria-label="考试日期">
+  </div>
+ </div>
  <a class="nbcard" href="shengci.html">
   <div class="big" id="nbn">0</div>
   <div class="tx"><b>我的生词本</b><span>点单词旁的 ☆ 收录，可导出、可闪卡复习</span></div>
   <div class="go">开始复习 →</div>
  </a>
+ <a class="nbcard" href="查词.html">
+  <div class="big">Aa</div>
+  <div class="tx"><b>原文查词</b><span>粘一篇雅思阅读原文，标出里面出现了本书哪些词、在哪一章</span></div>
+  <div class="go">打开 →</div>
+ </a>
+ <div class="hmwrap">
+  <div class="hmh">
+   <b>22 章完成度</b>
+   <span id="hmsum">—</span>
+   <span class="lg">少 <i style="background:var(--chip)"></i><i style="background:color-mix(in srgb,var(--accent) 28%,var(--panel))"></i><i style="background:color-mix(in srgb,var(--accent) 58%,var(--panel))"></i><i style="background:color-mix(in srgb,var(--accent) 88%,var(--panel))"></i> 多</span>
+  </div>
+  <div class="hm" id="hm"></div>
+ </div>
  <div class="toolbar"><div class="wrap" style="padding:0">
   <div class="tools">
    <input id="q" type="search" placeholder="搜索章节，如「植物」「交通」…">
@@ -512,6 +585,80 @@ window.NB=NB;
  if(tx) tx.textContent = due? ('今天有 '+due+' 个词到期，点这里开始复习') :
    (n? '暂无到期词，随时可以重新过一遍' : '点单词旁的 ☆ 收录，可导出、可闪卡复习');
  var fab=document.getElementById('nbfab'); if(fab) fab.style.display='none';
+})();
+</script>
+<script>
+/* ================= 今日任务卡 + 22 章完成度 ================= */
+(function(){
+ var CHM={"1": ["自然地理", 241], "2": ["植物研究", 130], "3": ["动物保护", 167], "4": ["太空探索", 75], "5": ["学校教育", 400], "6": ["科技发明", 118], "7": ["文化历史", 79], "8": ["语言演化", 67], "9": ["娱乐运动", 172], "10": ["物品材料", 151], "11": ["时尚潮流", 112], "12": ["饮食健康", 169], "13": ["建筑场所", 129], "14": ["交通旅行", 133], "15": ["国家政府", 148], "16": ["社会经济", 169], "17": ["法律法规", 114], "18": ["沙场争锋", 211], "19": ["社会角色", 120], "20": ["行为动作", 261], "21": ["身心健康", 413], "22": ["时间日期", 52]}, TOTAL=3631;
+ function J(k,d){ try{ var v=localStorage.getItem(k); return v?JSON.parse(v):d }catch(e){ return d } }
+ function pad(n){ return n<10?'0'+n:''+n }
+ function pct1(v){ return (v>0&&v<10? v.toFixed(1) : Math.round(v))+'%' }
+ var rec=J('vj-rec',{}), book=J('vj-book',{}), now=Date.now();
+ var ch={}, i, c, w, o;
+ for(i=1;i<=22;i++){ c=CHM[i]||['',0]; ch[i]={t:c[0],n:c[1],learn:0,master:0} }
+
+ /* 每个词只算一次：先看背诵记录（它带 ch），再补生词本里额外的词 */
+ var seen={}, dueAll=0, learnAll=0, masterAll=0;
+ for(w in rec){
+  o=rec[w]||{}; c=parseInt(o.ch||'',10)||0;
+  if(c&&ch[c]){ seen[w]=1; ch[c].learn++; if((o.lv||0)>=7) ch[c].master++; }
+  if((o.lv||0)<7 && (o.due||0)<=now) dueAll++;
+ }
+ for(w in book){
+  o=book[w]||{}; c=parseInt(o.c||'',10)||0;
+  if(c&&ch[c]&&!seen[w]){ seen[w]=1; ch[c].learn++; if((o.lv||0)>=7) ch[c].master++; }
+  if(!rec[w] && (o.lv||0)<7 && (o.due||o.t||0)<=now) dueAll++;
+ }
+ for(i=1;i<=22;i++){ learnAll+=ch[i].learn; masterAll+=ch[i].master }
+
+ function set(id,txt){ var e=document.getElementById(id); if(e) e.textContent=txt }
+ set('tkdue',dueAll);
+ set('tkdsub',dueAll?'点这里开始复习':'今天没有到期的词');
+ set('tkm',masterAll);
+ set('tkmr','共 '+TOTAL+' 词 · '+pct1(masterAll*100/TOTAL));
+ set('tkl',learnAll);
+ set('tklsub',learnAll?('占全站 '+pct1(learnAll*100/TOTAL)):'还没开始背');
+ var st=document.getElementById('tks');
+ if(st) st.innerHTML=(window.NB&&NB.streak?NB.streak():0)+'<small>天</small>';
+
+ /* 考试倒计时 */
+ var EX='vj-exam';
+ function exState(){
+  var d=''; try{ d=localStorage.getItem(EX)||'' }catch(e){}
+  var v=document.getElementById('tkd'), s=document.getElementById('tkdsub2'), inp=document.getElementById('exd');
+  if(inp) inp.value=d;
+  if(!v) return;
+  if(!d){ v.innerHTML='—'; if(s) s.textContent='设置考试日期'; return }
+  var days=Math.ceil((new Date(d+'T00:00:00').getTime()-Date.now())/864e5);
+  if(days>0){ v.innerHTML=days+'<small>天</small>'; if(s) s.textContent=d+' 考试' }
+  else if(days===0){ v.innerHTML='今天'; if(s) s.textContent='考试日，加油' }
+  else { v.innerHTML=Math.abs(days)+'<small>天前</small>'; if(s) s.textContent=d+' 已考' }
+ }
+ var exd=document.getElementById('exd');
+ if(exd) exd.addEventListener('change',function(){
+  try{ if(exd.value) localStorage.setItem(EX,exd.value); else localStorage.removeItem(EX) }catch(e){}
+  exState();
+ });
+ exState();
+
+ /* 热力图 */
+ var box=document.getElementById('hm');
+ if(box){
+  for(i=1;i<=22;i++){
+   c=ch[i]; var pct=c.n?Math.round(c.master*100/c.n):0;
+   var tint = c.learn ? Math.min(90, Math.round(pct*0.8)+12) : 0;
+   var a=document.createElement('a');
+   a.className='hc'+(c.n&&c.master>=c.n?' done':'');
+   a.href='unit'+pad(i)+'.html';
+   a.style.background='color-mix(in srgb,var(--accent) '+tint+'%,var(--panel))';
+   a.style.color=tint>48?'#fff':'var(--ink2)';
+   a.textContent=pad(i);
+   a.title='Unit '+pad(i)+' '+c.t+' · '+c.n+' 词 · 背过 '+c.learn+' · 掌握 '+c.master+'（'+pct+'%）';
+   box.appendChild(a);
+  }
+  set('hmsum','已背 '+learnAll+' 词 · 掌握 '+masterAll+' 词（'+pct1(TOTAL?masterAll*100/TOTAL:0)+'）');
+ }
 })();
 </script>
 </body></html>
