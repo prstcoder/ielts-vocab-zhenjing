@@ -1488,7 +1488,11 @@ var FT=(function(){
    if(e.key===']'){ set(FS,String(Math.min(2,fs()+1))); applyFS() }
   });
  }
- function host(){ return document.querySelector('.toolbar')||document.querySelector('.acts')||document.querySelector('.top') }
+ function host(){ return document.querySelector('.toolbar .tools')
+  ||document.querySelector('.tools')
+  ||document.querySelector('.acts')
+  ||document.querySelector('.toolbar')
+  ||document.querySelector('.top') }
  function group(){
   var h=host(); if(!h) return null;
   if(document.getElementById('ftgroup')) return document.getElementById('ftgroup');
