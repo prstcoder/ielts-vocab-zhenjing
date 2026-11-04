@@ -816,7 +816,9 @@ var REC=(function(){
   + '--rl:#2c3037;--rs:rgba(255,255,255,.07)}}'
   + '@media (max-width:520px){#rcroot{padding:14px 11px 26px}#rcroot .rcwd{font-size:29px}'
   + '#rcroot .rccard{padding:24px 17px 20px;min-height:230px}}';
-  var st=document.createElement('style'); st.id='rcstyle'; st.textContent=css;
+  css+='#rcroot .rchist{margin-top:10px;font-size:12.5px;color:var(--ri2);letter-spacing:.01em}'
+   +'#rcroot .rchist b{font-weight:700;color:var(--ri);font-variant-numeric:tabular-nums;padding:0 1px}';
+ var st=document.createElement('style'); st.id='rcstyle'; st.textContent=css;
   document.head.appendChild(st);
  }
 
@@ -833,7 +835,7 @@ var REC=(function(){
    +'<div class="rcans" id="rcans">'
    +'<div class="rcdef" id="rcdef"></div>'
    +'<div class="rczh" id="rczh"></div>'
-   +'<div class="rcx2" id="rcx2"></div>'
+   +'<div class="rcx2" id="rcx2"></div><div class="rchist" id="rchist"></div>'
    +'</div></div>'
    +'<div class="rcbtns"><button class="rcno" id="rcno">不认识 <kbd>1</kbd></button>'
    +'<button class="rcok" id="rcok">认识 <kbd>2</kbd></button>'
@@ -937,6 +939,7 @@ var REC=(function(){
   var x2=document.getElementById('rcx2');
   x2.textContent=r.x||'';
   show(x2,!!r.x);
+  paintHist(r.w);
  }
 
  function toBook(r){
@@ -946,15 +949,27 @@ var REC=(function(){
   if(window.NB&&NB.addOne) NB.addOne({w:r.w,p:r.p||'',m:r.m||'',y:'',e:'',z:'',d:'',s:'',c:''});
  }
 
+ function paintHist(w){
+  var el=document.getElementById('rchist'); if(!el) return;
+  var m=read(), o=(m&&m[w])||{}, wr=o.wr||0;
+  var ok=(o.ok!=null? o.ok : Math.max(0,(o.rv||0)-wr));
+  el.innerHTML=(ok||wr)
+   ? '记住 <b>'+ok+'</b> 次 · 没记住 <b>'+wr+'</b> 次'
+   : '第一次见这个词，凭感觉选就行';
+ }
+
  function grade(ok){
   if(idx>=queue.length) return;
   if(waiting) return next();
   var r=queue[idx], m=read(), o=m[r.w]||{lv:0,rv:0,wr:0};
-  if(ok){ o.lv=Math.min(7,(o.lv||0)+1); o.due=Date.now()+INT[o.lv]*864e5; }
-  else  { o.lv=0; o.due=Date.now()+10*6e4; o.wr=(o.wr||0)+1; toBook(r); }
+  if(ok){ o.lv=Math.min(7,(o.lv||0)+1); o.ok=(o.ok||0)+1; o.due=Date.now()+INT[o.lv]*864e5; }
+  else  { o.lv=0; o.due=Date.now()+10*6e4; o.wr=(o.wr||0)+1; o.ok=o.ok||0; toBook(r); }
   o.rv=(o.rv||0)+1; o.lrt=Date.now(); if(CH) o.ch=CH;
-  m[r.w]=o; save();
+  m[r.w]=o; save(); paintHist(r.w);
   if(ok) yes++; else no++;
+  var _ri=document.getElementById('rcinfo');
+  if(_ri){ var _rt=_ri.textContent.replace(/ · 本次 .*$/,'');
+   _ri.textContent=_rt+' · 本次 记住 '+yes+' · 没记住 '+no; }
   if(window.NB&&NB.bump) NB.bump('r');
   if(!ok){
    /* 不认识：先揭晓释义，停在这个词上等你看完再翻页 */
