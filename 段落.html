@@ -69,6 +69,7 @@ body.sent .sn:last-of-type{margin-bottom:0}
 body.sent .sn .en{display:block;font:16.4px/1.62 var(--serif)}
 body.sent .sn .zh{display:block;font-size:12.6px;line-height:1.55;color:var(--ink2);margin-top:2px}
 body.sent .ps .pzh{display:none}
+.ps .zh b,.ps .pzh b{font-weight:800;color:var(--ink)}
 body.nozh .ps .pzh,body.nozh .sn .zh{display:none}
 .sn.cur{background:var(--acc-soft);box-shadow:none;border-radius:3px}
 .sn.cur .en{color:var(--accent)}
@@ -248,8 +249,11 @@ function render(){
   var p=ps[i], body='', bag={};
   var zh='';
   for(k=0;k<p.s.length;k++){
-   body+='<span class="sn"><span class="en">'+mark(p.s[k][0], r, bag)+'</span> <span class="zh">'+p.s[k][1]+'</span></span>';
-   zh+=p.s[k][1];
+   var hz=[];
+   var en=mark(p.s[k][0], r, bag, hz);
+   var zz=zhMark(p.s[k][1], hz, gl(ch));
+   body+='<span class="sn"><span class="en">'+en+'</span> <span class="zh">'+zz+'</span></span>';
+   zh+=zz;
   }
   body='<div class="ps"><p class="pen">'+body+'</p><p class="pzh">'+zh+'</p></div>';
   var ws=Object.keys(bag);
@@ -264,13 +268,76 @@ function render(){
  document.getElementById('list').innerHTML=h;
  cov();
 }
-function mark(t, r, bag){
+function mark(t, r, bag, hits){
  return t.replace(r.re, function(m){
   var o=r.map[m.toLowerCase()];
   if(!o) return m;
   used[o.b]=1; bag[o.b]=1;
+  if(hits && hits.indexOf(o.b)<0) hits.push(o.b);
   return '<mark class="pv'+(o.d?' dv':'')+'" data-w="'+o.b+'">'+m+'</mark>';
  });
+}
+/* ---- 中文里把对应的词也加粗 ---- */
+var RAD={'\u2ecb':'车','\u2ed3':'长','\u2edb':'风','\u2edd':'食','\u2ee2':'马','\u2ec4':'西',
+ '\u2ec5':'见','\u2ec6':'角','\u2ea0':'民','\u2ee3':'骨','\u2ed8':'青','\u2edc':'飞','\u2ee9':'黄',
+ '\u2ed4':'门','\u2ee8':'麦','\u2ee5':'鱼','\u2ef0':'龙','\u2ee6':'鸟','\u2eec':'齐','\u2ec1':'虎',
+ '\u2ee4':'鬼','\u2eee':'齿','\u2eda':'页','\u2ec9':'贝'};
+function normCJK(s){ return s.replace(/[\u2E80-\u2FDF]/g, function(c){ return RAD[c]||c }) }
+function glossFrags(mean){
+ if(!mean) return [];
+ var t=normCJK(String(mean)).replace(/[（(][^）)]*[）)]/g,' ').replace(/(v|n|adj|adv|prep|conj|int|num|pron|vt|vi|phrase|aux|art|abbr)\./g,' ');
+ var out=[], segs=t.split(/[；;，,、\/|]/);
+ for(var i=0;i<segs.length;i++){
+  var s=segs[i].replace(/[\s.…]/g,'').replace(/某人|某物|某事/g,'');
+  if(s.length>=2 && /[\u4e00-\u9fff]/.test(s)) out.push(s);
+ }
+ return out;
+}
+var GLM={};
+function gl(ch){
+ if(GLM[ch]) return GLM[ch];
+ var m={}, L=CHS[ch]||[];
+ for(var i=0;i<L.length;i++){ if(!L[i][2]) m[L[i][0]]=glossFrags(L[i][1]); }
+ GLM[ch]=m; return m;
+}
+function zhMark(zh, hits, G){
+ if(!zh||!hits||!hits.length) return zh;
+ var spans=[], i, j, k;
+ for(i=0;i<hits.length;i++){
+  var fr=G[hits[i]]||[];
+  var best=null;
+  for(j=0;j<fr.length;j++){
+   var f=fr[j], cands=[f];
+   if(f.length>2){ cands.push(f.slice(0,2)); cands.push(f.slice(-2)); }
+   for(k=0;k<cands.length;k++){
+    var c=cands[k];
+    if(c.length<2) continue;
+    var p=zh.indexOf(c);
+    if(p>=0 && (!best || c.length>best.sc)) best={s:p,e:p+c.length,sc:c.length};
+   }
+  }
+  if(best) spans.push(best);
+  else if(fr.length && !/[的地性化度者]$/.test(fr[0])){
+   var ch0=fr[0].charAt(0);
+   if(ch0 && '而就都也又还在是有把被让使对给从向跟和与或的地得着了过们'.indexOf(ch0)<0
+      && zh.split(ch0).length===2){ spans.push({s:zh.indexOf(ch0),e:zh.indexOf(ch0)+1,sc:1}); }
+  }
+ }
+ if(!spans.length) return zh;
+ spans.sort(function(x,y){ return y.sc-x.sc || x.s-y.s });
+ var keep=[];
+ for(i=0;i<spans.length;i++){
+  var sp=spans[i], ok=1;
+  for(j=0;j<keep.length;j++){ if(sp.s<keep[j].e && keep[j].s<sp.e){ ok=0; break; } }
+  if(ok) keep.push(sp);
+ }
+ keep.sort(function(x,y){ return x.s-y.s });
+ var out='', last=0;
+ for(i=0;i<keep.length;i++){
+  out+=zh.slice(last,keep[i].s)+'<b class="zw">'+zh.slice(keep[i].s,keep[i].e)+'</b>';
+  last=keep[i].e;
+ }
+ return out+zh.slice(last);
 }
 function cov(){
  var heads=(CHS[ch]||[]).filter(function(e){ return !e[2] });
