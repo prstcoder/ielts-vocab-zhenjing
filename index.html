@@ -229,7 +229,24 @@ footer{margin-top:30px;color:var(--ink2);font-size:12.5px;line-height:1.8}
 /* 手动主题：html.dark / html.light 覆盖系统偏好 */
 html.dark{color-scheme:dark;--bg:#16181c; --panel:#1d2025; --ink:#e8eaed; --ink2:#9aa3ad; --line:#2c3037; --accent:#e5836a; --accent-soft:#2a211f; --chip:#242830; --mark:#4a3f1a; --green:#6cc38b;}
 html.light{color-scheme:light;--bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --ink2:#5b6470; --line:#e6e2da; --accent:#b4442e; --accent-soft:#fdf1ec; --chip:#efece6; --mark:#fff3c4; --green:#2f7d4f;}
+
+/* ---- 下载到本地（PWA 安装） ---- */
+.pwa{display:none;margin:14px auto 0;font:inherit;font-size:13.5px;font-weight:650;color:#fff;
+ background:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:8px 20px;cursor:pointer}
+.pwa.on{display:inline-block}
+.pwa:active{transform:translateY(1px)}
+.pwahint{display:none;margin-top:9px;font-size:12.2px;line-height:1.7;color:var(--ink2)}
+.pwahint.on{display:block}
 </style>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#b4442e">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="icon" href="icon-192.png" sizes="192x192">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="真经词汇">
 </head>
 <body data-kind="index">
 <div class="wrap">
@@ -242,6 +259,8 @@ html.light{color-scheme:light;--bg:#f7f6f3; --panel:#ffffff; --ink:#1f2328; --in
    <div class="stat"><b>1454</b><span>词含衍生词</span></div>
    <div class="stat"><b>100%</b><span>中英例句覆盖</span></div>
   </div>
+  <button class="pwa" id="pwaBtn" type="button">下载到本地 · 安装应用</button>
+  <p class="pwahint" id="pwaHint">iPhone / iPad：点浏览器底部的「分享」按钮，选「添加到主屏幕」，之后从桌面图标打开就是独立 App。</p>
  </div>
  <div class="today">
   <a class="tk hot" href="shengci.html">
@@ -663,6 +682,35 @@ window.NB=NB;
    box.appendChild(a);
   }
   set('hmsum','已背 '+learnAll+' 词 · 掌握 '+masterAll+' 词（'+pct1(TOTAL?masterAll*100/TOTAL:0)+'）');
+ }
+})();
+</script>
+
+<script>
+/* ---- PWA：注册 service worker + 安装入口 ---- */
+(function(){
+ var b=document.getElementById('pwaBtn'), hint=document.getElementById('pwaHint');
+ var standalone=(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone;
+ if(standalone){ if(b&&b.parentNode) b.parentNode.removeChild(b); if(hint&&hint.parentNode) hint.parentNode.removeChild(hint); }
+ else{
+  var deferred=null;
+  window.addEventListener('beforeinstallprompt', function(e){
+   e.preventDefault(); deferred=e; if(b) b.classList.add('on');
+  });
+  if(b) b.addEventListener('click', function(){
+   if(deferred){ deferred.prompt(); deferred.userChoice.then(function(){ deferred=null; b.classList.remove('on'); }); }
+   else if(hint){ hint.classList.add('on'); }
+  });
+  var ios=/iP(hone|ad|od)/.test(navigator.platform||'')||(/Macintosh/.test(navigator.userAgent)&&'ontouchend' in document);
+  if(ios){ if(b) b.classList.add('on'); if(hint) hint.classList.add('on'); }
+  window.addEventListener('appinstalled', function(){
+   if(b&&b.parentNode) b.parentNode.removeChild(b); if(hint&&hint.parentNode) hint.parentNode.removeChild(hint);
+  });
+ }
+ if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+   navigator.serviceWorker.register('sw.js').catch(function(){});
+  });
  }
 })();
 </script>

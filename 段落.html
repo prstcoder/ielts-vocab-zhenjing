@@ -764,4 +764,9 @@ chips();
 document.getElementById('cttl').innerHTML='Unit '+('0'+ch).slice(-2)+' <em>'+TT[ch]+'</em>';
 render();
 </script>
+
+<script>
+/* PWA：让从这一页进来也能装到桌面 */
+if('serviceWorker' in navigator){ window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}) }) }
+</script>
 </body></html>

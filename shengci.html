@@ -3456,4 +3456,9 @@ var SH=(function(){
  window.CONFUSE={refresh:render};
 })();
 </script>
+
+<script>
+/* PWA：让从这一页进来也能装到桌面 */
+if('serviceWorker' in navigator){ window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}) }) }
+</script>
 </body></html>
