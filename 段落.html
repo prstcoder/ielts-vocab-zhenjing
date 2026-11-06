@@ -117,6 +117,13 @@ body.sent.blind .sn.rev .en{filter:none}
 .qsc b{color:var(--accent);font-weight:700}
 #recbtn{color:var(--accent);background:var(--acc-soft);border-color:color-mix(in srgb,var(--accent) 30%,transparent)}
 #recbtn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+/* ---- 朗读速度 ---- */
+.rate{font:inherit;font-size:12.5px;font-weight:650;color:var(--ink);background:var(--panel);
+ border:1px solid var(--line);border-radius:9px;padding:5px 6px;cursor:pointer;appearance:none;
+ -webkit-appearance:none;padding-right:18px;
+ background-image:linear-gradient(45deg,transparent 50%,var(--ink2) 50%),linear-gradient(135deg,var(--ink2) 50%,transparent 50%);
+ background-position:calc(100% - 11px) 12px,calc(100% - 7px) 12px;background-size:4px 4px,4px 4px;background-repeat:no-repeat}
+.rate:hover{border-color:var(--accent);color:var(--accent)}
 </style>
 <!-- pwa -->
 <link rel="manifest" href="manifest.webmanifest">
@@ -142,7 +149,7 @@ body.sent.blind .sn.rev .en{filter:none}
   <button data-a="zh" id="zhbtn" title="显示/隐藏中文">中译</button>
   <button data-a="blind" title="遮住英文，只看中文回忆">盲读</button>
   <button data-a="blur" title="遮住高亮词，先猜再看">遮挡</button>
-  <button data-a="read" title="逐句朗读本章">朗读</button>
+  <button data-a="read" title="逐句朗读本章">朗读</button><select id="rateSel" class="rate" aria-label="朗读速度" title="朗读/连播速度"></select>
   <button data-a="rnd" title="随便跳一章">随机</button>
   <button data-a="th" title="切换深浅色">自</button>
  </div>
@@ -425,7 +432,7 @@ document.addEventListener('click', function(e){
 function sayOne(w){
  if(!canSpeak()) return;
  speechSynthesis.cancel();
- var u=new SpeechSynthesisUtterance(w); u.lang='en-GB'; u.rate=0.85;
+ var u=new SpeechSynthesisUtterance(w); u.lang='en-GB'; u.rate=parseFloat(get(RATE,'0.95'))||0.95;
  speechSynthesis.speak(u);
 }
 function act(a,b){
@@ -456,6 +463,23 @@ document.addEventListener('keydown', function(e){
 });
 window.addEventListener('resize', function(){ closePop() });
 window.addEventListener('scroll', function(){ if(pop.classList.contains('on')) closePop() }, {passive:true});
+/* ---- 朗读速度选择 ---- */
+(function(){
+ var sel=document.getElementById('rateSel'); if(!sel) return;
+ var opts=[0.6,0.75,0.85,0.95,1.1,1.25,1.4];
+ var cur=parseFloat(get(RATE,'0.95'))||0.95;
+ if(opts.indexOf(cur)<0) cur=0.95;
+ for(var i=0;i<opts.length;i++){
+  var o=document.createElement('option');
+  o.value=String(opts[i]); o.textContent=opts[i]+'\u00d7';
+  sel.appendChild(o);
+ }
+ sel.value=String(cur);
+ sel.addEventListener('change', function(){
+  set(RATE, sel.value);
+  toast('\u6717\u8bfb\u901f\u5ea6 ' + sel.value + '\u00d7');
+ });
+})();
 document.addEventListener('visibilitychange', function(){ if(document.hidden) stop() });
 
 var ICON='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3.2 6.2v3.6h1.9L8 12.2V3.8L5.1 6.2H3.2z"/><path d="M10.4 6.3a2.5 2.5 0 0 1 0 3.4"/><path d="M12.1 4.7a4.8 4.8 0 0 1 0 6.6"/></svg>';
