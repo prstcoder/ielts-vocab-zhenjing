@@ -1,7 +1,7 @@
 /* 雅思词汇真经 · Service Worker
    让站点可以「下载到本地」当 App 用：装完断网也能开。
    策略：静态资源 stale-while-revalidate（先给缓存，后台更新）。 */
-const VER = 'vj-v2';
+const VER = 'vj-v3';
 const CORE = [
   './',
   'index.html',

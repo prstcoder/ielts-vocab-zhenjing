@@ -893,7 +893,11 @@ var REC=(function(){
   + '#rcroot .rcspk:hover{opacity:1;color:'+ACC+'}'
   + '#rcroot .rcspk svg{width:18px;height:18px;display:block}'
   + '#rcroot .rcsen{margin-top:16px;font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:15.5px;'
-  + 'line-height:1.7;color:var(--ri);background:var(--rs);border-radius:11px;padding:11px 14px;text-align:left}'
+  + 'line-height:1.7;color:var(--ri);background:var(--rs);border-radius:11px;padding:11px 14px;text-align:left;'
+  + 'user-select:text;-webkit-user-select:text;cursor:text}'
+  + '#rcroot .rccp{float:right;margin:0 0 4px 10px;font:inherit;font-size:11px;font-weight:600;color:var(--ri2);'
+  + 'background:var(--rp);border:1px solid var(--rl);border-radius:6px;padding:1px 8px;cursor:pointer}'
+  + '#rcroot .rccp:hover{color:'+ACC+';border-color:'+ACC+'}'
   + '#rcroot .rcq{color:var(--ri2);font-size:12.5px;margin-top:16px;opacity:.9}'
   + '#rcroot .rcans{display:none;margin-top:18px;text-align:left;border-top:1px dashed var(--rl);padding-top:16px}'
   + '#rcroot .rcans.on{display:block}'
@@ -1037,8 +1041,12 @@ var REC=(function(){
   show(zh,!!r.z);
 
   var sen=document.getElementById('rcsen');
-  sen.textContent=r.e||'';
-  show(sen,!!r.e);
+  if(r.e){
+   sen.innerHTML='<button class="rccp" id="rccp" type="button">\u590d\u5236</button>'+esc(r.e);
+   show(sen,true);
+   var cp=document.getElementById('rccp');
+   if(cp) cp.onclick=function(ev){ ev.stopPropagation(); rcopy(r.e,cp) };
+  } else { sen.innerHTML=''; show(sen,false) }
 
   var x2=document.getElementById('rcx2');
   x2.textContent=r.x||'';
@@ -1090,7 +1098,21 @@ var REC=(function(){
   idx++; paint();
  }
 
- function tap(){ if(waiting){ return next() } reveal() }
+ function rcopy(t,btn){
+  var done=function(){ if(btn){ var o=btn.textContent; btn.textContent='\u5df2\u590d\u5236';
+   setTimeout(function(){ btn.textContent=o },1200) } };
+  var fallback=function(){
+   var ta=document.createElement('textarea');
+   ta.value=t; ta.style.position='fixed'; ta.style.top='-1000px'; ta.style.opacity='0';
+   document.body.appendChild(ta); ta.select();
+   try{ document.execCommand('copy'); done() }catch(e){}
+   document.body.removeChild(ta);
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done,fallback) }
+  else fallback();
+ }
+ function tap(){ if(window.getSelection&&String(window.getSelection()).length) return;
+  if(waiting){ return next() } reveal() }
  function next(){
   if(!waiting) return;
   waiting=false; idx++; paint();
